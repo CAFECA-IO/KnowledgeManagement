@@ -77,7 +77,7 @@ $ sudo scp ~/.ipfs/swarm.key ubuntu@192.168.50.5:~/.ipfs
 #### 清除預設的公有節點設定
 
 ```
-$ ipfs bootstrap rm — all
+$ ipfs bootstrap rm all
 ```
 
 #### 設定要連結的節點位置
