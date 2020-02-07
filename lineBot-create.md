@@ -57,4 +57,46 @@
 2. 在Basic setting可以取得Channel secret
 3. 在Messaging API可以建立Channel access token
 
+## 使用bottender建立專案
+>https://bottender.js.org/docs/channel-line-setup
+
+設定之後都可以在 bottender.config.js 修改
+
+1. 安裝bottender
+>npm i -g bottender
+2. 建立專案（名稱需全小寫）
+>npx create-bottender-app my-app
+3. 平台選line
+4. session store 選 memory
+5. 修改 channels.line.enable
+>`bottender.config.js`
+```js
+module.exports = {
+    //...
+    channels: {
+        line: {
+            enabled: true,
+        path: '/webhooks/line',
+        accessToken: process.env.LINE_ACCESS_TOKEN,
+        channelSecret: process.env.LINE_CHANNEL_SECRET,
+        },
+    },
+};
+```
+6. 寫入上面取得的 Channel secret, Channel access token
+>`.env`
+```
+LINE_ACCESS_TOKEN=
+LINE_CHANNEL_SECRET=
+```
+7. 執行測試，成功就會看到webhook url
+>npm run dev
+
+![](./img/lineBotCreate/bottenderTest.png)
+
 ## 設定機器人webhook
+>注意：line只吃https
+
+1. https://developers.line.biz/console
+2. 點進目標的Providor -> 點進目標的機器人
+3. 在Messaging API填入webhook網址
