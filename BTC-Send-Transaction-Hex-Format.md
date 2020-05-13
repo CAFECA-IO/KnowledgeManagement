@@ -151,9 +151,6 @@ c1c80ac8d402cb59eb88ac0c8c0000000000001976a914481e003d23566c1789dc9362085c3a0876
 
 
 #### OpCodes
-{% include helpers/subhead-links.md %}
-
-{% autocrossref %}
 
 The opcodes used in the pubkey scripts of standard transactions are:
 
