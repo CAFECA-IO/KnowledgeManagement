@@ -113,12 +113,12 @@ c1c80ac8d402cb59eb88ac0c8c0000000000001976a914481e003d23566c1789dc9362085c3a0876
 ##### 輸出索引（ vout ），標識使用來自該交易的哪個UTXO（第一個從0開始）4 bytes (同樣是反向位元組順序序列化)
 7dbd03383a240f27c7735af707e823da894e11732c5fe5919adff1672b817be0**01000000**6a47304402202769801183cd50eb2bd6c316a55add49fa4c0fd7216b523f394b97fe410b582d02205c76f4009b38b82a20f88b5f6af45f09220ba43d7e1c2064fa74807ddb299d7f012102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469ffffffff
 
-##### scriptSig 長度 106 bytes
+##### script Signature 長度 106 bytes
 > The number of bytes in the signature script. Maximum is 10,000 bytes.
 
 7dbd03383a240f27c7735af707e823da894e11732c5fe5919adff1672b817be001000000**6a**47304402204a24a1de4b4e552d1f53121825d139b1d1739d149df5a01d2ead760b865635c2022047a9b8f4d29dac29e9eacff6aea67249dcf716d576a00dbe24cf92c34a272909012102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469ffffffff
 
-##### scriptSig 
+##### script Signature 
 > A script-language script which satisfies the conditions placed in the outpoint’s pubkey script. Should only contain data pushes
 
 7dbd03383a240f27c7735af707e823da894e11732c5fe5919adff1672b817be0010000006a**47304402204a24a1de4b4e552d1f53121825d139b1d1739d149df5a01d2ead760b865635c2022047a9b8f4d29dac29e9eacff6aea67249dcf716d576a00dbe24cf92c34a272909012102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469**ffffffff
@@ -170,6 +170,11 @@ c1c80ac8d402cb59eb88ac0c8c0000000000001976a914481e003d23566c1789dc9362085c3a0876
 76a914**7b9a627a184897f10d31d73d87c2eea191d8f501**88ac
 
 | | 7b9a627a184897f10d31d73d87c2eea191d8f501 ..................................... PubKey hash
+
+```
+Warning icon Signature script modification warning: Signature scripts are not signed, so anyone can modify them. This means signature scripts should only contain data and data-pushing opcodes which can’t be modified without causing the pubkey script to fail. Placing non-data-pushing opcodes in the signature script currently makes a transaction non-standard, and future consensus rules may forbid such transactions altogether. (Non-data-pushing opcodes are already forbidden in signature scripts when spending a P2SH pubkey script.)
+
+```
 
 #### OpCodes
 
