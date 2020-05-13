@@ -1,4 +1,4 @@
-BTC 【Pay to public hash】交易 Hex 格式
+BTC 【Pay to public key hash】交易 Hex 格式
 
 ### Transaction Hex after signed
 ```
