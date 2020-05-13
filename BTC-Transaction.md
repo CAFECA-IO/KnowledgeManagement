@@ -1,7 +1,9 @@
 # BTC Transaction
 - Pay-to-Public-Key-Hash (P2PKH)
-- 
-
+- Pay-to-Public-Key (P2PK)
+- Multi-Signature
+- Data Outpu
+- Pay-to-Script-Hash (P2SH)
 
 ## Get BTC Transaction Fee
 
