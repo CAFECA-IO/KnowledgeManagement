@@ -48,7 +48,7 @@ async getUTXOs(address, beforeBlock = '') {
   }
 ```
 
-## get rawTransaction, merge in UTXO list
+## get rawTransaction, merge in UTXO list
 
 ```javascript
 async pushUTXOsTXHash({ utxos, address, beforeBlock = '' }) {
@@ -140,3 +140,7 @@ psbt.validateSignaturesOfInput(0);
 psbt.finalizeAllInputs();
 console.log('hex:', psbt.extractTransaction().toHex());
 ```
+
+# Reference
+[Transaction Decode](https://live.blockcypher.com/btc/decodetx/)
+[Mastering Bitcoin](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/)
