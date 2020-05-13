@@ -142,5 +142,5 @@ console.log('hex:', psbt.extractTransaction().toHex());
 ```
 
 # Reference
-[Transaction Decode](https://live.blockcypher.com/btc/decodetx/)
-[Mastering Bitcoin](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/)
+- [Transaction Decode](https://live.blockcypher.com/btc/decodetx/)
+- [Mastering Bitcoin](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/)
