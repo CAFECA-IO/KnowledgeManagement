@@ -10,3 +10,5 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 [libp2p 搭建私有 ipfs 網路](libp2p-ipfs-pnet.md)
 
 [BTC 交易](BTC-Transaction.md)
+
+[BTC 交易Hex格式](BTC-Send-Transaction-Hex-Format.md)
