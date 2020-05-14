@@ -286,6 +286,19 @@ take 20 byte of PubKey : 7B9A627A184897F10D31D73D87C2EEA191D8F501B
 ```
 Online base58 encoder/decoder [http://lenschulwitz.com/base58]
 
+**Get PubKey hash from receiver bitcoin public key**
+```
+1. HASH = RIPEMD-160(SHA256(public key)) 
+2. add prefix before HASH:
+    - 0x00 for P2PKH addresses on the main Bitcoin network (mainnet)
+    - 0x6f for P2PKH addresses on the Bitcoin testing network (testnet)
+    - 0x05 for P2SH addresses on mainnet
+    - 0xc4 for P2SH addresses on testnet
+   PRIFIX = [0x00]
+3. CHECKSUM: SHA256(SHA256(PRIFIX + HASH)) Extract the first four bytes
+4. Take 20 bytes of HASH + CHECKSUM
+```
+
 ```
 Warning icon Signature script modification warning: Signature scripts are not signed, so anyone can modify them. This means signature scripts should only contain data and data-pushing opcodes which can’t be modified without causing the pubkey script to fail. Placing non-data-pushing opcodes in the signature script currently makes a transaction non-standard, and future consensus rules may forbid such transactions altogether. (Non-data-pushing opcodes are already forbidden in signature scripts when spending a P2SH pubkey script.)
 
