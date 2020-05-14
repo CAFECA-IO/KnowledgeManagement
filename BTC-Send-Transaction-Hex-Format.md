@@ -292,15 +292,7 @@ Online base58 encoder/decoder [http://lenschulwitz.com/base58]
 
 **Get PubKey hash from receiver bitcoin public key**
 ```
-1. HASH = RIPEMD-160(SHA256(uncompressed public key [64 bytes])) 
-2. add prefix before HASH:
-    - 0x00 for P2PKH addresses on the main Bitcoin network (mainnet)
-    - 0x6f for P2PKH addresses on the Bitcoin testing network (testnet)
-    - 0x05 for P2SH addresses on mainnet
-    - 0xc4 for P2SH addresses on testnet
-   PRIFIX = [0x00]
-3. CHECKSUM: SHA256(SHA256(PRIFIX + HASH)) Extract the first four bytes
-4. Take 20 bytes of HASH + CHECKSUM
+1. PubKey hash = RIPEMD-160(SHA256(uncompressed public key [64 bytes])) [20 bytes]
 ```
 
 Here’s a full list of Opcodes: [https://en.bitcoin.it/wiki/Script#Opcodes].
