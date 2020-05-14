@@ -254,7 +254,7 @@ Uint8List compressedPubKey(List<int> uncompressedPubKey) {
 
 > is equal to
 
-> OP_DUP OP_HASH160 7b9a627a184897f10d31d73d87c2eea191d8f501 OP_EQUALVERIFY OP_CHECKSIG
+> OP_DUP OP_HASH160 OP_PUSHBYTES_20 7b9a627a184897f10d31d73d87c2eea191d8f501 OP_EQUALVERIFY OP_CHECKSIG
 
 **76a914**7b9a627a184897f10d31d73d87c2eea191d8f501**88ac**
 
@@ -262,7 +262,7 @@ Uint8List compressedPubKey(List<int> uncompressedPubKey) {
 
 | | a9 ..................................... OP_HASH160
 
-| | 14 ..................................... Push 20 bytes as data
+| | 14 ..................................... OP_PUSHBYTES_20
 
 | | 88 ..................................... OP_EQUALVERIFY
 
