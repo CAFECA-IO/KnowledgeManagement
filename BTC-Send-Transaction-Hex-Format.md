@@ -243,7 +243,7 @@ Uint8List compressedPubKey(List<int> uncompressedPubKey) {
 ##### Output 1——9 位元組 (VarInt) 後面的鎖定腳本的位元組數
 20bf020000000000**19**76a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac
 
-##### Output scriptPubKey (應該可以從block上得到？)
+##### Output scriptPubKey (可以從Kais API： btc/transactions/ 的response中的 txout > script > hex 取得)
 20bf02000000000019**76a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac**
 
 **76a914**7b9a627a184897f10d31d73d87c2eea191d8f501**88ac**
