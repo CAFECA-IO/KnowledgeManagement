@@ -123,6 +123,32 @@ c1c80ac8d402cb59eb88ac0c8c0000000000001976a914481e003d23566c1789dc9362085c3a0876
 
 7dbd03383a240f27c7735af707e823da894e11732c5fe5919adff1672b817be0010000006a**47304402204a24a1de4b4e552d1f53121825d139b1d1739d149df5a01d2ead760b865635c2022047a9b8f4d29dac29e9eacff6aea67249dcf716d576a00dbe24cf92c34a272909012102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469**ffffffff
 
+7dbd03383a240f27c7735af707e823da894e11732c5fe5919adff1672b817be0010000006a**47304402204a24a1de4b4e552d1f53121825d139b1d1739d149df5a01d2ead760b865635c2022047a9b8f4d29dac29e9eacff6aea67249dcf716d576a00dbe24cf92c34a27290901**2102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469ffffffff
+
+#### 簽名的序列化 (DER)
+
+> 0x47 ..................................... Push 71 bytes as data
+
+> 0x30 —— 標識 DER 序列的開始
+
+> 0x44 —— 序列長度 (68 bytes)
+
+> 0x02 —— 接下來是一個整數
+
+> 0x20 —— 整數的長度 (32 bytes)
+
+> R —— 4a24a1de4b4e552d1f53121825d139b1d1739d149df5a01d2ead760b865635c2
+     
+> 0x02 —— 接下來是另一個整數
+
+> 0x20 —— 另一個整數的長度 (32 bytes)
+
+> S —— 47a9b8f4d29dac29e9eacff6aea67249dcf716d576a00dbe24cf92c34a272909
+
+> 0x01 —— 一個後綴標識使用的雜湊類型 (SIGHASH_ALL)
+
+
+
 ##### 序列號設置為 FFFFFFFF
 > Sequence number. Default for Bitcoin Core and almost all other programs is 0xffffffff.
 
@@ -162,9 +188,13 @@ c1c80ac8d402cb59eb88ac0c8c0000000000001976a914481e003d23566c1789dc9362085c3a0876
 **76a914**7b9a627a184897f10d31d73d87c2eea191d8f501**88ac**
 
 | | 76 ..................................... OP_DUP
+
 | | a9 ..................................... OP_HASH160
+
 | | 14 ..................................... Push 20 bytes as data
+
 | | 88 ..................................... OP_EQUALVERIFY
+
 | | ac ..................................... OP_CHECKSIG
 
 76a914**7b9a627a184897f10d31d73d87c2eea191d8f501**88ac
