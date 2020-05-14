@@ -243,8 +243,12 @@ Uint8List compressedPubKey(List<int> uncompressedPubKey) {
 ##### Output 1——9 位元組 (VarInt) 後面的鎖定腳本的位元組數
 20bf020000000000**19**76a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac
 
-##### Output scriptPubKey (可以從Kais API： btc/transactions/ 的response中的 txout > script > hex 取得)
+##### Output scriptPubKey 
 20bf02000000000019**76a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac**
+
+> 76a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac
+> is equal t0
+> OP_DUP OP_HASH160 7b9a627a184897f10d31d73d87c2eea191d8f501 OP_EQUALVERIFY OP_CHECKSIG
 
 **76a914**7b9a627a184897f10d31d73d87c2eea191d8f501**88ac**
 
@@ -261,6 +265,24 @@ Uint8List compressedPubKey(List<int> uncompressedPubKey) {
 76a914**7b9a627a184897f10d31d73d87c2eea191d8f501**88ac
 
 | | 7b9a627a184897f10d31d73d87c2eea191d8f501 ..................................... PubKey hash
+
+
+**Get PubKey hash from receiver bitcoin address**
+```
+base58 decode receiver address, then remove the first byte of prefix, finally according to scriptPubKey prefix 0x14 only take 20 byte of PubKey hash.
+
+For example: 
+receiver address: 1CGZ4Ry37WHfdQgMzyAnNX6m3QCLbvRSTM
+base58 decode receiver address: 007B9A627A184897F10D31D73D87C2EEA191D8F501BF4B030C
+remove prefix 0x00: 7B9A627A184897F10D31D73D87C2EEA191D8F501BF4B030C
+    - 0x00 for P2PKH addresses on the main Bitcoin network (mainnet)
+    - 0x6f for P2PKH addresses on the Bitcoin testing network (testnet)
+    - 0x05 for P2SH addresses on mainnet
+    - 0xc4 for P2SH addresses on testnet
+take 20 byte of PubKey : 7B9A627A184897F10D31D73D87C2EEA191D8F501B
+
+```
+Online base58 encoder/decoder [http://lenschulwitz.com/base58]
 
 ```
 Warning icon Signature script modification warning: Signature scripts are not signed, so anyone can modify them. This means signature scripts should only contain data and data-pushing opcodes which can’t be modified without causing the pubkey script to fail. Placing non-data-pushing opcodes in the signature script currently makes a transaction non-standard, and future consensus rules may forbid such transactions altogether. (Non-data-pushing opcodes are already forbidden in signature scripts when spending a P2SH pubkey script.)
