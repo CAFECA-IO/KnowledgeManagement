@@ -158,7 +158,7 @@ script Signature 可以分為兩部份
 
 > 0x21 —— 序列長度 (33 byte)
 
-> 2102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469 —— ???
+> 2102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469 —— 公鑰PublicKey
 
 
 ##### 序列號設置為 FFFFFFFF
