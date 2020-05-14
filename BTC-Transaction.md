@@ -5,6 +5,18 @@
 - Data Outpu
 - Pay-to-Script-Hash (P2SH)
 
+## 辨識 transaction type
+### P2PKH
+output
+```javascript
+buffer.length === 25
+buffer[0] === OP_DUP === 0x76
+buffer[1] === OP_HASH160 === 0xa9
+buffer[2] === 0x14 &&
+buffer[23] === OP_EQUALVERIFY === 0x88
+buffer[24] === OP_CHECKSIG === 0xac
+```
+
 ## Get BTC Transaction Fee
 
 ```javascript
