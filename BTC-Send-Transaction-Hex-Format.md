@@ -1,5 +1,9 @@
 BTC 【Pay to public key hash】交易 Hex 格式
 
+###  Byte-map of a transaction with each type of TxIn and TxOut serialization.
+
+![Image of Yaktocat](https://en.bitcoin.it/w/images/en/e/e1/TxBinaryMap.png)
+
 ### Transaction Hex after signed
 ```
 020000000393d3ba1a02fd978b494e79ed199247079eb4f766fadc0b807c0734d4b18bd981000000006a47304402202769801183cd50eb2bd6c316a55add49
