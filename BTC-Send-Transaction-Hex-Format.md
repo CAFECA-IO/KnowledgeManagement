@@ -128,7 +128,7 @@ script Signature 可以分為兩部份
 ```
 47304402204a24a1de4b4e552d1f53121825d139b1d1739d149df5a01d2ead760b865635c2022047a9b8f4d29dac29e9eacff6aea67249dcf716d576a00dbe24cf92c34a27290901
 ```
-#### 簽名的序列化 (DER)
+> **簽名的序列化 (DER)**
 
 > 0x47 ..................................... Push 71 bytes as data
 
@@ -150,7 +150,7 @@ script Signature 可以分為兩部份
 
 > 0x01 —— 一個後綴標識使用的雜湊類型 (SIGHASH_ALL)
 
-2. 公鑰PublicKey
+2. Public Key (對應signature Key 的公鑰，可以是也可以不是compressedKey )
 
 ```
 2102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469
@@ -158,8 +158,36 @@ script Signature 可以分為兩部份
 
 > 0x21 —— 序列長度 (33 byte)
 
-> 2102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469
+> 2102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469 —— compressed PublicKey
 
+
+**Compressed Key**
+
+> A compressed key is just a way of storing a public key in fewer bytes (33 instead of 65). There are no compatibility or security issues because they are precisely the same keys, just stored in a different way.
+
+```
+Uint8List compressedPubKey(List<int> uncompressedPubKey) {
+  if (uncompressedPubKey.length % 2 == 1) {
+    uncompressedPubKey = uncompressedPubKey.sublist(1, uncompressedPubKey.length);
+  }
+  
+  List<int> x = uncompressedPubKey.sublist(0, 32);
+  List<int> y = uncompressedPubKey.sublist(32, 64);
+  BigInt p = BigInt.parse(
+      ‘fffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f’,
+      radix: 16);
+
+  BigInt xInt = BigInt.parse(hex.encode(x), radix: 16);
+  BigInt yInt = BigInt.parse(hex.encode(y), radix: 16);
+  BigInt check = (xInt.pow(3) + BigInt.from(7) - yInt.pow(2)) % p;
+ 
+  if (check == BigInt.zero) {
+    List<int> prefix =
+        BigInt.parse(hex.encode(y), radix: 16).isEven ? [0x02] : [0x03];
+    return Uint8List.fromList(prefix + x);
+  }
+}
+```
 
 ##### 序列號設置為 FFFFFFFF
 > Sequence number. Default for Bitcoin Core and almost all other programs is 0xffffffff.
