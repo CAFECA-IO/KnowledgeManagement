@@ -123,7 +123,26 @@ c1c80ac8d402cb59eb88ac0c8c0000000000001976a914481e003d23566c1789dc9362085c3a0876
 
 7dbd03383a240f27c7735af707e823da894e11732c5fe5919adff1672b817be0010000006a**47304402204a24a1de4b4e552d1f53121825d139b1d1739d149df5a01d2ead760b865635c2022047a9b8f4d29dac29e9eacff6aea67249dcf716d576a00dbe24cf92c34a272909012102275753690ab58df3c923001e94d407e30b03e60b1f2461729a1dd4f37ebe2469**ffffffff
 
-script Signature 可以分為兩部份
+
+**Pay-to-Script-Hash transaction**
+```
+scriptSig: ..signatures... <serialized script>
+```
+
+**Pay-to-Script-Hash m-of-n multi-signature transaction:**
+```
+scriptSig: 0 <sig1> ... <script>
+```
+**pay-to-pubkey transaction**
+```
+scriptSig: <sig>
+```
+
+**Pay-to-PubkeyHash transaction 可以分為兩部份**
+```
+scriptSig: <sig> <pubKey>
+```
+
 1.  簽名的序列化 (DER)
 ```
 47304402204a24a1de4b4e552d1f53121825d139b1d1739d149df5a01d2ead760b865635c2022047a9b8f4d29dac29e9eacff6aea67249dcf716d576a00dbe24cf92c34a27290901
@@ -216,7 +235,9 @@ Uint8List compressedPubKey(List<int> uncompressedPubKey) {
 ```
 ##### Output amount 8 位元組(小端序） 以聰（satoshis = 10^-8 bitcoin) 為單位的比特幣價值
 > 在序列化的交易中,以小端序（低位位元組在前）編碼
+
 **20bf020000000000**1976a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac
+
 <00 00 00 00 00 02 bf 20> == 180000 satoshis
 
 ##### Output 1——9 位元組 (VarInt) 後面的鎖定腳本的位元組數
