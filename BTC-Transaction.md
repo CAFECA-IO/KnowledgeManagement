@@ -147,6 +147,6 @@ console.log('hex:', psbt.extractTransaction().toHex());
 ```
 
 # Reference
-- [Transaction Decode](https://live.blockcypher.com/btc/decodetx/)
+- [Bitcoin Transaction Decode](https://live.blockcypher.com/btc/decodetx/)
 - [Mastering Bitcoin](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/)
 - [BitCoin Tools](https://bitcoinvalued.com/tools.php) - Generates a Hash160 from a BitCoin's public key.
