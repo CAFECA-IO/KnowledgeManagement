@@ -216,11 +216,11 @@ Uint8List compressedPubKey(List<int> uncompressedPubKey) {
 ```
 ##### Output amount 8 位元組(小端序） 以聰（satoshis = 10^-8 bitcoin) 為單位的比特幣價值
 > 在序列化的交易中,以小端序（低位位元組在前）編碼
-**20bf0200**000000001976a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac
-<00 02 bf 20> == 180000 satoshis
+**20bf020000000000**1976a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac
+<00 00 00 00 00 02 bf 20> == 180000 satoshis
 
 ##### Output 1——9 位元組 (VarInt) 後面的鎖定腳本的位元組數
-20bf0200**0000000019**76a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac
+20bf020000000000**19**76a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac
 
 ##### Output scriptPubKey (應該可以從block上得到？)
 20bf02000000000019**76a9147b9a627a184897f10d31d73d87c2eea191d8f50188ac**
