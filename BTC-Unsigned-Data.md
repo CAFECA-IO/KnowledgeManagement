@@ -7,16 +7,17 @@ BIP-84 : witness : p2wpkh
 
 ## Legacy
 ```
-unsignedTx.append(version)
-unsignedTx.append(inputData.sha256().sha256())
-unsignedTx.append(sequenceData.sha256().sha256())
-unsignedTx.append(outpoint)
-unsignedTx.append(scriptCode)
-unsignedTx.append(UnsafeBufferPointer<UInt64>(start: &amount, count: 1))
-unsignedTx.append(nSequence)
-unsignedTx.append(outputData.sha256().sha256())
-unsignedTx.append(locktime)
-unsignedTx.append(UnsafeBufferPointer<UInt32>(start: &hashType, count: 1))
+Double SHA256 of the serialization of:
+1. version
+2. inputData.sha256().sha256()
+3. sequenceData.sha256().sha256()
+4. outpoint
+5. scriptCode
+6. UnsafeBufferPointer<UInt64>(start: &amount, count: 1)
+7. nSequence
+8. outputData.sha256().sha256()
+9. locktime
+10.UnsafeBufferPointer<UInt32>(start: &hashType, count: 1)
 ```
 
 ## Withness
@@ -31,7 +32,7 @@ Double SHA256 of the serialization of:
 7. nSequence of the input (4-byte little endian)
 8. hashOutputs (32-byte hash)
 9. nLocktime of the transaction (4-byte little endian)
-10. sighash type of the signature (4-byte little endian)
+10.sighash type of the signature (4-byte little endian)
 ```
 
 ## Refference
