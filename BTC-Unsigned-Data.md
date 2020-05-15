@@ -36,5 +36,9 @@ Double SHA256 of the serialization of:
 10.sighash type of the signature (4-byte little endian)
 ```
 
+## 注意事項
+1. 簽名會因為演算法隨機取點，導致同樣的內文、公私鑰也會產出不同的結果，故不能直接比對。
+
 ## Refference
 - [BIP-0143](https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki)
+- [ECDSA 數學](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/第六章.html#digital_sigs)
