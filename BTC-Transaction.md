@@ -164,3 +164,4 @@ console.log('hex:', psbt.extractTransaction().toHex());
 - [BitCoin Tools](https://bitcoinvalued.com/tools.php) - Generates a Hash160 from a BitCoin's public key.
 - [OP_CHECKSIG](https://en.bitcoin.it/wiki/OP_CHECKSIG)
 - [How to Create a Raw Bitcoin Transaction — Step by Step](https://medium.com/coinmonks/how-to-create-a-raw-bitcoin-transaction-step-by-step-239b888e87f2)
+- [Bitcoin P2PKH Transaction Building with Node.js](http://derpturkey.com/bitcoin-p2pkh-exploration/)
