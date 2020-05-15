@@ -301,3 +301,22 @@ Here’s a full list of Opcodes: [https://en.bitcoin.it/wiki/Script#Opcodes].
 Warning icon Signature script modification warning: Signature scripts are not signed, so anyone can modify them. This means signature scripts should only contain data and data-pushing opcodes which can’t be modified without causing the pubkey script to fail. Placing non-data-pushing opcodes in the signature script currently makes a transaction non-standard, and future consensus rules may forbid such transactions altogether. (Non-data-pushing opcodes are already forbidden in signature scripts when spending a P2SH pubkey script.)
 
 ```
+#### 有用的連結 🔗
+
+Bitcoin 有用的參考文件
+[https://bitcoin.org/en/developer-reference#serialized-blocks]
+[https://en.bitcoin.it/wiki/Transaction#Input]
+[https://learnmeabitcoin.com/guide/script]
+[https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/]
+
+testnet txid detail
+[https://blockstream.info/testnet/tx/c8cb07b095ada727b31b5adaaf5b44094f618657af432f4474cee5447c6b612e?expand]
+
+online hash
+[https://modulovalue.com/bird_cryptography/#/]
+
+0nline base58 encoder & decoder
+[http://lenschulwitz.com/base58]
+
+Online transaction hex Decoder
+[https://live.blockcypher.com/btc/decodetx/]
