@@ -6,6 +6,7 @@ BIP-49 : witness : p2sh - p2wpkh
 BIP-84 : witness : p2wpkh  
 
 ## Legacy
+!!這個應該是錯的!!
 ```
 Double SHA256 of the serialization of:
 1. version
