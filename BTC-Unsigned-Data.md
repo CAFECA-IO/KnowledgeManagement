@@ -1,9 +1,9 @@
 # BTC Unsigned Data
 
 ## Mapping
-BIP-44 : legacy : p2pkh
-BIP-49 : witness : p2sh - p2wpkh
-BIP-84 : witness : p2wpkh
+BIP-44 : legacy : p2pkh  
+BIP-49 : witness : p2sh - p2wpkh  
+BIP-84 : witness : p2wpkh  
 
 ## Legacy
 ```
