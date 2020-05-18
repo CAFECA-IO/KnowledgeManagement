@@ -14,3 +14,5 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 [BTC 交易Hex格式](BTC-Send-Transaction-Hex-Format.md)
 
 [BTC 簽署資料格式](BTC-Unsigned-Data.md)
+
+[BTC 交易比對表](BTC-Transcation-diff.md)
