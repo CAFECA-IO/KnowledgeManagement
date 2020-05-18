@@ -321,9 +321,9 @@ BIP0143 github: [https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki]
 
 [https://bitcoin.org/en/developer-reference#serialized-blocks]
 
-[https://en.bitcoin.it/wiki/Transaction#Input]
+bitcoin wiki: [https://en.bitcoin.it/wiki/Transaction#Input]
 
-[https://learnmeabitcoin.com/guide/script]
+learnmeabitcoin: [https://learnmeabitcoin.com/guide/]
 
 [https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/]
 
