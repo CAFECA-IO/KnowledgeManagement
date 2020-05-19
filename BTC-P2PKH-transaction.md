@@ -165,3 +165,4 @@ const sig = secp256k1.ecdsaSign(hash, privKey);
 
 ## Reference
 - [Bitcoin P2PKH Transaction Building with Node.js](http://derpturkey.com/bitcoin-p2pkh-exploration/)
+- [example code](./file/btc-transaction)
