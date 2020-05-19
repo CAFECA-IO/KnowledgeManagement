@@ -154,6 +154,18 @@ buffer = Buffer.alloc(buffer.length + 4, buffer);
 const hash = sha256(sha256(buffer));
 ```
 
+此時每個 hash
+```
+  // vin[0]
+  7f775c7951d1836f50e073eb743ceb59367139059245cba2027aaf6766a2fb37
+  
+  // vin[1]
+  adc905dd57b6aff0d298eb2bf9893cb143096cb22981550c8eadcc59a67ca9cd
+  
+  // vin[2]
+  c0234706bbf4bde686b8b1b8c7ea9bfe583e3832ad4d2bd8583832ed3ea72c3d
+```
+
 ##### 7. sign input
 ```javascript
 const sig = secp256k1.ecdsaSign(hash, privKey);
