@@ -319,13 +319,13 @@ BIP0143 wiki: [https://en.bitcoin.it/wiki/BIP_0143#Abstract]
 
 BIP0143 github: [https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki]
 
-[https://bitcoin.org/en/developer-reference#serialized-blocks]
+Bitcoin Developer Reference： [https://bitcoin.org/en/developer-documentation]
 
 bitcoin wiki: [https://en.bitcoin.it/wiki/Transaction#Input]
 
 learnmeabitcoin: [https://learnmeabitcoin.com/guide/]
 
-[https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/]
+[中文]： [https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/]
 
 testnet txid detail
 [https://blockstream.info/testnet/tx/c8cb07b095ada727b31b5adaaf5b44094f618657af432f4474cee5447c6b612e?expand]
