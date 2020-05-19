@@ -6,7 +6,8 @@ Transaction ID:
 ```
 
 ## Make Transaction step by step
-完整的example code會放在最後，部分參數是寫死的，需要再做調整。
+- [example code](./file/btc-transaction)
+部分參數是寫死的，需要再做調整。
 
 ### Prepare
 - private key:
@@ -165,4 +166,3 @@ const sig = secp256k1.ecdsaSign(hash, privKey);
 
 ## Reference
 - [Bitcoin P2PKH Transaction Building with Node.js](http://derpturkey.com/bitcoin-p2pkh-exploration/)
-- [example code](./file/btc-transaction)
