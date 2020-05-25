@@ -20,3 +20,5 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 [橢圓曲線加密](Elliptic%20curve%20cryptography.md)
 
 [Flutter 呼叫平台原生程式碼(以 kotlin 為例)](flutter-plugin.md)
+
+[Flutter C interop](flutter_C_Interop.md)
