@@ -151,6 +151,8 @@ target_compile_options(audio-native-lib
    可能的解決方案
     
    1. [The Uint8List lives in the Dart heap, which is garbage collected, and the objects might be moved around by the garbage collector. So, you'll have to convert it into a pointer into the C heap.](https://github.com/dart-lang/ffi/issues/27)
+   
+   2. [allocate Func source code](https://github.com/dart-lang/ffi/tree/master/lib/src)
     
   ```java
       Uint8List list;
