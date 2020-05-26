@@ -108,7 +108,136 @@ target_compile_options(audio-native-lib
         PRIVATE -std=c++14 -Wall -Werror "$<$<CONFIG:RELEASE>:-Ofast>")
 ```
 
-error message
+  3. On Android, a dynamically linked library is distributed as a set of .so (ELF) files, one for each architecture. 
+在native_add plugin 的7個路徑下的4個檔案夾(arm64-v8a、armeabi-v7a、x86、x86_64)裡面各有一個'.so'檔，共28個。
+
+    1. ./example/build/app/intermediates/merged_native_libs/debug/out
+    2. ./example/build/app/intermediates/stripped_native_libs/debug/out
+    3. ./example/build/native_add/intermediates/cmake/debug
+    4. ./example/build/native_add/intermediates/intermediate-jars/debug
+    5. ./example/build/native_add/intermediates/library_and_local_jars_jni
+    6. ./example/build/native_add/intermediates/merged_native_libs/debug/out
+    7. ./example/build/native_add/intermediates/stripped_native_libs/debug/out
+    
+    
+### 3. Step 3: Load the code using the FFI library
+在根據[Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)這份文件創建出來的plugin中實驗：
+
+  1. 直接使用Joshua幫我們compile的libed25519.so
+  
+  ```java
+  final ffi.DynamicLibrary nativeAddLib = Platform.isAndroid
+    ? ffi.DynamicLibrary.open("libed25519.so")
+    : ffi.DynamicLibrary.process();
+  ```
+  
+  2. 測試使用libed25519.so中的Function
+  
+  ```java
+  final int Function(ffi.Pointer<ffi.Void> x) ed25519CreateSeed = nativeAddLib
+    .lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Void>)>>("ed25519_create_seed")
+    .asFunction();
+  ```
+  
+  3. 目前測試結果為失敗，
+  
+   失敗原因: 
+   
+   1. dart:ffi 與 dart:core 型別沒有一一對應，[dart:ffi型別](https://api.dart.dev/stable/2.8.2/dart-ffi/dart-ffi-library.html)
+   
+   2. [在dart中似乎不能使用Pointer]Dart is a garbage collected language which means that Dart objects are not guaranteed to live at a particular memory address as the garbage collector can (and certainly will) move these objects to different memory locations during a garbage collection. 
+      
+  解決方案: [import dart package ffi](https://pub.dev/packages/ffi#-readme-tab-)
+    
+   1. [The Uint8List lives in the Dart heap, which is garbage collected, and the objects might be moved around by the garbage collector. So, you'll have to convert it into a pointer into the C heap.](https://github.com/dart-lang/ffi/issues/27)
+   
+   2. [allocate Func source code](https://github.com/dart-lang/ffi/tree/master/lib/src)
+    
+  實作方法：
+  
+  ```java
+  import 'dart:ffi' as ffi; // For FFI
+  import 'package:ffi/ffi.dart';
+  import 'dart:io'; // For Platform.isX
+
+  ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
+    final ffi.Pointer<ffi.Uint8> pointer =
+        allocate<ffi.Uint8>(count: buffer.length);
+    for (int i = 0; i < buffer.length; i++) {
+        pointer[i] = buffer[i];
+    }
+    pointer.cast<ffi.Void>();
+    free(pointer);
+    return pointer;
+  }
+
+  ```
+  
+  成功處理轉型後會面對到兩個錯誤：
+  
+  1. Failed to load dynamic library (dlopen failed: library “libed25519.so” not found) 
+  
+  2. NoSuchMethodError: The method 'call' was called on nul. Tried calling: call(Pointer<Uint8>: address=0x79880b4e80, Pointer<Uint8>: address=0x798806ff00, Pointer<Uint8>: address=0x79880b4e80)
+  
+  根據上述描述所面對到問題，決定參考第2步使用cmake自己compile xxx.so檔，但遇到了下列幾個問題，目前還無法解決。
+  
+  1. Execution failed for task ':app:generateJsonModelDebug'. 
+    嘗試的解決方案
+      1.  brew install cmake && install 
+      2. [CMake Error: CMake was unable to find a build program corresponding to "Ninja".]    (https://stackoverflow.com/questions/54500937/cocos2d-x-android-build-failed), [Install ninja on Mac OSX](http://macappstore.org/ninja/)App description: Small build system for use with gyp or CMake
+      
+  2. Execution failed for task ':app:externalNativeBuildDebug'.
+    
+相關文件：
+
+CMakeLists.txt
+```java
+# Sets the minimum version of CMake required to build your native library.
+# This ensures that a certain set of CMake features is available to
+# your build.
+
+cmake_minimum_required(VERSION 3.4.1)
+
+project(Ed25519)
+
+# set(DIRECTORY ./src/main/cpp/ed25519.h )
+
+# target_include_directories(Ed25519 PRIVATE ${DIRECTORY})
+
+# include_directories(${DIRECTORY})
+
+# add_executable(Ed25519 src/main/cpp/ed25519.h src/main/cpp/key_exchange.c)
+
+# Specifies a library name, specifies whether the library is STATIC or
+# SHARED, and provides relative paths to the source code. You can
+# define multiple libraries by adding multiple add_library() commands,
+# and CMake builds them for you. When you build your app, Gradle
+# automatically packages shared libraries with your APK.
+
+add_library( # Specifies the name of the library.
+           ed25519
+
+           # Sets the library as a shared library.
+           SHARED
+
+           # Provides a relative path to your source file(s).
+           ./src/main/cpp/key_exchange.c
+           )
+
+
+# find_package( OpenCV REQUIRED )
+
+# set( sources /src/main/cpp/ed25519.h )
+
+# add_executable( Ed25519 ${sources} )
+
+# target_compile_options( Ed25519 PUBLIC -std=c++11 -fpermissive -w -Wall )
+
+# target_link_libraries( Ed25519 ${OpenCV_LIBS} -L/usr/lib64 -ldl )
+  
+```
+  
+Error Message
 
 ```java
 FAILURE: Build failed with an exception.
@@ -149,60 +278,4 @@ Run with --stacktrace option to get the stack trace. Run with --info or --debug 
 
 ```
 
-
-  3. On Android, a dynamically linked library is distributed as a set of .so (ELF) files, one for each architecture. 
-在native_add plugin 的7個路徑下的4個檔案夾(arm64-v8a、armeabi-v7a、x86、x86_64)裡面各有一個'.so'檔，共28個。
-
-    1. ./example/build/app/intermediates/merged_native_libs/debug/out
-    2. ./example/build/app/intermediates/stripped_native_libs/debug/out
-    3. ./example/build/native_add/intermediates/cmake/debug
-    4. ./example/build/native_add/intermediates/intermediate-jars/debug
-    5. ./example/build/native_add/intermediates/library_and_local_jars_jni
-    6. ./example/build/native_add/intermediates/merged_native_libs/debug/out
-    7. ./example/build/native_add/intermediates/stripped_native_libs/debug/out
-    
-    
-### 3. Step 3: Load the code using the FFI library
-在根據[Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)這份文件創建出來的plugin中實驗：
-
-  1. 直接使用Joshua幫我們compile的libed25519.so
-  
-  ```java
-  final ffi.DynamicLibrary nativeAddLib = Platform.isAndroid
-    ? ffi.DynamicLibrary.open("libed25519.so")
-    : ffi.DynamicLibrary.process();
-  ```
-  
-  2. 測試使用libed25519.so中的Function
-  
-  ```java
-  final int Function(ffi.Pointer<ffi.Void> x) ed25519CreateSeed = nativeAddLib
-    .lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Void>)>>("ed25519_create_seed")
-    .asFunction();
-  ```
-  
-  3. 目前測試結果為失敗，
-  
-   失敗原因: 
-   
-   1. dart:ffi 與 dart:core 型別沒有一一對應，[dart:ffi型別](https://api.dart.dev/stable/2.8.2/dart-ffi/dart-ffi-library.html)
-   
-   2. [在dart中似乎不能使用Pointer]Dart is a garbage collected language which means that Dart objects are not guaranteed to live at a particular memory address as the garbage collector can (and certainly will) move these objects to different memory locations during a garbage collection. 
-      
-   可能的解決方案: [import dart package ffi](https://pub.dev/packages/ffi#-readme-tab-)
-    
-   1. [The Uint8List lives in the Dart heap, which is garbage collected, and the objects might be moved around by the garbage collector. So, you'll have to convert it into a pointer into the C heap.](https://github.com/dart-lang/ffi/issues/27)
-   
-   2. [allocate Func source code](https://github.com/dart-lang/ffi/tree/master/lib/src)
-    
-  ```java
-      Uint8List list;
-      final pointer = allocate<Uint8>(count: list.length());
-      for(int i = 0, ...){
-        pointer[i] = list[i];
-      }
-      final voidStar = pointer.cast<Void>();
-      // function call
-      free(pointer);
-  ```
-    
+https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab
