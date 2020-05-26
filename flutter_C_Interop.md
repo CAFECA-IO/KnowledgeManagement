@@ -423,6 +423,20 @@ I/flutter (30616): handShake ed25519CreateKeypair secretKey: [0, 0, 0, 0, 0, 0, 
 
 1. 傳指標進去ed25519CreateKeypair function，但是對應的value沒有被更新。
 
+可能的解決方法：
+
+1. [Implement GC finalizers](https://github.com/dart-lang/sdk/issues/35770)
+```java
+/// Return a pointer object that has a finalizer attached to it. When this
+/// pointer object is collected by GC the given finalizer is invoked.
+///
+/// Note: the pointer object passed to the finalizer is not the same as 
+/// the pointer object that is returned from [finalizable] - it points
+/// to the same memory region but has different identity. 
+Pointer<T> finalizable<T>(Pointer<T> p, void finalizer(Pointer<T> ptr)) {
+}
+```
+
 
 https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab
 
