@@ -38,5 +38,14 @@ You add the sources to the ios folder, because CocoaPods doesn’t allow includi
     : ffi.DynamicLibrary.process();
   ```
   
-  2. 測試
+  2. 測試使用libed25519.so中的Function
+  
+  ```java
+  final int Function(ffi.Pointer<ffi.Void> x) ed25519CreateSeed = nativeAddLib
+    .lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Void>)>>("ed25519_create_seed")
+    .asFunction();
+  ```
+  
+  3. 目前測試結果
+  
   
