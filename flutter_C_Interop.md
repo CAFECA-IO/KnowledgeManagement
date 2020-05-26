@@ -437,6 +437,8 @@ Pointer<T> finalizable<T>(Pointer<T> p, void finalizer(Pointer<T> ptr)) {
 }
 ```
 
+2.https://github.com/dart-lang/samples/blob/master/ffi/system-command/linux.dart
+
 
 https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab
 
