@@ -108,3 +108,9 @@ scriptPubKey: HASH160 <20-byte-hash> EQUAL
 3. data: 將資料透過下表 encode 出來的結果。
 
 ![Bech32-encode-table](./img/BTC-segwit/Bech32-encode-table.png "Bech32-encode-table")
+
+可以看到上面這個對照表只有 32 種可能，因此要 encode 的資料，以 P2WPKH 為例，就是那 20 bytes 的 public key hash，必須先轉成 binary，然後再從左至右 (MSB 開始) 五個 bits 一組做上表的轉換，最後如果有不足 5 個 bits 就補上 0。
+
+最後，上述三樣東西，加上 checksum 全部一起就是他的 address 了。
+
+> 在 Bitcoin 的世界，目前就兩種 encoding 的方式，一個就是本來的 base58 encoding，也就是大家常看到的 1 開頭或是 3 開頭的 address，另一種就是這邊我們介紹的，在 segwit 的世界裡用的 bech32 encoding，也就是 bc1 開頭的 address。
