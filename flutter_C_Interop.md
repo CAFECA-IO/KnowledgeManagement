@@ -46,6 +46,12 @@ You add the sources to the ios folder, because CocoaPods doesn’t allow includi
     .asFunction();
   ```
   
-  3. 目前測試結果
+  3. 目前測試結果為失敗，
   
+    失敗原因：
   
+      1. dart:ffi 與 dart:core 型別沒有一一對應，[dart:ffi型別](https://api.dart.dev/stable/2.8.2/dart-ffi/dart-ffi-library.html)
+      2. [在dart中似乎不能使用Pointer]Dart is a garbage collected language which means that Dart objects are not guaranteed to live at a particular memory address as the garbage collector can (and certainly will) move these objects to different memory locations during a garbage collection. 
+      
+    可能
+    
