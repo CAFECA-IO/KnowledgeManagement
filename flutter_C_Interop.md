@@ -293,4 +293,43 @@ Execution failed for task ':app:externalNativeBuildDebug'.
   ...
 ```
 
+
+cmake success:
+CMakeLists.txt
+```java
+cmake_minimum_required(VERSION 3.4.1)
+
+# Specifies a library name, specifies whether the library is STATIC or
+# SHARED, and provides relative paths to the source code. You can
+# define multiple libraries by adding multiple add_library() commands,
+# and CMake builds them for you. When you build your app, Gradle
+# automatically packages shared libraries with your APK.
+add_library( # Specifies the name of the library.
+           ed25519
+
+           # Sets the library as a shared library.
+           SHARED
+
+           # Provides a relative path to your source file(s).
+           src/main/cpp/add_scalar.c
+           src/main/cpp/fe.c
+           src/main/cpp/fe.h
+           src/main/cpp/fixedint.h
+           src/main/cpp/ge.c
+           src/main/cpp/ge.h
+           src/main/cpp/key_exchange.c
+           src/main/cpp/keypair.c
+           src/main/cpp/precomp_data.h
+           src/main/cpp/sc.c
+           src/main/cpp/sc.h
+           src/main/cpp/seed.c
+           src/main/cpp/sha512.c
+           src/main/cpp/sha512.h
+           src/main/cpp/sign.c
+           src/main/cpp/verify.c
+           )
+
+include_directories(src/main/cpp/include/)
+```
+
 https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab
