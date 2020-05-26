@@ -237,7 +237,7 @@ add_library( # Specifies the name of the library.
   
 ```
   
-Error Message
+Error Message 1
 
 ```java
 FAILURE: Build failed with an exception.
@@ -276,6 +276,21 @@ Run with --stacktrace option to get the stack trace. Run with --info or --debug 
 
 * Get more help at https://help.gradle.org
 
+```
+
+Error Message 2
+
+```java
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:externalNativeBuildDebug'.
+> Build command failed.
+  Error while executing process /Users/emilyliang/Library/Android/sdk/cmake/3.6.4111459/bin/cmake with arguments {--build /Users/emilyliang/Workspace/TideiSun/FlutterDev/wallet/android/app/.cxx/cmake/debug/armeabi-v7a --target ed25519}
+  [1/2] Building C object CMakeFiles/ed25519.dir/src/main/cpp/key_exchange.c.o
+  [2/2] Linking C shared library /Users/emilyliang/Workspace/TideiSun/FlutterDev/wallet/build/app/intermediates/cmake/debug/obj/armeabi-v7a/libed25519.so
+  FAILED: : && /Users/emilyliang/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang  --target=armv7-none-linux-androideabi19 --gcc-toolchain=/Users/emilyliang/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/emilyliang/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -fPIC -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -O0 -fno-limit-debug-info  -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--fatal-warnings -Wl,--exclude-libs,libunwind.a -Wl,--no-undefined -Qunused-arguments -shared -Wl,-soname,libed25519.so -o /Users/emilyliang/Workspace/TideiSun/FlutterDev/wallet/build/app/intermediates/cmake/debug/obj/armeabi-v7a/libed25519.so CMakeFiles/ed25519.dir/src/main/cpp/key_exchange.c.o  -latomic -lm && :
+  ...
 ```
 
 https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab
