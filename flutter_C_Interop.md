@@ -14,7 +14,7 @@ You add the sources to the ios folder, because CocoaPods doesn’t allow includi
 
   1. 參考[Android Developer: add C/C++ to your project](https://developer.android.com/studio/projects/add-native-code)可以將    natvie code 放在 Android/src/main/cpp之下。
   
-  2. [還未實驗]參考[Android Developer: Create a CMake build script](https://developer.android.com/studio/projects/configure-cmake)用CMakeLists.txt文件來定義應如何編譯native code並將Gradle指向該文件
+  2. [Failed]參考[Android Developer: Create a CMake build script](https://developer.android.com/studio/projects/configure-cmake)用CMakeLists.txt文件來定義應如何編譯native code並將Gradle指向該文件
   
   ```java
   # Sets the minimum version of CMake required to build your native library.
@@ -106,6 +106,47 @@ add_subdirectory (${OBOE_DIR} ./oboe-bin)
 
 target_compile_options(audio-native-lib
         PRIVATE -std=c++14 -Wall -Werror "$<$<CONFIG:RELEASE>:-Ofast>")
+```
+
+error message
+
+```java
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:generateJsonModelDebug'.
+> Build command failed.
+Error while executing process /Users/emilyliang/Library/Android/sdk/cmake/3.6.4111459/bin/cmake with arguments {-H/Users/emilyliang/Workspace/TideiSun/FlutterDev/wallet/android/app -B/Users/emilyliang/Workspace/TideiSun/FlutterDev/wallet/android/app/.cxx/cmake/debug/armeabi-v7a -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-19 -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/emilyliang/Workspace/TideiSun/FlutterDev/wallet/build/app/intermediates/cmake/debug/obj/armeabi-v7a -DCMAKE_BUILD_TYPE=Debug -DANDROID_NDK=/Users/emilyliang/Library/Android/sdk/ndk/21.1.6352462 -DCMAKE_TOOLCHAIN_FILE=/Users/emilyliang/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake -DCMAKE_MAKE_PROGRAM=/Users/emilyliang/Library/Android/sdk/cmake/3.6.4111459/bin/ninja -GAndroid Gradle - Ninja}
+  -- Check for working C compiler: /Users/emilyliang/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang
+  -- Check for working C compiler: /Users/emilyliang/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang -- works
+  -- Detecting C compiler ABI info
+  -- Detecting C compiler ABI info - done
+  -- Detecting C compile features
+  -- Detecting C compile features - done
+  -- Check for working CXX compiler: /Users/emilyliang/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++
+  -- Check for working CXX compiler: /Users/emilyliang/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ -- works
+  -- Detecting CXX compiler ABI info
+  -- Detecting CXX compiler ABI info - done
+Launching lib/main.dart on Pixel 3 in debug mode...
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:generateJsonModelDebug'.
+> Build command failed.
+  -- Detecting CXX compile features
+  -- Detecting CXX compile features - done
+  -- Configuring done
+  -- Generating done
+  -- Build files have been written to: /Users/emilyliang/Workspace/TideiSun/FlutterDev/wallet/android/app/.cxx/cmake/debug/armeabi-v7a
+
+  CMake Error: CMake can not determine linker language for target: ed25519-lib
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
 ```
 
 
