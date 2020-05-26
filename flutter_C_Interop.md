@@ -14,7 +14,7 @@ You add the sources to the ios folder, because CocoaPods doesn’t allow includi
 
   1. 參考[Android Developer: add C/C++ to your project](https://developer.android.com/studio/projects/add-native-code)可以將    natvie code 放在 Android/src/main/cpp之下。
   
-  2. [Failed]參考[Android Developer: Create a CMake build script](https://developer.android.com/studio/projects/configure-cmake)用CMakeLists.txt文件來定義應如何編譯native code並將Gradle指向該文件
+  2. [Success]參考[Android Developer: Create a CMake build script](https://developer.android.com/studio/projects/configure-cmake)用CMakeLists.txt文件來定義應如何編譯native code並將Gradle指向該文件，CMakeLists.txt 放在 android/下面。
   
   ```java
   # Sets the minimum version of CMake required to build your native library.
@@ -107,8 +107,19 @@ add_subdirectory (${OBOE_DIR} ./oboe-bin)
 target_compile_options(audio-native-lib
         PRIVATE -std=c++14 -Wall -Werror "$<$<CONFIG:RELEASE>:-Ofast>")
 ```
+  3. add an externalNativeBuild section to android/app/build.gradle. For example:
+  
+```java
+externalNativeBuild {
+        // Encapsulates your CMake build configurations.
+        cmake {
+            // Provides a relative path to your CMake build script.
+            path '../CMakeLists.txt'
+        }
+    }
+```
 
-  3. On Android, a dynamically linked library is distributed as a set of .so (ELF) files, one for each architecture. 
+  4. On Android, a dynamically linked library is distributed as a set of .so (ELF) files, one for each architecture. 
 在native_add plugin 的7個路徑下的4個檔案夾(arm64-v8a、armeabi-v7a、x86、x86_64)裡面各有一個'.so'檔，共28個。
 
     1. ./example/build/app/intermediates/merged_native_libs/debug/out
@@ -179,7 +190,7 @@ target_compile_options(audio-native-lib
   
   2. NoSuchMethodError: The method 'call' was called on nul. Tried calling: call(Pointer<Uint8>: address=0x79880b4e80, Pointer<Uint8>: address=0x798806ff00, Pointer<Uint8>: address=0x79880b4e80)
   
-  根據上述描述所面對到問題，決定參考第2步使用cmake自己compile xxx.so檔，但遇到了下列幾個問題，目前還無法解決。
+  根據上述描述所面對到問題，決定參考第2步使用cmake自己compile xxx.so檔，但遇到了下列幾個問題，目前已經解決，錯誤原因為CMakeLists.txt寫錯，正確寫法在下面有提到。
   
   1. Execution failed for task ':app:generateJsonModelDebug'. 
     嘗試的解決方案
@@ -331,5 +342,83 @@ add_library( # Specifies the name of the library.
 
 include_directories(src/main/cpp/include/)
 ```
+
+完成步驟2中的1、2、3步就直接使用flutter run cmake，就會compile出libed25519.so，使用方法如下：
+
+1. 建立一個dart file 用來import native code function（目錄位置不重要）
+
+```java
+____lib
+  |____native_add
+    |____native_add.dart
+```
+
+2. open native_add.dart
+
+```java
+import 'dart:async';
+import 'dart:typed_data';
+
+import 'package:flutter/services.dart';
+import 'dart:ffi' as ffi; // For FFI
+import 'package:ffi/ffi.dart';
+import 'dart:io'; // For Platform.isX
+
+
+final ffi.DynamicLibrary nativeAddLib = Platform.isAndroid
+    ? ffi.DynamicLibrary.open("libed25519.so")
+    : ffi.DynamicLibrary.process();
+
+// final int Function(int x, int y) nativeAdd = nativeAddLib
+//     .lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Int32, ffi.Int32)>>("native_add")
+//     .asFunction();
+
+ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
+  final ffi.Pointer<ffi.Uint8> pointer =
+      allocate<ffi.Uint8>(count: buffer.length);
+  for (int i = 0; i < buffer.length; i++) {
+    pointer[i] = buffer[i];
+  }
+  pointer.cast<ffi.Void>();
+  free(pointer);
+  return pointer;
+}
+
+final void Function(ffi.Pointer<ffi.Uint8> publicKey,
+        ffi.Pointer<ffi.Uint8> secretKey, ffi.Pointer<ffi.Uint8> seed)
+    ed25519CreateKeypair = nativeAddLib
+        .lookup<
+            ffi.NativeFunction<
+                ffi.Void Function(
+                    ffi.Pointer<ffi.Uint8>,
+                    ffi.Pointer<ffi.Uint8>,
+                    ffi.Pointer<ffi.Uint8>)>>("ed25519_create_seed")
+        .asFunction();
+
+
+class NativeAdd {
+  static const MethodChannel _channel = const MethodChannel('native_add');
+
+  static Future<String> get platformVersion async {
+    final String version = await _channel.invokeMethod('getPlatformVersion');
+    return version;
+  }
+}
+```
+
+3. 在models/atwallet.dart中的 handshake function 中 使用 ed25519CreateKeypair function
+
+```java
+ // test native code
+    print('ed25519CreateKeypair: $ed25519CreateKeypair'); 
+    Uint8List publicKey = Uint8List(32);
+    Uint8List secretKey = Uint8List(64);
+    final Uint8List seed = Uint8List.fromList(hex.decode(
+        'c42fe3e3cabbc1fdbef84fe5efa306874ff858d2ef8a60b307f06369feb3fe14'));
+    ed25519CreateKeypair(getPointer(publicKey),getPointer(secretKey), getPointer(seed));
+    print('handShake ed25519CreateKeypair publicKey: $publicKey');
+    print('handShake ed25519CreateKeypair secretKey: $secretKey');
+```
+
 
 https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab
