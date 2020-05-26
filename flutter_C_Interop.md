@@ -396,16 +396,6 @@ final void Function(ffi.Pointer<ffi.Uint8> publicKey,
                     ffi.Pointer<ffi.Uint8>,
                     ffi.Pointer<ffi.Uint8>)>>("ed25519_create_seed")
         .asFunction();
-
-
-class NativeAdd {
-  static const MethodChannel _channel = const MethodChannel('native_add');
-
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
-}
 ```
 
 3. 在models/atwallet.dart中的 handshake function 中 使用 ed25519CreateKeypair function
