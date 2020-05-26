@@ -348,9 +348,11 @@ include_directories(src/main/cpp/include/)
 1. 建立一個dart file 用來import native code function（目錄位置不重要）
 
 ```java
-____lib
-  |____native_add
-    |____native_add.dart
+
+ ____wallet
+   |____lib
+     |____native_add
+       |____native_add.dart
 ```
 
 2. open native_add.dart
@@ -419,6 +421,17 @@ class NativeAdd {
     print('handShake ed25519CreateKeypair publicKey: $publicKey');
     print('handShake ed25519CreateKeypair secretKey: $secretKey');
 ```
+
+result:
+
+```java
+I/flutter (30616): ed25519CreateKeypair: Closure: (Pointer<Uint8>, Pointer<Uint8>, Pointer<Uint8>) => void
+I/flutter (30616): handShake ed25519CreateKeypair publicKey: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+I/flutter (30616): handShake ed25519CreateKeypair secretKey: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+```
+目前遇到的問題為：
+
+1. 傳指標進去ed25519CreateKeypair function，但是對應的value沒有被更新。
 
 
 https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab
