@@ -435,3 +435,5 @@ I/flutter (30616): handShake ed25519CreateKeypair secretKey: [0, 0, 0, 0, 0, 0, 
 
 
 https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab
+
+https://www.youtube.com/watch?v=X8JD8hHkBMc
