@@ -48,16 +48,17 @@ You add the sources to the ios folder, because CocoaPods doesn’t allow includi
   
   3. 目前測試結果為失敗，
   
-    失敗原因：
+   失敗原因：
    
-      1. dart:ffi 與 dart:core 型別沒有一一對應，[dart:ffi型別](https://api.dart.dev/stable/2.8.2/dart-ffi/dart-ffi-library.html)
-      2. [在dart中似乎不能使用Pointer]Dart is a garbage collected language which means that Dart objects are not guaranteed to live at a particular memory address as the garbage collector can (and certainly will) move these objects to different memory locations during a garbage collection. 
+   1. dart:ffi 與 dart:core 型別沒有一一對應，[dart:ffi型別](https://api.dart.dev/stable/2.8.2/dart-ffi/dart-ffi-library.html)
+   
+   2. [在dart中似乎不能使用Pointer]Dart is a garbage collected language which means that Dart objects are not guaranteed to live at a particular memory address as the garbage collector can (and certainly will) move these objects to different memory locations during a garbage collection. 
       
-    可能的解決方案
+   可能的解決方案
     
-    1. https://github.com/dart-lang/ffi/issues/27
+   1. [The Uint8List lives in the Dart heap, which is garbage collected, and the objects might be moved around by the garbage collector. So, you'll have to convert it into a pointer into the C heap.](https://github.com/dart-lang/ffi/issues/27)
     
-    ```java
+  ```java
       Uint8List list;
       final pointer = allocate<Uint8>(count: list.length());
       for(int i = 0, ...){
@@ -66,5 +67,5 @@ You add the sources to the ios folder, because CocoaPods doesn’t allow includi
       final voidStar = pointer.cast<Void>();
       // function call
       free(pointer);
-    ```
+  ```
     
