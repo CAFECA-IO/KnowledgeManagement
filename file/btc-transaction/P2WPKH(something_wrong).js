@@ -22,25 +22,25 @@ const privKey = Buffer.from(
 const pubKey = Buffer.from(secp256k1.publicKeyCreate(privKey));
 tx.vins.push({
   txid: Buffer.from('ae11664352c4e7e9307ec45f5330ca96288e453979dc69af4525b7c5a96e6029', 'hex'),
+  vout: 0,
+  hash: Buffer.from('ae11664352c4e7e9307ec45f5330ca96288e453979dc69af4525b7c5a96e6029', 'hex').reverse(),
+  sequence: 0xffffffff,
+  script: p2wpkhScript(hash160(pubKey)),
+  scriptSig: Buffer.alloc(0),
+});
+
+tx.vins.push({
+  txid: Buffer.from('ae11664352c4e7e9307ec45f5330ca96288e453979dc69af4525b7c5a96e6029', 'hex'),
   vout: 1,
   hash: Buffer.from('ae11664352c4e7e9307ec45f5330ca96288e453979dc69af4525b7c5a96e6029', 'hex').reverse(),
   sequence: 0xffffffff,
   script: p2wpkhScript(hash160(pubKey)),
-  scriptSig: null,
+  scriptSig: Buffer.alloc(0),
 });
 
 // tx.vins.push({
 //   txid: Buffer.from('ae11664352c4e7e9307ec45f5330ca96288e453979dc69af4525b7c5a96e6029', 'hex'),
 //   vout: 2,
-//   hash: Buffer.from('ae11664352c4e7e9307ec45f5330ca96288e453979dc69af4525b7c5a96e6029', 'hex').reverse(),
-//   sequence: 0xffffffff,
-//   script: p2wpkhScript(hash160(pubKey)),
-//   scriptSig: null,
-// });
-
-// tx.vins.push({
-//   txid: Buffer.from('ae11664352c4e7e9307ec45f5330ca96288e453979dc69af4525b7c5a96e6029', 'hex'),
-//   vout: 3,
 //   hash: Buffer.from('ae11664352c4e7e9307ec45f5330ca96288e453979dc69af4525b7c5a96e6029', 'hex').reverse(),
 //   sequence: 0xffffffff,
 //   script: p2pkhScript(hash160(pubKey)),
@@ -54,13 +54,14 @@ tx.vouts.push({
 });
 
 // 4: add output for change address
-tx.vouts.push({
-  script: p2pkhScript(hash160(pubKey)),
-  value: 23000,
-});
+// tx.vouts.push({
+//   script: p2pkhScript(hash160(pubKey)),
+//   value: 23000,
+// });
 
 // 5: now that tx is ready, sign and create script sig
 for (let i = 0; i < tx.vins.length; i++) {
+  tx.vins[i].scriptSig = Buffer.alloc(0);
   tx.witnesses.push(p2pkhScriptSig(signp2pkh(tx, i, privKey, 0x1), pubKey));
 }
 
@@ -191,7 +192,7 @@ function calcTxBytes(forSign, vins, vouts, witnesses) {
     + varuint.encodingLength(witnesses.length)
     + witnesses
       .map((witness) => (witness.length))
-      .reduce((sum, len) => sum + varuint.encodingLength(len) + len, 0);
+      .reduce((sum, len) => sum + 1 + len, 0);
   }
 
   return totalLength;
@@ -214,7 +215,7 @@ function txToBuffer(tx, forSign) {
   for (const vin of tx.vins) {
     cursor.writeBytes(vin.hash);
     cursor.writeUInt32LE(vin.vout);
-    if (vin.scriptSig) {
+    if (!forSign) {
       cursor.writeBytes(varuint.encode(vin.scriptSig.length));
       cursor.writeBytes(vin.scriptSig);
     } else {
@@ -236,7 +237,7 @@ function txToBuffer(tx, forSign) {
 
   if (!forSign) {
     for (const witness of tx.witnesses) {
-      cursor.writeBytes(varuint.encode(witness.length));
+      cursor.writeBytes(varuint.encode(2));
       cursor.writeBytes(witness);
     }
   }

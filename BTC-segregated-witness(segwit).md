@@ -117,3 +117,61 @@ scriptPubKey: HASH160 <20-byte-hash> EQUAL
 
 # Sample(not complete)
 [p2wpkh(something wrong)](./file/btc-transaction/P2WPKH(something_wrong).js)
+
+## 目前sample code有的錯誤
+
+- 產出來的raw transaction最後多1 byte (buffer 多算？)，但產生未簽名前的raw transaction則沒有問題。
+- 即使已經去掉最後多出來的 1 byte，~~產出來的raw transaction無法decode~~。witness 改成 0x02開頭就能了。
+- 上鏈時，簽名驗證會出錯。
+
+
+## 目前已確定的部分
+
+- 只要 input 有 segwit 的就屬於 segwit transaction。
+- input 都不是 segwit 就不是segwit transaction，也就不要加入marker、flag、witness。
+- segwit transaction 有幾個 input 就要有幾個 witness，因此witness 不用寫數量。
+- input 不是 segwit ，對應的 witness 就要填入 0x00。
+- 每個 witness 開頭不用填入witness的長度，而是 0x02。
+
+## 簽名try & error
+1. 對要簽名的input保留原本的output script，其他的補0
+```
+input 0:
+020000000229606ea9c5b72545af69dc7939458e2896ca30535fc47e30e9e7c452436611ae0000000016001421fafc89027872036072ba1d82271810b040713bffffffff29606ea9c5b72545af69dc7939458e2896ca30535fc47e30e9e7c452436611ae0100000000ffffffff01e80300000000000016001421fafc89027872036072ba1d82271810b040713b0000000001000000
+
+hash:
+90f6acbee613bfae75c9752e1f0815662011ecf5402bbd3a1df0399c90ec154a
+
+input 1:
+020000000229606ea9c5b72545af69dc7939458e2896ca30535fc47e30e9e7c452436611ae0000000000ffffffff29606ea9c5b72545af69dc7939458e2896ca30535fc47e30e9e7c452436611ae0100000016001421fafc89027872036072ba1d82271810b040713bffffffff01e80300000000000016001421fafc89027872036072ba1d82271810b040713b0000000001000000
+
+hash:
+90f6acbee613bfae75c9752e1f0815662011ecf5402bbd3a1df0399c90ec154a
+```
+transaction:
+```
+0200000000010229606ea9c5b72545af69dc7939458e2896ca30535fc47e30e9e7c452436611ae0000000000ffffffff29606ea9c5b72545af69dc7939458e2896ca30535fc47e30e9e7c452436611ae0100000000ffffffff01e80300000000000016001421fafc89027872036072ba1d82271810b040713b02483045022100aa2a0f9cced6a48da1639de136f8be187cbb5ee9097cb77c32b1b8e8938236b802203109dbaacb7b459fe654b17f4b250ba84532cf3523243c473714ec19f57566ec0121025304b56dc81a65d5513b0ff6a33651433735ecb5066f9d58a8902cb1a056459c02483045022100ca97a683d2fd3dfa4ebe36f10e62599ed5ea7946aa1ff40c93da1addaf17adbc02202aa503925d75174a054ce9cdb5c9687828debf7aa48fcb60a21480bd3be675e60121025304b56dc81a65d5513b0ff6a33651433735ecb5066f9d58a8902cb1a056459c00000000
+```
+
+error:
+```
+Error validating transaction: Error running script for input 0 referencing ae11664352c4e7e9307ec45f5330ca96288e453979dc69af4525b7c5a96e6029 at 0: Script was NOT verified successfully..
+```
+
+
+# Reference
+- [深入了解 segregated witness (segwit)](https://medium.com/getamis/深入了解-segregated-witness-segwit-db5d98bb534c)
+
+- [Programming The Blockchain in C#](https://programmingblockchain.gitbook.io/programmingblockchain/other_types_of_ownership/p2wpkh_pay_to_witness_public_key_hash)
+
+- [How to Create a p2sh-p2wpkh Raw Transaction — Step by Step](https://medium.com/coinmonks/how-to-create-a-raw-bitcoin-transaction-step-by-step-239b888e87f2)
+
+- [P2WPKH Transactions](https://github.com/libbitcoin/libbitcoin-system/wiki/P2WPKH-Transactions)
+
+- [Transaction Check & Examples](https://blockchainprogramming.azurewebsites.net/checktx)
+
+- [Segregated Witness Wallet Development Guide](https://bitcoincore.org/en/segwit_wallet_dev/)
+
+- [online decode transaction](https://live.blockcypher.com/btc-testnet/decodetx/)
+
+- [online push btc raw transaction](https://live.blockcypher.com/btc-testnet/pushtx/)
