@@ -374,7 +374,14 @@ ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
 }
 ```
 [參考資料1](https://github.com/dart-lang/ffi/issues/31)
+
 [參考資料2](https://api.dart.dev/stable/2.7.0/dart-ffi/Uint8Pointer/asTypedList.html)
+
+[參考資料3](https://github.com/dart-lang/samples/blob/master/ffi/system-command/linux.dart)
+
+[參考資料4](https://github.com/dart-lang/sdk/issues/35770)
+
+[參考資料5](https://medium.com/flutter/flutter-platform-channels-ce7f540a104e)
 
 4. 轉換C function to Dart function
 ```java
@@ -495,11 +502,6 @@ I/flutter (30616): handShake ed25519CreateKeypair secretKey: [0, 0, 0, 0, 0, 0, 
 Pointer<T> finalizable<T>(Pointer<T> p, void finalizer(Pointer<T> ptr)) {
 }
 ```
-
-2. https://github.com/dart-lang/samples/blob/master/ffi/system-command/linux.dart
-
-3. https://medium.com/flutter/flutter-platform-channels-ce7f540a104e
-
 
 
 
