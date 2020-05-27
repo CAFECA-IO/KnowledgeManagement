@@ -357,25 +357,10 @@ include_directories(src/main/cpp/include/)
 
 2. open native_add.dart
 
+3. write a function to [Pass Uint8List to Pointer](https://github.com/dart-lang/ffi/issues/27)
 ```java
-import 'dart:async';
-import 'dart:typed_data';
-
-import 'package:flutter/services.dart';
-import 'dart:ffi' as ffi; // For FFI
-import 'package:ffi/ffi.dart';
-import 'dart:io'; // For Platform.isX
-
-
-final ffi.DynamicLibrary nativeAddLib = Platform.isAndroid
-    ? ffi.DynamicLibrary.open("libed25519.so")
-    : ffi.DynamicLibrary.process();
-
-// final int Function(int x, int y) nativeAdd = nativeAddLib
-//     .lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Int32, ffi.Int32)>>("native_add")
-//     .asFunction();
-
 ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
+// int getPointer(Uint8List buffer) {
   final ffi.Pointer<ffi.Uint8> pointer =
       allocate<ffi.Uint8>(count: buffer.length);
   for (int i = 0; i < buffer.length; i++) {
@@ -383,22 +368,88 @@ ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
   }
   pointer.cast<ffi.Void>();
   free(pointer);
+  print(pointer);
   return pointer;
+  // return pointer.address;
+}
+```
+
+4. 轉換C functiofunctio n n
+```java
+// import 'dart:async';
+import 'dart:typed_data';
+
+// import 'package:flutter/services.dart';
+import 'dart:ffi' as ffi; // For FFI
+import 'package:ffi/ffi.dart';
+import 'dart:io';
+
+final ffi.DynamicLibrary nativeAddLib = Platform.isAndroid
+    ? ffi.DynamicLibrary.open("libed25519.so")
+    : ffi.DynamicLibrary.process();
+
+ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
+// int getPointer(Uint8List buffer) {
+  final ffi.Pointer<ffi.Uint8> pointer =
+      allocate<ffi.Uint8>(count: buffer.length);
+  for (int i = 0; i < buffer.length; i++) {
+    pointer[i] = buffer[i];
+  }
+  pointer.cast<ffi.Void>();
+  free(pointer);
+  print(pointer);
+  return pointer;
+  // return pointer.address;
 }
 
+final int Function(ffi.Pointer<ffi.Uint8> seed) ed25519CreateSeed = nativeAddLib
+    .lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Uint8>)>>(
+        "ed25519_create_seed")
+    .asFunction();
+
 final void Function(ffi.Pointer<ffi.Uint8> publicKey,
-        ffi.Pointer<ffi.Uint8> secretKey, ffi.Pointer<ffi.Uint8> seed)
+        ffi.Pointer<ffi.Uint8> privateKey, ffi.Pointer<ffi.Uint8> seed)
+// final void Function(int publicKey, int privateKey, int seed)
     ed25519CreateKeypair = nativeAddLib
+        .lookup<
+            ffi.NativeFunction<
+                ffi.Void Function(
+                    // ffi.Int32, ffi.Int32, ffi.Int32
+                    ffi.Pointer<ffi.Uint8>,
+                    ffi.Pointer<ffi.Uint8>,
+                    ffi.Pointer<ffi.Uint8>)>>("ed25519_create_keypair")
+        .asFunction();
+
+final void Function(
+        ffi.Pointer<ffi.Uint8> signature,
+        ffi.Pointer<ffi.Uint8> message,
+        int messageLength,
+        ffi.Pointer<ffi.Uint8> publicKey,
+        ffi.Pointer<ffi.Uint8> privateKey) ed25519Sign =
+    nativeAddLib
         .lookup<
             ffi.NativeFunction<
                 ffi.Void Function(
                     ffi.Pointer<ffi.Uint8>,
                     ffi.Pointer<ffi.Uint8>,
-                    ffi.Pointer<ffi.Uint8>)>>("ed25519_create_seed")
+                    ffi.Int32,
+                    ffi.Pointer<ffi.Uint8>,
+                    ffi.Pointer<ffi.Uint8>)>>("ed25519_sign")
+        .asFunction();
+
+final void Function(ffi.Pointer<ffi.Uint8> sharedSecret,
+        ffi.Pointer<ffi.Uint8> peerPublicKey, ffi.Pointer<ffi.Uint8> privateKey)
+    ed25519KeyExchange = nativeAddLib
+        .lookup<
+            ffi.NativeFunction<
+                ffi.Void Function(
+                    ffi.Pointer<ffi.Uint8>,
+                    ffi.Pointer<ffi.Uint8>,
+                    ffi.Pointer<ffi.Uint8>)>>("ed25519_key_exchange")
         .asFunction();
 ```
 
-3. 在models/atwallet.dart中的 handshake function 中 使用 ed25519CreateKeypair function
+5. 在models/atwallet.dart中的 handshake function 中 使用 ed25519CreateKeypair function
 
 ```java
  // test native code
