@@ -373,13 +373,21 @@ ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
   // return pointer.address;
 }
 ```
+[參考資料1](https://github.com/dart-lang/ffi/issues/31)
+[參考資料2](https://api.dart.dev/stable/2.7.0/dart-ffi/Uint8Pointer/asTypedList.html)
 
-4. 轉換C functiofunctio n n
+4. 轉換C function to Dart function
 ```java
-// import 'dart:async';
-import 'dart:typed_data';
+final int Function(ffi.Pointer<ffi.Uint8> seed) ed25519CreateSeed = nativeAddLib
+    .lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Uint8>)>>(
+        "ed25519_create_seed")
+    .asFunction();
+}
+```
 
-// import 'package:flutter/services.dart';
+完整代碼如下：
+```java
+import 'dart:typed_data';
 import 'dart:ffi' as ffi; // For FFI
 import 'package:ffi/ffi.dart';
 import 'dart:io';
@@ -464,7 +472,6 @@ final void Function(ffi.Pointer<ffi.Uint8> sharedSecret,
 ```
 
 result:
-
 ```java
 I/flutter (30616): ed25519CreateKeypair: Closure: (Pointer<Uint8>, Pointer<Uint8>, Pointer<Uint8>) => void
 I/flutter (30616): handShake ed25519CreateKeypair publicKey: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -477,6 +484,7 @@ I/flutter (30616): handShake ed25519CreateKeypair secretKey: [0, 0, 0, 0, 0, 0, 
 可能的解決方法：
 
 1. [Implement GC finalizers](https://github.com/dart-lang/sdk/issues/35770)
+
 ```java
 /// Return a pointer object that has a finalizer attached to it. When this
 /// pointer object is collected by GC the given finalizer is invoked.
