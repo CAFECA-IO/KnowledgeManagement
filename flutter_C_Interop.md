@@ -5,6 +5,7 @@
 在 flutter 中使用 C code
 
 ## 參考文件
+[flutter_nano_ffi](https://pub.dev/packages/flutter_nano_ffi)
 [Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)
 
 ### 1. 根據上面提到的文件可以創建flutter的plugin， name：native_add
@@ -373,15 +374,15 @@ ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
   // return pointer.address;
 }
 ```
-[參考資料1](https://github.com/dart-lang/ffi/issues/31)
+[參考資料1: dart-lang/ffi/issues/31](https://github.com/dart-lang/ffi/issues/31)
 
-[參考資料2](https://api.dart.dev/stable/2.7.0/dart-ffi/Uint8Pointer/asTypedList.html)
+[參考資料2: Uint8Pointer/asTypedList](https://api.dart.dev/stable/2.7.0/dart-ffi/Uint8Pointer/asTypedList.html)
 
-[參考資料3](https://github.com/dart-lang/samples/blob/master/ffi/system-command/linux.dart)
+[參考資料3: ffi/system-command/linux](https://github.com/dart-lang/samples/blob/master/ffi/system-command/linux.dart)
 
-[參考資料4](https://github.com/dart-lang/sdk/issues/35770)
+[參考資料4: dart-lang/sdk/issues/35770](https://github.com/dart-lang/sdk/issues/35770)
 
-[參考資料5](https://medium.com/flutter/flutter-platform-channels-ce7f540a104e)
+[參考資料5: flutter-platform-channels-ce7f540a104e](https://medium.com/flutter/flutter-platform-channels-ce7f540a104e)
 
 4. 轉換C function to Dart function
 ```java
