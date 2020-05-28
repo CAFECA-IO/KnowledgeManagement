@@ -9,6 +9,9 @@ TxinTemplate() {
 	value: bigNumber;
 	scriptType: string;
 	script: string
+
+	get toJson();
+
 }
 ```
 ```js
@@ -18,6 +21,8 @@ TxoutTemplate() {
 	set value: bigNumber;
 
 	scriptType: string;
+
+	get toJson();
 }
 ```
 ```js
