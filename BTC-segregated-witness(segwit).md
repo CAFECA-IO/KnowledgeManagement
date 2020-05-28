@@ -128,10 +128,12 @@ scriptPubKey: HASH160 <20-byte-hash> EQUAL
 ## 目前已確定的部分
 
 - 只要 input 有 segwit 的就屬於 segwit transaction。
-- input 都不是 segwit 就不是segwit transaction，也就不要加入marker、flag、witness。
+- ~~input 都不是 segwit 就不是segwit transaction，也就不要加入marker、flag、witness~~。
+>> 若 Input 有 segwit 一定要用 version 0 segwit program，若無，只要 purpose 是 49', 84'，就是 segwit，仍要用 version 0 segwit program
 - segwit transaction 有幾個 input 就要有幾個 witness，因此witness 不用寫數量。
 - input 不是 segwit ，對應的 witness 就要填入 0x00。
-- 每個 witness 開頭不用填入witness的長度，而是 0x02。
+- ~~每個 witness 開頭不用填入witness的長度，而是 0x02~~。
+>> witness 開頭的 02 是指簽章跟 public key 這兩個部分
 
 ## 簽名try & error
 1. 對要簽名的input保留原本的output script，其他的補0
