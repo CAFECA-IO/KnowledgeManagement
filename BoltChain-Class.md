@@ -85,6 +85,19 @@ Transaction class() {
 
 	get txID;
 	get txHash;
+	
+	/*
+	* hashToSign根據txins順序與交易格式產出要被簽名hash的array
+	* hashToSign有個switch來呼叫p2pkh, p2wpkh, p2sh-p2wpkh class產出對應的hash
+	* 每個class根據自己收到的(object? rawtx?)，根據自己的規則產出hash
+	*/
+	get hashToSign();
+	/*
+	* setScriptSig收到的格式會像[ { r: '', s:'' }, { r: '', s:'' }, ...]
+	* 組合出scriptSig[]
+	* 檢查是不是segwit的格式來決定要塞到witnesses[]還是各自txins的scriptSig
+	*/
+	set setScriptSig();
 
 	get toJson();
 	get toRaw();
