@@ -25,6 +25,13 @@ TxoutTemplate() {
 	get toJson();
 }
 ```
+```
+txoutScript(pubKey, type) {
+	p2pkh(pubKey);
+	p2wpkh(pubKey);
+	p2sh-p2wpkh(pubKey);
+}
+```
 ```js
 Transaction class() {
 	txins: TxinTemplate[];
