@@ -338,3 +338,27 @@ online hash
 
 Online transaction hex Decoder
 [https://live.blockcypher.com/btc/decodetx/]
+
+
+```java
+StatefulBuilder(
+      builder: (context, setState) {
+        return AlertDialog(
+          title: Text("Title of Dialog"),
+          content: Text(contentText),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("Cancel"),
+            ),
+            FlatButton(
+              onPressed: () {
+                setState(() {
+                  contentText = "Changed Content of Dialog";
+                });
+              },
+              child: Text("Change"),
+            ),
+          ],
+        );
+```
