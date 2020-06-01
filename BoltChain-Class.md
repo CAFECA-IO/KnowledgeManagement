@@ -78,27 +78,23 @@ ex:
 ---
 ```js
 Transaction class() {
-	txins: TxinTemplate[];
-	txouts: TxoutTemplate[];
-	witnesses: witness[];
+	from;
+	to;
 	data: jsonObject;
 	fee: bigNumber;
-	size: number;
-	version: number;
 
-	get txID;
 	get txHash;
-	
+
 	/*
 	* for btc
-	* hashToSign根據txins順序與交易格式產出要被簽名hash的array
-	* hashToSign有個switch來呼叫p2pkh, p2wpkh, p2sh-p2wpkh class產出對應的hash
+	* unsignData根據txins順序與交易格式產出要被簽名hash的array
+	* unsignData有個switch來呼叫p2pkh, p2wpkh, p2sh-p2wpkh class產出對應的hash
 	* 每個class根據自己收到的(object? rawtx?)，根據自己的規則產出hash
 	*
 	* for eth
 	* 回傳 rawTransaction
 	*/
-	get unsignData();
+	get unsignedData();
 
 	/*
 	* for btc
@@ -108,8 +104,68 @@ Transaction class() {
 	*/
 	set setScriptSig();
 
-	get toJson();
 	get toRaw();
 }
 ```
+---
+```js
+BtcTransaction() : Transaction {
+	from: TxinTemplate[];
+	to: TxoutTemplate[];
+	witnesses: witness[];
+	data: jsonObject;
+	fee: bigNumber;
+	version: number;
+	flag: number;
 
+	get txID;
+	get txHash;
+
+	/*
+	* unsignData根據txins順序與交易格式產出要被簽名hash的array
+	* unsignData有個switch來呼叫p2pkh, p2wpkh, p2sh-p2wpkh class產出對應的hash
+	* 每個class根據自己收到的(object? rawtx?)，根據自己的規則產出hash
+	*/
+	get unsignedData();
+
+	/*
+	* setScriptSig收到的格式會像[ { r: '', s:'' }, { r: '', s:'' }, ...]
+	* 組合出scriptSig[]
+	* 檢查是不是segwit的格式來決定要塞到witnesses[]還是各自txins的scriptSig
+	*/
+	set setScriptSig();
+
+	get toRaw();
+}
+```
+---
+```js
+EthTransaction() : Transaction {
+	from: string;
+	to: string;
+	data: jsonObject;
+	fee: bigNumber;
+	assetID: string;
+
+	nonce: string;
+	metadataHash: string;
+
+	get txHash;
+	
+	/*
+	* for eth
+	* 回傳 rawTransaction
+	*/
+	get unsignedData();
+
+	/*
+	* for btc
+	* setScriptSig收到的格式會像[ { r: '', s:'' }, { r: '', s:'' }, ...]
+	* 組合出scriptSig[]
+	* 檢查是不是segwit的格式來決定要塞到witnesses[]還是各自txins的scriptSig
+	*/
+	set setScriptSig();
+
+	get toRaw();
+}
+```
