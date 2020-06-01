@@ -33,8 +33,10 @@ ex:
 ```js
 TxoutTemplate() {
 	set addresses: string[];
-	set script: string;
 	set value: bigNumber;
+	set type: string;
+	
+	script: txoutScript(pubKey, type);
 }
 ```
 ex:
@@ -45,15 +47,16 @@ ex:
 	],
 	script: '76a91421fafc89027872036072ba1d82271810b040713b88ac',
 	value: 27000,
+	type: 'p2pkh'
 }
 ```
 ---
 
 ```js
-txoutScript(pubKey, type) {
-	p2pkh(pubKey);
-	p2wpkh(pubKey);
-	p2sh-p2wpkh(pubKey);
+txoutScript(addresses, type) {
+	p2pkh(addresses);
+	p2wpkh(addresses);
+	p2sh-p2wpkh(addresses);
 }
 ```
 ex:
@@ -87,12 +90,18 @@ Transaction class() {
 	get txHash;
 	
 	/*
+	* for btc
 	* hashToSign根據txins順序與交易格式產出要被簽名hash的array
 	* hashToSign有個switch來呼叫p2pkh, p2wpkh, p2sh-p2wpkh class產出對應的hash
 	* 每個class根據自己收到的(object? rawtx?)，根據自己的規則產出hash
+	*
+	* for eth
+	* 回傳 rawTransaction
 	*/
-	get hashToSign();
+	get unsignData();
+
 	/*
+	* for btc
 	* setScriptSig收到的格式會像[ { r: '', s:'' }, { r: '', s:'' }, ...]
 	* 組合出scriptSig[]
 	* 檢查是不是segwit的格式來決定要塞到witnesses[]還是各自txins的scriptSig
