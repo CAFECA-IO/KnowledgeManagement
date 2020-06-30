@@ -1,23 +1,28 @@
-# flutter_C_Interop
+# Flutter C Interop
 
-## 目標
+## 背景說明
+### 使用場景
+在 ATWallet Android 版本的 Flutter 專案中使用開發資源的 C library， 以實現ed25519 key exchange。
 
-在 flutter 中使用 C code
+### C library
+[orlp/ed25519](https://github.com/orlp/ed25519)
 
-## 參考文件
-[flutter_nano_ffi](https://pub.dev/packages/flutter_nano_ffi)
-[Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)
 
-### 1. 根據上面提到的文件可以創建flutter的plugin， name：native_add
+## 參考資料
+1. [Flutter 官方文件主要參考環境設置： Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)
 
-### 2. Step 2: Add C/C++ sources
-You add the sources to the ios folder, because CocoaPods doesn’t allow including sources above the podspec file, but Gradle allows you to point to the ios folder. It’s not required to use the same sources for both iOS and Android; **you may, of course, add Android-specific sources to the android folder and modify CMakeLists.txt appropriately.**
+2. [Android Developer: Create a CMake build script用CMakeLists.txt文件來定義應如何編譯](https://developer.android.com/studio/projects/configure-cmake)
+    *  [補充資料: stackoverflow Cmake 實作](https://stackoverflow.com/questions/54939099/where-can-i-find-a-working-cmakelists-txt-for-new-android-studio-project-with-ob)
+    
+3. [Implement C in Flutter 主要作為實作 C Function的參考: Flutter_nano_ffi](https://github.com/appditto/flutter_nano_ffi/blob/master/lib/src/ffi/ed25519_blake2b.dart)
 
-  1. 參考[Android Developer: add C/C++ to your project](https://developer.android.com/studio/projects/add-native-code)可以將    natvie code 放在 Android/src/main/cpp之下。
-  
-  2. [Success]參考[Android Developer: Create a CMake build script](https://developer.android.com/studio/projects/configure-cmake)用CMakeLists.txt文件來定義應如何編譯native code並將Gradle指向該文件，CMakeLists.txt 放在 android/下面。
-  
-  ```java
+## 實作方法
+
+1. Create a CMake build script
+檔名： CMakeLists.txt
+位置： [flutter project]/android/
+
+```java
   # Sets the minimum version of CMake required to build your native library.
   # This ensures that a certain set of CMake features is available to
   # your build.
@@ -38,7 +43,16 @@ You add the sources to the ios folder, because CocoaPods doesn’t allow includi
 
              # Provides a relative path to your source file(s).
              src/main/cpp/native-lib.cpp )
-  ```
+```
+  
+### 2. Step 2: Add C/C++ sources
+You add the sources to the ios folder, because CocoaPods doesn’t allow including sources above the podspec file, but Gradle allows you to point to the ios folder. It’s not required to use the same sources for both iOS and Android; **you may, of course, add Android-specific sources to the android folder and modify CMakeLists.txt appropriately.**
+
+  1. 參考[Android Developer: add C/C++ to your project](https://developer.android.com/studio/projects/add-native-code)可以將    natvie code 放在 Android/src/main/cpp之下。
+  
+  2. [Success]參考[Android Developer: Create a CMake build script](https://developer.android.com/studio/projects/configure-cmake)用CMakeLists.txt文件來定義應如何編譯native code並將Gradle指向該文件，CMakeLists.txt 放在 android/下面。
+  
+ 
   
   [stackoverflow 上的範例](https://stackoverflow.com/questions/54939099/where-can-i-find-a-working-cmakelists-txt-for-new-android-studio-project-with-ob)
   
