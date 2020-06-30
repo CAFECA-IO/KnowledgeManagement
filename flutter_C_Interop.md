@@ -105,7 +105,7 @@ externalNativeBuild {
        |____native_add.dart
 ```
 
-2. open native_add.dart， import t
+2. open native_add.dart
    1. import 'dart:ffi' as ffi; 
    2. import 'package:ffi/ffi.dart'; 提供將buffer轉成pointer的function
 
@@ -116,24 +116,90 @@ final ffi.DynamicLibrary ed25519Lib = Platform.isAndroid
     : ffi.DynamicLibrary.process();
 ```
 
-4. 實作function
-   1. 根據 C function 接收回傳的參數型別，轉換成flutter 
+4. 實作function, 以 ed25519CreateSeed function - int ed25519_create_seed(unsigned char *seed) 為例
+   1. 以dart:ffi 提供的型別定義 C function 接收與回傳的參數型別
+   ```java
+   typedef ed25519_create_seed_func = ffi.Int32 Function(ffi.Pointer<ffi.Uint8> seed);
+   ```
+   2. 根據上述function定義 dart function
+   ```java
+   typedef Ed25519CreateSeed = int Function(ffi.Pointer<ffi.Uint8> seed);
+   ```
+   3. 轉換C function to Dart function
+   ```java
+   final int Function(ffi.Pointer<ffi.Uint8>) ed25519CreateSeed = ed25519Lib
+    .lookup<ffi.NativeFunction<ed25519_create_seed_func>>('ed25519_create_seed')
+    .asFunction<Ed25519CreateSeed>();
+   ```
+   範例2
+   ```java 
+   // C ed25519CreateKeypair function -
+   // void ed25519_create_keypair(
+   // unsigned char *public_key,
+   // unsigned char *private_key,
+   // const unsigned char *seed);
+   typedef ed25519_create_keypair_func = ffi.Void Function(
+       ffi.Pointer<ffi.Uint8> publicKey,
+       ffi.Pointer<ffi.Uint8> privateKey,
+       ffi.Pointer<ffi.Uint8> seed);
+   typedef Ed25519CreateKeypair = void Function(ffi.Pointer<ffi.Uint8> publicKey,
+       ffi.Pointer<ffi.Uint8> privateKey, ffi.Pointer<ffi.Uint8> seed);
+   final void Function(
+           ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.Uint8>, ffi.Pointer<ffi.Uint8>)
+       ed25519CreateKeypair = ed25519Lib
+           .lookup<ffi.NativeFunction<ed25519_create_keypair_func>>(
+               'ed25519_create_keypair')
+           .asFunction<Ed25519CreateKeypair>();
+   ```
+   4. 定義一個class，將上述由C 轉成 dart 的 function 的參數轉為一般型別
+   ```java
+   class Ed25519 {
+     // Copy byte array to native heap
+     static ffi.Pointer<ffi.Uint8> _bytesToPointer(Uint8List bytes) {
+       final length = bytes.lengthInBytes;
+       final result = allocate<ffi.Uint8>(count: length);
+       for (var i = 0; i < length; ++i) {
+         result[i] = bytes[i];
+       }
+       return result;
+     }
+
+     // Creates a 32 byte random seed in seed for key generation. seed must be a writable 32 byte buffer. Returns 0 on success, and nonzero on failure.
+     static Uint8List createSeed() {
+       final result = allocate<ffi.Uint8>(count: 32);
+       int response = ed25519CreateSeed(result);
+       print('createSeed response isSucceed: ${response == 0 ? 'true' : 'false'}');
+       return result.asTypedList(32);
+     }
+     //Creates a new key pair from the given seed. public_key must be a writable 32 byte buffer, private_key must be a writable 64 byte buffer and seed must be a 32 byte buffer.
+     static KeyPair generateKeyPair(Uint8List seed) {
+       final seedPointer = _bytesToPointer(seed);
+       final publicKey = allocate<ffi.Uint8>(count: 32);
+       final privateKey = allocate<ffi.Uint8>(count: 64);
+       ed25519CreateKeypair(publicKey, privateKey, seedPointer);
+       free(seedPointer);
+       return KeyPair(
+         publicKey: publicKey.asTypedList(32),
+         privateKey: privateKey.asTypedList(64),
+       );
+     }
+   }
+   ```
+   5. 要使用上述function的話，即可直接在該檔案中 import '../native_add/native_add.dart';
+   ```java
+   //++ test C function
+    if (this.token.isEmpty) {
+      final Uint8List seed = Ed25519.createSeed();
+      final keyPair = Ed25519.generateKeyPair(seed);
+      Uint8List privateKey = keyPair.privateKey;
+      Uint8List publicKey = keyPair.publicKey;
+      this.publicKey = publicKey;
+      this.privateKey = privateKey;
+    }
+   ```
    
-```java
-ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
-// int getPointer(Uint8List buffer) {
-  final ffi.Pointer<ffi.Uint8> pointer =
-      allocate<ffi.Uint8>(count: buffer.length);
-  for (int i = 0; i < buffer.length; i++) {
-    pointer[i] = buffer[i];
-  }
-  pointer.cast<ffi.Void>();
-  free(pointer);
-  print(pointer);
-  return pointer;
-  // return pointer.address;
-}
-```
+### 其餘參考文件
+
 [參考資料1: dart-lang/ffi/issues/31](https://github.com/dart-lang/ffi/issues/31)
 
 [參考資料2: Uint8Pointer/asTypedList](https://api.dart.dev/stable/2.7.0/dart-ffi/Uint8Pointer/asTypedList.html)
@@ -143,135 +209,3 @@ ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
 [參考資料4: dart-lang/sdk/issues/35770](https://github.com/dart-lang/sdk/issues/35770)
 
 [參考資料5: flutter-platform-channels-ce7f540a104e](https://medium.com/flutter/flutter-platform-channels-ce7f540a104e)
-
-4. 轉換C function to Dart function
-```java
-final int Function(ffi.Pointer<ffi.Uint8> seed) ed25519CreateSeed = nativeAddLib
-    .lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Uint8>)>>(
-        "ed25519_create_seed")
-    .asFunction();
-}
-```
-
-完整代碼如下：
-```java
-import 'dart:typed_data';
-import 'dart:ffi' as ffi; // For FFI
-import 'package:ffi/ffi.dart';
-import 'dart:io';
-
-final ffi.DynamicLibrary nativeAddLib = Platform.isAndroid
-    ? ffi.DynamicLibrary.open("libed25519.so")
-    : ffi.DynamicLibrary.process();
-
-ffi.Pointer<ffi.Uint8> getPointer(Uint8List buffer) {
-// int getPointer(Uint8List buffer) {
-  final ffi.Pointer<ffi.Uint8> pointer =
-      allocate<ffi.Uint8>(count: buffer.length);
-  for (int i = 0; i < buffer.length; i++) {
-    pointer[i] = buffer[i];
-  }
-  pointer.cast<ffi.Void>();
-  free(pointer);
-  print(pointer);
-  return pointer;
-  // return pointer.address;
-}
-
-final int Function(ffi.Pointer<ffi.Uint8> seed) ed25519CreateSeed = nativeAddLib
-    .lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<ffi.Uint8>)>>(
-        "ed25519_create_seed")
-    .asFunction();
-
-final void Function(ffi.Pointer<ffi.Uint8> publicKey,
-        ffi.Pointer<ffi.Uint8> privateKey, ffi.Pointer<ffi.Uint8> seed)
-// final void Function(int publicKey, int privateKey, int seed)
-    ed25519CreateKeypair = nativeAddLib
-        .lookup<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    // ffi.Int32, ffi.Int32, ffi.Int32
-                    ffi.Pointer<ffi.Uint8>,
-                    ffi.Pointer<ffi.Uint8>,
-                    ffi.Pointer<ffi.Uint8>)>>("ed25519_create_keypair")
-        .asFunction();
-
-final void Function(
-        ffi.Pointer<ffi.Uint8> signature,
-        ffi.Pointer<ffi.Uint8> message,
-        int messageLength,
-        ffi.Pointer<ffi.Uint8> publicKey,
-        ffi.Pointer<ffi.Uint8> privateKey) ed25519Sign =
-    nativeAddLib
-        .lookup<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    ffi.Pointer<ffi.Uint8>,
-                    ffi.Pointer<ffi.Uint8>,
-                    ffi.Int32,
-                    ffi.Pointer<ffi.Uint8>,
-                    ffi.Pointer<ffi.Uint8>)>>("ed25519_sign")
-        .asFunction();
-
-final void Function(ffi.Pointer<ffi.Uint8> sharedSecret,
-        ffi.Pointer<ffi.Uint8> peerPublicKey, ffi.Pointer<ffi.Uint8> privateKey)
-    ed25519KeyExchange = nativeAddLib
-        .lookup<
-            ffi.NativeFunction<
-                ffi.Void Function(
-                    ffi.Pointer<ffi.Uint8>,
-                    ffi.Pointer<ffi.Uint8>,
-                    ffi.Pointer<ffi.Uint8>)>>("ed25519_key_exchange")
-        .asFunction();
-```
-
-5. 在models/atwallet.dart中的 handshake function 中 使用 ed25519CreateKeypair function
-
-```java
- // test native code
-    print('ed25519CreateKeypair: $ed25519CreateKeypair'); 
-    Uint8List publicKey = Uint8List(32);
-    Uint8List secretKey = Uint8List(64);
-    final Uint8List seed = Uint8List.fromList(hex.decode(
-        'c42fe3e3cabbc1fdbef84fe5efa306874ff858d2ef8a60b307f06369feb3fe14'));
-    ed25519CreateKeypair(getPointer(publicKey),getPointer(secretKey), getPointer(seed));
-    print('handShake ed25519CreateKeypair publicKey: $publicKey');
-    print('handShake ed25519CreateKeypair secretKey: $secretKey');
-```
-
-result:
-```java
-I/flutter (30616): ed25519CreateKeypair: Closure: (Pointer<Uint8>, Pointer<Uint8>, Pointer<Uint8>) => void
-I/flutter (30616): handShake ed25519CreateKeypair publicKey: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-I/flutter (30616): handShake ed25519CreateKeypair secretKey: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-```
-目前遇到的問題為：
-
-1. 傳指標進去ed25519CreateKeypair function，但是對應的value沒有被更新。
-
-可能的解決方法：
-
-1. [Implement GC finalizers](https://github.com/dart-lang/sdk/issues/35770)
-
-```java
-/// Return a pointer object that has a finalizer attached to it. When this
-/// pointer object is collected by GC the given finalizer is invoked.
-///
-/// Note: the pointer object passed to the finalizer is not the same as 
-/// the pointer object that is returned from [finalizable] - it points
-/// to the same memory region but has different identity. 
-Pointer<T> finalizable<T>(Pointer<T> p, void finalizer(Pointer<T> ptr)) {
-}
-```
-
-
-
-
-
-
-
-
-
-https://flutter.dev/docs/development/platform-integration/platform-channels?tab=android-channel-java-tab
-
-https://www.youtube.com/watch?v=X8JD8hHkBMc
