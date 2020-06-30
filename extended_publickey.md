@@ -1,4 +1,4 @@
-[Extended Key](https://learnmeabitcoin.com/guide/extended-keys)
+[Reference](https://learnmeabitcoin.com/guide/extended-keys)
     
 ![](https://i.imgur.com/Inr4bjw.png)
 
