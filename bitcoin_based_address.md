@@ -296,9 +296,9 @@ String get bech32HRP {
     if (this != ATCryptocurrencyType.btc && this != ATCryptocurrencyType.ltc)
       ATLog.error("Not BTC nor LTC");
     switch (this) {
-      case ATCryptocurrencyType.btc:
+      case Bitcoin:
         return ATConstants().isTestnet ? "tb" : "bc";
-      case ATCryptocurrencyType.ltc:
+      case Litecoin:
         return ATConstants().isTestnet ? "tltc" : "ltc";
       default:
         return "";
@@ -311,9 +311,9 @@ String get bech32Separator {
     if (this != ATCryptocurrencyType.btc && this != ATCryptocurrencyType.ltc)
       ATLog.error("Not BTC nor LTC");
     switch (this) {
-      case ATCryptocurrencyType.btc:
+      case Bitcoin:
         return "1";
-      case ATCryptocurrencyType.ltc:
+      case Litecoin:
         return "1";
       default:
         return "";
@@ -347,6 +347,83 @@ String get bech32Separator {
         return isTestnet ? 0xb0 : 0xb0;
     }
   }
+```
+
+```javascript=
+class Segwit {
+  Segwit(this.hrp, this.separator,this.version, this.program);
+
+  final String hrp;
+  final String separator;
+  final int version;
+  final List<int> program;
+
+  String get scriptPubKey {
+    var v = version == 0 ? version : version + 0x50;
+    return ([v, program.length] + program)
+        .map((c) => c.toRadixString(16).padLeft(2, '0'))
+        .toList()
+        .join('');
+  }
+}
+
+static const _CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+
+String bech32Encode(Segwit input, List<int> data){
+    int _polymod(List<int> values) {
+      var chk = 1;
+      values.forEach((int v) {
+        var top = chk >> 25;
+        chk = (chk & 0x1ffffff) << 5 ^ v;
+        for (int i = 0; i < generator.length; i++) {
+          if ((top >> i) & 1 == 1) {
+            chk ^= generator[i];
+          }
+        }
+      });
+
+      return chk;
+    }
+
+    List<int> _hrpExpand(String hrp) {
+      var result = hrp.codeUnits.map((c) => c >> 5).toList();
+      result = result + [0];
+
+      result = result + hrp.codeUnits.map((c) => c & 31).toList();
+
+      return result;
+    }
+
+    List<int> _createChecksum(String hrp, List<int> data) {
+      var values = _hrpExpand(hrp) + data + [0, 0, 0, 0, 0, 0];
+      var polymod = _polymod(values) ^ 1;
+
+      List<int> result = List<int>(6);
+
+      for (int i = 0; i < result.length; i++) {
+        result[i] = (polymod >> (5 * (5 - i))) & 31;
+      }
+      return result;
+    }
+
+    var checksummed = data + _createChecksum(input.hrp, data);
+    return input.hrp + input.separator + checksummed.map((i) => _CHARSET[i]).join();
+}
+
+String segwitEncode(Segwit input){
+    var version = input.version;
+    var program = input.program;
+    var data = _convertBits(program, 8, 5, true);
+    return bech32Encode(input, [version] + data));
+}
+
+String pubkeyToP2WPKHAddress(CryptocurrencyType type, List<int> publicKey) {
+    final List<int> hash =
+      ripemd160(sha256(pubKey.length > 33 ? compressedPubKey(pubKey) : pubKey));
+      
+    final String address = segwitEncode(Segwit(bech32HRP, bech32Separator,0, hash));
+  return address;
+}
 ```
 
 
