@@ -1,0 +1,5 @@
+[most of testnet cryptocurrency faucet: Dash](https://testnet.help/en/dashfaucet/testnet#log)
+[Bitcoin testnet faucet](https://tbtc.bitaps.com/)
+[Bitcoin Cash testnet faucet](https://developer.bitcoin.com/faucets/bch/)
+[Litcoin testnet faucet](https://kuttler.eu/en/bitcoin/ltc/faucet/)
+[Doge testnet faucet](https://testnet-faucet.com/doge-testnet/)
