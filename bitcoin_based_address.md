@@ -320,35 +320,7 @@ String get bech32Separator {
     }
   }
 ```
-
-#### Bip32Type
-```javascript=
-  int get bip32Type {
-    switch (CryptocurrencyType) {
-      case Bitcoin:
-        return isTestnet
-            ? isPublic ? 0x043587cf : 0x04358394
-            : isPublic ? 0x0488b21e : 0x0488ade4;
-      case Litecoin:
-        return isTestnet
-            ? isPublic ? 0x019da462 : 0x019d9cfe
-            : isPublic ? 0x019da462 : 0x019d9cfe;
-    }
-  }
-```
-
-#### wif
-```javascript=
-  int get wif {
-    switch (CryptocurrencyType) {
-      case Bitcoin:
-        return isTestnet ? 0xef : 0x80;
-      case Litecoin:
-        return isTestnet ? 0xb0 : 0xb0;
-    }
-  }
-```
-
+#### pubkeyToP2WPKHAddress
 ```javascript=
 class Segwit {
   Segwit(this.hrp, this.separator,this.version, this.program);
@@ -434,8 +406,3 @@ String pubkeyToP2WPKHAddress(CryptocurrencyType type, List<int> publicKey) {
   return address;
 }
 ```
-
-
-
-
-
