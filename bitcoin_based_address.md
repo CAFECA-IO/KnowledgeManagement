@@ -371,8 +371,17 @@ static const _CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
 
 String bech32Encode(Segwit input, List<int> data){
     int _polymod(List<int> values) {
-      var chk = 1;
-      values.forEach((int v) {
+    
+    const List<int> generator = [
+      0x3b6a57b2,
+      0x26508e6d,
+      0x1ea119fa,
+      0x3d4233dd,
+      0x2a1462b3,
+    ];
+
+    var chk = 1;
+    values.forEach((int v) {
         var top = chk >> 25;
         chk = (chk & 0x1ffffff) << 5 ^ v;
         for (int i = 0; i < generator.length; i++) {
