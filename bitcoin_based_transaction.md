@@ -2,5 +2,6 @@
 * [Bitcoin testnet faucet](https://tbtc.bitaps.com/)
 * [Bitcoin Cash testnet faucet](https://developer.bitcoin.com/faucets/bch/)
 * [ETC Mordor Faucet](http://mordor.etherdrip.net/)
-* [Litcoin testnet faucet](https://kuttler.eu/en/bitcoin/ltc/faucet/)
+* [Litcoin testnet faucet 1](https://tltc.bitaps.com/)
+* [Litcoin testnet faucet 2](https://kuttler.eu/en/bitcoin/ltc/faucet/)
 * [Doge testnet faucet](https://testnet-faucet.com/doge-testnet/)
