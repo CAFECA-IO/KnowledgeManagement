@@ -1,5 +1,6 @@
 * [most of testnet cryptocurrency's faucet](https://testnet.help/en/dashfaucet/testnet#log)
 * [Bitcoin testnet faucet](https://tbtc.bitaps.com/)
 * [Bitcoin Cash testnet faucet](https://developer.bitcoin.com/faucets/bch/)
+* [ETC Mordor Faucet](http://mordor.etherdrip.net/)
 * [Litcoin testnet faucet](https://kuttler.eu/en/bitcoin/ltc/faucet/)
 * [Doge testnet faucet](https://testnet-faucet.com/doge-testnet/)
