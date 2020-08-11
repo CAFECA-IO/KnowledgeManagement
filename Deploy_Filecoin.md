@@ -13,7 +13,7 @@ sudo apt install clang
 curl https://sh.rustup.rs -sSf | sh
 ```
 
-## Download Source Code and Install
+## Download Source Code and Install Lotus
 ```shell
 git clone https://github.com/filecoin-project/lotus.git
 cd lotus
