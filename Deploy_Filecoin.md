@@ -38,7 +38,12 @@ lotus wallet new bls
 # Check wallet balance
 lotus wallet balance t3qywg7fr66p6ujjtyocv47exxfke55io4kz5jecdrfr32v57ipg5c6goi4q3hxuwdxktiv7qvwqmxeuqccwqq
 
+# Regist miner
+# Testnet https://faucet.testnet.filecoin.io/
+# Get actor = bafy2bzacebjehhiysmlllbmfhifgtrjkcyhjzo2jz5dziecmyynqeruhs5hls
+
 # Start mining
+lotus-storage-miner init --actor=bafy2bzacebjehhiysmlllbmfhifgtrjkcyhjzo2jz5dziecmyynqeruhs5hls --owner= t3qywg7fr66p6ujjtyocv47exxfke55io4kz5jecdrfr32v57ipg5c6goi4q3hxuwdxktiv7qvwqmxeuqccwqq
 screen lotus-storage-miner run
 Ctrl + A + D
 ```
