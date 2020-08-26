@@ -9,12 +9,14 @@
 - deposit
 - withdraw
 - transfer
+- swap
 - donate
 
 ## BOLT JSON-RPC
 - deposit
 - withdraw
 - transfer
+- swap
 - donate
 - agentAddress
 - balance
