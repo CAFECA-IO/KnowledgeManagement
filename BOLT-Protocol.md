@@ -1,9 +1,9 @@
 # BOLT Protocol
 ## How to Use
 - Transaction with Data
-- RLP format
-  - function name
-  - arguments
+- Data Format
+  - function name = sha3-256(name).split(0, 8)
+  - arguments = RLP
 
 ## Blockchain function List
 - deposit
