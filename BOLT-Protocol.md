@@ -1,4 +1,4 @@
-# BOLT Protocol
+# Contract Protocol
 ## How to Use
 - Transaction with Data
 - Data Format
