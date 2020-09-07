@@ -2,7 +2,7 @@
 ## How to Use
 - Transaction with Data
 - Data Format
-  - function name = sha3-256(name.toLowerCase()).split(0, 8)
+  - function name = keccak256(name.toLowerCase()).split(0, 8)
   - arguments = RLP
 
 ## Blockchain function List
