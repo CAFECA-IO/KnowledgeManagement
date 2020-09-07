@@ -27,7 +27,7 @@
 - syncStatus
 
 ### deposit (0x48c73f68)
-(no input)
+- no data
 
 ### withdraw (0x855511cc)
 - cointype
@@ -39,8 +39,14 @@
   - hexstring
 
 ```
-transfer 1 BTC to 3LhS2MWhJC5vJwV1CtmHz3EzV4MNA1w65A
-0x855511cc8480000000880de0b6b3a76400009905d07e81f97923b57ceed458c6fa493511545397537a73e5f5
+withdraw 1 BTC to 3LhS2MWhJC5vJwV1CtmHz3EzV4MNA1w65A
+
+function name: 855511cc
+cointype: 84 80000000
+amount: 88 0de0b6b3a7640000
+address: 99 05d07e81f97923b57ceed458c6fa493511545397537a73e5f5
+
+0x855511cc800000000de0b6b3a764000005d07e81f97923b57ceed458c6fa493511545397537a73e5f5
 ```
 
 ### transfer (0xb483afd3)
@@ -54,16 +60,44 @@ transfer 1 BTC to 3LhS2MWhJC5vJwV1CtmHz3EzV4MNA1w65A
 - withdraw
   - boolean
 
+```
+transfer 1 BTC to 3LhS2MWhJC5vJwV1CtmHz3EzV4MNA1w65A
+
+function name: b483afd3
+cointype: 84 80000000
+amount: 88 0de0b6b3a7640000
+address: 99 05d07e81f97923b57ceed458c6fa493511545397537a73e5f5
+withdraw: 1
+
+0xb483afd3800000000de0b6b3a764000005d07e81f97923b57ceed458c6fa493511545397537a73e5f501
+```
+
 ### swap (0x695543c3)
 - from cointype
   - 0x80000000 to 0x 0x8fffffff
   - [reference](https://github.com/satoshilabs/slips/blob/master/slip-0044.md)
-- amount
+- from amount
   - number x 10**18
 - to cointype
   - 0x80000000 to 0x 0x8fffffff
   - [reference](https://github.com/satoshilabs/slips/blob/master/slip-0044.md)
+- to expect amount
+  - number x 10**18
 - to address
   - hexstring
 - withdraw
   - boolean
+
+```
+swap 1 BTC to 29.35 ETH to 0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8
+
+function name: 695543c3
+from cointype: 84 80000000
+from amount: 88 0de0b6b3a7640000
+to cointype: 84 8000003c
+to expect amount: 89 019750257f3db70000
+address: a8 ea674fdde714fd979de3edf0f56aa9716b898ec8
+withdraw: 1
+
+0x695543c38480000000880de0b6b3a7640000848000003c89019750257f3db70000a8ea674fdde714fd979de3edf0f56aa9716b898ec801
+```
