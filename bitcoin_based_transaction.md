@@ -3,6 +3,7 @@
 * [Bitcoin testnet faucet 2](https://coinfaucet.eu/en/btc-testnet/?__cf_chl_jschl_tk__=79a7f0c8b34f7458433e76a799db4339062fc89f-1599016779-0-AdX_EWn0hT7-PRnTLNYuEOab0pq3iUzZeLDTbZxHczOtyoQOhzUpiappDOwPGuZhYMwAvaZjuxhTO5vliL6PoVTDfNXh1CDd3L-tX6P2SkcZ0I4Lukp8peIQiW_OGqI7ST7DSsTwEWUXRNKQKAdvaky4zM0_6uZZLvrRXif4uhi-ARnc3DgySu31FubQiVOqpdBZ6unMuWmTuywuk5CIfUi2pkymogA8x82LBTiUM4B_hxXGYQ8CmFRtK7MFo11JY4GgICh5a3h2pMqt9_ZpijyEwZ8T2Hd3SN1Wdye_art0)
 * ~~[Bitcoin Cash testnet faucet](https://developer.bitcoin.com/faucets/bch/)~~
 * [BCH Testnet Faucet](https://faucet.fullstack.cash)
+* [ETH Ropsten Faucet](https://faucet.dimensions.network/)
 * [ETC Mordor Faucet](http://mordor.etherdrip.net/)
 * [Litcoin testnet faucet 1](https://tltc.bitaps.com/)
 * [Litcoin testnet faucet 2](https://kuttler.eu/en/bitcoin/ltc/faucet/)
