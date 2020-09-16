@@ -34,4 +34,4 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 ### Transaction(2020.9.16 update)
 [Ethereum Transaction](EthereumTransaction.md)
 
-[Bitcoin transaction](bitcoin_based_transaction.md)
+[Bitcoin transaction (with Faucet)](bitcoin_based_transaction.md)
