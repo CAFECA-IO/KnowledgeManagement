@@ -1,4 +1,4 @@
-# Contract Protocol
+# Pocket Bank Contract Protocol
 ## How to Use
 - Transaction with Data
 - Data Format
@@ -13,12 +13,22 @@
 - donate (0x86ba0d37)
 
 ## BOLT JSON-RPC
+Personal:
 - deposit (0x48c73f68)
 - withdraw (0x855511cc)
 - transfer (0xb483afd3)
 - swap (0x695543c3)
 - donate (0x86ba0d37)
-- agentAddress
+
+- borrow (0x4f943907)
+- return (0x7459b956)
+
+Personal readonly:
+- myAssets
+- myBalance
+
+System:
+- address
 - balance
 - exchangeRate
 - minAmount
@@ -101,3 +111,11 @@ withdraw: 1
 
 0x695543c38480000000880de0b6b3a7640000848000003c89019750257f3db70000a8ea674fdde714fd979de3edf0f56aa9716b898ec801
 ```
+
+### donate (0x86ba0d37)
+- no data
+
+### borrow (0x4f943907)
+
+
+### return (0x7459b956)
