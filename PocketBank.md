@@ -21,7 +21,7 @@ Personal:
 - donate (0x86ba0d37)
 
 - borrow (0x4f943907)
-- return (0x7459b956)
+- repay (0xd4ad2577)
 
 Personal readonly:
 - myAssets
