@@ -3,6 +3,8 @@
 ## MaterialApp
 
 ```javascript=
+ final GlobalKey<NavigatorState> _navigator = GlobalKey<NavigatorState>(); // 將 navigator 存起來，避免其他 Layer 使用 navigator 錯誤
+
  MaterialApp(
         builder: (context, widget) {
           return MediaQuery(

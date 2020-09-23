@@ -27,10 +27,13 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 
 [Extended Public Key](extended_publickey.md)
 
-[Bitcoin Based transaction](bitcoin_based_transaction.md)
-
 [Flutter App Design](flutter_app_design.md)
 
 [RxJS Introduction](rxjs.md)
 
 [Bitcoin 節點架設](bitcoin_node.md)
+
+### Transaction(2020.9.16 update)
+[Ethereum Transaction](EthereumTransaction.md)
+
+[Bitcoin transaction (with Faucet)](bitcoin_based_transaction.md)
