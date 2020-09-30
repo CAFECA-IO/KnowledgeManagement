@@ -31,7 +31,11 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 
 [RxJS Introduction](rxjs.md)
 
+### 節點架設
+
 [Bitcoin 節點架設](bitcoin_node.md)
+
+[Ripple 節點架設](ripple_node.md)
 
 ### Transaction(2020.9.16 update)
 [Ethereum Transaction](EthereumTransaction.md)
