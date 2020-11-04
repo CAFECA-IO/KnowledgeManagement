@@ -101,10 +101,11 @@ pip install -r requirements.txt
 
 ## 執行
 ```
-python inference.py --checkpoint_path <ckpt> --face <video.mp4> --audio <an-audio-source> 
+python inference.py --checkpoint_path <ckpt> --face <video.mp4> --audio <an-audio-source> --pad <padding>
 ```
 * <ckpt>: checkpoints/wav2lip_gan.pth 或 checkpoints/wav2lip.pth，根據上面選擇下載的檔案。
 * <video.mp4>: 可以是圖片或影片
 * <an-audio-source> : .wav, .mp3
+* <padding>: 四個參數分別為：上，下，左，右。0 10 0 -10 為嘴形多包含下方10px，少包含右邊10px; 
 
 產出的檔案會存在`./results/result_voice.mp4`
