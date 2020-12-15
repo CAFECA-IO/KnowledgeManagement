@@ -15,6 +15,10 @@ https://gitea-6f1861e5.baas.tmpstg.twcc.tw/TWCC-BAAS/fabric-operator/src/branch/
 ```shell
 kubectl logs hlf-peer--atlantis--peer0-0 peer -n fabric
 ```
+- kubectl exec --stdin --tty {pod-name} -- /bin/bash
+```shell
+kubectl exec --stdin --tty hlf-peer--atlantis--peer0-0 /bin/bash
+```
 
 ## Helm command
 - helm install
