@@ -21,3 +21,5 @@ https://gitea-6f1861e5.baas.tmpstg.twcc.tw/TWCC-BAAS/fabric-operator/src/branch/
 ```shell
 git clone
 ```
+
+## Pod restart with latest image
