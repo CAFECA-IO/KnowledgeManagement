@@ -24,6 +24,7 @@ kubectl exec --stdin --tty hlf-peer--atlantis--peer0-0 /bin/bash
 - helm install
 - helm uninstall
 - helm list
+- helm dependency update
 
 ## Simple Sample
 ```shell
