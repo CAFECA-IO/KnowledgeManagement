@@ -10,6 +10,10 @@ https://gitea-6f1861e5.baas.tmpstg.twcc.tw/TWCC-BAAS/fabric-operator/src/branch/
 
 ## Kubernetes command
 - kubectl get namespaces
+- kubectl create namespace {namespace}
+```shell
+kubectl create namespace wayne-playground
+```
 - kubectl get pod
 - kubectl get service
 - kubectl logs {pod-name} {container-name} -n {namespace}
