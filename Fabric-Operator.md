@@ -20,7 +20,11 @@ kubectl create namespace wayne-playground
 ```shell
 kubectl logs hlf-peer--atlantis--peer0-0 peer -n fabric
 ```
-- kubectl exec --stdin --tty {pod-name} -- /bin/bash
+- kubectl get pod -w -n {namespace}
+```shell
+kubectl get pod -w -n luphia-playground
+```
+- kubectl exec --stdin --tty {pod-name} -- /bin/sh
 ```shell
 kubectl exec --stdin --tty hlf-peer--atlantis--peer0-0 /bin/bash
 ```
