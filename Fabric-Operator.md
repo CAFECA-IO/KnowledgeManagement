@@ -32,7 +32,8 @@ kubectl exec --stdin --tty hlf-peer--atlantis--peer0-0 /bin/bash
 ## Helm command
 - helm install
 ```shell
-helm install createnetwork . -n luphia-playground
+cd fabric-operator/operator/helm-charts/createnetwork/
+helm install createnetwork-76fe6563 . -n luphia-playground
 ```
 - helm uninstall
 - helm list
