@@ -32,7 +32,7 @@ kubectl exec --stdin --tty hlf-peer--atlantis--peer0-0 /bin/bash
 ## Helm command
 - helm install
 ```shell
-
+helm install createnetwork . -n luphia-playground
 ```
 - helm uninstall
 - helm list
