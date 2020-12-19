@@ -9,6 +9,7 @@
 https://gitea-6f1861e5.baas.tmpstg.twcc.tw/TWCC-BAAS/fabric-operator/src/branch/tmp/operator/helm-charts
 
 ## Kubernetes command
+- kubectl get namespaces
 - kubectl get pod
 - kubectl get service
 - kubectl logs {pod-name} {container-name} -n {namespace}
@@ -22,9 +23,17 @@ kubectl exec --stdin --tty hlf-peer--atlantis--peer0-0 /bin/bash
 
 ## Helm command
 - helm install
+```shell
+
+```
 - helm uninstall
 - helm list
 - helm dependency update
+
+## External Chaincode
+```shell
+
+```
 
 ## Simple Sample
 ```shell
