@@ -1,5 +1,20 @@
 # SonarQube with NodeJs
 
+用來產生程式碼弱點，測試覆蓋率，健康度等報告
+
+- [準備環境](#準備環境)
+- [安裝npm套件](#安裝npm套件)
+- [Docker Image SonarQube](#SonarQube-with-Docker)
+- [專案掃描前設定](#專案掃描前設定)
+  + [Project structure](#project-structure)
+  + [code](#code)
+    + [sonar-project.js](#sonar-project.js)
+    + [package.json](#package.json)
+- [執行掃描](#執行掃描)
+  + [步驟](#步驟)
+    + [npm run test](#npm-run-test)
+    + [npm run sonar](#npm-run-sonar)
+
 ## 準備環境
 - Node/npm
 - Docker
@@ -14,7 +29,7 @@
 - **sonarqube-scanner** - SonarQube掃描用的套件，用這個可以少很多事，比如建專案、建key、其他設定等等
 - **jest-sonar-reporter** - 幫忙把jest結果轉換成SonarQube通用測試數據的套件
 
-## Docker Image SonarQube
+## SonarQube with Docker
 
 [SonarQube Docker hub](https://hub.docker.com/_/sonarqube/)
 
@@ -29,7 +44,9 @@
 * https://docs.sonarqube.org/latest/setup/install-server/
 > Warning: Only a single instance of SonarQube can connect to a database schema. If you're using a Docker Swarm or Kubernetes, make sure that multiple SonarQube instances are never running on the same database schema simultaneously. This will cause SonarQube to behave unpredictably and data will be corrupted. There is no safeguard until SONAR-10362.
 
-## Project structure
+## 專案掃描前設定
+
+### Project structure
 
 ```
 SampleProject
@@ -47,7 +64,7 @@ SampleProject
 
 ### code
 
-file: sonar-project.js
+#### sonar-project.js
 ```js
 const sonarqubeScanner =  require('sonarqube-scanner');
 sonarqubeScanner(
@@ -64,6 +81,7 @@ sonarqubeScanner(
   }, () => {});
 ```
 
+#### package.json
 在package.json加入以下幾行
 
 ```js
@@ -93,11 +111,18 @@ sonarqubeScanner(
 }
 ```
 
-## 測試
+## 執行掃描
 
+### 步驟
+- npm run test
+- npm run sonar
+
+#### npm run test
 > npm run test
 
-就可以看到類似下面的測試的結果
+產生覆蓋率測試報告。
+
+jest會掃描並執行專案底下所有 *.test.js，執行後就可以看到類似下面的測試的結果：
 ```sh
 
 > fabric-opa@0.1.0 unitTest /Users/wayne.lee/Desktop/BOLT/Project/ASUS/gitea-fabric-opa
@@ -120,8 +145,9 @@ Snapshots:   0 total
 Time:        2.723 s
 ```
 
-測試結果會在coverage裡，sonar-project.js會用到
+測試結果會在專案根目錄的**coverage**資料夾裡，sonar-project.js會用到
 
+#### npm run sonar
 > npm run sonar
 
 上傳測試結果，就可以在SonarQube看到被自動建起來的同名專案。
