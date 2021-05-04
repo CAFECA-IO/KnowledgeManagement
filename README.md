@@ -31,6 +31,9 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 
 [RxJS Introduction](rxjs.md)
 
+[ssh tunnel proxy](ssh-tunnel-proxy.md)
+
+[BlockScout - Ethereum network Explore 安裝](blockscount-install.md)
 ### 節點架設
 
 [Bitcoin 節點架設](bitcoin_node.md)
