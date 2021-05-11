@@ -60,6 +60,7 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 
 ### Flutter
 - [Flavor](./flutter/flavor.md)
+- [Notification(FCM)](./flutter/fcm.md)
 
 #### iOS
 - [上架](./flutter/ios/apple-store.md)
