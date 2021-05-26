@@ -2,6 +2,33 @@
 ## 找到該幣種的JSON RPC
 舉例： [BCH](https://docs.bitcoincashnode.org/doc/json-rpc/)
 
+## 0. 節點架設（以 BCH 為例）
+
+### install
+
+> source: https://bitcoincashnode.org/download/ubuntu
+
+```
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install g++-7
+
+sudo add-apt-repository ppa:bitcoin-cash-node/ppa
+sudo apt-get update
+sudo apt-get install bitcoind
+```
+
+run node
+
+```
+mainnet
+bitcoind -logtimestamps -datadir=/data -rest -rpcuser=xxx -rpcpassword=xxxxxx -daemon -txindex=1
+
+testnet
+bitcoind -logtimestamps -datadir=/data -rest -rpcuser=xxx -rpcpassword=xxxxxx -rpcport=18332 -testnet -daemon -rpcallowip=0.0.0.0/0 -txindex=1
+```
+
+
 ## 1. 新增要支援的幣種資料
 #### 在此文件：src/backend/libs/data/blockchainNetworks.js 裡面新增要支援的幣種資料
 以BCH為例：
@@ -44,7 +71,7 @@ bitcoin_cash_mainnet: [
 ```
 
 ## 2. 在server裡面的 private/config.toml 新增要支援的幣種，參考專案裡面的 default.config.toml
-#### protocal、host、port、user、password要請幫要新增的幣種架節點的同事提供。[此部分需要luphia、kais協助說明處理步驟]
+#### protocal、host、port、user、password要請幫要新增的幣種架節點的同事提供。
 以BCH為例：
 ```
   [database.bitcoin_cash_mainnet]
@@ -63,10 +90,27 @@ bitcoin_cash_mainnet: [
     max = 10
     
 ```
-## 3. 更新DB blockchainId
-**此部分需要Kais協助說明作法**
-為支援前端呼叫 getAccountList 時有新的幣種可以使用。要在DB加入要新增幣種的 blockchainId 
 
+## 3. 新增 Database
+
+```
+# ssh 到 DB 後
+$ createdb bitcoin_cash_mainnet
+$ psql
+psql=# grant all privileges on database <dbname> to <username> ;
+```
+
+## 3-1. （option）如果是要把舊的 blockchainId 更新成新的 (e.g. btc testnet `80000001` -> `F0000000`) 時
+
+- 停下 crawler 與 parser
+- 直接連進 `btc testnet` DataBase
+- 先改 `Blockchain` 表格中的 `blockchain_id`
+- 然後逐一將其他表格中的 `blockchain_id` 改成新的 `UPDATE table_name SET blockchain_id = 'F0000000' WHERE blockchain_id = '80000001'`
+  - Account
+  - BlockScanned
+  - Currency
+  - PendingTransaction
+  - UnparsedTransaction
 
 ## 4. 新增幣種的Crawler & Parser
 * [新幣種]CrawlerManagerBase.js
