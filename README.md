@@ -20,7 +20,7 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 - [BlockScout - Ethereum network Explore 安裝](blockscount-install.md)
 
 ### Service Quality
-- [High Availibly]()
+- [High Availability](High-Availability.md)
 
 ### TideWallet
 
