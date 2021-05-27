@@ -35,7 +35,7 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 
 [BlockScout - Ethereum network Explore 安裝](blockscount-install.md)
 
-
+### TideWallet
 
 ### 節點架設
 
