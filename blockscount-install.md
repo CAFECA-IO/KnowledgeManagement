@@ -29,6 +29,7 @@
   ```
   sudo apt update
   sudo apt install erlang -y
+  sudo apt-get install erlang-dev erlang-parsetools -y
   ```
   
   - step 4
