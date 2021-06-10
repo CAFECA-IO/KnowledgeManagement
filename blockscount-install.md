@@ -28,7 +28,7 @@
 
   ```
   sudo apt update
-  sudo apt install erlang
+  sudo apt install erlang -y
   ```
   
   - step 4
@@ -41,51 +41,51 @@
   ```
   wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb && sudo dpkg -i erlang-solutions_2.0_all.deb
   sudo apt-get update
-  sudo apt-get install esl-erlang
-  sudo apt-get install elixir
+  sudo apt-get install esl-erlang -y
+  sudo apt-get install elixir -y
   ```
 
 - Node.js
 
   ```
   curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-  sudo apt-get install -y nodejs
+  sudo apt-get install -y nodejs -y
   ```
 
 - Automake
 
   ```
-  sudo apt-get install automake
+  sudo apt-get install automake -y
   ```
   
 - Libtool
 
   ```
-  sudo apt-get install libtool
+  sudo apt-get install libtool -y
   ```
   
 - Lnotify-tools
 
   ```
-  sudo apt-get install inotify-tools
+  sudo apt-get install inotify-tools -y
   ```
   
 - Make
 
   ```
-  sudo apt-get install build-essential
+  sudo apt-get install build-essential -y
   ```
   
 - GMP
 
   ```
-  sudo apt-get install libgmp3-dev
+  sudo apt-get install libgmp3-dev -y
   ```
 
 - g++
 
   ```
-  sudo apt-get install g++
+  sudo apt-get install g++ -y
   ```
   
 - rust
