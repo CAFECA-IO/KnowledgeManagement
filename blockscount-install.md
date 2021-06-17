@@ -2,6 +2,14 @@
 
 > source: [BlockScout 浏览器搭建教程](https://www.jianshu.com/p/40bbc588058f)
 
+## centos 環境個套件版本
+
+- Erlang/OTP 23 [erts-11.1.5]
+- Elixir 1.10.0
+- node v15.8.0
+- npm 7.5.1
+- rust 1.52.0
+
 ## 環境
 
 - swap
