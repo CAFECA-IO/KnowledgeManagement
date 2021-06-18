@@ -52,3 +52,7 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 #### iOS
 - [上架](./flutter/ios/apple-store.md)
 #### Android
+- [上架](./flutter/android/google-market.md)
+
+### Chrome Extension
+- [上架](./chrome-extension/google-market.md)
