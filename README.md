@@ -18,7 +18,8 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 - [Flutter App Design](flutter_app_design.md)
 - [RxJS Introduction](rxjs.md)
 - [ssh tunnel proxy](ssh-tunnel-proxy.md)
-- [BlockScout - Ethereum network Explore 安裝](blockscount-install.md)
+- [BlockScout - Ethereum network Explore 安裝](blockscout-install.md)
+- [Blockscout - 多國語系](blockscout-i18n.md)
 
 ### Service Quality
 - [High Availability](High-Availability.md)
