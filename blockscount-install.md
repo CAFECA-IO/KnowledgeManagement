@@ -200,7 +200,7 @@ rm -rf apps/block_scout_web/assets/node_modules
 rm -rf apps/explorer/node_modules
 ```
 
-# 部署至 AWS（）
+# 部署至 AWS
 硬體需求
 - Explorer: centOS 8 r5a.xlarge 200GB SSD
 - DB: ubuntu 20.04 m2.medium 200GB SSD
@@ -208,6 +208,93 @@ rm -rf apps/explorer/node_modules
 ## DB
 ### 環境準備
 ### 部署流程
+
+1. 安裝 postgresql
+
+```
+sudo apt install postgresql postgresql-contrib
+```
+
+2. 啟動 postgresql
+
+```
+sudo pg_ctlcluster 12 main start
+```
+
+3. 檢查狀態
+
+```
+sudo pg_ctlcluster 12 main status
+```
+
+此時會看到
+
+```
+pg_ctl: server is running (PID: 6120)
+/usr/lib/postgresql/12/bin/postgres "-D" "/var/lib/postgresql/12/main" "-c" "config_file=/etc/postgresql/12/main/postgresql.conf"
+```
+
+4. 接下來要修改設定檔，使其他機器可以連上，先關閉 postgresql
+
+```
+sudo pg_ctlcluster 12 main stop
+```
+
+5. 編輯設定檔
+ 
+```
+sudo vim /etc/postgresql/12/main/postgresql.conf
+```
+
+找到 `listen_addresses`
+
+改成 `listen_addresses = '*'`
+
+6. 編輯連線設定檔
+
+```
+sudo vim /etc/postgresql/12/main/pg_hba.conf
+```
+
+將所有欄位後方都改成 `md5`
+
+然後新增連線限制設定
+
+```
+host    all             all             172.31.0.1/16           md5
+```
+
+7. 重啟 postgresql
+
+```
+sudo pg_ctlcluster 12 main restart
+```
+
+8. 修改 postgresql 密碼
+
+```
+sudo su postgres
+psql
+
+ALTER USER postgres with encrypted password 'your password';
+```
+
+9. 驗證連線
+
+```
+psql -h 172.31.18.32 -p 5432 -U postgres -W
+```
+
+然後輸入密碼，就會看到
+
+```
+psql (12.7 (Ubuntu 12.7-0ubuntu0.20.04.1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=#
+```
+
 ### 注意事項
 
 ## Explorer
@@ -437,11 +524,78 @@ export SHOW_PRICE_CHART=false
 export SHOW_TXS_CHART=true
 # 啟動 txs/day 圖表
 export ENABLE_TXS_STATS=true
+
+# 檢查服務是否還開啟著的頻率
+export HEART_BEAT_TIMEOUT=20
+# 服務崩潰後執行的指令
+export HEART_COMMAND="cd /home/centos/blockscout; source ~/.bashrc; nohup mix phx.server &"
 ```
 
-7. 讀取環境變數
+7. 授權 erlang 使用 80 port
 
-``source ~/.bashrc
 ```
+sudo setcap cap_net_bind_service=+ep /usr/lib/erlang/erts-11.1.5/bin/beam.smp
+```
+
+8. 讀取環境變數
+
+``
+source ~/.bashrc
+```
+
+9. 安装 Mix 依赖和編譯應用程式
+
+```
+mix do deps.get
+mix do local.rebar --force
+mix do deps.compile
+mix do compile
+```
+
+10. db 刪除、新建、遷移
+
+```
+mix do ecto.drop, ecto.create, ecto.migrate
+```
+
+11. 安装Node.js依賴
+
+```
+cd apps/block_scout_web/assets
+npm install && node_modules/webpack/bin/webpack.js --mode production
+```
+
+12. 部署靜態檔
+
+```
+cd apps/block_scout_web/
+mix phx.digest
+```
+
+13. 啟用HTTPS
+
+```
+cd apps/block_scout_web/
+mix phx.gen.cert blockscout blockscout.local
+```
+
+14. 設定 /etc/hosts
+
+在兩行後面添加 `blockscout blockscout.local`
+
+```
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 blockscout blockscout.local
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6 blockscout blockscout.local
+```
+
+15. 背景取用程式
+
+```
+nohup mix phx.server &
+```
+
+16. 檢查
+
+打開瀏覽器開啟 `http://{{ip}}`
 
 ### 注意事項
