@@ -1,5 +1,5 @@
 # 開發
-參考專案：[TideBit Wallet](https://github.com/BOLT-Protocol/TideBitWallet)
+參考專案：[TideBitWallet](https://github.com/BOLT-Protocol/TideBitWallet)
 
 ## 開始
 - 準備環境
