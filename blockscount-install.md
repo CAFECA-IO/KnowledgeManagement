@@ -528,7 +528,7 @@ export ENABLE_TXS_STATS=true
 # 檢查服務是否還開啟著的頻率
 export HEART_BEAT_TIMEOUT=20
 # 服務崩潰後執行的指令
-export HEART_COMMAND="cd /home/centos/blockscout; source ~/.bashrc; nohup mix phx.server &"
+export HEART_COMMAND="cd /home/centos/blockscout; screen -d -m mix phx.server"
 ```
 
 7. 授權 erlang 使用 80 port
@@ -590,9 +590,20 @@ mix phx.gen.cert blockscout blockscout.local
 
 15. 背景取用程式
 
+安裝
+
 ```
-nohup mix phx.server &
+sudo yum install screen -y
 ```
+
+執行
+
+```
+screen mix phx.server
+```
+
+此時按下 Ctrl + a 後，再按下 d 鍵（detach），這時候整個 screen 就會被卸離
+
 
 16. 檢查
 
