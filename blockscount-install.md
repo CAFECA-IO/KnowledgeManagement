@@ -539,7 +539,7 @@ sudo setcap cap_net_bind_service=+ep /usr/lib/erlang/erts-11.1.5/bin/beam.smp
 
 8. 讀取環境變數
 
-``
+```
 source ~/.bashrc
 ```
 
