@@ -57,4 +57,5 @@ Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
 - [上架](./flutter/android/google-market.md)
 
 ### Chrome Extension
+- [開發](./chrome-extension/develop.md)
 - [上架](./chrome-extension/google-market.md)
