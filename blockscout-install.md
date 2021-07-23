@@ -212,6 +212,7 @@ rm -rf apps/explorer/node_modules
 1. 安裝 postgresql
 
 ```
+sudo apt update
 sudo apt install postgresql postgresql-contrib
 ```
 
