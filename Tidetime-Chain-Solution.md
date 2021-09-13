@@ -20,6 +20,21 @@ heco官方推薦
 
 ## DPoS
 
+validator共識
+
+1. 呼叫proposal合約的createProposal，帶入地址。建立proposal後會有這個proposal的id。
+
+2. 現在的活躍validator呼叫proposal合約的voteProposal進行投票，帶入id和true/false，贊成超過半數即可有資格
+
+3. 通過表決的address`自行`呼叫validators合約的createOrEditValidator，填入資訊。
+
+4. 呼叫validators合約的stake進行質押，每次至少32eth
+
+5. 前21名可以在下次的epoch(每200 block, 約10分鐘)成為活躍validator，可呼叫validators合約的getTopValidators查看前21名是否有自己的address。
+
+6. getActiveValidators可以查看現在活躍的validator。
+> 成為活躍validator持續不出塊會受到懲罰。
+
 ## Genesis
 
 ```js
