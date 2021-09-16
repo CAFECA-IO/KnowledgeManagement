@@ -1,9 +1,21 @@
 # HECO
-調查研究 HECO 作為 Tidetime Chain 解決方案基礎適用性
+研究 HECO 作為 Tidetime Chain 解決方案基礎適用性
 
 ## 概述
 
-## 測試新增Validator
+## 研究目的
+- 驗證 DPoS 機制
+  - 礦工改選
+  - 礦工提取獎勵
+- 驗證經濟生態
+  - EIP-1559 手續費銷毀機制實裝
+  - 元交易機制驗證
+- 擴容機制
+
+## 研究結論
+
+## 實驗資料
+### 測試新增Validator
 
 1. 申請資格
 
@@ -52,7 +64,7 @@
 > 開始出塊了
 
 
-## 更高押金替換validator
+### 更高押金替換validator
 
 1. stake 100HT 到 0xa895D7555476041269E5ba2Eb96586F9dF8A7aE7
 
