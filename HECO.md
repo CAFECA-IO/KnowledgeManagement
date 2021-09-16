@@ -7,48 +7,48 @@
 
 1. 申請資格
 
-![](/2021/w36/heco/1_createProposal.png)
+![](/img/HECO/1_createProposal.png)
 
 2. 複製id給活躍validator表決
 
-![](/2021/w36/heco/2_copyProposalID.png)
+![](/img/HECO/2_copyProposalID.png)
 
 3. 檢查結果
 
-![](/2021/w36/heco/3_checkProposal.png)
+![](/img/HECO/3_checkProposal.png)
 
 4. 過半贊成
 
-![](/2021/w36/heco/4_moreThanHalfV.png)
+![](/img/HECO/4_moreThanHalfV.png)
 
 5. 先啟動節點同步
 > 此時還不能出塊，先同步避免成為validator後同步不到導致出不了塊。
 
-![](/2021/w36/heco/5_notValidator.png)
+![](/img/HECO/5_notValidator.png)
 
-![](/2021/w36/heco/5_oriActiveValidator.png)
+![](/img/HECO/5_oriActiveValidator.png)
 
 6. 切換帳戶，建立validator
 
-![](/2021/w36/heco/6_changeAccount.png)
+![](/img/HECO/6_changeAccount.png)
 
-![](/2021/w36/heco/6_createValidator.png)
+![](/img/HECO/6_createValidator.png)
 
 7. stake 至少 32 HT
 
-![](/2021/w36/heco/7_32HT.png)
+![](/img/HECO/7_32HT.png)
 
-![](/2021/w36/heco/7_stake.png)
+![](/img/HECO/7_stake.png)
 
-![](/2021/w36/heco/7_topValidator.png)
+![](/img/HECO/7_topValidator.png)
 
 > 檢查是否有在topValidator
 
 8. 等待下個epoch替換topValidator到ActivateValidator
 
-![](/2021/w36/heco/8_nextEpoch.png)
+![](/img/HECO/8_nextEpoch.png)
 
-![](/2021/w36/heco/8_isValidatorMining.png)
+![](/img/HECO/8_isValidatorMining.png)
 > 開始出塊了
 
 
@@ -56,8 +56,8 @@
 
 1. stake 100HT 到 0xa895D7555476041269E5ba2Eb96586F9dF8A7aE7
 
-![](/2021/w36/heco/10_100stack.png)
+![](/img/HECO/10_100stack.png)
 
 2. 等下個epoch確定進入
 
-![](/2021/w36/heco/11_new21Validators.png)
+![](/img/HECO/11_new21Validators.png)
