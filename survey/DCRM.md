@@ -181,4 +181,8 @@ curl -X POST -H "Content-Type":application/json --data '{"jsonrpc":"2.0","method
 # }
 ```
 
-10. 
+## reference
+
+- [測試步驟](https://gist.github.com/zhaojun-sh/f7d23bb9ae14b6275053aabafec0a787)
+
+- [json rpc api](https://github.com/fsn-dev/dcrm-walletService/wiki/walletService-RPC-API#dcrm_getReqAddrStatus)
