@@ -75,3 +75,20 @@
 2. 等下個epoch確定進入
 
 ![](/img/HECO/11_new21Validators.png)
+
+### 提取獎勵
+
+withdrawProfits(address)
+>執行會消耗gas，且每個address提領後需間隔28800 blocks(1天)。
+
+測試地址`0xA50eC5c6E4c315b43DC7a605FB7f705DD7a61a2a`自己提領
+
+receipt log
+```
+[ { "from": "0x000000000000000000000000000000000000f000", "topic": "0x51a69b4502f660774c9339825c7b5adbf0b8622289134647e29728ec5d9b3bb9", "event": "LogWithdrawProfits", "args": { "0": "0xA50eC5c6E4c315b43DC7a605FB7f705DD7a61a2a", "1": "0xA50eC5c6E4c315b43DC7a605FB7f705DD7a61a2a", "2": "144831000000000", "3": "1631867384", "val": "0xA50eC5c6E4c315b43DC7a605FB7f705DD7a61a2a", "fee": "0xA50eC5c6E4c315b43DC7a605FB7f705DD7a61a2a", "hb": "144831000000000", "time": "1631867384" } } ]
+```
+
+- 金額變化: 273918967.999855169 -> 273918967.999954461
+- 因為自己提領，手續費被燒掉，只多了0.000098292，而非0.000144831
+
+- (待驗證) 間隔2天以上是否會增加
