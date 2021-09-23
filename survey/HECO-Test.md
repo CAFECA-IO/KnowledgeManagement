@@ -1,3 +1,9 @@
+## menu
+- 準備
+- 競選礦工
+- 更高押金替換活躍礦工
+- 提取獎勵
+
 ## 準備
 
 1. `https://github.com/HuobiGroup/huobi-eco-contracts/tree/master/contracts` 取得contract
@@ -45,7 +51,7 @@
 ![](/img/HECO/publish.png)
 
 
-## 測試競選礦工
+## 競選礦工
 
 1. 資格提案
 
