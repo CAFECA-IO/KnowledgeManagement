@@ -266,6 +266,8 @@ curl -X POST -H "Content-Type":application/json --data '{"jsonrpc":"2.0","method
 
 - 測試用的client輔助，sign的部分沒看出來是如何帶to address、data等資訊，只有下key跟group。
 
+- 簽名需要全部人都有表達意見（同意或反對）才會更改狀態，而非過半。
+
 ## reference
 
 - [測試步驟](https://gist.github.com/zhaojun-sh/f7d23bb9ae14b6275053aabafec0a787)
