@@ -16,6 +16,12 @@
 
 ## 研究結論
 
+有幾點不確定。
+
+- 測試用的client輔助，sign的部分沒看出來是如何帶to address、data等資訊，只有下key跟group。
+
+- 簽名需要全部人都有表達意見（同意或反對）才會更改狀態，而非過半。
+
 ## 驗證資料
 
 ### 測試2/3共管帳戶
@@ -258,15 +264,6 @@ curl -X POST -H "Content-Type":application/json --data '{"jsonrpc":"2.0","method
 #     }
 # }
 ```
-
-
-## 結論
-
-測試成功，但有幾點不確定。
-
-- 測試用的client輔助，sign的部分沒看出來是如何帶to address、data等資訊，只有下key跟group。
-
-- 簽名需要全部人都有表達意見（同意或反對）才會更改狀態，而非過半。
 
 ## reference
 
