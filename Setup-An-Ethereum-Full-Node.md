@@ -21,6 +21,11 @@ mkdir /data/ethereum
 screen -m -d -L geth --syncmode full --cache 8192 --http --http.addr 0.0.0.0 --http.api web3,eth,txpool,ethash,net --mainnet --datadir /data/ethereum
 ```
 
+## 啟用 Proxy
+```
+bash <(curl https://raw.githubusercontent.com/Luphia/ecProxy/master/shell/install.sh -kL)
+```
+
 ### screen 參數
 
 -d: 背景分離執行
