@@ -12,13 +12,13 @@ sudo apt-get install -y screen
 ## 建立存放 ChainData 目錄
 
 ```
-mkdir chain-data
+mkdir /data/ethereum
 ```
 
 ## 啟動節點
 
 ```
-screen -d -m -L geth --cache 8192 --http --http.addr 0.0.0.0 --http.api admin,debug,web3,eth,txpool,personal,ethash,miner,net --ws --ws.addr 0.0.0.0 --ws.origins * --ws.port 8545 --ws.api admin,debug,web3,eth,txpool,personal,ethash,miner,net --mainnet --datadir chain-data
+screen -m -d -L geth --syncmode full --cache 8192 --http --http.addr 0.0.0.0 --http.api web3,eth,txpool,ethash,net --mainnet --datadir /data/ethereum
 ```
 
 ### screen 參數
