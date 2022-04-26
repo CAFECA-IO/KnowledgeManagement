@@ -93,7 +93,6 @@ fieldset>table
 `name =name_of_the_element filter=value_of_filter`
 
 原文網址：https://kknews.cc/code/m6y6lbp.html
-linkText = Accounts
 
 #### 透過 CSS Selector 定位
 根據基本CSS的方式做使用
