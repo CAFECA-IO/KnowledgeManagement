@@ -5,9 +5,9 @@
 3. https://www.tpisoftware.com/tpu/articleDetails/1846
 
 
-### Selenium WebDriver With Java
+## 概念 review: Selenium WebDriver With Java
 練習網站: https://courses.letskodeit.com/practice
-#### Selenium features
+### Selenium features
 * **Intro:** 
 Open source tool to automate web applications across multiple platforms.
 * **Platform independent:**
@@ -17,7 +17,7 @@ Firefox、Chrome、Safari、Edge
 * **Can be used with many languages:**
 Java、Python、JS、PHP、C#
 
-#### Selenium type
+### Selenium type
 * Selenium IDE
 
 * Selenium RC
@@ -29,7 +29,7 @@ Java、Python、JS、PHP、C#
 
 ![](https://i.imgur.com/kqKP4m9.png)
 
-#### xpath
+### xpath
 有關於xpath語法: http://www.w3big.com/zh-TW/xpath/xpath-syntax.html
 ```
 $x("//input[@id='name']");
@@ -38,7 +38,7 @@ $x("//input[contains(@class,'btn-style')]");
 ![](https://i.imgur.com/VQE1ZeQ.png)
 
 
-#### CSS selector
+### CSS selector
 css selector的寫法如下:
 ```
 // sample1:
@@ -55,7 +55,7 @@ fieldset>table
 #product
 
 ```
-## Advanced Locators
+### Advanced Locators
 
 // double child and / single child
 
@@ -70,7 +70,7 @@ fieldset>table
 ```
 
 ---
-### Selenium 實踐測試 - Python 版本
+## Selenium IDE 實踐測試 
 ![](https://i.imgur.com/l83BFqC.png)
 
 ### Selenium 指令驗證種類
@@ -96,7 +96,13 @@ fieldset>table
 linkText = Accounts
 
 #### 透過 CSS Selector 定位
-根據基本CSS的方式做使用，
+根據基本CSS的方式做使用
+| 選擇器 | code | 
+| -------- | -------- | 
+| id 選擇器     |   #idname   | 
+|class 類別選擇器|.cssName|
+|屬性選擇器|[屬性名稱="值"]|
+|標籤選擇器|tag_name[name="值"] |
 #### Xpath 表達式整理
 
 
@@ -107,8 +113,12 @@ linkText = Accounts
 | 選取當前子節點           | /     |
 |     選取父節點                     |    ..(兩點)   |
 
-以下舉一個例子：
-//div[@id="myDivID"]
-選取當前 div id 為 myDivID 的子節點
+* 以下舉一個例子：
+`//div[@id="myDivID"]/div[0]`
+
+    說明：
+    1. 選取當前 div id 為 myDivID 的子節點
+    2. 選取當前子節點的第一個 div 標籤節點
 
 #### 整合後端取值和前台測試
+##### 後端 python script 研究：
