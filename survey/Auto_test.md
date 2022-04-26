@@ -1,0 +1,114 @@
+# 自動化測試研究紀錄
+參考資訊：
+1. https://hackmd.io/@FortesHuang/S1V6jrvet
+2. https://steam.oxxostudio.tw/category/python/spider/selenium.html
+3. https://www.tpisoftware.com/tpu/articleDetails/1846
+
+
+### Selenium WebDriver With Java
+練習網站: https://courses.letskodeit.com/practice
+#### Selenium features
+* **Intro:** 
+Open source tool to automate web applications across multiple platforms.
+* **Platform independent:**
+Windows、Linux、Mac
+* **Support Multiple browsers:**
+Firefox、Chrome、Safari、Edge
+* **Can be used with many languages:**
+Java、Python、JS、PHP、C#
+
+#### Selenium type
+* Selenium IDE
+
+* Selenium RC
+
+* Selenium WebDriver
+    - A set of APIs which helps communication with browsers
+* Slenium Grid - Parallel/Sequential Execution
+    - Designed to run test automation on multiple systems in parallel
+
+![](https://i.imgur.com/kqKP4m9.png)
+
+#### xpath
+有關於xpath語法: http://www.w3big.com/zh-TW/xpath/xpath-syntax.html
+```
+$x("//input[@id='name']");
+$x("//input[contains(@class,'btn-style')]");
+```
+![](https://i.imgur.com/VQE1ZeQ.png)
+
+
+#### CSS selector
+css selector的寫法如下:
+```
+// sample1:
+tagname>tagname or #id
+
+// example1:
+fieldset>table
+--
+
+// sample2:
+#id name
+
+// example2:
+#product
+
+```
+## Advanced Locators
+
+// double child and / single child
+
+* 若要用tag裡面的內容來select的話，需要用到[text()='text details']
+* `//div[@class='homepage-hero']//a[text()='Enroll now']`
+
+* Using contains to find the elements(非完全等於，只有包含時使用。)
+```
+//tag[contains(@attribute,'value')]
+//div[@id='navbar']//a[contains(text(),'Login')]
+//div[@id='navbar']//a[contains(@class,'navbar-link') and contains(@href,'sign_in')]
+```
+
+---
+### Selenium 實踐測試 - Python 版本
+![](https://i.imgur.com/l83BFqC.png)
+
+### Selenium 指令驗證種類
+1. **操作指令**
+
+    用來操作瀏覽器及網頁的指令，像 input、click 等動作。
+    若操作失敗、或是發生了錯誤 -> 測試中止。
+2. **存取指令**
+
+    檢查瀏覽器及網頁的狀態 -> 將結果儲存在變數中，它們也用來自動產生驗證。
+3. **驗證指令**
+
+    確認應用程式的狀態是否符合預期的結果。
+    
+### Selenium locator 定位指令
+#### 透過過濾器按名稱定位
+* 在 Selenium IDE 裡面選擇 Command, 並輸入進 Target
+![](https://i.imgur.com/jCWcgmd.png)
+* 格式：
+`name =name_of_the_element filter=value_of_filter`
+
+原文網址：https://kknews.cc/code/m6y6lbp.html
+linkText = Accounts
+
+#### 透過 CSS Selector 定位
+根據基本CSS的方式做使用，
+#### Xpath 表達式整理
+
+
+| 作用                     | Xpath |
+| ------------------------ | ----- |
+| 選取元素的屬性           | @     |
+| 從當前節點選取所有子節點 | //    |
+| 選取當前子節點           | /     |
+|     選取父節點                     |    ..(兩點)   |
+
+以下舉一個例子：
+//div[@id="myDivID"]
+選取當前 div id 為 myDivID 的子節點
+
+#### 整合後端取值和前台測試
