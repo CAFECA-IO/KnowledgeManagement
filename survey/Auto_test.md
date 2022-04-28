@@ -78,7 +78,6 @@ fieldset>table
 
 ---
 ## Selenium IDE 實踐測試 
-![](https://i.imgur.com/l83BFqC.png)
 
 ### Selenium 指令驗證種類
 1. **操作指令**
