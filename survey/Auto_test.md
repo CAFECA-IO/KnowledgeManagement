@@ -3,6 +3,7 @@
 1. https://hackmd.io/@FortesHuang/S1V6jrvet
 2. https://steam.oxxostudio.tw/category/python/spider/selenium.html
 3. https://www.tpisoftware.com/tpu/articleDetails/1846
+4. https://www.tad0616.net/modules/tad_book3/page.php?tbsn=28&tbdsn=827
 
 
 ## 概念 review: Selenium WebDriver With Java
@@ -21,13 +22,19 @@ Java、Python、JS、PHP、C#
 * Selenium IDE
 
 * Selenium RC
-
+    支持多種語言編寫測試案例
 * Selenium WebDriver
     - A set of APIs which helps communication with browsers
 * Slenium Grid - Parallel/Sequential Execution
     - Designed to run test automation on multiple systems in parallel
 
-![](https://i.imgur.com/kqKP4m9.png)
+![](https://i.imgur.com/ePj2grW.png)
+* Workflow: 
+    * 當我們 run automation 時，complete automation code 會被重新轉換成 JSON
+    * 產生出來的 JSON 會透過 JSON Wire Protocol over HTTP 被傳送到 browser driver
+    * Browser Driver 在相對應的 Browser上 執行特定的 commands 
+    * Browser Driver 拿到 Browser 給的動作回覆（送回到client)
+
 
 ### xpath
 有關於xpath語法: http://www.w3big.com/zh-TW/xpath/xpath-syntax.html
@@ -72,7 +79,7 @@ fieldset>table
 ---
 ## Selenium IDE 實踐測試 
 ![](https://i.imgur.com/l83BFqC.png)
-
+Notes: 是否能在IDE上定義特定變數？（例如我今天要測
 ### Selenium 指令驗證種類
 1. **操作指令**
 
@@ -93,6 +100,7 @@ fieldset>table
 `name =name_of_the_element filter=value_of_filter`
 
 原文網址：https://kknews.cc/code/m6y6lbp.html
+linkText = Accounts
 
 #### 透過 CSS Selector 定位
 根據基本CSS的方式做使用
@@ -121,3 +129,4 @@ fieldset>table
 
 #### 整合後端取值和前台測試
 ##### 後端 python script 研究：
+![](https://i.imgur.com/o6tjEG5.png)
