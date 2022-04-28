@@ -126,6 +126,4 @@ fieldset>table
     1. 選取當前 div id 為 myDivID 的子節點
     2. 選取當前子節點的第一個 div 標籤節點
 
-#### 整合後端取值和前台測試
-##### 後端 python script 研究：
 ![](https://i.imgur.com/o6tjEG5.png)
