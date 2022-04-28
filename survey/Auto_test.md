@@ -79,7 +79,7 @@ fieldset>table
 ---
 ## Selenium IDE 實踐測試 
 ![](https://i.imgur.com/l83BFqC.png)
-Notes: 是否能在IDE上定義特定變數？（例如我今天要測
+
 ### Selenium 指令驗證種類
 1. **操作指令**
 
@@ -100,7 +100,6 @@ Notes: 是否能在IDE上定義特定變數？（例如我今天要測
 `name =name_of_the_element filter=value_of_filter`
 
 原文網址：https://kknews.cc/code/m6y6lbp.html
-linkText = Accounts
 
 #### 透過 CSS Selector 定位
 根據基本CSS的方式做使用
