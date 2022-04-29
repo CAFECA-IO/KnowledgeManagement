@@ -1,9 +1,7 @@
 # 自動化測試研究紀錄
-參考資訊：
-1. https://hackmd.io/@FortesHuang/S1V6jrvet
-2. https://steam.oxxostudio.tw/category/python/spider/selenium.html
-3. https://www.tpisoftware.com/tpu/articleDetails/1846
-4. https://www.tad0616.net/modules/tad_book3/page.php?tbsn=28&tbdsn=827
+## Summary:
+
+
 
 
 ## 概念 review: Selenium WebDriver With Java
@@ -151,4 +149,8 @@ fieldset>table
 但如果要測試的 case 不會遇到需要頻繁調整參數的問題(例如註冊），建議可以使用 Selenium IDE
 
 ### Reference: (轉換工具-> Selenium RC)
-1. https://www.tad0616.net/modules/tad_book3/page.php?tbsn=28&tbdsn=828
+參考資訊：
+1. https://hackmd.io/@FortesHuang/S1V6jrvet
+2. https://steam.oxxostudio.tw/category/python/spider/selenium.html
+3. https://www.tpisoftware.com/tpu/articleDetails/1846
+4. https://www.tad0616.net/modules/tad_book3/page.php?tbsn=28&tbdsn=827
