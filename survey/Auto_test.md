@@ -125,4 +125,23 @@ fieldset>table
     1. 選取當前 div id 為 myDivID 的子節點
     2. 選取當前子節點的第一個 div 標籤節點
 
+### 實踐介面參考圖
 ![](https://i.imgur.com/kNYO3Fo.png)
+
+### 使用限制
+1. 在測試 trade 時可能會遇到自動 type 無法測試的問題
+2. 無法自定義變數做統整（例如我今天想測試新的帳號，就必須到 test 裡面一個一個改帳號才能測試）
+3. pause 或 等待 element 出現才能做的測試都需要在側錄後對 test 重新進行調整
+4. 可能會有抓取特定物件但xpath需要被修改的問題（ IDE 使用了太過 hard code 的方式來生產程式碼 ）
+
+### 自動化測試提升時間參考（純測試，不包含測試報告）：
+1 hr （手動測試，包含遇到 bug) -> 30 min (自動測試＋手動測試觀察）
+
+### 未來可提升部分
+1. 建議轉換工具情境：
+若要設定能調整的參數，建議可以使用 Selenium RC 而非 Selenium IDE
+2. 可以採用 Selenium IDE 情境：
+但如果要測試的 case 不會遇到需要頻繁調整參數的問題(例如註冊），建議可以使用 Selenium IDE
+
+### Reference: (轉換工具-> Selenium RC)
+1. https://www.tad0616.net/modules/tad_book3/page.php?tbsn=28&tbdsn=827
