@@ -1,7 +1,7 @@
 # 自動化測試研究紀錄
 ## Summary:
 為了加速測試進行，本研究進行了針對 TideBit 可以採取的自動化介面測試研究。有關於自動化測試，Selenium、Katalon Studio、UFT 等都是測試時可能會使用的工具，但考量到 Selenium 有方便使用、支援多種模式和程式語言（Java、Groovy、Python、C＃等）等特性，故選用 Selenium 作為研究主題。
-Selenium 具有多種模式，例如：Selenium IDE、Selenium RC等，其中本研究的實踐部分為了求開發快速，所以採用 Selenium IDE 的測試方式。以下詳述了 Selenium 的介紹，並且針對定位 element 的語法做說明。
+Selenium 具有多種模式，例如：Selenium IDE、Selenium RC等，其中本研究的實踐部分為了求開發快速，所以採用 Selenium IDE 的測試方式。以下詳述了 Selenium 的介紹，並且針對定位 element 的語法和在 Tidebit 上進行的自動化測試實踐做說明。
 
 ## 概念 review: Selenium WebDriver With Java
 練習網站: https://courses.letskodeit.com/practice
