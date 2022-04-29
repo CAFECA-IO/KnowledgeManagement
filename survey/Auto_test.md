@@ -131,7 +131,7 @@ fieldset>table
 1. 先到 google extension 那下載 Selenium IDE 插件
 2. 下載 test tool: https://drive.google.com/file/d/15-xjfXsx-yuSC7rDohq86bHJ716QsODZ/view
 3. 匯入 Selenium IDE
-4. 查看 tests 並修改 login/register 相關 test step 的 value 成您要使用的帳號或密碼
+4. 查看 ests 並修改 login/register 相關 test step 的 value 成您要測試使用的帳號或密碼
 
 ### 使用限制
 1. 在測試 trade 時可能會遇到自動 type 無法測試的問題
