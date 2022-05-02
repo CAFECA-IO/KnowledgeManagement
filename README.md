@@ -1,5 +1,5 @@
 # KnowledgeManagement
-Creating, Sharing, Using and Managing the knowledge and information of BOLTCHAIN
+Creating, Sharing, Using and Managing the knowledge and information of CAFECA
 
 ## 未分類
 - [Coding Style](Coding-Style.md)
