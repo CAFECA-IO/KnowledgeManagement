@@ -270,27 +270,37 @@ output:
      
 
         減少伺服器回應時間
+        
         針對主機效能優化
+        
         使用較近的 CDN
+        
         Cache
+        
         提早載入第三方資源
         
     - 避免 Blocking Time
         
         降低 JavaScript blocking time
+        
         降低 CSS blocking time
         
     - 加快資源載入的時間 
 
         圖片大小優化
+        
         預先載入重要資源
+        
         將文字檔案進行壓縮
+        
         根據使用者的網路狀態提供不同的內容
+        
         使用 service worker
 
     - 避免使用客戶端渲染(CSR)
-    
+        
         若必須使用 CSR ，建議優化 JavaScript ，避免渲染時使用太多資源
+        
         盡量在伺服器端完成頁面渲染，讓用戶端取得已渲染好的內容
 
 - FID — First Input Delay 首次輸入延遲/封鎖時間總計 (與網站的互動性)
@@ -300,8 +310,11 @@ output:
     - 如何優化 FID ？
         
         減少 JavaScript 運作的時間
+        
         降低網站的 request 數並降低檔案大小
+        
         減少主執行序的工作
+        
         降低第三方程式碼的影響
         
 - CLS — Cumulative Layout Shift 累計版面配置轉移 (View 的穩定性)
@@ -356,6 +369,7 @@ output:
 
     - Application Bundle (經常變動的部分)：UI 與商業邏輯，跟我們寫的程式有關。
     - Vendor Bundle (不太會變動) ：第三⽅套件 / node_modules
+        
         因為通常它變動的頻率相對較低，因此比較適合被 cache，而在 Vendor Bundle 被 cache 的狀況下由於減少了 Application Bundle 的⼤⼩ -> 因此加快了再訪者的載入速度。
         
         優點: 邏輯簡單
@@ -371,7 +385,7 @@ output:
     ex.  webpack 的 CommonsChunkPlugin 實作類似下圖的 config 可以達成這個效果
 
 
-###### 以上為根據下方Reference所做的整理
+###### 以上為根據下方 Reference 所做的整理
 
 ---
 ## Reference:
