@@ -22,8 +22,8 @@ def auto_login_as_admin():
 // 嘗試自動開啟 email 做完整測試
 3. 
 
-#### 如何在 Mac 使用 Selenium 連接 Metamask?
-##### 連接 MetaMask 的前置作業
+### 如何在 Mac 使用 Selenium 連接 Metamask?
+#### 連接 MetaMask 的前置作業
 1. 使用 chrome 進入 chrome://extensions/
 ![](https://i.imgur.com/RQwwaMI.png)
 2. 將 Metamask 的 extension 資料夾 path 輸入進 External root directory 欄位
