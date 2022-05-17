@@ -5,7 +5,7 @@
 ### 使用 Python 語法 實際運行 Selenium 
 #### 前置作業
 1. 先下載 Google Chrome WebDriver，接著 pip3 install selenium
-2. 接著針對 Login test （admin) 撰寫
+2. 接著針對 Login test（admin) 撰寫
 ```
 def auto_login_as_admin():
 
