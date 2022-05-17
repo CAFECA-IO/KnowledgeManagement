@@ -72,4 +72,4 @@ https://www.lambdatest.com/blog/selenium-webdriver-with-python/
 https://dev.to/ltmenezes/automated-dapps-scrapping-with-selenium-and-metamask-2ae9
 
 https://www.lambdatest.com/learning-hub/python-tutorial
-![](https://i.imgur.com/eNfnC33.png)
+
