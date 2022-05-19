@@ -56,7 +56,7 @@ def test_app():
     opt = webdriver.ChromeOptions()
     opt.add_extension(EXTENSION_PATH)
     
-    // 將 crx path 作為 chrome driver 開啟時的ｏption
+    // 將 crx path 作為 chrome driver 開啟時的 option
     chrome_driver = webdriver.Chrome('/usr/local/bin/chromedriver',chrome_options=opt)
 ```
 #### 可能會遇到的問題
