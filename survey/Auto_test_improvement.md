@@ -114,9 +114,9 @@ def test_metamask_connection():
     chrome_driver.get('https://swap.tidebit.network')
     chrome_driver.find_element_by_xpath("//div[@id='app-content']//span[text()='Ethereum Mainnet']").click()
     chrome_driver.find_element_by_xpath("//div[@id='app-content']//a[text()='Show/hide']").click()
-    chrome_driver.find_element_by_xpath(("//div[@id='app-content']//div[@class='settings-page__content-item-col']//input")[3]).click()
+    chrome_driver.find_element_by_xpath("(//div[@id='app-content']//div[@class='settings-page__content-item-col'])[6]").click()
     chrome_driver.find_element_by_xpath("//div[@id='app-content']//span[text()='Ethereum Mainnet']").click()
-    chrome_driver.find_element_by_xpath(("//div[@id='app-content']//span[@class='network-name-item']")[1]).click()
+    chrome_driver.find_element_by_xpath("(//div[@id='app-content']//span[@class='network-name-item'])[1]").click()
 ```
 畫面示意圖：
 
