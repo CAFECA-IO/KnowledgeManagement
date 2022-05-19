@@ -3,7 +3,8 @@
 ### Summary:
 為了改善先前 Selenium IDE 的一些限制，例如：無法直接使用 Google Chrome Extension 的問題、無法指定參數的問題，因此根據以上幾點做改善，先研究了如何使用 Python 撰寫 Selenium 程式，並且嘗試實踐於 TideBit 上，以達到可以直接輸入帳號密碼，最終測試到可以將Trading 進行自動判斷測試的目標
 ### 最終目的：測試 TideBit 入金/ TideBit Swap 
-### 執行結果：測試 TideBit 入金 進行自動化測試不可行（目前判斷）/ TideBit Swap 使用 Selenium 進行自動化測試可行，需要 3hrs 完成自動化測試 
+### 執行結果：
+測試 TideBit 入金 進行自動化測試不可行（目前判斷）/ TideBit Swap 使用 Selenium 進行自動化測試可行，需要 3hrs 完成自動化測試 
 ### 使用 Python 語法 實際運行 Selenium 
 #### 前置作業
 1. 先下載 Google Chrome WebDriver，接著 pip3 install selenium
