@@ -1,4 +1,4 @@
-# Selenium and DApp
+# Selenium and Ｍetamask
 ## Selenium 
 ### Summary:
 為了改善先前 Selenium IDE 的一些限制，例如：無法直接使用 Google Chrome Extension 的問題、無法指定參數的問題，因此根據以上幾點做改善，先研究了如何使用 Python 撰寫 Selenium 程式，並且嘗試實踐於 TideBit 上，以達到可以直接輸入帳號密碼，最終測試到可以將Trading 進行自動判斷測試的目標
