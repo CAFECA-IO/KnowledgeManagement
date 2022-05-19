@@ -12,10 +12,9 @@
 
 - 預估研究時間：
 需要 2 hrs 進行 extension 抓取 element 研究
-需要執行完畢 Ropsten connection 後繼續測試 TideBit 入金和 TideBit Swap 測試
 
 - 若可以成功執行，預估的測試撰寫時間：
-若可以執行，需要 1 hr 撰寫 TideBit 入金 自動化測試 / TideBit Swap 需要 3hrs 完成自動化測試 
+若可以執行，預估需要 1 hr 撰寫 TideBit 入金 自動化測試 / TideBit Swap 需要 3hrs 完成自動化測試 
 
 ### 使用 Python 語法 實際運行 Selenium 
 #### 前置作業
