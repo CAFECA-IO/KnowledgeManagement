@@ -1,19 +1,25 @@
 # Selenium and Ｍetamask
 ## Selenium 
 ### Summary:
-為了改善先前 Selenium IDE 的一些限制，例如：無法直接使用 Google Chrome Extension 的問題、無法指定參數的問題，因此根據以上幾點做改善，先研究了如何使用 Python 撰寫 Selenium 程式，並且嘗試實踐於 TideBit 上，以達到可以直接輸入帳號密碼，最終測試到可以將Trading 進行自動判斷測試的目標
+為了改善先前 Selenium IDE 的一些限制，例如：無法直接使用 Google Chrome Extension 的問題、無法指定參數的問題，因此根據以上幾點做改善，先研究了如何使用 Python 撰寫 Selenium 程式，並且嘗試實踐於 TideBit 上，以達到可以直接輸入帳號密碼並且可以自動化測試 TideBit 入金和 TideBit Swap 的目標
+
 ### 最終目的：測試 TideBit 入金/ TideBit Swap 
+
 ### 執行結果：
 
-缺凡關鍵行為，即可繼續測試：
-Metamask 可以成功連接，缺乏測試成功取得 extension 的 element的關鍵行為（步驟8)
+- 缺乏的關鍵步驟：
+ 
+缺乏測試成功取得 extension 的 element（步驟8)
 
-預估研究時間：
+- 預估研究時間：
+
 需要 2 hrs 進行 extension 抓取 element 研究
 需要執行完畢 Ropsten connection 後繼續測試 TideBit 入金和 TideBit Swap 測試
 
-若可以成功執行，預估的測試撰寫時間：
+- 若可以成功執行，預估的測試撰寫時間：
+
 若可以執行，需要 1 hr 撰寫 TideBit 入金 自動化測試 / TideBit Swap 需要 3hrs 完成自動化測試 
+
 ### 使用 Python 語法 實際運行 Selenium 
 #### 前置作業
 1. 先下載 Google Chrome WebDriver，接著 pip3 install selenium
