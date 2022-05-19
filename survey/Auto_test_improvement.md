@@ -2,7 +2,8 @@
 ## Selenium 
 ### Summary:
 為了改善先前 Selenium IDE 的一些限制，例如：無法直接使用 Google Chrome Extension 的問題、無法指定參數的問題，因此根據以上幾點做改善，先研究了如何使用 Python 撰寫 Selenium 程式，並且嘗試實踐於 TideBit 上，以達到可以直接輸入帳號密碼，最終測試到可以將Trading 進行自動判斷測試的目標
-### 最終目的：測試TideBit 入金/ TideBit Swap 
+### 最終目的：測試 TideBit 入金/ TideBit Swap 
+### 執行結果：測試 TideBit 入金 進行自動化測試不可行（目前判斷）/ TideBit Swap 使用 Selenium 進行自動化測試可行，需要 3hrs 完成自動化測試 
 ### 使用 Python 語法 實際運行 Selenium 
 #### 前置作業
 1. 先下載 Google Chrome WebDriver，接著 pip3 install selenium
@@ -18,10 +19,7 @@ def auto_login_as_admin():
     chrome_driver.find_element_by_xpath("//input[@value='Submit']").click()
     // 暫停方便做確認
     sleep(20)
-```
-2. 接著針對 Register test 撰寫
-// 嘗試自動開啟 email 做完整測試
-3. 
+``` 
 
 ---
 ### 如何在 Mac 使用 Selenium 連接 Metamask?
@@ -53,18 +51,17 @@ def test_app():
 Error: `Timed out receiving message from renderer: 10.000`
 原因： 可能是遇到網路不穩定的問題
 
-#### 目前遇到的困難:
+#### 可能遇到的困難:
 嘗試捕捉 Metamask Get Started Button 但無法捕捉到該 button
 ![](https://i.imgur.com/pPgSXIV.png)
 
-目前使用的 code:
+遇到困難時使用的 code:
 ```
 // 使用 xpath: //button[text()='Get Started']
 chrome_driver.find_element_by_xpath("//button[text()='Get Started']").click()
 ```
-
-輸入正確的 xpath 但是無法捕捉 element
-![](https://i.imgur.com/qLSvRbA.png)
+#### 解決方式：
+在自動化測試打開其裝置時，可以使用 webdriver.get(”chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/welcome“）先轉換成網頁
 
 ---
 ## Reference:
