@@ -85,6 +85,7 @@ def test_metamask_connection():
     chrome_driver.get('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/welcome')
 ```
 接著進行下列步驟：（若發生無法獲取 element 的問題，可以設定 sleep(__seconds) )
+
 5. 進入 Metamask 初始設定頁面
 ```
 def test_metamask_connection(): 
