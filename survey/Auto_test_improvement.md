@@ -61,8 +61,60 @@ Error: `Timed out receiving message from renderer: 10.000`
 chrome_driver.find_element_by_xpath("//button[text()='Get Started']").click()
 ```
 #### 解決方式：
-在自動化測試打開其裝置時，可以使用 webdriver.get(”chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/welcome“）先轉換成網頁
+在自動化測試打開其裝置時，可以使用 webdriver.get(”chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/welcome“）先進入到網頁
+```
+def test_metamask_connection(): 
 
+    EXTENSION_PATH = '/Users/clemmyliao/Library/Application Support/Google/Chrome/Default/Extensions/nkbihfbeogaeaoehlefnkodbefgpgknn/10.14.3_0.crx'
+    opt = webdriver.ChromeOptions()
+    opt.add_extension(EXTENSION_PATH)
+    chrome_driver = webdriver.Chrome('/usr/local/bin/chromedriver',chrome_options=opt)
+    sleep(10)
+    chrome_driver.get('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/welcome')
+```
+接著進行下列步驟：（若發生無法獲取element的問題，可以設定sleep(__seconds))
+5. 進入 Metamask 初始設定頁面
+```
+def test_metamask_connection(): 
+
+    EXTENSION_PATH = '/Users/clemmyliao/Library/Application Support/Google/Chrome/Default/Extensions/nkbihfbeogaeaoehlefnkodbefgpgknn/10.14.3_0.crx'
+    opt = webdriver.ChromeOptions()
+    opt.add_extension(EXTENSION_PATH)
+    chrome_driver = webdriver.Chrome('/usr/local/bin/chromedriver',chrome_options=opt)
+    sleep(10)
+    chrome_driver.get('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/welcome')
+    # 設立頓點 跳轉一開始的設定頁面
+    sleep(3)
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div[@class='welcome-page']/button[text()='Get Started']").click()
+    sleep(3)
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div[@class='select-action__select-button']//button[text()='Import wallet']").click()
+    sleep(3)
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div[@class='page-container__footer']//button[text()='No Thanks']").click()
+```
+6. 自動匯入金鑰
+```
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div//input[@id='import-srp__srp-word-0']").send_keys("nurse") 
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div//input[@id='import-srp__srp-word-1']").send_keys("banner")
+    # 以下繼續輸入其他 keyword 總共 12 個 
+    ...
+    # input 完成 keyword 後進入 set password 
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div//input[@id='password']").send_keys("_pw")
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div//input[@id='confirm-password']").send_keys("_pw")
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div//input[@id='create-new-vault__terms-checkbox']").click()
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div//button[text()='Import']").click()
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div//button[text()='All Done']").click()
+```
+7. 進入 Metamask 開啟 testnet 並切換成 Ropsten
+```
+    chrome_driver.find_element_by_xpath("//div[@id='popover-content']//button[@title='Close']").click()
+    chrome_driver.get('https://swap.tidebit.network')
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//span[text()='Ethereum Mainnet']").click()
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//a[text()='Show/hide']").click()
+    chrome_driver.find_element_by_xpath(("//div[@id='app-content']//div[@class='settings-page__content-item-col']//input")[3]).click()
+    
+    
+```
+8. 
 ---
 ## Reference:
 https://www.lambdatest.com/blog/selenium-webdriver-with-python/
