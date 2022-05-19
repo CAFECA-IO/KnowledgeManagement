@@ -4,9 +4,15 @@
 為了改善先前 Selenium IDE 的一些限制，例如：無法直接使用 Google Chrome Extension 的問題、無法指定參數的問題，因此根據以上幾點做改善，先研究了如何使用 Python 撰寫 Selenium 程式，並且嘗試實踐於 TideBit 上，以達到可以直接輸入帳號密碼，最終測試到可以將Trading 進行自動判斷測試的目標
 ### 最終目的：測試 TideBit 入金/ TideBit Swap 
 ### 執行結果：
-Metamask 可以成功連接，但尚未成功取得 extension 的 element
+
+缺凡關鍵行為，即可繼續測試：
+Metamask 可以成功連接，缺乏測試成功取得 extension 的 element的關鍵行為（步驟8)
+
+預估研究時間：
 需要 2 hrs 進行 extension 抓取 element 研究
 需要執行完畢 Ropsten connection 後繼續測試 TideBit 入金和 TideBit Swap 測試
+
+若可以成功執行，預估的測試撰寫時間：
 若可以執行，需要 1 hr 撰寫 TideBit 入金 自動化測試 / TideBit Swap 需要 3hrs 完成自動化測試 
 ### 使用 Python 語法 實際運行 Selenium 
 #### 前置作業
@@ -114,13 +120,14 @@ def test_metamask_connection():
     chrome_driver.get('https://swap.tidebit.network')
     chrome_driver.find_element_by_xpath("//div[@id='app-content']//span[text()='Ethereum Mainnet']").click()
     chrome_driver.find_element_by_xpath("//div[@id='app-content']//a[text()='Show/hide']").click()
-    chrome_driver.find_element_by_xpath("(//div[@id='app-content']//div[@class='settings-page__content-item-col'])[6]").click()
-    chrome_driver.find_element_by_xpath("//div[@id='app-content']//span[text()='Ethereum Mainnet']").click()
-    chrome_driver.find_element_by_xpath("(//div[@id='app-content']//span[@class='network-name-item'])[1]").click()
+    chrome_driver.find_element_by_xpath("(//div[@id='app-content']//div[@class='settings-page__content-item-col'])[7]").click()
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']//div[@class='chip__right-icon']").click()
+    chrome_driver.find_element_by_xpath("(//div[@id='app-content']//span[@class='network-name-item'])[2]").click()
 ```
 畫面示意圖：
+![](https://i.imgur.com/FSIl6Tm.png)
 
-8. 切換成 Ropsten 後即可進行接下來的自動化測試撰寫
+8. [關鍵行為] 切換成 Ropsten 後 即可進行接下來的自動化測試 - 抓取TideBit swap 連接 metamask 後的 extension element
 ---
 ## Reference:
 https://www.lambdatest.com/blog/selenium-webdriver-with-python/
