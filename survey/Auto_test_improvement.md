@@ -73,7 +73,7 @@ Error: `Timed out receiving message from renderer: 10.000`
 chrome_driver.find_element_by_xpath("//button[text()='Get Started']").click()
 ```
 #### 解決方式：
-在自動化測試打開其裝置時，可以使用 webdriver.get(”chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/welcome“）先進入到網頁
+在自動化測試打開 extension 時，可以使用 webdriver.get(”chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/welcome“）進入到網頁
 ```
 def test_metamask_connection(): 
 
@@ -84,7 +84,7 @@ def test_metamask_connection():
     sleep(10)
     chrome_driver.get('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/welcome')
 ```
-接著進行下列步驟：（若發生無法獲取element的問題，可以設定sleep(__seconds))
+接著進行下列步驟：（若發生無法獲取 element 的問題，可以設定 sleep(__seconds) )
 5. 進入 Metamask 初始設定頁面
 ```
 def test_metamask_connection(): 
