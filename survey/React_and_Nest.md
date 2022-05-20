@@ -4,7 +4,7 @@
 為了節省建立以 Nest js 為框架的 React App 的時間，此篇研究著重在如何設定 package.json 以及將 Nest 框架的檔案和 React 放置在一起，期望未來能達到透過 Github repository 直接 pull 檔案下來也能快速進入狀況，並且基於此檔案能直接開發一個 Nest.js 作為 HTTP Service 的 React App 
 
 ## 執行結果：
-大概的 Folder 框架已經建構完畢，剩下還沒將影片放上網站，預估時間 3hr
+大概的 Folder 框架已經建構完畢，剩下還沒將影片放上網站，預估時間 3hrs
 ## 檔案的 Repository：
 
 https://github.com/royal0721/NestReact
