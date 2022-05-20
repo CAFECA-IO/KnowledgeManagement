@@ -20,7 +20,9 @@ $ nest new project-name
 
 3. 修改 package.json - 任何出現 src 的把它改成 server
 4. 另外開啟一個新的資料夾 (放在此 root folder 外），並且 create react app (輸入以下 create react app 指令)
+
 `npx create-react-app client`
+
 5. 建立一個新的 React App，並且將 src, public 文件複製進 Nest folder 中
 6. 修改 package.json，將 React App 中的 package 相關依賴放入 
 ![](https://i.imgur.com/p4Qnd9j.png)
