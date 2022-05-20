@@ -25,12 +25,37 @@ $ nest new project-name
 
 5. 建立一個新的 React App，並且將 src, public 文件複製進 Nest folder 中
 6. 修改 package.json，將 React App 中的 package 相關依賴放入 
-![](https://i.imgur.com/p4Qnd9j.png)
-
+```
+  "dependencies": {
+    "@nestjs/cli": "^8.2.6",
+    "@nestjs/common": "^8.1.1",
+    "@nestjs/core": "^8.1.1",
+    "@nestjs/platform-express": "^8.1.1",
+    "@nestjs/serve-static": "^2.2.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "nest": "^0.1.6",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-player": "^2.10.1",
+    "react-scripts": "5.0.1",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^4.6.4",
+    "web-vitals": "^2.1.4"
+  },
+```
 
 7. 修改 package.json 的 script - 將 react 相關的指令加上後綴詞 :react
-![](https://i.imgur.com/2ksBrE9.png)
-
+```
+  "scripts": {
+    "start:react": "react-scripts start",
+    "start": "nest start",
+    "build:react": "react-scripts build",
+    "test:react": "react-scripts test",
+    "eject:react": "react-scripts eject"
+  },
+```
 8. 修改 server folder 內的  module, main.ts 
 module:
 ```
