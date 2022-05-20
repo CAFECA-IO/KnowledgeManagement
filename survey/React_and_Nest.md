@@ -97,3 +97,5 @@ npm run start
 ```
 10. 查看 localhost:3000 就能看到網站被 run 起來
 11. (缺乏最後步驟) 放上 m3u8 影片
+
+開發環境設定 開發 初始化資料夾 部署 整個資料夾結構（server/react)
