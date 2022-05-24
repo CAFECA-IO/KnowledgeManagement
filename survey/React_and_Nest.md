@@ -143,7 +143,6 @@ push 上 git 時需要 ignore 的檔案或資料夾
 鎖定安裝時的 package version
 9. package.json:
 放置 dependencies, scripts, devDependencies 等
-tsconfig.json 是 TypeScript 編譯時看的編譯設定檔案
 10. tsconfig.build.json:
 引入 tsconfig.json 並 exculde 文件 
 11. tsconfig.json:
