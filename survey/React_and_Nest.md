@@ -137,16 +137,16 @@ local node_modules
 Nest 開發用的檔案
 6. src:
 React 開發用的檔案
-7. .gitignore
+7. .gitignore:
 push 上 git 時需要 ignore 的檔案或資料夾
-8. package-lock.json
+8. package-lock.json:
 鎖定安裝時的 package version
-9. package.json
+9. package.json:
 放置 dependencies, scripts, devDependencies 等
 tsconfig.json 是 TypeScript 編譯時看的編譯設定檔案
-10. tsconfig.build.json
+10. tsconfig.build.json:
 引入 tsconfig.json 並 exculde 文件 
-11. tsconfig.json
+11. tsconfig.json:
 Typescript - tsconfig.json 文件中指定了用來編譯此項目的 root folder 底下的文件和編譯選項
 
 ## Video App 開發
