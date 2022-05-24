@@ -151,8 +151,7 @@ Typescript - tsconfig.json 文件中指定了用來編譯此項目的 root folde
 ## Video App 開發
 開發前先下載 pkg:
     ```
-    npm install video.js
-    npm install react-router-dom@6
+    npm install video.js react-router-dom@6
     ```
 1. import video 並 建立 video Component 
     ```
