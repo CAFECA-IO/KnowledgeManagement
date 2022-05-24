@@ -97,6 +97,7 @@ module:
 - Nest 開發檔案放置於 server folder:
     新增的 controller/module/service 可以分別放在其資料夾底下
     ![](https://i.imgur.com/X82pYtz.png)
+    
     main.ts 監聽 port 3000，若要修改 port 可以在此檔案修改 
 
 - React 開發檔案放置於 src folder：
