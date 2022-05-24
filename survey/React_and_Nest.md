@@ -149,7 +149,11 @@ push 上 git 時需要 ignore 的檔案或資料夾
 Typescript - tsconfig.json 文件中指定了用來編譯此項目的 root folder 底下的文件和編譯選項
 
 ## Video App 開發
-
+開發前先下載 pkg:
+    ```
+    npm install video.js
+    npm install react-router-dom@6
+    ```
 1. import video 並 建立 video Component 
     ```
     import React, { useEffect, useRef, useState } from "react";
@@ -239,7 +243,7 @@ Typescript - tsconfig.json 文件中指定了用來編譯此項目的 root folde
     // <Route exact index element={<Home />} />
     // <Route exact path="/about" element={<About />} />
     ```
-4. 撰寫playlist component, 分別將 json 檔案轉換成一個一個 component
+4. 撰寫 playlist component, 分別將 json 檔案轉換成一個一個 component
     ```
     import data from '../playlist.json';
     import { Fragment, React } from "react";
