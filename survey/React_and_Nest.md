@@ -239,8 +239,6 @@ Typescript - tsconfig.json 文件中指定了用來編譯此項目的 root folde
       );
     }
     export default App;
-    // <Route exact index element={<Home />} />
-    // <Route exact path="/about" element={<About />} />
     ```
 4. 撰寫 playlist component, 分別將 json 檔案轉換成一個一個 component
     ```
