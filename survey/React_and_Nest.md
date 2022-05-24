@@ -211,9 +211,64 @@ Typescript - tsconfig.json 文件中指定了用來編譯此項目的 root folde
     }
     export default App;
     ```
-3. 畫面結果截圖
+3. 製作導覽列，在 App.js import React Router
+    ```
+    import React from "react";
+    import { BrowserRouter, Routes , Route, Link} from "react-router-dom";
+    import HomePage from "./component/HomePage";
+    import PlayList from "./component/PlayList";
+    function App() {
+      const linkStyle = {
+        margin: "1rem",
+        textDecoration: "none",
+        color: 'blue',
+        padding: '20px'
+      };
+      return (
+        <BrowserRouter>
+          <Link to="/" style={linkStyle}>首頁</Link>
+          <Link to="/playlist" style={linkStyle}>節目表</Link>
+          <Routes>
+            <Route path="/" element={<HomePage/>}/> 
+            <Route path="/playlist" element={<PlayList/>}/>
+          </Routes>
+        </BrowserRouter>
+      );
+    }
+    export default App;
+    // <Route exact index element={<Home />} />
+    // <Route exact path="/about" element={<About />} />
+    ```
+4. 撰寫playlist component, 分別將 json 檔案轉換成一個一個 component
+    ```
+    import data from '../playlist.json';
+    import { Fragment, React } from "react";
+    import './HomePage.css';
+    const PlayList = (props) => {    
 
+        const listItems = data.map((data_one, index) => (
+        <Fragment key={index}>
+            <li>
+                <span>{data_one.prgName}</span>
+                <span>{data_one.PlayTime}</span>
+                <span>{data_one.prgColumn}</span>
+            </li>
+        </Fragment>
+        ));
+
+        return (
+                <ul>{listItems}</ul>
+            )
+
+
+    }
+
+    export default PlayList;
+    ```
+5. 畫面結果截圖
     ![](https://i.imgur.com/rVYfT5m.jpg)
+    ![](https://i.imgur.com/cSlxWlU.png)
+
 
 ## Reference
 1. https://docs.nestjs.com/
