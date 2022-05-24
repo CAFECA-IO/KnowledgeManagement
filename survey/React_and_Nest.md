@@ -105,6 +105,7 @@ module:
  ![](https://i.imgur.com/jSP8iqR.png)
 
 - React 要使用的靜態資料放置於 public folder:
+
     ![](https://i.imgur.com/tOU2G8n.png)
 
 - npm run build:react 後生成打包完成的 index.html 放置於 build folder：
