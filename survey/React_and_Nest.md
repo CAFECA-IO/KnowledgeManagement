@@ -211,3 +211,6 @@ Typescript - tsconfig.json 文件中指定了用來編譯此項目的 root folde
     }
     export default App;
     ```
+3. 畫面結果截圖
+
+    ![](https://i.imgur.com/rVYfT5m.jpg)
