@@ -22,7 +22,7 @@ https://github.com/royal0721/NestReact
 
 5. 建立一個新的 React App，並且將 src, public 文件複製進 Nest folder 中
 
-## 初始化檔案
+## 專案初始化
 1. 修改 package.json，將 React App 中的 package 相關依賴放入 
     ```
       "dependencies": {
@@ -90,7 +90,7 @@ module:
     ```
 4. 重新 npm install 更新 node module
     `npm install`
-## 開發使用資料夾 
+## 資料夾結構
 
 
 
