@@ -214,3 +214,8 @@ Typescript - tsconfig.json 文件中指定了用來編譯此項目的 root folde
 3. 畫面結果截圖
 
     ![](https://i.imgur.com/rVYfT5m.jpg)
+
+## Reference
+1. https://docs.nestjs.com/
+2. https://create-react-app.dev/
+3. https://videojs.com/guides/react/
