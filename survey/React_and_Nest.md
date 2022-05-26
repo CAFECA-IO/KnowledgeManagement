@@ -110,7 +110,138 @@ module:
 
 - npm run build:react 後生成打包完成的 index.html 放置於 build folder：
     ![](https://i.imgur.com/QO3wilY.png)
+    
 ## 開發說明
+### 新增頁面
+1. 在 src 的 Component folder 中新增一個新的 Component 檔案，並加入其對應的 css 檔 （ 此處為 HomePage.js, Homepage.css )
+![](https://i.imgur.com/MrTSMBD.png)
+
+2. 在建立 Compoent 後記得要 export component（ 此處為 export default HomePage ) 
+
+    HomePage.js:
+    ```
+    import React from "react";
+    import Video from "./Video";
+    const HomePage = (props) => {
+        const play＿details = {
+            fill: true,
+            fluid: true,
+            autoplay: true,
+            controls: true,
+            preload: "metadata",
+            sources: [
+              {
+                src: "https://stream.chinasuntv.com/680k/mid_video_index.m3u8",
+                type: "application/x-mpegURL"
+              }
+            ]
+          };
+        return (
+            <Video {...play＿details} />
+          );
+    }
+
+    export default HomePage;
+    ```
+3. 新增 Component 至 SPA route 中，將 <HomePage/>加入 Routes 中並加入對應 Link
+    ```
+    import React from "react";
+    import { BrowserRouter, Routes , Route, Link} from "react-router-dom";
+    import HomePage from "./component/HomePage";
+    import PlayList from "./component/PlayList";
+    function App() {
+      const linkStyle = {
+        margin: "1rem",
+        textDecoration: "none",
+        color: 'blue',
+        padding: '20px'
+      };
+      return (
+        <BrowserRouter>
+          <Link to="/" style={linkStyle}>首頁</Link>
+          # 加入以下這行
+          <Link to="/playlist" style={linkStyle}>節目表</Link>
+          <Routes>
+            <Route path="/" element={<HomePage/>}/> 
+            ＃ 加入以下這行
+            <Route path="/playlist" element={<PlayList/>}/>
+          </Routes>
+        </BrowserRouter>
+      );
+    }
+    export default App;
+    ```
+
+4. 在瀏覽器輸入 localhost:3000/ 即可進入 HomePage 
+### 新增 API
+
+1. 在 server folder 新增一個專屬於 API 的 folder（ 此處為 /document )
+![](https://i.imgur.com/tsw8Vzj.png)
+
+2. 新增 controller 和對應的 service ( 此處為 document.controller.ts 和 document.service.ts ）於  document folder 底下，並且標註要使用的 api path 在 controller 的 decorator @Controller 中 （ 此處為 @Controller('document'）)
+
+    document.controller.ts:
+    ```
+    import { Controller, Get, Response } from '@nestjs/common';
+    import { DocumentService } from './document.service'; 
+
+    @Controller('document')
+    export class DocumentController {
+
+      docService: DocumentService;
+      constructor(){
+        this.docService= new DocumentService;
+      }
+
+      @Get()
+      getAllDoc(@Response() res) {
+       this.docService.getFakeData().subscribe((data)=>{
+            return data;
+       })
+      }
+
+    }
+    ```
+    document.service.ts:
+    ```
+    import { Injectable } from '@nestjs/common';
+    import { of } from 'rxjs';
+
+    @Injectable()
+    export class DocumentService {
+      getFakeData(){
+        return of('Fake Data');
+      }
+    }
+
+    ```    
+3. 最後將新增的 controller 放進 app.module.ts 的 controllers 中，Service 放進 providers 中 （ 此處為DocumentController, DocumentService )
+    
+    app.module.ts:
+    ```
+    import { Module } from '@nestjs/common';
+    import { ServeStaticModule } from '@nestjs/serve-static';
+    import { join } from 'path';
+    import { AppController } from './app.controller';
+    import {DocumentController} from './document/document.controller'
+    import { AppService } from './app.service';
+    import { DocumentService } from './document/document.service';
+    @Module({
+      imports: [
+        ServeStaticModule.forRoot({
+          rootPath: join(__dirname, '..', 'build'),
+          exclude: ['/api*'],
+        }),
+      ],
+      controllers: [AppController,DocumentController],
+      providers: [AppService, DocumentService]
+    })
+    export class AppModule {}
+    ```
+
+4. 最後在瀏覽器輸入 localhost:3000/api/document 即可以獲取資料
+
+### 新增 daemon
 
 
 ## 部署方式
