@@ -242,6 +242,47 @@ module:
 4. 最後在瀏覽器輸入 localhost:3000/api/document 即可以獲取資料
 
 ### 新增 daemon
+1. 在 server folder 裡面建立一個 service folder ( 此處為 test.service.ts )
+![](https://i.imgur.com/Jxylv6S.png)
+
+2. 撰寫 service 並 export 其 service（ 此處為 export default TestService )
+    ```
+    import { Injectable } from '@nestjs/common';
+
+
+    @Injectable()
+    export class TestService {
+      getTest():string{
+        return "Test";
+      }
+    }
+
+    export default TestService;
+    ```
+3.  將 Service 放入對應的 Ｍodule 的 providers 中 （ 此處為 app.moule.ts ) 來使用 ( 若要使用專屬 Controller 可以建立相同名稱的.controller.ts )
+
+    app.module.ts:
+    ```
+    import { Module } from '@nestjs/common';
+    import { ServeStaticModule } from '@nestjs/serve-static';
+    import { join } from 'path';
+    import { AppController } from './app.controller';
+    import {DocumentController} from './document/document.controller'
+    import { AppService } from './app.service';
+    import { DocumentService } from './document/document.service';
+    import TestService from './service/test.service';
+    @Module({
+      imports: [
+        ServeStaticModule.forRoot({
+          rootPath: join(__dirname, '..', 'build'),
+          exclude: ['/api*'],
+        }),
+      ],
+      controllers: [AppController,DocumentController],
+      providers: [AppService, DocumentService, TestService]
+    })
+    export class AppModule {}
+    ```
 
 
 ## 部署方式
