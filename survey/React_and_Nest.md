@@ -441,7 +441,7 @@ Typescript - tsconfig.json 文件中指定了用來編譯此項目的 root folde
     export default PlayList;
     ```
 5. 畫面結果截圖
-    ![](https://i.imgur.com/39eKFVS.png)
+    ![](https://i.imgur.com/sNsjJEc.png)
     ![](https://i.imgur.com/p2GIUCy.png)
 
 
