@@ -176,7 +176,8 @@ module:
 ### 新增 API
 
 1. 在 server folder 新增一個專屬於 API 的 folder（ 此處為 /document )
-![](https://i.imgur.com/tsw8Vzj.png)
+    
+    ![](https://i.imgur.com/tsw8Vzj.png)
 
 2. 新增 controller 和對應的 service ( 此處為 document.controller.ts 和 document.service.ts ）於  document folder 底下，並且標註要使用的 api path 在 controller 的 decorator @Controller 中 （ 此處為 @Controller('document'）)
 
