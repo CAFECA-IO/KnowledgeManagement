@@ -171,8 +171,11 @@ module:
     }
     export default App;
     ```
-
-4. 在瀏覽器輸入 localhost:3000/ 即可進入 HomePage 
+4. build react
+    ```
+    npm run build:react
+    ```
+6. 在瀏覽器輸入 localhost:3000/ 即可進入 HomePage 
 ### 新增 API
 
 1. 在 server folder 新增一個專屬於 API 的 folder（ 此處為 /document )
