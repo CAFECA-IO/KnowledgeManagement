@@ -2,4 +2,28 @@
 
 ## Deposit tsToken
 ### 流程圖
-![](https://i.imgur.com/OWgqIxv.png)
+![](https://i.imgur.com/UaOqkfN.png)
+
+## Withdraw
+### 流程圖
+
+## Place Bid
+### 流程圖
+
+## Cancel Bid
+### 流程圖
+
+## Auction
+### 流程圖
+
+## Mint
+### 流程圖
+
+## Repay
+### 流程圖
+
+## Redeem
+### 流程圖
+
+## Claim
+### 流程圖
