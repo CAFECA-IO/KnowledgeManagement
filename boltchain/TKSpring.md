@@ -21,9 +21,11 @@
 
 ## Repay
 ### 流程圖
+![](https://i.imgur.com/ZTGLhIy.png)
 
 ## Redeem
 ### 流程圖
+![](https://i.imgur.com/3yx53Rs.png)
 
 ## Claim
 ### 流程圖
