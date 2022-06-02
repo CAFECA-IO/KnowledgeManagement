@@ -7,14 +7,18 @@
 
 ### 執行結果：
 
-- 缺乏的關鍵步驟：
-缺乏測試成功取得 extension 的 element（步驟8)
+- 可以再優化的關鍵步驟：
+缺乏最後判斷 clickable button 的判斷程式
 
 - 預估研究時間：
-需要 2 hrs 進行 extension 抓取 element 研究
+需要 0.5 hrs 進行 clickable button 的判斷程式撰寫
 
 - 若可以成功執行，預估的測試撰寫時間：
-若可以執行，預估需要 1 hr 撰寫 TideBit 入金 自動化測試 / TideBit Swap 需要 3hrs 完成自動化測試 
+若可以執行，預估需要 1 hr 撰寫 TideBit 入金 自動化測試 / TideBit Swap 需要 0.5hrs 優化自動化測試（大致完成） 
+
+### TideBit Swap 自動化測試示範影片
+
+https://drive.google.com/file/d/1zHpzd4yKS0bgUfYi7Q_xWM1aju38go_n/view?usp=sharing
 
 ### 使用 Python 語法 實際運行 Selenium 
 #### 前置作業
@@ -127,6 +131,35 @@ def test_metamask_connection():
     chrome_driver.find_element_by_xpath("//div[@id='app-content']//div[@class='chip__right-icon']").click()
     chrome_driver.find_element_by_xpath("(//div[@id='app-content']//span[@class='network-name-item'])[2]").click()
 ```
+8. 連接 Metamask 並回到 TideBit Swap 網頁確認錢包帳號已連接 
+```
+    chrome_driver.get('https://swap.tidebit.network')
+    chrome_driver.find_element_by_xpath("//div[@class='header-bar']/button[text()='Connect']").click()
+    chrome_driver.find_element_by_xpath("//div[@class='ConnectOptions_icon-button__3A5mo']").click()
+    chrome_driver.get('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html')
+    chrome_driver.find_element_by_xpath("//div/button[text()='Next']").click()
+    chrome_driver.find_element_by_xpath("//div[@id='app-content']/div/div[@class='main-container-wrapper']/div/div[@class='page-container permission-approval-container']/div[@class='permission-approval-container__footers']/div[@class='page-container__footer']/footer/button[text()='Connect']").click()
+    chrome_driver.get('https://swap.tidebit.network')
+    print('connection ok!')
+```
+9. 進行 ETH Swap (ETH->tt3) 並且進入 Metamask confirm
+```    
+    chrome_driver.find_element_by_xpath('(//div[text()="Select Coin"])[1]').click()
+    chrome_driver.find_element_by_xpath('//div[text()="ETH"]').click()
+    chrome_driver.find_element_by_xpath('(//div[text()="Select Coin"])[1]').click() 
+    chrome_driver.find_element_by_xpath('//div[text()="tt3"]').click()
+    chrome_driver.find_element_by_xpath('(//input)[3]').send_keys("0.001") 
+    # get value of the element
+    exchange = chrome_driver.find_element_by_xpath('(//input)[4]').get_attribute('value')
+    chrome_driver.find_element_by_xpath('//button[text()="Swap"]').click()
+    chrome_driver.get('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html')
+    
+    # Go to Metamask and click confirm
+
+    chrome_driver.find_element_by_xpath("//div/div[@class='confirm-page-container-content confirm-page-container-         content--with-top-border']/div[@class='page-container__footer']/footer/button[text()='Confirm']").click()
+ 
+```
+    
 畫面示意圖：
 ![](https://i.imgur.com/FSIl6Tm.png)
 
