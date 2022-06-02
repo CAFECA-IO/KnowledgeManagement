@@ -16,10 +16,6 @@
 - 若可以成功執行，預估的測試撰寫時間：
 若可以執行，預估需要 1 hr 撰寫 TideBit 入金 自動化測試 / TideBit Swap 需要 0.5hrs 優化自動化測試（大致完成） 
 
-### TideBit Swap 自動化測試示範影片
-
-https://drive.google.com/file/d/1zHpzd4yKS0bgUfYi7Q_xWM1aju38go_n/view?usp=sharing
-
 ### 使用 Python 語法 實際運行 Selenium 
 #### 前置作業
 1. 先下載 Google Chrome WebDriver，接著 pip3 install selenium
@@ -160,10 +156,10 @@ def test_metamask_connection():
  
 ```
     
-畫面示意圖：
-![](https://i.imgur.com/FSIl6Tm.png)
+### 畫面結果連結：
 
-8. [關鍵行為] 切換成 Ropsten 後 即可進行接下來的自動化測試 - 抓取TideBit swap 連接 metamask 後的 extension element
+https://drive.google.com/file/d/1zHpzd4yKS0bgUfYi7Q_xWM1aju38go_n/view?usp=sharing
+
 ---
 ## Reference:
 https://www.lambdatest.com/blog/selenium-webdriver-with-python/
