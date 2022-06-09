@@ -16,6 +16,10 @@ https://lucid.app/lucidchart/90bf1827-b09c-46af-9038-bee407b46041/edit?viewport_
 https://lucid.app/lucidchart/f767b08f-a6f5-4d8d-bdcd-8e14757f0fc5/edit?view_items=9VTnwv78t2qd&invitationId=inv_67889ae9-a45d-4f7b-8d70-87d4824c614f#
 ## Place Bid
 ### 流程圖
+![](https://i.imgur.com/1if4ZyC.png)
+
+原圖：
+https://lucid.app/lucidchart/9cfcef02-1aee-484a-9c31-260c376622af/edit?viewport_loc=-1875%2C491%2C2470%2C1058%2C0_0&invitationId=inv_93719b62-48e6-4348-91dc-cbfe59abad07#
 
 ## Cancel Bid
 ### 流程圖
