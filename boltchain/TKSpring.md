@@ -10,7 +10,10 @@ https://lucid.app/lucidchart/90bf1827-b09c-46af-9038-bee407b46041/edit?viewport_
 
 ## Withdraw
 ### 流程圖
+![](https://i.imgur.com/NNmuvsf.png)
 
+原圖：
+https://lucid.app/lucidchart/f767b08f-a6f5-4d8d-bdcd-8e14757f0fc5/edit?view_items=9VTnwv78t2qd&invitationId=inv_67889ae9-a45d-4f7b-8d70-87d4824c614f#
 ## Place Bid
 ### 流程圖
 
