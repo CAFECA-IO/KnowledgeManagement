@@ -23,6 +23,10 @@ https://lucid.app/lucidchart/9cfcef02-1aee-484a-9c31-260c376622af/edit?viewport_
 
 ## Cancel Bid
 ### 流程圖
+![](https://i.imgur.com/6QNdEbz.png)
+
+原圖：
+https://lucid.app/lucidchart/2eb65c73-673e-49e9-b1c5-de1b5294509b/edit?viewport_loc=-2117%2C94%2C2368%2C1076%2C0_0&invitationId=inv_ab71347b-9062-4cdc-97cb-fd789870bb1a#
 
 ## Auction
 ### 流程圖
