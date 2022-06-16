@@ -52,3 +52,4 @@ https://lucid.app/lucidchart/ba251927-3c48-48d4-9d3c-c22d56e32d05/edit?viewport_
 
 ## Claim
 ### 流程圖
+![](https://i.imgur.com/hJxWOBK.png)
