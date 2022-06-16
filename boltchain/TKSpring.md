@@ -30,6 +30,10 @@ https://lucid.app/lucidchart/2eb65c73-673e-49e9-b1c5-de1b5294509b/edit?viewport_
 
 ## Auction
 ### 流程圖
+![](https://i.imgur.com/7pl81IA.png)
+
+原圖：
+https://lucid.app/lucidchart/df39e756-edce-423e-a661-9825e861149a/edit?viewport_loc=-2216%2C-1101%2C2670%2C1213%2C0_0&invitationId=inv_a33b5047-57ec-473f-8b17-2780967beb33#
 
 ## Mint
 ### 流程圖
