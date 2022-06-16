@@ -37,6 +37,10 @@ https://lucid.app/lucidchart/df39e756-edce-423e-a661-9825e861149a/edit?viewport_
 
 ## Mint
 ### 流程圖
+![](https://i.imgur.com/3ucHlXG.png)
+
+原圖：
+https://lucid.app/lucidchart/ba251927-3c48-48d4-9d3c-c22d56e32d05/edit?viewport_loc=-2076%2C-1433%2C2841%2C1291%2C0_0&invitationId=inv_385743f7-7ed7-47e5-8da4-790e9088befc#
 
 ## Repay
 ### 流程圖
