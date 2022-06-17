@@ -80,6 +80,9 @@ https://lucid.app/lucidchart/ba251927-3c48-48d4-9d3c-c22d56e32d05/edit?viewport_
 ![](https://i.imgur.com/ZTGLhIy.png)
 
 ### 流程說明
+1. 使用者提出 repay debt 的要求
+2. Auction Server 監聽 repay 事件，並且update database
+3. 由 Auction Server 通知 ITM Server 回傳 proof token
 
 ## Redeem
 ### 流程圖
