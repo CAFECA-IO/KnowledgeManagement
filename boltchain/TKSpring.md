@@ -36,7 +36,8 @@ https://lucid.app/lucidchart/9cfcef02-1aee-484a-9c31-260c376622af/edit?viewport_
 
 ### 流程說明
 1. 使用者提出 Place Bid 申請
-2. Auction Server 
+2. Auction Server 回傳 proof token 並且完成 Place Bid，完成後回傳 receipt 給使用者
+
 ## Cancel Bid
 ### 流程圖
 ![](https://i.imgur.com/6QNdEbz.png)
