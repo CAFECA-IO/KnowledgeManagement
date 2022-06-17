@@ -60,8 +60,9 @@ https://lucid.app/lucidchart/df39e756-edce-423e-a661-9825e861149a/edit?viewport_
 ### 流程說明
 1. 由 Auction Server 進行 Ｍatch 和 Settle，並且將最終的媒合分成 Unmatched、Lend 和 Borrow
 2. 將計算完成的 merkle tree 傳送給 Auction Server 
-3. 由 Auction Server 向 ITM Server update result
-4. 最後從 ITM Server 取得 proof token 後由 AuctionRouter upload merkle root
+3. 由 AuctionRouter upload merkle root
+4. 由 Auction Server 向 ITM Server update result
+5. 最後從 ITM Server 取得 proof token 
 
 ## Mint
 ### 流程圖
