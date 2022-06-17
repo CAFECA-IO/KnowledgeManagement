@@ -35,7 +35,8 @@ https://lucid.app/lucidchart/f767b08f-a6f5-4d8d-bdcd-8e14757f0fc5/edit?view_item
 https://lucid.app/lucidchart/9cfcef02-1aee-484a-9c31-260c376622af/edit?viewport_loc=-1875%2C491%2C2470%2C1058%2C0_0&invitationId=inv_93719b62-48e6-4348-91dc-cbfe59abad07#
 
 ### 流程說明
-
+1. 使用者提出 Place Bid 申請
+2. Auction Server 
 ## Cancel Bid
 ### 流程圖
 ![](https://i.imgur.com/6QNdEbz.png)
