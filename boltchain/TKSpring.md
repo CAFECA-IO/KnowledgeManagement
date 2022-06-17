@@ -23,8 +23,9 @@ https://lucid.app/lucidchart/90bf1827-b09c-46af-9038-bee407b46041/edit?viewport_
 https://lucid.app/lucidchart/f767b08f-a6f5-4d8d-bdcd-8e14757f0fc5/edit?view_items=9VTnwv78t2qd&invitationId=inv_67889ae9-a45d-4f7b-8d70-87d4824c614f#
 
 ### 流程說明
-1. 使用者向 Operator 提交提領 (Withdraw) 申請 
-2. Operator 透過 Auction Server 經由與 ITM Server 的互動取得 proof token，提供 redeem code 給 operator User 使⽤ withdraw 加上 redeem code 提交合約出⾦ 
+1. 使用者向 Operator 提交 Withdraw 申請 
+2. Operator 透過 Auction Server 經由與 ITM Server 的互動取得 proof token，接著取得 redeem code 
+3. User 使⽤ Withdraw 加上 redeem code 提交合約出⾦ 
 
 ## Place Bid
 ### 流程圖
