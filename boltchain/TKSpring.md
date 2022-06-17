@@ -9,6 +9,10 @@
 https://lucid.app/lucidchart/90bf1827-b09c-46af-9038-bee407b46041/edit?viewport_loc=-1918%2C-2364%2C2368%2C1014%2C0_0&invitationId=inv_79d72a54-03b0-4db7-8b7c-99d4cb962251#
 
 ### 流程說明
+1. 轉帳⾄合約 
+2. Operator 監聽轉帳事件後更新 off chain data 
+
+
 
 ## Withdraw
 ### 流程圖
@@ -18,6 +22,8 @@ https://lucid.app/lucidchart/90bf1827-b09c-46af-9038-bee407b46041/edit?viewport_
 https://lucid.app/lucidchart/f767b08f-a6f5-4d8d-bdcd-8e14757f0fc5/edit?view_items=9VTnwv78t2qd&invitationId=inv_67889ae9-a45d-4f7b-8d70-87d4824c614f#
 
 ### 流程說明
+1. User 向 operator 提交 withdraw 申請 
+2. Operator 提供 redeem code 給 operator User 使⽤ withdraw 加上 redeem code 提交合約出⾦ 
 
 ## Place Bid
 ### 流程圖
