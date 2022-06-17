@@ -90,6 +90,11 @@ https://lucid.app/lucidchart/ba251927-3c48-48d4-9d3c-c22d56e32d05/edit?viewport_
 ![](https://i.imgur.com/3yx53Rs.png)
 
 ### 流程說明
+1. 使用者提出 Redeem 需求 (burn tsbETH)
+2. 由 ERC721 合約進行由 tsbToken to tsToken 的  collateral 轉移，並且 approve 使用者 (borrower)
+3. Auction Server 監聽事件並且同步更新 database
+4. 由 Auction Server 提交更新資料給 ITM Server
+5. 最後從 ITM Server 取得 proof token
 
 ## Claim
 ### 流程圖
