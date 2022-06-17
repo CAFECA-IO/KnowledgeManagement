@@ -71,6 +71,9 @@ https://lucid.app/lucidchart/df39e756-edce-423e-a661-9825e861149a/edit?viewport_
 https://lucid.app/lucidchart/ba251927-3c48-48d4-9d3c-c22d56e32d05/edit?viewport_loc=-2076%2C-1433%2C2841%2C1291%2C0_0&invitationId=inv_385743f7-7ed7-47e5-8da4-790e9088befc#
 
 ### 流程說明
+1. 使用者提出 Mint 要求
+2. Auction Server 接收需求後回傳 receipt 和 merkle proof data
+3. 智能合約檢查 merkle proof data 並 Mint a request 
 
 ## Repay
 ### 流程圖
