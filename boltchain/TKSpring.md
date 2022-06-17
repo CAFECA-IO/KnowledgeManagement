@@ -9,10 +9,10 @@
 https://lucid.app/lucidchart/90bf1827-b09c-46af-9038-bee407b46041/edit?viewport_loc=-1918%2C-2364%2C2368%2C1014%2C0_0&invitationId=inv_79d72a54-03b0-4db7-8b7c-99d4cb962251#
 
 ### 流程說明
-1. 使用者提出轉帳請求
+1. 使用者提出轉帳至合約的請求
 2. Operator 監聽轉帳事件後更新 off chain data 
 3. 過程經過 Auction Server，並由 Auction Server 與 ITM Server 進行溝通
-4.  
+4. 最後由 Auction Server 回傳 receipt 和 proof token 給前端提供給使用者查看
 
 
 ## Withdraw
