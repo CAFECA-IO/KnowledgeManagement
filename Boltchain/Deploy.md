@@ -19,7 +19,7 @@ TCP 32668
 UDP 32668
 ```
 
-## Config.toml
+## config.toml
 ```toml
 [Eth]
 SyncMode = "full" #[snap, full]
@@ -85,9 +85,12 @@ EnableMsgEvents = false
 ReadTimeout = 30000000000
 WriteTimeout = 30000000000
 IdleTimeout = 120000000000
+```
 
+## System Config
+```
 [Unit]
-Description=heco chain service
+Description=boltchain service
 
 [Service]
 Type=simple
