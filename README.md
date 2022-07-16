@@ -51,9 +51,6 @@ Creating, Sharing, Using and Managing the knowledge and information of CAFECA
 - [Istio](./isto.md)
 - [K6 - load testing tool](./k6-load-testing-tool.md)
 
-### Fabric
-- [Fabric Performance](./Fabric-Performance.md)
-
 ### Flutter
 - [Flavor](./flutter/flavor.md)
 - [Notification(FCM)](./flutter/fcm.md)
@@ -66,3 +63,6 @@ Creating, Sharing, Using and Managing the knowledge and information of CAFECA
 ### Chrome Extension
 - [開發](./chrome-extension/develop.md)
 - [上架](./chrome-extension/google-market.md)
+
+### PaaS
+- [OpenStack](./PaaS/openstack.md)
