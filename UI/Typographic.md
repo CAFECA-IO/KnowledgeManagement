@@ -1,1 +1,2 @@
 - Golden Line Height：(FONT SIZE)*1.618= ideal line height
+- X2 Rule：Body font size = Title/2
