@@ -1,6 +1,9 @@
 # KnowledgeManagement
 Creating, Sharing, Using and Managing the knowledge and information of CAFECA
 
+## 工作技巧
+- [VSCode] [使用 VSCode 編輯遠端機器檔案](tips/edit_remote_files_with_vscode.md)
+
 ## 未分類
 - [Coding Style](Coding-Style.md)
 - [搭建 Ethereum 全節點](Setup-An-Ethereum-Full-Node.md)
