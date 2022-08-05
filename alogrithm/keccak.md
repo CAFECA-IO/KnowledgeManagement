@@ -1,5 +1,3 @@
-Principle of Keccak
-
 # Overview
 ## Keccak 簡介
 Keccak 是一種 Hash 函式，而所謂的 Hash 函式具有單向特性，也就是輸入值經由 Hash 函式產生出來的輸出有不可回推的特性。據分類來說，Keccak 為 Hash 函式中的密碼雜湊函式（Cryptographic Hash Function)，這種類型的函式所得出的輸出值不會有衝突 (collision) 的情況，因此區塊鏈中，都是使用密碼雜湊函式來進行 Hash 相關的運算。
