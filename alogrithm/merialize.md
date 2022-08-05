@@ -8,7 +8,7 @@ Merkle Tree 雜湊樹本身是一個樹狀的資料結構，且 Merkle Tree 是�
 ## 驗證方式
 在 Merkle Tree 的驗證資料中，每個節點都會以其子節點的數值做 Hash 值，所以當有人篡改了其中一個節點的數值，就會連帶影響到上層所算出的 Hash 值。故我們可以使用此方式進行驗證，以確保最後所得的資料並沒有被竄改。
 ## 應用場域
-Merkle Tree 被應用在 Bitcoin 和區塊鏈領域
+Merkle Tree 被應用在 Bitcoin 、區塊鏈領域、分佈式存儲資料庫(例子： AWS Dynamo DB)
 
 #Merialize
 Serialized Merkle-Tree
