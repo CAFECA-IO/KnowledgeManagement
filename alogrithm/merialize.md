@@ -53,7 +53,7 @@ class MerkleTree {
       set level = 0;
       for each nodeElements and set the nodeStorage;
       level++;
-      
+      // set node's index in level
       set NodesInLevel;
       for loop level <= levels:
         for loop i < NodesInLevel:
