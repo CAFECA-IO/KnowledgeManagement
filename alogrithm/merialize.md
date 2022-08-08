@@ -11,5 +11,7 @@ Merkle Tree 雜湊樹本身是一個樹狀的資料結構，且 Merkle Tree 是�
 Merkle Tree 被應用在 Bitcoin 、區塊鏈領域、分佈式存儲資料庫(例子： AWS Dynamo DB)
 
 ## Definition
+### Merkle Tree builder
+### Prover
+### Verifier
 
-proof, verifier
