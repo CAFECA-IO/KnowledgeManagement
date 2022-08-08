@@ -93,10 +93,16 @@ const Keccak = require('@cafeca/keccak');
 const keccak256 = new Keccak('keccak256'); 
 ```
 ### Merkle Tree related function
+updateNode():
+```
+updateNode()
+```
 insertNode():
 ```
-insertNode() {
-
+insertNode(leafValue) {
+    const index = totalLeavesCount;
+    call updateNode(index, leafValue, true);
+    totalLeavesCount = totalLeavesCount + 1;
 }
 ```
 getIndex():
@@ -118,11 +124,13 @@ getRoot(): string {
   return nodeStorage.get(MerkleTree.indexToKey(levels, 0)) || zeros[levels];
 }
 ```
-updateNode():
-```
-updateNode()
-```
 
+traverse()
+```
+traverse()
+```
 ### Prover
-### Verifier
-
+proof()
+```
+proof()
+```
