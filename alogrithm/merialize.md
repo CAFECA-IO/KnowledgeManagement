@@ -12,6 +12,12 @@ Merkle Tree 被應用在 Bitcoin 、區塊鏈領域、分佈式存儲資料庫(�
 
 ## Definition
 ### Merkle Tree builder
+在建立 Merkle Tree 時，需要先定義 Merkle Tree 的資料結構：
+```
+class MerkleTree {
+
+}
+```
 ### Prover
 ### Verifier
 
