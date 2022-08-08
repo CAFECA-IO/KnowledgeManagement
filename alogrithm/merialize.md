@@ -93,14 +93,24 @@ const Keccak = require('@cafeca/keccak');
 const keccak256 = new Keccak('keccak256'); 
 ```
 ### Merkle Tree related function
-insertNode()
+insertNode():
+```
+insertNode() {
 
-indexToKey()
-
+}
+```
+indexToKey():
+```
+indexToKey(index: number, elements): string {
+  return elements.indexOf(index);
+}
+```
+```
 getRoot()
-
+```
+```
 updateNode()
-
+```
 ### Prover
 ### Verifier
 
