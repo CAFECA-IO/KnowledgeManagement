@@ -67,7 +67,9 @@ class MerkleTree {
       
       // 遍歷 Merkle tree
       for loop level <= levels:
+      
         for loop i < NodesInLevel:
+      
           make MerleTree's leftNode and store key in leftKey;
           store leftNode in leftNode;
           make MerleTree's rightNode and store key in leftKey;
@@ -75,6 +77,7 @@ class MerkleTree {
           // put leftNode and rightNode in hash function
           set node = hashFunction(leftNode, rightNode);
           NodeStorage.set(node's Merkle tree key , node)
+        
         // 結束完一層進行上一層
         NodesInLevel = Math.ceil(NodesInLevel / 2);
       
