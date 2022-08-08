@@ -95,7 +95,8 @@ const keccak256 = new Keccak('keccak256');
 ### Merkle Tree related function
 updateNode():
 ```
-updateNode()
+updateNode() {
+}
 ```
 insertNode():
 ```
@@ -127,8 +128,28 @@ getRoot(): string {
 
 traverse()
 ```
-traverse()
+// traverse from leaf to root with handler for target node and sibling node
+traverse(leafIndex: number, callback(level: number, currentNodeIndex: number, siblingNodeIndex: number) => void) {
+  
+  // store current node index
+  let currentNodeIndex = leafIndex;
+  
+  // loop node index in certain level 
+  for loop i < levels:
+    let siblingNodeIndex;
+    if (currentNodeIndex % 2 === 0) {
+      siblingNodeIndex = currentNodeIndex + 1;
+    } else {
+      siblingNodeIndex = currentNodeIndex - 1;
+    }
+
+    callback(i, currentIndex, siblingIndex);
+    // 上層繼續
+    currentNodeIndex = Math.floor(currentNodeIndex / 2);
+  }
+}
 ```
+
 ### Prover
 proof()
 ```
