@@ -1,5 +1,5 @@
 # Overview
-## 原理簡介
+## Principle
 ![](https://i.imgur.com/kngYziw.png)
 
 圖片來源 [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Main_Page)
