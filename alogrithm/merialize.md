@@ -52,6 +52,7 @@ class MerkleTree {
       this.zeros.push(currentZeroNode);
     
     if (nodeElements.length > 0):
+    
       // set totalLeavesCounts, level
       set totalLeavesCounts = nodeElements.length;
       set level = 0;
