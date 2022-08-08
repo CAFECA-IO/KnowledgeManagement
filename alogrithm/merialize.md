@@ -35,6 +35,8 @@ class MerkleTree {
   
   // we can replace defaultHashFunction with any hash function we want to use for making hash value
   constructor(levels: number, nodeElements: string[] = [], hashFunction = defaultHashFunction) {
+  
+    // set levels, hashfunction, nodeStorage Map object, zero list and totalLeavesCounts
     levels = levels;
     hashLeftAndRight = hashFunction;
     nodeStorage = new Map();
