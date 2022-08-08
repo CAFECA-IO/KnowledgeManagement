@@ -89,6 +89,12 @@ class MerkleTree {
 const Keccak = require('@cafeca/keccak');
 const keccak256 = new Keccak('keccak256'); 
 ```
+### Merkle Tree related function
+insertNode()
+indexToKey()
+getRoot()
+updateNode()
+
 ### Prover
 ### Verifier
 
