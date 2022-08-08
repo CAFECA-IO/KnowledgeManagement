@@ -18,7 +18,12 @@ class MerkleTree {
 
 }
 ```
-### 
+### Hash
+在 Merkle Tree 的定義中，我們會使用到 Hash，而此處使用到的 Hash 我們採用先前開發的 js-Keccak-Laria 中的 keccak 256
+```
+const Keccak = require('@cafeca/keccak');
+const keccak256 = new Keccak('keccak256'); 
+```
 ### Prover
 ### Verifier
 
