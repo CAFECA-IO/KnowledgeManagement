@@ -46,9 +46,10 @@ class MerkleTree {
     // initialize the tree with zero value in the elemet
     push zero value to zeros[]
    
+    let currentZeroNode = this.zeroValue;
     for loop i < levels:
-      currentZero = this.hashLeftRight(currentZero, currentZero);
-      this.zeros.push(zero);
+      currentZeroNode = this.hashLeftAndRight(currentZeroNode, currentZeroNode);
+      this.zeros.push(currentZeroNode);
     
     if (nodeElements.length > 0):
       // set totalLeavesCounts, level
