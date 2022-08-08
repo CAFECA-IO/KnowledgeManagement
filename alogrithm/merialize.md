@@ -49,12 +49,20 @@ class MerkleTree {
       this.zeros.push(zero);
     
     if (nodeElements.length > 0):
+      // set totalLeavesCounts, level
       set totalLeavesCounts = nodeElements.length;
       set level = 0;
+      
+      // 遍歷 Elements 和放進 nodeStorage
       for each nodeElements and set the nodeStorage;
+      
+      // set level = 1;
       level++;
+      
       // set node's index in level
       set NodesInLevel;
+      
+      // 遍歷 Merkle tree
       for loop level <= levels:
         for loop i < NodesInLevel:
           make MerleTree's leftNode and store key in leftKey;
