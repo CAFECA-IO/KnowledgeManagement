@@ -99,18 +99,30 @@ insertNode() {
 
 }
 ```
-indexToKey():
+getIndex():
 ```
-indexToKey(index: number, elements): string {
-  return elements.indexOf(index);
+getIndex(targetValue){
+  find targetValue in NodeStorage
+  return targetValue index;
 }
 ```
+indexToKey(levels, index):
 ```
-getRoot()
+indexToKey(levels, index): string {
+  return levels+"-"+index;
+}
 ```
+getRoot():
+```
+getRoot(): string {
+  return nodeStorage.get(MerkleTree.indexToKey(levels, 0)) || zeros[levels];
+}
+```
+updateNode():
 ```
 updateNode()
 ```
+
 ### Prover
 ### Verifier
 
