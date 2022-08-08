@@ -11,7 +11,7 @@ Merkle Tree 雜湊樹本身是一個樹狀的資料結構，且 Merkle Tree 是�
 
 ### Merkle Tree 分支 - Sparse Merkle Tree
 基本的 Merkle Tree 被用來驗證節點是否存在在樹上，但若是要進行未存在節點的驗證怎麼辦？
-此時我們可以使用 Merkle Tree 的其他版本 - Sparse Merkle Tree，Sparse Merkle Tree 可以用來證明 inclusion 和 non-inclusion，換句話說，也就是能夠證明某筆資料存在和不存在某個 index，以圖一為例：我們能使用 Sparse 證明 H(B) 不存在在 index 3。
+此時我們可以使用 Merkle Tree 的其他版本 - Sparse Merkle Tree，Sparse Merkle Tree 可以用來證明 inclusion 和 non-inclusion，換句話說，也就是能夠證明某筆資料存在或不存在某個 index，以圖一為例：我們能使用 Sparse 證明 H(B) 不存在在 index 3。
 
 ### 應用場域
 Merkle Tree 被應用在 Bitcoin 、區塊鏈領域、分佈式存儲資料庫(例子： AWS Dynamo DB)等，大多被用來快速驗證資料節點是否存在。
