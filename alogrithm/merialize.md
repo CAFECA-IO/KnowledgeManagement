@@ -21,10 +21,56 @@ Merkle Tree 被應用在 Bitcoin 、區塊鏈領域、分佈式存儲資料庫(�
 ## Definition
 ### Merkle Tree builder
 在建立 Merkle Tree 時，需要先定義 Merkle Tree 的資料結構：
+
 ```
 class MerkleTree {
-
+  
+  // set type of tree elements
+  zeroValue = zero value;
+  levels: number;
+  hashLeftAndRight: (left: string, right: string) => string;
+  nodeStorage: Map<string, string>;
+  zeros: string[];
+  totalLeavesCounts: number;
+  
+  // we can replace defaultHashFunction with any hash function we want to use for making hash value
+  constructor(levels: number, nodeElements: string[] = [], hashFunction = defaultHashFunction) {
+    levels = levels;
+    hashLeftAndRight = hashFunction;
+    nodeStorage = new Map();
+    zeros = [];
+    totalLeavesCounts = 0;
+    
+    // initialize the tree with zero value in the elemet
+    push zero value to zeros[]
+   
+    for loop i < levels:
+      currentZero = this.hashLeftRight(currentZero, currentZero);
+      this.zeros.push(zero);
+    
+    if (nodeElements.length > 0):
+      set totalLeavesCounts = nodeElements.length;
+      set level = 0;
+      for each nodeElements and set the nodeStorage;
+      level++;
+      
+      set NodesInLevel;
+      for loop level <= levels:
+        for loop i < NodesInLevel:
+          make MerleTree's leftNode and store key in leftKey;
+          store leftNode in leftNode;
+          make MerleTree's rightNode and store key in leftKey;
+          store rightNode in rightNode;
+          // put leftNode and rightNode in hash function
+          set node = hashFunction(leftNode, rightNode);
+          NodeStorage.set(node's Merkle tree key , node)
+        // 結束完一層進行上一層
+        NodesInLevel = Math.ceil(NodesInLevel / 2);
+      
+   }
+   
 }
+
 ```
 ### Hash
 在 Merkle Tree 的定義中，我們會使用到 Hash，而此處使用到的 Hash 我們採用先前開發的 js-Keccak-Laria 中的 keccak 256 hash function
