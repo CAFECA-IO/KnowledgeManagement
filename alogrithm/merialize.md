@@ -9,7 +9,7 @@ Merkle Tree 雜湊樹本身是一個樹狀的資料結構，且 Merkle Tree 是�
 ### 驗證方式
 在 Merkle Tree 的驗證資料中，每個節點都會以其子節點的數值做 Hash 值，所以當有人篡改了其中一個節點的數值，就會連帶影響到上層所算出的 Hash 值。故我們可以使用此方式進行驗證，以確保最後所得的資料並沒有被竄改。
 
-### Merkle Tree 其他種類 - Sparse Merkle Tree
+### Merkle Tree 分支 - Sparse Merkle Tree
 基本的 Merkle Tree 被用來驗證節點是否存在在樹上，但若是要進行未存在節點的驗證怎麼辦？
 此時我們可以使用 Merkle Tree 的其他版本 - Sparse Merkle Tree，Sparse Merkle Tree 可以用來證明 inclusion 和 non-inclusion，換句話說，也就是能夠證明某筆資料不在某個 index，以圖一為例：我們能使用 Sparse 證明 H(B) 不存在在 index 3。
 
