@@ -160,6 +160,7 @@ npx eslint .
 npm run test
 ```
 測試項結果需要為 all pass
+
 2. 檢查 Naming covention
 參考 [Naming covention](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/technology/coding-convention/naming-convention.md)
 
