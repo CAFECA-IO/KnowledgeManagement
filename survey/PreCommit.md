@@ -85,10 +85,27 @@
     ```
  
 ## eslint 
-針對「錯字」跟「型別錯誤」，我們可以使用 eslint 來讓自動檢查我們的程式碼
+針對「錯字」跟「型別錯誤」，我們可以安裝 eslint，透過使用它來自動檢查我們的程式碼
 ```
 npm install --dev-dependency eslint
 ```
+接著，在 root 新增 .eslintrc 檔案
+
+承上，我們需要來修改 .eslintrc 檔案內容為以下的 code 來讓 eslint support es6 語法
+```
+"parserOptions": {
+    "ecmaVersion": 2019, // 支援 ECMAScript2019
+    "sourceType": "module", // 使用 ECMAScript ****module 
+    "ecmaFeatures": {
+      "jsx": true // 支援 JSX
+    }
+}
+```
+此時我們可以再輸入以下指令來檢查目前的檔案
+```
+npx eslint .
+```
+
 ## test
 
 ## All pre-commit test
