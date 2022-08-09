@@ -85,7 +85,10 @@
     ```
  
 ## eslint 
-
+針對拼字檢查和
+```
+npm install --dev-dependency eslint
+```
 ## test
 
 ## All pre-commit test
