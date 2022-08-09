@@ -85,11 +85,15 @@
     ```
  
 ## eslint 
-針對拼字檢查和
+針對「錯字」跟「型別錯誤」，我們可以使用 eslint 來讓自動檢查我們的程式碼
 ```
 npm install --dev-dependency eslint
 ```
 ## test
 
 ## All pre-commit test
+1.
+2.
+3.
+4. 確保 console.log有正確刪除，若要 print 出結果來檢查，我們可以使用 Logger
 ## Reference
