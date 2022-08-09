@@ -157,21 +157,21 @@ npx eslint .
 ## All pre-commit test
 1. Git branch 檢查
    - 檢查目前的 branch 為何？
-    ```
-    git branch -a
-    ```
+      ```
+      git branch -a
+      ```
    - switch 到正確的分支
-    ```
-    git checkout feature/your_branch
-    ``` 
+      ```
+      git checkout feature/your_branch
+      ``` 
    - 確認 pull 成最新版本（ branch 為 develop or main ）
-    ```
-    git pull origin develop
-    ```
-    or
-    ```
-    git pull origin main
-    ```
+      ```
+      git pull origin develop
+      ```
+      or
+      ```
+      git pull origin main
+      ```
 2. 檢查 unit test 測試結果
     ```
     npm run test
