@@ -36,9 +36,10 @@
     ```
     npm install --dev-dependency prettier
     ```
-    接著，我們可以使用以下指令來針對特定檔案使用 prettier 來檢查
+    接著，我們可以使用以下指令來針對特定檔案使用 prettier 來檢查並自動更新
     ```
-    npx prettier src/file_you_want_to_test.js
+    // it will print the formatted code
+    npx prettier --write src/file_you_want_to_test.js
     ```
 
 
