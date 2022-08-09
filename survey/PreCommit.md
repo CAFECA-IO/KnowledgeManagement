@@ -48,7 +48,10 @@
         "format": "prettier --write \"**/*.+(js|ts|json)\""
     },
     ```
-
+    並且執行以下指令
+    ```
+    npm run format
+    ```
 
 ## eslint 
 
