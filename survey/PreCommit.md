@@ -36,17 +36,6 @@
     ```
     npm install --dev-dependency prettier
     ```
-    接著，我們可以使用以下指令來針對特定檔案使用 prettier 來檢查並自動更新
-    ```
-    npx prettier --write src/file_you_want_to_test.js
-    ```
-    若想要使用一個指令讓 prettier 自動檢查所有檔案並且更新，我們可以修改 package.json 中的 script
-    ```
-    "scripts": {
-        ...
-        "format": "prettier --write \"**/*.+(js|ts|json)\""
-    },
-    ```
     接著，因為我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則，以下附上 airbnb 的 prettier 設定檔
     ```
     {
@@ -68,6 +57,26 @@
     如果想要自定義規則，我們可以使用 [prettier playground](https://prettier.io/playground/)，並勾選頁面左方的 options 來產出符合我們所要的 coding style 的 .prettierrc 檔案
     ![](https://i.imgur.com/KyK4pKS.png)
     
+    coding style 規則檢查指令設定 - 我們需要將 package.json 檔案中的 script 增加一個 check-format 的設定，以找出目前不符合 coding style 的程式碼
+    ```
+    "scripts": {
+        ...
+        "check-format": "prettier --ignore-path .gitignore --list-different \"**/*.+(js|ts|json)\"",
+    },
+    ```
+    
+    接著，我們可以使用以下指令來針對特定檔案使用 prettier 來自動更新不符合 coding style 的 code
+    ```
+    npx prettier --write src/file_you_want_to_test.js
+    ```
+    若想要使用一個指令讓 prettier 自動檢查所有檔案並且更新，我們可以修改 package.json 中的 script
+    ```
+    "scripts": {
+        ...
+        "format": "prettier --write \"**/*.+(js|ts|json)\""
+    },
+    ```
+
     最後執行以下指令，prettier 就會自動把 code 更新成符合我們所要的 coding style 的 code
     ```
     npm run format
