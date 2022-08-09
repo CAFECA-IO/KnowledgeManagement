@@ -1,7 +1,51 @@
 # Pre commit 前的準備
 
 ## Summary:
-為了確保 Commit 前的 code 是乾淨、符合 coding style 且能通過測試的，我們需要經過 format 、 eslint 、 test 等環節，以確認在 commit 前我們的 code 是符合規範的，而此研究就是針對 Pre Commit 的檢查步驟進行整理，並且提供一個比較方便查閱的檢查步驟。
+為了確保 Commit 前的 code 是乾淨、符合 coding style 且能通過測試的，我們需要經過 test 、 format 、 eslint  等環節，以確認在 commit 前我們的 code 是符合規範的，而此研究就是針對 Pre Commit 的檢查步驟進行整理，並且提供一個比較方便查閱的檢查步驟。
+
+## test
+在正式 commit 之前，我們需要針對 code 去撰寫我們的 unit test 檔案，此處以 Jest 為例：
+
+我們先安裝 jest ：
+```
+npm install -D jest
+```
+
+若要測試 typescript，我們需要安裝 ts 相關的所有 jest 檔案
+```
+npm install -D jest ts-jest @types/jest
+```
+
+接著，我們在 root 資料夾內建立一個 tests folder，然後在 folder 內建立對應的測試檔案
+
+在 run 測試以前，我們先在 root 資料夾裡面建立一個 jest.config.json 檔案，並且修改設置
+```
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+module.exports = {
+  coverageDirectory: 'coverage',
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  testRegex: '(/tests/.*|(\\.|/)(test|spec))\\.tsx?$',
+};
+```
+為了使用 test 指令讓我們可以方便進行測試，需要修改 package.json 檔案中的 script 並新增一個 test 指令
+```
+  "scripts": {
+    ...
+    "test": "jest --coverage"
+  },
+```
+
+在撰寫完成所有測試後，輸入以下指令並確保 test output 為 all pass
+```
+npm run test
+```
+
+最後確認一下測試覆蓋率：
+
+![](https://i.imgur.com/TAZ2t7q.png)
+
+以 js-Keccak-Laria 為例，library test branch 需要均為 100 %
 
 ## Format
 ### 目標： 
@@ -106,7 +150,6 @@ npm install --dev-dependency eslint
 npx eslint .
 ```
 
-## test
 
 ## All pre-commit test
 1.
