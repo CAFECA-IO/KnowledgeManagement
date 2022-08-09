@@ -176,10 +176,13 @@ npm run format
 npx eslint .
 ```
 5. 確保 console.log 有正確刪除，若要 print 出結果來檢查，我們可以使用 Logger
+若使用 vscode，可以使用左方的 search 功能搜尋所有 console.log
 
 ![](https://i.imgur.com/YijGFdH.png)
 
 ## Reference
 jest: https://titangene.github.io/article/jest-typescript.html
+
 eslint and prettier: https://ithelp.ithome.com.tw/users/20130284/ironman/3612
+
 airbnb config: https://www.npmjs.com/package/prettier-airbnb-config
