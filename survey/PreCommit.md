@@ -52,6 +52,12 @@
     ```
     npm run format
     ```
+    接著，我們的 code 就會自動更新成一個符合 prettier 預設規則的 code
+    ![](https://i.imgur.com/jYMmhks.png)
+    
+    若我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則
+    
+    
 
 ## eslint 
 
