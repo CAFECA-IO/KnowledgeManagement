@@ -10,7 +10,7 @@
 1. 檢查命名規則
 參考 [Naming covention](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/technology/coding-convention/naming-convention.md)
 
-在此處列出比較常用的幾個命名規則：
+  - 在此處列出比較常用的幾個命名規則：
 
 
 2. 
