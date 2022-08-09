@@ -5,7 +5,9 @@
 
 ## Format
 ### 目標： 
-在進行 Format 排版時，我們需要確認我們的程式碼是符合命名規則且符合 coding style 的
+在進行 Format 時，我們需要確認我們的程式碼是符合命名規則且符合 coding style 的
+### 檢查步驟和方法：
+
 ## eslint 
 
 ## test
