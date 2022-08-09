@@ -47,14 +47,7 @@
         "format": "prettier --write \"**/*.+(js|ts|json)\""
     },
     ```
-    並且執行以下指令
-    ```
-    npm run format
-    ```
-    接著，我們的 code 就會自動更新成一個符合 prettier 預設規則的 code
-    ![](https://i.imgur.com/jYMmhks.png)
-    
-    若我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則，以下附上 airbnb 的 prettier 設定檔
+    接著，因為我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則，以下附上 airbnb 的 prettier 設定檔
     ```
     {
         "$schema": "http://json.schemastore.org/prettierrc",
@@ -75,7 +68,11 @@
     如果想要自定義規則，我們可以使用 [prettier playground](https://prettier.io/playground/)，並勾選頁面左方的 options 來產出符合我們所要的 coding style 的 .prettierrc 檔案
     ![](https://i.imgur.com/KyK4pKS.png)
     
-
+    最後執行以下指令，prettier 就會自動把 code 更新成符合我們所要的 coding style 的 code
+    ```
+    npm run format
+    ```
+ 
 ## eslint 
 
 ## test
