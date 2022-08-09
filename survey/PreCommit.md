@@ -57,6 +57,8 @@
     
     若我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則
     
+    而我們可以使用 [prettier playground](https://prettier.io/playground/)，並勾選頁面左方的 options 來產出符合我們所要的 coding style 的 .prettierrc 檔案
+    ![](https://i.imgur.com/KyK4pKS.png)
     
 
 ## eslint 
