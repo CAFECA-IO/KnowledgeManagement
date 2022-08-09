@@ -12,7 +12,7 @@
 
     - 在此處列出比較常用的幾個命名規則：
         ```
-          // 檔案、Class、命名規則 --------
+          // 檔案、Class、命名規則 
           
           Folder、File: snake_case
           
@@ -20,7 +20,7 @@
           
           Function: lowerCamelCase （注意： 此處的第一個字母為小寫） 
           
-          // 變數命名規則 --------
+          // 變數命名規則 
           
           Parameter (Public): lowerCamelCase
           
