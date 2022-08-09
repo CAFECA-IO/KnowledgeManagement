@@ -20,6 +20,11 @@
           Function: lowerCamelCase （注意： 此處的第一個字母為小寫） 
           
           // 變數命名規則
+          Parameter (Public): lowerCamelCase
+          
+          Parameter (Private): _lowerCamelCase
+
+          Static Constant: UPPER_SNAKE_CASE
         ```
 
 2. 
