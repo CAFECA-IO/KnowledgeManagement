@@ -29,7 +29,7 @@
           Static Constant: UPPER_SNAKE_CASE
         ```
 
-2. Coding style 自動更新與檢查 - 安裝使用 Prettier 
+2. Coding style 自動檢查與更新 - 安裝使用 Prettier 
 
     為了自動檢查排版相關的 coding style 問題，我們可以使用 npm 安裝 prettier 套件，而此套件可以幫我們找出不符合 coding style 的 code。
     
