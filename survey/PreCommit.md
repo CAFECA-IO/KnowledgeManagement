@@ -159,16 +159,16 @@ npx eslint .
     ```
     npm run test
     ```
-  測試項結果需要為 all pass
+    測試項結果需要為 all pass
 
 2. 檢查 Naming covention
-  參考 [Naming covention](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/technology/coding-convention/naming-convention.md)
+    參考 [Naming covention](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/technology/coding-convention/naming-convention.md)
 
 3. 檢查 coding style 並修正
     ```
     npm run check-format
     ```
-  修正 code 讓全部檔案都符合 coding style
+    修正 code 讓全部檔案都符合 coding style
     ```
     npm run format
     ```
@@ -177,9 +177,9 @@ npx eslint .
     npx eslint .
     ```
 5. 確保 console.log 有正確刪除，若要 print 出結果來檢查，我們可以使用 Logger
-  若使用 vscode，可以使用左方的 search 功能搜尋所有 console.log
+    若使用 vscode，可以使用左方的 search 功能搜尋所有 console.log
 
-  ![](https://i.imgur.com/YijGFdH.png)
+    ![](https://i.imgur.com/YijGFdH.png)
 
 ## Reference
 jest: https://titangene.github.io/article/jest-typescript.html
