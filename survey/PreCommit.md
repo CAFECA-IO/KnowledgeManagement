@@ -57,7 +57,9 @@
     如果想要自定義規則，我們可以使用 [prettier playground](https://prettier.io/playground/)，並勾選頁面左方的 options 來產出符合我們所要的 coding style 的 .prettierrc 檔案
     ![](https://i.imgur.com/KyK4pKS.png)
     
-    coding style 規則檢查指令設定 - 我們需要將 package.json 檔案中的 script 增加一個 check-format 的設定，以找出目前不符合 coding style 的程式碼
+    [coding style 規則檢查指令設定] 
+    
+    我們需要將 package.json 檔案中的 script 增加一個 check-format 的設定，以找出目前不符合 coding style 的程式碼
     ```
     "scripts": {
         ...
