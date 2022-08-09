@@ -5,9 +5,11 @@
 
 ## Format
 ### 目標： 
-在進行 Format 時，我們需要確認我們的程式碼是符合命名規則且符合 coding style 的
+在進行 Format 時，我們需要確認我們的程式碼是符合命名規則且符合 coding style 的。
 ### 檢查步驟和方法：
-
+1. 檢查命名規則
+[Naming covention](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/technology/coding-convention/naming-convention.md)
+2. 
 ## eslint 
 
 ## test
