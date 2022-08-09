@@ -38,7 +38,6 @@
     ```
     接著，我們可以使用以下指令來針對特定檔案使用 prettier 來檢查並自動更新
     ```
-    // it will print the formatted code
     npx prettier --write src/file_you_want_to_test.js
     ```
     若想要使用一個指令讓 prettier 自動檢查所有檔案並且更新，我們可以修改 package.json 中的 script
