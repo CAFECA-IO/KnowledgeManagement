@@ -55,9 +55,25 @@
     接著，我們的 code 就會自動更新成一個符合 prettier 預設規則的 code
     ![](https://i.imgur.com/jYMmhks.png)
     
-    若我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則
-    
-    而我們可以使用 [prettier playground](https://prettier.io/playground/)，並勾選頁面左方的 options 來產出符合我們所要的 coding style 的 .prettierrc 檔案
+    若我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則，以下附上 airbnb 的 prettier 設定檔
+    ```
+    {
+        "$schema": "http://json.schemastore.org/prettierrc",
+        "arrowParens": "avoid",
+        "bracketSpacing": false,
+        "jsxBracketSameLine": false,
+        "jsxSingleQuote": false,
+        "printWidth": 100,
+        "proseWrap": "always",
+        "quoteProps": "as-needed",
+        "semi": true,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5",
+        "useTabs": false
+    }
+    ```   
+    如果想要自定義規則，我們可以使用 [prettier playground](https://prettier.io/playground/)，並勾選頁面左方的 options 來產出符合我們所要的 coding style 的 .prettierrc 檔案
     ![](https://i.imgur.com/KyK4pKS.png)
     
 
