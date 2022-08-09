@@ -31,11 +31,16 @@
 
 2. Coding style 檢查 - 安裝使用 Prettier 
 
-    為了自動檢查排版相關的 coding style 問題，我們可以使用 vscode 安裝 prettier 套件，而此套件可以幫我們揪出不符合 coding style 的排版問題。
+    為了自動檢查排版相關的 coding style 問題，我們可以使用 npm 安裝 prettier 套件，而此套件可以幫我們揪出不符合 coding style 的排版問題。
     
     ```
     npm install --dev-dependency prettier
     ```
+    接著，我們可以使用以下指令來針對特定檔案使用 prettier 來檢查
+    ```
+    npx prettier src/file_you_want_to_test.js
+    ```
+
 
 ## eslint 
 
