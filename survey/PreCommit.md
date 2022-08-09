@@ -129,6 +129,9 @@ npm run test
     ```
  
 ## eslint 
+### 目標： 
+在進行 eslint check 以確認我們的程式碼沒有「錯字」和「型別錯誤」。
+
 針對「錯字」跟「型別錯誤」，我們可以安裝 eslint，透過使用它來自動檢查我們的程式碼
 ```
 npm install --dev-dependency eslint
@@ -152,8 +155,31 @@ npx eslint .
 
 
 ## All pre-commit test
-1.
-2.
-3.
-4. 確保 console.log有正確刪除，若要 print 出結果來檢查，我們可以使用 Logger
+1. 檢查 unit test 測試結果
+```
+npm run test
+```
+測試項結果需要為 all pass
+2. 檢查 Naming covention
+參考 [Naming covention](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/technology/coding-convention/naming-convention.md)
+
+3. 檢查 coding style 並修正
+```
+npm run check-format
+```
+修正 code 讓全部檔案都符合 coding style
+```
+npm run format
+```
+4. 檢查拼字和型別錯誤
+```
+npx eslint .
+```
+5. 確保 console.log 有正確刪除，若要 print 出結果來檢查，我們可以使用 Logger
+
+![](https://i.imgur.com/YijGFdH.png)
+
 ## Reference
+jest: https://titangene.github.io/article/jest-typescript.html
+eslint and prettier: https://ithelp.ithome.com.tw/users/20130284/ironman/3612
+airbnb config: https://www.npmjs.com/package/prettier-airbnb-config
