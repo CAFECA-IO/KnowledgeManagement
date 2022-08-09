@@ -156,26 +156,26 @@ npx eslint .
 
 ## All pre-commit test
 1. 檢查 unit test 測試結果
-  ```
-  npm run test
-  ```
+    ```
+    npm run test
+    ```
   測試項結果需要為 all pass
 
 2. 檢查 Naming covention
   參考 [Naming covention](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/technology/coding-convention/naming-convention.md)
 
 3. 檢查 coding style 並修正
-  ```
-  npm run check-format
-  ```
+    ```
+    npm run check-format
+    ```
   修正 code 讓全部檔案都符合 coding style
-  ```
-  npm run format
-  ```
+    ```
+    npm run format
+    ```
 4. 檢查拼字和型別錯誤
-  ```
-  npx eslint .
-  ```
+    ```
+    npx eslint .
+    ```
 5. 確保 console.log 有正確刪除，若要 print 出結果來檢查，我們可以使用 Logger
   若使用 vscode，可以使用左方的 search 功能搜尋所有 console.log
 
