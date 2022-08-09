@@ -71,7 +71,7 @@
     ```
     npx prettier --write src/file_you_want_to_test.js
     ```
-    若想要使用一個指令讓 prettier 自動檢查所有檔案並且更新，我們可以修改 package.json 中的 script
+    若想要使用一個指令讓 prettier 自動檢查所有檔案並且更新，我們可以修改 package.json 中的 script 並增加一個 format 的指令
     ```
     "scripts": {
         ...
