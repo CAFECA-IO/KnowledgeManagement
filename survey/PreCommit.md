@@ -168,20 +168,7 @@ npx eslint .
 ```
 ## Git Hook 
 為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對承上三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
-### Husky - Node.js 的 Git Hooks 工具
-```
-npm install husky --save-dev
-```
-在 package.json 新增 husky property，並在 hook 裡面新增 "pre-commit"
-```
-  ...
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  ...
-```
+
 ### lint-staged 整合 format 、 lint
 在 pre-commit 的時候，可以幫我們針對這次想要 commit 的檔案，我們可以安裝 lint-staged，先做 format 或 lint
 ```
@@ -198,6 +185,32 @@ npm install --save-dev lint-staged
   ]
 }
 ```
+### Husky - Node.js 的 Git Hooks 工具
+```
+npm install husky --save-dev
+```
+在 package.json 新增 husky property，並在 hook 裡面新增 "pre-commit"
+```
+  ...
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && lint-staged"
+    }
+  },
+  ...
+```
+接著在下 git add . 和 git commit -m "your comment" 後，會出現下面的結果：
+![](https://i.imgur.com/9qqXIiC.png)
+
+[可能會遇到的問題]
+如果在 commit 時並未出現 husky ， 需要卸載並重新下載 husky@4 和 husky ，以確保可以取得更新後可以使用的 husky
+```
+npm uninstall husky
+npm install -D husky@4
+npm install -D husky
+```
+若有再輸入 commit 看到 husky 被啟動並執行 pre-commit 指令，表示有執行成功
+
 ## All pre-commit test
 1. Git branch 檢查
    - 檢查目前的 branch 為何？
@@ -216,31 +229,22 @@ npm install --save-dev lint-staged
       ```
       git pull origin main
       ```
-2. 檢查 unit test 測試結果
-    ```
-    npm run test
-    ```
-    測試項結果需要為 all pass
-
-3. 檢查 Naming covention
+2. 檢查 Naming covention
     參考 [Naming covention](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/technology/coding-convention/naming-convention.md)
 
-4. 檢查 coding style 並修正
-    ```
-    npm run check-format
-    ```
-    修正 code 讓全部檔案都符合 coding style
-    ```
-    npm run format
-    ```
-5. 檢查拼字和型別錯誤
-    ```
-    npx eslint .
-    ```
-6. 確保 console.log 有正確刪除，若要 print 出結果來檢查，我們可以使用 Logger
+3. 確保 console.log 有正確刪除，若要 print 出結果來檢查，我們可以使用 Logger
     若使用 vscode，可以使用左方的 search 功能搜尋所有 console.log
 
     ![](https://i.imgur.com/YijGFdH.png)
+
+4. 進行 Pre-commit (unit test & prettier & eslint)
+    ```
+    git add .
+    git commit -m "your comment"
+    ```
+
+5. git hook 執行 pre-commit 檢查拼字和型別錯誤
+
 
 
 ## Reference
