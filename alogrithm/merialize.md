@@ -6,6 +6,9 @@
 圖片來源 [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Main_Page)
 
 Merkle Tree 雜湊樹本身是一個樹狀的資料結構，且 Merkle Tree 是一個二元樹。其驗證資料存放方式是由最底層的子節點開始將文件進行 Hash 計算，然後由節點存放算出的 Hash 值，若這層的節點並非完整的偶數個節點，則會把最後的節點再複製一份以確保節點個數是偶數個。除此之外，因為 Merkle Tree 為二元樹狀結構，上層節點會是下層節點數的一半，每個節點會將下層的兩個子節點存放的 Hash 值一起做 Hash 計算後存放在節點，並依序由下層往上做，直到最後剩下第一層的 root 節點存放算出的 Hash 值，也就是總和整棵樹的節點算出的 Hash 值。
+### 確保為 perfect binary tree
+為了方便計算，我們需要確保用戶輸入 leaf list (input data) 後，若 leaf 總數為奇數，我們將 node 補成 perfect binary tree ， 一開始初始化時，我們會計算 樹所需要的 level n，而 n 的計算方式是以 (2^n - list len) for n = 0..10，直到計算出最小的正整數為止（ 2^10 = 1024 大約 = 1000 個交易量 )，而後我們會將 n levels 的所有 value 補成 0 ， 其節點的 hash 以 value = 0 進行 keccak 256 計算後得的 044852b2a670ade5407e78fb2863c51de9fcb96542a07186fe3aeda6bb8a116d 儲存之。 除此之外，我們需要將 leaf node 都確保在最後一層（level) 也就是算出來的 n level。
+
 ### 驗證方式
 在 Merkle Tree 的驗證資料中，每個節點都會以其子節點的數值做 Hash 值，所以當有人篡改了其中一個節點的數值，就會連帶影響到上層所算出的 Hash 值。故我們可以使用此方式進行驗證，以確保最後所得的資料並沒有被竄改。
 
@@ -32,16 +35,20 @@ class MerkleTree {
   nodeStorage: Map<string, string>;
   zeros: string[];
   totalLeavesCounts: number;
+  dataValueBlock: string[];
   
   // we can replace defaultHashFunction with any hash function we want to use for making hash value
-  constructor(levels: number, nodeElements: string[] = [], hashFunction = defaultHashFunction) {
-  
+  constructor(nodeElements: string[] = [], hashFunction = defaultHashFunction) {
+    // Todo -> 分群
+    
     // set levels, hashfunction, nodeStorage Map object, zero list and totalLeavesCounts
-    levels = levels;
+    levels = 0;
     hashLeftAndRight = hashFunction;
+    // Store node value
     nodeStorage = new Map();
-    zeros = [];
     totalLeavesCounts = 0;
+    // for sort
+    dataValueBlock = string[];
     
     // initialize the tree with zero value in the elemet
     push zero value to zeros[]
@@ -60,8 +67,10 @@ class MerkleTree {
       // 遍歷 Elements 和放進 nodeStorage
       for each nodeElements and set the nodeStorage;
       
-      // set level = 1;
-      level++;
+      calculate (2^n - nodeElements length   for n=0,1,2...,10) 最小正數 result  
+
+      // set levels = n;
+      levels = n (from upper calculation);
       
       // set node's index in level
       set NodesInLevel;
@@ -88,45 +97,80 @@ class MerkleTree {
 ```
 ### Hash
 在 Merkle Tree 的定義中，我們會使用到 Hash，而此處使用到的 Hash 我們採用先前開發的 js-Keccak-Laria 中的 keccak 256 hash function
+
+hashMerkle(leftString, rightString):
 ```
 const Keccak = require('@cafeca/keccak');
 const keccak256 = new Keccak('keccak256'); 
+hashMerkle(leftString: string, rightString: string) {
+    return keccak256.update([BigInt(leftString),BigInt(rightString)]).digest('hex');
+}
+
 ```
 ### Merkle Tree related function
-updateNode():
+
+insertNodes():
 ```
-updateNode() {
+insertNodes(leafValue: string[]) {
+    // add values
+    add leafValue to dataValueBlock list
+    // totalLeavesCount = totalLeavesCount + leafValue.length
+    totalLeavesCount = totalLeavesCount + leafValue.length;
+    // call sort and re-build Merkle-Tree
+    call sort();
 }
 ```
-insertNode():
+
+getIndex(targetHashValue):
 ```
-insertNode(leafValue) {
-    const index = totalLeavesCount;
-    call updateNode(index, leafValue, true);
-    totalLeavesCount = totalLeavesCount + 1;
-}
-```
-getIndex():
-```
-getIndex(targetValue){
+getIndex(targetHashValue) {
   find targetValue in NodeStorage
   return targetValue index;
 }
 ```
-indexToKey(levels, index):
+
+indexToValue(index):
 ```
-indexToKey(levels, index): string {
-  return levels+"-"+index;
-}
-```
-getRoot():
-```
-getRoot(): string {
-  return nodeStorage.get(MerkleTree.indexToKey(levels, 0)) || zeros[levels];
+indexToKey(index): string {
+  return NodeStorage[index];
 }
 ```
 
-traverse()
+getRoot(): string
+```
+getRoot(): string {
+  // get root hash (index = 0)
+  return nodeStorage.get(0);
+}
+```
+
+removeNodes(index: number): string 
+```
+removeNodes(index: number): string {
+   use index to map hash value and find target nodes;
+   update dataValueBlock node to 0;
+   update node's value to keccak256('0');
+   level = node's level;
+   for loop util index = 0: 
+       hash with siblings and store to parent node;  
+}
+```
+
+sort(): 
+```
+sort(nodeElement: string[]) {
+    sort nodeElement;
+    // re-build merkleTree again
+    processMerkleTree(nodeElement, nodeElement.length, keccak256);
+}
+```
+processMerkleTree(nodeElement, nodeElement.length, keccak256):
+```
+processMerkleTree(nodeElement, nodeElement.length, keccak256){
+// ++ Todo
+}
+```
+traverse():
 ```
 // traverse from leaf to root with handler for target node and sibling node
 traverse(leafIndex: number, callback(level: number, currentNodeIndex: number, siblingNodeIndex: number) => void) {
@@ -151,7 +195,8 @@ traverse(leafIndex: number, callback(level: number, currentNodeIndex: number, si
 ```
 
 ### Prover
-proof()
+// Todo
+proof():
 ```
 proof()
 ```
