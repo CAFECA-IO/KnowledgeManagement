@@ -185,7 +185,17 @@ npm install husky --save-dev
 ```
 npm install --save-dev lint-staged
 ```
-
+在 root 新增 .lintstagedrc 檔案，配置設定 prettier 、 eslint
+```
+{
+  "*.(js|ts)": [
+    "eslint"
+  ],
+  "**/*.+(js|ts|json)": [
+    "prettier --write"
+  ]
+}
+```
 ## All pre-commit test
 1. Git branch 檢查
    - 檢查目前的 branch 為何？
