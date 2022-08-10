@@ -172,13 +172,15 @@ npx eslint .
 ```
 npm install husky --save-dev
 ```
-在 root 新增 .huskyrc 檔案，並在裡面新增 "pre-commit"
+在 package.json 新增 husky property，並在 hook 裡面新增 "pre-commit"
 ```
-{
-  "hooks": {
-    "pre-commit": "npm run validate"
-  }
-}
+  ...
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  ...
 ```
 ### lint-staged 整合 format 、 lint
 在 pre-commit 的時候，可以幫我們針對這次想要 commit 的檔案，我們可以安裝 lint-staged，先做 format 或 lint
