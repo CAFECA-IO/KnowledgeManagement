@@ -119,7 +119,7 @@ npm run test
     ```
     "scripts": {
         ...
-        "format": "prettier --write \"**/*.+(js|ts|json)\""
+        "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
     },
     ```
 
@@ -152,6 +152,14 @@ npm install --dev-dependency eslint
 ```
 npx eslint .
 ```
+然而，我們需要整理指令將其歸納到 package.json 中以方便統一管理，讓其他開發者在開發同樣的專案時能夠以相同的指令進行 eslint 檢查，故我們在 script 中新增 lint
+```
+  "scripts": {
+		...
+    "lint": "eslint --ignore-path .gitignore ."
+  }
+```
+
 ## Git Hook 
 為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對承上三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
 ### Husky - Node.js 的 Git Hooks 工具
