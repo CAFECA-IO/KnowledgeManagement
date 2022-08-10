@@ -177,11 +177,9 @@ npm install --save-dev lint-staged
 在 root 新增 .lintstagedrc 檔案，配置設定 prettier 、 eslint
 ```
 {
-  "*.(js|ts)": [
-    "eslint"
-  ],
-  "**/*.+(js|ts|json)": [
-    "prettier --write"
+  "**/*.{js,jsx,ts,tsx,json,css}": [
+    "prettier --write",
+    "eslint ."
   ]
 }
 ```
