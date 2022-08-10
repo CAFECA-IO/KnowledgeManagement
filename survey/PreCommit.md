@@ -198,7 +198,7 @@ npm install husky --save-dev
   ...
 ```
 接著在下 git add . 和 git commit -m "your comment" 後，會出現下面的結果：
-![](https://i.imgur.com/9qqXIiC.png)
+![](https://i.imgur.com/A96Qq52.png)
 
 [可能會遇到的問題]
 如果在 commit 時並未出現 husky ， 需要卸載並重新下載 husky@4 和 husky ，以確保可以取得更新後可以使用的 husky
