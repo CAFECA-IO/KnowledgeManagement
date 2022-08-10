@@ -155,7 +155,9 @@ npx eslint .
 ## Git Hook 
 為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對承上三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
 ### Husky - Node.js 的 Git Hooks 工具
-
+```
+npm install husky --save-dev
+```
 ## All pre-commit test
 1. Git branch 檢查
    - 檢查目前的 branch 為何？
