@@ -172,6 +172,15 @@ npx eslint .
 ```
 npm install husky --save-dev
 ```
+在 root 新增 .huskyrc 檔案，並在裡面新增 "pre-commit"
+```
+{
+  "hooks": {
+    "pre-commit": "npm run validate"
+  }
+}
+```
+
 ## All pre-commit test
 1. Git branch 檢查
    - 檢查目前的 branch 為何？
