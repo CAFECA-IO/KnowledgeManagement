@@ -207,7 +207,7 @@ npm uninstall husky
 npm install -D husky@4
 npm install -D husky
 ```
-若有再輸入 commit 看到 husky 被啟動並執行 pre-commit 指令，表示有執行成功
+若再次 commit 後看到 husky 被啟動並執行 pre-commit 指令，表示有執行成功
 
 ## All pre-commit test
 1. Git branch 檢查
@@ -242,7 +242,7 @@ npm install -D husky
     ```
 
 5. git hook 執行 pre-commit 檢查拼字和型別錯誤
-
+6. 若未看到出錯警訊，即完成 pre-commit
 
 
 ## Reference
