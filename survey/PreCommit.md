@@ -197,7 +197,7 @@ npm install husky --save-dev
   },
   ...
 ```
-接著在下 git add . 和 git commit -m "your comment" 後，會出現下面的結果：
+接著在下 git add . 和 git commit -m "your comment" 後，會出現 husky：
 ![](https://i.imgur.com/A96Qq52.png)
 
 [可能會遇到的問題]
