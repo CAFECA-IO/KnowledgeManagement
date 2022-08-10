@@ -180,6 +180,11 @@ npm install husky --save-dev
   }
 }
 ```
+### lint-staged 整合 format 、 lint
+我們可以搭配 lint-staged，在 pre-commit 的時候，可以幫我們針對這次想要 commit 的檔案，先做 format 或 lint。
+```
+
+```
 
 ## All pre-commit test
 1. Git branch 檢查
