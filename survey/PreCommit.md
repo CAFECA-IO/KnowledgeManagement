@@ -242,7 +242,7 @@ npm install -D husky
     ```
 
 5. git hook 執行 pre-commit 檢查拼字和型別錯誤
-6. 若未看到出錯警訊，即完成 pre-commit
+6. 若未看到出錯警訊，即完成 commit
 
 
 ## Reference
