@@ -222,8 +222,7 @@ module.exports = {
   extends: ['plugin:import/typescript'],
   // 加上 no console log 規則並解決 prettier 衝突問題
   rules: {
-    'no-console': 'error',
-    'prettier/prettier': 'error',
+    'no-console': 'error'
   },
   plugins: ['prettier'],
 };
