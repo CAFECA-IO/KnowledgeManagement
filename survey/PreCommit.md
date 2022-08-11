@@ -279,7 +279,7 @@ npx eslint .
 
     ![](https://i.imgur.com/YijGFdH.png)
 
-4. 先進行檢驗 - check-format & eslint
+4. 先進行檢驗 - unit-test & check-format & eslint
     ```
     // 確保你的 unit test 會通過，且測試覆蓋率有維持一定標準
     // 確保你的 coding style 沒問題
