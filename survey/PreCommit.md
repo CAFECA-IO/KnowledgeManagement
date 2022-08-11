@@ -136,6 +136,13 @@ npm run test
 ```
 npm install --dev-dependency eslint
 ```
+
+如果要使用 ts，需要安裝 ts 相關的 plugin
+```
+ npm install @typescript-eslint/eslint-plugin@latest --save-dev
+ npm install @typescript-eslint/parser --save-dev
+```
+
 接著，在 root 新增 .eslintrc.js 檔案
 
 承上，我們需要來修改 .eslintrc.js 檔案內容為以下的 code 來讓 eslint support es6 語法 和 ts
@@ -149,6 +156,7 @@ module.exports = {
       experimentalObjectRestSpread: true,
     },
   },
+  // 加上 ts eslint 相關規則、pkg plugin
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
