@@ -9,7 +9,7 @@
 
 [注意]：以下步驟會直接進行 pre-commit，若只是需要檢驗目前程式碼是否符合 coding style，請查閱以下的 eslint 和 prettier 內容並執行 All pre-commit test 的 step 2 ~ step 5
 ## Git Hook 
-為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對承上三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
+為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對以下三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
 
 ### lint-staged 整合 format 、 lint
 在 pre-commit 的時候，可以幫我們針對這次想要 commit 的檔案，我們可以安裝 lint-staged，先做 format 或 lint
