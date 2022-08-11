@@ -12,7 +12,7 @@
 為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對以下三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
 
 ### lint-staged 整合 format 、 lint
-在 pre-commit 的時候，lint-staged 可以幫我們針對這次想要 commit 的檔案，因此我們可以先安裝 lint-staged 來做 format 或 lint
+在 pre-commit 的時候，lint-staged 可以幫我們針對這次想要 commit 的檔案做 format 或 lint，故此處我們先安裝 lint-staged
 ```
 npm install --save-dev lint-staged
 ```
@@ -20,7 +20,9 @@ npm install --save-dev lint-staged
 ```
 {
   "**/*.{js,jsx,ts,tsx,css}": [
+    // 會直接 format
     "prettier --write",
+    // eslint check
     "eslint ."
   ]
 }
@@ -41,7 +43,7 @@ npm install -D husky
   },
   ...
 ```
-接著在下 git add . 和 git commit -m "your comment" 後，會出現 husky：
+接著在輸入 git add . 和 git commit -m "your comment" 後，會出現 husky：
 ![](https://i.imgur.com/A96Qq52.png)
 
 [可能會遇到的問題]
@@ -68,7 +70,8 @@ npm install -D jest ts-jest @types/jest
 
 接著，我們在專案 root 資料夾內建立一個 tests folder，然後在 folder 內建立對應的測試檔案 （前端放在前端 root 資料夾，後端放在後端 root 資料夾)
 
-[此處以 ts 為例子] 在 run 測試以前，我們先在 root 資料夾裡面建立一個 jest.config.json 檔案，並且修改設置 (若沒有需要使用 ts 請參閱 [jest config 官網](https://jestjs.io/docs/configuration))
+[此處以 ts 為例子] 
+在 run 測試以前，我們先在 root 資料夾裡面建立一個 jest.config.json 檔案，並且修改設置 (若沒有需要使用 ts 請參閱 [jest config 官網](https://jestjs.io/docs/configuration))
 ```
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
