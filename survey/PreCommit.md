@@ -4,7 +4,7 @@
 為了確保 Commit 前的 code 是乾淨、符合 coding style 且能通過測試的，我們需要經過 test 、 format 、 eslint  等環節，以確認在 commit 前我們的 code 是符合規範的，而此研究就是針對 Pre Commit 的檢查步驟進行整理，並且提供一個比較方便查閱的檢查步驟。
 
 ## 環境
-目前測試是針對 node.js 後端，支援 js、ts，若要使用 react、vue 等前端框架需要加上一些 plugin，詳細資訊可以參考 eslint 的官方網站。
+目前測試是針對 node.js 後端，支援 js、ts，若要使用 react、vue 等前端框架需要加上一些 plugin，詳細資訊可以參考 reference 的 react eslint settings、。
 
 ## Test
 在正式 commit 之前，我們需要針對 code 去撰寫我們的 unit test 檔案，此處以 Jest 為例：
@@ -283,3 +283,9 @@ jest: https://titangene.github.io/article/jest-typescript.html
 eslint and prettier: https://ithelp.ithome.com.tw/users/20130284/ironman/3612
 
 airbnb config: https://www.npmjs.com/package/prettier-airbnb-config
+
+eslint settings: https://pjchender.dev/webdev/note-eslint/
+
+React eslint settings: https://ithelp.ithome.com.tw/articles/10215259
+
+Vue eslint settings: https://pjchender.blogspot.com/2019/07/vue-vue-style-guide-eslint-plugin-vue.html
