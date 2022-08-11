@@ -12,7 +12,7 @@
 為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對以下三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
 
 ### lint-staged 整合 format 、 lint
-在 pre-commit 的時候，可以幫我們針對這次想要 commit 的檔案，我們可以安裝 lint-staged，先做 format 或 lint
+在 pre-commit 的時候，lint-staged 可以幫我們針對這次想要 commit 的檔案，因此我們可以先安裝 lint-staged 來做 format 或 lint
 ```
 npm install --save-dev lint-staged
 ```
