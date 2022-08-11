@@ -7,7 +7,7 @@
 目前測試是針對 node.js 後端，支援 js、ts，若要使用 react、vue 等前端框架需要加上一些 plugin，詳細資訊可以參考 reference 的 React eslint settings、Vue eslint settings。在使用 Git hook 前，請確保有下載 eslint 和 prettier，若有出現 eslint 與 prettier 衝突的情形可以參考此文件的 eslint 和 prettier 設定。
 
 
-[注意]：以下步驟會直接進行 pre-commit，若只是需要剪線目前程式碼是否符合 coding style，請查閱以下的 eslint 和 prettier 內容 並執行 All pre-commit test 的 step 2 ~ step 5)
+[注意]：以下步驟會直接進行 pre-commit，若只是需要檢驗目前程式碼是否符合 coding style，請查閱以下的 eslint 和 prettier 內容並執行 All pre-commit test 的 step 2 ~ step 5
 ## Git Hook 
 為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對承上三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
 
