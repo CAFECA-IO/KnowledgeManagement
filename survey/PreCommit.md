@@ -85,21 +85,20 @@ npm run test
     ```
     接著，因為我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則，以下附上 airbnb 的 prettier 設定檔
     ```
-    {
-        "$schema": "http://json.schemastore.org/prettierrc",
-        "arrowParens": "avoid",
-        "bracketSpacing": false,
-        "jsxBracketSameLine": false,
-        "jsxSingleQuote": false,
-        "printWidth": 100,
-        "proseWrap": "always",
-        "quoteProps": "as-needed",
-        "semi": true,
-        "singleQuote": true,
-        "tabWidth": 2,
-        "trailingComma": "es5",
-        "useTabs": false
-    }
+	{
+	    "$schema": "http://json.schemastore.org/prettierrc",
+	    "arrowParens": "avoid",
+	    "bracketSpacing": false,
+	    "jsxSingleQuote": false,
+	    "printWidth": 100,
+	    "proseWrap": "always",
+	    "quoteProps": "as-needed",
+	    "semi": true,
+	    "singleQuote": true,
+	    "tabWidth": 2,
+	    "trailingComma": "es5",
+	    "useTabs": false
+	}
     ```   
     如果想要自定義規則，我們可以使用 [prettier playground](https://prettier.io/playground/)，並勾選頁面左方的 options 來產出符合我們所要的 coding style 的 .prettierrc 檔案
     ![](https://i.imgur.com/KyK4pKS.png)
@@ -159,7 +158,7 @@ module.exports = {
       experimentalObjectRestSpread: true,
     },
   },
-  // 加上 ts eslint 相關規則、pkg plugin
+  // 加上 ts 相關規則
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -173,11 +172,14 @@ module.exports = {
     },
   ],
   extends: ['plugin:import/typescript'],
-  // 加入 console.log 的 error
+  // 加上 no console log 規則並解決 prettier 衝突問題
   rules: {
-    'no-console': 'error'
-  }
+    'no-console': 'error',
+    'prettier/prettier': 'error',
+  },
+  plugins: ['prettier'],
 };
+
 
 ```
 此時我們可以再輸入以下指令來檢查目前的檔案
@@ -267,13 +269,17 @@ npm install -D husky
 
     ![](https://i.imgur.com/YijGFdH.png)
 
-4. 進行 Pre-commit (unit test & prettier & eslint)
+4. 先進行檢驗
+    ```
+    npm run validate
+    ```
+5. 進行 Pre-commit (unit test & prettier & eslint)
     ```
     git add .
     git commit -m "your comment"
     ```
 
-5. git hook 執行 pre-commit 檢查拼字、型別錯誤、console.log 
+6. git hook 執行 pre-commit 檢查拼字、型別錯誤、console.log 
 6. 若未看到出錯警訊，即完成 commit
 
 
