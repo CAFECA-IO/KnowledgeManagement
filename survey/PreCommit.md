@@ -28,24 +28,6 @@ npm install --save-dev lint-staged
 ```
 npm install husky --save-dev
 ```
-[此步驟只支援 node version > 14.8.0 因為這是新的語法，用來設定 package.json]
-如果想要直接在下載 husky 後啟用 git hook 可以下以下指令
-```
-npm pkg set scripts.prepare "husky install"
-```
-上述步驟會讓 package.json 自動新增一行 prepare
-```
-  "scripts": {
-    ...
-    "prepare": "husky install"
-  }
-```
-[alternative]
-若想要透過手動，可以下以下語法來 enable git hook
-```
-npx husky install
-```
-
 在 package.json 新增 husky property，並在 hook 裡面新增 "pre-commit" (包含 unit test & coding-style check and "不符合 coding style 的 code format")
 ```
   ...
