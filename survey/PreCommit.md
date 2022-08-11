@@ -28,7 +28,8 @@ npm install --save-dev lint-staged
 
 ### Husky - Node.js 的 Git Hooks 工具
 ```
-npm install husky --save-dev
+npm install -D husky@4
+npm install -D husky
 ```
 在 package.json 新增 husky property，並在 hook 裡面新增 "pre-commit" (包含 unit test & coding-style check and "不符合 coding style 的 code format")
 ```
