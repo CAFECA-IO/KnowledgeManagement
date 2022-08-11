@@ -136,17 +136,34 @@ npm run test
 ```
 npm install --dev-dependency eslint
 ```
-接著，在 root 新增 .eslintrc 檔案
+接著，在 root 新增 .eslintrc.js 檔案
 
-承上，我們需要來修改 .eslintrc 檔案內容為以下的 code 來讓 eslint support es6 語法
+承上，我們需要來修改 .eslintrc.js 檔案內容為以下的 code 來讓 eslint support es6 語法 和 ts
 ```
-"parserOptions": {
-    "ecmaVersion": 2019, // 支援 ECMAScript2019
-    "sourceType": "module", // 使用 ECMAScript ****module 
-    "ecmaFeatures": {
-      "jsx": true // 支援 JSX
-    }
-}
+module.exports = {
+  parserOptions: {
+    ecmaVersion: 2019, // 支援 ECMAScript2019
+    sourceType: 'module', // 使用 ECMAScript ****module
+    ecmaFeatures: {
+      jsx: true, // 支援 JSX
+      experimentalObjectRestSpread: true,
+    },
+  },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: [
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:import/recommended',
+      ],
+      parser: '@typescript-eslint/parser',
+      plugins: ['@typescript-eslint'],
+    },
+  ],
+  extends: ['plugin:import/typescript'],
+};
+
 ```
 此時我們可以再輸入以下指令來檢查目前的檔案
 ```
@@ -177,7 +194,7 @@ npm install --save-dev lint-staged
 在 root 新增 .lintstagedrc 檔案，配置設定 prettier 、 eslint
 ```
 {
-  "**/*.{js,jsx,ts,tsx,json,css}": [
+  "**/*.{js,jsx,ts,tsx,css}": [
     "prettier --write",
     "eslint ."
   ]
