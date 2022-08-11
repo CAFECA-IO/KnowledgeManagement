@@ -296,6 +296,9 @@ npx eslint .
 
 
 ## Reference
+
+jest 官網： https://jestjs.io/docs/configuration
+
 jest: https://titangene.github.io/article/jest-typescript.html
 
 eslint and prettier: https://ithelp.ithome.com.tw/users/20130284/ironman/3612
