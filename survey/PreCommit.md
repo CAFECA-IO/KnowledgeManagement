@@ -248,7 +248,7 @@ npx eslint .
 ```
   "scripts": {
 		...
-    "validate": "check-format && lint"
+    "validate": "npm run test && npm run check-format && npm run lint"
   }
 ```
 
@@ -282,7 +282,6 @@ npx eslint .
 4. 先進行檢驗 - check-format & eslint
     ```
     // 確保你的 unit test 會通過，且測試覆蓋率有維持一定標準
-    npm run test
     // 確保你的 coding style 沒問題
     npm run validate
     ```
