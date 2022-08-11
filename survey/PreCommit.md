@@ -270,7 +270,7 @@ npm install -D husky
     git commit -m "your comment"
     ```
 
-5. git hook 執行 pre-commit 檢查拼字, 型別錯誤, console.log 
+5. git hook 執行 pre-commit 檢查拼字、型別錯誤、console.log 
 6. 若未看到出錯警訊，即完成 commit
 
 
