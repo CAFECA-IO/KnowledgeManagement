@@ -4,7 +4,7 @@
 為了確保 Commit 前的 code 是乾淨、符合 coding style 且能通過測試的，我們需要經過 test 、 format 、 eslint  等環節，以確認在 commit 前我們的 code 是符合規範的，而此研究就是針對 Pre Commit 的檢查步驟進行整理，並且提供一個比較方便查閱的檢查步驟。
 
 ## 環境
-目前測試是針對 node.js 後端，支援 js、ts，若要使用 react、vue 等前端框架需要加上一些 plugin，詳細資訊可以參考 reference 的 React eslint settings、Vue eslint settings。在使用 Git hook 前，請確保有下載 eslint 和 prettier，若有出現 eslint 與 prettier 衝突的情形可以參考此文件的 eslint 和 prettier 設定。
+目前測試是針對 node.js 後端，支援 js、ts (備註： unit test 以 ts 為例），若要使用 react、vue 等前端框架需要加上一些 plugin，詳細資訊可以參考 reference 的 React eslint settings、Vue eslint settings。在使用 Git hook 前，請確保有下載 eslint 和 prettier，若有出現 eslint 與 prettier 衝突的情形可以參考此文件的 eslint 和 prettier 設定。
 
 
 [注意]：以下步驟會直接進行 pre-commit，若只是需要檢驗目前程式碼是否符合 coding style，請查閱以下的 eslint 和 prettier 內容並執行 All pre-commit test 的 step 2 ~ step 5
