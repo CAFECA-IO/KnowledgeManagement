@@ -170,6 +170,10 @@ module.exports = {
     },
   ],
   extends: ['plugin:import/typescript'],
+  // 加入 console.log 的 error
+  rules: {
+    'no-console': 'error'
+  }
 };
 
 ```
@@ -266,7 +270,7 @@ npm install -D husky
     git commit -m "your comment"
     ```
 
-5. git hook 執行 pre-commit 檢查拼字和型別錯誤
+5. git hook 執行 pre-commit 檢查拼字, 型別錯誤, console.log 
 6. 若未看到出錯警訊，即完成 commit
 
 
