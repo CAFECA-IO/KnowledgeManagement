@@ -274,7 +274,8 @@ npx eslint .
     參考 [Naming covention](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/technology/coding-convention/naming-convention.md)
 
 3. 確保 console.log 有正確刪除，若要 print 出結果來檢查，我們可以使用 Logger
-    若使用 vscode，可以使用左方的 search 功能搜尋所有 console.log
+
+   若使用 vscode，可以使用左方的 search 功能搜尋所有 console.log
 
     ![](https://i.imgur.com/YijGFdH.png)
 
