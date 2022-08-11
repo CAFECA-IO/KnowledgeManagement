@@ -4,7 +4,69 @@
 為了確保 Commit 前的 code 是乾淨、符合 coding style 且能通過測試的，我們需要經過 test 、 format 、 eslint  等環節，以確認在 commit 前我們的 code 是符合規範的，而此研究就是針對 Pre Commit 的檢查步驟進行整理，並且提供一個比較方便查閱的檢查步驟。
 
 ## 環境
-目前測試是針對 node.js 後端，支援 js、ts，若要使用 react、vue 等前端框架需要加上一些 plugin，詳細資訊可以參考 reference 的 React eslint settings、Vue eslint settings。
+目前測試是針對 node.js 後端，支援 js、ts，若要使用 react、vue 等前端框架需要加上一些 plugin，詳細資訊可以參考 reference 的 React eslint settings、Vue eslint settings。在使用 Git hook 前，請確保有下載 eslint 和 prettier，若有出現 eslint 與 prettier 衝突的情形可以參考此文件的 eslint 和 prettier 設定。
+
+## Git Hook 
+為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對承上三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
+
+### lint-staged 整合 format 、 lint
+在 pre-commit 的時候，可以幫我們針對這次想要 commit 的檔案，我們可以安裝 lint-staged，先做 format 或 lint
+```
+npm install --save-dev lint-staged
+```
+在 root 新增 .lintstagedrc 檔案，配置設定 prettier 、 eslint
+```
+{
+  "**/*.{js,jsx,ts,tsx,css}": [
+    "prettier --write",
+    "eslint ."
+  ]
+}
+```
+
+### Husky - Node.js 的 Git Hooks 工具
+```
+npm install husky --save-dev
+```
+[此步驟只支援 node version > 14.8.0 因為這是新的語法，用來設定 package.json]
+如果想要直接在下載 husky 後啟用 git hook 可以下以下指令
+```
+npm pkg set scripts.prepare "husky install"
+```
+上述步驟會讓 package.json 自動新增一行 prepare
+```
+  "scripts": {
+    ...
+    "prepare": "husky install"
+  }
+```
+[alternative]
+若想要透過手動，可以下以下語法來 enable git hook
+```
+npx husky install
+```
+
+在 package.json 新增 husky property，並在 hook 裡面新增 "pre-commit" 
+```
+  ...
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && lint-staged"
+    }
+  },
+  ...
+```
+接著在下 git add . 和 git commit -m "your comment" 後，會出現 husky：
+![](https://i.imgur.com/A96Qq52.png)
+
+[可能會遇到的問題]
+如果在 commit 時並未出現 husky ， 需要卸載並重新下載 husky@4 和 husky ，以確保可以取得更新後可以使用的 husky
+```
+npm uninstall husky
+npm install -D husky@4
+npm install -D husky
+```
+若再次 commit 後看到 husky 被啟動並執行 pre-commit 指令，表示有執行成功
 
 ## Test
 在正式 commit 之前，我們需要針對 code 去撰寫我們的 unit test 檔案，此處以 Jest 為例：
@@ -83,7 +145,7 @@ npm run test
     ```
     npm install --dev-dependency prettier
     ```
-    接著，因為我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則，以下附上 airbnb 的 prettier 設定檔
+    接著，因為我們的 coding style 與 prettier 所預設的排版不同，我們可以在 root 建立 .prettierrc 來設定我們所要的 coding style 規則，我們目前是參考 airbnb 的規則，以下附上 airbnb 的 prettier 設定檔
     ```
 	{
 	    "$schema": "http://json.schemastore.org/prettierrc",
@@ -100,7 +162,7 @@ npm run test
 	    "useTabs": false
 	}
     ```   
-    如果想要自定義規則，我們可以使用 [prettier playground](https://prettier.io/playground/)，並勾選頁面左方的 options 來產出符合我們所要的 coding style 的 .prettierrc 檔案
+    如果未來有做大幅的 coding style 調整，我們想要自定義規則，我們可以使用 [prettier playground](https://prettier.io/playground/)，並勾選頁面左方的 options 來產出符合我們所要的 coding style 的 .prettierrc 檔案
     ![](https://i.imgur.com/KyK4pKS.png)
     
     [coding style 規則檢查指令設定] 
@@ -200,48 +262,6 @@ npx eslint .
     "validate": "check-format && lint"
   }
 ```
-## Git Hook 
-為了要讓檢查時機點和對應腳本有個明確的管控，我們可以使用 Git Hooks 來針對承上三種測試（ Test、Format、 eslint ) 進行對應腳本的註冊，而 Git 觸發這些 hooks 時就會執行這些腳本去做對應的處理。
-
-### lint-staged 整合 format 、 lint
-在 pre-commit 的時候，可以幫我們針對這次想要 commit 的檔案，我們可以安裝 lint-staged，先做 format 或 lint
-```
-npm install --save-dev lint-staged
-```
-在 root 新增 .lintstagedrc 檔案，配置設定 prettier 、 eslint
-```
-{
-  "**/*.{js,jsx,ts,tsx,css}": [
-    "prettier --write",
-    "eslint ."
-  ]
-}
-```
-### Husky - Node.js 的 Git Hooks 工具
-```
-npm install husky --save-dev
-```
-在 package.json 新增 husky property，並在 hook 裡面新增 "pre-commit"
-```
-  ...
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test && lint-staged"
-    }
-  },
-  ...
-```
-接著在下 git add . 和 git commit -m "your comment" 後，會出現 husky：
-![](https://i.imgur.com/A96Qq52.png)
-
-[可能會遇到的問題]
-如果在 commit 時並未出現 husky ， 需要卸載並重新下載 husky@4 和 husky ，以確保可以取得更新後可以使用的 husky
-```
-npm uninstall husky
-npm install -D husky@4
-npm install -D husky
-```
-若再次 commit 後看到 husky 被啟動並執行 pre-commit 指令，表示有執行成功
 
 ## All pre-commit test
 1. Git branch 檢查
@@ -269,18 +289,24 @@ npm install -D husky
 
     ![](https://i.imgur.com/YijGFdH.png)
 
-4. 先進行檢驗
+4. 先進行檢驗 - check-format & eslint
     ```
+    // 確保你的 unit test 會通過，且測試覆蓋率有維持一定標準
+    npm run test
+    // 確保你的 coding style 沒問題
     npm run validate
     ```
-5. 進行 Pre-commit (unit test & prettier & eslint)
+5. 若有出現 prettier 報錯，可以使用以下 command 一次修正
+    ```
+    npm run format
+    ```
+6. 進行 Pre-commit (unit test & prettier & eslint)
     ```
     git add .
     git commit -m "your comment"
     ```
-
-6. git hook 執行 pre-commit 檢查拼字、型別錯誤、console.log 
-6. 若未看到出錯警訊，即完成 commit
+7. git hook 執行 pre-commit 檢查拼字、型別錯誤、console.log 
+8. 若未看到出錯警訊，即完成 commit
 
 
 ## Reference
@@ -295,3 +321,5 @@ eslint settings: https://pjchender.dev/webdev/note-eslint/
 React eslint settings: https://ithelp.ithome.com.tw/articles/10215259
 
 Vue eslint settings: https://pjchender.blogspot.com/2019/07/vue-vue-style-guide-eslint-plugin-vue.html
+
+husky: https://typicode.github.io/husky/#/
