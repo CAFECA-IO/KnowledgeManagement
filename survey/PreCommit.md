@@ -19,7 +19,7 @@ npm install -D jest
 npm install -D jest ts-jest @types/jest
 ```
 
-接著，我們在 root 資料夾內建立一個 tests folder，然後在 folder 內建立對應的測試檔案
+接著，我們在專案 root 資料夾內建立一個 tests folder，然後在 folder 內建立對應的測試檔案 （前端放在前端 root 資料夾，後端放在後端 root 資料夾)
 
 在 run 測試以前，我們先在 root 資料夾裡面建立一個 jest.config.json 檔案，並且修改設置
 ```
