@@ -83,7 +83,7 @@ class MerkleTree {
   // set type of tree elements
   zeroValue = 0;
   levels: number;
-  nodeStorage: Buffer []; // index and value
+  nodeStorage: [] ; // Map index to value
   totalLeavesCounts: number;
   groupNumber: 0;
   consistentHashRing: consistentHashing;
@@ -130,33 +130,37 @@ buildMerkleTree(groupNum, elements, hashConfig){
       for loop from n level of nodes to 0 level of nodes:
           for loop index in n level:      
               const nodeHash = do Hash(left child's index, right child's index);
-              store nodeHash in nodeStorage;
+              store nodeHash in nodeStorage[index];
 
       // 遍歷 Merkle tree
       const dataHashes = getDataBlockHash(groupNum, elements, hashConfig);
 
+      let i = 0;
       // 使用廣度優先排序 並由最後一層做到第一層
       for loop from n level of nodes to 0 level of nodes:
           for loop for loop index in n level:
               use dataHashes and store hash in nodeStorage;
-              if (index > 32 * ((3 * 2**n) - 2) &&  index < 32 * ((3 * 2**n) - 2) * this.groupNum):
-                 // i > 32 * ( 2**(n+1)-2 ) - 2**n )
-                 // n level index
-                 if(dataHash[index]!= RLP code):
-                     store dataHash[index] to nodeStorage;
+              if (index > ((3 * 2**n) - 2) &&  index < ((3 * 2**n) - 2) + this.groupNum):
+                 // n level 的第一個 datahash to last element datahash
+                 if(dataHash[i]!= RLP code):
+                     store dataHashes[index] to nodeStorage[index];
+                     i++;
                  else:
-                     store RLP code
-              else if (index > 32 * ((3 * 2**n) - 2) * this.groupNum):
-                  store RLP code 
+                     // last null elements 
+                     store RLP code to nodeStorage[index];
+                     i++;
+              else if (index > ((3 * 2**n) - 2) + this.groupNum):
+                  store RLP code to nodeStorage[index];
+                  i++;
               else:
                   const nodeHash = do Hash(left child's index, right child's index);
-                  store nodeHash to nodeStorage
+                  store nodeHash to nodeStorage;
               
 }
 ```
-### getDataBlockHash(groupNum, elements, hashConfig) : Buffer[]
+### getDataBlockHash(groupNum, elements, hashConfig) : string []
 ```
-getDataBlockHash(groupNum, elements) : Buffer[] {
+getDataBlockHash(groupNum, elements) : string [] {
     
     // string array to store data
     let dataBlockHash = [];
@@ -166,14 +170,16 @@ getDataBlockHash(groupNum, elements) : Buffer[] {
         dataBlockHash[this.consistentHashRing.consistentHash(ele)] = keccak256(ele + hashConfig);
     
     // 填補 RLP code to zeroRLPBuffer
-    let zeroRLPBuffer = Buffer.alloc(groupNum - elements.length);
-    fill zeroRLPBuffer with RLP code
+    const zeroRlpCode = rlpCodeConverter(0);
+    let zeroRlpArray = [];
+    for loop element length to groupNum:
+        fill zeroRLPArray with RLP code;
     
     // get finalbuffer data
-    const DataBuffer = Buffer concat (Buffer.from(dataBlockHash), zeroRLPBuffer);
+    const dataArray = concat (dataBlockHash, zeroRlpArray);
     
-    // output final data buffer
-    return DataBuffer;
+    // output final data array
+    return dataArray;
     
 }
 ```
@@ -266,18 +272,46 @@ removeNodes(value: number): boolean {
     }
 }
 ```
-### getFullEvidence(): hexstring
+
+### getter
+ 
+getFullEvidence(): hexstring
 ```
 function getFullEvidence() {
- return  groupNum + nodeStorage[0] + hashConfig + nodeStorage[1 to last one];
+   let nodesWithRlp = []
+   for loop 1 to nodeStorage.length:
+       // if it's not 0 value
+       if (nodeStorage[i] !== 80):
+           nodesWithRlp.add(rlpConverter(nodeStorage[i])+nodeStorage[i]);
+       else:
+           nodesWithRlp.add(80);
+
+   let result = [];
+   // add rlpcode to node
+   return  Buffer.from([groupNum , nodeStorage[0] , hashConfig] + preOrder(0));
 }
 ```
-### getPartialEvidence(): hexstring
+getPartialEvidence(): hexstring
 ```
 getPartialEvidence() {
-  return 32 bytes (groupNum + nodeStorage[0] + hashConfig + nodeStorage[1 to last one]);
+  return 32 bytes (Buffer.from([groupNum , nodeStorage[0] , hashConfig]));
 }
 ```
+
+preOrder(index): string []
+```
+// input root index first
+preOrder(index): {
+  if (index >= items.length) {
+        return result;
+    }
+  result.add(nodesWithRlp[index]);
+  preOrder((2 * index)+1);
+  preOrder((2 * index)+2);  
+}
+
+```
+
 ### Prover
 // 檢測 tree 是否有被竄改
 proof(root_hash):
@@ -303,7 +337,53 @@ proofIndexNode(index){
         return true;
 }
 ```
+dataToEvidence
+```
+dataToEvidence( hashList: string [], data: string | Buffer ): {
 
+    let node = data;
+    let sortedHashList = [];
+
+    for loop element in hashList:
+        get element index in nodeStorage
+        add element to sortedHashList by the order of sorted index
+        if no index:
+            return -1;
+
+
+    for loop range(0 , hashList.length):
+        node = keccak256(node, sortedHashList[i]);
+    // get root node, if node === nodeStorage[0], return tree
+    if (node === nodeStorage[0]) {
+        return getFullEvidence();
+    }
+
+}
+```
+nodeToEvidence
+```
+nodeToEvidence( hashList: string [] | Buffer [], hashElement: string | Buffer ): {
+
+    let node = hashElement;
+    let sortedHashList = [];
+
+    for loop element in hashList:
+        get element index in nodeStorage
+        add element to sortedHashList by the order of sorted index
+        if no index:
+            return -1;
+
+
+    for loop range(0 , hashList.length):
+        node = keccak256(node, sortedHashList[i]);
+
+    // get root node, if node === nodeStorage[0], return tree
+    if (node === nodeStorage[0]) {
+        return getFullEvidence();
+    }    
+
+}
+``` 
 ----
 ### Data 群數 output - ConsistentHashing
 
@@ -369,6 +449,16 @@ getGroupNumberAndConfig(): number[] {
     return [this.groupNumber , hashConfig];
 }
 ```
+### utils
+rlpConverter(value: string): string
+```
+rlpConverter(value: string): {
+    map rlpCode;
+    return rlpCode;
+}
+
+```
+
 ### Sample
 
 input: 
