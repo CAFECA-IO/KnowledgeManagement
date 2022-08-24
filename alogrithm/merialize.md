@@ -84,26 +84,26 @@ class MerkleTree {
   zeroValue = 0;
   nodeStorage: {}; // Map index to value
   totalLeavesCounts: number;
-  groupNumber: 0;
+  groupSize: 0;
   consistentHashRing: consistentHashing;
   
   // constructor function
-  constructor( groupNumber: number, nodeElements: buffer | string, hashFunction = defaultHashFunction ) {
+  constructor( groupSize: number, nodeElements: buffer | string, hashFunction = defaultHashFunction ) {
     
     hashLeftAndRight = hashFunction;
     totalLeavesCounts = 0;
-    groupNum = 0;
-    hashConfig = 0;
+    groupSize = 0;
+    sort = 0;
     
     if (nodeElements.length > 0):
       
       // set totalLeavesCounts, level
       set totalLeavesCounts = nodeElements.length;
       consistentHashRing = new consistentHashing(nodeElements);
-      groupNum = this.consistentHashRing.getGroupNumberAndConfig()[0];
-      hashConfig = this.consistentHashRing.getGroupNumberAndConfig()[1];
+      groupSize = this.consistentHashRing.getGroupSizeAndSort()[0];
+      sort = this.consistentHashRing.getGroupSizeAndSort()[1];
       // call build tree function
-      buildMerkleTree(groupNum, elements, hashConfig);
+      buildMerkleTree(groupSize, elements, sort);
 
                   
    }
