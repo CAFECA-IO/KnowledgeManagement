@@ -82,8 +82,7 @@ class MerkleTree {
   
   // set type of tree elements
   zeroValue = 0;
-  levels: number;
-  nodeStorage: [] ; // Map index to value
+  nodeStorage: {}; // Map index to value
   totalLeavesCounts: number;
   groupNumber: 0;
   consistentHashRing: consistentHashing;
@@ -91,8 +90,6 @@ class MerkleTree {
   // constructor function
   constructor( groupNumber: number, nodeElements: buffer | string, hashFunction = defaultHashFunction ) {
     
-    // set levels, hashfunction, nodeStorage Map object, zero list and totalLeavesCounts
-    levels = 0;
     hashLeftAndRight = hashFunction;
     totalLeavesCounts = 0;
     groupNum = 0;
@@ -102,7 +99,6 @@ class MerkleTree {
       
       // set totalLeavesCounts, level
       set totalLeavesCounts = nodeElements.length;
-      set level = 0;
       consistentHashRing = new consistentHashing(nodeElements);
       groupNum = this.consistentHashRing.getGroupNumberAndConfig()[0];
       hashConfig = this.consistentHashRing.getGroupNumberAndConfig()[1];
@@ -113,9 +109,9 @@ class MerkleTree {
    }
 
 ```
-### buildMerkleTree(groupNum, elements, hashConfig)
+### buildMerkleTree(groupSize, elements, sort)
 ```
-buildMerkleTree(groupNum, elements, hashConfig){
+buildMerkleTree(groupSize, elements, sort){
 
       // 計算 level 有多少層
       calculate (2^n - groupNum  for n = 0,1,2...,20) 最小正數 result  
@@ -123,8 +119,7 @@ buildMerkleTree(groupNum, elements, hashConfig){
       // set levels = n;
       levels = n (from upper calculation);
       
-      // 算出層數後 -> 建立一個空 buffer
-      nodeStorage = Buffer.alloc( 32 * ( 2**(n-1) - 1 ) );
+      nodeStorage = {};
       
       // 並且把 buffer tree 由 預設值排好
       for loop from n level of nodes to 0 level of nodes:
@@ -133,14 +128,14 @@ buildMerkleTree(groupNum, elements, hashConfig){
               store nodeHash in nodeStorage[index];
 
       // 遍歷 Merkle tree
-      const dataHashes = getDataBlockHash(groupNum, elements, hashConfig);
+      const dataHashes = getDataBlockHash(groupSize, elements, sort);
 
       let i = 0;
       // 使用廣度優先排序 並由最後一層做到第一層
       for loop from n level of nodes to 0 level of nodes:
           for loop for loop index in n level:
-              use dataHashes and store hash in nodeStorage;
-              if (index > ((3 * 2**n) - 2) &&  index < ((3 * 2**n) - 2) + this.groupNum):
+              // use dataHashes and store hash in nodeStorage;
+              if (index > ((3 * 2**n) - 2)):
                  // n level 的第一個 datahash to last element datahash
                  if(dataHash[i]!= RLP code):
                      store dataHashes[index] to nodeStorage[index];
@@ -158,21 +153,21 @@ buildMerkleTree(groupNum, elements, hashConfig){
               
 }
 ```
-### getDataBlockHash(groupNum, elements, hashConfig) : string []
+### getDataBlockHash(groupSize, elements) : string []
 ```
-getDataBlockHash(groupNum, elements) : string [] {
+getDataBlockHash(groupSize, elements) : string [] {
     
     // string array to store data
     let dataBlockHash = [];
 
     for loop ele in elements:
         // 填寫 DataHash in dataBlockHash 中
-        dataBlockHash[this.consistentHashRing.consistentHash(ele)] = keccak256(ele + hashConfig);
+        dataBlockHash[this.consistentHashRing.consistentHash(ele)] = keccak256(ele + hashSize);
     
     // 填補 RLP code to zeroRLPBuffer
     const zeroRlpCode = rlpCodeConverter(0);
     let zeroRlpArray = [];
-    for loop element length to groupNum:
+    for loop element length to groupSize:
         fill zeroRLPArray with RLP code;
     
     // get finalbuffer data
@@ -192,7 +187,7 @@ const Keccak = require('@cafeca/keccak');
 const keccak256 = new Keccak('keccak256'); 
 hashMerkle(leftString: string, rightString: string) {
 
-    const Hash = new keccak('keccak256').update(leftString hash ||rightString hash);
+    const Hash = new keccak('keccak256').update( String.concat(leftString, rightString) );
     return Hash;
 
 }
@@ -297,7 +292,14 @@ getPartialEvidence() {
   return 32 bytes (Buffer.from([groupNum , nodeStorage[0] , hashConfig]));
 }
 ```
-
+doPreOrder(elements, rootIndex): string []
+```
+doPreOrder(elements, rootIndex) {
+    const items = elements;
+    let result = [];
+    preOrder(index);
+}
+```
 preOrder(index): string []
 ```
 // input root index first
@@ -313,22 +315,12 @@ preOrder(index): {
 ```
 
 ### Prover
-// 檢測 tree 是否有被竄改
-proof(root_hash):
-```
-proof(root_hash){
-    const rootHash = Hash(nodeStorage[1], nodeStorage[2])
-    if root_hash === rootHash:
-        return true;
-    else:
-        return false;
-}
-```
+
 // 檢測某 index 的 node 是否存在在樹上
-proofIndexNode(index):
+proofIndexNode(index): boolean
 
 ```
-proofIndexNode(index){
+proofIndexNode(index): boolean{
     for loop to parents until reach the root:
         do Hash(index of node's hash ,siblings hash);
     if roothash!= previous root hash:
@@ -337,50 +329,91 @@ proofIndexNode(index){
         return true;
 }
 ```
-dataToEvidence
+getPartialEvidenceByData( data: string | Buffer ): string [] 
 ```
-dataToEvidence( hashList: string [], data: string | Buffer ): {
+getPartialEvidenceByData( data: string | Buffer ): string [] {
 
-    let node = data;
-    let sortedHashList = [];
+    // get sort (hashConfig) 
+    const sort = this.consistentHashRing.getGroupSizeAndSort()[1];
+    // get index
+    const index = this.consistentHashRing.consistentHash(data);  
+    // get hash
+    const hash = this.hashMerkle(data, sort);
+    // result = [];
+    let result = [];    
+    
+    // find data in last level
+    if this.nodeStorage[index + 2^n-1] !== data:
+        return -1;
 
-    for loop element in hashList:
-        get element index in nodeStorage
-        add element to sortedHashList by the order of sorted index
-        if no index:
-            return -1;
+    // get evidence element from tree 
+    for loop siblings index to root index:
+        check bodeStorage[index + 2^n-1] is left child or right child:
+        if it's left child:
+           result.unshift(this.nodeStorage[index], this.nodeStorage[index+1])
+        else:
+           result.unshift(this.nodeStorage[index-1], this.nodeStorage[index])
 
-
-    for loop range(0 , hashList.length):
-        node = keccak256(node, sortedHashList[i]);
-    // get root node, if node === nodeStorage[0], return tree
-    if (node === nodeStorage[0]) {
-        return getFullEvidence();
-    }
-
+    return result;
 }
 ```
-nodeToEvidence
+getPartialEvidenceByHash( hash: string | Buffer ): string []
 ```
-nodeToEvidence( hashList: string [] | Buffer [], hashElement: string | Buffer ): {
+getPartialEvidenceByHash( hash: string | Buffer ): string []{
 
-    let node = hashElement;
+    // get sort (hashConfig) 
+    const sort = this.consistentHashRing.getGroupSizeAndSort()[1];
+
+    // result = [];
+    let result = [];    
+    
+    find hash in last level
+    if this.nodeStorage[index + 2^n-1] !== data:
+        return [-1];
+
+    // get evidence element from tree 
+    for loop siblings index to root index:
+        check bodeStorage[index + 2^n-1] is left child or right child:
+        if it's left child:
+           result.unshift(this.nodeStorage[index], this.nodeStorage[index+1])
+        else:
+           result.unshift(this.nodeStorage[index-1], this.nodeStorage[index])
+
+    return result;
+}
+```
+## verify
+verifyNodeByData
+```
+verifyNodeByData( data: string | Buffer , hashList: string [] | Buffer [] ): boolean{
+
+    let nodeHash = this.hashMerkle(data);
     let sortedHashList = [];
 
     for loop element in hashList:
-        get element index in nodeStorage
-        add element to sortedHashList by the order of sorted index
-        if no index:
-            return -1;
+        nodeHash = this.hashMerkle(nodeHash,hashList[i]);
 
+    if nodeHash === this.nodeStorage[0]:
+        return true;
+    else:
+        return false;
 
-    for loop range(0 , hashList.length):
-        node = keccak256(node, sortedHashList[i]);
+}
+``` 
+verifyNodeByHash
+```
+verifyNodeByHash( hash: string | Buffer , hashList: string [] | Buffer [] ): boolean{
 
-    // get root node, if node === nodeStorage[0], return tree
-    if (node === nodeStorage[0]) {
-        return getFullEvidence();
-    }    
+    let nodeHash = hash;
+    let sortedHashList = [];
+
+    for loop element in hashList:
+        nodeHash = this.hashMerkle(nodeHash,hashList[i]);
+
+    if nodeHash === this.nodeStorage[0]:
+        return true;
+    else:
+        return false;
 
 }
 ``` 
@@ -391,8 +424,8 @@ nodeToEvidence( hashList: string [] | Buffer [], hashElement: string | Buffer ):
 Class ConsistentHashing {
       
       nodeElements : Buffer [];
-      groupNumber : number;
-      hashConfig : number;
+      groupSize : number;
+      sort : number;
 
       constructor( elementsList : Buffer []) { 
           this.nodeElements = elementsList;
@@ -402,7 +435,7 @@ Class ConsistentHashing {
       function consistentHash(element) {...}
 }
 ```
-hashCalculator(elements): number [] // groupNumber & element 所加上的 hashConfig 數字
+hashCalculator(elements): number [] // groupSize & element 所加上的 sort (hashConfig) 數字
 ```
 hashCalculator(elements) : number [] {
     
@@ -428,8 +461,8 @@ hashCalculator(elements) : number [] {
  
     } 
     
-    this.hashConfig = count;
-    this.groupNumber = groupNumber;
+    this.sort = count;
+    this.groupSize = groupNumber;
 
 }
 ```
@@ -437,16 +470,16 @@ consistentHash(element): string
 ```
 function consistentHash(element) {
  
-    const result = (keccak256(element+hashConfig) mod this.groupNumber);
+    const result = (keccak256(element+sort) mod this.groupSize);
     // return index
     return result;
 
 }
 ```
-getGroupNumberAndConfig(): number[]
+getGroupSizeAndSort(): number[]
 ```
-getGroupNumberAndConfig(): number[] {
-    return [this.groupNumber , hashConfig];
+getGroupSizeAndSort(): number[] {
+    return [this.groupSize , this.sort];
 }
 ```
 ### utils
