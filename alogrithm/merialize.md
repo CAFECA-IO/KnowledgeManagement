@@ -329,57 +329,63 @@ proofIndexNode(index): boolean{
         return true;
 }
 ```
-getPartialEvidenceByData( data: string | Buffer ): string [] 
+getPartialEvidenceByData( data: string | Buffer , fullTree: string [] | Buffer [] ): string [] 
 ```
-getPartialEvidenceByData( data: string | Buffer ): string [] {
+getPartialEvidenceByData( data: string | Buffer , fullTree: string [] | Buffer [] ): string [] {
 
     // get sort (hashConfig) 
-    const sort = this.consistentHashRing.getGroupSizeAndSort()[1];
+    const sort = get sort from fullTree;
     // get index
-    const index = this.consistentHashRing.consistentHash(data);  
+    const index = this.consistentHash(data);  
     // get hash
     const hash = this.hashMerkle(data, sort);
     // result = [];
     let result = [];    
     
+    remove groupSize and sort from fullTree;
+
     // find data in last level
-    if this.nodeStorage[index + 2^n-1] !== data:
+    if fullTree[index + 2^n-1] !== data:
         return -1;
+     
+    transfer fullTree from preorder to original format;
 
     // get evidence element from tree 
     for loop siblings index to root index:
-        check bodeStorage[index + 2^n-1] is left child or right child:
+        check fullTree[index + 2^n-1] is left child or right child:
         if it's left child:
-           result.unshift(this.nodeStorage[index], this.nodeStorage[index+1])
+           result.unshift(fullTree[index], fullTree[index+1])
         else:
-           result.unshift(this.nodeStorage[index-1], this.nodeStorage[index])
+           result.unshift(fullTree[index-1], fullTree[index])
 
     return result;
 }
 ```
-getPartialEvidenceByHash( hash: string | Buffer ): string []
+getPartialEvidenceByHash( hash: string | Buffer , fullTree: string [] | Buffer [] ): string []
 ```
-getPartialEvidenceByHash( hash: string | Buffer ): string []{
-
-    // get sort (hashConfig) 
-    const sort = this.consistentHashRing.getGroupSizeAndSort()[1];
+getPartialEvidenceByHash( hash: string | Buffer , fullTree: string [] | Buffer [] ): string [] {
 
     // result = [];
     let result = [];    
     
-    find hash in last level
-    if this.nodeStorage[index + 2^n-1] !== data:
-        return [-1];
+    remove groupSize and sort from fullTree;
+
+    // find data in last level
+    if hash not in fullTree :
+        return -1;
+     
+    transfer fullTree from preorder to original format;
 
     // get evidence element from tree 
     for loop siblings index to root index:
-        check bodeStorage[index + 2^n-1] is left child or right child:
+        check fullTree[index + 2^n-1] is left child or right child:
         if it's left child:
-           result.unshift(this.nodeStorage[index], this.nodeStorage[index+1])
+           result.unshift(fullTree[index], fullTree[index+1])
         else:
-           result.unshift(this.nodeStorage[index-1], this.nodeStorage[index])
+           result.unshift(fullTree[index-1], fullTree[index])
 
     return result;
+
 }
 ```
 ## verify
