@@ -237,7 +237,8 @@ module.exports = {
 ```
 npx eslint .
 ```
-這時可能會發現terminal顯示缺乏pkg
+這時可能會發現 terminal 顯示缺乏 pkg
+
 因此我們需要再下以下指令
 ```
 npm install eslint-plugin-import@latest --save-dev
