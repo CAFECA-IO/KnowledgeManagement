@@ -2,19 +2,19 @@
 ## Data Structure
 ### 證據株
 - Full evidence:
-一長串的 string，資料結構如下
+一長串的 string，資料結構如下（leafs 為前序遍歷，採 RLP 編碼）
 ```
        0F 1234567..........................F FFFF 12345................................................F
       |--|--------------....----------------|----|-----------...----------------------------------------| 
       group       keccak 256 root hash       hash           leafs
-      size              32 byte              config   (32 * (2^(n+1)-2) - RLP code remaining bytes) bytes
+      size              26 byte              salt   (32 * (2^(n+1)-2) - RLP code remaining bytes) bytes
 ```
-- Partial evidence:
+- Merkle Root:
 ```
        0F 34567............................. FFFF 
       |--|--------------....----------------|----|
       group       keccak 256 root hash       hash           
-      size 26 byte(減去前 2bytes,後 4bytes)   config  
+      size   26 byte(減去前 2bytes, 後 4bytes) salt  
 ```
 
 ## Principle
@@ -114,7 +114,7 @@ class MerkleTree {
 buildMerkleTree(groupSize, elements, sort){
 
       // 計算 level 有多少層
-      calculate (2^n - groupNum  for n = 0,1,2...,20) 最小正數 result  
+      calculate (2^n - groupSize  for n = 0,1,2...,20) 最小正數 result  
 
       // set levels = n;
       levels = n (from upper calculation);
@@ -144,7 +144,7 @@ buildMerkleTree(groupSize, elements, sort){
                      // last null elements 
                      store RLP code to nodeStorage[index];
                      i++;
-              else if (index > ((3 * 2**n) - 2) + this.groupNum):
+              else if (index > ((3 * 2**n) - 2) + this.groupSize):
                   store RLP code to nodeStorage[index];
                   i++;
               else:
@@ -202,14 +202,14 @@ insertNodes():
 insertNodes(value: Buffer []) {
     // get original element and add sort 
     nodeElements add value
-    this.consistentHashRing = new ConsistentHashing(this.groupNum, nodeElements);
+    this.consistentHashRing = new ConsistentHashing(this.groupSize, nodeElements);
     
     // rebuild nodeStorage
-    groupNum = this.consistentHashRing.getGroupNumberAndConfig()[0];
-    hashConfig = this.consistentHashRing.getGroupNumberAndConfig()[1];
+    groupSize = this.consistentHashRing.getGroupSizeAndConfig()[0];
+    sort = this.consistentHashRing.getGroupSizeAndConfig()[1];
     
     // rebuild merkle tree
-    buildMerkleTree(groupNum, nodeElements, hashConfig);
+    buildMerkleTree(groupSize, nodeElements, sort);
 
     // store nodeStorage size to totalLeavesCount 
     totalLeavesCount = count nodeStorage nodes 
@@ -248,14 +248,14 @@ removeNodes(value: number): boolean {
     if (nodeElements contains value) {
         // get original element and add sort 
         nodeElements remove value
-        this.consistentHashRing = new ConsistentHashing(this.groupNum, nodeElements);
+        this.consistentHashRing = new ConsistentHashing(this.groupSize, nodeElements);
     
         // rebuild nodeStorage
-        groupNum = this.consistentHashRing.getGroupNumberAndConfig()[0];
-        hashConfig = this.consistentHashRing.getGroupNumberAndConfig()[1];
+        groupSize = this.consistentHashRing.getGroupSizeAndSort()[0];
+        sort = this.consistentHashRing.getGroupSizeAndSort()[1];
     
         // rebuild merkle tree
-        buildMerkleTree(groupNum, nodeElements, hashConfig);
+        buildMerkleTree(groupSize, nodeElements, sort);
 
         // store nodeStorage size to totalLeavesCount 
         totalLeavesCount = count nodeStorage nodes ;
@@ -283,13 +283,13 @@ function getFullEvidence() {
 
    let result = [];
    // add rlpcode to node
-   return  Buffer.from([groupNum , nodeStorage[0] , hashConfig] + preOrder(0));
+   return  Buffer.from([groupSize , nodeStorage[0] , sort] + doPreOrder(nodesWithRlp , 0));
 }
 ```
-getPartialEvidence(): hexstring
+getMerkleRoot(): hexstring
 ```
 getPartialEvidence() {
-  return 32 bytes (Buffer.from([groupNum , nodeStorage[0] , hashConfig]));
+  return 32 bytes (Buffer.from([groupSize , nodeStorage[0] , sort]));
 }
 ```
 doPreOrder(elements, rootIndex): string []
@@ -338,25 +338,9 @@ getPartialEvidenceByData( data: string | Buffer , fullTree: string [] | Buffer [
     // get index
     const index = this.consistentHash(data);  
     // get hash
-    const hash = this.hashMerkle(data, sort);
-    // result = [];
-    let result = [];    
+    const hash = this.hashMerkle(data, sort);  
     
-    remove groupSize and sort from fullTree;
-
-    // find data in last level
-    if fullTree[index + 2^n-1] !== data:
-        return -1;
-     
-    transfer fullTree from preorder to original format;
-
-    // get evidence element from tree 
-    for loop siblings index to root index:
-        check fullTree[index + 2^n-1] is left child or right child:
-        if it's left child:
-           result.unshift(fullTree[index], fullTree[index+1])
-        else:
-           result.unshift(fullTree[index-1], fullTree[index])
+    const result = getPartialEvidenceByHash(hash, fullTree);
 
     return result;
 }
@@ -394,15 +378,8 @@ verifyNodeByData
 verifyNodeByData( data: string | Buffer , hashList: string [] | Buffer [] ): boolean{
 
     let nodeHash = this.hashMerkle(data);
-    let sortedHashList = [];
-
-    for loop element in hashList:
-        nodeHash = this.hashMerkle(nodeHash,hashList[i]);
-
-    if nodeHash === this.nodeStorage[0]:
-        return true;
-    else:
-        return false;
+    const result = verifyNodeByHash( nodeHash , hashList );
+    return result;
 
 }
 ``` 
@@ -411,12 +388,11 @@ verifyNodeByHash
 verifyNodeByHash( hash: string | Buffer , hashList: string [] | Buffer [] ): boolean{
 
     let nodeHash = hash;
-    let sortedHashList = [];
 
     for loop element in hashList:
         nodeHash = this.hashMerkle(nodeHash,hashList[i]);
 
-    if nodeHash === this.nodeStorage[0]:
+    if nodeHash === this.hashList[0]:
         return true;
     else:
         return false;
@@ -445,19 +421,21 @@ hashCalculator(elements): number [] // groupSize & element 所加上的 sort (ha
 ```
 hashCalculator(elements) : number [] {
     
-    const groupNumber = elements.length * 4;
+    # initialize the param
+    slotSize = 2^n && slotSize > elements.length * 4
+    const groupSize = minimal(slotSize);
     let indexMap;
     let i = 0;
     let count = 0;
 
-    while(i < groupNumber) {
+    while(i < groupSize) {
 
-        if (keccak256(element) mod groupNumber not in indexMap):
+        if (keccak256(element) mod groupSize not in indexMap):
             if (count = 0) {
-                indexMap[keccak256(element) mod groupNumber] = keccak256(element);
+                indexMap[keccak256(element) mod groupSize] = keccak256(element);
             } else {
                 // 換個數字做 hash
-                indexMap[keccak256(element + count.toString()) mod groupNumber] = keccak256(element);
+                indexMap[keccak256(element + count.toString()) mod groupSize] = keccak256(element);
             }
             i = i + 1;
         else:
@@ -468,7 +446,7 @@ hashCalculator(elements) : number [] {
     } 
     
     this.sort = count;
-    this.groupSize = groupNumber;
+    this.groupSize = groupSize;
 
 }
 ```
