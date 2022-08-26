@@ -237,6 +237,12 @@ module.exports = {
 ```
 npx eslint .
 ```
+這時可能會發現terminal顯示缺乏pkg
+因此我們需要再下以下指令
+```
+npm install eslint-plugin-import@latest --save-dev
+npm install eslint-plugin-prettier@latest --save-dev
+```
 然而，我們需要整理指令將其歸納到 package.json 中以方便統一管理，讓其他開發者在開發同樣的專案時能夠以相同的指令進行 eslint 檢查，故我們在 script 中新增 lint
 ```
   "scripts": {
