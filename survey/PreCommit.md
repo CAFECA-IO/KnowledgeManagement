@@ -16,7 +16,7 @@
 ```
 npm install --save-dev lint-staged
 ```
-在 root 新增 .lintstagedrc 檔案，配置設定 prettier 、 eslint
+在 root 新增 .lintstagedrc 檔案，配置設定 prettier 、 eslint (以下為說明用所以使用 comment，記得去除 comment)
 ```
 {
   "**/*.{js,jsx,ts,tsx,css}": [
