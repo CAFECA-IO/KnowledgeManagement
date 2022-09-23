@@ -16,3 +16,9 @@ ssh-keygen -f myLoginKey.pem -y > myLoginKey.pub
 cp myLoginKey.pub /root/.pub
 ssh-copy-id ${username}@${hostname}
 ```
+
+## Set SSH Entrance
+```shell
+chsh -s /bin/bash
+usermod -s /bin/bash ${username}
+```
