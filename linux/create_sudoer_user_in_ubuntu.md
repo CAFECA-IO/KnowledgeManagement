@@ -9,3 +9,10 @@ New password:
 ```shell
 sudo usermod -g sudo ${username}
 ```
+
+## Setup Login Key
+```shell
+ssh-keygen -f myLoginKey.pem -y > myLoginKey.pub
+cp myLoginKey.pub /root/.pub
+ssh-copy-id ${username}@${hostname}
+```
