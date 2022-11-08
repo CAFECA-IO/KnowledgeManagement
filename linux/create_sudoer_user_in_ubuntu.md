@@ -10,6 +10,11 @@ New password:
 sudo usermod -g sudo ${username}
 ```
 
+## Install OpenSSH
+```shell
+sudo apt-get install openssh-server
+```
+
 ## Setup Login Key
 ```shell
 ssh-keygen -f myLoginKey.pem -y > myLoginKey.pub
@@ -21,4 +26,17 @@ ssh-copy-id ${username}@${hostname}
 ```shell
 chsh -s /bin/bash
 usermod -s /bin/bash ${username}
+```
+
+## Example
+```shell
+useradd -m -s /usr/bin/bash luphia
+```
+```shell
+passwd luphia <<!
+asdf1234
+!
+```
+```shell
+sudo usermod -g sudo luphia
 ```
