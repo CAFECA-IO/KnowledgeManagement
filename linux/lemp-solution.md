@@ -101,7 +101,7 @@ sudo vim /etc/nginx/sites-available/default
         #       # With php-fpm (or other unix sockets):
                 fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
         #       # With php-cgi (or other tcp sockets):
-                fastcgi_pass 127.0.0.1:9000;
+        #       fastcgi_pass 127.0.0.1:9000;
         }
 ```
 - Restart Nginx and PHP
