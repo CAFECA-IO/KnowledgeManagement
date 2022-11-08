@@ -83,3 +83,29 @@ Nov 08 15:12:11 isuntv-0002 systemd[1]: Started The PHP 7.4 FastCGI Process Man>
 ```shell
 sudo vim /etc/php/7.4/fpm/php.ini
 ```
+```shell
+cgi.fix_pathinfo=0
+```
+- Enable PHP for Nginx
+```shell
+sudo vim /etc/nginx/sites-available/default
+```
+```shell
+        # Add index.php to the list if you are using PHP
+        index index.php index.html index.htm index.nginx-debian.html;
+```
+```shell
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+        #
+        #       # With php-fpm (or other unix sockets):
+                fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        #       # With php-cgi (or other tcp sockets):
+                fastcgi_pass 127.0.0.1:9000;
+        }
+```
+- Restart Nginx and PHP
+```shell
+sudo systemctl restart php7.4-fpm
+sudo systemctl restart nginx 
+```
