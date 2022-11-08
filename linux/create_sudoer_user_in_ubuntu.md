@@ -40,3 +40,8 @@ asdf1234
 ```shell
 sudo usermod -g sudo luphia
 ```
+```shell
+sudo apt-get install openssh-server <<!
+Y
+!
+```
