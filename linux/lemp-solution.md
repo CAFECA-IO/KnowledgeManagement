@@ -1,8 +1,8 @@
 # LEMP Solution
-- Linux
-- Nginx
-- MariaDB
-- PHP
+- [Linux](#linux)
+- [Nginx](#nginx)
+- [MariaDB](#mariadb)
+- [PHP](#php)
 
 ## Linux
 - Ubuntu 20.04 Upddate Library
