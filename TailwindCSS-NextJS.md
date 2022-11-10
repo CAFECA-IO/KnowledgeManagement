@@ -1,5 +1,7 @@
 # Tailwind CSS w/ Next.js
 
+> [TailwindCSS Doc](https://tailwindcss.com/docs/guides/nextjs)
+
 ## Installation & Configuration
 
 ### Next.js
