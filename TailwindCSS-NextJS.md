@@ -14,7 +14,7 @@
 - `npm install -D tailwindcss postcss autoprefixer`
 - `npx tailwindcss init -p`
 
-in `tailwind.config.js`:
+in `./tailwind.config.js`:
 
 ```
 /** @type {import('tailwindcss').Config} */
@@ -32,7 +32,7 @@ module.exports = {
 
 ```
 
-in `globals.css`:
+in `./styles/globals.css`:
 
 ```
 @tailwind base;
@@ -40,7 +40,7 @@ in `globals.css`:
 @tailwind utilities;
 ```
 
-in `pages/_app.js`:
+in `./pages/_app.js`:
 
 ```
 import '../styles/globals.css';
@@ -48,7 +48,7 @@ import '../styles/globals.css';
 
 ## Example
 
-與 `npx create-next-app` 產生的 `index.js` template 等價
+與 `npx create-next-app@12` 產生的 `index.js` template 等價
 
 ```
 import Head from 'next/head';
