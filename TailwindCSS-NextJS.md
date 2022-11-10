@@ -1,4 +1,4 @@
-# Tailwind CSS w/ Next.js
+# Tailwind CSS with Next.js
 
 > [TailwindCSS Doc](https://tailwindcss.com/docs/guides/nextjs)
 
@@ -65,7 +65,7 @@ const Home = () => {
 			<main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
 				<h1 className="text-6xl font-bold">
 					Welcome to{' '}
-					<a className="text-sky-800" href="https://nextjs.org">
+					<a className="text-sky-700 hover:underline" href="https://nextjs.org">
 						Next.js!
 					</a>
 				</h1>
@@ -127,8 +127,7 @@ const Home = () => {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					Powered by{' '}
-					<Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+					Footer @ Example
 				</a>
 			</footer>
 		</div>
@@ -140,4 +139,4 @@ export default Home;
 
 ```
 
-![image](./img/TailwindCSS-NextJS/20221110.PNG)
+![image](./img/TailwindCSS-NextJS/20221110_nextjs_tailwind.PNG)
