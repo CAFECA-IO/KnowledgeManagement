@@ -50,7 +50,7 @@ import '../styles/globals.css';
 
 ## Example
 
-與 `npx create-next-app@12` 產生的 `index.js` template 等價
+與 `npx create-next-app` 產生的 `index.js` template 等價
 
 ```
 import Head from 'next/head';
