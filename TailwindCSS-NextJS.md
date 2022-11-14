@@ -1,6 +1,8 @@
 # Tailwind CSS with Next.js
 
-> [TailwindCSS Doc](https://tailwindcss.com/docs/guides/nextjs)
+> [TailwindCSS Official Docs](https://tailwindcss.com/docs/guides/nextjs)
+
+- [can't select which version of Next.js will be used](https://github.com/vercel/next.js/discussions/35794)
 
 ## Installation & Configuration
 
