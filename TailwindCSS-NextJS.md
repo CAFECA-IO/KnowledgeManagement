@@ -6,7 +6,7 @@
 
 ### Next.js
 
-- `npx create-next-app@12 <directory_name> --use-npm`
+- `npx create-next-app <directory_name> --use-npm`
 - `cd <directory_name>`
 
 ### Tailwind
