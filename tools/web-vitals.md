@@ -7,5 +7,5 @@ web-vitals 是 Google 分析大量使用者資料後，用於量化網站使用�
 - CLS 累計佈局位移(Cumulative Layout Shift)：頁面於開始到載入完成，過程中所有區塊移位分數的總和，分數越高代表頁面的位移狀況越嚴重。
 
 ## 參考來源
-https://ranking.works/%E6%8A%80%E8%A1%93SEO/core-web-vitals
-https://ithelp.ithome.com.tw/articles/10248039
+- https://ranking.works/%E6%8A%80%E8%A1%93SEO/core-web-vitals
+- https://ithelp.ithome.com.tw/articles/10248039
