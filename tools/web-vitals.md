@@ -13,9 +13,9 @@ Core Web Vitals 是 Google 分析大量使用者資料後，用於量化網站�
 - First Contentful Paint (FCP)：從網頁開始載入到渲染出第一個元素到畫面上所花的時間。
 - Time to First Byte (TTFB)：瀏覽器對 server 發出請求後到接收到回應資料(第一個 byte)所花的時間。
 - Time to Interactive (TTI)：從網頁開始載入到最後一個長時間任務(long tasks)結束，且可以回應使用者互動所花的時間。
-  - 長時間任務(long tasks)是指超過 50ms 的任務，可能是解析 HTML 建立 DOM Tree、解析 CSS 套用樣式、執行 JS 等。最後一個 Long task 代表 5 秒內沒有其他 Long task ，且當時沒有三個以上的 GET 請求。
-- Total Blocking Time (TBT)：主執行緒被長時間任務(long tasks)阻塞的總時間，這段時間被視為無法回應使用者互動的時間。
-  - 阻塞的時間是指長時間任務中超過 50ms 的時間，將每個 long task time - 50ms 做總和就是 TBT。
+  - 長時間任務(long tasks)是指超過 50 毫秒的任務，可能是解析 HTML 建立 DOM Tree、解析 CSS 套用樣式、執行 JS 等。最後一個 Long task 代表 5 秒內沒有其他 Long task ，且當時沒有三個以上的 GET 請求。
+- Total Blocking Time (TBT)：主執行緒被long tasks阻塞的總時間，這段時間被視為無法回應使用者互動的時間。
+  - 阻塞的時間是指 long tasks 超過 50ms 的時間，將每個 long task time - 50ms 做總和就是 TBT。
 
 ## 使用方法
 - 安裝 web-vitals
