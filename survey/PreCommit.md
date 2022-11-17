@@ -306,15 +306,15 @@ npm install eslint-plugin-prettier@latest --save-dev
 
 ## 使用 Tailwind CSS 的設置
 
-為了讓 Tailwind CSS 能通過 pre-commit 需做以下設置，讓 .css 跟 .js .ts 依照各自的規則檢查
+為了讓 Tailwind CSS 能通過 pre-commit 需做以下設置，讓 `.css` 跟 `.js` `.ts` 依照各自的規則檢查
 
-需設置 lintstaged 跟 eslint 跟 prettier
+需設置 lint-staged 跟 eslint 跟 prettier
 
 - 安裝 eslint 跟 prettier plugin
 
 `npm install -D eslint-plugin-tailwindcss prettier-plugin-tailwindcss`
 
-- 在 .eslintrc.js
+- 在 `.eslintrc.js`
 
 ```
 ...
@@ -345,7 +345,7 @@ whitelist: [],
 ...
 ```
 
-- 把 .lintstagedrc 改成.lintstagedrc.json 並更改內容，讓 pre-commit 依照副檔名分開檢查
+- 把 `.lintstagedrc` 改成 `.lintstagedrc.json` 並更改內容，讓 lint-staged 依照副檔名分開檢查
 
 ```
 {
@@ -380,3 +380,7 @@ React eslint settings: https://ithelp.ithome.com.tw/articles/10215259
 Vue eslint settings: https://pjchender.blogspot.com/2019/07/vue-vue-style-guide-eslint-plugin-vue.html
 
 husky: https://typicode.github.io/husky/#/
+
+
+
+
