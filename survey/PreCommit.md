@@ -304,6 +304,64 @@ npm install eslint-plugin-prettier@latest --save-dev
 7. git hook 執行 pre-commit 檢查拼字、型別錯誤、console.log 
 8. 若未看到出錯警訊，即完成 commit
 
+## 使用 Tailwind CSS 的設置
+
+為了讓 Tailwind CSS 能通過 pre-commit 需做以下設置，讓 .css 跟 .js .ts 依照各自的規則檢查
+
+需設置 lintstaged 跟 eslint 跟 prettier
+
+- 安裝 eslint 跟 prettier plugin
+
+`npm install -D eslint-plugin-tailwindcss prettier-plugin-tailwindcss`
+
+- 在 .eslintrc.js
+
+```
+...
+extends: ['plugin:import/typescript', 'plugin:tailwindcss/recommended'],
+...
+rules: {
+'no-console': 'error',
+'tailwindcss/no-contradicting-classname': 'error',
+'tailwindcss/classnames-order': 'off',
+'tailwindcss/enforces-negative-arbitrary-values': 'off',
+'tailwindcss/enforces-shorthand': 'off',
+'tailwindcss/migration-from-tailwind-2': 'off',
+'tailwindcss/no-arbitrary-value': 'off',
+'tailwindcss/no-custom-classname': 'error',
+},
+...
+settings: {
+tailwindcss: {
+// These are the default values but feel free to customize
+callees: ['classnames', 'clsx', 'ctl'],
+config: 'tailwind.config.js',
+cssFiles: ['**/*.css', '!**/node_modules', '!**/.*', '!**/dist', '!**/build'],
+cssFilesRefreshRate: '5_000',
+removeDuplicates: true,
+whitelist: [],
+},
+},
+...
+```
+
+- 把 .lintstagedrc 改成.lintstagedrc.json 並更改內容，讓 pre-commit 的 eslint 依照檔名分開執行
+
+```
+{
+"/*.+(js|jsx|ts|tsx)": [
+"./node_modules/.bin/eslint --fix",
+"./node_modules/.bin/prettier --write",
+"git add"
+],
+"/*.+(css)": [
+"./node_modules/.bin/eslint/tailwindcss --fix",
+"./node_modules/.bin/prettier --write",
+"git add"
+]
+}
+```
+
 
 ## Reference
 
