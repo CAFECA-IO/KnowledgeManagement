@@ -319,29 +319,29 @@ npm install eslint-plugin-prettier@latest --save-dev
 
 ```
 ...
-extends: ['plugin:import/typescript', 'plugin:tailwindcss/recommended'],
+extends: [..., 'plugin:tailwindcss/recommended'],
 ...
 rules: {
-'no-console': 'error',
-'tailwindcss/no-contradicting-classname': 'error',
-'tailwindcss/classnames-order': 'off',
-'tailwindcss/enforces-negative-arbitrary-values': 'off',
-'tailwindcss/enforces-shorthand': 'off',
-'tailwindcss/migration-from-tailwind-2': 'off',
-'tailwindcss/no-arbitrary-value': 'off',
-'tailwindcss/no-custom-classname': 'error',
+  ...
+  'tailwindcss/no-contradicting-classname': 'error',
+  'tailwindcss/classnames-order': 'off',
+  'tailwindcss/enforces-negative-arbitrary-values': 'off',
+  'tailwindcss/enforces-shorthand': 'off',
+  'tailwindcss/migration-from-tailwind-2': 'off',
+  'tailwindcss/no-arbitrary-value': 'off',
+  'tailwindcss/no-custom-classname': 'error',
 },
 ...
 settings: {
-tailwindcss: {
-// These are the default values but feel free to customize
-callees: ['classnames', 'clsx', 'ctl'],
-config: 'tailwind.config.js',
-cssFiles: ['**/*.css', '!**/node_modules', '!**/.*', '!**/dist', '!**/build'],
-cssFilesRefreshRate: '5_000',
-removeDuplicates: true,
-whitelist: [],
-},
+  tailwindcss: {
+    // These are the default values but feel free to customize
+    callees: ['classnames', 'clsx', 'ctl'],
+    config: 'tailwind.config.js',
+    cssFiles: ['**/*.css', '!**/node_modules', '!**/.*', '!**/dist', '!**/build'],
+    cssFilesRefreshRate: '5_000',
+    removeDuplicates: true,
+    whitelist: [],
+  },
 },
 ...
 ```
@@ -350,16 +350,16 @@ whitelist: [],
 
 ```
 {
-"/*.+(js|jsx|ts|tsx)": [
-"./node_modules/.bin/eslint --fix",
-"./node_modules/.bin/prettier --write",
-"git add"
-],
-"/*.+(css)": [
-"./node_modules/.bin/eslint/tailwindcss --fix",
-"./node_modules/.bin/prettier --write",
-"git add"
-]
+  "/*.+(js|jsx|ts|tsx)": [
+  "./node_modules/.bin/eslint --fix",
+  "./node_modules/.bin/prettier --write",
+  "git add"
+  ],
+  "/*.+(css)": [
+  "./node_modules/.bin/eslint/tailwindcss --fix",
+  "./node_modules/.bin/prettier --write",
+  "git add"
+  ]
 }
 ```
 
