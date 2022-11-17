@@ -63,7 +63,19 @@ reportWebVitals(console.log);
 - 優化客戶端渲染(Client Side Rendering)
 
 2. 優化互動反應能力
+延遲互動回應時間的主要原因是繁重的 JavaScript 執行任務佔用著主執行緒，讓瀏覽器無法處理使用者的互動行為事件，因此優化 JS 程式碼執行速度可以有效改善。
 
+- 拆分 long task
+- 優化頁面的 JavaScript 載入流程
+- 使用 Web Workers 技術
+- 減少 JavaScript 的執行時間
+
+3. 優化視覺穩定性
+
+- 圖片元素使用固定百分比，或設定寬高比 CSS
+- 外部嵌入資源設定尺寸 (Ads, embeds, iframes)
+- 避免在現有內容上方插入動態載入的內容，導致推擠到其他元件的排版，可以先預留好需要的空間(CSS aspect ratio boxes)，或是將受影響的排版移到可視範圍之外
+- 使用 Skeletor UI（先載入固定版位的前端技術）
 
 ## 參考來源
 - https://ranking.works/%E6%8A%80%E8%A1%93SEO/core-web-vitals
@@ -72,3 +84,4 @@ reportWebVitals(console.log);
 - https://www.npmjs.com/package/web-vitals
 - https://gcdeng.com/blog/a-guidebook-to-optimize-web-vitals
 - https://juejin.cn/post/6930903996127248392
+- https://gcdeng.com/blog/a-guidebook-to-optimize-web-vitals#largest-contentful-paint-lcp
