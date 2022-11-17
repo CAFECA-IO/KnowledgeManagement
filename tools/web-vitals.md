@@ -45,17 +45,24 @@ import reportWebVitals from "./reportWebVitals";
 
 reportWebVitals(console.log);
 ```
+- 在 developer tool 應該能看見以下訊息
+  - 有些指標要特定條件才會產生執行結果，例如 FID 須透過使用者與網頁有互動來觸發
 
+<img width="1072" alt="image" src="https://user-images.githubusercontent.com/114177573/202349315-7158d95f-4ec4-4f08-8be0-7a8b9c541632.png">
+
+- value 值為輸出結果，單位為毫秒(CLS 除外)
 
 ## 優化方法
 
-如何優化載入速度？
+1. 優化載入速度
 由於網頁在顯示的過程中，背景會讀取大量的網頁原始碼與檔案，要有效降低 LCP ，最好的方法就是加速網頁載入的速度，以及調整主要畫面的載入順序，讓主要內容可以更快的呈現在使用者面前。能透過以下方法改善：
 
-1. 減少主機 Server 的載入時間
-2. 優化外部引用之資源(CSS & JavaScript)
-3. 減少頁面元素載入時間
-4. 優化客戶端渲染(Client Side Rendering)
+- 減少主機 Server 的載入時間
+- 優化外部引用資源(CSS & JavaScript)
+- 減少頁面元素載入時間
+- 優化客戶端渲染(Client Side Rendering)
+
+2. 優化互動反應能力
 
 
 ## 參考來源
@@ -64,3 +71,4 @@ reportWebVitals(console.log);
 - https://markdowner.net/article/155285708041748480
 - https://www.npmjs.com/package/web-vitals
 - https://gcdeng.com/blog/a-guidebook-to-optimize-web-vitals
+- https://juejin.cn/post/6930903996127248392
