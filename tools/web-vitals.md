@@ -6,7 +6,7 @@ Core Web Vitals 是 Google 分析大量使用者資料後，用於量化網站�
 
 - LCP 最大內容渲染時間(Largest Content Paint)：使用者用瀏覽器打開網頁時，網頁從開始等待畫面載入，直到主要畫面載入完成所需要的時間。
 - FID 首次輸入延遲(First Input Delay)：從使用者第一次與頁面互動，到瀏覽器成功給出回應的時間。
-- CLS 累計佈局位移(Cumulative Layout Shift)：頁面於開始到載入完成，過程中所有區塊移位分數的總和，分數越高代表頁面的位移狀況越嚴重，網頁畫面的穩定性越差。
+- CLS 累計佈局位移(Cumulative Layout Shift)：頁面於開始到載入完成，過程中所有區塊移位分數的總和。評分範圍為 0~1 ，分數越高代表頁面的位移狀況越嚴重，網頁畫面的穩定性越差。
 
 除了以上三項之外， web-vitals 還提供了其他指標，可作為優化 Core Web Vitals 的考量依據。前二者與 LCP 較相關，後二者和 FID 有關。
 
