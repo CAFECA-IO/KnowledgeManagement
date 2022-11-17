@@ -345,7 +345,7 @@ whitelist: [],
 ...
 ```
 
-- 把 .lintstagedrc 改成.lintstagedrc.json 並更改內容，讓 pre-commit 的 eslint 依照檔名分開執行
+- 把 .lintstagedrc 改成.lintstagedrc.json 並更改內容，讓 pre-commit 依照副檔名分開檢查
 
 ```
 {
