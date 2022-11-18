@@ -28,13 +28,14 @@ Mounting 是發生在 component 的實體剛建立並被加入 DOM 中的時候�
 
 ### 2. render()
 render 是 components 一定要實作的 method ，當 render 被調用時，他會檢查 this.props 和 this.state 並回傳以下類型的其中一項：
-- React elements：用 JSX 創建的 react element ，指引 react 要渲染 DOM 或是我們定義的其他 component。
-- Arrays and fragments ：一次可以回傳多個 react element (詳情見[fragments](https://reactjs.org/docs/fragments.html))
+- React elements：用 JSX 創建的 react element ，指引 react 要渲染 DOM 或是我們定義的其他 component
+- String and numbers ：渲染文字節點 (Text node) 到 DOM 上
+- Arrays and fragments ：可以一次回傳多個 react element (詳情見[fragments](https://reactjs.org/docs/fragments.html))
 - Portals ：用來渲染 children 到 DOM subtree (詳情見 [portals](https://reactjs.org/docs/portals.html))
+- Booleans or null ：什麼都不渲染
 
-render()只是渲染前最後一個呼叫的生命週期函數，元件還沒有真的渲染到DOM上。所以不要在render()中操作有關return元素的DOM。
+需要注意的是，render 只是渲染前最後一個呼叫的生命週期函數，元件還沒有真的渲染到 DOM 上。所以不能在 render 中操作有關 return 元素的 DOM。這點在後面會有更詳細的說明。
 
-> Pure function：
 ### 3. componentDidMount()
 
 ## Updating
@@ -43,6 +44,8 @@ render()只是渲染前最後一個呼叫的生命週期函數，元件還沒有
 
 ## Error Handling
 這是 React lifecycle 內建的錯誤處理函式，只會在 lifecycle methods 出錯時被觸發。
+
+> Pure function：
 
 ## 參考
 - https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
