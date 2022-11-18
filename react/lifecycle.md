@@ -27,18 +27,22 @@ Mounting 是發生在 component 的實體剛建立並被加入 DOM 中的時候�
 通常在 React 中 constructor 只會有兩種用途：初始化 state 和綁定事件。在[官方文件](https://zh-hant.reactjs.org/docs/react-component.html#constructor)中有提到，如果沒有要初始化 state 也不需要綁定任何 methods 時，這個 component 就不需要 constructor 了。
 
 ### 2. render()
-render 是 components 一定要實作的 method ，當 render 被調用時，他會檢查 this.props 和 this.state 並回傳以下類型的其中一項：
+render 是 components 一定要實作的 method ，當 render 被呼叫時，他會檢查 this.props 和 this.state 並回傳以下類型的其中一項：
 - React elements：用 JSX 創建的 react element ，指引 react 要渲染 DOM 或是我們定義的其他 component
 - String and numbers ：渲染文字節點 (Text node) 到 DOM 上
 - Arrays and fragments ：可以一次回傳多個 react element (詳情見[fragments](https://reactjs.org/docs/fragments.html))
 - Portals ：用來渲染 children 到 DOM subtree (詳情見 [portals](https://reactjs.org/docs/portals.html))
 - Booleans or null ：什麼都不渲染
 
-需要注意的是，render 只是渲染前最後一個呼叫的生命週期函數，元件還沒有真的渲染到 DOM 上。所以不能在 render 中操作有關 return 元素的 DOM。這點在後面會有更詳細的說明。
+需要注意的是，render 只是渲染前最後一個呼叫的生命週期函數，元件還沒有真的渲染到 DOM 上，所以必須是純粹函式(pure function)，不能在此變更 state 或呼叫 api 等有 side effect 的事。
+
+> Pure function：沒有產生 side effect 的函式。與其他 function 互不干擾，不會修改/引用/存取到外部變數。
 
 ### 3. 更新 DOM 元素和 Refs
+React 會把 Virtual DOM snapshot 產出來，並與上一個產出的 Virtual DOM snapshot 做比較（diff），決定哪些內容是要實際被更新到 DOM 上的。
 
 ### 4. componentDidMount()
+當 component 已經完成渲染就會呼叫這個函式，它用來處理那些有 DOM 元素之後才能做的事，以及更新 state、call API 取得資料。
 
 ## Updating
 
@@ -46,8 +50,6 @@ render 是 components 一定要實作的 method ，當 render 被調用時，他
 
 ## Error Handling
 這是 React lifecycle 內建的錯誤處理函式，只會在 lifecycle methods 出錯時被觸發。
-
-> Pure function：
 
 ## 參考
 - https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
