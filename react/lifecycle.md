@@ -2,10 +2,7 @@
 ## 生命週期概述
 每個元件 (component) 都有各自獨立的生命週期 (lifecycle) ，透過 React 提供的各種生命週期函式 (lifecycle methods) ，指引 component 在不同階段完成該執行的任務。
 <img width="1115" alt="image" src="https://user-images.githubusercontent.com/114177573/202624503-1c16ecd3-b41d-42da-b80c-297019b8c288.png">
-
-這是[官網](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)提供的生命週期概覽圖，上面列出了不同階段中常用的 method 。較詳細的可以參考下圖。
-
-<img width="1114" alt="image" src="https://user-images.githubusercontent.com/114177573/202650334-08532b7d-dbbd-4465-931d-acb92ffb0d55.png">
+這是[官網](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)提供的生命週期概覽圖，上面列出了不同階段中常用的 method
 
 生命週期發展由左至右分成三個時期：
 
@@ -24,7 +21,14 @@
 以下將先從概覽圖的左至右，也就是 Mounting 、 Updating 、 Unmounting 個別的內部運作流程進行說明。再從上至下分別解說 Render 、 Pre-commit 、 Commit 三個子階段的功能與特性。
 
 ## Mounting
-Mounting 是發生在 component 的實體剛建立並被加入 DOM 中的時候。每個 component 的實體只會經歷一次。
+Mounting 是發生在 component 的實體剛建立並被加入 DOM 中的時候。每個 component 都只會經歷一次 Mounting。
+
+### 1. Constructor() 
+通常在 React 中 constructor 只會有兩種用途：初始化 state 和綁定事件。在[官方文件](https://zh-hant.reactjs.org/docs/react-component.html#constructor)中有提到，如果沒有要初始化 state 也不需要綁定任何 methods 時，這個 component 就不需要 constructor 了。
+
+### 2. render()
+3. 
+4. 
 
 
 ## 參考
