@@ -36,7 +36,9 @@ render 是 components 一定要實作的 method ，當 render 被調用時，他
 
 需要注意的是，render 只是渲染前最後一個呼叫的生命週期函數，元件還沒有真的渲染到 DOM 上。所以不能在 render 中操作有關 return 元素的 DOM。這點在後面會有更詳細的說明。
 
-### 3. componentDidMount()
+### 3. 更新 DOM 元素和 Refs
+
+### 4. componentDidMount()
 
 ## Updating
 
