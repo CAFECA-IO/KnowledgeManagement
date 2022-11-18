@@ -27,10 +27,24 @@ Mounting 是發生在 component 的實體剛建立並被加入 DOM 中的時候�
 通常在 React 中 constructor 只會有兩種用途：初始化 state 和綁定事件。在[官方文件](https://zh-hant.reactjs.org/docs/react-component.html#constructor)中有提到，如果沒有要初始化 state 也不需要綁定任何 methods 時，這個 component 就不需要 constructor 了。
 
 ### 2. render()
-3. 
-4. 
+render 是 components 一定要實作的 method ，當 render 被調用時，他會檢查 this.props 和 this.state 並回傳以下類型的其中一項：
+- React elements：用 JSX 創建的 react element ，指引 react 要渲染 DOM 或是我們定義的其他 component。
+- Arrays and fragments ：一次可以回傳多個 react element (詳情見[fragments](https://reactjs.org/docs/fragments.html))
+- Portals ：用來渲染 children 到 DOM subtree (詳情見 [portals](https://reactjs.org/docs/portals.html))
 
+render()只是渲染前最後一個呼叫的生命週期函數，元件還沒有真的渲染到DOM上。所以不要在render()中操作有關return元素的DOM。
+
+> Pure function：
+### 3. componentDidMount()
+
+## Updating
+
+## Unmounting
+
+## Error Handling
+這是 React lifecycle 內建的錯誤處理函式，只會在 lifecycle methods 出錯時被觸發。
 
 ## 參考
 - https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 - https://ithelp.ithome.com.tw/articles/10244651
+- https://ithelp.ithome.com.tw/articles/10201139
