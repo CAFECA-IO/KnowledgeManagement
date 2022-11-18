@@ -1,4 +1,5 @@
 # Pre commit 前的準備
+![image](https://user-images.githubusercontent.com/20677913/202692524-b5cf99a7-82a2-4992-a80b-f8c449b94cea.png)
 
 ## Summary:
 為了確保 Commit 前的 code 是乾淨、符合 coding style 且能通過測試的，我們需要經過 test 、 format 、 eslint  等環節，以確認在 commit 前我們的 code 是符合規範的，而此研究就是針對 Pre Commit 的檢查步驟進行整理，並且提供一個比較方便查閱的檢查步驟。
