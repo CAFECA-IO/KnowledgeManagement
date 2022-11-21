@@ -69,6 +69,10 @@ components 一定要實作的 method 。在 Updating 時期 render() 大致會�
 ## Error Handling
 這是 React lifecycle 內建的錯誤處理函式，只會在 lifecycle methods 出錯時被觸發。
 
+### componentDidCatch()
+可以捕捉從子元件中拋出的錯誤，並將這個錯誤訊息提供給 [Error Boundary](https://reactjs.org/docs/error-boundaries.html) 元件。Error Boundary 的概念是當某個元件發生錯誤，包覆該元件的 Error Boundary 元件可以把錯誤訊息呈現在網頁上，避免一個小元件發生的錯誤影響到其它的父元件，導致
+可以捕捉從子元件中拋出的錯誤，並將這個錯誤訊息提供給 [Error Boundary](https://reactjs.org/docs/error-boundaries.html) 元件。Error Boundary 的概念是當某個元件發生錯誤，，包覆該元件的 Error Boundary 元件可以把錯誤訊息呈現在網頁上，避免一個小元件發生的錯誤，影響其它的父元件。
+
 ## 參考
 - https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 - https://ithelp.ithome.com.tw/articles/10244651
