@@ -306,7 +306,7 @@ npm install eslint-plugin-prettier@latest --save-dev
 7. git hook 執行 pre-commit 檢查拼字、型別錯誤、console.log 
 8. 若未看到出錯警訊，即完成 commit
 
-## 使用 Tailwind CSS 的設置
+## Tailwind CSS 的設置
 
 為了讓 Tailwind CSS 能通過 pre-commit 需做以下設置，讓 `.css` 跟 `.js` `.ts` 依照各自的規則檢查
 
@@ -363,7 +363,7 @@ settings: {
   ]
 }
 ```
-- 設置完成，可以跑指令 `npm run lint` 看是否符合 eslint 規則，而非跑指令 `npm run validate` 
+- 設置完成，可以跑指令 `npm run lint` 或 `npx eslint .` 看是否符合 eslint 規則，而非跑指令 `npm run validate` 
 
 
 
