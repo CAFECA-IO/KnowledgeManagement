@@ -363,6 +363,8 @@ settings: {
   ]
 }
 ```
+- 設置完成，可以跑指令 `npm run lint` 看是否符合 eslint 規則，而非跑指令 `npm run validate` 
+
 
 
 ## Reference
