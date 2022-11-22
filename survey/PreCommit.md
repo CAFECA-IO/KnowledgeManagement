@@ -364,6 +364,7 @@ settings: {
 }
 ```
 - 設置完成，可以跑指令 `npm run lint` 或 `npx eslint .` 看是否符合 eslint 規則，而非跑指令 `npm run validate` 
+- 若有 error ，修掉 error 後，使用vs code source control plugin，需 unstage 已經 staged 的檔案變化後再 pre-commit；使用 CLI 則直接 `git add .` 將新檔案變化 staged 就能 pre-commit
 
 
 
