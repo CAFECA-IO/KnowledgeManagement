@@ -1,5 +1,6 @@
-# Pre commit 前的準備
 ![image](https://user-images.githubusercontent.com/20677913/202692524-b5cf99a7-82a2-4992-a80b-f8c449b94cea.png)
+
+# Pre commit 前的準備
 
 ## Summary:
 為了確保 Commit 前的 code 是乾淨、符合 coding style 且能通過測試的，我們需要經過 test 、 format 、 eslint  等環節，以確認在 commit 前我們的 code 是符合規範的，而此研究就是針對 Pre Commit 的檢查步驟進行整理，並且提供一個比較方便查閱的檢查步驟。
@@ -326,10 +327,10 @@ rules: {
   ...
   'tailwindcss/no-contradicting-classname': 'error',
   'tailwindcss/classnames-order': 'off',
-  'tailwindcss/enforces-negative-arbitrary-values': 'off',
+  'tailwindcss/enforces-negative-arbitrary-values': 'error',
   'tailwindcss/enforces-shorthand': 'off',
-  'tailwindcss/migration-from-tailwind-2': 'off',
-  'tailwindcss/no-arbitrary-value': 'off',
+  'tailwindcss/migration-from-tailwind-2': 'error',
+  'tailwindcss/no-arbitrary-value': 'error',
   'tailwindcss/no-custom-classname': 'error',
 },
 ...
@@ -365,6 +366,7 @@ settings: {
 ```
 - 設置完成，可以跑指令 `npm run lint` 或 `npx eslint .` 看是否符合 eslint 規則，而非跑指令 `npm run validate` 
 - 若有 error ，修掉 error 後，使用vs code source control plugin，需 unstage 已經 staged 的檔案變化後再 pre-commit；使用 CLI 則直接 `git add .` 將新檔案變化 staged 就能 pre-commit
+- 備註: [enforces-negative-arbitrary-values](https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/enforces-negative-arbitrary-values.md) 不是檢查是否使用 negative value (e.g. margin) ，而是檢查是否依照格式 (`m-[-5px]`✅｜ `-m-[5px]`❌) 使用 negative value 
 
 
 
