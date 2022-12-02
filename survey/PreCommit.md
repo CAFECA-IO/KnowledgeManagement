@@ -366,7 +366,9 @@ settings: {
 ```
 - 設置完成，可以跑指令 `npm run lint` 或 `npx eslint .` 看是否符合 eslint 規則，而非跑指令 `npm run validate` 
 - 若有 error ，修掉 error 後，使用vs code source control plugin，需 unstage 已經 staged 的檔案變化後再 pre-commit；使用 CLI 則直接 `git add .` 將新檔案變化 staged 就能 pre-commit
-- 備註: [enforces-negative-arbitrary-values](https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/enforces-negative-arbitrary-values.md) 不是檢查是否使用 negative value (e.g. margin) ，而是檢查是否依照格式 (`m-[-5px]`✅｜ `-m-[5px]`❌) 使用 negative value 
+- 備註: [enforces-negative-arbitrary-values](https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/enforces-negative-arbitrary-values.md) 不是檢查是否使用 negative value (e.g. margin) ，而是檢查是否依照格式使用 negative value 
+  - `m-[-5px]` ✅ 
+  - `-m-[5px]` ❌ 
 
 
 
