@@ -9,8 +9,35 @@
 ## EIP 712 簽名規範/格式
 
 
-## EIP 712 簽名實作 (`ethers.js`)
+## EIP 712 簽名實作 (`ethers.js`｜Metamask｜Wallet Connect)
 
+### Metamask
+
+- sign
+
+```jsx
+
+```
+
+- Verified by ethers.js
+
+```jsx
+
+```
+
+### Wallet Connect
+
+- sign
+
+```jsx
+
+```
+
+- Verified by ethers.js
+
+```jsx
+
+```
 
 ## 參考資料
 
