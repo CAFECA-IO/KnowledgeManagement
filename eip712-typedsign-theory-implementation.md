@@ -7,7 +7,11 @@
 
 
 ## EIP 712 簽名規範/格式
-
+- `string name` 
+- `string version` 
+- `uint256 chainId` 
+- `address verifyingContract` 
+- `bytes32 salt` 
 
 ## EIP 712 簽名實作 (`ethers.js`｜Metamask｜Wallet Connect)
 
