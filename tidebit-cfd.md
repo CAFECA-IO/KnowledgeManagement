@@ -465,6 +465,6 @@ $464,050 的 USDT。
 
 [https://www.investopedia.com/articles/stocks/09/trade-a-cfd.asp#:~:text=Some%20advantages%20of%20CFDs%20include,spread%20upon%20entering%20the%20CFD](https://www.investopedia.com/articles/stocks/09/trade-a-cfd.asp#:~:text=Some%20advantages%20of%20CFDs%20include,spread%20upon%20entering%20the%20CFD)
 
-- Miro 使用的相關圖片來源
+- 使用的相關圖片來源
 
 [https://icons8.com/](https://icons8.com/)
