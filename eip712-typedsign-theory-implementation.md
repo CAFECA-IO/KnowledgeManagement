@@ -12,24 +12,9 @@
 - `uint256 chainId` 
 - `address verifyingContract` 
 - `bytes32 salt` 
+## EIP 712 簽名實作
 
-## EIP 712 簽名實作 (`ethers.js`｜Metamask｜Wallet Connect)
-
-### Metamask
-
-- sign
-
-```jsx
-
-```
-
-- Verified by ethers.js
-
-```jsx
-
-```
-
-### Wallet Connect
+### `ethers.js`
 
 - sign
 
@@ -37,7 +22,7 @@
 
 ```
 
-- Verified by ethers.js
+- Verified
 
 ```jsx
 
