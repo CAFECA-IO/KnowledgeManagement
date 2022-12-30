@@ -15,6 +15,10 @@
 - `address verifyingContract` 用於驗證簽名的合約地址。
 - `bytes32 salt`
 
+### 必填、選填
+
+## EIP 712 中 Hash 的原理跟產生的方法
+
 
 <!-- ## EIP 712 簽名實作
 
