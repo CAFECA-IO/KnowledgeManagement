@@ -7,13 +7,13 @@
 
 
 ## EIP 712 簽名規範/格式
-`EIP712Domain` 格式應照以下順序，但可省略不填 `salt`, `verifyingContract` 跟 `chainId`
+`EIP712Domain` 格式應照以下順序
 
 - `string name` 簽名域 (signing domain) 的用戶可讀名稱，即 DApp 或協議的名稱。
-- `string version` 簽名域的當前主要版本。來自不同版本的簽名不兼容。
-- `uint256 chainId` [EIP-155](https://eips.ethereum.org/EIPS/eip-155) chain id.
-- `address verifyingContract` 用於驗證簽名的合約地址。
-- `bytes32 salt`
+- [optional] `string version` 簽名域的當前主要版本。來自不同版本的簽名不兼容。
+- [optional] `uint256 chainId` [EIP-155](https://eips.ethereum.org/EIPS/eip-155) chain id.
+- [optional] `address verifyingContract` 用於驗證簽名的合約地址。
+- [optional] `bytes32 salt`
 
 <!-- Public key: 0xb54898DB1250A6a629E5B566367E9C60a7Dd6C30
 
