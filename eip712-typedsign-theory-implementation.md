@@ -39,7 +39,7 @@ name removed, get signature:
 
 
 
-### 必填、選填
+<!-- ### 必填、選填 -->
 
 ## EIP 712 中 Hash 的原理跟產生的方法
 
