@@ -1,7 +1,18 @@
 # Cypress
 
 ## Install
-
+```
+npm install cypress
+```
+安裝
+```
+npx cypress open
+```
+開啟 GUI
+```
+npx cypress run
+```
+執行測試
 ## Write Your Testcase
 ### Visit a page
 ### Input data
