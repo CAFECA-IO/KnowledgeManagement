@@ -28,8 +28,8 @@ cy.visit("https://docs.cypress.io/");
 2. 機器人驗證
 3. 抓不到 elements 的問題
 
-### 技巧
-- 跳過開新視窗的語法
+### Tips
+- Cypress 無法訪問瀏覽器新分頁的網址，可以使用以下的語法跳過開新視窗
 ```
 .invoke("removeAttr", "target")
 ```
