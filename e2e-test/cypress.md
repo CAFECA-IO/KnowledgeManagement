@@ -1,15 +1,24 @@
 # Cypress
 
 ## Install
+在專案中安裝 Cypress 
 ```
 npm install cypress
-
-npx cypress open //開啟 GUI
-npx cypress run //在終端執行測試
 ```
 
+```
+npx cypress open
+```
+開啟 GUI
+```
+npx cypress run
+```
+如果只需要驗證測試結果，這個指令可以讓 cypress 在終端執行測試，不另外開啟 GUI
 ## Write Your Testcase
 ### Visit a page
+```
+cy.visit("https://docs.cypress.io/");
+```
 ### Input data
 ### Click button
 ### Verify result
