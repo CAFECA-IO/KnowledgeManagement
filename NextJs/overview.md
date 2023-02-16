@@ -5,10 +5,10 @@ npx create-next-app --ts
 
 # Next 主要特點
 
-- [File-based routing](/s/file-based-routing)
+- [File-based routing](#file-based-routing)
     - great for SEO and initial load
-- [Server-side rendering](/s/server-side-rendering)
-- [Fullstack Capabilities](/s/fullstack-capabilities)
+- [Server-side rendering](#SSR)
+- [Fullstack Capabilities](#fullstack-capabilities)
 
 
 # SSR
