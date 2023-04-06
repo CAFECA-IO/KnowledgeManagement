@@ -36,6 +36,7 @@ DeWT 為簽名的內容加上用戶簽名的結果進行 rlp 編碼。
   - 其中服務條款的網址、隱私條款的網址後面都有一個 hash 用來確定服務條款、隱私條款的版本
 - signer： 用戶簽名錢包的地址
 - expired： DeWT 的到期時間，簽名後的 1 小時到期。
+- (補) 簽名時間
 ```javascript!
 const payload = {
     domain: "https://www.tidebit-defi.com",
@@ -43,6 +44,7 @@ const payload = {
     agree: ["https://www.tidebit-defi.com/term_of_service/{hash}", "https://www.tidebit-defi.com/private_policy/{hash}"],
     signer: "0xfc657dAf7D901982a75ee4eCD4bDCF93bd767CA4",
     expired: "{timestamp}"
+    iat: "{timestamp}"
 }
 ```
 #### 簽名結果:
@@ -59,7 +61,7 @@ const signature = {
 1. 檢查 DeWT 的 domain 是否正確
 2. 檢查 DeWT 的 version 是否正確
 3. 檢查用戶同意的條款是否為最新版
-4. 檢查 DeWT 是否未過期
+4. 檢查 DeWT 是否未過期 (補)
 5. 檢查用戶的簽名，由用戶的簽名結果加上明文內容反推出用戶的 publickey，再由 publickey 推出用戶的地址，與先前回推出的明文中提供的 signer比對是否一致，若一致才合法。
 ## Reference
 - [What is a JWT? Understanding JSON Web Tokens](https://supertokens.com/blog/what-is-jwt)
