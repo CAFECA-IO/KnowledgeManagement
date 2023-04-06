@@ -23,11 +23,11 @@ const JWT = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e25hbWU6Ikpob24gRG9lIixleHBpcm
 #### 產生DeWT
 用戶訪問 TideBit-DeFi 使用 metamask 與 TideBit-DeFi 連結後，為使用 TideBit-DeFi 的服務需使用自己的錢包簽 TideBit-DeFi 提供的相關的同意條款如 Term of services, private policy。用戶簽名的內容我們使用 eip712 寫在智能合約裡，將用戶簽名的結果加上簽名的內容即為 DeWT。
 #### 存取
-在用戶產生 DeWT 使用 api 發送給後端伺服器，並將DeWT 將存放在用戶瀏覽器的 cookie 之中。
-- 前端: 在每次發生 api 時要帶上 DeWT，並且需要定期到 cookie 檢查 DeWT 是否已過期。
-- 後端: 在收到 DeWT，要先驗證此 DeWT(驗證方法稍後說明)是否合法，如合法需要到 DB 檢查此用戶是否存在，如存在就紀錄此登入行為，若不存在則需要建立新用戶。
+在用戶產生 DeWT 後使用 api 發送給後端伺服器，並將DeWT 將存放在用戶瀏覽器的 cookie 之中。
+- 前端: 在每次發送 api 時要帶上 DeWT，並且需要定期到 cookie 檢查 DeWT 是否已過期。
+- 後端: 在收到 DeWT，要先驗證此 DeWT(驗證方法稍後說明)是否合法，如合法需要到 DB 檢查此用戶是否存在，如存在就紀錄此登入行為，若不存在則需要建立新用戶並紀錄此登入行為。
 ### DeWT資料格式
-DeWT 由簽名的內容進行 base64編碼 後，加上用戶簽名的結果組成。
+DeWT 為簽名的內容加上用戶簽名的結果進行 rlp 編碼。
 
 #### 簽名內容:
 - domain: Tidebit-DeFi 的 domain
@@ -55,7 +55,7 @@ const signature = {
 ```
 
 ### 驗證機制
-後端在收到 DeWT 後，先將 DeWT 由base64編碼轉回明文，
+後端在收到 DeWT 後，先將 DeWT 由rlp編碼轉回明文，
 1. 檢查 DeWT 的 domain 是否正確
 2. 檢查 DeWT 的 version 是否正確
 3. 檢查用戶同意的條款是否為最新版
