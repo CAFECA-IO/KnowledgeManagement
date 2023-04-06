@@ -14,6 +14,8 @@ const JWT = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e25hbWU6Ikpob24gRG9lIixleHBpcm
 - payload: 裡面則是包含有前後端需要共享的資訊，以 `{name:"Jhon Doe",expired:1680761500301,admin:true}` 為例 Base64 編碼的結果為 `e25hbWU6Ikpob24gRG9lIixleHBpcmVkOjE2ODA3NjE1MDAzMDEsYWRtaW46dHJ1ZX0`。
 - signature: 由後端持有的 private key 對 header 及 payload Base64Encoded 的結果使用 HMACSHA256 演算法簽名，將簽名的結果也進行 Base64 編碼。
 
+### (補) 驗證流程
+
 ## DeWT
 ![](https://i.imgur.com/LI3WkLk.jpg)
 
