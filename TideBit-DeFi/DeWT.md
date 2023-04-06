@@ -17,17 +17,34 @@ const JWT = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e25hbWU6Ikpob24gRG9lIixleHBpcm
 ## DeWT
 ![](https://i.imgur.com/LI3WkLk.jpg)
 
+### 流程
+#### 產生DeWT
+用戶訪問 TideBit-DeFi 使用 metamask 與 TideBit-DeFi 連結後，為使用 TideBit-DeFi 的服務需使用自己的錢包簽 TideBit-DeFi 提供的相關的同意條款如 Term of services, private policy。用戶簽名的內容我們使用 eip712 寫在智能合約裡，將用戶簽名的結果加上簽名的內容即為 DeWT。
+#### 存取
+在用戶產生 DeWT 使用 api 發送給後端伺服器，並將DeWT 將存放在用戶瀏覽器的 cookie 之中。
+- 前端: 在每次發生 api 時要帶上 DeWT，並且需要定期到 cookie 檢查 DeWT 是否已過期。
+- 後端: 在收到 DeWT，要先驗證此 DeWT(驗證方法稍後說明)是否合法，如合法需要到 DB 檢查此用戶是否存在，如存在就紀錄此登入行為，若不存在則需要建立新用戶。
+### DeWT資料格式
+DeWT 由簽名的內容進行 base64編碼 後，加上用戶簽名的結果組成。
 
-### 產生流程
-DeWT 
-### 資料格式
+#### 簽名內容:
+- domain: Tidebit-DeFi 的 domain
+- version: Tidebit-DeFi 現在使用的版本
+- agree： 服務條款的網址(Term of services)，隱私條款的網址(private policy)
+  - 其中服務條款的網址、隱私條款的網址後面都有一個 hash 用來確定服務條款、隱私條款的版本
+- signer： 用戶簽名錢包的地址
+- expired： DeWT 的到期時間，簽名後的 1 小時到期。
 ```javascript!
 const payload = {
     domain: "https://www.tidebit-defi.com",
     version: "",
+    agree: ["https://www.tidebit-defi.com/term_of_service/{hash}", "https://www.tidebit-defi.com/private_policy/{hash}"],
     signer: "0xfc657dAf7D901982a75ee4eCD4bDCF93bd767CA4",
     expired: "{timestamp}"
 }
+```
+#### 簽名結果:
+```javascript!
 const signature = {
     r,
     s,
@@ -35,9 +52,12 @@ const signature = {
 }
 ```
 
-### 存取位置
-cookie
 ### 驗證機制
-
+後端在收到 DeWT 後，先將 DeWT 由base64編碼轉回明文，
+1. 檢查 DeWT 的 domain 是否正確
+2. 檢查 DeWT 的 version 是否正確
+3. 檢查用戶同意的條款是否為最新版
+4. 檢查 DeWT 是否未過期
+5. 檢查用戶的簽名，由用戶的簽名結果加上明文內容反推出用戶的 publickey，再由 publickey 推出用戶的地址，與先前回推出的明文中提供的 signer比對是否一致，若一致才合法。
 ## Reference
 - [What is a JWT? Understanding JSON Web Tokens](https://supertokens.com/blog/what-is-jwt)
