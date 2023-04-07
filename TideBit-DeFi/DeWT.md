@@ -24,7 +24,7 @@ const JWT = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e25hbWU6Ikpob24gRG9lIixleHBpcm
 1. 後端伺服器收到 JWT 後使用 [base64 解碼](https://www.base64decode.org/)。
 2. 先比對 header 內容，確認 typ 為 JWT 且 alg 為 HS256。
 3. (optional) 若 payload 中有 iat(issue at， 簽名時間)或是 expired等資訊則需要判斷此 JWT 是否是未過期的狀態。
-4. JWT 簽名的伺服器與驗證的伺服器會共用私鑰，所以可以將收到的 JWT 的 headeer，payload 的簽名，對比是否有得到一樣的結果。
+4. JWT 簽名的伺服器與驗證的伺服器會共用私鑰，所以可以將收到的 JWT 的 header，payload 的簽名，對比是否有得到一樣的結果。
 
 上述條件均滿足即為合法的 JWT。
 
@@ -33,7 +33,9 @@ const JWT = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e25hbWU6Ikpob24gRG9lIixleHBpcm
 
 
 ### 產生 DeWT
-用戶訪問 TideBit-DeFi 使用 metamask 與 TideBit-DeFi 連結後，為使用 TideBit-DeFi 的服務需使用自己的錢包簽 TideBit-DeFi 提供的相關的同意條款如 Term of services, private policy。用戶簽名的內容我們使用 eip712 寫在智能合約裡，將用戶簽名的結果加上簽名的內容即為 DeWT。
+1. 用戶訪問 TideBit-DeFi 使用 metamask 與 TideBit-DeFi 連結後
+2. 為使用 TideBit-DeFi 的服務需使用自己的錢包簽 TideBit-DeFi 提供的相關的同意條款如 Term of services, private policy。
+3. 用戶簽名的內容我們使用 eip712 寫在智能合約裡，將用戶簽名的結果加上簽名的內容即為 DeWT。
 ### 存取 DeWT
 在用戶產生 DeWT 後使用 api 發送給後端伺服器，並將DeWT 將存放在用戶瀏覽器的 cookie 之中。
 - 前端: 在每次發送 api 時要帶上 DeWT，並且需要定期到 cookie 檢查 DeWT 是否已過期。
