@@ -22,9 +22,15 @@ bootstrap();
 
 ## Module、Controller、Service
 ### 建置在 Market 下的 Tickers Module
-Module 屬於功能模組，把相同性質的功能包裝在一起。
+- Module 把相同性質的功能包裝在一起，並依照各模組的需求來串接。
+- Module 擁有 controllers、providers、imports 與 exports 四個參數。
+- 大部分的 Module 都是功能模組，其概念即為「把相同性質的功能包裝在一起」。
+- 每個 Module 都是共享模組，其遵循著「依照各模組的需求來串接」的概念來設計。
+- 透過共享模組的方式來與其他模組共用同一個實例。
+- 可以透過全域模組來減少匯入次數，但不該把多數模組做提升，在設計上不是很理想。
+- 善用常用模組的方式來統一管理多個常用模組。
 ```shell!
- nest generate controller <CONTROLLER_NAME>
+ nest generate module <CONTROLLER_NAME>
  nest generate module market/tickers     
 ```
 完成後會新增一個檔案 `markets.module.ts` 在 market/tickers 資料夾下並在 `app.module.ts` 裡面 `import` MarketsModule。
@@ -51,6 +57,16 @@ export class AppModule {}
 ```
 
 ### 建置 Controller
+Nest 的 Http Method 裝飾器名稱即對應標準 Http Method：
+
+- @Get：表示接收對應路由且為 GET 請求時觸發。
+- @Post：表示接收對應路由且為 POST 請求時觸發。
+- @Put：表示接收對應路由且為 PUT 請求時觸發。
+- @Patch：表示接收對應路由且為 PATCH 請求時觸發。
+- @Delete：表示接收對應路由且為 DELETE 請求時觸發。
+- @Options：表示接收對應路由且為 OPTIONS 請求時觸發。
+- @Head：表示接收對應路由且為 HEAD 請求時觸發。
+- @All：表示接收對應路由且為以上任何方式的請求時觸發。
 ```shell!
  nest generate controller <CONTROLLER_NAME>
  nest generate controller market/tickers   
@@ -113,3 +129,28 @@ export class TickersController {
   }
 }
 ```
+
+### 建立一個有 params 及 query 的 API： listTrade
+1. 建立 Module (TradesModules) `nest generate module market/trades`
+2. 建立 Controller (TradesController) `nest generate controller market/trades`
+3. 建立 Service (TradesService) `nest generate service market/trades`
+4. 在 `trades.controller.ts` 定義路徑
+```typescript!
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { TradesService } from './trades.service';
+
+@Controller('trades')
+export class TradesController {
+  constructor(private readonly tradesService: TradesService) {}
+
+  @Get(':ticker')
+  async get(
+    @Param('ticker') ticker: string,
+    @Query() query: { timespan: string; limit: number },
+  ) {
+    return await this.tradesService.listTrades(ticker, query);
+  }
+}
+```
+5. 在 `trades.service.ts` 裡面定義 `listTrades`
+6. nest start，在瀏覽器打開 `http://localhost:3000/trades/eth?timespan=1s&limit=500`
