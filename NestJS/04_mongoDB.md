@@ -71,3 +71,144 @@ import MongoConfigFactory from './config/mongo.config';
 })
 export class AppModule {}
 ```
+ 在 mongoDB 建立帳號及 database 透過 database Connect 獲得連線資訊，把對應的資訊填到 .env 裡面
+ 
+[url: mongoDB](https://cloud.mongodb.com/v2/6437a139e7ffc775573e816e#/clusters/connect?clusterId=Cluster0)
+
+## 設計 Scheme
+在 Nest 要設計 schema 有兩種方式，一種是採用 mongoose 原生的做法，另一種則是用 Nest 設計的裝飾器，這裡會以 Nest 裝飾器為主。透過 Nest 裝飾器設計的 schema 主要是由 @Schema 與 @Prop 所構成：
+
+這裡我們先設計一個名為 User 的 class，並使用 @Schema 裝飾器，在 src/common/models 資料夾下建立一個名為 user.model.ts 的檔案：
+```typescript!
+import { Schema } from '@nestjs/mongoose';
+
+@Schema()
+export class User {}
+```
+### Prop 裝飾器
+@Prop 裝飾器定義了 document 的欄位，其使用在 class 中的屬性，它擁有基本的型別推斷功能，讓開發人員在面對簡單的型別可以不需特別做指定，但如果是陣列或巢狀物件等複雜的型別，則需要在 @Prop 帶入參數來指定其型別，而帶入的參數其實就是 mongoose 的 SchemaType，詳細內容可以參考官方文件。
+
+然後來修改一下 user.model.ts 的內容，實作一次 @Prop 的使用方式。
+
+### 產生 Schema
+在設計好 schema 之後，就要將 schema 透過 SchemaFactory 的 createForClass 方法產生出這個 schema 的實體。
+```typescript!
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+export type UserDocument = User & Document;
+
+@Schema()
+export class User {
+  @Prop({ required: true })
+  name: string;
+
+  @Prop({ required: true })
+  address: string;
+
+  @Prop()
+  email: string;
+
+  @Prop({ required: true })
+  created_timestamp: number;
+
+  @Prop()
+  updated_timestamp: number;
+}
+
+export const UserSchema = SchemaFactory.createForClass(User);
+```
+
+## 使用 Model
+先用 nestCLI 生成 UserModule、UserController、UserService
+```shell!
+$ nest generate module user
+$ nest generate controller user
+$ nest generate service user
+```
+
+MongooseModule 有提供 forFeature 方法來配置 MongooseModule，並在該作用域下定義需要的 model，使用方式很簡單，給定一個陣列其內容即為 要使用的 schema 與 對應的 collection 名稱，通常我們習慣直接使用 schema 的 class 名稱作為值，其最終會對應到的 collection 為 名稱 + s，舉例來說，User 會對應到的 collection 名稱即 users。
+
+我們修改 user.module.ts，將 MongooseModule 引入，並在 UserModule 的作用域下使用 User 的 model：
+
+```typescript!
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+
+import { User, UserSchema } from '../../common/models/user.model';
+import { UserController } from './user.controller';
+import { UserService } from './user.service';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema }
+    ])
+  ],
+  controllers: [UserController],
+  providers: [UserService]
+})
+export class UserModule {}
+```
+
+在定義好之後，就可以透過 @InjectModel 來將 User 的 model 注入到 UserService 中，並給定型別 UserDocument：
+```typescript!
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+
+import { Model } from 'mongoose';
+
+import { User, UserDocument } from '../../common/models/user.model';
+
+@Injectable()
+export class UserService {
+
+  constructor(
+    @InjectModel(User.name) private readonly userModel: Model<UserDocument>
+  ) {}
+
+}
+```
+### 建立 (Create)
+修改 user.service.ts 的內容，新增一個 create 方法，並呼叫 userModel 的 create 方法來建立一個使用者到 users 這個 collection 裡面：
+```typescript!
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+
+import { Model } from 'mongoose';
+
+import { User, UserDocument } from '../../common/models/user.model';
+
+@Injectable()
+export class UserService {
+
+  constructor(
+    @InjectModel(User.name) private readonly userModel: Model<UserDocument>
+  ) {}
+
+  create(user: any) {
+    return this.userModel.create(user);
+  }
+
+}
+```
+
+修改 user.controller.ts 的內容，設計一個 POST 方法來建立使用者，並且返回 UserDocument 到客戶端：
+```typescript
+import { Body, Controller, Post } from '@nestjs/common';
+import { UserService } from './user.service';
+
+@Controller('users')
+export class UserController {
+  
+  constructor(
+    private readonly userService: UserService
+  ) {}
+
+  @Post()
+  create(@Body() body: any) {
+    return this.userService.create(body);
+  }
+
+}
+```
