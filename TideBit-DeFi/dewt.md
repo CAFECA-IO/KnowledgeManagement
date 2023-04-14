@@ -249,3 +249,7 @@ OAuth 2.0 對於如何頒發憑證的細節，規定得非常詳細。具體來�
 - [別再使用JWT 作為Session 系統！問題重重且很危險](https://learnku.com/articles/22616)
 - [一文整理前后端鉴权方案！](https://z.itpub.net/article/detail/9DDEE4C5561AE916018002EA24608806)
 - [session、token、jwt、oauth2](https://www.jianshu.com/p/f31ef35eb77c)
+- ()[白话让你理解什么是oAuth2协议](https://zhuanlan.zhihu.com/p/92051359)
+- (! 先讀)[前后端接口鉴权全解：cookie、session、token 区别解析](https://ssshooter.com/2021-02-21-auth/)
+- ()[还分不清 Cookie、Session、Token、JWT？](https://developer.aliyun.com/article/856618)
+- ()[扒一扒Cookie、Session、Token、JWT、OAuth2、OIDC、SSO、Ids4一家的关系网](https://juejin.cn/post/7077540836229152775)
