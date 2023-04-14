@@ -33,6 +33,7 @@ export class TodoModule {}
 
 **注意：雖然可以透過提升為全域來減少匯入的次數，但非必要情況應少用，這樣才是好的設計準則。**
 
+# 在 TBD-backend 有嘗試將兩者組合起來使用
 我這邊將取得 config 的 ConfigModule 跟負責 request 的 HttpModule 用 CommonModule 包起來，然後定義成 Global Module，然後在各個 Module 間就可以同一使用，就不會發生需要多次去讀 .env 的問題。
 
 ```typescript=
