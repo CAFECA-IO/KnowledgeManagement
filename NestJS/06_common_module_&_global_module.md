@@ -84,3 +84,40 @@ export class CommonModule {}
 
 ```
 
+在 AppModule import 一次就夠了
+```typescript=
+import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
+import { TickersModule } from './market/tickers/tickers.module';
+import { CandlesticksModule } from './market/candlesticks/candlesticks.module';
+import { CfdsModule } from './user/trade/cfds/cfds.module';
+import { MarketModule } from './market/market.module';
+import { UserModule } from './user/user.module';
+import { CommonModule } from './common.module';
+
+@Module({
+  imports: [
+    CommonModule,
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        uri: config.get<string>('mongo.uri'),
+      }),
+    }),
+    TickersModule,
+    CandlesticksModule,
+    CfdsModule,
+    MarketModule,
+    UserModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
+```
