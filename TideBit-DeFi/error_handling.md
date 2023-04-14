@@ -1,6 +1,8 @@
 - [Error Handling](#error-handling)
   - [概述](#概述)
   - [自定義錯誤代碼與物件](#自定義錯誤代碼與物件)
+    - [錯誤代碼](#錯誤代碼)
+    - [錯誤物件](#錯誤物件)
   - [例外處理原則](#例外處理原則)
     - [例外傳遞](#例外傳遞)
     - [敏感資訊隱藏](#敏感資訊隱藏)
@@ -17,6 +19,8 @@
 開發時，很多例外處理情境，一個好的錯誤處理策略可以提高程式的穩定性以及可維護性。
 
 ## 自定義錯誤代碼與物件
+
+### 錯誤代碼
 
 使用以下 8 位錯誤代碼規則來統一管理錯誤：
 
@@ -52,6 +56,20 @@
 - **`10110001`**：表示前端系統致命錯誤的編號 0001。
 - **`20220005`**：表示後端合約嚴重錯誤的編號 0005。
 - **`30330010`**：表示區塊鏈交易一般錯誤的編號 0010。
+
+### 錯誤物件
+
+- 用規定的錯誤代碼丟出錯誤
+
+```tsx
+try {
+	// Do something
+} catch (e: any) {
+	const code = Code.SERVICE_TERM_DISABLE;
+	const error = new CustomError(code);
+	throw error;
+}
+```
 
 ## 例外處理原則
 
@@ -95,7 +113,6 @@
 
 ## 例外處理流程示意圖
 
-
 ```mermaid
 graph TD
     A[開始] --> B[遇到異常]
@@ -133,9 +150,11 @@ async function signTransaction(wallet: Wallet, txData: any): Promise<SignedTrans
         // 用戶的去中心化錢包簽名
         const signedTransaction = await wallet.signTransaction(txData);
         return signedTransaction;
-    } catch (error) {
+    } catch (e) {
         // 例外傳遞：將錯誤傳遞給上層 function 處理
-        throw new Error(`簽名交易失敗: ${error.message}`);
+        	const code = Code.SERVICE_TERM_DISABLE;
+	        const error = new CustomError(code);
+	        throw error;
     }
 }
 
@@ -144,9 +163,11 @@ function transformData(data: any): any {
         // 資料格式轉換
         const transformedData = /* 轉換過程 */;
         return transformedData;
-    } catch (error) {
+    } catch (e) {
         // 例外傳遞：將錯誤傳遞給上層 function 處理
-        throw new Error(`資料格式轉換失敗: ${error.message}`);
+        	const code = Code.INVALID_INPUT;
+	        const error = new CustomError(code);
+	        throw error;
     }
 }
 
@@ -155,9 +176,11 @@ function matchOrder(order: Order): MatchedOrder {
         // 搓合訂單
         const matchedOrder = /* 搓合過程 */;
         return matchedOrder;
-    } catch (error) {
+    } catch (e) {
         // 例外傳遞：將錯誤傳遞給上層函數處理
-        throw new Error(`訂單搓合失敗: ${error.message}`);
+        	const code = Code.INTERNAL_SERVER_ERROR;
+	        const error = new CustomError(code);
+	        throw error;
     }
 }
 
@@ -168,9 +191,25 @@ async function openPosition(wallet: Wallet, orderData: any): Promise<void> {
         const signedTransaction = await signTransaction(wallet, transformedData);
         const matchedOrder = matchOrder(signedTransaction);
         // 開倉成功
-    } catch (error) {
-        console.error(`開倉失敗: ${error.message}`);
-        // 可以在這裡進行錯誤分析、收集或通知用戶等操作
+    } catch (e) {
+          console.error(`開倉失敗: ${error.message}`);
+          // 可以在這裡進行錯誤分析、收集或通知用戶等操作
+
+        if (error instanceof CustomError) {
+          if (error.code === Code.INVALID_INPUT) {
+            // ...
+          } else if (error.code === Code.INTERNAL_SERVER_ERROR) {
+            // ...
+          } else if (error.code === Code.SERVICE_TERM_DISABLE) {
+            // ...
+          }
+          result.code = error.code;
+          result.reason = error.message;
+          return result;
+        } else {
+          // ...
+        }
+
     }
 }
 ```
@@ -220,4 +259,3 @@ let point = '';
       } ...
     }
 ```
-
