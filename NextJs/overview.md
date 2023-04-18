@@ -15,7 +15,7 @@ npx create-next-app --ts
   - [Next.js 中的 CSR、SSR 與 SSG](#nextjs-中的-csrssr-與-ssg)
 - [File-based routing](#file-based-routing)
   - [Static Routes](#static-routes)
-- [Dynamic Route Example with Context and I18n by Typescript](#dynamic-route-example-with-context-and-i18n-by-typescript) - [tags: `Next` `React` `Typescript`](#tags-next-react-typescript)
+- [Dynamic Route Example with Context and I18n by Typescript](#dynamic-route-example-with-context-and-i18n-by-typescript) 
 
 # SSR
 
