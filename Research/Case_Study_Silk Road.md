@@ -23,7 +23,9 @@
   Tool might be useful in this case:
   
   1. Clear flow path
-  2.  some common techniques for clustering Bitcoin addresses include:
+  2. Clustering algorithms to group address
+  
+  some common techniques for clustering Bitcoin addresses include:
 
       - Heuristic analysis: This involves looking at the patterns of transaction inputs and outputs and making educated guesses about which addresses are likely to be controlled by the same entity.
       - Change address detection: This involves looking for Bitcoin addresses that receive change from a transaction and grouping them with the sending address.
