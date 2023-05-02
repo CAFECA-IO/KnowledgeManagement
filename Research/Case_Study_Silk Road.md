@@ -11,13 +11,24 @@
 ## 產出
 - Knowlodge Report
   - 概述
+  
   The case of money laundering using blockchain involved the Darknet marketplace known as Silk Road. Silk Road was an online black market that facilitated the sale of illegal drugs, weapons, and other illicit goods using Bitcoin as the primary payment method.
   
   - 研究目的
+  
   To understand how tracing tool can be used in the Silk Road case
   
   - 研究結論
   
+  Tool might be useful in this case:
+  
+  1. Clear flow path
+  2.  some common techniques for clustering Bitcoin addresses include:
+
+      - Heuristic analysis: This involves looking at the patterns of transaction inputs and outputs and making educated guesses about which addresses are likely to be controlled by the same entity.
+      - Change address detection: This involves looking for Bitcoin addresses that receive change from a transaction and grouping them with the sending address.
+      - Address reuse analysis: This involves looking for Bitcoin addresses that are used multiple times by the same entity and grouping them together.
+      - Input merging: This involves looking at the inputs of a transaction and grouping them based on similarities in their spending patterns.
   
   - 研究數據
   
