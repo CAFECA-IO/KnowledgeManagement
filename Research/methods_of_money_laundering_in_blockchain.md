@@ -1,5 +1,25 @@
+# Research
+> v1.0.0 20220502
+## 執行時程
+- 4.5 hr
 
+## 前置需求
+- no
+### 使用工具
+- Internet
 
+## 產出
+- Knowlodge Report
+  - 概述
+  
+ 2021年統計顯示，網路犯罪份子透過虛擬加密貨幣非法洗錢高達86億美元，此數據相較於2020年上升30％，加密貨幣儼然成為新型洗錢管道
+ 
+  - 研究目的
+  
+ 了解犯罪份子如何透過加密貨幣洗錢，進而判斷如何可以防止相關案例發生
+  
+  - 研究結論
+  
 - Dark Exchange
 OTC : KYC 較不嚴格的交易所是洗錢罪犯較會選擇的地方，OTC Broker 會再進入有KYC 的交易所兌換法幣，其原理與混弊器類似，要防止此類犯罪方式，除交易所本身需有嚴格的 KYC ，針對 OTC 網站進行的交易，也須小心
 
@@ -44,3 +64,14 @@ OTC : KYC 較不嚴格的交易所是洗錢罪犯較會選擇的地方，OTC Bro
 
 - Hot car method
 簡單來說就是將虛擬貨幣存入冷錢包，等待風頭過後再慢慢使用該錢包中的貨幣，來躲避嫌疑
+  
+  
+
+## 參考文件
+- 參考文獻
+
+[Coincu News](https://news.coincu.com/57201-the-days-of-privacy-coins-have-arrived-with-13-tokens-rising-by-double-digits/)
+
+Youtube
+
+FATF
