@@ -113,7 +113,23 @@ const channel = pusher.subscribe("public-channel");
 
 ![](https://i.imgur.com/DS6V7ht.png)
 [圖片來源](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/)
-
+其中圖上沒有顯示的是，在 Client Library 向 App Server request `/pusher/auth` 後，在 Server App 會直接使用 Server Library（Pusher 實體）取得 auth，再回傳給  Client Library 。
+```typescript=
+const user = {
+        user_id: signer,
+        user_info: {
+          address: signer,
+          deWT,
+          channel: channel_name,
+        },
+};
+ const auth = pusher.authorizeChannel(
+        socket_id,
+        channel_name,
+        user,
+      );
+return auth      
+```
 ## PrivateChannel
 專用、加密和在線頻道需要授權，因此需要對託管 Web 應用程序的應用程序服務器進行額外調用，以確保當前用戶可以訂閱給定頻道。
 ```typescript=
