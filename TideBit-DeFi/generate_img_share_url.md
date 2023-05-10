@@ -20,7 +20,8 @@ graph TD
 ## 採取的作法
 
 - 在用戶點下 icon 分享之後，把包含 CFD ID 跟 share 路徑的 URL （`share/cfd/[cfdId]`） 用 encodeURIComponent 包起來，放在對應的社群媒體分享路徑後面。
-- 其中為了讓爬蟲能爬到我們要它顯示的資料，須設定好對應的 HTML Tage 並確保在顯示網頁之前，圖片已經生成，並且有絕對路徑可以放在 <meta> img src 裡
+- 其中為了讓爬蟲能爬到我們要它顯示的資料，須設定好對應的 HTML Tage 並確保在顯示網頁之前，圖片已經生成，並且有絕對路徑可以放在 `<meta>` img src 裡
+  - 因為 Next.js v13.3.0 提供在 API Route 裡面寫 JSX 且將其轉成圖片並回傳圖片的功能，所以省下很多繞彎路的時間
 
 1. `share/cfd/[cfdId]` 會把拿到的 CFD ID 傳給 `api/images/cfd/[cfdId]`
 2. `api/images/cfd/[cfdId]` 透過傳 CFD ID 給 API，即時跟後端拿這筆 CFD 的資料
@@ -33,7 +34,12 @@ graph TD
 
 ## 要設定的 HTML Tag
 
-Open Graph (OG) 協議使任何網頁都可以成為社交圖中的豐富對象。例如，這用於 Facebook 以允許任何網頁具有與 Facebook 上任何其他對象相同的功能。
+Open Graph (OG) 協議使任何網頁分享在不同的社群媒體上，都可以被擷取到相同的資訊。
+
+- 圖片解析度
+  - 建議 1200x630 px
+  - [Facebook 分享 og:image 的要求](https://developers.facebook.com/docs/sharing/webmasters/images/)
+- ⚠️ Tips: `<img>` 的 src 可以是相對路徑，但`<meta>`裡面的 og:image 或 twitter:image 都只能給絕對路徑
 
 ### 通用的 tag
 
