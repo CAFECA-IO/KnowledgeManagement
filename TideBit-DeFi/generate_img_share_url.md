@@ -1,4 +1,4 @@
-> ### [Notion 好讀版](https://soul-quenching.notion.site/Next-js-KM-shared-5f291916630742bf8955176e4888fd93)
+> ## [Notion 好讀版](https://soul-quenching.notion.site/Next-js-KM-shared-5f291916630742bf8955176e4888fd93)
 
 - [目的](#目的)
 - [實踐原理](#實踐原理)
@@ -39,19 +39,20 @@ graph TD
 5. `share/cfd/[cfdId]` 把圖片放到要被分享的網頁上，並設定好 HTML Tag，確保爬蟲能爬到它要的資料
 
 - 實作示意圖（[高清版](https://miro.com/app/board/uXjVMK0CRHY=/?share_link_id=391689350778)）
-  ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/6664a804-d2fa-4961-b85f-b615466881fa)
+  ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/c6b74037-9ce5-446d-8fc5-9b817433f3cd)
+
 
 ## Dev Tool - Network & Elements
 
 - 產生圖片 `/api/images/cfd/[cfdId]`
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b9d8cc84-3256-4738-8510-7bd01ad1d19a)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/aad57e47-817a-4ea2-8bfc-ae0c8e4e834e/Untitled.png)
 
 - 產生分享網頁 `/share/cfd/[cfdId]`
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/add22d4e-a224-4f13-9e31-d7917e008a54)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8bb4cd6b-49e2-4565-870d-d072f867445b/Untitled.png)
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/12edccf8-30d7-413e-8e5f-a4c7bf519993)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e5f51489-f341-47c8-9010-1e712e4fb88e/Untitled.png)
 
 ## 關於 ImageResponse
 
