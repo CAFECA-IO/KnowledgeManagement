@@ -87,7 +87,7 @@ graph TD
 
 ### 設定字型 (Font Buffer / ArrayBuffer)
 
-- `[feat: 🎸 BarlowBuffer in /api/images/cfd/[cfdId] to change font](https://github.com/CAFECA-IO/TideBit-DeFi/pull/631/commits/99fe18589d62e0eeaff2983d8b7cc758267ea1d8)`
+- [`feat: 🎸 BarlowBuffer in /api/images/cfd/[cfdId] to change font`](https://github.com/CAFECA-IO/TideBit-DeFi/pull/631/commits/99fe18589d62e0eeaff2983d8b7cc758267ea1d8)
 
   1. 下載 Barlow.ttf
   2. 到[此](https://products.aspose.app/font/base64/ttf) encode .ttf as base64 (`<your_base64_encoded_font_string>`)
