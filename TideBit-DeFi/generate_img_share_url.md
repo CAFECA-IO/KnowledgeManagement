@@ -41,18 +41,15 @@ graph TD
 - 實作示意圖（[高清版](https://miro.com/app/board/uXjVMK0CRHY=/?share_link_id=391689350778)）
   ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/c6b74037-9ce5-446d-8fc5-9b817433f3cd)
 
-
 ## Dev Tool - Network & Elements
 
 - 產生圖片 `/api/images/cfd/[cfdId]`
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b9d8cc84-3256-4738-8510-7bd01ad1d19a)
-
+  ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b9d8cc84-3256-4738-8510-7bd01ad1d19a)
 
 - 產生分享網頁 `/share/cfd/[cfdId]`
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/add22d4e-a224-4f13-9e31-d7917e008a54)
+  ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/add22d4e-a224-4f13-9e31-d7917e008a54)
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/12edccf8-30d7-413e-8e5f-a4c7bf519993)
-
 
 ## 關於 ImageResponse
 
@@ -168,6 +165,8 @@ Open Graph (OG) 協議使任何網頁分享在不同的社群媒體上，都可�
 ```
 
 ## [附錄] 踩過的坑 🩸
+
+- [CFD 分享 PNL 流程小視窗 data/ context #162](https://github.com/CAFECA-IO/TideBit-DeFi/issues/162)｜[Feature/pnl sharing #595](https://github.com/CAFECA-IO/TideBit-DeFi/pull/595)
 
 ### Trial 1: 從 Context 拿資料
 
