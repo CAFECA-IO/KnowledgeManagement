@@ -177,7 +177,7 @@ Open Graph (OG) 協議使任何網頁分享在不同的社群媒體上，都可�
 - getServerSideProps 是 Next.js 提供的 function ，在 Server 端執行，預想上在 Server 將 component 轉成圖片再透過 `<Head>` 改變 `<meta>` 等 tag
   - 卡住的地方是
   1. 在 Server 將 component 或 JSX 轉成圖片有障礙
-  2. <meta> 似乎無法被即時更改並且被爬蟲爬到
+  2. `<meta>` 似乎無法被即時更改並且被爬蟲爬到
      1. 後來發現有些 [Workaround](https://github.com/vercel/next.js/issues/35172) 可以解決這個問題
   - 此時 @Luphia 提供 Next.js v13.3.0 的 ImageResponse 作法，故 Trial 2 就沒繼續實驗了，未來若原本作法失效，可以考慮從這邊下手
 - 什麼是 getServerSideProps、getStaticPath + getStaticProps
