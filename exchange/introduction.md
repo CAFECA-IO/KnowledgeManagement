@@ -223,8 +223,8 @@ T5.timestamp = T4.timestamp + period = '2023-05-11 11:17:55.2'
 |1|ETH|USDT|0|4.412|17|2023-05-11 11:17:52|
 |2|ETH|USDT|0|6.32|4|2023-05-11 11:17:54|
 |3|ETH|USDT|0|7|1|2023-05-11 11:17:55|
-|4|ETH|USDT|0|7.068|1|2023-05-11 11:17:55.1|
-|5|ETH|USDT|0|7.136|1|2023-05-11 11:17:55.2|
+|4|ETH|USDT|0|7.068|0|2023-05-11 11:17:55.1|
+|5|ETH|USDT|0|7.136|0|2023-05-11 11:17:55.2|
 
 ### Real Market with Price Priority and Data Prediction
 - tradeBook
