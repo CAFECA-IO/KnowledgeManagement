@@ -194,6 +194,7 @@ type candleStick = {
 |1|USDT<br>75|ETH<br>17|2023-05-11 11:17:52|
 |2|USDT<br>25.28|ETH<br>4|2023-05-11 11:17:54|
 |3|USDT<br>7|ETH<br>1|2023-05-11 11:17:55|
+|4|ETH<br>8.21|USDT<br>575|2023-05-11 11:17:56|
 
 | trade | from | to | timestamp |
 |:-:|:-:|:-:|:-:|
