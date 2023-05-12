@@ -20,6 +20,8 @@ Interface tradeBook {
   
   constructor();
   add(trade: trade) void;
+  toLineChart()
+  toCandleStickChart()
 }
 ```
 
