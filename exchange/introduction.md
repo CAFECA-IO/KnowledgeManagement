@@ -201,6 +201,7 @@ type candleStick = {
 |2|USDT<br>25.28|ETH<br>4|2023-05-11 11:17:54|
 |3|USDT<br>7|ETH<br>1|2023-05-11 11:17:55|
 |4|USDT<br>7.068|ETH<br>1|2023-05-11 11:17:55.1|
+|4|USDT<br>7.136|ETH<br>1|2023-05-11 11:17:55.2|
 
 ### Real Market with Price Priority and Data Prediction
 - tradeBook
