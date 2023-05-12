@@ -114,16 +114,16 @@ decrease liquidity
 - timestamp
 
 ### Price Priority Market
-| trade | from | to | timestamp |
-|:-:|:-:|:-:|:-:|
-|1|USDT<br>75|ETH<br>17|2023-05-11 11:17:52|
-|2|USDT<br>25.28|ETH<br>4|2023-05-11 11:17:52|
+| trade | asset1 | asset2 | direct | price | amount | timestamp |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|1|ETH|USDT|0|4.412|17|2023-05-11 11:17:52|
+|2|ETH|USDT|0|6.32|4|2023-05-11 11:17:52|
 
 |Taker|from|to|
 |:-:|:-:|:-:|
-|9|804|21|
-|9|729|4|
-|9|703.72|0|
+|9|USDT<br>804|ETH<br>21|
+|9|USDT<br>729|ETH<br>4|
+|9|USDT<br>703.72|ETH<br>0|
 
 ### Line Charts
 ```
@@ -191,20 +191,40 @@ type candleStick = {
 - linear regression
 - after trade 3
 
-| trade | from | to | timestamp |
-|:-:|:-:|:-:|:-:|
-|1|USDT<br>75|ETH<br>17|2023-05-11 11:17:52|
-|2|USDT<br>25.28|ETH<br>4|2023-05-11 11:17:54|
-|3|USDT<br>7|ETH<br>1|2023-05-11 11:17:55|
-|4|ETH<br>8.21|USDT<br>575|2023-05-11 11:17:56|
+| trade | asset1 | asset2 | direct | price | amount | timestamp |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|1|ETH|USDT|BUY|4.412|17|2023-05-11 11:17:52|
+|2|ETH|USDT|BUY|6.32|4|2023-05-11 11:17:54|
+|3|ETH|USDT|BUY|7|1|2023-05-11 11:17:55|
 
-| trade | from | to | timestamp |
-|:-:|:-:|:-:|:-:|
-|1|USDT<br>75|ETH<br>17|2023-05-11 11:17:52|
-|2|USDT<br>25.28|ETH<br>4|2023-05-11 11:17:54|
-|3|USDT<br>7|ETH<br>1|2023-05-11 11:17:55|
-|4|USDT<br>7.068|ETH<br>1|2023-05-11 11:17:55.1|
-|4|USDT<br>7.136|ETH<br>1|2023-05-11 11:17:55.2|
+- Prediction Trade 4
+```
+T4.asset1 = T3.asset1 = ETH
+T4.asset2 = T3.asset2 = USDT
+T4.direct = T3.direct = BUY
+T4.price = T3.price + ((T3.price - T2.price) / (T3.timestamp - T2.timestamp) * period) = 7 + ((7 - 6.32) / (1683775075000 - 1683775074000) * 100) = 7.068
+T4.amount = 0
+T4.timestamp = T3.timestamp + period = '2023-05-11 11:17:55.1'
+```
+> caution: Exception if T3.timestamp === T2.timestamp
+
+- Prediction Trade 5
+```
+T5.asset1 = T4.asset1 = ETH
+T5.asset2 = T4.asset2 = USDT
+T5.direct = T4.direct = BUY
+T5.price = T4.price + ((T4.price - T3.price) / (T4.timestamp - T3.timestamp) * period) = 7.068 + ((7.068 - 7) / (1683775075100 - 1683775075000) * 100) = 7.136
+T5.amount = 0
+T5.timestamp = T4.timestamp + period = '2023-05-11 11:17:55.2'
+```
+
+| trade | asset1 | asset2 | direct | price | amount | timestamp |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|1|ETH|USDT|0|4.412|17|2023-05-11 11:17:52|
+|2|ETH|USDT|0|6.32|4|2023-05-11 11:17:54|
+|3|ETH|USDT|0|7|1|2023-05-11 11:17:55|
+|4|ETH|USDT|0|7.068|1|2023-05-11 11:17:55.1|
+|5|ETH|USDT|0|7.136|1|2023-05-11 11:17:55.2|
 
 ### Real Market with Price Priority and Data Prediction
 - tradeBook
