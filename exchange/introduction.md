@@ -111,6 +111,8 @@ decrease liquidity
 - direct
 - price
 - amount
+- timestamp
+
 ### Price Priority Market
 | trade | from | to | timestamp |
 |:-:|:-:|:-:|:-:|
