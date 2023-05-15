@@ -131,9 +131,10 @@ decrease liquidity
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | 1 | ETH | USDT | BUY | 11.83 | 21 | 2023-05-11 11:17:52 |
 
-| Taker | from | to |
-| --- | --- | --- |
-| 9 | USDT804 | ETH21 |
+|Taker|from|to|
+|:-:|:-:|:-:|
+|9|USDT<br>804|ETH<br>21|
+
 
 ### Line Charts
 ```
