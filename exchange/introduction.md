@@ -125,6 +125,16 @@ decrease liquidity
 |9|USDT<br>729|ETH<br>4|
 |9|USDT<br>703.72|ETH<br>0|
 
+### Time Priority Market 
+
+| trade | asset1 | asset2 | direct | price | amount | timestamp |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 1 | ETH | USDT | BUY | 11.83 | 21 | 2023-05-11 11:17:52 |
+
+| Taker | from | to |
+| --- | --- | --- |
+| 9 | USDT804 | ETH21 |
+
 ### Line Charts
 ```
 type line = {
