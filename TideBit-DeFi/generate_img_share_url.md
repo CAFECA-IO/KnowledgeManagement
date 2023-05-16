@@ -124,6 +124,8 @@ Open Graph (OG) 協議使任何網頁分享在不同的社群媒體上，都可�
 - ⚠️ Tips: `<img>` 的 src 可以是相對路徑，但`<meta>`裡面的 og:image 或 twitter:image 都只能給絕對路徑
 
 ### 通用的 tag
+- Tips: og:image:width 跟 og:image:height 要跟圖片本身的資訊一樣，否則會被 Facebook 忽略
+- [1200x630](https://developers.facebook.com/docs/sharing/webmasters/images/) 是 FB 預覽縮圖時理想的、不會被截的尺寸
 
 ```html
 <meta name="description" content="CFD Sharing" />
