@@ -1,4 +1,5 @@
 # Exchange Introduction
+
 - Order Book
 - Match
 - Trade Book
@@ -6,7 +7,7 @@
 ```
 Interface orderBook {
   private orders: order[];
-  
+
   constructor();
   add(order: order) void;
   update(id: string, order: order) void;
@@ -17,7 +18,7 @@ Interface orderBook {
 ```
 Interface tradeBook {
   private trades: trade[];
-  
+
   constructor();
   add(trade: trade) void;
   toLineChart()
@@ -29,7 +30,7 @@ Interface tradeBook {
 Interface Exchange {
   private orderBoook: orderBook;
   private tradeBook: tradeBook;
-  
+
   constructor();
   public addOrder(): order;
   public match();
@@ -37,19 +38,21 @@ Interface Exchange {
 ```
 
 ## Order Book
-| order id | from | to | timestamp |
-|:-:|:-:|:-:|:-:|
-|1|ETH<br>60|USDT<br>710|2023-05-11 11:17:07|
-|2|ETH<br>17|USDT<br>75|2023-05-11 11:17:14|
-|3|USDT<br>700|ETH<br>87|2023-05-11 11:17:18|
-|4|ETH<br>91|USDT<br>575|2023-05-11 11:17:19|
-|5|ETH<br>7|USDT<br>64|2023-05-11 11:17:21|
-|6|ETH<br>55|USDT<br>986|2023-05-11 11:17:22|
-|7|USDT<br>431|ETH<br>25|2023-05-11 11:17:25|
-|8|USDT<br>682|ETH<br>33|2023-05-11 11:17:34|
-|9|USDT<br>804|ETH<br>21|2023-05-11 11:17:52|
+
+| order id |    from     |     to      |      timestamp      |
+| :------: | :---------: | :---------: | :-----------------: |
+|    1     |  ETH<br>60  | USDT<br>710 | 2023-05-11 11:17:07 |
+|    2     |  ETH<br>17  | USDT<br>75  | 2023-05-11 11:17:14 |
+|    3     | USDT<br>700 |  ETH<br>87  | 2023-05-11 11:17:18 |
+|    4     |  ETH<br>91  | USDT<br>575 | 2023-05-11 11:17:19 |
+|    5     |  ETH<br>7   | USDT<br>64  | 2023-05-11 11:17:21 |
+|    6     |  ETH<br>55  | USDT<br>986 | 2023-05-11 11:17:22 |
+|    7     | USDT<br>431 |  ETH<br>25  | 2023-05-11 11:17:25 |
+|    8     | USDT<br>682 |  ETH<br>33  | 2023-05-11 11:17:34 |
+|    9     | USDT<br>804 |  ETH<br>21  | 2023-05-11 11:17:52 |
 
 ## Match
+
 1. new Taker Order
 2. sort Maker Orders
 3. try to fill first Maker Order
@@ -65,6 +68,7 @@ Maker.to.quantity = MTQ
 Maker.from.asset = MFA
 Maker.to.asset = MTA
 ```
+
 ```
 TFA = MTA
 TTA = MFA
@@ -72,39 +76,43 @@ TFQ * MFQ / TTQ / MTQ > 1
 ```
 
 ### Market Maker
+
 increase liquidity
 
 ### Market Taker
+
 decrease liquidity
 
 ### Time Priority
-|new order|from|to|timestamp|
-|:-:|:-:|:-:|:-:|
-|9|USDT<br>804|ETH<br>21|11:17:52|
 
-| market order | from | to | timestamp |
-|:-:|:-:|:-:|:-:|
-|1|ETH<br>60|USDT<br>710|2023-05-11 11:17:07|
-|2|ETH<br>17|USDT<br>75|2023-05-11 11:17:14|
-|4|ETH<br>91|USDT<br>575|2023-05-11 11:17:19|
-|5|ETH<br>7|USDT<br>64|2023-05-11 11:17:21|
-|6|ETH<br>55|USDT<br>986|2023-05-11 11:17:22|
+| new order |    from     |    to     | timestamp |
+| :-------: | :---------: | :-------: | :-------: |
+|     9     | USDT<br>804 | ETH<br>21 | 11:17:52  |
+
+| market order |   from    |     to      |      timestamp      |
+| :----------: | :-------: | :---------: | :-----------------: |
+|      1       | ETH<br>60 | USDT<br>710 | 2023-05-11 11:17:07 |
+|      2       | ETH<br>17 | USDT<br>75  | 2023-05-11 11:17:14 |
+|      4       | ETH<br>91 | USDT<br>575 | 2023-05-11 11:17:19 |
+|      5       | ETH<br>7  | USDT<br>64  | 2023-05-11 11:17:21 |
+|      6       | ETH<br>55 | USDT<br>986 | 2023-05-11 11:17:22 |
 
 ### Price Priority
-|new order|from|to|timestamp|
-|:-:|:-:|:-:|:-:|
-|9|USDT<br>804|ETH<br>21|2023-05-11 11:17:52|
 
-| market order | from | to | timestamp |
-|:-:|:-:|:-:|:-:|
-|2|ETH<br>17|USDT<br>75|2023-05-11 11:17:14|
-|4|ETH<br>91|USDT<br>575|2023-05-11 11:17:19|
-|5|ETH<br>7|USDT<br>64|2023-05-11 11:17:21|
-|1|ETH<br>60|USDT<br>710|2023-05-11 11:17:07|
-|6|ETH<br>55|USDT<br>986|2023-05-11 11:17:22|
+| new order |    from     |    to     |      timestamp      |
+| :-------: | :---------: | :-------: | :-----------------: |
+|     9     | USDT<br>804 | ETH<br>21 | 2023-05-11 11:17:52 |
 
+| market order |   from    |     to      |      timestamp      |
+| :----------: | :-------: | :---------: | :-----------------: |
+|      2       | ETH<br>17 | USDT<br>75  | 2023-05-11 11:17:14 |
+|      4       | ETH<br>91 | USDT<br>575 | 2023-05-11 11:17:19 |
+|      5       | ETH<br>7  | USDT<br>64  | 2023-05-11 11:17:21 |
+|      1       | ETH<br>60 | USDT<br>710 | 2023-05-11 11:17:07 |
+|      6       | ETH<br>55 | USDT<br>986 | 2023-05-11 11:17:22 |
 
 ## Trade Book
+
 - trade
 - asset 1
 - asset 2
@@ -114,54 +122,55 @@ decrease liquidity
 - timestamp
 
 ### Price Priority Market
-| trade | asset1 | asset2 | direct | price | amount | timestamp |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|1|ETH|USDT|BUY|4.412|17|2023-05-11 11:17:52|
-|2|ETH|USDT|BUY|6.32|4|2023-05-11 11:17:52|
 
-|Taker|from|to|
-|:-:|:-:|:-:|
-|9|USDT<br>804|ETH<br>21|
-|9|USDT<br>729|ETH<br>4|
-|9|USDT<br>703.72|ETH<br>0|
+| trade | asset1 | asset2 | direct | price | amount |      timestamp      |
+| :---: | :----: | :----: | :----: | :---: | :----: | :-----------------: |
+|   1   |  ETH   |  USDT  |  BUY   | 4.412 |   17   | 2023-05-11 11:17:52 |
+|   2   |  ETH   |  USDT  |  BUY   | 6.32  |   4    | 2023-05-11 11:17:52 |
 
-### Time Priority Market 
+| Taker |      from      |    to     |
+| :---: | :------------: | :-------: |
+|   9   |  USDT<br>804   | ETH<br>21 |
+|   9   |  USDT<br>729   | ETH<br>4  |
+|   9   | USDT<br>703.72 | ETH<br>0  |
 
-| trade | asset1 | asset2 | direct | price | amount | timestamp |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| 1 | ETH | USDT | BUY | 11.83 | 21 | 2023-05-11 11:17:52 |
+### Time Priority Market
 
-|Taker|from|to|
-|:-:|:-:|:-:|
-|9|USDT<br>804|ETH<br>21|
+| trade | asset1 | asset2 | direct | price | amount |      timestamp      |
+| :---: | :----: | :----: | :----: | :---: | :----: | :-----------------: |
+|   1   |  ETH   |  USDT  |  BUY   | 11.83 |   21   | 2023-05-11 11:17:52 |
+
+| Taker |    from     |    to     |
+| :---: | :---------: | :-------: |
+|   9   | USDT<br>804 | ETH<br>21 |
 
 ### Price Priority vs Time Priority
 
 - 價格優先
-    - 對於交易所的優點
-        - 可以導致更小的價差和更準確的市場定價，最終改善市場流動性。
-    - 對於交易所的缺點
-        - 與時序相比，這種方法的實施和維護也可能更加複雜。
-    - 對於用戶的優點
-        - 獎勵提供較優價格的用戶
-        - 適合依賴速度執行策略
-        - 提高所有參與者的流動性和更好的執行力。
-    - 對於用戶的缺點
-        - 對於提前提交訂單但沒有最佳價格的交易者來說，這可能會帶來潛在的不利影響。
+  - 對於交易所的優點
+    - 可以導致更小的價差和更準確的市場定價，最終改善市場流動性。
+  - 對於交易所的缺點
+    - 與時序相比，這種方法的實施和維護也可能更加複雜。
+  - 對於用戶的優點
+    - 獎勵提供較優價格的用戶
+    - 適合依賴速度執行策略
+    - 提高所有參與者的流動性和更好的執行力。
+  - 對於用戶的缺點
+    - 對於提前提交訂單但沒有最佳價格的交易者來說，這可能會帶來潛在的不利影響。
 - 時序優先
-    - 對於交易所的優點
-        - 系統簡單易懂、容易維護
-    - 對於交易所的缺點
-        - 降低市場流動性
-        - 深度圖看起來不公平
-    - 對於用戶的優點
-        - 獎勵提前提交訂單的用戶
-    - 對於用戶的缺點
-        - 成交的價格不是最有競爭力的
-        - 不適合依賴速度執行策略
-
+  - 對於交易所的優點
+    - 系統簡單易懂、容易維護
+  - 對於交易所的缺點
+    - 降低市場流動性
+    - 深度圖看起來不公平
+  - 對於用戶的優點
+    - 獎勵提前提交訂單的用戶
+  - 對於用戶的缺點
+    - 成交的價格不是最有競爭力的
+    - 不適合依賴速度執行策略
 
 ### Line Charts
+
 ```
 type line = {
   average: number;
@@ -169,6 +178,7 @@ type line = {
   timestamp: number;
 }
 ```
+
 ```
   toLineChart(interval: number, length: number): line[] {
     const lines: line[] = [];
@@ -188,6 +198,7 @@ type line = {
 ```
 
 ### Candlestick Charts
+
 ```
 type candleStick = {
   open: number;
@@ -198,6 +209,7 @@ type candleStick = {
   timestamp: number;
 };
 ```
+
 ```
   toCandleStick(interval: number, length: number): candleStick[] {
     const candleSticks: candleStick[] = [];
@@ -222,18 +234,21 @@ type candleStick = {
     return candleSticks;
   }
 ```
+
 ### Data Prediction
+
 - period 100ms
 - linear regression
 - after trade 3
 
-| trade | asset1 | asset2 | direct | price | amount | timestamp |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|1|ETH|USDT|BUY|4.412|17|2023-05-11 11:17:52|
-|2|ETH|USDT|BUY|6.32|4|2023-05-11 11:17:54|
-|3|ETH|USDT|BUY|7|1|2023-05-11 11:17:55|
+| trade | asset1 | asset2 | direct | price | amount |      timestamp      |
+| :---: | :----: | :----: | :----: | :---: | :----: | :-----------------: |
+|   1   |  ETH   |  USDT  |  BUY   | 4.412 |   17   | 2023-05-11 11:17:52 |
+|   2   |  ETH   |  USDT  |  BUY   | 6.32  |   4    | 2023-05-11 11:17:54 |
+|   3   |  ETH   |  USDT  |  BUY   |   7   |   1    | 2023-05-11 11:17:55 |
 
 - Prediction Trade 4
+
 ```
 T4.asset1 = T3.asset1 = ETH
 T4.asset2 = T3.asset2 = USDT
@@ -242,9 +257,11 @@ T4.price = T3.price + ((T3.price - T2.price) / (T3.timestamp - T2.timestamp) * p
 T4.amount = 0
 T4.timestamp = T3.timestamp + period = '2023-05-11 11:17:55.1'
 ```
+
 > caution: Exception if T3.timestamp === T2.timestamp
 
 - Prediction Trade 5
+
 ```
 T5.asset1 = T4.asset1 = ETH
 T5.asset2 = T4.asset2 = USDT
@@ -254,20 +271,69 @@ T5.amount = 0
 T5.timestamp = T4.timestamp + period = '2023-05-11 11:17:55.2'
 ```
 
-| trade | asset1 | asset2 | direct | price | amount | timestamp |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|1|ETH|USDT|BUY|4.412|17|2023-05-11 11:17:52|
-|2|ETH|USDT|BUY|6.32|4|2023-05-11 11:17:54|
-|3|ETH|USDT|BUY|7|1|2023-05-11 11:17:55|
-|4|ETH|USDT|BUY|7.068|0|2023-05-11 11:17:55.1|
-|5|ETH|USDT|BUY|7.136|0|2023-05-11 11:17:55.2|
+| trade | asset1 | asset2 | direct | price | amount |       timestamp       |
+| :---: | :----: | :----: | :----: | :---: | :----: | :-------------------: |
+|   1   |  ETH   |  USDT  |  BUY   | 4.412 |   17   |  2023-05-11 11:17:52  |
+|   2   |  ETH   |  USDT  |  BUY   | 6.32  |   4    |  2023-05-11 11:17:54  |
+|   3   |  ETH   |  USDT  |  BUY   |   7   |   1    |  2023-05-11 11:17:55  |
+|   4   |  ETH   |  USDT  |  BUY   | 7.068 |   0    | 2023-05-11 11:17:55.1 |
+|   5   |  ETH   |  USDT  |  BUY   | 7.136 |   0    | 2023-05-11 11:17:55.2 |
 
 ### Real Market with Price Priority and Data Prediction
+
 - tradeBook
 - lineChart
 - tickerStickChart
 
+Order book
+| order id | from | to | timestamp | unix timestamp in ms | |
+| --- | --- | --- | --- | --- | --- |
+| 1 | ETH60 | USDT710 | 2023-05-11 11:17:07 | 1683775027000 | |
+| 2 | ETH17 | USDT75 | 2023-05-11 11:17:14 | 1683775034000 | |
+| 3 | USDT700 | ETH87 | 2023-05-11 11:17:18 | 1683775038000 | 17:18 時 1. 2. 是 maker |
+| 4 | ETH91 | USDT575 | 2023-05-11 11:17:19 | 1683775039000 | 17:19 時 1. 2. 3. 是 maker |
+| 5 | ETH7 | USDT64 | 2023-05-11 11:17:21 | 1683775041000 | |
+| 6 | ETH55 | USDT986 | 2023-05-11 11:17:22 | 1683775042000 | |
+| 7 | USDT431 | ETH25 | 2023-05-11 11:17:25 | 1683775045000 | |
+| 8 | USDT682 | ETH33 | 2023-05-11 11:17:34 | 1683775054000 | |
+| 9 | USDT804 | ETH21 | 2023-05-11 11:17:52 | 1683775072000 | |
+
+Match
+
+taker
+
+| order id | from    | to    | timestamp           |
+| -------- | ------- | ----- | ------------------- |
+| 3        | USDT700 | ETH87 | 2023-05-11 11:17:18 |
+
+maker
+
+| order id | from           | to                                 | timestamp           | from/to     |
+| -------- | -------------- | ---------------------------------- | ------------------- | ----------- |
+| 2        | ETH17          | USDT75                             | 2023-05-11 11:17:14 | 17/75=0.23  |
+| 4        | ETH91 (→ETH21) | USDT575 (→575-442.308=132.692USDT) | 2023-05-11 11:17:19 | 91/575=0.15 |
+| 5        | ETH7           | USDT64                             | 2023-05-11 11:17:21 | 7/64=0.11   |
+| 1        | ETH60          | USDT710                            | 2023-05-11 11:17:07 | 60/710=0.09 |
+| 6        | ETH55          | USDT986                            | 2023-05-11 11:17:22 | 55/986=0.06 |
+
+Trade book
+
+| trade | asset1 | asset2 | direct | price  | amount | timestamp             | unix timestamp in ms |                                                                             |
+| ----- | ------ | ------ | ------ | ------ | ------ | --------------------- | -------------------- | --------------------------------------------------------------------------- |
+| 1     | ETH    | USDT   | BUY    | 4.412  | 17     | 2023-05-11 11:17:18   | 1683775038000        | order 3 的時間                                                              |
+| 2     | ETH    | USDT   | BUY    | 6.319  | 70     | 2023-05-11 11:17:19   | 1683775039000        | order 4 的時間                                                              |
+| 3     | ETH    | USDT   | BUY    | 6.5097 | 0      | 2023-05-11 11:17:19.1 | 1683775039100        | 6.319 + ((6.319 - 4.412) / (1683775039000 - 1683775038000) \* 100) = 6.5097 |
+| 4     | ETH    | USDT   | BUY    | 6.7004 | 0      | 2023-05-11 11:17:19.2 | 1683775039200        |                                                                             |
+| 5     | ETH    | USDT   | BUY    | 6.8911 | 0      | 2023-05-11 11:17:19.3 | 1683775039300        |                                                                             |
+| 6     | ETH    | USDT   | BUY    | 7.0818 | 0      | 2023-05-11 11:17:19.4 | 1683775039400        |                                                                             |
+| 7     | ETH    | USDT   | BUY    | 7.2725 | 0      | 2023-05-11 11:17:19.5 | 1683775039500        |                                                                             |
+| 8     | ETH    | USDT   | BUY    | 7.4632 | 0      | 2023-05-11 11:17:19.6 | 1683775039600        |                                                                             |
+| 9     | ETH    | USDT   | BUY    | 7.6539 | 0      | 2023-05-11 11:17:19.7 | 1683775039700        |                                                                             |
+| 10    | ETH    | USDT   | BUY    | 7.8446 | 0      | 2023-05-11 11:17:19.8 | 1683775039800        |                                                                             |
+| 11    | ETH    | USDT   | BUY    | 8.0353 | 0      | 2023-05-11 11:17:19.9 | 1683775039900        |                                                                             |
+
 ### Real Market with Time Priority and Data Prediction
+
 - tradeBook
 - lineChart
 - tickerStickChart
