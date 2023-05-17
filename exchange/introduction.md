@@ -425,7 +425,7 @@ maker
     - 剩餘 367-(710/60)\*18=154USDT
   - maker
     - 剩餘 60-18=42ETH
-    - 剩餘 710-(710/60)\*18=212.994USDT
+    - 剩餘 710-(710/60)\*18=710-213=497USDT
   - price
     - 710/60=11.833
   - amount
@@ -446,10 +446,10 @@ maker
 | 5        | ETH7 | USDT64 |
 | 5        | ETH0 | USDT0  |
 
-| order id | from  | to          |
-| -------- | ----- | ----------- |
-| 1        | ETH60 | USDT710     |
-| 1        | ETH42 | USDT212.994 |
+| order id | from  | to      |
+| -------- | ----- | ------- |
+| 1        | ETH60 | USDT710 |
+| 1        | ETH42 | USDT497 |
 
 ### Real Market with Time Priority and Data Prediction
 
