@@ -595,6 +595,52 @@ maker
 | -------- | ----- | --------- | ------------------- | -------------------- |
 | 6        | ETH43 | USDT106.5 | 2023-05-11 11:17:22 | 1683775042000        |
 
+### Line chart & Candlestick chart
+
+```
+Line chart data [
+  { average: 4.412, volume: 17, timestamp: 1683775038000 },
+  { average: 9.968333333333334, volume: 600, timestamp: 1683775045000 },
+  { average: 11.833, volume: 33, timestamp: 1683775054000 },
+  { average: 14.879999999999999, volume: 21, timestamp: 1683775072000 }
+]
+Candlestick chart data [
+  {
+    open: 4.412,
+    high: 4.412,
+    low: 4.412,
+    close: 4.412,
+    volume: 17,
+    timestamp: 1683775038000
+  },
+  {
+    open: 8.929,
+    high: 11.833,
+    low: 8.929,
+    close: 11.833,
+    volume: 600,
+    timestamp: 1683775045000
+  },
+  {
+    open: 11.833,
+    high: 11.833,
+    low: 11.833,
+    close: 11.833,
+    volume: 33,
+    timestamp: 1683775054000
+  },
+  {
+    open: 11.833,
+    high: 17.927,
+    low: 11.833,
+    close: 17.927,
+    volume: 21,
+    timestamp: 1683775072000
+  }
+]
+```
+
+
 ### Real Market with Time Priority and Data Prediction
 
 - tradeBook
@@ -627,3 +673,54 @@ maker
 | order id | from  | to        | timestamp           | unix timestamp in ms |
 | -------- | ----- | --------- | ------------------- | -------------------- |
 | 6        | ETH43 | USDT106.5 | 2023-05-11 11:17:22 | 1683775042000        |
+
+
+### Line chart & Candlestick chart
+
+```
+Line chart data [
+  { average: 4.412, volume: 17, timestamp: 1683775038000 },
+  {
+    average: 10.870333333333335,
+    volume: 633,
+    timestamp: 1683775045000
+  },
+  { average: 11.849, volume: 2, timestamp: 1683775054000 },
+  { average: 13.535, volume: 19, timestamp: 1683775072000 }
+]
+
+Candlestick chart data [
+  {
+    open: 4.412,
+    high: 4.412,
+    low: 4.412,
+    close: 4.412,
+    volume: 17,
+    timestamp: 1683775038000
+  },
+  {
+    open: 8.929,
+    high: 11.849,
+    low: 8.929,
+    close: 11.849,
+    volume: 633,
+    timestamp: 1683775045000
+  },
+  {
+    open: 11.849,
+    high: 11.849,
+    low: 11.849,
+    close: 11.849,
+    volume: 2,
+    timestamp: 1683775054000
+  },
+  {
+    open: 9.143,
+    high: 17.927,
+    low: 9.143,
+    close: 17.927,
+    volume: 19,
+    timestamp: 1683775072000
+  }
+]
+```
