@@ -128,13 +128,13 @@ db.createUser(
 
 ## Connect mongodb with Authorization
 ```shell
-mongo 127.0.0.1:27012/{$dbname} -u {$dbuser} -p {$dbpassword}
+mongosh 127.0.0.1:27012/{$dbname} -u {$dbuser} -p {$dbpassword}
 ```
 
 ## Dump and Restore
 ```shell
 # data lock
-mongo 127.0.0.1:27012/admin -u {$dbuser} -p {$dbpassword}
+mongosh 127.0.0.1:27012/admin -u {$dbuser} -p {$dbpassword}
 db.runCommand({fsync:1,lock:1})
 db.currentOp()
 
