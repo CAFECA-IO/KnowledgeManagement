@@ -42,7 +42,7 @@ https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 
 ### Create a list file for MongoDB ###
-echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/6.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 
 ### Reload local package database ###
 sudo apt-get update
