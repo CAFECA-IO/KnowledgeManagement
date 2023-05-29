@@ -71,6 +71,10 @@ security:
 ```shell
 sudo mongod --config /etc/mongod.conf &
 ```
+## Start mongodb at system start
+```shell
+sudo systemctl start mongod
+```
 
 ## Connect mongodb with client
 ```shell
