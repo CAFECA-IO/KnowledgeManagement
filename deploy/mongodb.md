@@ -74,7 +74,7 @@ sudo mongod --config /etc/mongod.conf &
 
 ## Connect mongodb with client
 ```shell
-mongo 127.0.0.1:27017
+mongosh 127.0.0.1:27017
 
 ### close db
 use admin
