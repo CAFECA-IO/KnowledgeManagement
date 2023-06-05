@@ -118,9 +118,10 @@ graph TD
 
 Open Graph (OG) 協議使任何網頁分享在不同的社群媒體上，都可以被擷取到相同的資訊。
 
-- 圖片解析度
-  - 建議 1200x630 px
-  - [Facebook 分享 og:image 的要求](https://developers.facebook.com/docs/sharing/webmasters/images/)
+- [Facebook 分享 og:image 的要求](https://developers.facebook.com/docs/sharing/webmasters/images/)
+  - 圖片解析度：圖片比例 1.91:1，建議解析度 1200x630 pixels，或至少 600x315 pixels；允許的最小解析度為 200x200 pixels
+  - 圖檔需小於 8 MB
+  - 
 - ⚠️ Tips: `<img>` 的 src 可以是相對路徑，但`<meta>`裡面的 og:image 或 twitter:image 都只能給絕對路徑
 
 ### 通用的 tag
