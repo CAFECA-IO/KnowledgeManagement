@@ -17,6 +17,13 @@ forge install transmissions11/solmate Openzeppelin/openzeppelin-contracts
 ```
 <img width="464" alt="Screenshot 2023-06-13 at 5 13 25 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/ad25ca61-4b6d-408a-8209-de5f483e14ff">
 
+*如果失敗的話*
+- 可以關掉 vpn
+- 然後 [unset proxy](https://stackoverflow.com/questions/32268986/git-how-to-remove-proxy)
+```
+git config --global --unset https.proxy
+git config --global --unset http.proxy
+```
 ### 在 src 下 建立 TokenVault.sol的新文件
 
 <img width="441" alt="Screenshot 2023-06-13 at 5 13 46 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/8972099f-bfbb-41ca-ad85-97a7400c4a17">
