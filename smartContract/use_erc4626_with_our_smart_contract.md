@@ -3,6 +3,7 @@
 - [How to Use ERC-4626 with Your Smart Contract](https://www.quicknode.com/guides/ethereum-development/smart-contracts/how-to-use-erc-4626-with-your-smart-contract/)
 - [Writing ERC-20 Tests in Solidity with Foundry](https://soliditydeveloper.com/foundry)
 - [Creating an NFT with Foundry & Solmate](https://rya-sge.github.io/access-denied/2022/12/20/foundry-tutorial-nft/)
+- [Vaults and the ERC-4626 token contract](https://cryptomarketpool.com/vaults-and-the-erc-4626-token-contract/)
 ## 構建 ERC-4626 金庫
 ### 使用 foundry init 〈dir〉建立專案
 ```
