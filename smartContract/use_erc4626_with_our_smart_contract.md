@@ -165,7 +165,7 @@ on anvil log:
 transaction result:
 <img width="1090" alt="Screenshot 2023-06-14 at 4 14 41 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/432c0f22-27e4-4082-8de0-7d7662170ca6">
 
-3. [failed] deposit
+3. deposit
 ```sh
 cast send <vault_contract> "deposit(uint256)" <amount> --private-key $PRIVATE_KEY
 ```
