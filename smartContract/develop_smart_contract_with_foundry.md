@@ -1,6 +1,7 @@
 # Develop smart contract with foundry
 ## install foundry
 ```sh=
+curl -L https://foundry.paradigm.xyz | bash
 ```
 ## create a new project with forge
 ```sh=
@@ -138,3 +139,7 @@ forge script script/Vault.s.sol:VaultScript --fork-url=http://localhost:8545 --p
 cast call 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512 "totalAssets()(uint256)"
 ```
 <img width="859" alt="Screenshot 2023-06-14 at 1 37 49 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/03b69fbd-4908-47e4-9fd0-11adad1aafeb">
+
+# Reference:
+- [[Youtube] Smart Contract Development with Foundry](https://www.youtube.com/watch?v=uelA2U9TbgM)
+- [Foundry book](https://book.getfoundry.sh/)
