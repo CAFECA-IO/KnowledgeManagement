@@ -15,7 +15,7 @@ ex. install openZeppelin contracts
 ```sh=
 forge install Openzeppelin/openzeppelin-contracts
 ```
-*如果失敗的話*
+\*如果失敗的話*
 - 可以關掉 vpn
 - 然後 [unset proxy](https://stackoverflow.com/questions/32268986/git-how-to-remove-proxy)
 ```
