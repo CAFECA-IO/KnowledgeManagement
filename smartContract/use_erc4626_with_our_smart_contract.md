@@ -176,4 +176,6 @@ cast send 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512 "deposit(uint256)" 100 --pr
 ```
 transaction result:
 <img width="1074" alt="Screenshot 2023-06-14 at 4 40 46 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/eb4dc6af-3dd4-471a-90ea-cae6c9d852fa">
+<img width="953" alt="Screenshot 2023-06-14 at 4 43 10 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/286a50ef-9650-4218-9996-7caaa14560dd">
+<img width="672" alt="Screenshot 2023-06-14 at 4 46 24 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/48b1d6d2-3928-421c-8fc1-cbbb6fb3f38a">
 
