@@ -59,6 +59,8 @@ contract Vault is ERC4626 {
 ### 定義 Vault 裡面要用的 asset
 這裡我將這個 asset 命名為 \_vUSDT
 ```solidity=
+// create your variables and immutables
+ERC20 private immutable _vUSDT;
 ...
 constructor(ERC20 _asset, string memory _name, string memory _symbol) ERC4626(_asset) ERC20(_name, _symbol) {
     _vUSDT = _asset;
