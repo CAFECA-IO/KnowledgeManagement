@@ -15,7 +15,13 @@ ex. install openZeppelin contracts
 ```sh=
 forge install Openzeppelin/openzeppelin-contracts
 ```
-
+*如果失敗的話*
+- 可以關掉 vpn
+- 然後 [unset proxy](https://stackoverflow.com/questions/32268986/git-how-to-remove-proxy)
+```
+git config --global --unset https.proxy
+git config --global --unset http.proxy
+```
 ## 開發智能合約
 在 src/ 下面開發智能合約，檔案名以 .sol 結尾
 ex. 以開發erc4626的智能合約為例，在src下新增一個 Vault.sol 在此檔案裡新增下列 code:
