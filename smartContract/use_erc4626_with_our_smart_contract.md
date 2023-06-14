@@ -142,7 +142,7 @@ cast send <erc20_contract> "mint(address,uint256)" <my_address> <amount> --priva
 
 ex.
 ```sh
-cast send 0x5fbdb2315678afecb367f032d93f642f64180aa3 "mint(address,uint256)" 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 100 --private-key $PRIVATE_KEY
+cast send 0x5fbdb2315678afecb367f032d93f642f64180aa3 "mint(address,uint256)" 0x5fbdb2315678afecb367f032d93f642f64180aa3 100 --private-key $PRIVATE_KEY
 ```
 on anvil log:
 <img width="612" alt="Screenshot 2023-06-14 at 4 08 32 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/c6ddf3da-805d-4083-99e6-55dbdb442cf2">
