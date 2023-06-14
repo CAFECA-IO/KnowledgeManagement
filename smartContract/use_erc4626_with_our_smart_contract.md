@@ -154,7 +154,7 @@ transaction result:
 
 2. approve
  ```sh
-cast send <erc20_contract> "mint(address,uint256)" <vault_contract> <amount> --private-key $PRIVATE_KEY
+cast send <erc20_contract> "approve(address,uint256)" <vault_contract> <amount> --private-key $PRIVATE_KEY
 ```
 
 ex.
