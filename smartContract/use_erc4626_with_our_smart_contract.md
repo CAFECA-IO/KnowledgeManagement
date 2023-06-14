@@ -13,7 +13,7 @@
 foundry init vault_erc4626
 ```
 
-### 安裝 Openzeppelin Contracts  
+### 安裝 Openzeppelin 及 solmate Contracts  
 為了在我們的專案中使用 ERC4626 及 ERC20 我們先安裝 Openzeppelin Contracts 及 transmissions11/solmate
 ```
 forge install transmissions11/solmate Openzeppelin/openzeppelin-contracts
@@ -32,11 +32,13 @@ git config --global --unset http.proxy
 <img width="441" alt="Screenshot 2023-06-13 at 5 13 46 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/8972099f-bfbb-41ca-ad85-97a7400c4a17">
 
 構建我們的保險庫的第一步是確定我們的許可證標識符、Solidity 編譯版本，然後導入 ERC-4626 庫。
+### 使用 solmate
 ```solidity=
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
 
-import "openzeppelin-contracts/contracts/token/ERC20/extensions/ERC4626.sol";
+import {ERC4626} from "solmate/mixins/ERC4626.sol";
+import {ERC20} from "solmate/tokens/ERC20.sol";
 ```
 導入 ERC-4626 庫後，下一步是為您的合約指定一個名稱並使用“is”關鍵字繼承該庫。
 
@@ -51,13 +53,8 @@ contract TokenVault is ERC4626 {
 
 }
 ```
-下一步是創建一個映射，在用戶存款後跟踪他們在金庫中的份額。該映射將維護每個用戶的份額餘額的記錄。
 
-```solidity=
-// a mapping that checks if a user has deposited the token
-mapping(address => uint256) public shareHolder;
-```
-接下來，創建一個構造函數，為 ERC-4626 構造函數賦值：_asset用於 ERC20 代幣地址，_name用於金庫代幣的名稱，_symbol用於金庫代幣的符號。例如，如果您存入 USDC，您可以使用“vaultUSDC”作為_name ，使用“vUSDC”作為_symbol。
+接下來，創建一個構造函數，為 ERC-4626 構造函數賦值：_asset用於 ERC20 代幣地址，_name用於金庫代幣的名稱，_symbol用於金庫代幣的符號。例如，如果您存入 DAI，您可以使用“”作為_name ，使用“rvDAI”作為_symbol。
 ```solidity=
 constructor(ERC20 _UNDERLYING)
         ERC4626(
@@ -77,8 +74,7 @@ constructor(ERC20 _UNDERLYING)
         totalSupply = type(uint256).max;
     }
 ```
-
-## 完整的 code
+#### 完整的 code
 ```solidity=
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
@@ -114,7 +110,24 @@ contract TokenVault is ERC4626 {
     }
 }
 ```
+### openZeppelin
+```solidity=
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
 
+import "openzeppelin-contracts/contracts/token/ERC20/extensions/ERC4626.sol";
+
+contract Vault is ERC4626 {
+    constructor(address _token) ERC4626(IERC20Metadata(_token)) ERC20("name", "symbol") {}
+}
+
+```
+下一步是創建一個映射，在用戶存款後跟踪他們在金庫中的份額。該映射將維護每個用戶的份額餘額的記錄。
+
+```solidity=
+// a mapping that checks if a user has deposited the token
+mapping(address => uint256) public shareHolder;
+```
 ## 資產代幣的智能合約：
 ```solidity!
 // SPDX-License-Identifier: MIT
