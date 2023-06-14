@@ -139,10 +139,10 @@ export PRIVATE_KEY=<private provide by anvil>
  ```sh
 cast send <erc20_contract> "mint(address,uint256)" <my_address> <amount> --private-key $PRIVATE_KEY
 ```
-
+注意這裡的 address 要對應所使用的 private key
 ex.
 ```sh
-cast send 0x5fbdb2315678afecb367f032d93f642f64180aa3 "mint(address,uint256)" 0x5fbdb2315678afecb367f032d93f642f64180aa3 100 --private-key $PRIVATE_KEY
+cast send 0x5fbdb2315678afecb367f032d93f642f64180aa3 "mint(address,uint256)" 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 100 --private-key $PRIVATE_KEY
 ```
 on anvil log:
 <img width="612" alt="Screenshot 2023-06-14 at 4 08 32 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/c6ddf3da-805d-4083-99e6-55dbdb442cf2">
@@ -175,5 +175,5 @@ ex.
 cast send 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512 "deposit(uint256)" 100 --private-key $PRIVATE_KEY
 ```
 transaction result:
-<img width="1089" alt="Screenshot 2023-06-14 at 4 21 36 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/6c514d7b-c5ce-4f70-8c53-67914e77e65e">
+<img width="1074" alt="Screenshot 2023-06-14 at 4 40 46 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/eb4dc6af-3dd4-471a-90ea-cae6c9d852fa">
 
