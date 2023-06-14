@@ -121,3 +121,59 @@ contract VaultTest is Test {
 forge test -vvvv
 ```
 <img width="1284" alt="Screenshot 2023-06-14 at 3 47 30 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/09471a8a-bf30-4de3-a8e9-126cf0550436">
+
+### 部署到本地節點測試
+### 使用 terminal 打開 anvil
+```sh
+anvil
+```
+### 部署
+```sh
+forge script script/Vault.s.sol:VaultScript --fork-url=http://localhost:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --broadcast
+```
+### Deposit
+```sh
+export PRIVATE_KEY=<private provide by anvil>
+```
+1. 鑄幣
+ ```sh
+cast send <erc20_contract> "mint(address,uint256)" <my_address> <amount> --private-key $PRIVATE_KEY
+```
+
+ex.
+```sh
+cast send 0x5fbdb2315678afecb367f032d93f642f64180aa3 "mint(address,uint256)" 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 100 --private-key $PRIVATE_KEY
+```
+on anvil log:
+<img width="612" alt="Screenshot 2023-06-14 at 4 08 32 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/c6ddf3da-805d-4083-99e6-55dbdb442cf2">
+
+transaction result:
+<img width="1087" alt="Screenshot 2023-06-14 at 4 09 22 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/9ee7d185-6a9e-46b6-8bfc-978023464e0d">
+
+2. approve
+ ```sh
+cast send <erc20_contract> "mint(address,uint256)" <vault_contract> <amount> --private-key $PRIVATE_KEY
+```
+
+ex.
+```sh
+cast send 0x5fbdb2315678afecb367f032d93f642f64180aa3 "approve(address,uint256)" 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512 100 --private-key $PRIVATE_KEY
+```
+on anvil log:
+<img width="642" alt="Screenshot 2023-06-14 at 4 14 10 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/8303ed65-e447-4f99-b79f-42d8738cd677">
+
+transaction result:
+<img width="1090" alt="Screenshot 2023-06-14 at 4 14 41 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/432c0f22-27e4-4082-8de0-7d7662170ca6">
+
+3. [failed] deposit
+```sh
+cast send <vault_contract> "deposit(uint256)" <amount> --private-key $PRIVATE_KEY
+```
+
+ex.
+```sh
+cast send 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512 "deposit(uint256)" 100 --private-key $PRIVATE_KEY
+```
+transaction result:
+<img width="1089" alt="Screenshot 2023-06-14 at 4 21 36 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/6c514d7b-c5ce-4f70-8c53-67914e77e65e">
+
