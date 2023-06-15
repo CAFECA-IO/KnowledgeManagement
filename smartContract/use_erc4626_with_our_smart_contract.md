@@ -229,6 +229,7 @@ cast send $ERC20_CONTRACT "mint(address,uint256)" 0xf39Fd6e51aad88F6F4ce6aB88272
 <img width="1680" alt="Screenshot 2023-06-15 at 11 39 53 AM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/76ab172d-efe7-4d2f-a46b-9349ece691f7">
 
 #### decode logs
+
 ```sh
 cast receipt --rpc-url $RPC_URL 0xb3fb21890aac9ab6816e6bae3e22deba2ccce98b2dd2caf8c12800c4c777d9b4  --json|jq
 ```
@@ -275,7 +276,9 @@ cast send $ERC20_CONTRACT "approve(address,uint256)" $ERC4626_CONTRACT 1 --priva
 ```
 <img width="1288" alt="Screenshot 2023-06-15 at 11 40 44 AM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/7f071825-a2d4-4f65-9d86-93efc8f5d8de">
 <img width="1680" alt="Screenshot 2023-06-15 at 11 40 10 AM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/5416a22b-c67b-4a8b-8479-ed1d3f133b3f">
+
 #### decode logs
+
 ```sh
 cast receipt --rpc-url $RPC_URL 0xdf76de424ea7fc773d4c44a8b5806d5e4e0c1b7d5a45db3d69203dec236f8a06  --json|jq
 ```
@@ -315,6 +318,7 @@ cast receipt --rpc-url $RPC_URL 0xdf76de424ea7fc773d4c44a8b5806d5e4e0c1b7d5a45db
 }
 ```
 ### deposit 1 vUSDT to ERC4626_CONTRACT 
+
 ```sh
 cast send $ERC4626_CONTRACT "deposit(uint256)" 1 --private-key $PRIVATE_KEY --rpc-url $RPC_URL
 ```
@@ -326,6 +330,7 @@ cast send $ERC4626_CONTRACT "deposit(uint256)" 1 --private-key $PRIVATE_KEY --rp
 ```sh
 cast receipt --rpc-url $RPC_URL 0x1416715bc4c10be896c72c5b763b57a57153d96dd0fdddd6ad58365fdb23f6b1 --json|jq
 ```
+
 ```json
 {
   "transactionHash": "0x1416715bc4c10be896c72c5b763b57a57153d96dd0fdddd6ad58365fdb23f6b1",
