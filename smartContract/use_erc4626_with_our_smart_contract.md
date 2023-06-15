@@ -191,7 +191,7 @@ transaction result:
 <img width="953" alt="Screenshot 2023-06-14 at 4 43 10 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/286a50ef-9650-4218-9996-7caaa14560dd">
 <img width="672" alt="Screenshot 2023-06-14 at 4 46 24 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/48b1d6d2-3928-421c-8fc1-cbbb6fb3f38a">
 
-# 部署到 ropsten
+# 部署到 fantom testnet
 ```sh
 export RPC_URL=<rpc_url_of_the_chain_that_you_want_to_deploy_on>
 export PRIVATE_KEY=<your_private_key>
@@ -422,26 +422,26 @@ cast receipt --rpc-url $RPC_URL 0x1416715bc4c10be896c72c5b763b57a57153d96dd0fddd
   "effectiveGasPrice": "0x3d37d060"
 }
 ```
-
+#### logs[0]
 * 其中 `logs[0]topics[0]` 對應的 hex(`0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925`) 為 `keccak "Approval(address,address,uint256)"` 可以下這句 command 驗證 `cast keccak "Approval(address,address,uint256)"`
 * `Approval(address,address,uint256)` 對應的 abi 是 `Approval(address indexed owner, address indexed spender, uint256 value)`
 * `logs[0]topics[1]` 對應的是 owner
 * `logs[0]topics[2]` 對應的是 spender
 * `data` 對應的是 value
-
+#### logs[1]
 * 其中 `logs[1]topics[0]` 對應的 hex(`0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef`) 為 `keccak "Transfer(address,address,uint256)"` 可以下這句 command 驗證 `cast keccak "Transfer(address,address,uint256)"`
 * `Transfer(address,address,uint256)` 對應的 abi 是 `Transfer(address from, address to, uint256 value)`
 * `logs[1]topics[1]` 對應的是 from `0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266` 我的 address
 * `logs[1]topics[2]` 對應的是 to `0x0000000000000000000000006c87575aeeffcdc6be3ad4c7c494fe2ba2df55bb` ERC4626 的 合約地址
 * `data` 對應的是 value
-
+#### logs[2]
 * 其中 `logs[2]topics[0]` 對應的 hex(`0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef`) 為 `keccak "Transfer(address,address,uint256)"` 可以下這句 command 驗證 `cast keccak "Transfer(address,address,uint256)"` 
 * `Transfer(address,address,uint256)` 對應的 abi 是 `Transfer(address from, address to, uint256 value)`
 * `logs[2]topics[1]` 對應的是 from `0x0000000000000000000000000000000000000000000000000000000000000000` 我的 address
 * `logs[2]topics[2]` 對應的是 to `0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266` ERC4626 的 合約地址
 * `data` 對應的是 value
 * 這個無中生有對應的是 mint
-
+#### logs[3]
 * 其中 `logs[3]topics[0]` 對應的 hex(`0xdcbc1c05240f31ff3ad067ef1ee35ce4997762752e3a095284754544f4c709d7`) 為 `keccak "Deposit(address,address,uint256,uint256)"` 可以下這句 command 驗證 `cast keccak "Deposit(address,address,uint256,uint256)"`
 * `Approval(address,address,uint256)` 對應的 abi 是 event `event Deposit(address sender, address owner, uint256 assets, uint256 shares) `
 * `logs[3]topics[1]` 對應的是 sender `0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266` 我的 address
