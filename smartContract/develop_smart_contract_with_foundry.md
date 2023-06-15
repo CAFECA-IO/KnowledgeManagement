@@ -3,6 +3,9 @@
 ```sh=
 curl -L https://foundry.paradigm.xyz | bash
 ```
+```sh=
+foundryup
+```
 ## create a new project with forge
 ```sh=
 forge init <Project_Name>
