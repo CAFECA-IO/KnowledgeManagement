@@ -232,6 +232,7 @@ cast send $ERC20_CONTRACT "mint(address,uint256)" 0xf39Fd6e51aad88F6F4ce6aB88272
 ```sh
 cast receipt --rpc-url $RPC_URL 0xb3fb21890aac9ab6816e6bae3e22deba2ccce98b2dd2caf8c12800c4c777d9b4  --json|jq
 ```
+
 ```json
 {
   "transactionHash": "0xb3fb21890aac9ab6816e6bae3e22deba2ccce98b2dd2caf8c12800c4c777d9b4",
@@ -278,6 +279,7 @@ cast send $ERC20_CONTRACT "approve(address,uint256)" $ERC4626_CONTRACT 1 --priva
 ```sh
 cast receipt --rpc-url $RPC_URL 0xdf76de424ea7fc773d4c44a8b5806d5e4e0c1b7d5a45db3d69203dec236f8a06  --json|jq
 ```
+
 ```json
 {
   "transactionHash": "0xdf76de424ea7fc773d4c44a8b5806d5e4e0c1b7d5a45db3d69203dec236f8a06",
