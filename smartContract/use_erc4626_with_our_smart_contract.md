@@ -322,6 +322,7 @@ cast send $ERC4626_CONTRACT "deposit(uint256)" 1 --private-key $PRIVATE_KEY --rp
 <img width="1680" alt="Screenshot 2023-06-15 at 11 45 06 AM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/0ae04918-d904-49b8-9287-9a6c77b280e3">
 
 #### decode logs
+
 ```sh
 cast receipt --rpc-url $RPC_URL 0x1416715bc4c10be896c72c5b763b57a57153d96dd0fdddd6ad58365fdb23f6b1 --json|jq
 ```
