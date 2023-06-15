@@ -7,6 +7,9 @@
 - [Vaults and the ERC-4626 token contract](https://cryptomarketpool.com/vaults-and-the-erc-4626-token-contract/)
 - [How to write an ERC-4626 token contract for yield-bearing vaults](https://blog.logrocket.com/write-erc-4626-token-contract-yield-bearing-vaults/)
 - [github gist: ERC4626yieldvaultcontract.sol](https://gist.github.com/wolz-CODElife/0acdee6ac30b85521377be81a0af19ac)
+- [Fantom Developer Documentation](https://docs.fantom.foundation/)
+- [Solidity by Example](https://solidity-by-example.org/)
+- [RPC Info](https://rpc.info/#fantom)
 
 # 創建一個專案
 這邊使用 `forge init <Project_Name>` 建立專案，並用 `forge install <Dependency>` 安裝相關的 library。
@@ -146,10 +149,13 @@ ex.
 ```sh
 cast send 0x5fbdb2315678afecb367f032d93f642f64180aa3 "mint(address,uint256)" 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 100 --private-key $PRIVATE_KEY
 ```
+
 on anvil log:
+
 <img width="612" alt="Screenshot 2023-06-14 at 4 08 32 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/c6ddf3da-805d-4083-99e6-55dbdb442cf2">
 
 transaction result:
+
 <img width="1087" alt="Screenshot 2023-06-14 at 4 09 22 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/9ee7d185-6a9e-46b6-8bfc-978023464e0d">
 
 2. approve
@@ -158,13 +164,16 @@ cast send <erc20_contract> "approve(address,uint256)" <vault_contract> <amount> 
 ```
 
 ex.
+
 ```sh
 cast send 0x5fbdb2315678afecb367f032d93f642f64180aa3 "approve(address,uint256)" 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512 100 --private-key $PRIVATE_KEY
 ```
 on anvil log:
+
 <img width="642" alt="Screenshot 2023-06-14 at 4 14 10 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/8303ed65-e447-4f99-b79f-42d8738cd677">
 
 transaction result:
+
 <img width="1090" alt="Screenshot 2023-06-14 at 4 14 41 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/432c0f22-27e4-4082-8de0-7d7662170ca6">
 
 3. deposit
@@ -173,6 +182,7 @@ cast send <vault_contract> "deposit(uint256)" <amount> --private-key $PRIVATE_KE
 ```
 
 ex.
+
 ```sh
 cast send 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512 "deposit(uint256)" 100 --private-key $PRIVATE_KEY
 ```
@@ -180,4 +190,27 @@ transaction result:
 <img width="1074" alt="Screenshot 2023-06-14 at 4 40 46 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/eb4dc6af-3dd4-471a-90ea-cae6c9d852fa">
 <img width="953" alt="Screenshot 2023-06-14 at 4 43 10 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/286a50ef-9650-4218-9996-7caaa14560dd">
 <img width="672" alt="Screenshot 2023-06-14 at 4 46 24 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/48b1d6d2-3928-421c-8fc1-cbbb6fb3f38a">
+
+# 部署到 ropsten
+```sh
+export RPC_URL=<rpc_url_of_the_chain_that_you_want_to_deploy_on>
+export PRIVATE_KEY=<your_private_key>
+```
+
+ex.
+
+```sh
+export RPC_URL=https://rpc.testnet.fantom.network/
+export PRIVATE_KEY=<your_private_key>
+```
+
+### 打開本地節點
+```sh
+anvil --fork-url $RPC_URL
+```
+### 部署
+```sh
+forge script script/Vault.s.sol:VaultScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY  --broadcast
+```
+![Uploading Screenshot 2023-06-15 at 11.12.02 AM.png…]()
 
