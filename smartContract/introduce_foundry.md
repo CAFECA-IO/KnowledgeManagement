@@ -145,8 +145,8 @@ cast send <TO> <SIG> [ARGS] --rpc-url=$RPC --keystore=<PATH>
 ```
 #### ENS
 ```
-`cast resolve-name <NAME> --rpc-url=$RPC `
-`cast lookup-address <ADDRESS> --rpc-url=$RPC`
+cast resolve-name <NAME> --rpc-url=$RPC 
+cast lookup-address <ADDRESS> --rpc-url=$RPC
 ```
 #### 編碼解碼
 ```
