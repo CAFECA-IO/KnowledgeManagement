@@ -1,3 +1,13 @@
+# Git clone 我們的 Vault 專案
+* [Git repo](https://github.com/CAFECA-IO/Vault)
+```sh
+git clone https://github.com/CAFECA-IO/Vault.git
+```
+* 切換到 <latest> branch 
+```sh
+git fetch origin feature/transfer:feature/transfer
+git checkout feature/transfer
+```
 # 部署
 ## 現在本地端啟動模擬 fantom testnet 的節點
 ```sh
@@ -16,7 +26,7 @@ forge script script/Vault.s.sol:VaultScript --rpc-url $RPC_URL --private-key $PR
 <img width="1440" alt="Screenshot 2023-06-15 at 3 54 28 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/17acca24-e459-4c44-8fb8-be2282d74461">
 
 # 入金到我們的 Vault 合約
-## 使用我們的 USDT contract 鑄金(mint) 1 vUSDT
+## 使用我們的 USDT contract 鑄金(mint) 1 tbUSDT
 可以使用 `cast --to-wei <vault>` 知道對應的 wei
 <img width="471" alt="Screenshot 2023-06-15 at 3 58 53 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/79f63b4d-2fdc-433d-86e0-05fe2fa5cdaa">
 
@@ -34,7 +44,7 @@ cast receipt 0x2974cf935ebb39f341806541e7ac0161baad5814e4e03ba56056cc24fe6bab17 
 <img width="1285" alt="Screenshot 2023-06-15 at 4 04 17 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/a5d75b97-1632-483a-a78f-87ff400e13d4">
 <img width="1680" alt="Screenshot 2023-06-15 at 4 05 00 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/8ef30ace-8814-4e41-978d-d49c0fb1d600">
 
-## approval 1 vUSDT 給我們的 Vault contract
+## approval 1 tbUSDT 給我們的 Vault contract
 ```sh
 export ERC20_CONTRACT=0x32bad9d42f62a3c5aa373905b13ece56add9b682
 export ERC4626_CONTRACT=0xaeefb85c5a863bb42c3f5e291d2f56be7b1cc1ed
@@ -49,7 +59,7 @@ cast receipt 0x8c8c9fb817bd72f00e4f33513e036c9bb78046c6364dae095f0f7d97c488391b 
 <img width="1289" alt="Screenshot 2023-06-15 at 4 07 37 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/2e40c9ce-275b-4c53-bcca-50f82a10c5e6">
 <img width="1680" alt="Screenshot 2023-06-15 at 4 07 55 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/adc78002-2009-4372-9628-4ed38c9b0fe8">
 
-## 入金(deposit) 1 vUSDT 到我們的 Vault contract
+## 入金(deposit) 1 tbUSDT 到我們的 Vault contract ，得到 1 vUSDT
 ```sh
 export ERC20_CONTRACT=0x32bad9d42f62a3c5aa373905b13ece56add9b682
 export ERC4626_CONTRACT=0xaeefb85c5a863bb42c3f5e291d2f56be7b1cc1ed
@@ -159,6 +169,7 @@ cast call $ERC4626_CONTRACT "balanceOf(address)" $MY_ADDRESS --rpc-url $RPC_URL
 ## 轉 0.5 vUSDT (shares) 到其他錢包
 可以使用 `cast --to-wei <vault>` 知道 0.5 vUSDT 對應的 wei
 <img width="477" alt="Screenshot 2023-06-15 at 4 33 41 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/81e98c15-fd4b-4494-8b8d-8c17332632f3">
+### 方法 1: 使用 `transfer(address,unit)` 
 ```sh
 export ERC20_CONTRACT=0x32bad9d42f62a3c5aa373905b13ece56add9b682
 export ERC4626_CONTRACT=0xaeefb85c5a863bb42c3f5e291d2f56be7b1cc1ed
@@ -166,8 +177,8 @@ export MY_ADDRESS=0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 export ANOTHER_ADDRESS=0xfc657dAf7D901982a75ee4eCD4bDCF93bd767CA4
 cast send $ERC4626_CONTRACT "transfer(address,uint256)" $ANOTHER_ADDRESS 500000000000000000 --rpc-url $RPC_URL --private-key $PRIVATE_KEY  
 ```
-### 結果
-#### txhash
+#### 結果
+##### txhash
 ```sh
 cast receipt 0x59f3b0c35f21470ce411117fec980d200b0409c882e7df83bdb1bf6af11d0cdd --rpc-url $RPC_URL --json|jq
 ```
@@ -205,7 +216,7 @@ cast receipt 0x59f3b0c35f21470ce411117fec980d200b0409c882e7df83bdb1bf6af11d0cdd 
   "effectiveGasPrice": "0x3d3d75b0"
 }
 ```
-### 檢查
+#### 檢查
 1. check `balanceOf(address)` my address on ERC4626_CONTRACT，expect: 0.5 vUSDT
 ```sh
 cast call $ERC4626_CONTRACT "balanceOf(address)" $MY_ADDRESS --rpc-url $RPC_URL
@@ -222,7 +233,50 @@ cast call $ERC4626_CONTRACT "balanceOf(address)" $ANOTHER_ADDRESS --rpc-url $RPC
 <img width="1680" alt="Screenshot 2023-06-15 at 4 38 21 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/ee2b6ca6-bcad-45f4-8511-1571af314759">
 <img width="1680" alt="Screenshot 2023-06-15 at 4 38 34 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/6991f335-e1c6-4809-b621-1e06931189b8">
 
-## MY_ADDRESS 取款 0.5 vUSDT (shares) 到自己的錢包
+4. 從這個收到 shares 的 address 取款 0.5 tbUSDT (shares --> assets) 到自己的錢包
+```sh
+export ANOTHER_PRIVATE_KEY=<ANOTHER_PRIVATE_KEY>
+cast send $ERC4626_CONTRACT "withdraw(uint256,address)" 500000000000000000 $ANOTHER_ADDRESS --rpc-url $RPC_URL --private-key $ANOTHER_PRIVATE_KEY  
+```
+
+### 方法 2: 使用 `transferShares(uint256,address)` 
+```sh
+export ERC20_CONTRACT=
+export ERC4626_CONTRACT=
+export MY_ADDRESS=
+export ANOTHER_ADDRESS=
+cast send $CONTRACT_ERC4626 "transferShares(uint256,address)" 5000 $ADDRESS_2 --private-key $PRIVATE_KEY_1 --rpc-url $RPC_UR
+```
+#### 結果
+##### txhash
+```sh
+cast receipt <txhash> --rpc-url $RPC_URL --json|jq
+```
+```json=
+
+```
+#### 檢查
+1. check `balanceOf(address)` my address on ERC4626_CONTRACT，expect: 0.5 vUSDT
+```sh
+cast call $ERC4626_CONTRACT "balanceOf(address)" $MY_ADDRESS --rpc-url $RPC_URL
+```
+
+2. check `balanceOf(address)` another address on ERC4626_CONTRACT，expect: 0.5 vUSDT
+```sh
+cast call $ERC4626_CONTRACT "balanceOf(address)" $ANOTHER_ADDRESS --rpc-url $RPC_URL
+```
+
+3. 到 [fantom testnet](https://testnet.ftmscan.com/) 上查看
+
+4. 從這個收到 shares 的 address 取款 0.5 tbUSDT (shares --> assets) 到自己的錢包
+```sh
+export ANOTHER_PRIVATE_KEY=<ANOTHER_PRIVATE_KEY>
+cast send $CONTRACT_ERC4626 "withdraw(uint256)" 5000  --rpc-url $RPC_URL --private-key $PRIVATE_KEY_2
+```
+### 結果
+<img width="1287" alt="Screenshot 2023-06-15 at 4 57 40 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/991c6011-7708-4365-8bac-a35ed3091e1d">
+
+## MY_ADDRESS 取款 0.5 tbUSDT (shares --> assets) 到自己的錢包
 ```sh
 cast send $ERC4626_CONTRACT "withdraw(uint256,address)" 500000000000000000 $MY_ADDRESS --rpc-url $RPC_URL --private-key $PRIVATE_KEY  
 ```
@@ -314,10 +368,3 @@ cast call $ERC4626_CONTRACT "balanceOf(address)" $MY_ADDRESS --rpc-url $RPC_URL
 <img width="1680" alt="Screenshot 2023-06-15 at 4 45 32 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/188db1f4-5c45-490b-809b-e1975e54513b">
 <img width="1680" alt="Screenshot 2023-06-15 at 4 45 40 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/604337ca-3130-4108-9246-f267eed9fd44">
 
-## ANOTHER_ADDRESS 取款 0.5 vUSDT (shares) 到自己的錢包
-```sh
-export ANOTHER_PRIVATE_KEY=<ANOTHER_PRIVATE_KEY>
-cast send $ERC4626_CONTRACT "withdraw(uint256,address)" 500000000000000000 $ANOTHER_ADDRESS --rpc-url $RPC_URL --private-key $ANOTHER_PRIVATE_KEY  
-```
-### 結果
-<img width="1287" alt="Screenshot 2023-06-15 at 4 57 40 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/991c6011-7708-4365-8bac-a35ed3091e1d">
