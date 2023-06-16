@@ -1,11 +1,18 @@
 # Develop smart contract with foundry
 ## install foundry
+### Linux/Mac:
+這個指令是從 [foundry的首頁](https://getfoundry.sh/ 得到的
 ```sh=
 curl -L https://foundry.paradigm.xyz | bash
 ```
+### Windows:
+- [ref](https://book.getfoundry.sh/getting-started/installation#building-from-source)
+
+下載好後透過下列指令安裝 foundry提供的組件
 ```sh=
 foundryup
 ```
+
 ## create a new project with forge
 ```sh=
 forge init <Project_Name>
