@@ -5,7 +5,7 @@
   git clone https://github.com/CAFECA-IO/Vault.git
 ```
 
-切換到 <latest> branch 
+切換到 <latest> branch (SHA1: 5c260d8742a94cfea7e8f067686c68aebcfc04b7)
 
 ```sh
   cd Vault
@@ -18,7 +18,7 @@
   forge install
 ```
 
-**!!!  下列的
+**!!!  下列的演示是以 branch: <featrue/transfer> (SHA1: a4edd69f8f0bf5a92349f8a4a140d061d9674a4a) 做的**
 # 部署
 ## 現在本地端啟動模擬 fantom testnet 的節點
 ```sh
@@ -322,10 +322,15 @@ cast call $CONTRACT_ERC4626 "totalSharesOfUser(address)" $ADDRESS_1 --rpc-url $R
 ## 轉 0.5 vUSDT (shares) 到其他錢包
 可以使用 `cast --to-wei <vault>` 知道 0.5 vUSDT 對應的 wei
 <img width="477" alt="Screenshot 2023-06-15 at 4 33 41 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/81e98c15-fd4b-4494-8b8d-8c17332632f3">
-### 使用 `transferShares(uint256,address)` 
+### 使用`transferShares(uint256,address)`
+feature/public_usdt(SHA1: 5c260d8742a94cfea7e8f067686c68aebcfc04b7) 及 featrue/transfer (SHA1: a4edd69f8f0bf5a92349f8a4a140d061d9674a4a) 兩個版本都分別有 `transfer(address,uint256)` 及 `transferShares(uint256,address)` 的方法，都可以轉移 shares， feature/public_usdt(SHA1: 5c260d8742a94cfea7e8f067686c68aebcfc04b7) 的版本有進一步優化，且之後會之後會移除 `transferShares(uint256,address)` 的方法。兩個版本的 logs 會不一樣，但是兩個 command 均可以使用。
 ```sh
 cast send $CONTRACT_ERC4626 "transferShares(uint256,address)" 500000000000000000 $ADDRESS_2 --private-key $PRIVATE_KEY_1 --rpc-url $RPC_URL
 ```
+**** 如果要用   `transfer(address,uint256)` command 如下:
+```sh
+cast send $CONTRACT_ERC4626 "transfer(address,uint256)" $ADDRESS_2 500000000000000000 --private-key $PRIVATE_KEY_1 --rpc-url $RPC_URL
+```  
 ### 結果
 #### txhash
   <img width="1680" alt="Screenshot 2023-06-16 at 2 49 46 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/3b139c0c-eea2-4390-ae9d-c88d0fb12cbe">
