@@ -331,6 +331,8 @@ cast send $CONTRACT_ERC4626 "transferShares(uint256,address)" 500000000000000000
 ```sh
 cast send $CONTRACT_ERC4626 "transfer(address,uint256)" $ADDRESS_2 500000000000000000 --private-key $PRIVATE_KEY_1 --rpc-url $RPC_URL
 ```  
+可以到 [txhash: 0x6c671c64df038cfff77821d67a8b2ebf5f487ef532ca6438182d11ba61d462cf](https://testnet.ftmscan.com/tx/0x6c671c64df038cfff77821d67a8b2ebf5f487ef532ca6438182d11ba61d462cf) 上查看  
+  
 ### 結果
 #### txhash
   <img width="1680" alt="Screenshot 2023-06-16 at 2 49 46 PM" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/3b139c0c-eea2-4390-ae9d-c88d0fb12cbe">
