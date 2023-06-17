@@ -9,8 +9,8 @@
 
 ```sh
   cd Vault
-  git fetch origin featrue/transfer:featrue/transfer
-  git checkout featrue/transfer
+  git fetch origin feature/public_usdt:feature/public_usdt
+  git checkout feature/public_usdt
 ```
 
 # 安裝 dependency
@@ -18,6 +18,7 @@
   forge install
 ```
 
+**!!!  下列的
 # 部署
 ## 現在本地端啟動模擬 fantom testnet 的節點
 ```sh
