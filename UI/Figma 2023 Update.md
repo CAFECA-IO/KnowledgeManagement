@@ -2,7 +2,7 @@
 
 ![3d-illustration-figma-graphic-design-web-design-black-white-black-background](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/19e433c1-7c13-4784-bc78-48a0ed307079)
 
-<h3> 1. Auto-Layout </h3>
+<h2> 1. Auto-Layout </h2>
 <img width="236" alt="截圖 2023-07-25 下午2 34 21" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/54a48897-405b-440b-8a23-cd560ee81223">
 
 Before, we could only use auto layout in horizontal or vertical orientations. However, with the new update, now we can automatically wrap content when the witdth of the viewport is below a specific measurement.
@@ -18,7 +18,7 @@ Indeed, with the new features available, we can now truly create responsive desi
 
 <hr>
 
-<h3> 2. Variables </h3>
+<h2> 2. Variables </h2>
 Variables is a very powerful tool to systematize your design.
 
 <br><b> Types of variables </b>
@@ -90,7 +90,7 @@ It's more flexible and convenient when you create your design system with variab
 <br>For example:
 ![HC_variables-explain_GIF_2 5](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/9a4ff298-031c-4e98-b9de-35cd96c1bfd6)
 If we only want some tokens to change, this structure allows us to choose the correct token upstream and change it without having to manually rework everything downstream.
-
+<hr>
 <h3>References</h3>
 [Mizko- Figma's CONFIG 2023 Updates Explained | Real Examples](https://www.youtube.com/watch?v=jBXy30VwC_U&t=1097s)
 [Figma Learn](https://help.figma.com/hc/en-us)
