@@ -88,3 +88,7 @@ It's more flexible and convenient when you create your design system with variab
 <br>For example:
 ![HC_variables-explain_GIF_2 5](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/9a4ff298-031c-4e98-b9de-35cd96c1bfd6)
 If we only want some tokens to change, this structure allows us to choose the correct token upstream and change it without having to manually rework everything downstream.
+
+<h3>References</h3>
+[Mizko- Figma's CONFIG 2023 Updates Explained | Real Examples](https://www.youtube.com/watch?v=jBXy30VwC_U&t=1097s)
+[Figma Learn](https://help.figma.com/hc/en-us)
