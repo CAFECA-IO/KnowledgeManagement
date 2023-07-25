@@ -18,3 +18,65 @@ Indeed, with the new features available, we can now truly create responsive desi
 
 <h3> 2. Variables </h3>
 Variables is a very powerful tool to systematize your design.
+
+<br><b> Types of variables </b>
+
+There are four types of variables. Each one can be applied to specific properties and elements.
+
+<table style="height: 66px; width: 522px;">
+<thead>
+<tr style="height: 22px;">
+<th style="height: 22px; width: 121.812px;">Variable type</th>
+<th style="height: 22px; width: 133.375px;">Defined by</th>
+<th style="height: 22px; width: 256.812px;">Can be applied to</th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 113.812px;"><span class="ui-icon-no-border variable-color" aria-label="color variable type, color paint palette"></span> Color</td>
+<td style="height: 22px; width: 125.375px;">Solid fills</td>
+<td style="height: 22px; width: 248.812px;">
+<ul>
+<li>Fill colors</li>
+<li>Stroke colors</li>
+</ul>
+</td>
+</tr>
+<tr style="height: 22px;">
+<td style="height: 22px; width: 113.812px;"><span class="ui-icon-no-border variable-number" aria-label="number variable type, pound, hashtag"></span> Number</td>
+<td style="height: 22px; width: 125.375px;">Number values</td>
+<td style="height: 22px; width: 248.812px;">
+<ul>
+<li>Text layers</li>
+<li>Corner radius</li>
+<li>Minimum and maximum width/height</li>
+<li>Padding and gap between</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 113.812px;"><span class="ui-icon-no-border variable-string" aria-label="string variable type, text"></span> String</td>
+<td style="width: 125.375px;">
+<p>Text strings and variant names</p>
+</td>
+<td style="width: 248.812px;">
+<ul>
+<li>Text layers</li>
+<li>Variant instances</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 113.812px;"><span class="ui-icon-no-border variable-boolean" aria-label="boolean variable type, circle inside square"></span> Boolean</td>
+<td style="width: 125.375px;">
+<p>True/false values</p>
+</td>
+<td style="width: 248.812px;">
+<ul>
+<li>Layer visibility</li>
+<li>Variant instances with true/false values</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
