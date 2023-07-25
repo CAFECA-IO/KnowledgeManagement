@@ -20,8 +20,10 @@ Indeed, with the new features available, we can now truly create responsive desi
 
 <h2> 2. Variables </h2>
 Variables is a very powerful tool to systematize your design.
+<br>
+<br>
 
-<br><b> Types of variables </b>
+<b> - Types of variables </b>
 
 There are four types of variables. Each one can be applied to specific properties and elements.
 
@@ -83,7 +85,7 @@ There are four types of variables. Each one can be applied to specific propertie
 </tbody>
 </table>
 
-<br><b> Manage variables </b>
+<br><b> - Manage variables </b>
 <br>
 
 It's more flexible and convenient when you create your design system with variables insteand of style.
