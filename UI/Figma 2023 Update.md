@@ -16,7 +16,7 @@ We also have the option to set the minimum or maximum width for containers in fi
 
 Indeed, with the new features available, we can now truly create responsive designs. We have access to wrap auto layout, as well as the ability to set both minimum and maximum width or height for containers, making it easier to design and adapt to different viewport sizes.
 
-<hr>
+<br>
 
 <h2> 2. Variables </h2>
 Variables is a very powerful tool to systematize your design.
