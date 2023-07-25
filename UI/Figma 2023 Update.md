@@ -10,3 +10,7 @@ Before, we could only use auto layout in horizontal or vertical orientations. Ho
 <img width="235" alt="截圖 2023-07-25 下午2 39 45" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/b220272e-140f-4bdd-aa04-b0b9b9228edc">
 
 We also have the option to set the minimum or maximum width for containers in figma. Once the container reaches the minimum width, it will automatically start wrapping the content.
+
+Indeed, with the new features available, we can now truly create responsive designs. We have access to wrap auto layout, as well as the ability to set both minimum and maximum width or height for containers, making it easier to design and adapt to different viewport sizes.
+
+<h3> 2. Variables </h3>
