@@ -153,8 +153,8 @@ Step 2: Select the button and add interaction - on click - Conditional
 
 <hr>
 <h3>References</h3>
-<a href="https://www.youtube.com/watch?v=jBXy30VwC_U&t=1097s">Mizko- Figma's CONFIG 2023 Updates Explained | Real Examples</a>
-<a href="https://help.figma.com/hc/en-us">Figma Learn</a>
-<a href="https://www.youtube.com/watch?v=Tx45NcbU6aA&t=224s">DesignCoure- Figma Variables & Advanced Prototyping - Crash Course</a>
+<br><a href="https://www.youtube.com/watch?v=jBXy30VwC_U&t=1097s">Mizko- Figma's CONFIG 2023 Updates Explained | Real Examples</a>
+<br><a href="https://help.figma.com/hc/en-us">Figma Learn</a>
+<br><a href="https://www.youtube.com/watch?v=Tx45NcbU6aA&t=224s">DesignCoure- Figma Variables & Advanced Prototyping - Crash Course</a>
 
 
