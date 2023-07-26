@@ -154,6 +154,6 @@ Step 2: Select the button and add interaction - on click - Conditional
 <hr>
 <h3>References</h3>
 [Mizko- Figma's CONFIG 2023 Updates Explained | Real Examples](https://www.youtube.com/watch?v=jBXy30VwC_U&t=1097s)
-[Figma Learn](https://help.figma.com/hc/en-us)
-
+<br>[Figma Learn](https://help.figma.com/hc/en-us)
+<br>[DesignCoure- Figma Variables & Advanced Prototyping - Crash Course]([https://help.figma.com/hc/en-us](https://www.youtube.com/watch?v=Tx45NcbU6aA)https://www.youtube.com/watch?v=Tx45NcbU6aA)
 
