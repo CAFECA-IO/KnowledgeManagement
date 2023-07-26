@@ -128,7 +128,7 @@ Step 2: Binding the variable to the number next to the like button
 <br>
 <br>
 Step 3: Select the button and add interaction - on click - Set variable and add a simple logic by entering <b> #LikeCount +1</b>
-<br> ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/7b7e006a-e3ae-48ee-b877-aad584cf4493)
+<br>![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/7b7e006a-e3ae-48ee-b877-aad584cf4493)
 
 
 <br>
