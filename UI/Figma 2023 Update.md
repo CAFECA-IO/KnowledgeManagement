@@ -133,10 +133,25 @@ Developers can download assets from the file with just one click and choose the 
 
 ### Compare changes to see the latest
 
+<img width="100%" alt="feature4" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/76baf656-bb23-4210-9743-5f97415dd4e7">
+
+With this feature, developers can now easily see what changes were made by the designers between two versions.
+
+### Component playground
+
+<img width="100%" alt="feature5" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/92e6d469-28bb-4c2d-9c5a-5246225de7b7">
+
+In the component playground, developers are able to check all the variants of a component without worrying about impacting the design.
+
+### Figma for VScode
+
+<img width="100%" alt="feature6" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/341d9d3c-dd2f-4361-ae43-e1cc5885b993">
+
+With the Figma plugin on VSCode, you can put your code and the design side by side, allowing you to inspect Figma files, collaborate with designers, receive notifications, and get code suggestions to build faster.
+
 ### References
 
 - [Mizko- Figma's CONFIG 2023 Updates Explained | Real Examples](https://www.youtube.com/watch?v=jBXy30VwC_U&t=1097s)
 - [Figma Learn](https://help.figma.com/hc/en-us)
 - [DesignCourse- Figma Variables & Advanced Prototyping - Crash Course](https://www.youtube.com/watch?v=Tx45NcbU6aA&t=224s)
-
-
+- [CoderOne- Figma VSCode Extension!! Convert Design to Code!](https://www.youtube.com/watch?v=sNK-cPmnx94)
