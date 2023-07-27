@@ -91,7 +91,7 @@ There are four types of variables. Each one can be applied to specific propertie
 It's more flexible and convenient when you create your design system with variables insteand of style.
 <br>For example:
 ![HC_variables-explain_GIF_2 5](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/9a4ff298-031c-4e98-b9de-35cd96c1bfd6)
-(Photo by Figma)<br>
+(Image Credit: Figma)<br>
 <br>
 If we only want some tokens to change, this structure allows us to choose the correct token upstream and change it without having to manually rework everything downstream.
 
@@ -101,7 +101,7 @@ If we only want some tokens to change, this structure allows us to choose the co
 Variables also allow you to set different modes for your design, such as dark and light mode, or for different devices.
 So that you can manage the color, spacing, radius, or other value in different modes.
 <img width="960" alt="variable-default-mode" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/ea13df13-f4b9-463e-a361-f7d1e42c0558">
-(Photo by Figma)<br>
+(Image Credit: Figma)<br>
 <br>
 
 <h2> 3. Advanced prototyping </h2>
@@ -124,12 +124,12 @@ Step 1: Set a number variable named 'LikeCount' with an initial value of 0.
 <br>
 Step 2: Binding the variable to the number next to the like button
 <br>![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/60fd60f7-3be9-4cc5-b7f7-945ee1034406)
-
+(Image Credit: DesignCoure)<br>
 <br>
 <br>
 Step 3: Select the button and add interaction - on click - Set variable and add a simple logic by entering <b> #LikeCount +1</b>
 <br><img width="100%" alt="截圖 2023-07-26 下午4 16 06" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/7b7e006a-e3ae-48ee-b877-aad584cf4493">
-
+(Image Credit: DesignCoure)<br>
 
 <br>
 <br>So now when the user click on the like button, the number will increase by 1
@@ -140,10 +140,12 @@ Step 3: Select the button and add interaction - on click - Set variable and add 
 
 Step 1: Set a number variable named 'itemCount' with an initial value of 0.
 <br><img width="353" alt="截圖 2023-07-26 下午3 32 50" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/3278adbd-f879-41dd-a30c-46951b3213f5">
+(Image Credit: Figma)<br>
 <br>
 <br>
 Step 2: Select the button and add interaction - on click - Conditional
 <br>![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/905d340a-9b52-44e2-8f91-73f85525be5b)
+(Image Credit: Figma)<br>
 <br>
 <br>Step 3: Now you can  apply a simple logic to the button by entering 
 <br><b>if #itemCount >0 set variable #itemCount = #itemCount -1</b>
