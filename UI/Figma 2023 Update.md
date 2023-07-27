@@ -91,7 +91,7 @@ There are four types of variables. Each one can be applied to specific propertie
 It's more flexible and convenient when you create your design system with variables insteand of style.
 <br>For example:
 ![HC_variables-explain_GIF_2 5](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/9a4ff298-031c-4e98-b9de-35cd96c1bfd6)
-(Image Credit: Figma)<br>
+<br>(Image Credit: Figma)<br>
 <br>
 If we only want some tokens to change, this structure allows us to choose the correct token upstream and change it without having to manually rework everything downstream.
 
@@ -101,15 +101,16 @@ If we only want some tokens to change, this structure allows us to choose the co
 Variables also allow you to set different modes for your design, such as dark and light mode, or for different devices.
 So that you can manage the color, spacing, radius, or other value in different modes.
 <img width="960" alt="variable-default-mode" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/ea13df13-f4b9-463e-a361-f7d1e42c0558">
-(Image Credit: Figma)<br>
+<br>(Image Credit: Figma)<br>
 <br>
 
 <h2> 3. Advanced prototyping </h2>
 
 New features:
-
-<b>Set variables</b>
-<br><b>Conditional</b>
+<ul>
+<li><b>Set variables</b></li>
+<li><b>Conditional</b></li>
+</ul>
 
 Previous we talked about that variables essentially allow you to store information in your designs and they are actually what power the  advanced prototyping.
 By using the prototyping interaction to make changes to those variables and by binding elements of your designs to variables, you're able to create prototypes that have logic and are able to create screens that are dynamically update based on your variables.
@@ -159,12 +160,15 @@ Step 2: Select the button and add interaction - on click - Conditional
 
 Features:
 
-<b>Support different coding language and dimension units</b>
-<br><b>Communicate with your designer more easily </b>
-<br><b>Download Assets in one click </b>
-<br><b>Compare changes to see the latest </b>
-<br><b>Component playground </b>
-<br><b>Figma for VScode </b>
+<ul>
+<li><b>Support different coding language and dimension units</b></li>
+<li><b>Communicate with your designer more easily </b></li>
+<li><b>Download Assets in one click </b></li>
+<li><b>Compare changes to see the latest </b></li>
+<li><b>Component playground </b></li>
+<li><b>Figma for VScode </b></li>
+</ul>
+
 
 <hr>
 <h3>References</h3>
