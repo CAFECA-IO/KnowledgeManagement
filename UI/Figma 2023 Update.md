@@ -151,6 +151,18 @@ Step 2: Select the button and add interaction - on click - Conditional
 
 <br>This logic ensures that when users click on the '-' button, the number will automatically decrease by 1. However, we want to prevent the number from going below 0. So, the 'else' condition ensures that if the current #itemCount is greater than 0, it will decrement by 1; otherwise, it will be set to 0. With this condition, #itemCount will never be negative.
 
+
+<h2> 4. Dev-Mode </h2>
+
+Features:
+
+<b>Support different coding language and dimension units</b>
+<br><b>Communicate with your designer more easily </b>
+<br><b>Download Assets in one click </b>
+<br><b>Compare changes to see the latest </b>
+<br><b>Component playground </b>
+<br><b>Figma for VScode </b>
+
 <hr>
 <h3>References</h3>
 <br><a href="https://www.youtube.com/watch?v=jBXy30VwC_U&t=1097s">Mizko- Figma's CONFIG 2023 Updates Explained | Real Examples</a>
