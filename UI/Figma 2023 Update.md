@@ -78,8 +78,8 @@ Step 2: Select the button and add interaction - on click - Conditional
 
 Step 3: Now you can apply a simple logic to the button by entering:
 
-if #itemCount > 0 set variable #itemCount = #itemCount - 1
-else #itemCount > 0 set variable #itemCount = 0
+<b>if #itemCount > 0 set variable #itemCount = #itemCount - 1
+else #itemCount > 0 set variable #itemCount = 0</b>
 
 
 This logic ensures that when users click on the '-' button, the number will automatically decrease by 1. However, we want to prevent the number from going below 0. So, the 'else' condition ensures that if the current #itemCount is greater than 0, it will decrement by 1; otherwise, it will be set to 0. With this condition, #itemCount will never be negative.
@@ -94,6 +94,9 @@ Features:
 - Compare changes to see the latest
 - Component playground
 - Figma for VScode
+
+Dev-Mode is an incredibly amazing tool that brings design and development closer than ever before, making the job for developers easier and more convenient.
+
 
 ### References
 
