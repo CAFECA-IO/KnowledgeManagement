@@ -33,6 +33,8 @@ It's more flexible and convenient when you create your design system with variab
 
 ![Variables Example](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/9a4ff298-031c-4e98-b9de-35cd96c1bfd6)
 
+<sub>Image Credit: Figma</sub>
+
 If we only want some tokens to change, this structure allows us to choose the correct token upstream and change it without having to manually rework everything downstream.
 
 #### Modes Variables
@@ -40,6 +42,8 @@ If we only want some tokens to change, this structure allows us to choose the co
 Variables also allow you to set different modes for your design, such as dark and light mode, or for different devices. So that you can manage the color, spacing, radius, or other value in different modes.
 
 ![Modes Variables Example](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/ea13df13-f4b9-463e-a361-f7d1e42c0558)
+
+<sub>Image Credit: Figma</sub>
 
 ## 3. Advanced Prototyping
 
@@ -56,13 +60,19 @@ Step 1: Set a number variable named 'LikeCount' with an initial value of 0.
 
 ![Set Variables Step 1](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/02e8695e-9b83-4ed3-973e-c79d85d222d7)
 
+<sub>Image Credit: DesignCourse</sub>
+
 Step 2: Binding the variable to the number next to the like button
 
 ![Set Variables Step 2](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/60fd60f7-3be9-4cc5-b7f7-945ee1034406)
 
+<sub>Image Credit: DesignCourse</sub>
+
 Step 3: Select the button and add interaction - on click - Set variable and add a simple logic by entering `#LikeCount +1`
 
 ![Set Variables Step 3](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/7b7e006a-e3ae-48ee-b877-aad584cf4493)
+
+<sub>Image Credit: DesignCourse</sub>
 
 So now when the user clicks on the like button, the number will increase by 1.
 
@@ -72,9 +82,13 @@ Step 1: Set a number variable named 'itemCount' with an initial value of 0.
 
 ![Conditional Step 1](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/3278adbd-f879-41dd-a30c-46951b3213f5)
 
+<sub>Image Credit: Figma</sub>
+
 Step 2: Select the button and add interaction - on click - Conditional
 
 ![Conditional Step 2](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/905d340a-9b52-44e2-8f91-73f85525be5b)
+
+<sub>Image Credit: Figma</sub>
 
 Step 3: Now you can apply a simple logic to the button by entering:
 
@@ -95,8 +109,29 @@ Features:
 - Component playground
 - Figma for VScode
 
+<img width="100%" alt="Dev Mode Toggle" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/f01c6aa8-aa86-42c7-b6e3-6afd9e6267af">
+
 Dev-Mode is an incredibly amazing tool that brings design and development closer than ever before, making the job for developers easier and more convenient.
 
+### Support different coding languages and dimension units
+
+![feature1](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/8c57b9a1-1515-4a50-938e-f4a96f0daddd)
+
+Generate production-ready CSS, iOS, or Android code snippets from your design—or use a plugin to customize code for whatever framework you’re using.
+
+### Communicate with your designer more easily
+
+![feature2](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/3fedfc70-3779-4e19-a6ec-320ee5c49285)
+
+With the "Ready for dev" icon, developers can easily identify which pages or projects have been completed by the designer and start the development process. Additionally, it provides clarity on the most recent design changes, allowing developers to stay informed about updates and make necessary changes accordingly.
+
+### Download Assets in one click
+
+<img width="100%" alt="feature3" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/f8b2b1d7-400d-4f95-88fe-81e571f44a46">
+
+Developers can download assets from the file with just one click and choose the specific document type they need. Even if the assets are not displayed in the Asset area, they can still export them by clicking the export button.
+
+### Compare changes to see the latest
 
 ### References
 
