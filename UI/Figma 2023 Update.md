@@ -120,16 +120,17 @@ For example
 
 Step 1: Set a number variable named 'LikeCount' with an initial value of 0.
 <br><img width="849" alt="截圖 2023-07-26 下午4 16 06" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/02e8695e-9b83-4ed3-973e-c79d85d222d7">
+<br>(Image Credit: DesignCoure)<br>
 <br>
 <br>
 Step 2: Binding the variable to the number next to the like button
 <br>![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/60fd60f7-3be9-4cc5-b7f7-945ee1034406)
-(Image Credit: DesignCoure)<br>
+<br>(Image Credit: DesignCoure)<br>
 <br>
 <br>
 Step 3: Select the button and add interaction - on click - Set variable and add a simple logic by entering <b> #LikeCount +1</b>
 <br><img width="100%" alt="截圖 2023-07-26 下午4 16 06" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/7b7e006a-e3ae-48ee-b877-aad584cf4493">
-(Image Credit: DesignCoure)<br>
+<br>(Image Credit: DesignCoure)<br>
 
 <br>
 <br>So now when the user click on the like button, the number will increase by 1
@@ -140,12 +141,12 @@ Step 3: Select the button and add interaction - on click - Set variable and add 
 
 Step 1: Set a number variable named 'itemCount' with an initial value of 0.
 <br><img width="353" alt="截圖 2023-07-26 下午3 32 50" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/3278adbd-f879-41dd-a30c-46951b3213f5">
-(Image Credit: Figma)<br>
+<br>(Image Credit: Figma)<br>
 <br>
 <br>
 Step 2: Select the button and add interaction - on click - Conditional
 <br>![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/905d340a-9b52-44e2-8f91-73f85525be5b)
-(Image Credit: Figma)<br>
+<br>(Image Credit: Figma)<br>
 <br>
 <br>Step 3: Now you can  apply a simple logic to the button by entering 
 <br><b>if #itemCount >0 set variable #itemCount = #itemCount -1</b>
