@@ -210,12 +210,27 @@ OrderSchema.pre('save', async function(next) {
 
 這些特性確保了資料庫在處理交易時的可靠性和穩定性，並且可以防止數據損壞和丟失。
 
-
-
-
-
-
-
-
-
-transaction 的用法，會遇到的狀況
+# Mongoose 中更複雜的數據操作
+下面我將介紹一些你可能會遇到的高級查詢，例如聚合(aggregation)、連接(join)不同的 collection 等。
+1. 可以使用聚合(aggregation)進行數據的加總（Sum）等：
+你可以使用 Mongoose 的 aggregate 方法來進行數據的加總。例如，如果你想加總所有貓咪的年齡，你可以使用以下代碼：
+```
+async sumAge(): Promise<number> {
+  const result = await this.catModel.aggregate([
+    {
+      $group: {
+        _id: null,
+        total: { $sum: '$age' },
+      },
+    },
+  ]);
+  return result.length > 0 ? result[0].total : 0;
+}
+```
+2. 連接（Join）不同的 Collection：
+Mongoose 的 populate 方法可以用來連接不同的 collection。例如，如果你有一個 Owner model 和 Cat model，你可以使用以下代碼將它們連接起來：
+```
+const owners = await this.ownerModel.find()
+  .populate('cats')  // assuming 'cats' is a field in Owner model that refers to Cat model
+  .exec();
+```
