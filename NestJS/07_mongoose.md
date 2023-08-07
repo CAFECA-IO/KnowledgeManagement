@@ -122,7 +122,7 @@ Native MongoDB Node.js Driver: 這是 MongoDB 官方提供的 Node.js 驅動程�
 ### 測試 mongoose 跟原生 mongoDB 的效能差異
 1. 安裝必要的 npm 包：
 ```shell=
-npm install mongoose mongodb mongoose-auto-increment
+npm install mongoose mongodb
 ```
 2. 測試 insert data:
 insert 10萬筆 trade，trade 含有 auto increase ID 、timstamp、price、amount等屬性，每筆 trade 的 timestamp 間隔為 100ms
@@ -161,41 +161,44 @@ nativeMongoTest();
 **撰寫Mongoose測試用例:**
 ```typescript=
 const mongoose = require('mongoose');
-const autoIncrement = require('mongoose-auto-increment');
 
 const connection = mongoose.createConnection('mongodb://localhost:27017/testDB', { useNewUrlParser: true, useUnifiedTopology: true });
-autoIncrement.initialize(connection);
 
-const tradeSchema = new mongoose.Schema({
     id: Number,
     timestamp: Number,
     price: Number,
     amount: Number
 });
 
-tradeSchema.plugin(autoIncrement.plugin, { model: 'Trade', field: 'id', startAt: 1 });
 const Trade = connection.model('Trade', tradeSchema);
 
+async function getLastTradeID() {
+    const lastTrade = await Trade.findOne().sort({ id: -1 }).select('id');
+    return lastTrade ? lastTrade.id : 0;
+}
+
 async function mongooseTest() {
+    const currentID = await getLastTradeID();
     const startTime = Date.now();
 
     console.time("MongooseInsert");
     for (let i = 0; i < 100000; i++) {
         await Trade.create({
+            id: +currentID + i,
             timestamp: startTime + i * 100,
             price: Math.random() * 1000,
             amount: Math.random() * 10
         });
     }
     console.timeEnd("MongooseInsert");
-    
+
     await connection.close();
 }
 
 mongooseTest();
 ```
 3. 測試 aggregation:
-加總price*amount的測試，至少加總30000筆
+加總price*amount的測試，至少加總100000筆
 **原生 MongoDB 測試用例:**
 ```typescript=
 const { MongoClient } = require('mongodb');
@@ -210,7 +213,7 @@ async function nativeMongoSumTest() {
     const collection = db.collection('trades');
 
     const endTime = Date.now();
-    const startTime = endTime - (30000 * 100);
+    const startTime = endTime - (100000 * 100);
 
     console.time("NativeMongoSum");
     
@@ -253,10 +256,8 @@ nativeMongoSumTest();
 **撰寫Mongoose測試用例:**
 ```typescript=
 const mongoose = require('mongoose');
-const autoIncrement = require('mongoose-auto-increment');
 
 const connection = mongoose.createConnection('mongodb://localhost:27017/testDB', { useNewUrlParser: true, useUnifiedTopology: true });
-autoIncrement.initialize(connection);
 
 const tradeSchema = new mongoose.Schema({
     id: Number,
@@ -265,12 +266,11 @@ const tradeSchema = new mongoose.Schema({
     amount: Number
 });
 
-tradeSchema.plugin(autoIncrement.plugin, { model: 'Trade', field: 'id', startAt: 1 });
 const Trade = connection.model('Trade', tradeSchema);
 
 async function mongooseSumTest() {
     const endTime = Date.now();
-    const startTime = endTime - (30000 * 100);
+    const startTime = endTime - (100000 * 100);
 
     console.time("MongooseSum");
     
@@ -312,21 +312,24 @@ mongooseSumTest();
 ```
 ### 測試結果
 
-| insert      | 測試 1 耗時  | 測試 2 耗時  | 測試 3 耗時  | 測試 4 耗時  | 測試 5 耗時  | 平均耗時  |
-| -------------- | ----------  | ----------  | ----------  | ----------  | ----------  | ----------  |
-| native mongodb |         |          |         |         |         |         |         |
-| mongoose       |          |          |         |         |         |         |         |
+| insert         | 測試 1 耗時  | 測試 2 耗時  | 測試 3 耗時  | 測試 4 耗時  | 測試 5 耗時  | 平均耗時  |
+| -------------- | ----------- | ---------- | ---------- | ----------- | ---------- | ---------- |
+| native mongodb |     24.242s |    24.301s |    24.257s |    24.377s |    24.203s |     24.276s | 
+| mongoose       |     39.737s |    40.052s |    40.124s |    39.996s |    39.994s |    39.9806s | 
 
-| aggrefation      | 測試 1 耗時  | 測試 2 耗時  | 測試 3 耗時  | 測試 4 耗時  | 測試 5 耗時  | 平均耗時  |
-| -------------- | ----------  | ----------  | ----------  | ----------  | ----------  | ----------  |
-| native mongodb |         |          |         |         |         |         |         |
-| mongoose       |          |          |         |         |         |         |         |
+| aggrefation    | 測試 1 耗時  | 測試 2 耗時  | 測試 3 耗時  | 測試 4 耗時  | 測試 5 耗時  | 平均耗時  |
+| -------------- | ----------- | ---------- | ---------- | ----------- | ---------- | ----------  |
+| native mongodb |   481.365ms |   487.539ms |   485.882ms |   478.156ms |   475.872ms |   481.7628ms |
+| mongoose       |   488.866ms |   489.436ms |   496.954ms |    486.99ms |   488.727s |   490.1946ms |
 
 ### 結論
-整體來說，原生 MongoDB 驅動程式在效能上可能會稍微優於 Mongoose，因為它提供了更直接、更少抽象的數據庫操作。然而，Mongoose 提供的數據模型化、驗證和中間件功能可以極大地提升開發效率和代碼的可維護性，這些優勢可能會抵銷它在效能上的微小劣勢。最終哪種方法更適合你，將取決於你的具體需求和優先考慮的因素。所以在我看看這兩者之間的主要差別不在於效能，而是在於它們提供的特性和便利性。
+- 在insert操作上，使用原生的MongoDB驅動明顯比Mongoose快很多。這主要是因為Mongoose提供了一個更高級的抽象層，包括模型驗證、中間件、查詢構建等功能，而這些都會帶來一些額外的性能開銷。
+
+- 在aggrefation操作上，原生MongoDB和Mongoose之間的差距較小。這可能是因為聚合操作主要是在MongoDB伺服器端執行，而Mongoose只是提供了一個較為友好的界面來建立和發送這些操作。然而，儘管差距較小，原生的MongoDB驅動仍然略快於Mongoose。
+
+整體來說，原生 MongoDB 驅動程式在效能上可能會稍微優於 Mongoose，因為它提供了更直接、更少抽象的數據庫操作。然而，Mongoose 提供的數據模型化、驗證和中間件功能可以極大地提升開發效率和代碼的可維護性，這些優勢可能會抵銷它在效能上的微小劣勢。最終哪種方法更適合你，將取決於你的具體需求和優先考慮的因素。
 - 選擇使用 Mongoose 還是原生 MongoDB 需要考慮你的項目需求和優先事項。如果你更關心快速開發和模型驗證，而對於性能較為寬鬆，那麼 Mongoose 是個不錯的選擇。如果你需要追求極致的性能，並且願意犧牲一些開發便利性，那麼原生 MongoDB 驅動可能更適合你。最好根據項目的實際需求進行選擇。
 - 最佳方法是根據你的專案需求和預期的使用情況來選擇適合的方法。你也可以根據不同的場景結合使用兩者，例如在開發階段使用Mongoose，而在性能要求較高的生產環境中使用原生MongoDB。
-
 
 # 在 mongoose 中如何使用 transaction
 在 MongoDB 4.0 以後的版本中，引入了事務（transaction）的概念，可以讓你在一個單一的 session 中執行多個操作，並且這些操作可以一起被提交或者被回溯。在 NestJS 與 Mongoose 中，你可以使用以下方式來實現這種需求：
