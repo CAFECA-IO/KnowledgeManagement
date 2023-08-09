@@ -15,7 +15,7 @@ Decentralized Web Token（DeWT) 是我們專為 TideBit-DeFi 設計的去中心�
        * 當使用分散式系統或集群時，可能需要進行session同步，增加複雜性。
        * Cookies可能受到XSS和CSRF攻擊。
 
-![dewt drawio](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/bcde349c-a228-466d-8cca-ac517e2c1c5a)
+   ![dewt drawio](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/bcde349c-a228-466d-8cca-ac517e2c1c5a)
 
 2. **Token 驗證 (包括JWT、SSO)**：
     * **Token**：與Session類似，但不會儲存使用者資訊於伺服器。當使用者登入成功後，伺服器會發放一個Token給使用者，每次請求時帶上這個Token，伺服器驗證Token的有效性即可。
@@ -29,9 +29,9 @@ Decentralized Web Token（DeWT) 是我們專為 TideBit-DeFi 設計的去中心�
     * **缺點**：
        * 若Token遺失或被竊取，它可能被濫用，直到過期。
        * JWT的內容可以被解碼查看，因此不能用來儲存敏感資料。
-       * SSO實施需要考慮多種安全問題，可能增加複雜性。
+ * SSO實施需要考慮多種安全問題，可能增加複雜性。
 
-![dewt_2 drawio](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/57fc8b59-a1a6-45a0-ad53-9147b137cb50)
+   ![dewt_2 drawio](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/30471587-4633-4e96-a70d-d8c48fb05e1b)
 
 3. **OAuth 2.0 (開放授權)**：
     * OAuth 2.0 是一個讓第三方應用程式在未取得使用者明確帳戶和密碼的情況下，取得其資源的協定。例如，當您使用Google帳戶登入其他網站或應用時。
@@ -47,7 +47,7 @@ Decentralized Web Token（DeWT) 是我們專為 TideBit-DeFi 設計的去中心�
        * 若不正確或不安全地實施，可能會被攻擊者利用。
        * 某些OAuth 2.0流程（例如隱藏式）可能不夠安全，需要特別注意。
 
-![dewt drawio (1)](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/351084ee-07db-494d-9418-c47a07deb548)
+   ![dewt drawio (1)](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/351084ee-07db-494d-9418-c47a07deb548)
 
 **核心差異**：
 - **Session - Cookie**：伺服器中心化，是一種基於伺服器的身份驗證方法，需要伺服器持久化保存每個使用者的Session資料，使用者的瀏覽器需要支持並接受Cookies，使用伺服器儲存的Session資料和客戶端的Cookie進行驗證。
