@@ -14,24 +14,6 @@ Decentralized Web Token（DeWT) 是我們專為 TideBit-DeFi 設計的去中心�
        * 伺服器需保存大量session資料，對於大型或高流量的應用程式可能會造成伺服器壓力。
        * 當使用分散式系統或集群時，可能需要進行session同步，增加複雜性。
        * Cookies可能受到XSS和CSRF攻擊。
-       *
-
-   * **發行**：當用戶成功登入，伺服器生成一個Session ID。
-   * **驗證**：伺服器會在每次用戶的請求中確認Cookie中的Session ID是否與伺服器存儲的Session ID匹配。
-
-2. **Token (例如 JWT)**:
-   * **發行**：當用戶成功登入，伺服器生成一個Token並回傳給用戶。
-   * **驗證**：用戶在後續的請求中會帶上此Token，伺服器會驗證此Token的有效性（例如：對JWT進行解碼和檢查簽名）。
-
-3. **SSO (Single Sign-On)**:
-   * **發行**：用戶首次登入SSO系統時，SSO系統發行一個認證Token或票據。
-   * **驗證**：當用戶訪問其他與SSO聯盟的應用時，該應用會向SSO系統驗證用戶的Token或票據的有效性。
-
-4. **OAuth 2.0**:
-   * **發行**：用戶授權第三方應用訪問其資源後，認證伺服器會發行一個Access Token給第三方應用。
-   * **驗證**：第三方應用使用該Token來請求資源伺服器上的受保護資源。資源伺服器會驗證Token的有效性後才回傳資料。
-
-為了製作圖解，你可以考慮使用工具如：Visio、Lucidchart、draw.io等。在每個驗證流程中，可以繪製一個"用戶"圖示、一個"伺服器"或"應用程式"圖示，並使用箭頭來表示Token、Session ID或其他憑證的發行和驗證的方向。這樣，視覺化的流程可以幫助理解和解釋這些身份驗證機制。
 ![dewt drawio](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/bcde349c-a228-466d-8cca-ac517e2c1c5a)
 
 2. **Token 驗證 (包括JWT、SSO)**：
