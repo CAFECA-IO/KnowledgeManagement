@@ -47,6 +47,8 @@ Decentralized Web Token（DeWT) 是我們專為 TideBit-DeFi 設計的去中心�
        * 若不正確或不安全地實施，可能會被攻擊者利用。
        * 某些OAuth 2.0流程（例如隱藏式）可能不夠安全，需要特別注意。
 
+![dewt drawio (1)](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/351084ee-07db-494d-9418-c47a07deb548)
+
 **核心差異**：
 - **Session - Cookie**：伺服器中心化，是一種基於伺服器的身份驗證方法，需要伺服器持久化保存每個使用者的Session資料，使用者的瀏覽器需要支持並接受Cookies，使用伺服器儲存的Session資料和客戶端的Cookie進行驗證。
 - **Token 驗證**：與Session相反，是無狀態的身份驗證方法，不需要伺服器保存Session資料。使用Token進行驗證，其中JWT是一種常用的Token格式，具有自包含性，它可以在token本身儲存資訊。
