@@ -14,6 +14,7 @@ Decentralized Web Token（DeWT) 是我們專為 TideBit-DeFi 設計的去中心�
        * 伺服器需保存大量session資料，對於大型或高流量的應用程式可能會造成伺服器壓力。
        * 當使用分散式系統或集群時，可能需要進行session同步，增加複雜性。
        * Cookies可能受到XSS和CSRF攻擊。
+
 ![dewt drawio](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/bcde349c-a228-466d-8cca-ac517e2c1c5a)
 
 2. **Token 驗證 (包括JWT、SSO)**：
@@ -29,6 +30,7 @@ Decentralized Web Token（DeWT) 是我們專為 TideBit-DeFi 設計的去中心�
        * 若Token遺失或被竊取，它可能被濫用，直到過期。
        * JWT的內容可以被解碼查看，因此不能用來儲存敏感資料。
        * SSO實施需要考慮多種安全問題，可能增加複雜性。
+
 ![dewt_2 drawio](https://github.com/CAFECA-IO/KnowledgeManagement/assets/17249354/57fc8b59-a1a6-45a0-ad53-9147b137cb50)
 
 3. **OAuth 2.0 (開放授權)**：
