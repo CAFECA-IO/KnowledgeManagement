@@ -1,3 +1,12 @@
+---
+date: 1691452800
+title: 'mongoose: odm solution of mongoDB'
+description:
+  '這篇文章深入探討了 mongoose，這是一個用於 Node.js 的 MongoDB ODM（Object Document Mapper）工具。文章首先解釋了 mongoose 的基本概念、特點和主要功能。其次，文章比較了 mongoose 和其他 MongoDB 互動工具的優缺點，接著，文章探討了 mongoose 與原生 MongoDB 之間的性能差異，並提供了一套測試流程，以測試兩者在插入和聚合操作上的效能差異。'
+picture: '/km/03.png'
+category: ['KM_CATEGORY.DATABASE']
+authorId: 'emily'
+---
 # mongoose: odm solution of mongoDB
 ## mongoose 是什麼
 `mongoose` 是一個 Node.js 套件，是 MongoDB 的 ODM（Object Document Mapper，物件數據映射，解釋見下方補充說明的部分）物件模型工具，用於異步處理環境中對 MongoDB 資料庫的操作。
@@ -346,14 +355,17 @@ mongooseSumTest();
 
 將單機模式的 MongoDB 轉換為副本集需要以下步驟([ref:](https://www.mongodb.com/docs/manual/tutorial/convert-standalone-to-replica-set/))：
 1. DB 備份
-```
+
+```shell=
 mongodump -d tidebit-defi -o /home/tidebit/tidebit-defi.backup
 ```
+
 2. 關閉 database
   2.1. 使用 `mongosh` 連線進入 `mongod` 實體
   2.2. 使用 admin `use admin`
   2.3. 使用下列語句關閉 database
-```
+   
+```shell=
    db.adminCommand(
      {
         shutdown: 1,
@@ -361,42 +373,58 @@ mongodump -d tidebit-defi -o /home/tidebit/tidebit-defi.backup
      }
    )
 ```
+
 3. 修改 MongoDB 配置文件
 MongoDB 的配置文件通常為 mongod.conf 或 mongodb.conf。在該配置文件中，需要添加或修改以下行來指定副本集名稱：
-```
+
+```shell=
 replication:
   replSetName: "rs0"
 ```
+
 "rs0" 是副本集的名稱，你可以根據需要來修改。
 **注意，這需要在你打算加入副本集的每一台機器上都進行。**
+
 4. 重新啟動 MongoDB
 我們是是使用 screen 啟動 mongoDB
-```
+
+```shell=
 sudo screen mongod --config /etc/mongod.conf --replSet
 ```
+
 5. 初始化副本集
 在任何一台你打算加入副本集的機器上，使用 `mongosh` 連線進入 `mongod` 實體，然後執行以下命令來初始化副本集
-```
+
+```shell=
 rs.initiate()
 ```
+
 6. 添加節點到副本集
 使用以下命令來將其他機器添加到副本集：
-```
+
+```shell=
 rs.add("mongodb://otherhost:27017")
 ```
+
 "otherhost" 應該替換為你打算添加的機器的主機名或 IP 地址。如果 MongoDB 服務不是運行在標準端口（27017）上，也需要修改端口號。
+
 7. 確認副本集狀態
 使用以下命令來檢查副本集的狀態：
-```
+
+```shell=
 rs.status()
 ```
+
 這將顯示副本集的狀態，包括所有節點的狀態和選舉狀態等。
+
 8. 如果更新失敗要將 DB 復原
-```
+
+```shell=
 mv /var/lib/mongodb  /var/lib/mongodb.backup
 mkdir /var/lib/mongodb 
 mongorestore --drop /home/tidebit/tidebit-defi.backup/ --nsInclude=tidebit-defi.*
 ```
+
 [add user to DB](https://github.com/CAFECA-IO/KnowledgeManagement/blob/master/deploy/mongodb.md#add-a-user-to-a-database)
 
 請注意，副本集需要至少三個節點才能正常工作。在只有兩個數據節點的情況下，建議添加一個仲裁節點（arbiter），仲裁節點不持有數據，但可以參與選舉過程。
@@ -409,6 +437,7 @@ const session = await this.model.startSession();
 session.startTransaction();
 ```
 ### 3. 在此 session 中執行數據庫操作：
+
 ```typescript=
 try {
   const opts = { session };
@@ -430,7 +459,7 @@ try {
   session.endSession();
 }
 ```
-在上述代碼中，{ $inc: { balance: amount } } 用於將餘額增加特定的數量。如果該操作導致餘額變為負數，則該操作將拋出一個錯誤，事務將被回溯，並且之前在此事務中所做的所有操作都將被撤銷。
+在上述代碼中 `{ $inc: { balance: amount } }` 用於將餘額增加特定的數量。如果該操作導致餘額變為負數，則該操作將拋出一個錯誤，事務將被回溯，並且之前在此事務中所做的所有操作都將被撤銷。
 
 注意，MongoDB 的事務功能需要在同一個 replica set 中的多個伺服器之間進行協調，因此在使用該功能時可能會有一些效能的開銷。
 
@@ -438,7 +467,8 @@ try {
 要在 NestJS 中連接到 MongoDB 副本集，你需要在 MongooseModule 中提供適當的連接字串和選項。
 
 在副本集的連接字串中，你需要列出副本集中的所有節點，並指定副本集的名稱。一個典型的 MongoDB 副本集連接字串如下：
-```
+
+```shell=
 mongodb://host1:27017,host2:27017,host3:27017/mydatabase?replicaSet=myReplicaSet
 ```
 在上面的連接字串中，host1、host2 和 host3 是副本集中的節點，27017 是他們的端口，mydatabase 是你的數據庫名稱，myReplicaSet 是副本集的名稱。
@@ -453,7 +483,8 @@ mongodb://host1:27017,host2:27017,host3:27017/mydatabase?replicaSet=myReplicaSet
 在單機 MongoDB 環境下，使用 Mongoose 的 middleware，你可以定義在保存、更新或刪除 document 之前或之後要執行的操作。這在某些情況下可以模擬事務的行為，以下面的例子來說明，假設我們有 User 和 Order 兩個模型，一個用戶想要創建一個訂單，這需要在 Order 集合中新增一個文檔並從 User 集合中的對應用戶餘額中扣除訂單金額。
 
 下面的程式碼展示了如何在 Order 模型的 save 方法被調用之前，先檢查用戶餘額是否足夠並做扣款的操作：
-```
+
+```typescript=
 import { Schema } from 'mongoose';
 import { User } from './models/user.model';
 
@@ -502,7 +533,8 @@ OrderSchema.pre('save', async function(next) {
 下面我將介紹一些你可能會遇到的高級查詢，例如聚合(aggregation)、連接(join)不同的 collection 等。
 1. 可以使用聚合(aggregation)進行數據的加總（Sum）等：
 你可以使用 Mongoose 的 aggregate 方法來進行數據的加總。例如，如果你想加總所有貓咪的年齡，你可以使用以下代碼：
-```
+
+```typescript=
 async sumAge(): Promise<number> {
   const result = await this.catModel.aggregate([
     {
@@ -515,9 +547,11 @@ async sumAge(): Promise<number> {
   return result.length > 0 ? result[0].total : 0;
 }
 ```
+
 2. 連接（Join）不同的 Collection：
 Mongoose 的 populate 方法可以用來連接不同的 collection。例如，如果你有一個 Owner model 和 Cat model，你可以使用以下代碼將它們連接起來：
-```
+
+```typescript=
 const owners = await this.ownerModel.find()
   .populate('cats')  // assuming 'cats' is a field in Owner model that refers to Cat model
   .exec();
