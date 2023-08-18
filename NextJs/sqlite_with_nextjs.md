@@ -110,7 +110,7 @@ const post = await prisma.post.findMany({
   },
 })
 
-// Read all
+// Get all
 const allPosts = await prisma.post.findMany()
 ```
 
@@ -124,6 +124,86 @@ const updatePost = await prisma.post.update({
     categories: 'newbie',
   },
 })
+```
+
+### Delete
+```jsx
+const deletePosts = await prisma.post.deleteMany({
+  where: {
+    author: {
+      contains: 'julian',
+    },
+  },
+})
+```
+
+## 應用實例
+- API 內容
+```ts
+// /api/addPosts.ts
+import {NextApiRequest, NextApiResponse} from 'next';
+import {PrismaClient} from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Info (20230818 - Julian) Check if the method is POST
+  if (req.method !== 'POST') {
+    return res.status(405).json({message: 'Method not allowed'});
+  }
+
+  const contactData = JSON.parse(req.body);
+  // Info (20230818 - Julian) Create a new contact in the database
+  const saveContact = await prisma.post.create({
+    data: contactData,
+  });
+
+  res.status(200).json(saveContact);
+}
+```
+
+- Form component (節錄)
+```jsx
+const FormComponent  = () => {
+  {...}
+  // Info: (20230818 - Julian) Call API to add new post
+  const addPost = async (kmData: IKMData) => {
+    const response = await fetch('/api/addPost', {
+      method: 'POST',
+      body: JSON.stringify(kmData),
+    });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    return await response.json();
+  };
+
+  // Info: (20230818 - Julian) Click submit button
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    const newData: IKMData = {
+      id: kmId,
+      author: inputAuthorId,
+      title: inputTitle,
+      description: inputDescription,
+      picture: inputPicture,
+      categories: inputCategory,
+      content: inputContent,
+    };
+
+    try {
+      event.preventDefault();
+
+      await addPost(newData);
+      ...
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return(...)
+}
 ```
 
 
