@@ -41,21 +41,93 @@ datasource db {
 
 ### 設定 Data Modal
 ```prisma
-model KnowledgeManagement {
-  id          String   @id @unique
+model Post {
+  id          String   @id
   title       String
   description String
   categories  String
   picture     String
-  authorId    String
+  author      String
   content     String
   date        DateTime @default(now())
 }
 ```
 
-- 這裡定義資料表的欄位、屬性和關聯。
+- 這裡定義資料表的欄位、屬性和關聯。以下為標籤的說明
+  -  `@id`：主鍵
+  -  `@unique`：表示欄位不能重覆
+  -  `@default`：設定欄位預設值，例如 `@default(autoincrement())` 自動遞增、`@default(now())` 預設為目前時間等...
+  -  `@relation`：描述不同 model 的欄位關聯性，詳細的說明可參考[官方文件](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)
 
-參考來源
+## 生成 Migration
+```shell
+npx prisma migrate dev --name init
+```
+
+- 在 `migration.sql` 中記錄了要放入資料庫的 Table 。在本例中只有一個 `Post` Table
+<img width="886" alt="image" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/46b5c0c3-34e1-484c-8392-aa9c3306a5fa">
+
+接下來執行 Prisma Studio：
+
+```shell
+npx prisma studio
+```
+
+- 執行後就可以在瀏覽器上透過 GUI 操作剛才生成的 Table
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/cb7a3a7b-d1f7-4b6b-bd0a-a85c5ac9d0a7)
+
+## 連接 Next.js
+```jsx
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+```
+完成資料庫的設定後，就可以在 Next.js 中進行 CRUD
+
+### Create
+```jsx
+  const saveContact = await prisma.post.create({
+    data: {
+      id: 'km-20230818001',
+      title: 'I am a title',
+      description: "I'm a description",
+      categories: 'category',
+      picture: '/picture_src',
+      author: 'julian',
+      content: 'I am content',
+    },
+  });
+```
+
+### Read 
+```jsx
+// Filter by a single value
+const post = await prisma.post.findMany({
+  where: {
+    id: {
+      endsWith: '001',
+    },
+  },
+})
+
+// Read all
+const allPosts = await prisma.post.findMany()
+```
+
+### Update
+```jsx
+const updatePost = await prisma.post.update({
+  where: {
+    id: 'km-20230818001',
+  },
+  data: {
+    categories: 'newbie',
+  },
+})
+```
+
+
+### 參考來源
 - [Prisma](https://www.prisma.io/docs/concepts/components/prisma-schema)
 - [Using SQLite with Next.js 13](https://javascript.plainenglish.io/using-sqlite-with-next-js-13-cfa270e1d7ba)
 - [The Easiest Way to Work with a Database in Next.js](https://www.youtube.com/watch?v=FMnlyi60avU)
