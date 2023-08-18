@@ -56,7 +56,7 @@ model KnowledgeManagement {
 - 這裡定義資料表的欄位、屬性和關聯。
 
 參考來源
-- [Prisma](https://www.prisma.io/)
+- [Prisma](https://www.prisma.io/docs/concepts/components/prisma-schema)
 - [Using SQLite with Next.js 13](https://javascript.plainenglish.io/using-sqlite-with-next-js-13-cfa270e1d7ba)
 - [The Easiest Way to Work with a Database in Next.js](https://www.youtube.com/watch?v=FMnlyi60avU)
 - [仿Trello - Prisma 安裝與 Schema 建立](https://ithelp.ithome.com.tw/articles/10250424)
