@@ -73,6 +73,7 @@ JWT 為 JSON Web Token 是一種開放標準（RFC 7519），它定義了一種�
 3. 收到資料後，後端伺服器根據用戶的資料產生對應的 JSON ，其 JSON 含有三個部份 header、payload、signature(在第三步產生)。
 4. 由伺服器對用 [Base64 編碼](https://www.base64encode.org/)的 header、payload 簽名得到 signature，得到的 signature也用[Base64 編碼](https://www.base64encode.org/)。
 5. 得到 Token， Token 是 header、payload、signature 分別[Base64 編碼](https://www.base64encode.org/)後得到的結果用點(.)將三者串聯起來。
+
 ```javascript
 const JWT = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e25hbWU6Ikpob24gRG9lIixleHBpcmVkOjE2ODA3NjE1MDAzMDEsYWRtaW46dHJ1ZX0.PT7k3siYn67lJBMYzQkj/yLsLt1SYGztgTTiR5or1Ss='
 ```
@@ -136,6 +137,7 @@ DeWT 為簽名的內容加上用戶簽名的結果進行 rlp 編碼。
 - signer： 用戶簽名錢包的地址
 - expired： DeWT 的到期時間，簽名後的 1 小時到期。
 - iat: issue at，DeWT 的簽名時間
+
 ```javascript!
 const payload = {
     domain: "https://www.tidebit-defi.com",
@@ -146,7 +148,9 @@ const payload = {
     iat: "{timestamp}"
 }
 ```
+
 #### 簽名結果:
+
 ```javascript!
 const signature = {
     r,
