@@ -55,7 +55,7 @@
 - 股利的支付 (Payments of dividends)
 - 庫藏股 (Treasury Stock): 購買或出售自家股票
 
-## 非現金的投資與籌資活動補充 (Supplemental schedule of non-cash investing and financing activities)
+## 非現金的營運活動補充 (Supplemental schedule of non-cash operating activities)
 
 - 用加密貨幣購買加密貨幣(Purchase of crypto assets and investments with non-cash consideration)
 - 賣掉加密貨幣獲得加密貨幣(Disposal of crypto assets for non-cash consideration)
