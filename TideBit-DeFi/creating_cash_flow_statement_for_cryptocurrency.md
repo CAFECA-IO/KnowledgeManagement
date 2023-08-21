@@ -94,7 +94,7 @@ USDT：($1,000)
 
 Other current and non-current assets：($1,000)
 
-## 現貨交易
+## 現貨交易 (補充交易所自己買加密貨幣)
 
 ### 買BTC
 
@@ -102,11 +102,19 @@ Other current and non-current assets：($1,000)
 
 **營運活動現金流量**：
 
+USDT: ($1000)
+
+Other current and non-current assets: $1000
+
 Transaction revenue: $10
 
 - 指定期間內，用戶下單買 1 BTC (市價 1000 美元，我們給用戶的買價是 1010 美元)，我們自己就有 1 BTC 可以賣給用戶
 
 **營運活動現金流量**：
+
+USDT: $1000
+
+Other current and non-current assets: ($1000)
 
 Transaction revenue: $10
 
@@ -125,7 +133,7 @@ Transaction revenue: $10
 Transaction revenue: $10
 
 
-## CFD交易
+## CFD交易 (關倉的時候會不會有現金流入?)
 
 ### 做多BTC
 
