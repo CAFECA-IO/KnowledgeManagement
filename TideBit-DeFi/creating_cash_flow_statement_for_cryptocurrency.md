@@ -94,7 +94,7 @@ USDT：($1,000)
 
 Other current and non-current assets：($1,000)
 
-## 現貨交易 (補充交易所自己買加密貨幣)
+## 現貨交易 (補充交易所自己定期買加密貨幣)
 
 ### 買BTC
 
@@ -163,7 +163,7 @@ Transaction revenue: $10
 
 Transaction revenue: $10
 
-## 永續合約
+## 永續合約 (跟現貨交易概念一樣，除了沒有到期日)
 
 ### **1. 未平倉 (Open Position)**
 
@@ -197,7 +197,7 @@ Transaction revenue: 取決於具體情況
 
 沒變化
 
-### **5. 強制平倉 (Liquidation)**
+### **5. 強制平倉 (Liquidation)** (補充交易所做交易的例子)
 
 - 用戶的保證金不足，交易所強制平倉用戶的倉位，並從中賺取強制平倉手續費。
 
