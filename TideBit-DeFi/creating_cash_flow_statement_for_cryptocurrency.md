@@ -155,6 +155,8 @@ Transaction revenue: $10
 
 Transaction revenue: $10
 
+## 永續合約
+
 ### **1. 未平倉 (Open Position)**
 
 - 指定期間內，用戶下單做多 1 BTC的永續合約 (市價 1000 美元) 但還未關閉，交易所尚未有任何現金流動。
