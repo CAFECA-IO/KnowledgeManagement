@@ -1,4 +1,7 @@
 # Using SQLite with Next.js
+## 什麼是嵌入式資料庫
+不需另外安裝，能和系統程式語言整合到應用程式中的輕量級資料庫。由於資料庫就儲存在應用程式的本地文件中，無須網路連線，資料的存取可以更快速。嵌入式資料庫通常不需要複雜的配置過程，應用程式在運行時即可自動創建和管理資料庫。沒有額外的伺服器，所以部署和安裝也相對簡單，通常只須將資料庫文件和應用程式一起打包即可。而且大多數嵌入式資料庫都支持標準的 SQL 查詢語言，使得資料操作更便利，特別適合使用手機應用程式、桌面應用程式、嵌入式系統和遊戲開發等。
+
 ## 安裝 Prisma
 `Prisma` 是一套可以透過 `JavaScript` 或 `TypeScript` 來操作資料庫套件，幫助開發人員更輕鬆地管理資料庫。能夠串接 `PostgreSQL`、`MySQL`、`SQLite`、`MongoDB` 等資料庫，並且提供 GUI 介面。
 
@@ -208,6 +211,7 @@ const FormComponent  = () => {
 
 
 ### 參考來源
+- [嵌入式資料庫SQLite實務初探](https://www.syscom.com.tw/ePaper_Content_EPArticledetail.aspx?id=191&EPID)
 - [Prisma](https://www.prisma.io/docs/concepts/components/prisma-schema)
 - [Using SQLite with Next.js 13](https://javascript.plainenglish.io/using-sqlite-with-next-js-13-cfa270e1d7ba)
 - [The Easiest Way to Work with a Database in Next.js](https://www.youtube.com/watch?v=FMnlyi60avU)
