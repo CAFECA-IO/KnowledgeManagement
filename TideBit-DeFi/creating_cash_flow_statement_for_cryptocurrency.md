@@ -163,7 +163,9 @@ Transaction revenue: $10
 
 **營運活動現金流量**：
 
-Funding rate: 取決於市場條件
+Funding rate: 0.1%
+
+Funding payment: $1 (用戶支付給交易所或反向交易的用戶)
 
 ### 做空BTC
 
@@ -171,7 +173,9 @@ Funding rate: 取決於市場條件
 
 **營運活動現金流量**：
 
-Funding rate: 取決於市場條件
+Funding rate: 0.1%
+
+Funding payment: -$1 (交易所或反向交易的用戶支付給用戶)
 
 
 # **現金流量表的製作方法和注意事項**
