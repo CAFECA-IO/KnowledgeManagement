@@ -3,22 +3,19 @@
 不需另外安裝，就能和系統程式語言整合到應用程式中的輕量級資料庫。由於資料庫就儲存在應用程式的本地文件中，無須網路連線，資料的存取可以更快速。嵌入式資料庫通常不需要複雜的配置過程，應用程式在運行時即可自動創建和管理資料庫。沒有額外的伺服器，所以部署和安裝也相對簡單，通常只須將資料庫文件和應用程式一起打包即可。而且大多數嵌入式資料庫都支持標準的 SQL 查詢語言，使得資料操作更便利，特別適合使用手機應用程式、桌面應用程式、嵌入式系統和遊戲開發等。
 
 ## 常見的嵌入式資料庫
-1. SQLite：輕量級、零配置、支持標準 SQL 查詢語言和跨平台（包括移動設備和桌面應用程式），符合 ACID(Atomicity, Consistency, Isolation, Durability)。但是 SQLite 在多個使用者同時寫入操作時可能會受到一些限制，因此不適用於高流量的場景；如果應用程式為單用戶取向，未來也不會需要支援多用戶訪問，那麼 SQLite 提供了最簡單和高效的本地資料儲存解決方案。
-2. Firebird：輕量級、支持跨平台和 ACID ，確保資料一致性。與 SQLite 不同的是，Firebird 能支援多個使用者同時訪問，特別適用於多用戶、伺服器端的場景。另外，Firebird 是完全開源的，可以自由使用和修改。
-3. H2 Database：使用 Java 開發的輕量級嵌入式資料庫，支援 SQL 和 JDBC（Java Database Connectivity，是Java語言中用來規範客戶端程式如何來訪問資料庫的應用程式介面）。可以在本地快速啟動，並支援瀏覽器的 Console 介面。但由於其主要針對 Java，所以不太適用於非 Java 的應用程式。
-4. Realm：適用於移動應用程式，特別是需要離線儲存和同步功能的場景，支援 iOS 和 Android，並提供跨平台的同步功能。Realm 還提供物件映射（ORM）API，避免讓使用者直接接觸 SQL 語法，簡化了程式語言的複雜度。但缺點是其關聯式查詢需求可能受限，相對不如其他嵌入式資料庫靈活。
+1. SQLite：輕量級、零配置、支持標準 SQL 查詢語言和跨平台（包括移動設備和桌面應用程式），符合 ACID(Atomicity, Consistency, Isolation, Durability)。但是 SQLite 在多個使用者同時寫入操作時可能會受到一些限制，因此不適用於高流量的場景。SQLite 提供了最簡單和高效的本地資料儲存解決方案，如果**應用程式為單用戶取向，未來也不會需要支援多用戶訪問**，那麼 SQLite 會是最好的嵌入式資料庫選擇。
+3. Firebird：輕量級、支持跨平台和 ACID ，確保資料一致性。與 SQLite 不同的是，Firebird 能支援多個使用者同時訪問，特別適用於多用戶、伺服器端的場景。另外，Firebird 是完全開源的，可以自由使用和修改。
+4. H2 Database：使用 Java 開發的輕量級嵌入式資料庫，支援 SQL 和 JDBC（Java Database Connectivity，是Java語言中用來規範客戶端程式如何來訪問資料庫的應用程式介面）。可以在本地快速啟動，並支援瀏覽器的 Console 介面。但由於其主要針對 Java，所以不太適用於非 Java 的應用程式。
+5. Realm：適用於移動應用程式，特別是需要離線儲存和同步功能的場景，支援 iOS 和 Android，並提供跨平台的同步功能。Realm 還提供物件映射（ORM）API，避免讓使用者直接接觸 SQL 語法，簡化了程式語言的複雜度。但缺點是其關聯式查詢需求可能受限，相對不如其他嵌入式資料庫靈活。
 
-分析以上多種嵌入式資料庫，我們選擇在本次專案中使用**SQLite**。
+## 連接 Next.js
+以下是提供在 Next.js 中連接 SQLite 資料庫的工具：
+1. Prisma：一套可以透過 JavaScript 或 TypeScript 來操作資料庫套件，幫助開發人員更輕鬆地管理資料庫。能夠串接 `PostgreSQL`、`MySQL`、`SQLite`、`MongoDB` 等資料庫，並且提供 GUI 介面。Prisma 可以自動從資料庫結構生成模型，而無需手動定義模型；還提供資料庫遷移功能，模型結構變化時也能輕鬆地同步資料庫結構，不必手動更新資料庫。相較於其他工具，**Prisma 擁有許多自動化功能，使開發者更高效地操作和管理資料庫**。
+2. TypeORM：一個支援多種資料庫的 ORM 框架，其中就包括 SQLite，能夠使用 TypeScript 定義模型並進行查詢。
+3. Sequelize：另一個流行的 Node.js ORM，提供了強大的查詢和模型定義功能，支援多種包括 SQLite 的資料庫。
+4. SQLite3 NPM Package：如果想以更原生的方式進行 SQLite 連接，可以直接使用 sqlite3 NPM 套件。該套件提供一個能夠使用 SQL 語句直接與 SQLite 進行互動的簡單介面。
 
-## Prisma
-`Prisma` 是一套可以透過 `JavaScript` 或 `TypeScript` 來操作資料庫套件，幫助開發人員更輕鬆地管理資料庫。能夠串接 `PostgreSQL`、`MySQL`、`SQLite`、`MongoDB` 等資料庫，並且提供 GUI 介面。
-
-其他類似功能的工具有：
-1. Sequelize：用於 Node.js 的 ORM，支援多種關聯式數據庫，如 MySQL、PostgreSQL 和 SQLite。它提供類似 Prisma 的映射功能。
-2. TypeORM：也是 Node.js 的 ORM，專注於 TypeScript，同樣支援多種關聯式數據庫，且具有良好的類型安全性。
-3. SQLAlchemy：Python 的 ORM，支援多種關聯式數據庫。它提供了豐富的映射和查詢功能，並支援多種 SQL 表達式。
-4. Hibernate：Java 的 ORM，專注於 Java 語言，支援多種關聯式數據庫。它提供了強大的映射和查詢功能，並廣泛用於 Java 開發領域。
-
+## 安裝 Prisma
 - 透過 npm 安裝 Prisma
 ```shell
 npm i -D prisma
@@ -41,7 +38,7 @@ npx prisma init
 - 如果使用的是 VS Code ，可以安裝 `Prisma` 套件讓文件自動標色，提升可讀性
 <img width="984" alt="image" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/fac794ce-aa94-4aa6-86f2-73926701d7b7">
 
-- 另外，在 `.env` 也會出現預設的 darabase url ，將 DATABASE_URL 改為 `file:./dev.db`
+- 另外，在 `.env` 也會出現預設的 database url ，將 DATABASE_URL 改為 `file:./dev.db`
 
 <img width="1014" alt="image" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/29661cf2-b0cc-40dc-bff9-0df3bf7b7b52">
 
