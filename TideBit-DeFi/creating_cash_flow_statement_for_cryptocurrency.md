@@ -17,29 +17,128 @@
 - **特殊的儲存方式**：例如冷錢包（不連接網路的儲存方式）和熱錢包（連接網路的儲存方式）。
 - **法規環境的不確定性**：加密貨幣的法規在許多國家仍在發展中，因此交易所需要持續適應。
 
-# **製作加密貨幣交易所的現金流量表需要的資料（提供存款、CFD服務給用戶的去中心化交易所）**
+# 加密貨幣交易所的營運活動
+
+- 入金
+    - 法幣入金
+    - 加密貨幣入金
+- 出金
+    - 法幣出金
+    - 加密貨幣出金
+- 現貨交易
+- CFD交易
+- 永續期貨合約
+    - 有資金費率（應收）
+
+# **製作加密貨幣交易所的現金流量表需要的資料及對應的會計科目**
 
 ## 營運活動 (Operating Activities)
 
-- **交易收入**：給用戶提供的價差跟每筆交易收的費用。
-- **交易費用**：支付為了交易服務產生的費用。
-- **法規遵循費用**：如許可證費用或法律諮詢費。（？
-- 幫其他平台籌資
-- 現貨交易、C2C
+- 交易收入(Transaction revenue)：給用戶提供的價差跟每筆交易收的費用。
+- 交易費用(Transaction expense)：支付為了交易服務產生的費用。
+- 利息費用 (Interest Expense): 利息的支付
+- USDT
+- USDC
+- 持有的加密貨幣(Other current and non-current assets)
+- 用法幣購買加密貨幣(Purchase of crypto assets held) [定義為存貨而非長期投資]
+- 賣掉加密貨幣獲得法幣(Disposal of crypto assets held)  [定義為存貨而非長期投資]
 
 ## 投資活動 (Investing Activities)
 
-- 用現金及約當現金/加密貨幣買賣加密貨幣
-
+- 
 
 ## 籌資活動 (Financing Activities)
-- 我們找投資人
+
+- 從發行普通股所得的資金(***Proceeds from issuance of common stock*** or ***Cash received from issuing common stock***)
+- 長期債務 (Long-Term Debt): 債務的增加或減少
+- 短期借款 (Short-Term Borrowings): 債務的增加或減少
+- 股利的支付 (Payments of dividends)
+- 庫藏股 (Treasury Stock): 購買或出售自家股票
+
+## 非現金的投資與籌資活動補充 (Supplemental schedule of non-cash investing and financing activities)
+
+- 用加密貨幣購買加密貨幣(Purchase of crypto assets and investments with non-cash consideration)
+- 賣掉加密貨幣獲得加密貨幣(Disposal of crypto assets for non-cash consideration)
+
+# 現金流量表的實例
+
+## 法幣入金
+
+- 指定期間內，入金 1000 USDT
+
+**營運活動現金流量**：
+
+USDT：$1,000
+
+## 加密貨幣入金
+
+- 指定期間內，入金 1 ETH (價值一千美元)
+
+**營運活動現金流量**：
+
+Other current and non-current assets：$1,000
+
+## 法幣出金
+
+- 指定期間內，出金 1000 USDT
+
+**營運活動現金流量**：
+
+USDT：($1,000)
+
+## 加密貨幣出金
+
+- 指定期間內，出金 1 ETH (價值一千美元)
+
+**營運活動現金流量**：
+
+Other current and non-current assets：($1,000)
+
+## 現貨交易
+
+### 買BTC
+
+- 指定期間內，用戶下單買 1 BTC (市價 1000 美元，我們給用戶的買價是 1010 美元)，我們去別的交易所買 1 BTC
+
+**營運活動現金流量**：
+
+Transaction revenue: $10
+
+- 指定期間內，用戶下單買 1 BTC (市價 1000 美元，我們給用戶的買價是 1010 美元)，我們自己就有 1 BTC 可以賣給用戶
+
+**營運活動現金流量**：
+
+Transaction revenue: $10
+
+### 賣BTC
+
+- 指定期間內，用戶下單賣 1 BTC (市價 1000 美元，我們給用戶的賣價是 990 美元)，我們將用戶的 BTC 拿去別的交易所賣掉
+
+**營運活動現金流量**：
+
+Transaction revenue: $10
+
+- 指定期間內，用戶下單賣 1 BTC (市價 1000 美元，我們給用戶的賣價是 990 美元)，我們自己就能跟用戶買
+
+**營運活動現金流量**：
+
+Transaction revenue: $10
+
+## CFD交易
+
+### 做多BTC
+
+### 做空BTC
+
+## 永續合約
+
+### 做多BTC
+
+### 做空BTC
 
 # **現金流量表的製作方法和注意事項**
 
 - 投資活動和籌資活動的直接法比較容易理解，因為它們直接反映了資產和負債的變動。而間接法則需要將資產和負債的變動轉換成現金流量的影響，這可能比較複雜和不直觀。以下例子皆為營運活動
-- 應收帳款跟應付帳款不用記在現金流量表上
-
 
 ## 直接法
 
