@@ -56,10 +56,38 @@ Continuing from the previous question
 ## Analysis
 
 ### Persona
+
+```Can you build a persona for mining software user including their behavior, wants and need. in table```
+
+<img width="790" alt="persona" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/f5d1882c-6a53-4d82-be21-eb5967fde2d5">
+
+In here, you can also add some specific codition acoording to your previous user research to the persona, like what type of user, age, experience or so to fit your scenario better.
+Sometime ChatGPT might give you some insight that you didn't notice before.
+
 ### User story
+
+```can you give me the user story of [name from previous answer]```
+
+<img width="795" alt="user story" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/2d2e37c8-6919-40e9-af3e-e35ff41c819a">
+
+It would be more beneficial if you could continue the inquiry after creating the persona. Alternatively, if you have distinct personas in mind, you can inform ChatGPT in advance. This approach enables it to craft more accurate and creative content.
+
 ### User flow
 
+```Create a user flow for [your product].```
+
+<img width="790" alt="user flow" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/fd8ab58f-2352-417c-9ff8-1a229c760405">
+
+Here, you can incorporate additional conditions, such as considering the devices or environments in which the user flow will be experienced. This ensures that the user flow aligns with the specific requirements of your final product.
+
 ## Wireframing
+
+```create a wireframe in text for mining software app on desktop that's friendly and easy adaptive for new user```
+
+<img width="790" alt="截圖 2023-08-22 下午4 16 32" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/7339fc01-1777-4741-9203-14623189629b">
+
+Given that ChatGPT is a text-based AI, it's incapable of directly generating visual content like wireframes. However, it can provide a fundamental outline of the elements that should be present in your final wireframe. It's still our job to visualize it.
+
 ## UX Writting
 
 ## UI Design
