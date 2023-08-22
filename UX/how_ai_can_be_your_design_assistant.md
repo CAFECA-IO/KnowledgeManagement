@@ -60,11 +60,10 @@ Continuing from the previous question
 ### User flow
 
 ## Wireframing
-
-## Checklist for UI Design
-
-## Color palettes
-
 ## UX Writting
 
-## Generate svg code
+## UI Design
+
+### Generate svg code
+### Checklist for UI Design
+### Color palettes
