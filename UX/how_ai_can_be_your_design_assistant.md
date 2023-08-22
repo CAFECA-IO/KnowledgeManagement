@@ -61,4 +61,10 @@ Continuing from the previous question
 
 ## Wireframing
 
+## Checklist for UI Design
+
+## Color palettes
+
 ## UX Writting
+
+## Generate svg code
