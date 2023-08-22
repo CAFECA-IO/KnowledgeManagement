@@ -8,7 +8,7 @@
 4. H2 Database：使用 Java 開發的輕量級嵌入式資料庫，支援 SQL 和 JDBC（Java Database Connectivity，是Java語言中用來規範客戶端程式如何來訪問資料庫的應用程式介面）。可以在本地快速啟動，並支援瀏覽器的 Console 介面。但由於其主要針對 Java，所以不太適用於非 Java 的應用程式。
 5. Realm：適用於移動應用程式，特別是需要離線儲存和同步功能的場景，支援 iOS 和 Android，並提供跨平台的同步功能。Realm 還提供物件映射（ORM）API，避免讓使用者直接接觸 SQL 語法，簡化了程式語言的複雜度。但缺點是其關聯式查詢需求可能受限，相對不如其他嵌入式資料庫靈活。
 
-## 連接 Next.js
+## 連接 SQLite
 以下是提供在 Next.js 中連接 SQLite 資料庫的工具：
 1. Prisma：一套可以透過 JavaScript 或 TypeScript 來操作資料庫套件，幫助開發人員更輕鬆地管理資料庫。能夠串接 `PostgreSQL`、`MySQL`、`SQLite`、`MongoDB` 等資料庫，並且提供 GUI 介面。Prisma 可以自動從資料庫結構生成模型，而無需手動定義模型；還提供資料庫遷移功能，模型結構變化時也能輕鬆地同步資料庫結構，不必手動更新資料庫。相較於其他工具，**Prisma 擁有許多自動化功能，使開發者更高效地操作和管理資料庫**。
 2. TypeORM：一個支援多種資料庫的 ORM 框架，其中就包括 SQLite，能夠使用 TypeScript 定義模型並進行查詢。
