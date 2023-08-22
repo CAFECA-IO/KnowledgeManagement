@@ -1,3 +1,6 @@
+
+![jodiewu_tw_A_person_and_one_AI_robot_brainstorming_together_wit_0f32fc17-c920-4599-ad43-9fab41691a8e](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/2eaa2f9b-e04d-47c8-9fb6-aabbc5ecbdfd)
+
 Today, we will be collaborating with two prominent AI platforms, ChatGPT and Midjourney, which have garnered significant recognition in the current AI landscape. Our objective is to explore how these platforms can provide valuable support to UI/UX designers in their work.
 
 # Chat GPT
