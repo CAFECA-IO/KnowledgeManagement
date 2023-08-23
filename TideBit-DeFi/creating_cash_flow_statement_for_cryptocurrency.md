@@ -156,15 +156,47 @@ Disposal of cryptocurrencies: $5,000
 
 ---
 
-### 交易所用 USDT 買、用戶用 USDT 買賣
+### 交易所用USDT買、用戶用USDT買賣
 
-- 指定期間內，交易所自己斷斷續續用 USDT 逢低買進 BTC，總共買入 10 BTC (依照各自買進的當下匯率乘以各自買進的數量得到成本價 9000 美元)；用戶總共用 USD 下單買 5 BTC 跟賣 2 BTC，依照各自當下的匯率得出用戶總共買 3400 美元價值的 3 BTC
-  - 粗淺地假設交易所買入 10 BTC 時匯率為 900 USD/BTC，用戶買入時匯率為 1000 USDT/BTC，用戶賣出時匯率為 800 USDT/BTC，財報結算時的匯率為 800 USDT/BTC，交易所點差固定為 1 %，單向為(1%/2=0.005)；1 USDT = 1 USD
-  - 用戶 5*1000-2*800=5000-1600=3400 總共買入 3400 美元價值的 3 BTC，代表交易所賣出 3400 美元價值的 3 BTC
-  - 交易所持有 10-3= 7 BTC，價值為 800\*7=5600 美元
-  - ~~交易收入為 5*1000*0.005 + 2*800*0.005=33 美元~~
+- 指定期間內，交易所自己斷斷續續用 USDT 逢低買進BTC，總共買入 10 BTC (依照各自買進的當下匯率乘以各自買進的數量得到成本價 9000 美元)；用戶總共用 USD 下單買 5 BTC 跟賣 2 BTC，依照各自當下的匯率得出用戶總共買 3400 美元價值的 3 BTC
+    - 粗淺地假設交易所買入 10 BTC 時匯率為 900 USD/BTC，用戶買入時匯率為 1000 USDT/BTC，用戶賣出時匯率為 800 USDT/BTC，財報結算時的匯率為 800 USDT/BTC，交易所點差固定為 1 %，單向為(1%/2=0.005)；1 USDT = 1 USD
+    - 用戶 5*1000-2*800=5000-1600=3400 總共買入 3400 美元價值的 3 BTC，代表交易所賣出 3400 美元價值的 3 BTC
+    - 交易所持有 10-3= 7 BTC，價值為 800*7=5600 美元
+    - ~~交易收入為 5*1000*0.005 + 2*800*0.005=33美元~~
 
-**營運活動現金流量**：
+### 過程
+
+- 交易所自己總共買入 10 BTC
+    - 現金流出了 9000 USDT，因為購買了 10 BTC
+
+**非現金的營運活動補充 (Supplemental schedule of non-cash operating activities)**：
+
+Purchase of cryptocurrencies with non-cash consideration: ($9,000)
+
+- 用戶在交易所買入 5 BTC
+    - 現金流入 5000 USDT，因為將價值 5000 美元的 BTC 賣給用戶
+
+**非現金的營運活動補充 (Supplemental schedule of non-cash operating activities)**：
+
+Disposal of cryptocurrencies for non-cash consideration: $5,000 
+
+- 用戶在交易所賣出 2 BTC
+    - 現金流出了 1600 USDT，因為跟用戶買的 2 BTC
+
+**非現金的營運活動補充 (Supplemental schedule of non-cash operating activities)**：
+
+Purchase of cryptocurrencies with non-cash consideration: ($1,600)
+
+### 結果
+
+- 這段期間的現金流量表
+    - -5600=-9000+5000-1600
+
+**非現金的營運活動補充 (Supplemental schedule of non-cash operating activities)**：
+
+Purchase of cryptocurrencies with non-cash consideration: ($10,600)
+
+Disposal of cryptocurrencies for non-cash consideration: $5,000
 
 ---
 
