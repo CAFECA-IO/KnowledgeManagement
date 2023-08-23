@@ -146,7 +146,6 @@ Purchase of cryptocurrencies: ($1,600)
 ### 結果
 
 - 這段期間的現金流量表
-  - 在 Other current and non-current assets 這個會計科目下，現金流出了 5600 美元
   - -5600=-9000+5000-1600
 
 **營運活動現金流量**：
