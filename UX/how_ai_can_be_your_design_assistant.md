@@ -201,4 +201,4 @@ It's a really useful tool for UI designers to create some images for their produ
 Midjourney can generate images in various styles, color palettes, and scales. It's highly beneficial, eliminating concerns about copyright. 
 Even though it's not perfecteverytime, it can offer you different idea on your visual work.
 
-For more Information about how to use Midjourney please check:
+For more Information about how to use Midjourney please check: (Midjourney)[https://github.com/CAFECA-IO/WorkGuidelines/blob/main/AI/Graphic/Midjourney.md]
