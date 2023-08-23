@@ -174,3 +174,31 @@ Result:
 
 Now we know ChatGPT doesn't have any sense of art or even doesn't know what a cat should be look like.
 But hope one day it will learn then it can be pretty helphul.
+
+
+# Midjourney
+
+Midjourney is a generative artificial intelligence program and service generates images from natural language descriptions.
+It's a really useful tool for UI designers to create some images for their products.
+
+## Background:
+
+<img width="533" alt="截圖 2023-08-23 上午11 38 57" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/d16e2aa1-a06e-41ca-8a4f-2bf90ca91b1d">
+
+## Illustration:
+
+<img width="536" alt="截圖 2023-08-23 上午11 40 19" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/3e19f986-fd1c-4cd8-810f-a7a78ab1b3b5">
+
+## Landing page idea
+
+<img width="535" alt="截圖 2023-08-23 上午11 43 25" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/80a21ab9-f7a2-4817-9612-578bd097a1dc">
+
+## Banner
+
+<img width="532" alt="截圖 2023-08-23 上午11 46 10" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/8ed5e0a8-c832-4abb-ae33-5b9f8dd66913">
+
+
+Midjourney can generate images in various styles, color palettes, and scales. It's highly beneficial, eliminating concerns about copyright. 
+Even though it's not perfecteverytime, it can offer you different idea on your visual work.
+
+For more Information about how to use Midjourney please check:
