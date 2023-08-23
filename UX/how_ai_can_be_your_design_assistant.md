@@ -93,6 +93,26 @@ Given that ChatGPT is a text-based AI, it's incapable of directly generating vis
 
 ## UX Writting
 
+This is my personal favorite part.
+Ask ChatGPT for UX writting ideas, in any languages you want!
+
+1. Page description
+
+```Give me 10 interesting and creative captions for 404 page```
+<img width="813" alt="404" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/4c70b05e-e486-40b0-91ea-e9b359b7e6cd">
+
+2. Buttons
+
+```Give me 10 idea for the caption of CTA buttons```
+<img width="821" alt="CTA" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/6269d2fb-2e82-4941-ae1c-93b030cc7a41">
+
+
+3. Headline or Content
+
+```Give me 10 Professional headline for a blockchain solution company's web```
+<img width="821" alt="headline" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/5253dfa5-46c5-449b-aff0-21b32b51d8a9">
+
+
 ## UI Design
 
 ### Generate svg code
