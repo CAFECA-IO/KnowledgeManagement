@@ -115,6 +115,62 @@ Ask ChatGPT for UX writting ideas, in any languages you want!
 
 ## UI Design
 
-### Generate svg code
 ### Checklist for UI Design
+
+```Create a checklist for UI elements for a perfect mining software in a table```
+
+<img width="826" alt="checklist" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/aff566e1-8382-45b2-88d2-e95231d14451">
+
+This table can serve as a foundation for ensuring that your product's user interface covers the essential elements for a seamless user experience.
+You can adapt and expand the checklist based on your specific functionalities and requirements. 
+
+
 ### Color palettes
+
+It's really fast to generate color palettes with ChatGPT, you can just tell it your brand color and the elements you need then everything will be done in few second.
+
+```Can you give me a bright and energetic color palette for a mining software app in bright mode with the brand color #FFA502 and #1A2E50. Including background, surface, text, button in default, hover and disable state, state color. List them in table```
+
+<img width="817" alt="color" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/1f358d67-bff7-4655-ad05-ac7d4fd329dc">
+
+As a professional UX designer, we know how important accessibility is. So don; don't forget to check the color you are going to use is complied with Web Content Accessibility Guidelines.
+Here is what you can do.
+
+```Can you check if this color palette comply with Level AAA```
+
+<img width="792" alt="AAA" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/903e611c-84ea-41b4-a041-8d46ecc1fdad">
+
+```can you fix that problem and give me a new color palette ```
+
+<img width="793" alt="fix" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/75835bfa-0d31-4bef-8613-e6f00b075d87">
+
+Here you go, A color palette with your brand voice and user-friendly is done. And you can always make little change to ensure the color palette fits your needs.
+
+
+### Generate svg code (Beta)
+
+As we know ChatGPT is an AI text-based model, so it can't generate SVG images directly. However, it can help you generate SVG code for a simple icon.
+Let's see how it work.
+
+```can you generate an email outline icon in svg code```
+
+<img width="801" alt="icon" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/7e9837ab-9e70-4c14-8c4d-5471ee341f14">
+
+
+Result:
+
+<img width="116" alt="截圖 2023-08-23 上午11 24 34" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/6b3d8438-3e7b-485e-b248-895663727612">
+
+Looks OK right? Let's try something more complicated...
+
+```can you generate a cute cat outline icon in svg code```
+
+<img width="822" alt="截圖 2023-08-23 上午11 29 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/4c7d453d-8f02-4e0d-993b-e10b66527427">
+
+Result:
+
+<img width="131" alt="截圖 2023-08-23 上午11 26 30" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/a9753b86-c7d2-436e-94e0-9a03c7c21a99">
+
+
+Now we know ChatGPT doesn't have any sense of art or even doesn't know what a cat should be look like.
+But hope one day it will learn then it can be pretty helphul.
