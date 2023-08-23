@@ -44,8 +44,8 @@
 - USDT
 - USDC
 - 持有的加密貨幣(Other current and non-current assets)
-- 用法幣購買加密貨幣(Purchase of cryptocurrencies) [定義為存貨而非長期投資]
-- 賣掉加密貨幣獲得法幣(Disposal of cryptocurrencies) [定義為存貨而非長期投資]
+- 用法幣購買加密貨幣(Purchase of cryptocurrencies) ~[定義為存貨而非長期投資]~
+- 賣掉加密貨幣獲得法幣(Disposal of cryptocurrencies) ~[定義為存貨而非長期投資]~
 
 ## 投資活動 (Investing Activities)
 
