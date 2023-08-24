@@ -238,6 +238,7 @@ Disposal of cryptocurrencies for non-cash consideration: $5,050
 
 - 這段期間的現金流量表
   - 1010-384=626
+  - 要分別記錄
 
 **Cash flows from operating activities:**
 
@@ -344,6 +345,7 @@ USDT: ($900.9)
 - 這段期間的現金流量表
   - USDT: -900.9+626=-274.9
   - 900-274.9=625.1
+  - 拆開USDT received from customers
 
 **Cash flows from operating activities:**
 
