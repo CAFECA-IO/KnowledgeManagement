@@ -42,12 +42,8 @@
 - Cash received from customers: 從客戶那邊賺到的錢
 - USDT: 交易所持有的 USDT
 - USDC: 交易所持有的 USDC
-- 交易收入(Transaction revenue)：給用戶提供的價差跟每筆交易收的費用。
-- 交易費用(Transaction expense)：支付為了交易服務產生的費用。
-- 利息費用 (Interest Expense): 利息的支付
-- 持有的加密貨幣(Other current and non-current assets)
-- 用法幣購買加密貨幣(Purchase of cryptocurrencies) [定義為存貨而非長期投資]
-- 賣掉加密貨幣獲得法幣(Disposal of cryptocurrencies) [定義為存貨而非長期投資]
+- 用法幣購買加密貨幣(Purchase of cryptocurrencies)
+- 賣掉加密貨幣獲得法幣(Disposal of cryptocurrencies)
 
 ## 投資活動 (Investing Activities)
 
@@ -118,16 +114,16 @@ User crypto withdrawal：($1,000)
 
 - 指定期間內，交易所自己斷斷續續用 USD 逢低買進 BTC，總共買入 10 BTC；用戶總共用 USD 下單買 5 BTC 跟賣 1 BTC
   - 粗淺地假設交易所買入 10 BTC 時匯率為 900 USD/BTC，用戶買入時匯率為 1000 USD/BTC，用戶賣出時匯率為 800 USD/BTC，財報結算時的匯率為 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)
-  - 用戶 5x1000-1x800=5000-800=4200 總共買入 4200 美元價值的 3 BTC，代表交易所賣出 4200 美元價值的 3 BTC
+  - 用戶 5*1000-1*800=5000-800=4200 總共買入 4200 美元價值的 3 BTC，代表交易所賣出 4200 美元價值的 3 BTC
   - 交易所持有 10-3= 7 BTC
-  - ~~交易收入為 5x1000x0.01 + 1x800x0.01=58 美元~~
+  - ~~交易收入為 5*1000*0.01 + 1*800*0.01=58 美元~~
 
 ### 過程
 
 - 交易所自己總共買入 10 BTC
   - 加上別的交易所的點差 0.1 %，現金流出了 9009 美元，因為購買了 10 BTC
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 Cryptocurrencies: $9,000
 
@@ -136,7 +132,7 @@ Purchase of cryptocurrencies: ($9,009)
 - 用戶在交易所買入 5 BTC
   - 加上我們交易所的點差 1 %，現金流入 5050 美元，將價值 5000 美元的 BTC 賣給用戶
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 Cryptocurrencies: ($5,000)
 
@@ -145,7 +141,7 @@ Disposal of cryptocurrencies: $5,050
 - 用戶在交易所賣出 1 BTC
   - 加上我們交易所的點差 1 %，現金流出了 792 美元，跟用戶買的 1 BTC
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 Cryptocurrencies: $800
 
@@ -156,7 +152,7 @@ Purchase of cryptocurrencies: ($792)
 - 這段期間的現金流量表
   - 總共賺得 4800-9801+5050=49
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 Cryptocurrencies: $4,800
 
@@ -164,7 +160,7 @@ Purchase of cryptocurrencies: ($9,801)
 
 Disposal of cryptocurrencies: $5,050
 
-NET CASH FLOW FROM OPERATING ACTIVITIES: $49
+**NET CASH FLOW FROM OPERATING ACTIVITIES: $49**
 
 ---
 
@@ -172,16 +168,16 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: $49
 
 - 指定期間內，交易所自己斷斷續續用 USDT 逢低買進 BTC，總共買入 10 BTC；用戶總共用 USD 下單買 5 BTC 跟賣 1 BTC
   - 粗淺地假設交易所買入 10 BTC 時匯率為 900 USDT/BTC，用戶買入時匯率為 1000 USDT/BTC，用戶賣出時匯率為 800 USDT/BTC，財報結算時的匯率為 800 USDT/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD
-  - 用戶 5x1000-1x800=5000-800=4200 總共買入 4200 美元價值的 3 BTC，代表交易所賣出 4200 美元價值的 3 BTC
+  - 用戶 5*1000-1*800=5000-800=4200 總共買入 4200 美元價值的 3 BTC，代表交易所賣出 4200 美元價值的 3 BTC
   - 交易所持有 10-3= 7 BTC
-  - ~~交易收入為 5x1000x0.01 + 1x800x0.01=58 美元~~
+  - ~~交易收入為 5*1000*0.01 + 1*800*0.01=58 美元~~
 
 ### 過程
 
 - 交易所自己總共買入 10 BTC
   - 加上別的交易所的點差 0.1 %，現金流出了 9009 USDT，因為購買了 10 BTC
 
-Supplemental schedule of non-cash operating activities：
+**Supplemental schedule of non-cash operating activities**：
 
 Cryptocurrencies: $9,000
 
@@ -190,7 +186,7 @@ Purchase of cryptocurrencies with non-cash consideration: ($9,009)
 - 用戶在交易所買入 5 BTC
   - 加上我們交易所的點差 1 %，現金流入 5050 USDT，因為將價值 5000 美元的 BTC 賣給用戶
 
-Supplemental schedule of non-cash operating activities：
+**Supplemental schedule of non-cash operating activities**：
 
 Cryptocurrencies: ($5,000)
 
@@ -199,7 +195,7 @@ Disposal of cryptocurrencies for non-cash consideration: $5,050
 - 用戶在交易所賣出 1 BTC
   - 加上我們交易所的點差 1 %，現金流出了 792 USDT，因為跟用戶買的 1 BTC
 
-Supplemental schedule of non-cash operating activities：
+**Supplemental schedule of non-cash operating activities**：
 
 Cryptocurrencies: $800
 
@@ -210,7 +206,7 @@ Purchase of cryptocurrencies with non-cash consideration: ($792)
 - 這段期間的現金流量表
   - 4800-9801+5050=49
 
-非現金的營運活動補充 (Supplemental schedule of non-cash operating activities)：
+**非現金的營運活動補充 (Supplemental schedule of non-cash operating activities)**：
 
 Cryptocurrencies: $4,800
 
@@ -222,20 +218,20 @@ Disposal of cryptocurrencies for non-cash consideration: $5,050
 
 ## CFD 交易
 
-### 用 USD 做多做空 BTC
+### 用戶用 USD 做多做空 BTC，倉位皆以清算
 
-- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，皆已關倉
+- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶**幾乎同時**開 5 BTC 價值 5000 美元的多單，開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，皆已關倉
   - 用戶做多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USD 流動性足夠，故沒有另外買賣 BTC
+  - **多空沖銷後**，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USD 流動性足夠，故沒有另外買賣 BTC
 
 ### 過程
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
-  - 保證金為 5x1000x1.01/5=$1010，((800-1000)/1000)x5=-1 觸及強制平倉價，損失所有保證金
-  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，
+  - 保證金為 5*1000*1.01/5=$1010，((800-1000)/1000)\*5=-1 觸及強制平倉價，損失所有保證金
+  - 強制平倉價格 1000*(1-0.2)*1.0001=800.08，強制平倉手續費 0.08 美元，
 - 空單
-  - 保證金為 2x1000x0.99/5=$396，(-(800x1.01-1000))x2=384
+  - 保證金為 2*1000*0.99/5=$396，(-(800*1.01-1000))*2=384
     - 空單關倉時拿回保證金 396 美元跟獲利 384 美元
 
 ### 結果
@@ -243,26 +239,26 @@ Disposal of cryptocurrencies for non-cash consideration: $5,050
 - 這段期間的現金流量表
   - 1010-384=626
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 Cash received from customers: $626
 
-NET CASH FLOW FROM OPERATING ACTIVITIES: $626
+**NET CASH FLOW FROM OPERATING ACTIVITIES: $626**
 
 ---
 
-### 交易所用 USD 買 BTC，用 USD 做多做空 BTC
+### 交易所用 USD 買 BTC，用戶用 USD 做多做空 BTC，倉位皆以清算
 
-- 指定期間內，交易所本身資產(狀態)有 3 BTC，10,000 USD，陸續總共買了 1 BTC；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，皆已關倉
+- 指定期間內，交易所本身資產(狀態)有 3 BTC，10,000 USD，陸續總共買了 1 BTC；用戶**幾乎同時**開 5 BTC 價值 5000 美元的多單，開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，皆已關倉
   - 交易所買 BTC 的匯率為 900 USD/BTC，用戶做多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所買入 1 BTC 以確保資產價值
+  - **多空沖銷後**，剩下 5-2=3 BTC 多單，交易所買入 1 BTC 以確保資產價值
 
 ### 過程
 
 - 交易所總共買入 1 BTC
   - 加上別的交易所的點差 0.1 %，現金流出 900.9 美元
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 Cryptocurrencies: $900
 
@@ -270,10 +266,10 @@ Purchase of cryptocurrencies: ($900.9)
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
-  - 保證金為 5x1000x1.01/5=$1010，((800-1000)/1000)x5=-1 觸及強制平倉價，損失所有保證金
-  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，
+  - 保證金為 5*1000*1.01/5=$1010，((800-1000)/1000)\*5=-1 觸及強制平倉價，損失所有保證金
+  - 強制平倉價格 1000*(1-0.2)*1.0001=800.08，強制平倉手續費 0.08 美元，
 - 空單
-  - 保證金為 2x1000x0.99/5=$396，(-(800x1.01-1000))x2=384
+  - 保證金為 2*1000*0.99/5=$396，(-(800*1.01-1000))*2=384
     - 空單關倉時拿回保證金 396 美元跟獲利 384 美元
 
 ### 結果
@@ -281,7 +277,7 @@ Purchase of cryptocurrencies: ($900.9)
 - 這段期間的現金流量表
   - 1010-384-900.9+900=625.1
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 Cash received from customers: $626
 
@@ -291,20 +287,20 @@ Purchase of cryptocurrencies: ($900.9)
 
 ---
 
-### 用 USDT 做多做空 BTC
+### 用戶用 USDT 做多做空 BTC，倉位皆以清算
 
-- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USDT；用戶幾乎同時開 5 BTC 價值 5000 USDT 的多單，開 2 BTC 價值 2000USDT 空單，槓桿為 5 倍，皆已關倉
+- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USDT；用戶**幾乎同時**開 5 BTC 價值 5000 USDT 的多單，開 2 BTC 價值 2000USDT 空單，槓桿為 5 倍，皆已關倉
   - 用戶做多匯率為 1000 USDT/BTC，用戶做空匯率為 1000 USDT/BTC，用戶關倉時匯率為 800 USDT/BTC，財報結算時匯率 800 USDT/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0，1 USDT = 1 USD
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USDT 流動性足夠，故沒有另外買賣 BTC
+  - **多空沖銷後**，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USDT 流動性足夠，故沒有另外買賣 BTC
 
 ### 過程
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
-  - 保證金為 5x1000x1.01/5=$1010，((800-1000)/1000)x5=-1 觸及強制平倉價，損失所有保證金
-  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 USDT ，
+  - 保證金為 5*1000*1.01/5=$1010，((800-1000)/1000)\*5=-1 觸及強制平倉價，損失所有保證金
+  - 強制平倉價格 1000*(1-0.2)*1.0001=800.08，強制平倉手續費 0.08 USDT ，
 - 空單
-  - 保證金為 2x1000x0.99/5=396 USDT ，(-(800x1.01-1000))x2=384 USDT
+  - 保證金為 2*1000*0.99/5=396 USDT ，(-(800*1.01-1000))*2=384 USDT
     - 空單關倉時拿回保證金 396 USDT 跟獲利 384 USDT
 
 ### 結果
@@ -312,24 +308,24 @@ Purchase of cryptocurrencies: ($900.9)
 - 這段期間的現金流量表
   - 1010-384=626
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 USDT received from customers: $626
 
 ---
 
-### 交易所用 USDT 買 BTC，用 USDT 做多做空 BTC
+### 交易所用 USDT 買 BTC，用 USDT 做多做空 BTC，倉位皆以清算
 
-- 指定期間內，交易所本身資產(狀態)有 3 BTC，10,000 USDT，陸續總共買了 1 BTC；用戶幾乎同時開 5 BTC 價值 5000 USDT 的多單，開 2 BTC 價值 2000 USDT 空單，槓桿為 5 倍，皆已關倉
+- 指定期間內，交易所本身資產(狀態)有 3 BTC，10,000 USDT，陸續總共買了 1 BTC；用戶**幾乎同時**開 5 BTC 價值 5000 USDT 的多單，開 2 BTC 價值 2000 USDT 空單，槓桿為 5 倍，皆已關倉
   - 交易所買 BTC 的匯率為 900 USDT/BTC，用戶做多匯率為 1000 USDT/BTC，用戶做空匯率為 1000 USDT/BTC，用戶關倉時匯率為 800 USDT/BTC，財報結算時匯率 800 USDT/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所買入 1 BTC 以確保資產價值
+  - **多空沖銷後**，剩下 5-2=3 BTC 多單，交易所買入 1 BTC 以確保資產價值
 
 ### 過程
 
 - 交易所總共買入 1 BTC
   - 加上別的交易所的點差 0.1 %，現金流出 900.9 USDT
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 Cryptocurrencies: $900
 
@@ -337,10 +333,10 @@ USDT: ($900.9)
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
-  - 保證金為 5x1000x1.01/5=$1010，((800-1000)/1000)x5=-1 觸及強制平倉價，損失所有保證金
-  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，
+  - 保證金為 5*1000*1.01/5=$1010，((800-1000)/1000)\*5=-1 觸及強制平倉價，損失所有保證金
+  - 強制平倉價格 1000*(1-0.2)*1.0001=800.08，強制平倉手續費 0.08 美元，
 - 空單
-  - 保證金為 2x1000x0.99/5=$396，(-(800x1.01-1000))x2=384
+  - 保證金為 2*1000*0.99/5=$396，(-(800*1.01-1000))*2=384
     - 空單關倉時拿回保證金 396 美元跟獲利 384 美元
 
 ### 結果
@@ -349,13 +345,32 @@ USDT: ($900.9)
   - USDT: -900.9+626=-274.9
   - 900-274.9=625.1
 
-Cash flows from operating activities:
+**Cash flows from operating activities:**
 
 USDT: ($274.9)
 
 Cryptocurrencies: $900
 
-NET CASH FLOW FROM OPERATING ACTIVITIES: $625.1
+**NET CASH FLOW FROM OPERATING ACTIVITIES: $625.1**
+
+---
+
+## 永續合約 (跟現貨交易概念一樣，除了沒有到期日)
+
+- 未平倉
+- 已平倉
+- 自動減倉
+- 資金費率調整
+- 強制平倉
+- 保證金調整
+
+### 交易所用 USD 買 BTC，用戶用 USD 做多做空 BTC，部分倉位未結算
+
+---
+
+### 交易所用 USDT 買 BTC，用 USDT 做多做空 BTC，部分倉位未清算
+
+---
 
 ---
 
