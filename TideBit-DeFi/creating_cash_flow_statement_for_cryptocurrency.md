@@ -48,7 +48,7 @@
 | Purchase of cryptocurrencies                                       | 用法幣購買加密貨幣                           |
 | Disposal of cryptocurrencies                                       | 賣掉加密貨幣獲得法幣                         |
 | Insurance fund for perpetual contracts                             | 為了保證永續合約正常運作的基金               |
-| Cash received from customers as transaction fee                    | 從用戶那邊賺到的現金及約當現金               |
+| Cash received from customers as transaction fee                    | 從用戶那邊賺到的交易手續費，以現金形式       |
 | Cash received from customers for liquidation in CFD trading        | 從客戶收到的用於 CFD 交易清算的現金          |
 | Cash received from customers for liquidation in perpetual contract | 從客戶收到的用於永續合約交易清算的現金       |
 | Cash paid to customers as rebates for transaction fees             | 用現金及約當現金支付給用戶的手續費返傭       |
