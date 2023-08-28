@@ -1,6 +1,7 @@
 # 加密貨幣交易所的現金流量表撰寫指南
 
-本文將介紹現金流量表的本質，以及製作現金流量表的方法，接著一一用直接法呈現加密貨幣交易所的營運活動造成的現金流量表變化，期望達到示範作用並引起更多加密貨幣交易所監管相關的討論。
+本文將介紹現金流量表的本質，以及製作現金流量表的方法，接著一一用直接法呈現加密貨幣交易所的營運活動造
+成的現金流量表變化，期望達到拋磚引玉的效果，引起更多加密貨幣交易所監管相關的討論。
 
 # 什麼是現金流量表（現金流量表的重要性跟作用）
 
@@ -37,27 +38,23 @@
 
 ## 營運活動 (Operating Activities)
 
-- User deposit: 用戶的法幣存款
-- User crypto deposit: 用戶的加密貨幣存款
-- User withdrawal: 用戶的法幣提款
-- User crypto withdrawal: 用戶的加密貨幣提款
-- Cryptocurrencies: 交易所持有的加密貨幣，不包含與有美元儲備的(US Dollar backed)、被廣泛認同的穩定幣如 USDT 及 USDC
-  - US dollar backed 有美元儲備
-    - Being backed by the US dollar provides a level of trust and assurance to holders that they can redeem their assets for US dollars.
-    - 宣稱每發行一個穩定幣，背後就有一塊美元支持的加密貨幣有 USDC、USDT、BUSD
-  - US dollar pegged 與美元掛鉤
-    - An asset or currency is said to be pegged to the US dollar when its value is intentionally kept at a fixed rate or within a specific range relative to the US dollar.
-    - 用一籃子的加密貨幣或演算法來盡量達成與美元 1:1 兌換的加密貨幣有 Dai、UST
-- Cash received from customers: 從用戶那邊賺到的現金及約當現金
-- Cash paid to customers: 支付給用戶的現金及約當現金
-- Cash paid to suppliers: 支付給供應商的現金及約當現金
-- USDT received from customers: 從用戶那邊賺到的 USDT
-- USDT paid to customers: 支付給用戶的 USDT
-- USDT: 交易所持有的 USDT
-- USDC: 交易所持有的 USDC
-- Purchase of cryptocurrencies: 用法幣購買加密貨幣
-- Disposal of cryptocurrencies: 賣掉加密貨幣獲得法幣
-- Insurance Fund for Perpetual Contracts: 為了保證永續合約正常運作的基金
+| Item                                                               | Definition                                   |
+| ------------------------------------------------------------------ | -------------------------------------------- |
+| User deposit                                                       | 用戶的法幣存款                               |
+| User crypto deposit                                                | 用戶的加密貨幣存款                           |
+| User withdrawal                                                    | 用戶的法幣提款                               |
+| User crypto withdrawal                                             | 用戶的加密貨幣提款                           |
+| Cryptocurrencies                                                   | 交易所持有的加密貨幣                         |
+| Purchase of cryptocurrencies                                       | 用法幣購買加密貨幣                           |
+| Disposal of cryptocurrencies                                       | 賣掉加密貨幣獲得法幣                         |
+| Insurance fund for perpetual contracts                             | 為了保證永續合約正常運作的基金               |
+| Cash received from customers as transaction fee                    | 從用戶那邊賺到的現金及約當現金               |
+| Cash received from customers for liquidation in CFD trading        | 從客戶收到的用於 CFD 交易清算的現金          |
+| Cash received from customers for liquidation in perpetual contract | 從客戶收到的用於永續合約交易清算的現金       |
+| Cash paid to customers as rebates for transaction fees             | 用現金及約當現金支付給用戶的手續費返傭       |
+| Cash paid to customers for perpetual contract profits              | 用現金及約當現金支付給用戶的永續合約利潤     |
+| Cash paid to customers for CFD trading profits                     | 支付給客戶的 CFD 交易利潤現金                |
+| Cash paid to customers for funding rates in perpetual contract     | 用現金及約當現金支付給用戶的永續合約資金費率 |
 
 ## 投資活動 (Investing Activities)
 
@@ -65,23 +62,35 @@
 
 ## 籌資活動 (Financing Activities)
 
-- 從發行普通股所得的資金( _Proceeds from issuance of common stock_ or _Cash received from issuing common stock_ )
-- 長期債務 (Long-Term Debt): 債務的增加或減少
-- 短期借款 (Short-Term Borrowings): 債務的增加或減少
-- 股利的支付 (Payments of dividends)
-- 庫藏股 (Treasury Stock): 購買或出售自家股票
+| Item                                   | Definition             |
+| -------------------------------------- | ---------------------- |
+| Proceeds from issuance of common stock | 從發行普通股所得的資金 |
+| Long-Term Debt                         | 長期債務的增加或減少   |
+| Short-Term Borrowings                  | 短期債務的增加或減少   |
+| Payments of dividends                  | 股利的支付             |
+| Treasury Stock                         | 購買或出售自家股票     |
 
 ## 非現金的營運活動補充 (Supplemental schedule of non-cash operating activities)
 
-- 用穩定幣購買加密貨幣(Purchase of cryptocurrencies with non-cash consideration)，例如用 USDT 買 BTC
-- 賣掉加密貨幣獲得穩定幣(Disposal of cryptocurrencies for non-cash consideration)，例如賣掉 BTC 持有 USDT
-- Insurance Fund for Perpetual Contracts with non-cash consideration: 為了保證永續合約正常運作的基金，以加密貨幣形式
-- USDT received from customers: 從用戶那邊賺到的 USDT
-- USDT paid to customers: 支付給用戶的 USDT
+| Item                                                                           | Definition                                     |
+| ------------------------------------------------------------------------------ | ---------------------------------------------- |
+| Purchase of cryptocurrencies with non-cash consideration                       | 用穩定幣買加密貨幣，例如用 USDT 買 BTC         |
+| Disposal of cryptocurrencies for non-cash consideration                        | 賣加密貨幣得到穩定幣，例如賣掉 BTC 持有 USDT   |
+| Insurance fund for perpetual contracts with non-cash consideration             | 為了保證永續合約正常運作的基金，以加密貨幣形式 |
+| Cryptocurrencies received from customers as transaction fees                   | 從用戶那邊賺到的交易手續費，以加密貨幣形式     |
+| Cryptocurrencies received from customers for liquidation in perpetual contract | 從客戶收到的用於永續合約交易清算的加密貨幣     |
+| Cryptocurrencies received from customers for liquidation in CFD trading        | 從客戶收到的用於 CFD 交易清算的加密貨幣        |
+| Cryptocurrencies paid to customers as rebates for transaction fees             | 用加密貨幣支付給用戶的手續費返傭               |
+| Cryptocurrencies paid to customers for perpetual contract profits              | 用加密貨幣支付給用戶的永續合約利潤             |
+| Cryptocurrencies paid to suppliers for expenses                                | 向供應商支付費用的加密貨幣                     |
+| Cryptocurrencies paid to customers for CFD trading profits                     | 支付給客戶的 CFD 交易利潤加密貨幣              |
+| Cryptocurrencies paid to customers for funding rates in perpetual contract     | 用加密貨幣支付給用戶的永續合約資金費率         |
+| Cryptocurrencies paid to customers for profits in perpetual contract           | 用加密貨幣支付給客戶的永續合約交易利潤         |
 
 # 現金流量表的製作方法和注意事項
 
-- 投資活動和籌資活動的直接法比較容易理解，因為它們直接反映了資產和負債的變動。而間接法則需要將資產和負債的變動轉換成現金流量的影響，這可能比較複雜和不直觀。以下例子皆為營運活動
+- 投資活動和籌資活動的直接法比較容易理解，因為它們直接反映了資產和負債的變動。而間接法則需要將資產和
+  負債的變動轉換成現金流量的影響，這可能比較複雜和不直觀。以下例子皆為營運活動
 
 ## 直接法
 
@@ -125,8 +134,11 @@
 
 ## 驗算
 
-1. 計算期初和期末的現金餘額。期初的現金餘額是指報告期間開始時交易所持有的現金和等價物（如銀行存款、短期投資等）。期末的現金餘額是指報告期間結束時交易所持有的現金和等價物。這兩個數字可以從交易所的資產負債表中獲得。
-2. 計算期間內的淨增減現金餘額。將三大類現金流動的淨額相加，得到期間內的淨增減現金餘額。這個數字應該與期初和期末的現金餘額之差相等，以檢驗現金流量表的準確性。
+1. 計算期初和期末的現金餘額。期初的現金餘額是指報告期間開始時交易所持有的現金和等價物（如銀行存款、
+   短期投資等）。期末的現金餘額是指報告期間結束時交易所持有的現金和等價物。這兩個數字可以從交易所的
+   資產負債表中獲得。
+2. 計算期間內的淨增減現金餘額。將三大類現金流動的淨額相加，得到期間內的淨增減現金餘額。這個數字應該
+   與期初和期末的現金餘額之差相等，以檢驗現金流量表的準確性。
 
 ---
 
@@ -178,12 +190,12 @@ User crypto withdrawal：($1,000)
 
 ### 交易所跟用戶都用 USD 買賣 BTC
 
-- 指定期間內，交易所自己斷斷續續用 USD 逢低買進 BTC，總共買入 10 BTC；用戶總共用 USD 下單買 5 BTC 跟賣 1 BTC
-  - 粗淺地假設交易所買入 10 BTC 時匯率為 900 USD/BTC，用戶買入時匯率為 1000 USD/BTC，用戶賣出時匯率為 800 USD/BTC，財報結算時的匯率為 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)
-  - 附帶一提，資產負債表下的紀錄可能長這樣：
-    - 用戶 5x1000-1x800=5000-800=4200 總共買入 4200 美元價值的 3 BTC，代表交易所賣出 4200 美元價值的 3 BTC
-    - 交易所持有 10-3= 7 BTC， 7x800=5600 美元
-    - 保留盈餘為 5x1000x0.01 + 1x800x0.01=58 美元
+- 指定期間內，交易所自己斷斷續續用 USD 逢低買進 BTC，總共買入 10 BTC；用戶總共用 USD 下單買 5 BTC 跟
+  賣 1 BTC - 粗淺地假設交易所買入 10 BTC 時匯率為 900 USD/BTC，用戶買入時匯率為 1000 USD/BTC，用戶賣
+  出時匯率 為 800 USD/BTC，財報結算時的匯率為 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01) -
+  附帶一提，資產負債表下的紀錄可能長這樣： - 用戶 5x1000-1x800=5000-800=4200 總共買入 4200 美元價值
+  的 3 BTC，代表交易所賣出 4200 美元價值的 3 BTC - 交易所持有 10-3= 7 BTC， 7x800=5600 美元 - 保留盈
+  餘為 5x1000x0.01 + 1x800x0.01=58 美元
 
 ### 過程
 
@@ -233,13 +245,15 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: $49
 
 ### 交易所跟用戶都用 USDT 買賣 BTC
 
-- 指定期間內，交易所自己斷斷續續用 USDT 逢低買進 BTC，總共買入 10 BTC；用戶總共用 USD 下單買 5 BTC 跟賣 1 BTC
-  - 粗淺地假設交易所買入 10 BTC 時匯率為 900 USDT/BTC，用戶買入時匯率為 1000 USDT/BTC，用戶賣出時匯率為 800 USDT/BTC，財報結算時的匯率為 800 USDT/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD
+- 指定期間內，交易所自己斷斷續續用 USDT 逢低買進 BTC，總共買入 10 BTC；用戶總共用 USD 下單買 5 BTC
+  跟賣 1 BTC - 粗淺地假設交易所買入 10 BTC 時匯率為 900 USDT/BTC，用戶買入時匯率為 1000 USDT/BTC，用
+  戶賣出時匯 率為 800 USDT/BTC，財報結算時的匯率為 800 USDT/BTC，交易所點差固定為 2 %，單向為
+  (2%/2=0.01)，1 USDT = 1 USD
 
 ### 過程
 
 - 交易所自己總共買入 10 BTC
-  - 加上別的交易所的點差 0.1 %，現金流出了 9009 USDT，因為購買了 10 BTC
+  - 加上別的交易所的點差 0.1 %，現金流出了 9009 USDT，等值 9009 美元，因為購買了 10 BTC
 
 Supplemental schedule of non-cash operating activities：
 
@@ -284,18 +298,21 @@ NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $49
 
 ## CFD 交易
 
-### 用戶用 USD 做多做空 BTC，倉位皆已清算
+### 用戶用 USD 做多做空 BTC，倉位皆已關倉
 
-- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，皆已關倉
-  - 用戶做多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USD 流動性足夠，故沒有另外買賣 BTC
+- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，
+  開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，皆已關倉 - 用戶做多匯率為 1000 USD/BTC，用戶做空匯率為
+  1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算 時匯率 800 USD/BTC，交易所點差固定為 2 %，單
+  向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0 - 多空沖銷後，剩下 5-2=3 BTC
+  多單，交易所本身的 10 BTC 跟 10000 USD 流動性足夠，故沒有另外買賣 BTC
 
 ### 過程
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
   - 保證金為 5x1000x1.01/5=$1010，((800-1000)/1000)x5=-1 觸及強制平倉價，損失所有保證金 1010 美元
-  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，交易所吸收強制平倉手續費
+  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，交易所
+    吸收強制平倉手續費
 - 空單
   - 保證金為 2x1000x0.99/5=$396，(-(800x1.01-1000))x2=384
     - 空單關倉時用戶拿回保證金 396 美元跟獲利 384 美元
@@ -307,9 +324,9 @@ NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $49
 
 Cash flows from operating activities:
 
-Cash received from customers: $1010
+Cash received from customers for liquidation in CFD trading: $1010
 
-Cash paid to customers: ($384)
+Cash paid to customers for CFD trading profits: ($384)
 
 NET CASH FLOW FROM OPERATING ACTIVITIES: $626
 
@@ -317,9 +334,12 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: $626
 
 ### 交易所用 USD 買 BTC，用戶用 USD 做 CFD 交易，倉位皆已關倉
 
-- 指定期間內，交易所本身資產(狀態)有 3 BTC，10,000 USD，又陸續總共買了 1 BTC；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，皆已關倉
-  - 交易所買 BTC 的匯率為 900 USD/BTC，用戶做多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所買入 1 BTC 以確保資產價值
+- 指定期間內，交易所本身資產(狀態)有 3 BTC，10,000 USD，又陸續總共買了 1 BTC；用戶幾乎同時開 5 BTC
+  價值 5000 美元的多單，開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，皆已關倉 - 交易所買 BTC 的匯率為
+  900 USD/BTC，用戶做多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用 戶關倉時匯率為 800
+  USD/BTC，財報結算時匯率 800 USD/BTC，交易所點差固定為 2 %，單向為 (2%/2=0.01)，1 USDT = 1 USD，強
+  制平倉手續費為 0.01%，手續費為 0 - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所買入 1 BTC 以確保資產價
+  值
 
 ### 過程
 
@@ -347,7 +367,9 @@ Purchase of cryptocurrencies: ($900.9)
 
 Cash flows from operating activities:
 
-Cash received from customers: $626
+Cash received from customers for liquidation in CFD trading: $1010
+
+Cash paid to customers for CFD trading profits: ($384)
 
 Cryptocurrencies: $900
 
@@ -357,11 +379,13 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: $625.1
 
 ---
 
-### 用戶用 USDT 做 CFD 交易，倉位皆以清算
+### 用戶用 USDT 做 CFD 交易，倉位皆已關倉
 
-- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USDT；用戶幾乎同時開 5 BTC 價值 5000 USDT 的多單，開 2 BTC 價值 2000USDT 空單，槓桿為 5 倍，皆已關倉
-  - 用戶做多匯率為 1000 USDT/BTC，用戶做空匯率為 1000 USDT/BTC，用戶關倉時匯率為 800 USDT/BTC，財報結算時匯率 800 USDT/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0，1 USDT = 1 USD
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USDT 流動性足夠，故沒有另外買賣 BTC
+- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USDT；用戶幾乎同時開 5 BTC 價值 5000 USDT 的多單
+  ，開 2 BTC 價值 2000USDT 空單，槓桿為 5 倍，皆已關倉 - 用戶做多匯率為 1000 USDT/BTC，用戶做空匯率
+  為 1000 USDT/BTC，用戶關倉時匯率為 800 USDT/BTC，財報 結算時匯率 800 USDT/BTC，交易所點差固定為 2
+  %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費 為 0.01%，手續費為 0，1 USDT = 1 USD - 多空沖
+  銷後，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USDT 流動性足夠，故沒有另外買賣 BTC
 
 ### 過程
 
@@ -380,9 +404,9 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: $625.1
 
 Supplemental schedule of non-cash operating activities：
 
-USDT received from customers: $1010
+Cryptocurrencies received from customers for liquidation in CFD trading $1010
 
-USDT paid to customers: ($384)
+Cryptocurrencies paid to customers for CFD trading profits ($384)
 
 NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $626
 
@@ -390,9 +414,12 @@ NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $626
 
 ### 交易所用 USDT 買 BTC，用戶用 USDT 做 CFD 交易，倉位皆已關倉
 
-- 指定期間內，交易所本身資產(狀態)有 3 BTC，10,000 USDT，又陸續總共買了 1 BTC；用戶幾乎同時開 5 BTC 價值 5000 USDT 的多單，開 2 BTC 價值 2000 USDT 空單，槓桿為 5 倍，皆已關倉
-  - 交易所買 BTC 的匯率為 900 USDT/BTC，用戶做多匯率為 1000 USDT/BTC，用戶做空匯率為 1000 USDT/BTC，用戶關倉時匯率為 800 USDT/BTC，財報結算時匯率 800 USDT/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所買入 1 BTC 以確保資產價值
+- 指定期間內，交易所本身資產(狀態)有 3 BTC，10,000 USDT，又陸續總共買了 1 BTC；用戶幾乎同時開 5 BTC
+  價值 5000 USDT 的多單，開 2 BTC 價值 2000 USDT 空單，槓桿為 5 倍，皆已關倉 - 交易所買 BTC 的匯率為
+  900 USDT/BTC，用戶做多匯率為 1000 USDT/BTC，用戶做空匯率為 1000 USDT/BTC， 用戶關倉時匯率為 800
+  USDT/BTC，財報結算時匯率 800 USDT/BTC，交易所點差固定為 2 %，單向為 (2%/2=0.01)，1 USDT = 1 USD，
+  強制平倉手續費為 0.01%，手續費為 0 - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所買入 1 BTC 以確保資產
+  價值
 
 ### 過程
 
@@ -425,9 +452,9 @@ Cryptocurrencies: $900
 
 Purchase of cryptocurrencies with non-cash consideration: ($900.9)
 
-USDT received from customers: $1010
+Cryptocurrencies received from customers for liquidation in CFD trading $1010
 
-USDT paid to customers: ($384)
+Cryptocurrencies paid to customers for CFD trading profits ($384)
 
 NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $625.1
 
@@ -435,33 +462,46 @@ NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $625.1
 
 ## 永續合約
 
-永續期貨合約與傳統期貨最大的不同在於它沒有確定的到期日，允許交易者長期持有。這種合約的價格（標記價格）基於一個指數價格，指數價格是根據主要現貨市場的平均價格計算得出的。當市場高度波動時，標記價格能避免不當強行平倉情況，這種調整會發生。此外，交易者需要支付一定的保證金來開設和維持他們的倉位。如果市場對他們不利，他們可能會面臨被強制平倉的風險。交易所提供了一系列工具和機制，如保險基金和自動去槓桿化，以確保市場的穩定和交易者的資金安全。
+永續期貨合約與傳統期貨最大的不同在於它**沒有確定的到期日**，允許交易者長期持有。這種合約的價格（**標
+記價格**）基於一個**指數價格**，**指數價格**是根據主要現貨市場的平均價格計算得出的。當市場高度波動時
+，**標記價格**能避免不當強行平倉情況，這種調整會發生。此外，交易者需要支付一定的保證金來開設和維持他
+們的倉位。如果市場對他們不利，他們可能會面臨被強制平倉的風險。交易所提供了一系列工具和機制，如**保險
+基金和自動去槓桿化**，以確保市場的穩定和交易者的資金安全。
 
-- 指數價格由根據主要現貨市場及其相對交易量計算得出的資產平均價格構成。
-  - 指數價格是一種從多個市場或交易所中提取的資產平均價格，用於反映該資產在整體市場中的真實價值。它可以幫助減少單一市場或交易所的價格操縱或異常波動的影響。
-    舉例說明：
-    假設我們想知道比特幣的指數價格。我們可以從幾個主要的加密貨幣交易所（如 Binance、Coinbase、Kraken 等）取得比特幣的價格，然後計算它們的平均價格。如果 Binance 上的比特幣價格是$50,000，Coinbase 上是$49,800，而 Kraken 上是$50,200，那麼比特幣的指數價格將是這三個價格的平均值，即$50,000。
-- 標記價格與實際交易價格（最後價格）相比的預計合約真實價值（公允價格）
-
-  - 計算標記價格可在市場高度波動時避免發生不當強行平倉的狀況。因此，雖然指數價格與現貨市場價格相關，但標記價格代表永續期貨合約的公允價值。標記價格係基於指數價格及資金費率計算得出，且是計算「未實現盈虧」的重要構成元素。
-
+- **指數價格**由根據主要現貨市場及其相對交易量計算得出的資產平均價格構成。
+  - 指數價格是一種**從多個市場或交易所中提取的資產平均價格**，用於反映該資產在整體市場中的真實價值。
+    它可以幫助減少單一市場或交易所的價格操縱或異常波動的影響。
+    舉例說明： 假設我們想知道比特幣的指數價格。我們可以從幾個主要的加密貨幣交易所（如
+    Binance、Coinbase、Kraken 等）取得比特幣的價格，然後計算它們的平均價格。如果 Binance 上的比特幣價
+    格是$50,000，Coinbase 上是$49,800，而 Kraken 上是$50,200，那麼比特幣的指數價格將是這三個價格的平均
+    值，即$50,000。
+- **標記價格**與實際交易價格（最後價格）相比的**預計合約真實價值（公允價格）**
+  - 計算標記價格可在市場高度波動時避免發生不當強行平倉的狀況。因此，雖然**指數價格與現貨市場價格相關
+    ，但標記價格代表永續期貨合約的公允價值**。**標記價格係基於指數價格及資金費率**計算得出，且是計算
+    「未實現盈虧」的重要構成元素。
+- 資金費率調整 (Funding Rate Adjustment)
+  - 避免單一方體量太大，用來平衡市場的機制，資金費率為**正**代表做多的交易者要付錢給做空的交易者，資
+    金費率為**負**就是做空的交易者要付錢給做多的交易者，每八小時計算一次，在關倉前會先記在帳上，關倉
+    才會付清。
+  - 資金費率是直接給反向交易的交易者。
 - 自動去槓桿化 (Auto-Deleveraging)
   - 避免用戶賺太多，交易所無法給出這麼多利潤，讓盈利的人賺少一點以補貼虧損的人
-- 資金費率調整 (Funding Rate Adjustment)
-  - 避免單一方體量太大，用來平衡市場的機制，資金費率為正代表做多的交易者要付錢給做空的交易者，資金費率為負就是做空的交易者要付錢給做多的交易者，每八小時計算一次，在關倉前會先記在帳上，關倉才會付清。
-  - 資金費率是直接給反向交易的交易者。
 - 保證金
-  - 初始保證金是開設槓桿倉位時所需的最低資金，確保交易者有足夠的資金承擔潛在損失。維持保證金是維持該倉位所需的最低資金。當資金低於此水平時，交易者可能會被強制平倉，
+  - **初始保證金**是開設槓桿倉位時所需的最低資金，確保交易者有足夠的資金承擔潛在損失。**維持保證
+    金**是維持該倉位所需的最低資金。當資金低於此水平時，交易者可能會被強制平倉，
 - 保險基金
-  - 防止虧損交易者的餘額降至零以下，同時確保正在盈利的交易者鎖定利潤。避免交易所自掏腰包來保證盈利者的利潤。部分基金來源自強制平倉手續費。
+  - 防止虧損交易者的餘額降至零以下，同時確保正在盈利的交易者鎖定利潤。避免交易所自掏腰包來保證盈利者
+    的利潤。部分基金來源自強制平倉手續費。
 
 ---
 
 ### 交易所用 USD 賣 BTC，用戶用 USD 做永續合約交易，部分倉位未關倉，多單爆倉過多的情況
 
-- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，開 8 BTC 價值 8000 美元空單，槓桿為 5 倍，1 BTC 價值的空單倉位未關倉
-  - 資金費率始終為 -0.1%，用戶做多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - BTC 價格瘋狂跌，空單價值過大，交易所決定賣出 10 BTC ，賣出時匯率為 700 USD/BTC
+- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，
+  開 8 BTC 價值 8000 美元空單，槓桿為 5 倍，1 BTC 價值的空單倉位未關倉 - 資金費率始終為 -0.1%，用戶
+  做多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率
+  800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續
+  費為 0 - BTC 價格瘋狂跌，空單價值過大，交易所決定賣出 10 BTC ，賣出時匯率為 700 USD/BTC
 
 ### 過程
 
@@ -474,28 +514,32 @@ Cryptocurrencies: ($7000)
 
 Disposal of cryptocurrencies: $6930
 
-- 資金費率由做空的人給做多的人，這段期間內的資金費率的錢由空單價值來計算，而多單交易者各自能拿到多少是由多單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交給該收到資金費率的用戶
-  - 8x1000x0.001=8 美元
+- 資金費率由做空的人給做多的人，這段期間內的資金費率的錢由空單價值來計算，而多單交易者各自能拿到多少
+  是由多單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交
+  給該收到資金費率的用戶；為簡化只計算一次 - 8x1000x0.001=8 美元
 
 Cash flows from operating activities:
 
-Insurance Fund for Perpetual Contracts: $8
+Insurance fund for perpetual contracts: $8
 
-Cash paid to customers: ($8)
+Cash paid to customers for funding rates in perpetual contract: ($8)
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
   - 保證金為 5x1000x1.01/5=$1010，((800-1000)/1000)x5=-1 觸及強制平倉價，損失所有保證金 1010 美元
-  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，由保險基金吸收強制平倉手續費。
-- 空單
-  - 保證金 8x1000x0.99/5=$1584，(-(800x1.01-1000))x9=1344
+  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，由保險
+    基金吸收強制平倉手續費。
+- 空單關倉價值 7 BTC 的倉位
+  - 保證金 7x1000x0.99/5=$1584，(-(800x1.01-1000))x7=1344
     - 空單關倉時用戶拿回保證金 1980 美元跟獲利 1344 美元
 
 ### 結果
 
 - 這段期間的現金流量表
   - 交易所沒有控制好空單價值，造成虧損 404 美元
+  - Insurance fund for perpetual contracts: 8+0.08=8.08
   - Cash paid to customers: -1344-8=-1352
+  - Cash received from customers: 1010-0.08=1009.92
 
 Cash flows from operating activities:
 
@@ -503,11 +547,13 @@ Cryptocurrencies: ($7000)
 
 Disposal of cryptocurrencies: $6930
 
-Insurance Fund for Perpetual Contracts: $8.08
+Insurance fund for perpetual contracts: $8.08
 
-Cash received from customers: $1009.92
+Cash received from customers for liquidation in perpetual contract: $1009.92
 
-Cash paid to customers: ($1352)
+Cash paid to customers for funding rates in perpetual contract: ($8)
+
+Cash paid to customers for perpetual contract profits: ($1344)
 
 NET CASH FLOW FROM OPERATING ACTIVITIES: ($404)
 
@@ -515,29 +561,32 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: ($404)
 
 ### 用戶用 USD 做永續合約交易，部分倉位未關倉
 
-- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，其中有 1 BTC 的空單未關倉
-  - 資金費率始終為 0.1%，用戶做多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USD 流動性足夠，故沒有另外買賣 BTC
+- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，
+  開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，其中有 1 BTC 的空單未關倉 - 資金費率始終為 0.1%，用戶做
+  多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率
+  800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續
+  費為 0 - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USD 流動性足夠，故沒有另外
+  買賣 BTC
 
 ### 過程
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
   - 保證金為 5x1000x1.01/5=$1010，((800-1000)/1000)x5=-1 觸及強制平倉價，損失所有保證金 1010 美元
-  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，由保險基金吸收強制平倉手續費。
+  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，由保險
+    基金吸收強制平倉手續費。
 - 空單
-
-  - 保證金 1x1000x0.99/5=$198，(-(800x1.01-1000))x2=192
+  - 保證金 1x1000x0.99/5=$198，(-(800x1.01-1000))x1=192
     - 空單關倉時用戶拿回保證金 198 美元跟獲利 192 美元
-
-- 資金費率由做多的人給做空的人，這段期間內的資金費率的錢由多單價值來計算，而空單交易者各自能拿到多少是由多單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交給該收到資金費率的用戶
-  - 5x1000x0.001=5 美元
+- 資金費率由做多的人給做空的人，這段期間內的資金費率的錢由多單價值來計算，而空單交易者各自能拿到多少
+  是由多單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交
+  給該收到資金費率的用戶；為簡化只計算一次 - 5x1000x0.001=5 美元
 
 Cash flows from operating activities:
 
-Insurance Fund for Perpetual Contracts: $5
+Insurance fund for perpetual contracts: $5
 
-Cash paid to customers: ($5)
+Cash paid to customers for funding rates in perpetual contract: ($5)
 
 ### 結果
 
@@ -546,11 +595,13 @@ Cash paid to customers: ($5)
 
 Cash flows from operating activities:
 
-Cash paid to customers: ($197)
+Cash paid to customers for funding rates in perpetual contract: ($5)
 
-Insurance Fund for Perpetual Contracts: $5.08
+Cash paid to customers for perpetual contract profits: ($192)
 
-Cash received from customers: $1009.92
+Insurance fund for perpetual contracts: $5.08
+
+Cash received from customers for liquidation in perpetual contract: $1009.92
 
 NET CASH FLOW FROM OPERATING ACTIVITIES: $818
 
@@ -558,14 +609,17 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: $818
 
 ### 交易所用 USDT 賣 BTC，用戶用 USDT 做永續合約交易，部分倉位未關倉，多單爆倉過多的情況
 
-- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USDT ；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，開 8 BTC 價值 8000 美元空單，槓桿為 5 倍，1 BTC 價值的空單倉位未關倉
-  - 資金費率始終為 -0.1%，用戶做多匯率為 1000 USDT/BTC，用戶做空匯率為 1000 USDT/BTC，用戶關倉時匯率為 800 USDT/BTC，財報結算時匯率 800 USDT/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - BTC 價格瘋狂跌，空單價值過大，交易所決定賣出 10 BTC ，賣出時匯率為 700 USDT/BTC
+- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USDT ；用戶幾乎同時開 5 BTC 價值 5000 美元的多單
+  ，開 8 BTC 價值 8000 美元空單，槓桿為 5 倍，1 BTC 價值的空單倉位未關倉 - 資金費率始終為 -0.1%，用
+  戶做多匯率為 1000 USDT/BTC，用戶做空匯率為 1000 USDT/BTC，用戶關倉時匯率 為 800 USDT/BTC，財報結算
+  時匯率 800 USDT/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為
+  0.01%，手續費為 0 - BTC 價格瘋狂跌，空單價值過大，交易所決定賣出 10 BTC ，賣出時匯率為 700
+  USDT/BTC
 
 ### 過程
 
 - 交易所賣 10 BTC
-  - 加上別的交易所的點差 0.1 %，現金流入 6930 美元
+  - 加上別的交易所的點差 0.1 %，現金流入 6930 USDT
 
 Supplemental schedule of non-cash operating activities：
 
@@ -573,22 +627,24 @@ Cryptocurrencies: ($7000)
 
 Disposal of cryptocurrencies with non-cash consideration: $6930
 
-- 資金費率由做空的人給做多的人，這段期間內的資金費率的錢由空單價值來計算，而多單交易者各自能拿到多少是由多單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交給該收到資金費率的用戶
-  - 8x1000x0.001=8 美元
+- 資金費率由做空的人給做多的人，這段期間內的資金費率的錢由空單價值來計算，而多單交易者各自能拿到多少
+  是由多單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交
+  給該收到資金費率的用戶；為簡化只計算一次 - 8x1000x0.001=8 美元
 
 Supplemental schedule of non-cash operating activities：
 
-Insurance Fund for Perpetual Contracts with non-cash consideration: $8
+Insurance fund for perpetual contracts with non-cash consideration: $8
 
-USDT paid to customers: ($8)
+Cryptocurrencies paid to customers: ($8)
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
   - 保證金為 5x1000x1.01/5=$1010，((800-1000)/1000)x5=-1 觸及強制平倉價，損失所有保證金 1010 美元
-  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，由保險基金吸收強制平倉手續費。
+  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，由保險
+    基金吸收強制平倉手續費。
 - 空單
-  - 保證金 8x1000x0.99/5=$1584，(-(800x1.01-1000))x9=1344
-    - 空單關倉時用戶拿回保證金 1980 美元跟獲利 1344 美元
+  - 保證金 7x1000x0.99/5=$1386，(-(800x1.01-1000))x7=1344
+    - 空單關倉時用戶拿回保證金 1386 美元跟獲利 1344 美元
 
 ### 結果
 
@@ -602,11 +658,13 @@ Cryptocurrencies: ($7000)
 
 Disposal of cryptocurrencies: $6930
 
-Insurance Fund for Perpetual Contracts with non-cash consideration: $8.08
+Insurance fund for perpetual contracts with non-cash consideration: $8.08
 
-USDT received from customers: $1009.92
+Cryptocurrencies received from customers for liquidation in perpetual contract: $1009.92
 
-USDT paid to customers: ($1352)
+Cryptocurrencies paid to customers for profits in perpetual contract: ($1344)
+
+Cryptocurrencies paid to customers for funding rates in perpetual contract: ($8)
 
 NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: ($404)
 
@@ -614,29 +672,32 @@ NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: ($404)
 
 ### 用戶用 USDT 做永續合約交易，部分倉位未關倉
 
-- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，其中有 1 BTC 的空單未關倉
-  - 資金費率始終為 0.1%，用戶做多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率 800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續費為 0
-  - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USD 流動性足夠，故沒有另外買賣 BTC
+- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USD；用戶幾乎同時開 5 BTC 價值 5000 美元的多單，
+  開 2 BTC 價值 2000 美元空單，槓桿為 5 倍，其中有 1 BTC 的空單未關倉 - 資金費率始終為 0.1%，用戶做
+  多匯率為 1000 USD/BTC，用戶做空匯率為 1000 USD/BTC，用戶關倉時匯率為 800 USD/BTC，財報結算時匯率
+  800 USD/BTC，交易所點差固定為 2 %，單向為(2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，手續
+  費為 0 - 多空沖銷後，剩下 5-2=3 BTC 多單，交易所本身的 10 BTC 跟 10000 USD 流動性足夠，故沒有另外
+  買賣 BTC
 
 ### 過程
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
   - 保證金為 5x1000x1.01/5=$1010，((800-1000)/1000)x5=-1 觸及強制平倉價，損失所有保證金 1010 美元
-  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，由保險基金吸收強制平倉手續費。
+  - 強制平倉價格 1000x(1-0.2)x1.0001=800.08，強制平倉手續費 0.08 美元，由交易所執行強制平倉，由保險
+    基金吸收強制平倉手續費。
 - 空單
-
-  - 保證金 1x1000x0.99/5=$198，(-(800x1.01-1000))x2=192
+  - 保證金 1x1000x0.99/5=$198，(-(800x1.01-1000))x1=192
     - 空單關倉時用戶拿回保證金 198 美元跟獲利 192 美元
-
-- 資金費率由做多的人給做空的人，這段期間內的資金費率的錢由多單價值來計算，而空單交易者各自能拿到多少是由多單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交給該收到資金費率的用戶
-  - 5x1000x0.001=5 美元
+- 資金費率由做多的人給做空的人，這段期間內的資金費率的錢由多單價值來計算，而空單交易者各自能拿到多少
+  是由空單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交
+  給該收到資金費率的用戶；為簡化只計算一次 - 5x1000x0.001=5 美元
 
 Supplemental schedule of non-cash operating activities：
 
-Insurance Fund for Perpetual Contracts with non-cash consideration: $5
+Insurance fund for perpetual contracts with non-cash consideration: $5
 
-USDT paid to customers: ($5)
+Cryptocurrencies paid to customers for funding rates in perpetual contract: ($5)
 
 ### 結果
 
@@ -645,17 +706,101 @@ USDT paid to customers: ($5)
 
 Supplemental schedule of non-cash operating activities：
 
-USDT paid to customers: ($197)
+Cryptocurrencies paid to customers for profits in perpetual contract: ($192)
 
-Insurance Fund for Perpetual Contracts with non-cash consideration: $5.08
+Cryptocurrencies paid to customers for funding rates in perpetual contract: ($5)
 
-USDT received from customers: $1009.92
+Insurance fund for perpetual contracts with non-cash consideration: $5.08
+
+Cryptocurrencies received from customers for liquidation in perpetual contract: $1009.92
 
 NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $818
 
 ---
 
+### 交易所跟用戶都用 USDT 交易，部分倉位未關倉，交易所收手續費並有返傭機制，以及與供應商來往的例子
+
+- 指定期間內，交易所本身資產(狀態)有 10 BTC，10,000 USDT ；用戶總共開 12 BTC 的多單，2 BTC 的空單，
+  剩餘 5 BTC 的多單跟 1 BTC 的空單未關倉，交易所在這期間買了 5 BTC - 資金費率始終為 0.1%，交易所買
+  BTC 的匯率為 1200 USD/BTC，用戶開多單的匯率為 800 USD/BTC、在 1000 USD/BTC 關倉，用戶開空單的匯率
+  為 900 USD/BTC、在 800 USD/BTC 關倉；財報結算時匯率 800 USDT/BTC， 交易所點差固定為 2 %，單向為
+  (2%/2=0.01)，1 USDT = 1 USD，強制平倉手續費為 0.01%，taker 及 maker 手續費皆為 0.03%，無論開倉關倉
+  都會收手續費； 其中返傭比例為手續費 30%；需定期支付供應商一筆費用，可能是固定的或浮動的，在此假設
+  費用為 1000 USDT - 因為 BTC 持續上漲，交易所評估之後決定買 5 BTC
+
+### 過程
+
+- 需定期支付供應商一筆費用
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrencies paid to suppliers for expenses: ($1000)
+
+- 交易所買 5 BTC
+  - 加上別的交易所的點差 0.1 %，現金流出 6006 USDT
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrencies: $6000
+
+Disposal of cryptocurrencies with non-cash consideration: ($6006)
+
+- 資金費率由做多的人給做空的人，這段期間內的資金費率的錢由多單價值來計算，而空單交易者各自能拿到多少
+  是由多單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交
+  給該收到資金費率的用戶；為簡化只計算一次
+  - 12x800x0.001=9.6 USDT
+
+Supplemental schedule of non-cash operating activities：
+
+Insurance fund for perpetual contracts with non-cash consideration: $9.6
+
+Cryptocurrencies paid to customers: ($9.6)
+
+- 保證金為涵蓋點差的價格除以槓桿
+- 多單
+  - 已關倉的保證金為 7x800x1.01x1/5~=1132 USDT，獲利 (1000x0.99-800x1.01)x7=1274 USDT
+- 空單
+  - 已關倉的保證金為 1x900x0.99x1/5~=179 USDT，獲利 -(800x1.01-900x0.99)x1=83 USDT
+- 交易所收的手續費
+  - 沒算上點差的倉位價值
+    - 開倉
+      - (12x800+2x900)x0.0003=3.42 USDT
+    - 關倉
+      - (7x1000+1x800)x0.0003=2.34 USDT
+  - ~~算上點差 (12x800x1.01+2x900x0.99)x0.0003=3.44~~
+- 返傭
+  - 符合返傭資格的倉位價值為 2 BTC 多單及 1 BTC 空單 ，皆已關倉
+    - (2x800+2x1000+1x900+1x800)x0.0003x0.3=0.48 ~=0.5 USDT
+
+### 結果
+
+- 這段期間的現金流量表
+  - 交易所沒有控制好多單價值，造成虧損 2360.08 USDT
+  - Cryptocurrencies paid to customers:
+    - -1274-83-9.6=1366.6
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrencies paid to suppliers for expenses: ($1000)
+
+Cryptocurrencies: $6000
+
+Disposal of cryptocurrencies with non-cash consideration: ($6006)
+
+Insurance fund for perpetual contracts with non-cash consideration: $9.6
+
+Cryptocurrencies paid to customers for profits in perpetual contract: ($1357)
+
+Cryptocurrencies received from customers as transaction feess: $3.42
+
+Cryptocurrencies paid to customers for funding rates in perpetual contract: ($9.6)
+
+Cryptocurrencies paid to customers as rebates for transaction fees: ($0.5)
+
+NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: ($2360.08)
+
 # 參考來源
 
 - [幣安永續期貨合約](https://academy.binance.com/zt/articles/what-are-perpetual-futures-contracts)
+- [U 本位期貨合約規範](https://www.binance.com/zh-TC/support/faq/u-%E6%9C%AC%E4%BD%8D%E6%9C%9F%E8%B2%A8%E5%90%88%E7%B4%84%E8%A6%8F%E7%AF%84-360033161972)
 - [The Cash Flow Statement - Direct Method](https://accountingsuperpowers.com/financial-statements/cash-flow-statement/cash-flow-statement-direct-method/#tab-con-3)
