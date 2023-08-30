@@ -36,25 +36,26 @@
 
 # 製作加密貨幣交易所的現金流量表需要的資料及對應的會計科目
 
+- 區分現金營運活動與非現金營運活動的標準在於：持有的是現金還是加密貨幣，例如跟用戶收的手續費是以加密
+  貨幣形式，則為交易所的非現金流入。
+
 ## 營運活動 (Operating Activities)
 
 | Item                                                               | Definition                                   |
 | ------------------------------------------------------------------ | -------------------------------------------- |
-| User deposit                                                       | 用戶的法幣存款                               |
-| User crypto deposit                                                | 用戶的加密貨幣存款                           |
-| User withdrawal                                                    | 用戶的法幣提款                               |
-| User crypto withdrawal                                             | 用戶的加密貨幣提款                           |
-| Cryptocurrencies                                                   | 交易所持有的加密貨幣                         |
+| Cash deposited by customers                                        | 用戶的現金存款                               |
+| Cash withdrawn by customers                                        | 用戶的現金提款                               |
 | Purchase of cryptocurrencies                                       | 用法幣購買加密貨幣                           |
 | Disposal of cryptocurrencies                                       | 賣掉加密貨幣獲得法幣                         |
-| Insurance fund for perpetual contracts                             | 為了保證永續合約正常運作的基金               |
+| Cash paid to suppliers for expenses                                | 向供應商支付費用的現金                       |
 | Cash received from customers as transaction fee                    | 從用戶那邊賺到的交易手續費，以現金形式       |
 | Cash received from customers for liquidation in CFD trading        | 從客戶收到的用於 CFD 交易清算的現金          |
-| Cash received from customers for liquidation in perpetual contract | 從客戶收到的用於永續合約交易清算的現金       |
 | Cash paid to customers as rebates for transaction fees             | 用現金及約當現金支付給用戶的手續費返傭       |
-| Cash paid to customers for perpetual contract profits              | 用現金及約當現金支付給用戶的永續合約利潤     |
 | Cash paid to customers for CFD trading profits                     | 支付給客戶的 CFD 交易利潤現金                |
+| Insurance fund for perpetual contracts                             | 為了保證永續合約正常運作的基金               |
 | Cash paid to customers for funding rates in perpetual contract     | 用現金及約當現金支付給用戶的永續合約資金費率 |
+| Cash paid to customers for perpetual contract profits              | 用現金及約當現金支付給用戶的永續合約利潤     |
+| Cash received from customers for liquidation in perpetual contract | 從客戶收到的用於永續合約交易清算的現金       |
 
 ## 投資活動 (Investing Activities)
 
@@ -74,18 +75,42 @@
 
 | Item                                                                           | Definition                                     |
 | ------------------------------------------------------------------------------ | ---------------------------------------------- |
+| Cryptocurrencies deposited by customers                                        | 用戶的加密貨幣存款                             |
+| Cryptocurrencies withdrawn by customers                                        | 用戶的加密貨幣提款                             |
+| Cryptocurrency inflows                                                         | 交易所本身持有的加密貨幣增加                   |
+| Cryptocurrency outflows                                                        | 交易所本身持有的加密貨幣減少                   |
 | Purchase of cryptocurrencies with non-cash consideration                       | 用穩定幣買加密貨幣，例如用 USDT 買 BTC         |
 | Disposal of cryptocurrencies for non-cash consideration                        | 賣加密貨幣得到穩定幣，例如賣掉 BTC 持有 USDT   |
-| Insurance fund for perpetual contracts with non-cash consideration             | 為了保證永續合約正常運作的基金，以加密貨幣形式 |
 | Cryptocurrencies received from customers as transaction fees                   | 從用戶那邊賺到的交易手續費，以加密貨幣形式     |
-| Cryptocurrencies received from customers for liquidation in perpetual contract | 從客戶收到的用於永續合約交易清算的加密貨幣     |
 | Cryptocurrencies received from customers for liquidation in CFD trading        | 從客戶收到的用於 CFD 交易清算的加密貨幣        |
 | Cryptocurrencies paid to customers as rebates for transaction fees             | 用加密貨幣支付給用戶的手續費返傭               |
-| Cryptocurrencies paid to customers for perpetual contract profits              | 用加密貨幣支付給用戶的永續合約利潤             |
 | Cryptocurrencies paid to suppliers for expenses                                | 向供應商支付費用的加密貨幣                     |
 | Cryptocurrencies paid to customers for CFD trading profits                     | 支付給客戶的 CFD 交易利潤加密貨幣              |
+| Insurance fund for perpetual contracts with non-cash consideration             | 為了保證永續合約正常運作的基金，以加密貨幣形式 |
+| Cryptocurrencies received from customers for liquidation in perpetual contract | 從客戶收到的用於永續合約交易清算的加密貨幣     |
+| Cryptocurrencies paid to customers for perpetual contract profits              | 用加密貨幣支付給用戶的永續合約利潤             |
 | Cryptocurrencies paid to customers for funding rates in perpetual contract     | 用加密貨幣支付給用戶的永續合約資金費率         |
 | Cryptocurrencies paid to customers for profits in perpetual contract           | 用加密貨幣支付給客戶的永續合約交易利潤         |
+
+## 其他補充項目
+
+- 與現金有關
+
+| Item                                                                    | Definition                                 |
+| ----------------------------------------------------------------------- | ------------------------------------------ |
+| Effect of exchange rates on cash, cash equivalents, and restricted cash | 交易所本身持有的資產因匯率造成的價值變化   |
+| Cash, cash equivalents, and restricted cash, beginning of period        | 報表起始日的現金及約當現金                 |
+| Cash, cash equivalents, and restricted cash, end of period              | 報表結束日的現金及約當現金                 |
+| Net increase(decrease) in cash, cash equivalents, and restricted cash   | 現金、現金等價物及受限現金的淨增加(淨減少) |
+
+- 與非現金有關
+
+| Item                                       | Definition                                   |
+| ------------------------------------------ | -------------------------------------------- |
+| Valuation adjustment for cryptocurrencies  | 交易所本身持有的加密貨幣因匯率造成的價值變化 |
+| Cryptocurrencies, beginning of period      | 報表起始日的加密貨幣                         |
+| Cryptocurrencies, end of period            | 報表結束日的加密貨幣                         |
+| Net increase(decrease) in cryptocurrencies | 加密貨幣的淨增加(淨減少)                     |
 
 # 現金流量表的製作方法和注意事項
 
@@ -151,7 +176,7 @@
 
 Cash flows from operating activities:
 
-User deposit：$1,000
+Cash deposited by customers：$1,000
 
 ---
 
@@ -160,9 +185,9 @@ User deposit：$1,000
 - 指定期間內，用戶總共入金 1 ETH ，1 ETH= 1000 USD
   - 交易所流入 1000 美元價值的 ETH
 
-Cash flows from operating activities:
+Supplemental schedule of non-cash operating activities：
 
-User crypto deposit：$1,000
+Cryptocurrencies deposited by customers：$1,000
 
 ---
 
@@ -172,7 +197,7 @@ User crypto deposit：$1,000
 
 Cash flows from operating activities:
 
-User withdrawal：($1,000)
+Cash withdrawn by customers ：($1,000)
 
 ---
 
@@ -180,9 +205,9 @@ User withdrawal：($1,000)
 
 - 指定期間內，用戶總共出金 1 ETH (價值一千美元)
 
-Cash flows from operating activities:
+Supplemental schedule of non-cash operating activities：
 
-User crypto withdrawal：($1,000)
+Cryptocurrencies withdrawn by customers：($1,000)
 
 ---
 
@@ -204,27 +229,33 @@ User crypto withdrawal：($1,000)
 
 Cash flows from operating activities:
 
-Cryptocurrencies: $9,000
-
 Purchase of cryptocurrencies: ($9,009)
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrency inflows: $9,000
 
 - 用戶在交易所買入 5 BTC
   - 加上我們交易所的點差 1 %，現金流入 5050 美元，將價值 5000 美元的 BTC 賣給用戶
 
 Cash flows from operating activities:
 
-Cryptocurrencies: ($5,000)
-
 Disposal of cryptocurrencies: $5,050
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrency outflows: ($5,000)
 
 - 用戶在交易所賣出 1 BTC
   - 加上我們交易所的點差 1 %，現金流出了 792 美元，跟用戶買的 1 BTC
 
 Cash flows from operating activities:
 
-Cryptocurrencies: $800
-
 Purchase of cryptocurrencies: ($792)
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrency inflows: $800
 
 ### 結果
 
@@ -233,15 +264,19 @@ Purchase of cryptocurrencies: ($792)
 
 Cash flows from operating activities:
 
-Cryptocurrencies: $4,800
-
 Purchase of cryptocurrencies: ($9,801)
 
 Disposal of cryptocurrencies: $5,050
 
-NET CASH FLOW FROM OPERATING ACTIVITIES: $49
+NET CASH FLOW FROM OPERATING ACTIVITIES: ($4,751)
 
----
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrency inflows: $9,800
+
+Cryptocurrency outflows: ($5,000)
+
+NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $4,800
 
 ### 交易所跟用戶都用 USDT 買賣 BTC
 
@@ -348,9 +383,11 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: $626
 
 Cash flows from operating activities:
 
-Cryptocurrencies: $900
-
 Purchase of cryptocurrencies: ($900.9)
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrency inflows: $900
 
 - 保證金為涵蓋點差的價格除以槓桿
 - 多單
@@ -371,11 +408,13 @@ Cash received from customers for liquidation in CFD trading: $1010
 
 Cash paid to customers for CFD trading profits: ($384)
 
-Cryptocurrencies: $900
-
 Purchase of cryptocurrencies: ($900.9)
 
-NET CASH FLOW FROM OPERATING ACTIVITIES: $625.1
+NET CASH FLOW FROM OPERATING ACTIVITIES: ($274.9)
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrency inflows: $900
 
 ---
 
@@ -428,7 +467,7 @@ NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $626
 
 Supplemental schedule of non-cash operating activities：
 
-Cryptocurrencies: $900
+Cryptocurrency inflows: $900
 
 Purchase of cryptocurrencies with non-cash consideration: ($900.9)
 
@@ -448,7 +487,7 @@ Purchase of cryptocurrencies with non-cash consideration: ($900.9)
 
 Supplemental schedule of non-cash operating activities：
 
-Cryptocurrencies: $900
+Cryptocurrency inflows: $900
 
 Purchase of cryptocurrencies with non-cash consideration: ($900.9)
 
@@ -470,11 +509,10 @@ NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $625.1
 
 - **指數價格**由根據主要現貨市場及其相對交易量計算得出的資產平均價格構成。
   - 指數價格是一種**從多個市場或交易所中提取的資產平均價格**，用於反映該資產在整體市場中的真實價值。
-    它可以幫助減少單一市場或交易所的價格操縱或異常波動的影響。
-    舉例說明： 假設我們想知道比特幣的指數價格。我們可以從幾個主要的加密貨幣交易所（如
-    Binance、Coinbase、Kraken 等）取得比特幣的價格，然後計算它們的平均價格。如果 Binance 上的比特幣價
-    格是$50,000，Coinbase 上是$49,800，而 Kraken 上是$50,200，那麼比特幣的指數價格將是這三個價格的平均
-    值，即$50,000。
+    它可以幫助減少單一市場或交易所的價格操縱或異常波動的影響。舉例說明： 假設我們想知道比特幣的指數
+    價格。我們可以從幾個主要的加密貨幣交易所（如 Binance、Coinbase、Kraken 等）取得比特幣的價格，然
+    後計算它們的平均價格。如果 Binance 上的比特幣價格是$50,000，Coinbase 上是$49,800，而 Kraken 上是
+    $50,200，那麼比特幣的指數價格將是這三個價格的平均值，即$50,000。
 - **標記價格**與實際交易價格（最後價格）相比的**預計合約真實價值（公允價格）**
   - 計算標記價格可在市場高度波動時避免發生不當強行平倉的狀況。因此，雖然**指數價格與現貨市場價格相關
     ，但標記價格代表永續期貨合約的公允價值**。**標記價格係基於指數價格及資金費率**計算得出，且是計算
@@ -510,9 +548,11 @@ NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $625.1
 
 Cash flows from operating activities:
 
-Cryptocurrencies: ($7000)
-
 Disposal of cryptocurrencies: $6930
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrency outflows: ($7000)
 
 - 資金費率由做空的人給做多的人，這段期間內的資金費率的錢由空單價值來計算，而多單交易者各自能拿到多少
   是由多單價值百分比去分配的；資金費率直接在用戶之間進行，手續費可能會短暫地停留在交易所，之後再轉交
@@ -543,8 +583,6 @@ Cash paid to customers for funding rates in perpetual contract: ($8)
 
 Cash flows from operating activities:
 
-Cryptocurrencies: ($7000)
-
 Disposal of cryptocurrencies: $6930
 
 Insurance fund for perpetual contracts: $8.08
@@ -555,7 +593,13 @@ Cash paid to customers for funding rates in perpetual contract: ($8)
 
 Cash paid to customers for perpetual contract profits: ($1344)
 
-NET CASH FLOW FROM OPERATING ACTIVITIES: ($404)
+NET CASH FLOW FROM OPERATING ACTIVITIES: $6596
+
+Supplemental schedule of non-cash operating activities：
+
+Cryptocurrency outflows: ($7000)
+
+NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: ($7000)
 
 ---
 
@@ -623,7 +667,7 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: $818
 
 Supplemental schedule of non-cash operating activities：
 
-Cryptocurrencies: ($7000)
+Cryptocurrency outflows: ($7000)
 
 Disposal of cryptocurrencies with non-cash consideration: $6930
 
@@ -654,7 +698,7 @@ Cryptocurrencies paid to customers: ($8)
 
 Supplemental schedule of non-cash operating activities：
 
-Cryptocurrencies: ($7000)
+Cryptocurrency outflows: ($7000)
 
 Disposal of cryptocurrencies: $6930
 
@@ -741,7 +785,7 @@ Cryptocurrencies paid to suppliers for expenses: ($1000)
 
 Supplemental schedule of non-cash operating activities：
 
-Cryptocurrencies: $6000
+Cryptocurrency inflows: $6000
 
 Disposal of cryptocurrencies with non-cash consideration: ($6006)
 
@@ -783,7 +827,7 @@ Supplemental schedule of non-cash operating activities：
 
 Cryptocurrencies paid to suppliers for expenses: ($1000)
 
-Cryptocurrencies: $6000
+Cryptocurrency inflows: $6000
 
 Disposal of cryptocurrencies with non-cash consideration: ($6006)
 
