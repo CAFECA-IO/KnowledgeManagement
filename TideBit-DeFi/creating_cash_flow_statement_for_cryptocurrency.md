@@ -103,6 +103,18 @@
 | Cash, cash equivalents, and restricted cash, end of period              | 報表結束日的現金及約當現金                 |
 | Net increase(decrease) in cash, cash equivalents, and restricted cash   | 現金、現金等價物及受限現金的淨增加(淨減少) |
 
+- Effect of exchange rates on cash, cash equivalents, and restricted cash 其餘法幣兌換成功能性貨幣(
+  此處為 USD)時，因匯率造成的價值波動
+
+  1. 一家美國公司在 7 月 1 日在法國有 100 萬歐元的現金。當天的匯率是 1 歐元=1.1 美元，所以在美國公司
+     的帳簿上，這筆錢的等價是 110 萬美元。
+  2. 到了 7 月 30 日，公司仍然有 100 萬歐元的現金在法國，但當天的匯率已經變為 1 歐元=1.2 美元。因此
+     ，這筆錢現在在帳簿上的等價是 120 萬美元。
+
+  在這 30 天中，公司沒有增加或使用其在法國的現金餘額，但由於匯率的變動，它的現金等價在帳簿上增加了
+  10 萬美元。這 10 萬美元的增加會在現金流量表的「Effect of exchange rates on cash, cash equivalents,
+  and restricted cash」部分呈現，以解釋為什麼公司的現金餘額會因為匯率變動而增加。
+
 - 與非現金有關
 
 | Item                                       | Definition                                   |
@@ -111,6 +123,17 @@
 | Cryptocurrencies, beginning of period      | 報表起始日的加密貨幣                         |
 | Cryptocurrencies, end of period            | 報表結束日的加密貨幣                         |
 | Net increase(decrease) in cryptocurrencies | 加密貨幣的淨增加(淨減少)                     |
+
+- Valuation adjustment for cryptocurrencies 加密貨幣兌換成功能性貨幣(此處為 USD)時，因匯率造成的價值
+  波動
+  - 舉例說明
+    1. 一家美國公司在 7 月 1 日持有 100 BTC。當天的匯率是 1 BTC = 30,000 USD，所以在美國公司的帳簿上
+       ，這筆比特幣的等價是 3,000,000 美元。
+    2. 到了 7 月 30 日，公司仍然持有 100 BTC，但當天的匯率已經變為 1 BTC = 32,000 USD。因此，這筆比
+       特幣現在在帳簿上的等價是 3,200,000 美元。在這 30 天中，公司沒有增加或使用其持有的比特幣，但由
+       於匯率的變動，它的比特幣等價在帳簿上增加了 200,000 美元。這 200,000 美元的增加會在現金流量表
+       的「Valuation adjustment for cryptocurrencies 」部分呈現，以解釋為什麼公司的比特幣等價會因為
+       匯率變動而增加。
 
 # 現金流量表的製作方法和注意事項
 
@@ -415,6 +438,8 @@ NET CASH FLOW FROM OPERATING ACTIVITIES: ($274.9)
 Supplemental schedule of non-cash operating activities：
 
 Cryptocurrency inflows: $900
+
+NET CASH FLOW FROM NON-CASH OPERATING ACTIVITIES: $900
 
 ---
 
