@@ -368,6 +368,18 @@
 - 總營業費用 (Total Operating Expenses): [美金]
 
 ---
+4. 金融費用部分 (Financial Costs):
+- 支付的利息 (Interest Expense): [美金]
+- 外匯損益 (Traditional Forex Gains/Losses): [美金]
+  - 加密貨幣外匯損益 (Cryptocurrency Forex Gains/Losses):
+  - 法幣換加密貨幣損失 (Fiat to Cryptocurrency Conversion Losses): [美金]
+  - 加密貨幣換法幣損失 (Cryptocurrency to Fiat Conversion Losses): [美金]
+  - 法幣互換損失 (Fiat to Fiat Conversion Losses): [美金]
+- 過期未付款項的利息 (Interest on Overdue Payments): [美金]
+- 避險合約成本 (Hedging Contract Costs): [美金]
+
+- 總金融費用 (Total Financial Costs): [美金]
+---
 
 4. 其他損益部分:
 - 投資損益 (Investment Gains/Losses): [美金]
