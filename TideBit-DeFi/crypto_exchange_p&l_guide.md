@@ -271,32 +271,6 @@
 
 ---
 
-
-**未實現損益的計算案例：**
-
-1. **外匯損益 (Foreign Exchange Gains/Losses)**:
-   - 假設交易所持有的是10,000美元，原始匯率是1美元對30台幣。所以原始價值是300,000台幣。
-   - 若匯率變動為1美元對31台幣，現在的價值是310,000台幣。
-   - 未實現的外匯損益 = 310,000 - 300,000 = 10,000台幣。
-
-2. **加密貨幣損益 (Cryptocurrency Gains/Losses)**:
-   - 假設交易所持有的是5比特幣，原始價格是每比特幣10,000美元，所以原始價值是50,000美元。
-   - 若比特幣價格上升到每比特幣11,000美元，現在的價值是55,000美元。
-   - 未實現的加密貨幣損益 = 55,000 - 50,000 = 5,000美元。
-
-**區分虛擬貨幣擁有者為客戶或平台的情況：**
-
-1. **客戶**:
-   - 假設客戶在交易所購買了2比特幣，原始價格是每比特幣10,000美元，所以原始價值是20,000美元。
-   - 若比特幣價格上升到每比特幣10,500美元，現在的價值是21,000美元。
-   - 客戶的未實現損益 = 21,000 - 20,000 = 1,000美元。
-
-2. **平台**:
-   - 假設交易所持有3比特幣，原始價格是每比特幣10,000美元，所以原始價值是30,000美元。
-   - 若比特幣價格下跌到每比特幣9,500美元，現在的價值是28,500美元。
-   - 平台的未實現損益 = 28,500 - 30,000 = -1,500美元。
-
----
 在綜合損益表中，未實現損益的呈現方式取決於該損益的性質和會計準則。以下是一般的處理方式：
 
 1. **未實現的外匯損益**:
@@ -330,120 +304,103 @@
 ---
 
 1. 收入部分:
-- 交易手續費 (Transaction Fee):
-  - BTC:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - ETH:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - USD: [金額]
-  - USDT:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - [其他幣種]:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - 交易手續費總額 (Total Transaction Fee in USD): [美金]
-  
-- 點差費 (Spread Fee):
-  - [幣種]:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - 點差費總額 (Total Spread Fee in USD): [美金]
-
-- 保證停損手續費 (Guaranteed Stop Loss Fee):
-  - [幣種]:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - 保證停損手續費總額 (Total GSL Fee in USD): [美金]
-
-- 強制平倉費 (Liquidation Fee):
-  - [幣種]:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - 強制平倉費總額 (Total Liquidation Fee in USD): [美金]
-
-- 提現手續費 (Withdrawal Fee):
-  - [幣種]:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - 提現手續費總額 (Total Withdrawal Fee in USD): [美金]
-
-- 入金手續費 (Deposit Fee):
-  - [幣種]:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - 入金手續費總額 (Total Deposit Fee in USD): [美金]
-
-- 其他收入 (Other Income):
-  - USD: [金額]
-
 - 總收入 (Total Income): [美金]
-
----
+- 細節: 
+  - 交易手續費 (Transaction Fee):
+    - 交易手續費總額 (Total Transaction Fee in USD): [美金]
+    - 細節: 
+      - BTC:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
+      - ETH:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
+      - USD: [金額]
+      - USDT:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
+      - [其他幣種]:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
+  - 點差費 (Spread Fee):
+    - 點差費總額 (Total Spread Fee in USD): [美金]
+    - 細節: 
+      - [幣種]:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
+  - 保證停損手續費 (Guaranteed Stop Loss Fee):
+    - 保證停損手續費總額 (Total GSL Fee in USD): [美金]
+    - 細節: 
+      - [幣種]:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
+  - 強制平倉費 (Liquidation Fee):
+    - 強制平倉費總額 (Total Liquidation Fee in USD): [美金]
+    - 細節: 
+      - [幣種]:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
+  - 提現手續費 (Withdrawal Fee):
+    - 提現手續費總額 (Total Withdrawal Fee in USD): [美金]
+    - 細節: 
+      - [幣種]:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
+  - 入金手續費 (Deposit Fee):
+    - 入金手續費總額 (Total Deposit Fee in USD): [美金]
+    - 細節: 
+      - [幣種]:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
+  - 其他收入 (Other Income):
+    - 其他收入總額 (Total Other Income in USD): [美金]
+    - 細節: 
+      - [幣種]:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
 
 2. 成本部分:
-- 技術供應商費用 (Technical Provider Fee): [美金]
-- 市場數據供應商費用 (Market Data Provider Fee): [美金]
-- 新幣上架成本 (New Coin Listing Cost): [美金]
 - 總成本 (Total Costs): [美金]
-
----
+- 細節: 
+  - 技術供應商費用 (Technical Provider Fee): [美金]
+  - 市場數據供應商費用 (Market Data Provider Fee): [美金]
+  - 新幣上架成本 (New Coin Listing Cost): [美金]
 
 3. 營業費用部分:
-- 員工薪資 (Salaries): [美金]
-- 租金 (Rent): [美金]
-- 市場推廣 (Marketing): [美金]
-- 返傭費用 (Commission Rebates):
-  - [幣種]:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - 返傭費用總額 (Total Commission Rebates in USD): [美金]
-  
 - 總營業費用 (Total Operating Expenses): [美金]
+- 細節: 
+  - 員工薪資 (Salaries): [美金]
+  - 租金 (Rent): [美金]
+  - 市場推廣 (Marketing): [美金]
+  - 返傭費用 (Commission Rebates):
+    - 返傭費用總額 (Total Commission Rebates in USD): [美金]
+    - 細節: 
+      - [幣種]:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
 
----
 4. 金融費用部分 (Financial Costs):
-- 支付的利息 (Interest Expense): [美金]
-- 外匯損益 (Traditional Forex Gains/Losses): [美金]
+- 總金融費用 (Total Financial Costs): [美金]
+- 細節: 
+  - 支付的利息 (Interest Expense): [美金]
   - 加密貨幣外匯損益 (Cryptocurrency Forex Gains/Losses):
   - 法幣換加密貨幣損失 (Fiat to Cryptocurrency Conversion Losses): [美金]
   - 加密貨幣換法幣損失 (Cryptocurrency to Fiat Conversion Losses): [美金]
   - 法幣互換損失 (Fiat to Fiat Conversion Losses): [美金]
-- 過期未付款項的利息 (Interest on Overdue Payments): [美金]
-- 避險合約成本 (Hedging Contract Costs): [美金]
-
-- 總金融費用 (Total Financial Costs): [美金]
----
 
 4. 其他損益部分:
-- 投資損益 (Investment Gains/Losses): [美金]
-- 外匯損益 (Forex Gains/Losses): [美金]
-- 加密貨幣損益 (Cryptocurrency Gains/Losses):
-  - [幣種]:
-    - 數量: [數量]
-    - 成本價: [美金]
-    - 公允價: [美金]
-  - 加密貨幣損益總額 (Total Cryptocurrency Gains/Losses in USD): [美金]
-  
 - 總其他損益 (Total Other Gains/Losses): [美金]
-
----
+- 細節: 
+  - 投資損益 (Investment Gains/Losses): [美金]
+  - 外匯損益 (Forex Gains/Losses): [美金]
+  - 加密貨幣損益 (Cryptocurrency Gains/Losses): [美金]
+    - 加密貨幣損益總額 (Total Cryptocurrency Gains/Losses in USD): [美金]
+    - 細節: 
+      - [幣種]:
+        - 數量: [數量]
+        - 成本價值/持有價值: [美金]
 
 5. 淨利潤 (Net Profit or Loss): [美金]
-
----
 
 簽署 (Signed):
 日期 (Date):
