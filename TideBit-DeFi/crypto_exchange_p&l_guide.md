@@ -21,6 +21,7 @@
      - **可供出售金融資產的公允價值變動(Fair Value Changes of Available-for-Sale Financial Assets)**：企業持有的特定投資證券或其他可供出售的金融資產的公允價值變動，這些變動在資產被出售之前不會影響損益。
      - **再估計盈餘(Revaluation Surplus)**：當固定資產或無形資產的帳面價值被重新評估時，可能會產生的增值或貶值。
      - **確定給付制的企業退休計畫調整(Defined Benefit Pension Plan Adjustments)**：基於確定給付制的企業退休計畫中，不計於當期的特定支出或收入。
+
 其中在國際財務報導準則（IFRS）和美國會計準則（US GAAP）中，有四種項目被列為其他綜合損益，包括匯兌差額(Foreign Currency Translation)、現金流量避險(Cash Flow Hedges)、可供出售金融資產的公允價值變動(Fair Value Changes of Available-for-Sale Financial Assets)，以及確定給付制的企業退休計畫調整(Defined Benefit Pension Plan Adjustments).
 
 **如何區分**：
