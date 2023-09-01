@@ -114,124 +114,124 @@
 
 ## 總表
 
-| Statements of Cash Flows - USD ($)$ in Thousands                        | 30 Days Ended July 30, |               |
-| ----------------------------------------------------------------------- | ---------------------- | ------------- |
-|                                                                         | 7 月. 30, 2023         | 7 月. 1, 2023 |
-| Cash flows from operating activities                                    |                        |               |
-| Cash deposited by customers                                             | $0                     | $0            |
-| Cash withdrawn by customers                                             | 0                      | 0             |
-| Purchase of cryptocurrencies                                            | 0                      | 0             |
-| Disposal of cryptocurrencies                                            | 0                      | 0             |
-| Cash received from customers as transaction fee                         | 0                      | 0             |
-| Cash received from customers for liquidation in CFD trading             | 0                      | 0             |
-| Cash paid to customers as rebates for transaction fees                  | 0                      | 0             |
-| Cash paid to suppliers for expenses                                     | 0                      | 0             |
-| Cash paid to customers for CFD trading profits                          | 0                      | 0             |
-| Net cash provided by operating activities                               | 0                      | 0             |
-| Cash flows from investing activities                                    |                        |               |
-| Net cash provided by investing activities                               | 0                      | 0             |
-| Cash flows from financing activities                                    |                        |               |
-| Net cash used in financing activities                                   | 0                      | 0             |
-| Net increase in cash, cash equivalents, and restricted cash             | 0                      | 0             |
-| Cash, cash equivalents, and restricted cash, beginning of period        | 0                      | 0             |
-| Cash, cash equivalents, and restricted cash, end of period              | $0                     | $0            |
-|                                                                         |                        |               |
-|                                                                         |                        |               |
-| Supplemental schedule of non-cash operating activities                  |                        |               |
-| Cryptocurrencies deposited by customers                                 | 30                     | 50            |
-| Cryptocurrencies withdrawn by customers                                 | (70)                   | (20)          |
-| Cryptocurrency inflows                                                  | 0                      | 0             |
-| Cryptocurrency outflows                                                 | 0                      | 0             |
-| Cryptocurrencies received from customers as transaction fees            | 0                      | 0             |
-| Cryptocurrencies received from customers for liquidation in CFD trading | 1000                   | 10            |
-| Cryptocurrencies paid to customers for CFD trading profits              | 0                      | 0             |
-| Purchase of cryptocurrencies with non-cash consideration                | 0                      | 0             |
-| Disposal of cryptocurrencies for non-cash consideration                 | 0                      | 0             |
-| Net increase in cryptocurrencies                                        | 1000                   | 20            |
-| Cryptocurrencies, beginning of period                                   | 50                     | 0             |
-| Cryptocurrencies, end of period                                         | $1,000                 | $50           |
+| Statements of Cash Flows - USD ($)$ in Thousands                        | 30 Days Ended July 30, |              |
+| ----------------------------------------------------------------------- | ---------------------- | ------------ |
+|                                                                         | July 30, 2023          | July 1, 2023 |
+| Cash flows from operating activities                                    |                        |              |
+| Cash deposited by customers                                             | $0                     | $0           |
+| Cash withdrawn by customers                                             | 0                      | 0            |
+| Purchase of cryptocurrencies                                            | 0                      | 0            |
+| Disposal of cryptocurrencies                                            | 0                      | 0            |
+| Cash received from customers as transaction fee                         | 0                      | 0            |
+| Cash received from customers for liquidation in CFD trading             | 0                      | 0            |
+| Cash paid to customers as rebates for transaction fees                  | 0                      | 0            |
+| Cash paid to suppliers for expenses                                     | 0                      | 0            |
+| Cash paid to customers for CFD trading profits                          | 0                      | 0            |
+| Net cash provided by operating activities                               | 0                      | 0            |
+| Cash flows from investing activities                                    |                        |              |
+| Net cash provided by investing activities                               | 0                      | 0            |
+| Cash flows from financing activities                                    |                        |              |
+| Net cash used in financing activities                                   | 0                      | 0            |
+| Net increase in cash, cash equivalents, and restricted cash             | 0                      | 0            |
+| Cash, cash equivalents, and restricted cash, beginning of period        | 0                      | 0            |
+| Cash, cash equivalents, and restricted cash, end of period              | $0                     | $0           |
+|                                                                         |                        |              |
+|                                                                         |                        |              |
+| Supplemental schedule of non-cash operating activities                  |                        |              |
+| Cryptocurrencies deposited by customers                                 | 30                     | 50           |
+| Cryptocurrencies withdrawn by customers                                 | (70)                   | (20)         |
+| Cryptocurrency inflows                                                  | 0                      | 0            |
+| Cryptocurrency outflows                                                 | 0                      | 0            |
+| Cryptocurrencies received from customers as transaction fees            | 0                      | 0            |
+| Cryptocurrencies received from customers for liquidation in CFD trading | 1000                   | 10           |
+| Cryptocurrencies paid to customers for CFD trading profits              | 0                      | 0            |
+| Purchase of cryptocurrencies with non-cash consideration                | 0                      | 0            |
+| Disposal of cryptocurrencies for non-cash consideration                 | 0                      | 0            |
+| Net increase in cryptocurrencies                                        | 1000                   | 20           |
+| Cryptocurrencies, beginning of period                                   | 50                     | 0            |
+| Cryptocurrencies, end of period                                         | $1,000                 | $50          |
 
 ## 細項
 
-| Cryptocurrencies deposited by customers                                       | 7 月. 30, 2023 |                |                     | 7 月. 1, 2023 |                |                     |
-| ----------------------------------------------------------------------------- | -------------- | -------------- | ------------------- | ------------- | -------------- | ------------------- |
-| (Carrying Value in thousands)                                                 | Amount         | Carrying Value | Percentage of Total | Amount        | Carrying Value | Percentage of Total |
-| Bitcoin                                                                       | 2              | $10            | 33.3%               | 5             | $10            | 50%                 |
-| Ethereum                                                                      | 5              | 10             | 33.3%               | 3.9           | 5              | 25%                 |
-| USDT                                                                          | 10000          | 10             | 33.3%               | 33000         | 5              | 25%                 |
-| Total cryptocurrencies deposited by customers                                 | —              | $30            | 99.9%               | —             | $20            | 100.0%              |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-| Cryptocurrencies withdrawn by customers                                       | 7 月. 30, 2023 |                |                     | 7 月. 1, 2023 |                |                     |
-| (Carrying Value in thousands)                                                 | Amount         | Carrying Value | Percentage of Total | Amount        | Carrying Value | Percentage of Total |
-| Bitcoin                                                                       | 2              | $20            | 28.6%               | 5             | $10            | 16.4%               |
-| Ethereum                                                                      | 5              | 20             | 28.6%               | 3.9           | 20             | 34.2%               |
-| USDT                                                                          | 10000          | 30             | 42.8%               | 33000         | 20             | 49.3%               |
-| Total cryptocurrencies withdrawn by customers                                 | —              | $70            | 100%                | —             | $50            | 100.0%              |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-| Cryptocurrency inflows                                                        | 7 月. 30, 2023 |                |                     | 7 月. 1, 2023 |                |                     |
-| (Carrying Value in thousands)                                                 | Amount         | Carrying Value | Percentage of Total | Amount        | Carrying Value | Percentage of Total |
-| Bitcoin                                                                       | 0              | $0             | —                   | 0             | $0             | —                   |
-| Ethereum                                                                      | 0              | 0              | —                   | 0             | 0              | —                   |
-| USDT                                                                          | 0              | 0              | —                   | 0             | 0              | —                   |
-| Total cryptocurrency inflows                                                  | —              | $0             | —                   | —             | $0             | —                   |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-| Cryptocurrency outflows                                                       | 7 月. 30, 2023 |                |                     | 7 月. 1, 2023 |                |                     |
-| (Carrying Value in thousands)                                                 | Amount         | Carrying Value | Percentage of Total | Amount        | Carrying Value | Percentage of Total |
-| Bitcoin                                                                       | 0              | $0             | —                   | 0             | $0             | —                   |
-| Ethereum                                                                      | 0              | 0              | —                   | 0             | 0              | —                   |
-| USDT                                                                          | 0              | 0              | —                   | 0             | 0              | —                   |
-| Total cryptocurrency outflows                                                 | —              | $0             | —                   | —             | $0             | —                   |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-| Cryptocurrencies received from customers as transaction fees                  | 7 月. 30, 2023 |                |                     | 7 月. 1, 2023 |                |                     |
-| (Carrying Value in thousands)                                                 | Amount         | Carrying Value | Percentage of Total | Amount        | Carrying Value | Percentage of Total |
-| Bitcoin                                                                       | 0              | $0             | —                   | 0             | $0             | —                   |
-| Ethereum                                                                      | 0              | 0              | —                   | 0             | 0              | —                   |
-| USDT                                                                          | 0              | 0              | —                   | 0             | 0              | —                   |
-| Total cryptocurrencies received from customers as transaction fees            | —              | $0             | —                   | —             | $0             | —                   |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-| Cryptocurrencies received from customers for liquidation in CFD trading       | 7 月. 30, 2023 |                |                     | 7 月. 1, 2023 |                |                     |
-| (Carrying Value in thousands)                                                 | Amount         | Carrying Value | Percentage of Total | Amount        | Carrying Value | Percentage of Total |
-| Bitcoin                                                                       | 2              | $3,000         | 30.0%               | 0.2           | $3             | 30.0%               |
-| Ethereum                                                                      | 5              | 2000           | 20.0%               | 2.1           | 2              | 20.0%               |
-| USDT                                                                          | 5000000        | 5000           | 50.0%               | 5000          | 5              | 50.0%               |
-| Total cryptocurrencies received from customers for liquidation in CFD trading | —              | $1,000         | 100.0%              | —             | $10            | 100.0%              |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-| Cryptocurrencies paid to customers for CFD trading profits                    | 7 月. 30, 2023 |                |                     | 7 月. 1, 2023 |                |                     |
-| (Carrying Value in thousands)                                                 | Amount         | Carrying Value | Percentage of Total | Amount        | Carrying Value | Percentage of Total |
-| Bitcoin                                                                       | 0              | $0             | —                   | 0             | $0             | —                   |
-| Ethereum                                                                      | 0              | 0              | —                   | 0             | 0              | —                   |
-| USDT                                                                          | 0              | 0              | —                   | 0             | 0              | —                   |
-| Total cryptocurrencies paid to customers for CFD trading profits              | —              | $0             | —                   | —             | $0             | —                   |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-| Purchase of cryptocurrencies with non-cash consideration                      | 7 月. 30, 2023 |                |                     | 7 月. 1, 2023 |                |                     |
-| (Carrying Value in thousands)                                                 | Amount         | Carrying Value | Percentage of Total | Amount        | Carrying Value | Percentage of Total |
-| Bitcoin                                                                       | 0              | $0             | —                   | 0             | $0             | —                   |
-| Ethereum                                                                      | 0              | 0              | —                   | 0             | 0              | —                   |
-| USDT                                                                          | 0              | 0              | —                   | 0             | 0              | —                   |
-| Total purchase of cryptocurrencies with non-cash consideration                | —              | $0             | —                   | —             | $0             | —                   |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-|                                                                               |                |                |                     |               |                |                     |
-| Disposal of cryptocurrencies for non-cash consideration                       | 7 月. 30, 2023 |                |                     | 7 月. 1, 2023 |                |                     |
-| (Carrying Value in thousands)                                                 | Amount         | Carrying Value | Percentage of Total | Amount        | Carrying Value | Percentage of Total |
-| Bitcoin                                                                       | 0              | $0             | —                   | 0             | $0             | —                   |
-| Ethereum                                                                      | 0              | 0              | —                   | 0             | 0              | —                   |
-| USDT                                                                          | 0              | 0              | —                   | 0             | 0              | —                   |
-| Total disposal of cryptocurrencies for non-cash consideration                 | —              | $0             | —                   | —             | $0             | —                   |
+| Cryptocurrencies deposited by customers                                       | July 30, 2023 |            |                     | July 1, 2023 |            |                     |
+| ----------------------------------------------------------------------------- | ------------- | ---------- | ------------------- | ------------ | ---------- | ------------------- |
+| (Cost Value in thousands)                                                     | Amount        | Cost Value | Percentage of Total | Amount       | Cost Value | Percentage of Total |
+| Bitcoin                                                                       | 2             | $10        | 33.3%               | 5            | $10        | 50%                 |
+| Ethereum                                                                      | 5             | 10         | 33.3%               | 3.9          | 5          | 25%                 |
+| USDT                                                                          | 10000         | 10         | 33.3%               | 33000        | 5          | 25%                 |
+| Total cryptocurrencies deposited by customers                                 | —             | $30        | 99.9%               | —            | $20        | 100.0%              |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+| Cryptocurrencies withdrawn by customers                                       | July 30, 2023 |            |                     | July 1, 2023 |            |                     |
+| (Cost Value in thousands)                                                     | Amount        | Cost Value | Percentage of Total | Amount       | Cost Value | Percentage of Total |
+| Bitcoin                                                                       | 2             | $20        | 28.6%               | 5            | $10        | 16.4%               |
+| Ethereum                                                                      | 5             | 20         | 28.6%               | 3.9          | 20         | 34.2%               |
+| USDT                                                                          | 10000         | 30         | 42.8%               | 33000        | 20         | 49.3%               |
+| Total cryptocurrencies withdrawn by customers                                 | —             | $70        | 100%                | —            | $50        | 100.0%              |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+| Cryptocurrency inflows                                                        | July 30, 2023 |            |                     | July 1, 2023 |            |                     |
+| (Cost Value in thousands)                                                     | Amount        | Cost Value | Percentage of Total | Amount       | Cost Value | Percentage of Total |
+| Bitcoin                                                                       | 0             | $0         | —                   | 0            | $0         | —                   |
+| Ethereum                                                                      | 0             | 0          | —                   | 0            | 0          | —                   |
+| USDT                                                                          | 0             | 0          | —                   | 0            | 0          | —                   |
+| Total cryptocurrency inflows                                                  | —             | $0         | —                   | —            | $0         | —                   |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+| Cryptocurrency outflows                                                       | July 30, 2023 |            |                     | July 1, 2023 |            |                     |
+| (Cost Value in thousands)                                                     | Amount        | Cost Value | Percentage of Total | Amount       | Cost Value | Percentage of Total |
+| Bitcoin                                                                       | 0             | $0         | —                   | 0            | $0         | —                   |
+| Ethereum                                                                      | 0             | 0          | —                   | 0            | 0          | —                   |
+| USDT                                                                          | 0             | 0          | —                   | 0            | 0          | —                   |
+| Total cryptocurrency outflows                                                 | —             | $0         | —                   | —            | $0         | —                   |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+| Cryptocurrencies received from customers as transaction fees                  | July 30, 2023 |            |                     | July 1, 2023 |            |                     |
+| (Cost Value in thousands)                                                     | Amount        | Cost Value | Percentage of Total | Amount       | Cost Value | Percentage of Total |
+| Bitcoin                                                                       | 0             | $0         | —                   | 0            | $0         | —                   |
+| Ethereum                                                                      | 0             | 0          | —                   | 0            | 0          | —                   |
+| USDT                                                                          | 0             | 0          | —                   | 0            | 0          | —                   |
+| Total cryptocurrencies received from customers as transaction fees            | —             | $0         | —                   | —            | $0         | —                   |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+| Cryptocurrencies received from customers for liquidation in CFD trading       | July 30, 2023 |            |                     | July 1, 2023 |            |                     |
+| (Cost Value in thousands)                                                     | Amount        | Cost Value | Percentage of Total | Amount       | Cost Value | Percentage of Total |
+| Bitcoin                                                                       | 2             | $3,000     | 30.0%               | 0.2          | $3         | 30.0%               |
+| Ethereum                                                                      | 5             | 2000       | 20.0%               | 2.1          | 2          | 20.0%               |
+| USDT                                                                          | 5000000       | 5000       | 50.0%               | 5000         | 5          | 50.0%               |
+| Total cryptocurrencies received from customers for liquidation in CFD trading | —             | $1,000     | 100.0%              | —            | $10        | 100.0%              |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+| Cryptocurrencies paid to customers for CFD trading profits                    | July 30, 2023 |            |                     | July 1, 2023 |            |                     |
+| (Cost Value in thousands)                                                     | Amount        | Cost Value | Percentage of Total | Amount       | Cost Value | Percentage of Total |
+| Bitcoin                                                                       | 0             | $0         | —                   | 0            | $0         | —                   |
+| Ethereum                                                                      | 0             | 0          | —                   | 0            | 0          | —                   |
+| USDT                                                                          | 0             | 0          | —                   | 0            | 0          | —                   |
+| Total cryptocurrencies paid to customers for CFD trading profits              | —             | $0         | —                   | —            | $0         | —                   |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+| Purchase of cryptocurrencies with non-cash consideration                      | July 30, 2023 |            |                     | July 1, 2023 |            |                     |
+| (Cost Value in thousands)                                                     | Amount        | Cost Value | Percentage of Total | Amount       | Cost Value | Percentage of Total |
+| Bitcoin                                                                       | 0             | $0         | —                   | 0            | $0         | —                   |
+| Ethereum                                                                      | 0             | 0          | —                   | 0            | 0          | —                   |
+| USDT                                                                          | 0             | 0          | —                   | 0            | 0          | —                   |
+| Total purchase of cryptocurrencies with non-cash consideration                | —             | $0         | —                   | —            | $0         | —                   |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+|                                                                               |               |            |                     |              |            |                     |
+| Disposal of cryptocurrencies for non-cash consideration                       | July 30, 2023 |            |                     | July 1, 2023 |            |                     |
+| (Cost Value in thousands)                                                     | Amount        | Cost Value | Percentage of Total | Amount       | Cost Value | Percentage of Total |
+| Bitcoin                                                                       | 0             | $0         | —                   | 0            | $0         | —                   |
+| Ethereum                                                                      | 0             | 0          | —                   | 0            | 0          | —                   |
+| USDT                                                                          | 0             | 0          | —                   | 0            | 0          | —                   |
+| Total disposal of cryptocurrencies for non-cash consideration                 | —             | $0         | —                   | —            | $0         | —                   |
 
 # 現金流量表的製作方法和注意事項
 
