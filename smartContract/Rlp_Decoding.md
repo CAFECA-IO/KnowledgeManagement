@@ -74,7 +74,7 @@
 |   0000000...0000000000000000002c68af0bb140000    | decode input[1,0]       |
 |   ...2000000...0000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000...003850952491606a0e420eb929b1a2e1a450d013f1| decode input[1,1]       |
 | 6508457f(1695040895)      | decode input [2]       |
-|c0|表示data結束進入VRS簽名部分|
+|c0|NULL,表示data結束進入VRS簽名部分|
 |01|V|
 |a0|分隔符|
 |8b50ee3e376edb0fc0719ecb19a38dd7558285ba61b15c30083369bb76bfb393|R|
