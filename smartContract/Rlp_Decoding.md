@@ -66,11 +66,13 @@
 | 83 045ee9      | gasLimit       |
 | 94 3fc91a3afd70395cd496c647d5a6cc9d4b2b7fad      | To       |
 | 88 02c68af0bb140000      | Value       |
+|b9 0284 |b9>b7(185 >183),185-183 = 2,告訴你後面兩bytes(4個字),是宣告data的長度(0284=644)|
+| 3593564c000000...~C0      | Data       |
 | 84 3593564c      | Function hash       |
-| OxO2      | EIP-1559       |
-| OxO2      | EIP-1559       |
-| OxO2      | EIP-1559       |
-| OxO2      | EIP-1559       |
-| OxO2      | EIP-1559       |
-| OxO2      | EIP-1559       |
+| 6508457f      | unit256       |
+| 0b08      | decode input[0]       |
+|   0000000...0000000000000000002c68af0bb140000    | decode input[1,0]       |
+|   ...000002000000...0000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc20000...003850952491606a0e420eb929b1a2e1a450d013f1
+   | decode input[1,1]       |
+| 6508457f(1695040895)      | decode input [2]       |
 
