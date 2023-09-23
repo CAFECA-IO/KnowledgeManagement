@@ -56,5 +56,21 @@
 
 | Syntex      | Description |
 | ------------------------ | --------------------|
-| Header      | Title       |
-| Paragraph   | Text        |
+| OxO2      | EIP-1559       |
+| F9   | F9 = f7 + 2 (告訴你後面兩bytes(4個字),是宣告整篇的長度)         |
+| 02fa      | 02fa = 762, 762*2 = 1524     |
+| 01      | chainID       |
+| 81 b4(decimal:180)      | Nonce       |
+| 83 a6792e      | maxPriorityFeePerGas       |
+| 85 0244ddce8e      | maxFeePerGas       |
+| 83 045ee9      | gasLimit       |
+| 94 3fc91a3afd70395cd496c647d5a6cc9d4b2b7fad      | To       |
+| 88 02c68af0bb140000      | Value       |
+| 84 3593564c      | Function hash       |
+| OxO2      | EIP-1559       |
+| OxO2      | EIP-1559       |
+| OxO2      | EIP-1559       |
+| OxO2      | EIP-1559       |
+| OxO2      | EIP-1559       |
+| OxO2      | EIP-1559       |
+
