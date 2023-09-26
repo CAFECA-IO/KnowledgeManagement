@@ -1,0 +1,76 @@
+# Preface
+
+## What is money laundering?
+
+Money laundering is a complex and illegal process through which individuals or organizations attempt to conceal the origins of illegally obtained money, making it appear as if it comes from legitimate sources. The primary goal of money laundering is to "clean" the so-called "dirty money" so that it can be freely used without raising suspicion.
+
+## Why use crypto currency as a way to do money landering?
+
+During the early days of cryptocurrency, there were relatively fewer regulations and established systems in place to manage its use. This lack of oversight, combined with the inherent features of cryptocurrencies such as anonymity, pseudonymity, and the absence of central authorities, created an environment in which criminals could more easily hide their identities and engage in illegal activities.
+Also it's easier to transfer the asset out of the country they stay, in this case it's harder for investigators to track the money.
+
+## Nowadays 
+
+As cryptocurrencies gained popularity and attention, regulatory efforts increased to address these concerns. Governments and financial authorities around the world began developing and implementing measures to regulate the cryptocurrency space, including: 
+- Know Your Customer (KYC) and Anti-Money Laundering (AML) Regulations
+- Licensing and Registration for  cryptocurrency businesses
+- Taxation
+- Blockchain Analysis
+
+Today, we will introduce some common behavioral patterns that serve as red flags in cryptocurrency trading.
+
+# Multiple Transfers
+
+## Making multiple small amounts of transactions 
+
+According to regulations, large and irregular transactions can attract the attention of government or financial authorities. All legitimate financial institutions that require their customers to undergo Know Your Customer (KYC) procedures are obligated to report such transactions. This heightened scrutiny exposes criminal activities to authorities.
+
+That's why one of the reason why criminals would do multiple trasnfers is to structure transactions in small amounts that are under record-keeping or repoerting threshold.
+It's also a common pattern in cash money laundering.
+
+## Making multiple high-value amounts of transactions
+
+By spacing out the transactions and making them appear regular, criminals may attempt to make the transactions seem more like legitimate trading or investment activity. This can further mask the illicit nature of the funds and decrease suspicion.
+
+## Making multiple transactions to multiple virtual assets service providers.
+
+Criminals often try to transfer their assets to virtual asset service providers located in somewhere that is no relation to where the customer lives or conducts business; or jurisdictions with either weak or no Anti-Money Laundering/Counter-Financing of Terrorism (AML/CFT) regulations. This strategy complicates investigators' efforts to trace the origin of the funds and resources.
+
+
+# Multiple Receives
+
+Making frequent transfers to the same virtual asset (VA) account within a specific period of time, especially when it involves multiple individuals, transactions from the same IP address, or significant amounts, can raise red flags for several reasons:
+
+- Criminals often use a single address to aggregate funds obtained from various sources, including illegal activities such as scams, theft, or ransomware. Multiple receives into a single address can indicate the consolidation of these illicit funds.
+
+- Structuring, also known as smurfing, involves breaking down large sums of money into smaller transactions to avoid triggering reporting thresholds and attracting regulatory attention.
+
+- In some cases, individuals may engage in frequent transfers to evade taxes or hide their financial activities from tax authorities.
+
+- In some cases, middlemen or intermediaries may be involved in cryptocurrency transactions. These middlemen may use multiple receives to distribute funds or to anonymize the transaction. This can make it difficult to identify the ultimate sender or receiver.
+
+# Multiple Deposits
+
+This typically occurs with individuals or organizations that possess multiple virtual asset addresses. 
+They break down their illicitly obtained funds into smaller amounts, deposit them to one or multiple exchanges or virtual asset service providers then converting them into various cryptocurrencies. This process incurs additional transaction fees,but without logical business explanation.
+Or after depositing, they withdrawing virtual assets (VAs) from a virtual asset service provider (VASP) and promptly transferring them to a private wallet effectively transforms the exchange or VASP into a money laundering mixer. It usually happens without additional exchange or investment activity, which is an unnecessary step and incurs transaction fees.
+
+# Multiple Withdraws
+
+
+
+# With Black List
+
+Accepting funds suspected as stolen or fraudulent -
+o depositing funds from VA addresses that have been identified as holding stolen funds, or VA addresses linked to the holders of stolen funds.
+
+# With Darknet
+# With Mixing Service
+# With Gambling Site
+# Large Transfer
+# Large Receive
+# Large Deposit
+# Large Withdraw
+# To High Risk Location
+
+<img width="1264" alt="CS1" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/8ccbbdeb-91fe-4dd1-8f67-27eda332db7c">
