@@ -64,8 +64,8 @@ In some cases, identity thieves may make multiple withdrawals from a victim's ac
 
 # With Black List
 
-Accepting funds suspected as stolen or fraudulent
-o depositing funds from VA addresses that have been identified as holding stolen funds, or VA addresses linked to the holders of stolen funds.
+Addresses linked to criminal activities, such as hacking, fraud, theft, or other unlawful actions, will be placed on BAIFA's Black List.
+Accepting funds from addresses on the Black List is considered to be aiding money laundering.
 
 # With Darknet
 # With Mixing Service
