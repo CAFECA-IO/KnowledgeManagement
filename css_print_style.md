@@ -4,6 +4,7 @@
   - [背景圖消失](#背景圖消失)
   - [頁面沒有根據`<hr />`分割](#頁面沒有根據hr分割)
   - [不需要預設的頁首和頁尾](#不需要預設的頁首和頁尾)
+- [@media print](#@media print)
 - [參考來源](#參考來源)
 
 ## 使用情境
@@ -92,9 +93,56 @@ page-break-inside: auto | always | avoid /* 控制元素本身是否分頁 */
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/72d75b86-2442-46cd-9441-fb3c1b5468fb)
 這樣報表匯出的結果就符合預期了。
 
+### @media print
+這是用於設定列印樣式的 Media Query，透過 `@media print` 我們可以讓網頁中的特定元素(如：navbar, footer)在列印時隱藏，或是做其他特殊調整。包在其 css 語法外層即可，用法和 `＠media screen` 或其他 Media Query 一致。
+以下整理一些常用的 `＠media screen` 語法範例：
+```css
+@media print {
+  /* 列印時隱藏特定元素 */
+  .no-print {
+    display: none;
+  }
 
-### 補充內容
+  /* 列印時將頁面背景設置為白色 */
+  body {
+    background-color: white;
+  }
 
+  /* 列印時將頁面寬度設置為 8.5 英寸 */
+  body {
+    width: 8.5in;
+  }
+
+  /* 列印時取消超鏈接的下劃線 */
+  a:link,
+  a:visited {
+    text-decoration: none;
+  }
+
+  /* 列印時隱藏 navbar 和 footer */
+  .nav,
+  .footer {
+    display: none;
+  }
+
+  /* 列印時避免切割到 page 的內容 */
+  .page {
+    page-break-inside: avoid;
+    position: relative;
+    min-height: 100vh;
+  }
+  /* 列印時在 page 下方加入頁數 */
+  .page::after {
+    content: counter(page-number);
+    counter-increment: page-number 1;
+    position: absolute;
+    bottom: 0;
+    font-size: 30px;
+    text-align: center;
+  }
+}
+```
+> 內容引用自[此文章](https://kbytalk.com/html-print-css/)和[此文章](https://ithelp.ithome.com.tw/articles/10232006)
 
 ### 參考來源
 - [在網頁當中如何設定列印格式?(CSS的media print設定)](https://kbytalk.com/html-print-css/)
