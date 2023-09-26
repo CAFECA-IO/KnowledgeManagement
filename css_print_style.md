@@ -34,17 +34,27 @@
 
 #### 頁面沒有根據`<hr/>`分割
 ```css
-page-break-after: auto | always | avoid | left | right /* 控制元素後是否分頁 */
-page-break-before: auto | always | avoid | left | right /* 控制元素前是否分頁 */
-page-break-inside: auto | always | avoid | left | right /* 控制元素本身是否分頁 */
+page-break-after: auto | always | avoid /* 控制元素後是否分頁 */
+page-break-before: auto | always | avoid /* 控制元素前是否分頁 */
+page-break-inside: auto | always | avoid /* 控制元素本身是否分頁 */
 ```
-透過這三個 CSS 屬性，我們就可以控制列印時，網頁該在哪些段落進行分割，主要有這 5 種設定值：
+透過這三個 CSS 屬性，我們就可以控制列印時，網頁該在哪些段落進行分割，主要有這幾種設定值：
 - auto: 有必要時自動分頁
 - always: 強制分頁
 - avoid: 避免分頁
-- left: 直到下一張的左頁前強制分頁
-- right: 直到下一張的右頁前強制分頁
-請在[這裡](https://developer.mozilla.org/en-US/docs/Web/CSS/break-after)閱讀更詳細的說明
+
+請在[這裡](https://developer.mozilla.org/en-US/docs/Web/CSS/break-after)閱讀更詳細的說明。
+
+回到我們的案例，給 `<hr /> 加上 `page-break-after` 的屬性。
+```html
+<hr style={{pageBreakAfter: 'always'}} />
+
+// with Tailwind css
+<hr className="break-after-always" />
+```
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/8c0fc15b-c1ad-4235-a558-330f3d0123d0)
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/73f909c5-42c5-4fd9-9712-2a8552d155ea)
+分頁問題也解決了。
 
 ### 參考來源
 - [在網頁當中如何設定列印格式?(CSS的media print設定)](https://kbytalk.com/html-print-css/)
@@ -53,3 +63,4 @@ page-break-inside: auto | always | avoid | left | right /* 控制元素本身是
 - [原來前端網頁列印，不是只要 window.print() 就好了](https://medium.com/unalai/%E5%8E%9F%E4%BE%86%E5%89%8D%E7%AB%AF%E7%B6%B2%E9%A0%81%E5%88%97%E5%8D%B0-%E4%B8%8D%E6%98%AF%E5%8F%AA%E8%A6%81-window-print-%E5%B0%B1%E5%A5%BD%E4%BA%86-7af44cacf43e)
 - [CSS - 網頁列印與樣式](https://ithelp.ithome.com.tw/articles/10232006)
 - [列印 Html 網頁時的強制換頁方式](http://www.eion.com.tw/Blogger/?Pid=1048)
+- [使用 "強制換頁" page-break-after:always 的注意事項 ](https://seanphpbook.blogspot.com/2020/04/css-page-break-afteralways-chrome-ie.html)
