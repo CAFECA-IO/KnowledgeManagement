@@ -57,11 +57,14 @@ Or after depositing, they withdrawing virtual assets (VAs) from a virtual asset 
 
 # Multiple Withdraws
 
+Criminals involved in money laundering may withdraw funds in multiple small transactions to avoid detection. This technique, known as "structuring" or "smurfing," is used to break down large sums of money into smaller, less conspicuous withdrawals to circumvent reporting thresholds.
+
+In some cases, identity thieves may make multiple withdrawals from a victim's account as part of their fraudulent activities.
 
 
 # With Black List
 
-Accepting funds suspected as stolen or fraudulent -
+Accepting funds suspected as stolen or fraudulent
 o depositing funds from VA addresses that have been identified as holding stolen funds, or VA addresses linked to the holders of stolen funds.
 
 # With Darknet
