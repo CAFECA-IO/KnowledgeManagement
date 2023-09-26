@@ -2,7 +2,7 @@
 - [使用情境](#使用情境)
 - [實作方法](#實作方法)
   - [背景圖消失](#背景圖消失)
-  - [頁面沒有根據`<hr/>`分割](#頁面沒有根據`<hr/>`分割)
+  - [頁面沒有根據\<hr/>分割](#頁面沒有根據\<hr/>分割)
 - [參考來源](#參考來源)
 
 ## 使用情境
@@ -32,7 +32,7 @@
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/0123ad4a-d2e9-4585-9f03-4034e776b4b6)
 手動模式下也可以直接勾選「背景圖形」這個選項。
 
-#### 頁面沒有根據`<hr/>`分割
+#### 頁面沒有根據\<hr/>分割
 ```css
 page-break-after: auto | always | avoid /* 控制元素後是否分頁 */
 page-break-before: auto | always | avoid /* 控制元素前是否分頁 */
@@ -45,7 +45,7 @@ page-break-inside: auto | always | avoid /* 控制元素本身是否分頁 */
 
 請在[這裡](https://developer.mozilla.org/en-US/docs/Web/CSS/break-after)閱讀更詳細的說明。
 
-回到我們的案例，給 `<hr /> 加上 `page-break-after` 的屬性。
+回到我們的案例，給 `<hr />` 加上 `page-break-after` 的屬性。
 ```html
 <hr style={{pageBreakAfter: 'always'}} />
 
