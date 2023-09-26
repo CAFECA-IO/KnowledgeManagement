@@ -28,11 +28,11 @@ According to regulations, large and irregular transactions can attract the atten
 That's why one of the reason why criminals would do multiple trasnfers is to structure transactions in small amounts that are under record-keeping or repoerting threshold.
 It's also a common pattern in cash money laundering.
 
-## Making multiple high-value amounts of transactions
+- Making multiple high-value amounts of transactions
 
 By spacing out the transactions and making them appear regular, criminals may attempt to make the transactions seem more like legitimate trading or investment activity. This can further mask the illicit nature of the funds and decrease suspicion.
 
-## Making multiple transactions to multiple virtual assets service providers.
+- Making multiple transactions to multiple virtual assets service providers.
 
 Criminals often try to transfer their assets to virtual asset service providers located in somewhere that is no relation to where the customer lives or conducts business; or jurisdictions with either weak or no Anti-Money Laundering/Counter-Financing of Terrorism (AML/CFT) regulations. This strategy complicates investigators' efforts to trace the origin of the funds and resources.
 
@@ -44,8 +44,6 @@ Making frequent transfers to the same virtual asset (VA) account within a specif
 - Criminals often use a single address to aggregate funds obtained from various sources, including illegal activities such as scams, theft, or ransomware. Multiple receives into a single address can indicate the consolidation of these illicit funds.
 
 - Structuring, also known as smurfing, involves breaking down large sums of money into smaller transactions to avoid triggering reporting thresholds and attracting regulatory attention.
-
-- In some cases, individuals may engage in frequent transfers to evade taxes or hide their financial activities from tax authorities.
 
 - In some cases, middlemen or intermediaries may be involved in cryptocurrency transactions. These middlemen may use multiple receives to distribute funds or to anonymize the transaction. This can make it difficult to identify the ultimate sender or receiver.
 
