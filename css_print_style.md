@@ -1,3 +1,10 @@
+# 目錄
+- [使用情境](#使用情境)
+- [實作方法](#實作方法)
+  - [背景圖消失](#背景圖消失)
+  - [頁面沒有根據`<hr/>`分割](#頁面沒有根據`<hr/>`分割)
+- [參考來源](#參考來源)
+
 ## 使用情境
 有時候會碰到將網頁畫面列印出來的需求。以 BAIFA 報表為例，先用 Html 完成報表內容的排版，設定每一頁的尺寸為 A4 大小(長 595px、寬 842px)，並在每頁間用 `<hr />` 分割。完成的網頁如下：
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/a46ff708-caeb-43a3-ade3-86f4465770d4)
@@ -12,7 +19,7 @@
 這些問題其實都可以透過 CSS 的語法解決。 CSS 不僅能控制前端網頁的呈現畫面，還有針對列印結果的 Media Query 可設定，除此之外，也有 `break-before` 、 `@page`等。接下來我們將介紹和實作這些特殊的語法。
 
 ### 實作方法
-#### 1. 背景圖消失
+#### 背景圖消失
 為了讓畫面更加整潔，大多瀏覽器的列印模式預設都會去除一部份的顏色和圖案。要讓網頁中所有顏色都顯示，請在 globasl.css 中加入以下語法：
 ```css
 * {
@@ -25,8 +32,24 @@
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/0123ad4a-d2e9-4585-9f03-4034e776b4b6)
 手動模式下也可以直接勾選「背景圖形」這個選項。
 
-#### 2. 頁面沒有根據 <hr /> 分割
+#### 頁面沒有根據`<hr/>`分割
+```css
+page-break-after: auto | always | avoid | left | right /* 控制元素後是否分頁 */
+page-break-before: auto | always | avoid | left | right /* 控制元素前是否分頁 */
+page-break-inside: auto | always | avoid | left | right /* 控制元素本身是否分頁 */
+```
+透過這三個 CSS 屬性，我們就可以控制列印時，網頁該在哪些段落進行分割，主要有這 5 種設定值：
+- auto: 有必要時自動分頁
+- always: 強制分頁
+- avoid: 避免分頁
+- left: 直到下一張的左頁前強制分頁
+- right: 直到下一張的右頁前強制分頁
+請在[這裡](https://developer.mozilla.org/en-US/docs/Web/CSS/break-after)閱讀更詳細的說明
 
 ### 參考來源
 - [在網頁當中如何設定列印格式?(CSS的media print設定)](https://kbytalk.com/html-print-css/)
 - [關於 @media print 的二三事](https://kakadodo.github.io/2018/03/13/css-media-print-setting/)
+- [@media print 你是誰？](https://tsengbatty.medium.com/media-print-%E4%BD%A0%E6%98%AF%E8%AA%B0-ae093fab85b8)
+- [原來前端網頁列印，不是只要 window.print() 就好了](https://medium.com/unalai/%E5%8E%9F%E4%BE%86%E5%89%8D%E7%AB%AF%E7%B6%B2%E9%A0%81%E5%88%97%E5%8D%B0-%E4%B8%8D%E6%98%AF%E5%8F%AA%E8%A6%81-window-print-%E5%B0%B1%E5%A5%BD%E4%BA%86-7af44cacf43e)
+- [CSS - 網頁列印與樣式](https://ithelp.ithome.com.tw/articles/10232006)
+- [列印 Html 網頁時的強制換頁方式](http://www.eion.com.tw/Blogger/?Pid=1048)
