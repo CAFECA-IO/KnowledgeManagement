@@ -73,4 +73,29 @@ o depositing funds from VA addresses that have been identified as holding stolen
 # Large Withdraw
 # To High Risk Location
 
-<img width="1264" alt="CS1" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/8ccbbdeb-91fe-4dd1-8f67-27eda332db7c">
+# Transactions with Privacy Coins
+
+Privacy coins like Monero, Zcash, or Dash are designed to provide enhanced privacy and anonymity. While this feature can protect users' identities, it also makes it challenging for authorities and financial institutions to trace and monitor transactions. This lack of transparency can trigger concerns, as it may hinder the detection of illicit activities such as money laundering, tax evasion, and the financing of criminal enterprises.
+
+## How Privacy Coins work
+
+- Ring Signatures (Monero) 環狀簽名: In Monero, for example, when a user initiates a transaction, their transaction is mixed or "ringed" with several other transactions on the network. This makes it challenging to determine which specific input (or source) corresponds to the actual sender's funds.
+
+<img width="1264" alt="Ring" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/53d458dc-f4c9-4ffa-9856-6d46601f4ae7">
+
+- Zero-Knowledge Proofs (Zcash) 零知識證明: In Zcash, zero-knowledge proofs enable the network to verify that a transaction is valid without revealing the sender's address, receiver's address, or transaction amount. The mathematical proof demonstrates that a transaction meets the network's rules without revealing any sensitive information.
+
+<img width="1264" alt="What is Zero-Knowledge Proofs" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/bb882fa9-8f18-48de-92e2-0d2ba3d1f358">
+
+- Stealth Addresses 隱身地址: Privacy coins often use stealth addresses to provide recipients with a unique, one-time public address for each transaction. This means that even if someone knows your public address, they cannot link it to specific transactions because each transaction uses a different stealth address.
+
+<img width="1264" alt="Stealth" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/3edbc0ac-51eb-49b4-a20a-f35bad3f7ce5">
+
+- Confidential Transactions 保密交易: Some privacy coins, like Grin or Beam, implement confidential transactions. These cryptographic techniques encrypt the transaction amount, making it challenging for outsiders to determine the exact value being transferred.
+
+- CoinJoin (Optional): Some privacy coins offer optional CoinJoin functionality, which allows multiple users to pool their transactions into a single transaction, making it difficult to trace individual transactions within the mix.
+
+# References
+
+[Moneropedia](https://www.getmonero.org/resources/moneropedia/ringsignatures.html)
+[Chainlink Blog](https://blog.chain.link/zero-knowledge-proof-use-cases/)
