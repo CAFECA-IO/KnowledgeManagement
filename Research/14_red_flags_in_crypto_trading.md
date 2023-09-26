@@ -21,7 +21,7 @@ Today, we will introduce some common behavioral patterns that serve as red flags
 
 # Multiple Transfers
 
-## Making multiple small amounts of transactions 
+- Making multiple small amounts of transactions 
 
 According to regulations, large and irregular transactions can attract the attention of government or financial authorities. All legitimate financial institutions that require their customers to undergo Know Your Customer (KYC) procedures are obligated to report such transactions. This heightened scrutiny exposes criminal activities to authorities.
 
