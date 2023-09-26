@@ -3,14 +3,17 @@
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/a46ff708-caeb-43a3-ade3-86f4465770d4)
 然而列印出來的結果卻不如預期：
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/e6398eff-5d83-42e5-b5be-313915b543fa)
-這是因為我們沒有設定網頁的列印樣式。CSS 不僅能
+這是因為我們沒有設定網頁的列印樣式。依據上面的輸出結果，我們可以整理出以下幾個需要修正的問題：
 
-依據上面的輸出結果，我們可以整理出以下幾個需要修正的問題：
 1. 背景圖消失
 2. 頁面沒有根據 `<hr />` 分割
 3. 不需要預設的頁首和頁尾
 
+這些問題其實都可以透過 CSS 的語法解決。 CSS 不僅能控制前端網頁的呈現畫面，還有針對列印結果的 Media Query 可設定，除此之外，也有 `break-before` 、 `@page`等。接下來我們將介紹和實作這些特殊的語法。
+
 ### 實作方法
+#### 1. 背景圖消失
+一般情況下
 
 ### 參考來源
 - [在網頁當中如何設定列印格式?(CSS的media print設定)](https://kbytalk.com/html-print-css/)
