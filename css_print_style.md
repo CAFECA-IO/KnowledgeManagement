@@ -13,7 +13,11 @@
 
 ### 實作方法
 #### 1. 背景圖消失
-一般情況下
+為了讓畫面更加整潔，大多瀏覽器的列印模式預設都會去除背景顏色。
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/0123ad4a-d2e9-4585-9f03-4034e776b4b6)
+手動模式下也可以直接勾選「背景圖形」這個選項。
 
 ### 參考來源
 - [在網頁當中如何設定列印格式?(CSS的media print設定)](https://kbytalk.com/html-print-css/)
+- [關於 @media print 的二三事](https://kakadodo.github.io/2018/03/13/css-media-print-setting/)
