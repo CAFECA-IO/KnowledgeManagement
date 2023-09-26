@@ -13,10 +13,19 @@
 
 ### 實作方法
 #### 1. 背景圖消失
-為了讓畫面更加整潔，大多瀏覽器的列印模式預設都會去除背景顏色。
+為了讓畫面更加整潔，大多瀏覽器的列印模式預設都會去除一部份的顏色和圖案。要讓網頁中所有顏色都顯示，請在 globasl.css 中加入以下語法：
+```css
+* {
+  -webkit-print-color-adjust: exact; /* 如果背景圖還是沒有顯現，可以在後面加上 !important */
+}
+```
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/dde8fff3-27ff-4394-ad3c-beb94ecca67e)
+這樣背景就有了。
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/0123ad4a-d2e9-4585-9f03-4034e776b4b6)
 手動模式下也可以直接勾選「背景圖形」這個選項。
+
+#### 2. 頁面沒有根據 <hr /> 分割
 
 ### 參考來源
 - [在網頁當中如何設定列印格式?(CSS的media print設定)](https://kbytalk.com/html-print-css/)
