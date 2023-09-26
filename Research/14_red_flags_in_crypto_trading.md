@@ -101,4 +101,7 @@ Privacy coins like Monero, Zcash, or Dash are designed to provide enhanced priva
 # References
 
 [Moneropedia](https://www.getmonero.org/resources/moneropedia/ringsignatures.html)
+
 [Chainlink Blog](https://blog.chain.link/zero-knowledge-proof-use-cases/)
+
+[FATF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/Virtual-Assets-Red-Flag-Indicators.pdf.coredownload.pdf)
