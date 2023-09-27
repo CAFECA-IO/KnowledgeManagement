@@ -137,20 +137,44 @@ High-value receipts and high-value transfers share the same concept but involve 
 
 When customers send funds to unregulated or inadequately regulated Virtual Asset Service Providers (VASPs), it can raise suspicions, particularly when the customer's location does not align with the jurisdiction of the VASPs involved. This heightened risk is associated with concerns related to illicit activities, money laundering, and attempts to evade Anti-Money Laundering and Countering the Financing of Terrorism (AML/CFT) controls.
 
-## Black List on FATF
+## Black List on FATF (Updated in June, 2023)
 
 The "Black List" identifies countries or jurisdictions with significant deficiencies in combating money laundering, terrorist financing, and proliferation financing. These nations are urged to take counter-measures to safeguard the international financial system from the risks associated with these illicit activities.
 
 - North Korea
-  The FATF is concerned about the North Korea's failure to address its anti-money laundering and counter-financing of terrorism deficiencies, which pose risks to the global financial system. They call on all countries to exercise caution when dealing with the North Korea, enhance scrutiny of transactions, and apply counter-measures and targeted sanctions in line with UN Security Council Resolutions. Jurisdictions are also encouraged to close DPRK bank branches and terminate correspondent relationships when required by UN resolutions.
-
-Further, the FATF has serious concerns with the threat posed by the DPRK’s illicit activities related to the proliferation of weapons of mass destruction and its financing.
-
 - Iran
+- Myanmar
 
-Iran agreed to fix its issues back in June 2016, but it hasn't done so yet. Now, because Iran’s failure to enact the Palermo <<巴勒摩公約>> and Terrorist Financing Conventions<<制止向恐怖主義提供資助的國際公約>> in line with the FATF Standards, the FATF has lifted the suspension of counter-measures. It's asking all members and jurisdictions to take effective counter-measures.
+## Grey List on FATF (Updated in June, 2023)
 
-The FATF will decide what to do next, including whether to suspend counter-measures, if Iran starts following FATF standards. However, Iran needs to take specific measures to address the problems related to countering terrorism financing as outlined in the Action Plan before that can happen.
+The "Grey List" highlights countries collaborating with FATF to address money laundering, terrorist financing, and proliferation financing issues. Increased monitoring signifies their commitment to swiftly resolve these deficiencies within agreed timeframes.
+
+- Albania
+- Barbados
+- Burkina Faso
+- Cameroon
+- Cayman Islands
+- Croatia
+- Democratic Republic of Congo
+- Gibraltar
+- Haiti
+- Jamaica
+- Jordan
+- Mali
+- Mozambique
+- Nigeria
+- Panama
+- Philippines
+- Senegal
+- South Africa
+- South Sudan
+- Syria
+- Tanzania
+- Türkiye
+- Uganda
+- United Arab Emirates
+- Vietnam
+- Yemen
 
 # Transactions with Privacy Coins
 
