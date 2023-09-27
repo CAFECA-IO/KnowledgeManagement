@@ -1,3 +1,6 @@
+![KM-cover](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/8f250c7f-49bd-4412-b78e-48d9e908a4fd)
+
+
 # Preface
 
 ## What is money laundering?
