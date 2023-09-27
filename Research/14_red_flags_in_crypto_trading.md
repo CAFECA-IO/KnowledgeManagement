@@ -103,8 +103,22 @@ Another method commonly employed for cryptocurrency money laundering involves on
 
 It's important to recognize that money launderers are not motivated by the desire to profit from gambling; rather, they seek to legitimize their ill-gotten gains and avoid suspicion. 
 
-# Large Transfer
-# Large Receive
+# Large Transfer (High-value Transfer)
+
+- Risk of Money Laundering: To save the time,high-value transactions can be used by criminals as a means to legitimize illicit funds. Money launderers may seek to move significant sums of money through legitimate channels to obscure the source of their illegal gains.
+
+- Potential for Terrorist Financing: High-value transactions can also be indicative of terrorist financing, where individuals or organizations attempt to move substantial funds to support illegal activities or terrorist operations.
+
+- Scam or fraud: High-value transfers may be connected to investment scams or fraudulent schemes where victims are convinced to transfer substantial sums of money, often with the promise of significant returns.
+
+- Hacking: Hackers may target financial institutions, exchanges, or payment processors, gaining access to their systems. This access can enable them to initiate high-value transfers directly from these institutions. 
+
+When investigating the potential link between a high-value transfer and illegal activity, investigators carefully evaluate factors like the source of funds, transaction history, purpose of the transfer, and relationships involved. This is why the "Know Your Customer" (KYC) process is a crucial step for financial institutions. KYC helps identify irregular transactions and discrepancies between the transaction amount and the client's background, enabling institutions to report and address suspicious activities effectively.
+
+# Large Receipt (High-value Receipt)
+
+High-value receipts and high-value transfers share the same concept but involve different roles for senders and recipients.
+
 # Large Deposit
 
 Deposits into an account or a VA address are significantly higher than ordinary with an unknown source of funds, followed by conversion to fiat currency, which may indicate theft of funds.
