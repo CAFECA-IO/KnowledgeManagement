@@ -65,12 +65,39 @@ In some cases, identity thieves may make multiple withdrawals from a victim's ac
 Addresses linked to criminal activities, such as hacking, fraud, theft, or other unlawful actions, will be placed on BAIFA's Black List.
 Accepting funds from addresses on the Black List is considered to be aiding money laundering.
 
-# With Darknet
+# With Darknet (Darkweb)
+
+The darknet itself is not inherently illegal. It's a part of the internet that is intentionally hidden and not indexed by traditional search engines.
+It can provide a level of privacy and anonymity for users. It's used by journalists, activists, whistleblowers, and individuals living in countries with strict censorship to communicate and share information without fear of surveillance or censorship.
+
+Meanwhile, Darknet markets, also known as underground or hidden markets, are online platforms that operate on the dark web and are accessible through specialized software. These markets facilitate the buying and selling of a wide range of illegal goods and services, including drugs, stolen data, counterfeit documents, hacking tools, and more. Criminals use these markets to conduct illicit transactions.
+
+Many darknet markets primarily use cryptocurrencies like Bitcoin for transactions. Cryptocurrencies provide a degree of anonymity, making them an attractive choice for conducting illegal activities. Criminals often use cryptocurrencies to pay for illegal goods and services on darknet markets.
+
 # With Mixing Service
+
+Mixing and tumbling services are methods used in the world of cryptocurrency to enhance the privacy and anonymity of transactions. These services aim to obscure the source and destination of funds, making it difficult to trace the flow of cryptocurrency.
+
+### Mixing Services (Coin Mixing or CoinJoin): 
+- Multiple users send their cryptocurrency to a mixing service.
+- The mixing service combines these funds into a pool.
+- It then redistributes the cryptocurrency to the intended recipients, but in a way that makes it challenging to associate specific inputs with specific outputs.
+This process breaks the transaction history, enhancing privacy.
+
+### Tumbling Services (Bitcoin Tumblers or Tumblers): 
+Tumbling services work similarly to mixing services but with a focus on Bitcoin. They aim to "tumble" or "shuffle" Bitcoins to break the transaction history. Here's how it works:
+- Users send their Bitcoins to a tumbler service.
+- The tumbler service mixes these Bitcoins with other users' coins.
+- The service then sends the mixed Bitcoins back to the users, but in randomized amounts and at different times.
+- As a result, it becomes challenging to link the original Bitcoins to their source.
+  
 # With Gambling Site
 # Large Transfer
 # Large Receive
 # Large Deposit
+
+Deposits into an account or a VA address are significantly higher than ordinary with an unknown source of funds, followed by conversion to fiat currency, which may indicate theft of funds.
+
 # Large Withdraw
 # To High Risk Location
 
