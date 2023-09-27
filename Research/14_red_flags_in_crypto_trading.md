@@ -92,6 +92,17 @@ Tumbling services work similarly to mixing services but with a focus on Bitcoin.
 - As a result, it becomes challenging to link the original Bitcoins to their source.
   
 # With Gambling Site
+
+Another method commonly employed for cryptocurrency money laundering involves online gambling. With the increasing acceptance of cryptocurrencies on various online gambling and gaming websites, criminals have found a seemingly simple way to legitimize their illicit funds. Here's how it works:
+
+- Access to Online Gambling Sites: Criminals access online casinos, sports betting platforms, or other gaming websites that accept cryptocurrencies as a means of payment.
+- Purchasing Credits: They use their cryptocurrency to purchase in-game credits, virtual chips, or tokens on these platforms.
+- Gameplay: To create a façade of legitimacy, the money launderers engage in actual gameplay, making bets and playing rounds of games.
+- Cashing Out: After a few rounds or bets, they cash out their cryptocurrency, often in multiple small transactions.
+- Legitimization: By doing so, they provide themselves with a plausible explanation for the source of the funds. They can assert that their winnings in these online games account for the money cashed out.
+
+It's important to recognize that money launderers are not motivated by the desire to profit from gambling; rather, they seek to legitimize their ill-gotten gains and avoid suspicion. 
+
 # Large Transfer
 # Large Receive
 # Large Deposit
