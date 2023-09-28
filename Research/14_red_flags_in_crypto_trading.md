@@ -68,6 +68,9 @@ In some cases, identity thieves may make multiple withdrawals from a victim's ac
 Addresses linked to criminal activities, such as hacking, fraud, theft, or other unlawful actions, will be placed on BAIFA's Black List.
 Accepting funds from addresses on the Black List is considered to be aiding money laundering.
 
+[OFAC-Specially Designated Nationals and Blocked Persons List](https://www.treasury.gov/ofac/downloads/sdnlist.pdf)
+[OFAC-Sanctions List Search](https://sanctionssearch.ofac.treas.gov)
+
 # With Darknet (Darkweb)
 
 The darknet itself is not inherently illegal. It's a part of the internet that is intentionally hidden and not indexed by traditional search engines.
@@ -208,3 +211,5 @@ Privacy coins like Monero, Zcash, or Dash are designed to provide enhanced priva
 [Chainlink Blog](https://blog.chain.link/zero-knowledge-proof-use-cases/)
 
 [FATF](https://www.fatf-gafi.org/content/dam/fatf-gafi/reports/Virtual-Assets-Red-Flag-Indicators.pdf.coredownload.pdf)
+
+[U.S. DEPARTMENT OF THE TREASURY](https://home.treasury.gov)
