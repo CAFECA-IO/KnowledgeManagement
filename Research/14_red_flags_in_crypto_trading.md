@@ -69,6 +69,7 @@ Addresses linked to criminal activities, such as hacking, fraud, theft, or other
 Accepting funds from addresses on the Black List is considered to be aiding money laundering.
 
 [OFAC-Specially Designated Nationals and Blocked Persons List](https://www.treasury.gov/ofac/downloads/sdnlist.pdf)
+
 [OFAC-Sanctions List Search](https://sanctionssearch.ofac.treas.gov)
 
 # With Darknet (Darkweb)
