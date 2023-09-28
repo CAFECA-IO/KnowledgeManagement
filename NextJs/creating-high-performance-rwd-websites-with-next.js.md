@@ -3,7 +3,8 @@
 在現代網站開發中，效能是不可忽視的要素。以下將探討如何利用Next.js與TailwindCSS來打造效能卓越的網站。
 
 ## **1. 效能指標介紹**
-
+- **測試工具**: 使用Google的[PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)來檢測頁面加載速度。
+  
 可參考：**[web-vitals](https://github.com/CAFECA-IO/KnowledgeManagement/blob/master/tools/web-vitals.md#web-vitals)**
 
 - **First Contentful Paint (FCP)**: 衡量當第一塊內容（例如文字或圖像）在用戶的屏幕上被渲染的時間。**建議完成時間為 2.5 秒內**。
@@ -179,6 +180,7 @@ Last-Modified: Tue, 15 Sep 2020 12:45:26 GMT
 ### TailwindCSS 的 CSS 優化解法
 
 - Tree-shaking optimization
+
 
 # 參考資料
 
