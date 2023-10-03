@@ -145,9 +145,12 @@ Content Delivery Network (CDN) 是一種服務，它通過在地理上分散的�
 
 勾選 Paint flashing 之後，會在 component 被重新繪製時標註螢光色
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/3a9cad5e-aed1-41c0-be43-060b6e297a52)
-
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ca511547-1f2c-4469-aed6-5b661ed04381)
+
+<img src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/3a9cad5e-aed1-41c0-be43-060b6e297a52" width="600">
+
+
+
 
 
 ### **React Developer Tools**
@@ -156,8 +159,10 @@ Content Delivery Network (CDN) 是一種服務，它通過在地理上分散的�
 
 - 勾選 `Highlight updates when components render` ，在組件重新渲染時，可以看到組件被線條框住，綠色線條代表重新渲染的次數較少，黃色線條代表被重新渲染許多次。
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/cb9509be-9172-414b-a649-82b5a7a50804)
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/f6a19871-4fd9-4ece-ba4f-ce51f293aa17)
+<img src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/cb9509be-9172-414b-a649-82b5a7a50804" width="400">
+
+<img src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/f6a19871-4fd9-4ece-ba4f-ce51f293aa17" width="400">
+
 
 
 - 在造成渲染的原因中，“`This is the first time the component rendered.`”是正常的原因，其他原因如 “`The parent component rendered.`”跟“`Context changed`” 等等是效能優化時須斟酌是否能改善的地方
