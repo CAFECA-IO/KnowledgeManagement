@@ -54,7 +54,7 @@
 | Cash paid to customers for CFD trading profits                     | 支付給客戶的 CFD 交易利潤現金                |
 | Insurance fund for perpetual contracts                             | 為了保證永續合約正常運作的基金               |
 | Cash paid to customers for funding rates in perpetual contract     | 用現金及約當現金支付給用戶的永續合約資金費率 |
-| Cash paid to customers for perpetual contract profits              | 用現金及約當現金支付給用戶的永續合約利潤     |
+| Cash paid to customers for profits in perpetual contract                       | 用現金及約當現金支付給用戶的永續合約利潤     |
 | Cash received from customers for liquidation in perpetual contract | 從客戶收到的用於永續合約交易清算的現金       |
 
 ## 投資活動 (Investing Activities)
@@ -88,7 +88,6 @@
 | Cryptocurrencies paid to customers for CFD trading profits                     | 支付給客戶的 CFD 交易利潤加密貨幣              |
 | Insurance fund for perpetual contracts with non-cash consideration             | 為了保證永續合約正常運作的基金，以加密貨幣形式 |
 | Cryptocurrencies received from customers for liquidation in perpetual contract | 從客戶收到的用於永續合約交易清算的加密貨幣     |
-| Cryptocurrencies paid to customers for perpetual contract profits              | 用加密貨幣支付給用戶的永續合約利潤             |
 | Cryptocurrencies paid to customers for funding rates in perpetual contract     | 用加密貨幣支付給用戶的永續合約資金費率         |
 | Cryptocurrencies paid to customers for profits in perpetual contract           | 用加密貨幣支付給客戶的永續合約交易利潤         |
 
