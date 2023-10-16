@@ -80,50 +80,82 @@ Poxa是一個開源的Pusher服務兼容實現，用Elixir語言編寫。它是�
 
 #### Step 1：安裝Elixir和Erlang
 
-根據您的操作系統，從官方網站下載和安裝Elixir和Erlang。
+根據您的操作系統，從官方網站下載和安裝Elixir和Erlang，至少需要 Elixir 1.9 或以上的版本和 Erlang 21.0 或以上的版本。
 
-#### Step 2：克隆Poxa的GitHub倉庫
+**以 macbook 為例**
 
+可以使用 homebrew 安裝，下列command會安裝對於的Elixir和Erlang。
+
+```sh
+brew install elixir
+```
+
+檢查版本
+```sh
+elixir --version
+erl -version
+
+```
+
+#### Step 2：git clone Poxa on GitHub
+ 
+我們這邊使用我們fork到 CAFACA-IO 的 poxa 專案，也可以使用原始專案 `https://github.com/edgurgel/poxa.git`
 ```bash
-git clone https://github.com/edgurgel/poxa.git
+git clone https://github.com/CAFECA-IO/poxa.git
 cd poxa
 ```
 
-#### Step 3：安裝依賴
+#### Step 3：安裝並編譯dependencies
 
 ```bash
 mix deps.get
+mix deps.compile
 ```
 
-#### Step 4：配置Poxa
+#### Step 4: 初始化數據庫
 
-打開或創建 `config/config.exs` 文件，進行相應配置，例如：
+```bash
+mix do ecto.create, ecto.migrate
+```
+
+#### Step 5: 配置 Poxa
+
+- 你可以修改或創建一個配置文件，例如 `dev.config`。
+- 文件內容可能如下：
 
 ```elixir
+use Mix.Config
+
 config :poxa,
-  port: 8080,
-  app_id: "your_app_id",
-  app_key: "your_app_key",
-  app_secret: "your_app_secret"
+  http: [ip: {127, 0, 0, 1}, port: 8080],
+  app_key: "YOUR_APP_KEY",
+  secret: "YOUR_SECRET_KEY",
+  app_id: "YOUR_APP_ID"
 ```
 
-#### Step 5：啟動Poxa服務器
+#### Step 6: 啟動 Poxa
 
 ```bash
 mix run --no-halt
 ```
 
-此時，Poxa服務器應該在您配置的端口上運行。
+- 這將會在本地的 8080 端口啟動 Poxa 服務。
 
-#### Step 6：測試Poxa
+#### Step 7: 驗證 Poxa 是否運行
 
-您可以使用WebSocket客戶端工具或寫一個簡單的客戶端代碼來連接到Poxa服務器，進行測試。
+打開你的瀏覽器，訪問 `http://localhost:8080`，如果能看到 Poxa 的控制面板，則表示 Poxa 已經成功運行。
+
+#### Step 8: 客戶端連接
+
+- 你可以開始使用適合的客戶端 SDK，如 Pusher client SDK，來連接到 Poxa 服務並開始發送和接收消息。
+
+這些步驟應該可以幫助你在本地成功架設 Poxa 服務。根據你的需求，你可能還需要進一步配置 SSL、設置反向代理等。在部署到生產環境前，記得考慮安全性和性能的優化。
 
 ## 如何使用Poxa？
 
 - 客戶端可以使用WebSocket連接到Poxa服務器，發送和接收消息。
 - 可以使用HTTP API向特定的頻道推送消息。
 
-### 結語
+## 結語
 
 了解Poxa的基本概念和使用方法，可以幫助我們更好地在實時互動應用中作出適合的技術選擇和應用。
