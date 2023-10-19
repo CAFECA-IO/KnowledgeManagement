@@ -1,5 +1,5 @@
 # Decentralized Web Token（DeWT)
-Decentralized Web Token（DeWT) 是我們專為 TideBit-DeFi 設計的去中心化認證機制，其原理參考 [JWT](https://supertokens.com/blog/what-is-jwt) 的認證機制，兩者主要的不同在於 JWT 是由網站所核發(是一種中心式的認證機制)而 DWT 則是由用戶所核發，並且兩者簽署的內容也不同。
+Decentralized Web Token（DeWT) 是我們專為 TideBit-DeFi 設計的去中心化認證機制，其原理參考 [JWT](https://supertokens.com/blog/what-is-jwt) 的認證機制，兩者主要的不同在於 JWT 是由網站所核發(是一種中心式的認證機制)而 DeWT 則是由用戶所核發，並且兩者簽署的內容也不同。
 
 ## 常見的身份驗證和授權技術
 當我們談論前後端的鑑權方式時，我們主要討論的是怎麼確定一個用戶或應用程式的身份以及他們是否有權限去訪問某些資源。以下是幾種常見的鑑權方式的詳細說明：
