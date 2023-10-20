@@ -112,6 +112,7 @@ mix deps.get
 mix deps.compile
 ```
 
+
 #### Step 4: 初始化數據庫
 
 ```bash
