@@ -3,7 +3,7 @@ last updated on 2023-10-21
 
 ## Environment
 - Ubuntu 22.04
-- 
+
 ### Setup SWAP
 Create a Swap File
 ```shell
