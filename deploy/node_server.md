@@ -3,6 +3,7 @@ last updated on 2023-10-21
 
 ## Environment
 - Ubuntu 22.04
+- (setup user)[https://github.com/CAFECA-IO/KnowledgeManagement/blob/master/linux/create_sudoer_user_in_ubuntu.md]
 
 ### Setup SWAP
 Create a Swap File
