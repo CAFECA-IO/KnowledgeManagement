@@ -2,11 +2,11 @@
 - [Context](#context)
 - [Reducer](#reducer)
 - [Zustand](#zustand)
-  - [\***\*在 Zustand 中管理 State\*\***](#在-zustand-中管理-state)
+  - [**在 Zustand 中管理 State**](#在-zustand-中管理-state)
     - [**創建 Zustand Store**](#創建-zustand-store)
     - [**在組件中使用 Zustand Store**](#在組件中使用-zustand-store)
 - [Redux toolkit](#redux-toolkit)
-  - [\***\*在 Redux Toolkit 中管理 State\*\***](#在-redux-toolkit-中管理-state)
+  - [**在 Redux Toolkit 中管理 State**](#在-redux-toolkit-中管理-state)
     - [創建 Slice](#創建-slice)
     - [**配置和使用 Redux Store**](#配置和使用-redux-store)
 - [References](#references)
@@ -51,7 +51,7 @@ const useStore = create((set) => ({
 }));
 ```
 
-### **在組件中使用 Zustand Store**
+### 在組件中使用 Zustand Store
 
 ```jsx
 const Counter = () => {
@@ -68,7 +68,7 @@ const Counter = () => {
 
 # Redux toolkit
 
-## \***\*在 Redux Toolkit 中管理 State\*\***
+## 在 Redux Toolkit 中管理 State
 
 Redux Toolkit 是 Redux 的官方推薦方式，它提供了更簡潔的 API 來減少模板代碼。
 
@@ -95,7 +95,7 @@ const counterSlice = createSlice({
 export const { increase, decrease } = counterSlice.actions;
 ```
 
-### **配置和使用 Redux Store**
+### 配置和使用 Redux Store
 
 ```jsx
 import { Provider, useSelector, useDispatch } from "react-redux";
