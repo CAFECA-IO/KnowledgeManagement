@@ -29,6 +29,9 @@
 
 - 使用 context 存取、變更 state
 
+![Screenshot 2023-11-20 at 12 35 23](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/dacee75e-a415-4b7e-839a-d4b547a0812d)
+
+
 
 
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/d2cd43cd-d609-49f6-82a1-c322b6b52dfa
@@ -39,6 +42,9 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/d2cd43cd-d609-4
 
 - 使用 Zustand 存取、變更 state
 
+![Screenshot 2023-11-20 at 12 35 43](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/15aa1e3c-cc28-4e0c-b252-0eaf8cc687ba)
+
+
 
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/40a5501f-16fe-4e1a-9a3d-0827bec390e3
 
@@ -48,6 +54,7 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/40a5501f-16fe-4
 
 - 使用 Redux toolkit 存取、變更 state
 
+![Screenshot 2023-11-20 at 12 36 38](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/d398f42a-0ba2-4bee-80de-2f49e4cd214b)
 
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/18ec8510-c12c-41e7-be95-4a471fcb3700
 
