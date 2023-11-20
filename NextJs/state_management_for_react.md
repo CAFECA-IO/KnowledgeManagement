@@ -28,9 +28,10 @@
 ### Context 頁面
 
 - 使用 context 存取、變更 state
+- 從 Profiler extension 跟 log 可以看出：在 Player A component 按下按鈕呼叫來自 context 的 function，造成 **context 裡面的 A 分數改變跟重新判斷 winner 是誰**，會造成包在 `<ContextProvider> <ContextProvider/>` 裡面的 components re-run，但理想情況是只需要 re-run Player A component 跟 Winner component ，在 Player B component 也需要讀取跟使用 context 值的情況下，用 context 實作會造成不必要的效能消耗。
+    - log 可看藍色圓圈的部分
 
-![Screenshot 2023-11-20 at 12 35 23](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/dacee75e-a415-4b7e-839a-d4b547a0812d)
-
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/61b4acb1-88ce-4bd3-971e-b962dedab0ed)
 
 
 
@@ -41,8 +42,11 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/d2cd43cd-d609-4
 ### Zustand 頁面
 
 - 使用 Zustand 存取、變更 state
+- 從 Profiler extension 跟 log 可以看出：在 Player A component 按下按鈕呼叫來自 Zustand 的 function，造成 Zustand **裡面的 A 分數改變跟重新判斷 winner 是誰**，只會 re-run Player A component 跟 Winner component ，用 Zustand 實作可以在 Player B component 也需要讀取跟寫入全域變數的情況下，不會造成不必要的效能消耗。
+    - log 可看藍色圓圈的部分
 
-![Screenshot 2023-11-20 at 12 35 43](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/15aa1e3c-cc28-4e0c-b252-0eaf8cc687ba)
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c310686-d794-424f-aae1-e910e2330e58)
+
 
 
 
@@ -52,9 +56,12 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/40a5501f-16fe-4
 
 ### Redux toolkit 頁面
 
-- 使用 Redux toolkit 存取、變更 state
+- 使用 Redux toolkit  存取、變更 state
+- 從 Profiler extension 跟 log 可以看出：在 Player A component 按下按鈕呼叫來自 Redux toolkit 的 function，造成 Redux toolkit **裡面的 A 分數改變跟重新判斷 winner 是誰**，只會 re-run Player A component 跟 Winner component ，用 Redux toolkit 實作可以在 Player B component 也需要讀取跟寫入全域變數的情況下，不會造成不必要的效能消耗。
+    - log 可看藍色圓圈的部分
 
-![Screenshot 2023-11-20 at 12 36 38](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/d398f42a-0ba2-4bee-80de-2f49e4cd214b)
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/e0997fc8-c29d-4ad7-938c-e9bbde10e7d3)
+
 
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/18ec8510-c12c-41e7-be95-4a471fcb3700
 
