@@ -33,7 +33,9 @@
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/61b4acb1-88ce-4bd3-971e-b962dedab0ed)
 
-https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/d2cd43cd-d609-49f6-82a1-c322b6b52dfa
+![Screen Recording 2023-11-20 at 12 29 32](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/46365c8a-8f17-4b92-b901-a6b72f6842cc)
+
+
 
 ### Zustand 頁面
 
@@ -42,8 +44,8 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/d2cd43cd-d609-4
   - log 可看藍色圓圈的部分
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c310686-d794-424f-aae1-e910e2330e58)
+![Screen Recording 2023-11-20 at 12 30 08](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/f2a2f2f4-88de-412c-bbe1-06ca7edbf603)
 
-https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/40a5501f-16fe-4e1a-9a3d-0827bec390e3
 
 ### Redux toolkit 頁面
 
@@ -52,8 +54,8 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/40a5501f-16fe-4
   - log 可看藍色圓圈的部分
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/e0997fc8-c29d-4ad7-938c-e9bbde10e7d3)
+![Screen Recording 2023-11-20 at 12 30 32](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/fef8c2d1-dc0a-42a5-b7db-187c0e5510fc)
 
-https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/18ec8510-c12c-41e7-be95-4a471fcb3700
 
 # 實際運用例子
 
