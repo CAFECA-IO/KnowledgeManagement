@@ -29,13 +29,28 @@
 
 - 使用 context 存取、變更 state
 
+
+
+https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/d2cd43cd-d609-49f6-82a1-c322b6b52dfa
+
+
+
 ### Zustand 頁面
 
 - 使用 Zustand 存取、變更 state
 
+
+https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/40a5501f-16fe-4e1a-9a3d-0827bec390e3
+
+
+
 ### Redux toolkit 頁面
 
 - 使用 Redux toolkit 存取、變更 state
+
+
+https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/18ec8510-c12c-41e7-be95-4a471fcb3700
+
 
 # Context
 
