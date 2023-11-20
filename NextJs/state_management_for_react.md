@@ -176,7 +176,8 @@ const App = () => (
 
 # References
 
+- [useContext doc](https://react.dev/reference/react/useContext)
 - [Zustand doc](https://docs.pmnd.rs/zustand/getting-started/introduction)
 - [Redux toolkit doc](https://redux-toolkit.js.org/introduction/getting-started)
 - [React Context API vs Zustand State Manager](https://medium.com/@viraj.vimu/react-context-api-vs-zustand-state-manager-98ca9ac76904)
-  - [Example on CodeSandbox](https://codesandbox.io/p/sandbox/heuristic-diffie-iqhnqg?file=%2Fpages%2Fcontext-page.js%3A1%2C1)
+    - [Example on CodeSandbox](https://codesandbox.io/p/sandbox/heuristic-diffie-iqhnqg?file=%2Fpages%2Fcontext-page.js%3A1%2C1)
