@@ -65,21 +65,20 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/40a5501f-16fe-4
 
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/18ec8510-c12c-41e7-be95-4a471fcb3700
 
+# 實際運用例子
 
-# Context
+## Context
 
 - 參考 [React-tips](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/newbie/react-tips.md#usecontext)
 
-# Zustand
+## 在 Zustand 中管理 State
 
 Zustand 是一個簡單的狀態管理庫，它使用一個創建 store 的函數，你可以在其中定義 state 和更新它的函數。
-
-## 在 Zustand 中管理 State
 
 ### 創建 Zustand Store
 
 ```jsx
-import create from "zustand";
+import create from 'zustand';
 
 const useStore = create((set) => ({
   count: 0,
@@ -103,22 +102,22 @@ const Counter = () => {
 };
 ```
 
-# Redux toolkit
+## Redux toolkit
 
-## Introduction
+### Introduction
 
 - Reducer: 它是 Redux 架構的核心概念之一，用於描述應用的狀態如何響應不同的 actions 而改變。Reducer 是純函數，根據當前狀態和給定的 action 計算出新的狀態。
 - Redux Toolkit: Redux Toolkit 是 Redux 的標準工具集，旨在簡化 Redux 應用的開發。它提供了 `createSlice` 和 `configureStore` 等函數，這些函數使得管理 Redux 狀態和寫作 reducers 更加簡單和高效。它還內置了一些最佳實踐，如 Redux Thunk 中間件，用於處理異步邏輯。
 - 在 Redux Toolkit 中，你不需要明確地編寫 action types 和 action creators，因為 `createSlice` 會自動為你生成。這使得代碼更加簡潔並減少了錯誤。此外，Redux Toolkit 通過提供一個配置化的 store 創建方法，使得設置和維護 Redux 應用更加容易。
 
-## Reducer
+### Reducer
 
 Reducer 是一個函數，它接受當前的 state 和一個 action 作為參數，然後返回一個新的 state。它的主要作用是根據 action 的類型來決定如何改變 state。在 Redux 和其他類似的狀態管理庫中，Reducer 是不可變的（immutable），意味著它們不會直接修改當前的 state，而是返回一個新的 state 對象。
 
 ```jsx
 function myReducer(state, action) {
   switch (action.type) {
-    case "ACTION_TYPE":
+    case 'ACTION_TYPE':
       // 返回一個更新後的 state
       return { ...state, ...action.payload };
     default:
@@ -134,10 +133,10 @@ function myReducer(state, action) {
 Slice 是 Redux Toolkit 中的一個概念，它封裝了一部分 state 和與之相關的 reducers。
 
 ```jsx
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 const counterSlice = createSlice({
-  name: "counter",
+  name: 'counter',
   initialState: { count: 0 },
   reducers: {
     increase: (state) => {
@@ -155,7 +154,7 @@ export const { increase, decrease } = counterSlice.actions;
 ### 配置和使用 Redux Store
 
 ```jsx
-import { Provider, useSelector, useDispatch } from "react-redux";
+import { Provider, useSelector, useDispatch } from 'react-redux';
 
 const store = configureStore({
   reducer: {
@@ -190,4 +189,4 @@ const App = () => (
 - [Zustand doc](https://docs.pmnd.rs/zustand/getting-started/introduction)
 - [Redux toolkit doc](https://redux-toolkit.js.org/introduction/getting-started)
 - [React Context API vs Zustand State Manager](https://medium.com/@viraj.vimu/react-context-api-vs-zustand-state-manager-98ca9ac76904)
-  - [Example on CodeSandbox](https://codesandbox.io/p/sandbox/heuristic-diffie-iqhnqg?file=%2Fpages%2Fcontext-page.js%3A1%2C1)
+    - [Example on CodeSandbox](https://codesandbox.io/p/sandbox/heuristic-diffie-iqhnqg?file=%2Fpages%2Fcontext-page.js%3A1%2C1)
