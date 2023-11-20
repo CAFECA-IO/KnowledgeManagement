@@ -1,5 +1,6 @@
 # KnowledgeManagement
-Creating, Sharing, Using and Managing the knowledge and information of CAFECA
+Creating, Sharing, Using and Managing the knowledge and information of CAFECA  
+[Website Publishment](https://mermer.com.tw/en/knowledge-management)
 
 ## 工作技巧
 - [VSCode] [使用 VSCode 編輯遠端機器檔案](tips/edit_remote_files_with_vscode.md)
