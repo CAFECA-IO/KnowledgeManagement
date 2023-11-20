@@ -3,14 +3,14 @@
   - [Context 頁面](#context-頁面)
   - [Zustand 頁面](#zustand-頁面)
   - [Redux toolkit 頁面](#redux-toolkit-頁面)
-- [Context](#context)
-- [Zustand](#zustand)
+- [實際運用例子](#實際運用例子)
+  - [Context](#context)
   - [在 Zustand 中管理 State](#在-zustand-中管理-state)
     - [創建 Zustand Store](#創建-zustand-store)
     - [在組件中使用 Zustand Store](#在組件中使用-zustand-store)
-- [Redux toolkit](#redux-toolkit)
-  - [Introduction](#introduction)
-  - [Reducer](#reducer)
+  - [Redux toolkit](#redux-toolkit)
+    - [Introduction](#introduction)
+    - [Reducer](#reducer)
   - [在 Redux Toolkit 中管理 State](#在-redux-toolkit-中管理-state)
     - [創建 Slice](#創建-slice)
     - [配置和使用 Redux Store](#配置和使用-redux-store)
@@ -29,39 +29,29 @@
 
 - 使用 context 存取、變更 state
 - 從 Profiler extension 跟 log 可以看出：在 Player A component 按下按鈕呼叫來自 context 的 function，造成 **context 裡面的 A 分數改變跟重新判斷 winner 是誰**，會造成包在 `<ContextProvider> <ContextProvider/>` 裡面的 components re-run，但理想情況是只需要 re-run Player A component 跟 Winner component ，在 Player B component 也需要讀取跟使用 context 值的情況下，用 context 實作會造成不必要的效能消耗。
-    - log 可看藍色圓圈的部分
+  - log 可看藍色圓圈的部分
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/61b4acb1-88ce-4bd3-971e-b962dedab0ed)
 
-
-
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/d2cd43cd-d609-49f6-82a1-c322b6b52dfa
-
-
 
 ### Zustand 頁面
 
 - 使用 Zustand 存取、變更 state
 - 從 Profiler extension 跟 log 可以看出：在 Player A component 按下按鈕呼叫來自 Zustand 的 function，造成 Zustand **裡面的 A 分數改變跟重新判斷 winner 是誰**，只會 re-run Player A component 跟 Winner component ，用 Zustand 實作可以在 Player B component 也需要讀取跟寫入全域變數的情況下，不會造成不必要的效能消耗。
-    - log 可看藍色圓圈的部分
+  - log 可看藍色圓圈的部分
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c310686-d794-424f-aae1-e910e2330e58)
 
-
-
-
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/40a5501f-16fe-4e1a-9a3d-0827bec390e3
-
-
 
 ### Redux toolkit 頁面
 
-- 使用 Redux toolkit  存取、變更 state
+- 使用 Redux toolkit 存取、變更 state
 - 從 Profiler extension 跟 log 可以看出：在 Player A component 按下按鈕呼叫來自 Redux toolkit 的 function，造成 Redux toolkit **裡面的 A 分數改變跟重新判斷 winner 是誰**，只會 re-run Player A component 跟 Winner component ，用 Redux toolkit 實作可以在 Player B component 也需要讀取跟寫入全域變數的情況下，不會造成不必要的效能消耗。
-    - log 可看藍色圓圈的部分
+  - log 可看藍色圓圈的部分
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/e0997fc8-c29d-4ad7-938c-e9bbde10e7d3)
-
 
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/18ec8510-c12c-41e7-be95-4a471fcb3700
 
@@ -78,7 +68,7 @@ Zustand 是一個簡單的狀態管理庫，它使用一個創建 store 的函�
 ### 創建 Zustand Store
 
 ```jsx
-import create from 'zustand';
+import create from "zustand";
 
 const useStore = create((set) => ({
   count: 0,
@@ -117,7 +107,7 @@ Reducer 是一個函數，它接受當前的 state 和一個 action 作為參數
 ```jsx
 function myReducer(state, action) {
   switch (action.type) {
-    case 'ACTION_TYPE':
+    case "ACTION_TYPE":
       // 返回一個更新後的 state
       return { ...state, ...action.payload };
     default:
@@ -133,10 +123,10 @@ function myReducer(state, action) {
 Slice 是 Redux Toolkit 中的一個概念，它封裝了一部分 state 和與之相關的 reducers。
 
 ```jsx
-import { createSlice, configureStore } from '@reduxjs/toolkit';
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const counterSlice = createSlice({
-  name: 'counter',
+  name: "counter",
   initialState: { count: 0 },
   reducers: {
     increase: (state) => {
@@ -154,7 +144,7 @@ export const { increase, decrease } = counterSlice.actions;
 ### 配置和使用 Redux Store
 
 ```jsx
-import { Provider, useSelector, useDispatch } from 'react-redux';
+import { Provider, useSelector, useDispatch } from "react-redux";
 
 const store = configureStore({
   reducer: {
@@ -189,4 +179,4 @@ const App = () => (
 - [Zustand doc](https://docs.pmnd.rs/zustand/getting-started/introduction)
 - [Redux toolkit doc](https://redux-toolkit.js.org/introduction/getting-started)
 - [React Context API vs Zustand State Manager](https://medium.com/@viraj.vimu/react-context-api-vs-zustand-state-manager-98ca9ac76904)
-    - [Example on CodeSandbox](https://codesandbox.io/p/sandbox/heuristic-diffie-iqhnqg?file=%2Fpages%2Fcontext-page.js%3A1%2C1)
+  - [Example on CodeSandbox](https://codesandbox.io/p/sandbox/heuristic-diffie-iqhnqg?file=%2Fpages%2Fcontext-page.js%3A1%2C1)
