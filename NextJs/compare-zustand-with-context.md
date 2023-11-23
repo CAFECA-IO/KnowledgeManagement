@@ -85,3 +85,5 @@ useEffect(() => {
 - [Zustand. React state management done right with bear minimum](https://tsh.io/blog/zustand-react/)
 - [Transient updates (for often occurring state-changes)](https://github.com/pmndrs/zustand#transient-updates-for-often-occurring-state-changes)
 - [useShallow vs shallow](https://github.com/pmndrs/zustand/discussions/2203)
+- [Fetching data with Effects](https://react.dev/reference/react/useEffect#fetching-data-with-effects)
+- [Fixing Race Conditions in React with useEffect](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
