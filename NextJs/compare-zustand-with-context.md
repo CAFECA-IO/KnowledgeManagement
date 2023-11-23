@@ -5,6 +5,7 @@
   - [Zustand](#zustand)
 - [原有 Context 寫法](#原有-context-寫法)
 - [用 Zustand 重構的寫法](#用-zustand-重構的寫法)
+- [References](#References)
 
 
 # 效能差別
@@ -74,3 +75,13 @@ useEffect(() => {
     };
   }, []);
 ```
+
+
+# References
+
+- [Zustand GitHub (必讀)](https://github.com/pmndrs/zustand)
+- [Zustand 簡體中文筆記](https://awesomedevin.github.io/zustand-vue/docs/introduce/start/zustand)
+    - [zustand-pub (跨应用/跨框架 状态管理及共享)](https://awesomedevin.github.io/zustand-vue/docs/introduce/start/zustand-pub)
+- [Zustand. React state management done right with bear minimum](https://tsh.io/blog/zustand-react/)
+- [Transient updates (for often occurring state-changes)](https://github.com/pmndrs/zustand#transient-updates-for-often-occurring-state-changes)
+- [useShallow vs shallow](https://github.com/pmndrs/zustand/discussions/2203)
