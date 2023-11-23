@@ -48,7 +48,7 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/0ec3f92b-8a3d-4
 
 - [參考 PR](https://github.com/CAFECA-IO/TideBit-DeFi/pull/1440/files#diff-9df147470ad72240aaa1734c585ab5fb7077e460d7209db49e438ba7fafad86a)
 
-### pages/_app
+### pages/_app.tsx
 
 - [參考 PR](https://github.com/CAFECA-IO/TideBit-DeFi/pull/1440/files#diff-9df147470ad72240aaa1734c585ab5fb7077e460d7209db49e438ba7fafad86a)
 
