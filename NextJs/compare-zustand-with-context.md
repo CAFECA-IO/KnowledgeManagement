@@ -23,7 +23,7 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/5a807e74-ddf8-4
 
 - [測試用 PR](https://github.com/CAFECA-IO/TideBit-DeFi/pull/1440)
 
-使用 Chrome 無痕模式開啟[網頁](https://tidebit-defi-9peh12ga7-cafeca.vercel.app/trade/cfd/eth-usdt)，網頁停留一分鐘，CPU 約消耗 22.9-50.4，Memory footprint 約 68-88 MB 
+使用 Chrome 無痕模式開啟[網頁](https://tidebit-defi-9peh12ga7-cafeca.vercel.app/trade/cfd/eth-usdt)，網頁停留一分鐘，CPU 約消耗 22.9-50.4，Memory footprint 約 68-88 MB ，CPU 約優化 28%-43%，Memory 約優化 17% 
 
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/0ec3f92b-8a3d-4884-abab-a25b0f58b2f6
 
