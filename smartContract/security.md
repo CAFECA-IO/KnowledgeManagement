@@ -122,7 +122,7 @@ D. 應用程序漏洞
 
 3.  引入互斥鎖，新增一個狀態變量來在代碼執行中鎖定合約，避免重入調用。
 
-    contract EtherStore {
+        contract EtherStore {
     
         //initialize the mutex
         bool reEntrancyMutex = false;
@@ -150,7 +150,7 @@ D. 應用程序漏洞
             reEntrancyutex = false;
         }
     
-    }
+        }
 
 
 #### 溢出
