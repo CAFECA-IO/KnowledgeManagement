@@ -231,6 +231,11 @@ Solidity函數中的可見性指定符控制著函數的調用方式​​。當
 
 #### GovernMental
 
+### 參考資料
+
+1. [Smart Contract: Attacks and Protections](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8976179) by SARWAR SAYEED , HECTOR MARCO-GISBERT , (Senior Member, IEEE), AND TOM CAIRA
+2. [Master in Ethereum](https://github.com/ethereumbook/ethereumbook) by Gavin Wood, Antonopoulos Andreas
+
 
 
 
