@@ -97,25 +97,17 @@ A. 重入性
 
 讓我們一步一步來看：
 
-1. 攻擊者首先部署EtherStore合約。
-然後，攻擊者部署Attack合約，並在構造函數中指定EtherStore合約的地址。這樣，Attack合約就可以與EtherStore合約進行交互。
+1. 攻擊者首先部署EtherStore合約。然後，攻擊者部署Attack合約，並在構造函數中指定EtherStore合約的地址。這樣，Attack合約就可以與EtherStore合約進行交互。
 
-2.攻擊者通過調用Attack合約的attackEtherStore()函數來啟動攻擊。這個函數首先要求攻擊者發送至少1個以太幣到Attack合約。
-attackEtherStore()函數接著調用EtherStore合約的depositFunds()方法，將這1個以太幣存入EtherStore合約。
-緊接著，attackEtherStore()函數調用EtherStore的withdrawFunds()方法，嘗試從EtherStore合約提取1個以太幣。
+2.攻擊者通過調用Attack合約的attackEtherStore()函數來啟動攻擊。這個函數首先要求攻擊者發送至少1個以太幣到Attack合約。attackEtherStore()函數接著調用EtherStore合約的depositFunds()方法，將這1個以太幣存入EtherStore合約。緊接著，attackEtherStore()函數調用EtherStore的withdrawFunds()方法，嘗試從EtherStore合約提取1個以太幣。
 
-3. 當EtherStore合約處理提款請求時，它將1個以太幣發送回Attack合約。
-由於是以太幣的轉移，這自動觸發了Attack合約的回調函數（fallback函數）。
+3. 當EtherStore合約處理提款請求時，它將1個以太幣發送回Attack合約。由於是以太幣的轉移，這自動觸發了Attack合約的回調函數（fallback函數）。
 
-5. 回調函數中的重入攻擊：
-在Attack合約的回調函數中，如果檢測到EtherStore合約的餘額仍然大於1個以太幣，它會再次調用EtherStore合約的withdrawFunds()方法。
-重點是，在EtherStore合約更新用戶的餘額和最後提款時間之前，就發送了以太幣。這意味著Attack合約可以在同一個交易中多次提取資金。
+4. 回調函數中的重入攻擊：在Attack合約的回調函數中，如果檢測到EtherStore合約的餘額仍然大於1個以太幣，它會再次調用EtherStore合約的withdrawFunds()方法。重點是，在EtherStore合約更新用戶的餘額和最後提款時間之前，就發送了以太幣。這意味著Attack合約可以在同一個交易中多次提取資金。
 
-5.每次Attack合約的回調函數被觸發時，它都會檢查EtherStore的餘額，並再次嘗試提款。
-這個循環會持續進行，直到EtherStore的餘額降至不足以繼續提款為止。
+5.每次Attack合約的回調函數被觸發時，它都會檢查EtherStore的餘額，並再次嘗試提款。這個循環會持續進行，直到EtherStore的餘額降至不足以繼續提款為止。
 
-6. 一旦EtherStore的餘額不足以繼續提款，Attack合約的回調函數停止執行。
-攻擊者可以通過調用Attack合約的collectEther()函數，將從EtherStore合約中提取的所有資金轉移到自己的賬戶。
+6. 一旦EtherStore的餘額不足以繼續提款，Attack合約的回調函數停止執行。攻擊者可以通過調用Attack合約的collectEther()函數，將從EtherStore合約中提取的所有資金轉移到自己的賬戶。
 
 B. 溢出
 這種漏洞相對容易引發，並且發生在接受未經授權的輸入數據或值的交易中​​。智能合約溢出主要發生在提供的值超過最大值時​​。這些合約主要用Solidity編寫，Solidity可以處理高達256位的數字，因此增加1將導致溢出。傳統的測試方法不足以確定智能合約中的溢出漏洞。
