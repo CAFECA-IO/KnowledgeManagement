@@ -58,6 +58,8 @@ D. DELEGATECALL
 
 E. 默認可見性
 Solidity函數中的可見性指定符控制著函數的調用方式​​。當允許用戶通過派生合約調用外部函數時，可見性指定符也起到控制作用。可見性指定符的不當實現可能對智能合約造成嚴重影響。函數的默認可見性總是設置為公共的，允許外部合約在函數未明確提及時調用可見性。當開發人員忽略將可見性指定符設置為私有時，就會出現這種漏洞。
+
+
         contract GuessAddress {
             function gainEther() {
               // Winner while the last 8 hex
