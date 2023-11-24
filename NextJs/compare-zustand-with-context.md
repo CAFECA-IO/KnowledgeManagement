@@ -42,11 +42,11 @@ https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/0ec3f92b-8a3d-4
     - 為了簡化實驗，沒有實作 API worker 跟 queue 的功能，在 production 模式下不會有 race condition 或 duplicate requests 的問題
 - 然後在 candlestick chart component 裡面使用 subscribe() 監聽 worker store 的 trades 資料，然後使用 market store 的 function 儲存 trades 並且每 0.1 秒畫出蠟燭圖
 
-### lib/stores/worker.ts
+### stores/worker.ts
 
 - [參考 PR](https://github.com/CAFECA-IO/TideBit-DeFi/pull/1440/files#diff-9df147470ad72240aaa1734c585ab5fb7077e460d7209db49e438ba7fafad86a)
 
-### lib/stores/market.ts
+### stores/market.ts
 
 - [參考 PR](https://github.com/CAFECA-IO/TideBit-DeFi/pull/1440/files#diff-9df147470ad72240aaa1734c585ab5fb7077e460d7209db49e438ba7fafad86a)
 
