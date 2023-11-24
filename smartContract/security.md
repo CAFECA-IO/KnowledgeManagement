@@ -114,6 +114,44 @@ A. 重入性
 
 6. 一旦EtherStore的餘額不足以繼續提款，Attack合約的回調函數停止執行。攻擊者可以通過調用Attack合約的collectEther()函數，將從EtherStore合約中提取的所有資金轉移到自己的賬戶。
 
+針對這個攻擊合約有三種防範方法：
+
+1. 使用內置的transfer函數向外部合約發送以太幣，因為transfer函數會給外部調用附加額外的 2300 gas，所以不足以支持目標合約再次調用其他合約。
+
+2. 使用 "檢查 - 生效 - 交互" 的模式確保所有對狀態的修改都在向其他合約發送以太幣之前執行。
+
+3.  引入互斥鎖，新增一個狀態變量來在代碼執行中鎖定合約，避免重入調用。
+
+    contract EtherStore {
+    
+        //initialize the mutex
+        bool reEntrancyMutex = false;
+        uint256 public withdrawalLimit = 1 ether;
+        mapping(address=>uint256) public lastWithdrawTime;
+        mapping(address=>uint256) public balances;
+    
+        function depositFunds() public payable{
+            balances[msg.sender] + = msg.value;
+        }
+    
+        function withdrawFunds(uint256 _weiToWithdraw) public{
+            require(!reEntrancyMutex);
+            require(balances[msg.sender] >= _weiToWithdraw);
+            //limit the withdrawal
+            require(_weiToWithdraw <= withdrawalLimit);
+            //limit the time allowed to withdraw
+            require(now>=lastWithdrawTime[msg.sender]+1weeks);
+            balances[msg.sender] - = _weiToWithdraw;
+            lastWithdrawTime[msg.sender] = now;
+            // set the reEntrancy mutex before the external call
+            reEntrancyMutex = true;
+            msg.sender.transfer(_weiToWithdraw);
+            //release the mutex after the external call
+            reEntrancyutex = false;
+        }
+    
+    }
+
 
 B. 溢出
 
