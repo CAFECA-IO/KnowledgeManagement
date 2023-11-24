@@ -96,6 +96,7 @@ A. 重入性
     }
 
 讓我們一步一步來看：
+
 1. 攻擊者首先部署EtherStore合約。
 然後，攻擊者部署Attack合約，並在構造函數中指定EtherStore合約的地址。這樣，Attack合約就可以與EtherStore合約進行交互。
 
