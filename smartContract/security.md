@@ -217,7 +217,21 @@ Solidity函數中的可見性指定符控制著函數的調用方式​​。當
 
 #### 2016年，The DAO
 
-#### PoWHC和批量轉帳溢出
+2016年的以太坊DAO攻擊是區塊鏈歷史上一個重要且具有爭議的事件。這次攻擊對以太坊網絡產生了深遠的影響，最終導致了以太坊網絡的“硬分叉”。
+
+DAO（去中心化自治組織）是在以太坊區塊鏈上建立的一個智能合約系統，旨在創建一個去中心化的投資基金。它通過公開募集以太幣（ETH）籌集了大量資金。
+
+不幸的是，DAO智能合約中存在一個漏洞。2016年6月，一個未知的攻擊者利用這個漏洞，從DAO合約中提取了約360萬個以太幣，當時價值約5000萬美元。
+
+這個漏洞是由於代碼中的錯誤，開發者沒有考慮到遞歸調用的可能性。因此，它使得攻擊者能夠在最初幾小時內偷走價值數百萬美元的以太幣。DAO攻擊情境展示了一個簡單的智能合約漏洞可能有多麼具破壞性。
+
+這次攻擊引起了以太坊社區的廣泛關注和爭論。一方面，有人認為應該尊重“代碼即法律”的原則，即使這意味著接受損失。另一方面，有人主張應該逆轉交易，以恢復資金給原始持有者。
+
+經過激烈的討論和投票後，以太坊社區決定執行一次硬分叉，以逆轉DAO合約中的交易，並將資金退還給原來的投資者。這次硬分叉在區塊鏈上創建了一個新分支，並恢復了被盜的資金。
+
+硬分叉創建了兩個獨立的區塊鏈和兩個獨立的貨幣：以太坊（ETH）和以太坊經典（ETC）。以太坊（ETH）是硬分叉後的新鏈，而以太坊經典（ETC）則繼續沿用原有的區塊鏈。
+
+#### PoWHC
 
 #### Parity 多重簽名錢包(2nd attack)
 
@@ -235,6 +249,7 @@ Solidity函數中的可見性指定符控制著函數的調用方式​​。當
 
 1. [Smart Contract: Attacks and Protections](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8976179) by SARWAR SAYEED , HECTOR MARCO-GISBERT , (Senior Member, IEEE), AND TOM CAIRA
 2. [Master in Ethereum](https://github.com/ethereumbook/ethereumbook) by Gavin Wood, Antonopoulos Andreas
+3. [How $800k Evaporated from the PoWH Coin Ponzi Scheme Overnight](https://medium.com/@ebanisadr/how-800k-evaporated-from-the-powh-coin-ponzi-scheme-overnight-1b025c33b530)
 
 
 
