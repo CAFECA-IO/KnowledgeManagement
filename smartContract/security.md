@@ -31,18 +31,18 @@ B. 溢出
 這種漏洞相對容易引發，並且發生在接受未經授權的輸入數據或值的交易中​​。智能合約溢出主要發生在提供的值超過最大值時​​。這些合約主要用Solidity編寫，Solidity可以處理高達256位的數字，因此增加1將導致溢出。傳統的測試方法不足以確定智能合約中的溢出漏洞。
 例如以下包含漏洞的智能合約代碼
 
-  function batchTransfer(address[] _acceptors, uint256 _value) public whenNotPaused returns (bool) {
-      uint cnt = _acceptors.length;
-      uint256 total = uint256(cnt) * _value;
-      require(cnt > 0 && cnt <= 20);
-      require(_value > 0 && balances[msg.sender] >= total);
-      balances[msg.sender] = balances[msg.sender].sub(total);
-      for (uint i = 0; i < cnt; i++) {
-          balances[_acceptors[i]] = balances[_acceptors[i]].add(_value);
-          Transfer(msg.sender, _acceptors[i], _value);
-      }
-      return true;
-  }
+    function batchTransfer(address[] _acceptors, uint256 _value) public whenNotPaused returns (bool) {
+        uint cnt = _acceptors.length;
+        uint256 total = uint256(cnt) * _value;
+        require(cnt > 0 && cnt <= 20);
+        require(_value > 0 && balances[msg.sender] >= total);
+        balances[msg.sender] = balances[msg.sender].sub(total);
+        for (uint i = 0; i < cnt; i++) {
+            balances[_acceptors[i]] = balances[_acceptors[i]].add(_value);
+            Transfer(msg.sender, _acceptors[i], _value);
+        }
+        return true;
+    }
 
 ​​，攻擊者可以使用參數調用此函數
 來利用這個漏洞。例如，下面的代碼total = value * _2 = 0將檢查移至balances[msg.sender] >= total。攻擊者可以在接收方函數中輸入2個地址，以便讓代幣智能合約將以太幣轉給這兩個地址。
