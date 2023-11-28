@@ -52,7 +52,7 @@
 
 <div align=center>
   
-![286138169-7d6147f3-b27c-4479-86da-6cbc02f66be0](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/e9f04bea-1fbc-499d-8ce1-96d0b047a43a)
+![286138169-7d6147f3-b27c-4479-86da-6cbc02f66be0](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/f9c999dd-82de-4b15-a9ab-bbc48e626f52)
 
 </div>
 
