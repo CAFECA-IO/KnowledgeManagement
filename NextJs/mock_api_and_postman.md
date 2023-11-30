@@ -151,7 +151,7 @@ fetch(uri + '/api/v1/chains-all')
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/105651918/d66e6cd5-ab62-46ad-92c6-517d14ab2366)
 
-# 資料來源：
+# 資料來源
 
 https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/mocking-with-examples/
 
