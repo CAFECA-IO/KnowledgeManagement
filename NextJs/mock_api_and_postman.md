@@ -155,6 +155,6 @@ fetch(uri + '/api/v1/chains-all')
 
 https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/mocking-with-examples/
 
-https://www.notion.so/Postman-Mock-Server-API-Server-API-Let-s-Write-54d9397595a44617b9ea851d284ff9e9?pvs=21
+https://tzuhui.io/2022/05/13/tool/postman-mock-server/
 
-https://www.notion.so/Postman-Mock-Server-Mock-API-d0a6410488e9481b9b49b7d7d5c8e22b?pvs=21
+https://www.letswrite.tw/postman-mock-server/
