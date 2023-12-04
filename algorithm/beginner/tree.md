@@ -29,9 +29,10 @@
 
 ## e.g. find 5
 
-- 先從 root 下手，因為 5 > 2，所以接著從 root 的 right child 下手，因為 5 > 3，所以接著從 3 的 right child 下手，因為 5 > 4，所以接著從 4 的 right child 下手，但 4 是 leaf node，也就是 4 的 children node 都為 null，所以得知 5 不存在這一個 binary search tree 裡，回傳 false
+- 先從 root 下手，因為 5 > 2，所以接著從 root 的 right child 下手，因為 5 > 3，所以接著從 3 的 right child 下手，因為 5 > 4，所以接著從 4 的 right child 下手，但 4 是 leaf node，也就是 4 的 children node 都為 null，所以得知 5 不存在這一個 binary search tree 裡，最後回傳 false
 
-### [補圖]
+<img width="385" alt="Screenshot 2023-12-04 at 16 40 38" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ed88584e-0dcd-4f1a-9b6c-f165473fd8ad">
+
 
 ## The time complexity of the search
 
@@ -40,7 +41,12 @@
         - h = log n, for a balanced tree
         - h = n, for an unbalanced tree
 
-### [補圖]
+- unbalanced tree
+<img width="381" alt="Screenshot 2023-12-04 at 16 41 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/fc25d12d-089b-4088-b79a-02e5f60e66c8">
+
+- balanced tree
+<img width="254" alt="Screenshot 2023-12-04 at 16 41 33" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/37f5808e-0c0e-4918-bd2d-8cab1a251cf2">
+
 
 ## code snippet
 
@@ -67,12 +73,28 @@ function search(root, target) {
 ### e.g. Insert 6
 
 - 將 value 加在 leaf node 會比較簡單
+<img width="153" alt="Screenshot 2023-12-04 at 16 39 44" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c7d4b63-bd8a-477c-9230-b51db4ed7ff6">
+<img width="141" alt="Screenshot 2023-12-04 at 16 39 40" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/2970acea-9484-4441-bf75-bc34bca9e229">
+<img width="165" alt="Screenshot 2023-12-04 at 16 39 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/dc8c2209-b68c-4a6b-a703-4eae9aa2f0b5">
 
-### [補圖]
+
 
 ### code snippet
 
 ```jsx
+// Insert a new node and return the root of the BST.
+function insert(root, val) {
+    if (root == null) {
+        return new TreeNode(val);
+    }
+
+    if (val > root.val) {
+        root.right = insert(root.right, val);
+    } else  if (val < root.val) {
+        root.left = insert(root.left, val);
+    }
+    return root;
+}
 
 ```
 
@@ -124,6 +146,6 @@ function search(root, target) {
 
 - https://neetcode.io/courses/dsa-for-beginners
 - https://www.scaler.com/topics/data-structures/tree-data-structure/
--
+- https://www.youtube.com/watch?v=q4fnJZr8ztY
 -
 -
