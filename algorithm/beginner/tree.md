@@ -130,9 +130,52 @@ function insert(root, val) {
 
 <img width="778" alt="Screenshot 2023-12-04 at 16 31 29" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/775712ab-5df2-494a-90fe-cc21755398d1">
 
+### code snippet
+
+```jsx
+// Return the minimum value node of the BST.
+function minValueNode(root) {
+    let curr = root;
+    while(curr != null && curr.left != null) {
+        curr = curr.left;
+    }
+    return curr;
+}
+
+// Remove a node and return the root of the BST.
+function remove(root, val) {
+    if (root == null) {
+        return null;
+    }
+    if (val > root.val) {
+        root.right = remove(root.right, val);
+    } else if (val < root.val) {
+        root.left = remove(root.left, val);
+    } else {
+        if (root.left == null) {
+            return root.right;
+        } else if (root.right == null) {
+            return root.left;
+        } else {
+            let minNode = minValueNode(root.right);
+            root.val = minNode.val;
+            root.right = remove(root.right, minNode.val);
+        }
+    }
+    return root;
+}
+```
+
 # Balanced Binary Search Tree (BBST)
 
+- 在 insert, remove node 時，會自動保持平衡的資料結構
+
+## Tree rotation
+
+### Right Rotation
+
 ## Time complexity of insertion, removal, and search
+
 | Operation | Average | Worst Case |
 | --- | --- | --- |
 | Insert | O(log n) | O(log n) |
@@ -143,7 +186,16 @@ function insert(root, val) {
 
 # Depth-First Search (DFS) 適用於任何樹狀資料結構，不限於 BST
 
-- 
+## 1. inorder traversal
+
+- 從左到右開始遍歷 (traverse)，
+- 不限於 BST，但以下用 BST 示例
+
+## 2. preorder traversal
+
+## 3. postorder traversal
+
+## 4. reverse-order traversal
 
 # Breadth-First Search (BFS) 適用於任何樹狀資料結構，不限於 BST
 
