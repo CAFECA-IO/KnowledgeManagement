@@ -21,14 +21,84 @@
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/bc44242e-816d-424e-a5d6-b55e5dbb2681)
 
-# Binary Search Tree
+# Binary Search Tree (BST)
 
 - 不會有重複的值
 - 是排序好的，其中 parent node 的 left child 小於 parent node ，right child 大於 parent node
+- 本身是 two-branch，但因為 Binary Search Tree 本身是經過排序的，用 one-branch recursion 找到目標值是最簡單的
+
+## e.g. find 5
+
+- 先從 root 下手，因為 5 > 2，所以接著從 root 的 right child 下手，因為 5 > 3，所以接著從 3 的 right child 下手，因為 5 > 4，所以接著從 4 的 right child 下手，但 4 是 leaf node，也就是 4 的 children node 都為 null，所以得知 5 不存在這一個 binary search tree 裡，回傳 false
+
+### [補圖]
+
+## The time complexity of the search
+
+- 如果 BST 本身是平衡 (balanced) 的，也就是 root 的左右兩邊 node 數量差不多，則時間複雜度為 O(log n)，但如果是失衡 (unbalanced) 的，則時間複雜度為 O(n)
+    - 也可將時間複雜度看成 O(h) ，其中 h 為 tree 的高度
+        - h = log n, for a balanced tree
+        - h = n, for an unbalanced tree
+
+### [補圖]
+
+## code snippet
+
+```jsx
+function search(root, target) {
+    if (root == null) {
+        return false;
+    }
+
+    if (target > root.val) {
+        return search(root.right, target);
+    } else if (target < root.val) {
+        return search(root.left, target);
+    } else {
+        return true;
+    }    
+}
+```
 
 # BST Insert and Remove
 
--
+## Insertion
+
+### e.g. Insert 6
+
+- 將 value 加在 leaf node 會比較簡單
+
+### [補圖]
+
+### code snippet
+
+```jsx
+
+```
+
+## Removal
+
+- 因為刪掉目標 node 之後仍需維持 BST 的特性，所以依照維持難度分為兩個情境
+    1. 目標 node 有 0 或 1 個 child
+    2. 目標 node 有 2 個 children
+
+<img width="397" alt="Screenshot 2023-12-04 at 16 28 22" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b47c7763-7cb1-49ca-b098-3638dd42609b">
+
+### Case 1: 刪掉 2
+<img width="783" alt="Screenshot 2023-12-04 at 16 28 28" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/a08f43fd-30c3-4816-abd7-747861d46e7d">
+
+### Case 2: 刪掉 3 
+<img width="749" alt="Screenshot 2023-12-04 at 16 30 24" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/011e9621-06de-43f1-893b-728283bb46d9">
+
+
+### Case 3: 刪掉 6
+<img width="766" alt="Screenshot 2023-12-04 at 16 28 38" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/75e126ad-8c4a-4b8f-8d87-879b664d97ac">
+
+
+
+### Case 4: 刪掉 4
+
+<img width="778" alt="Screenshot 2023-12-04 at 16 31 29" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/775712ab-5df2-494a-90fe-cc21755398d1">
 
 # Balanced BST
 
