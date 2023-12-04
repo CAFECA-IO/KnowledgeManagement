@@ -48,6 +48,7 @@
 <img width="254" alt="Screenshot 2023-12-04 at 16 41 33" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/37f5808e-0c0e-4918-bd2d-8cab1a251cf2">
 
 
+
 ## code snippet
 
 ```jsx
@@ -73,11 +74,12 @@ function search(root, target) {
 ### e.g. Insert 6
 
 - 將 value 加在 leaf node 會比較簡單
-<img width="153" alt="Screenshot 2023-12-04 at 16 39 44" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c7d4b63-bd8a-477c-9230-b51db4ed7ff6">
-<img width="141" alt="Screenshot 2023-12-04 at 16 39 40" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/2970acea-9484-4441-bf75-bc34bca9e229">
+- 將 6 加到 BST
 <img width="165" alt="Screenshot 2023-12-04 at 16 39 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/dc8c2209-b68c-4a6b-a703-4eae9aa2f0b5">
 
-
+- 有兩種可能結果
+<img width="153" alt="Screenshot 2023-12-04 at 16 39 44" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c7d4b63-bd8a-477c-9230-b51db4ed7ff6">
+<img width="141" alt="Screenshot 2023-12-04 at 16 39 40" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/2970acea-9484-4441-bf75-bc34bca9e229">
 
 ### code snippet
 
@@ -114,29 +116,39 @@ function insert(root, val) {
 
 
 ### Case 3: 刪掉 6
+- 刪掉 6 之後，為了補上空缺，需找 6 左邊最大的 node 或右邊最小的 node
 <img width="766" alt="Screenshot 2023-12-04 at 16 28 38" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/75e126ad-8c4a-4b8f-8d87-879b664d97ac">
 
-
+## Time complexity of insertion, removal, and search
+| Operation | Average | Worst Case |
+| --- | --- | --- |
+| Insert | O(log n) | O(n) |
+| Remove | O(log n) | O(n) |
+| Search | O(log n) | O(n) |
 
 ### Case 4: 刪掉 4
 
 <img width="778" alt="Screenshot 2023-12-04 at 16 31 29" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/775712ab-5df2-494a-90fe-cc21755398d1">
 
-# Balanced BST
+# Balanced Binary Search Tree (BBST)
+
+## Time complexity of insertion, removal, and search
+| Operation | Average | Worst Case |
+| --- | --- | --- |
+| Insert | O(log n) | O(log n) |
+| Remove | O(log n) | O(log n) |
+| Search | O(log n) | O(log n) |
+
+
+
+# Depth-First Search (DFS) 適用於任何樹狀資料結構，不限於 BST
+
+- 
+
+# Breadth-First Search (BFS) 適用於任何樹狀資料結構，不限於 BST
 
 -
 
-# Depth-First Search
-
--
-
-# Breadth-First Search
-
--
-
-# BST Sets and Maps
-
--
 
 # Merkle Tree
 
@@ -147,5 +159,5 @@ function insert(root, val) {
 - https://neetcode.io/courses/dsa-for-beginners
 - https://www.scaler.com/topics/data-structures/tree-data-structure/
 - https://www.youtube.com/watch?v=q4fnJZr8ztY
--
--
+- https://github.com/CAFECA-IO/KnowledgeManagement/blob/master/algorithm/merialize.md
+- https://github.com/CAFECA-IO/js-Merialize-Laria
