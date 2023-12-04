@@ -15,11 +15,11 @@
   - 將單一 node 的深度視為 1 ， `node 4` 的有 2 個 **ancestor** ，深度為 2+1=3
   - （另一種做法是將 single node 視為 0）
 
-https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=929&x=161&y=31&w=712&h=628&store=1&accept=image%2F*&auth=LCA%2037495dc3bf58559d5f2cdb47a098be9fc8927d7959a1f4046d4c8427410f7db9-ts%3D1701674363
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ff66c067-ff56-4936-836b-88ac23ff07ae)
 
-https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=965&x=-34&y=721&w=740&h=707&store=1&accept=image%2F*&auth=LCA%209499310057edfba7d90039b72069c0510f044ac015207eda7a8753a0c3622339-ts%3D1701674363
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/404ce013-1c52-4131-80b5-4ddb0b5e4129)
 
-https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=965&x=780&y=758&w=857&h=704&store=1&accept=image%2F*&auth=LCA%20ed464270cc145e3fa39361924ae7c762c5d335b66ae1197ae0a4f555f9d83cb1-ts%3D1701674363
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/bc44242e-816d-424e-a5d6-b55e5dbb2681)
 
 # Binary Search Tree
 
