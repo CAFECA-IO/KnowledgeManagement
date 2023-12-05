@@ -53,7 +53,6 @@ class TreeNode {
 
 - 先從 root 下手，因為 5 > 2，所以接著從 root 的 right child 下手，因為 5 > 3，所以接著從 3 的 right child 下手，因為 5 > 4，所以接著從 4 的 right child 下手，但 4 是 leaf node，也就是 4 的 children node 都為 null，所以得知 5 不存在這一個 binary search tree 裡，最後回傳 false
 
-<img width="385" alt="Screenshot 2023-12-04 at 16 40 38" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ed88584e-0dcd-4f1a-9b6c-f165473fd8ad">
 
 <img src="https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4568&x=5672&y=-1753&w=1497&h=1165&store=1&accept=image%2F*&auth=LCA%20b950a8251de4b62519743a62909fcadb4a66679fa4532fbcc956084e1b1cf7e3-ts%3D1701704902">
 
