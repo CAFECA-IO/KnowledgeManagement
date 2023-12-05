@@ -19,7 +19,8 @@
     - 將單一 node 的深度視為 1 ， `node 4` 的有 2 個 **ancestor** ，深度為 2+1=3
     - （另一種做法是將 single node 視為 0）
 
-https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4540&x=-1630&y=-1646&w=1356&h=1013&store=1&accept=image%2F*&auth=LCA%2028f42601b428e2599239a2919a0dbf8823feddc942af06e079e6fcb5d7647863-ts%3D1701704902
+<img src="https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4540&x=-1630&y=-1646&w=1356&h=1013&store=1&accept=image%2F*&auth=LCA%2028f42601b428e2599239a2919a0dbf8823feddc942af06e079e6fcb5d7647863-ts%3D1701704902" width="800" height="600">
+
 
 https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4542&x=22&y=-1595&w=1163&h=774&store=1&accept=image%2F*&auth=LCA%200102f3d589d26b369d52f345d61692da035e4e0c8f9d542d8294f582747fdc08-ts%3D1701704902
 
