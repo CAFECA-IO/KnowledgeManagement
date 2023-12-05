@@ -1,7 +1,6 @@
 # Overview
 
 - 本文會先介紹 binary tree 的定義，接著介紹 binary search tree (BST) 以及 BST 的 search, insert, remove, rotation，接著介紹泛用於樹狀結構的搜尋方法深度優先搜尋 (Depth-first search, DFS) 跟廣度優先搜尋 (Breadth-first search, BFS)，最後，介紹常見於區塊鏈的樹狀結構 Merkle tree
-- 其中示範的程式碼皆使用 Javascript 
 
 # Binary Tree
 
@@ -20,11 +19,15 @@
     - 將單一 node 的深度視為 1 ， `node 4` 的有 2 個 **ancestor** ，深度為 2+1=3
     - （另一種做法是將 single node 視為 0）
 
-https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ff66c067-ff56-4936-836b-88ac23ff07ae
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4540&x=-1630&y=-1646&w=1356&h=1013&store=1&accept=image%2F*&auth=LCA%2028f42601b428e2599239a2919a0dbf8823feddc942af06e079e6fcb5d7647863-ts%3D1701704902
 
-https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/404ce013-1c52-4131-80b5-4ddb0b5e4129
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4542&x=22&y=-1595&w=1163&h=774&store=1&accept=image%2F*&auth=LCA%200102f3d589d26b369d52f345d61692da035e4e0c8f9d542d8294f582747fdc08-ts%3D1701704902
 
-https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/bc44242e-816d-424e-a5d6-b55e5dbb2681
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4542&x=-1712&y=-421&w=2678&h=1734&store=1&accept=image%2F*&auth=LCA%20cbd078ee061dd9a6ba108b22af52a6801e4456a450eecd9f1c2302f2cc04778b-ts%3D1701704902
+
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4542&x=-1569&y=1858&w=1519&h=823&store=1&accept=image%2F*&auth=LCA%20969e429c9f635dd6caef5e321363121d73bf9d12a6fb61fad891b097b2d64f80-ts%3D1701704902
+
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4568&x=-50&y=1823&w=1541&h=823&store=1&accept=image%2F*&auth=LCA%2004bdfe7c8fc8ccc845f5990a621d6902a5fd7c598a58332cbc74b8421053842d-ts%3D1701704902
 
 ## code snippet of binary tree node
 
@@ -45,11 +48,15 @@ class TreeNode {
 - 是排序好的，其中 parent node 的 left child 小於 parent node ，right child 大於 parent node
 - 本身是 two-branch，但因為 Binary Search Tree 本身是經過排序的，用 one-branch recursion 找到目標值是最簡單的
 
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4568&x=4042&y=-1581&w=1277&h=903&store=1&accept=image%2F*&auth=LCA%202a5f2aa67fdca3894e191bcb160b783867a7f869ae8a877f0f34b2f6201e76a3-ts%3D1701704902
+
 ## e.g. find 5
 
 - 先從 root 下手，因為 5 > 2，所以接著從 root 的 right child 下手，因為 5 > 3，所以接著從 3 的 right child 下手，因為 5 > 4，所以接著從 4 的 right child 下手，但 4 是 leaf node，也就是 4 的 children node 都為 null，所以得知 5 不存在這一個 binary search tree 裡，最後回傳 false
 
 <img width="385" alt="Screenshot 2023-12-04 at 16 40 38" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ed88584e-0dcd-4f1a-9b6c-f165473fd8ad">
+
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4568&x=5672&y=-1753&w=1497&h=1165&store=1&accept=image%2F*&auth=LCA%20b950a8251de4b62519743a62909fcadb4a66679fa4532fbcc956084e1b1cf7e3-ts%3D1701704902
 
 ## The time complexity of the search
 
@@ -57,10 +64,21 @@ class TreeNode {
     - 也可將時間複雜度看成 O(h) ，其中 h 為 tree 的高度
         - h = log n, for a balanced tree
         - h = n, for an unbalanced tree
+    - 是否平衡可參考 balance factor (BF)
+        
+        ```jsx
+        bf=(Height of left subtree) - (Height of right subtree)
+        balanced: -1<=bf<=1 
+        unbalanced: bf<-1 or bf>1
+        ```
+        
 - unbalanced tree
-<img width="381" alt="Screenshot 2023-12-04 at 16 41 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/fc25d12d-089b-4088-b79a-02e5f60e66c8">
+
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4604&x=3715&y=-560&w=2003&h=1314&store=1&accept=image%2F*&auth=LCA%20b2829c0a4e6e39fa277a1c95d87ef9a15d62d67d2986ece063fe6bbd18760a12-ts%3D1701704902
+
 - balanced tree
-<img width="254" alt="Screenshot 2023-12-04 at 16 41 33" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/37f5808e-0c0e-4918-bd2d-8cab1a251cf2">
+
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4603&x=5745&y=-563&w=1629&h=936&store=1&accept=image%2F*&auth=LCA%20ce00490e982335d81378e6771dc22922be75f9a63367c8a6eec9ed5d9ebe6c0c-ts%3D1701704902
 
 ## code snippet of search in BST
 
@@ -89,9 +107,13 @@ function search(root, target) {
 
 - 將 value 加在 leaf node 會比較簡單
 - 將 6 加到 BST
+
 <img width="165" alt="Screenshot 2023-12-04 at 16 39 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/dc8c2209-b68c-4a6b-a703-4eae9aa2f0b5">
+
 - 有兩種可能結果
+
 <img width="153" alt="Screenshot 2023-12-04 at 16 39 44" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c7d4b63-bd8a-477c-9230-b51db4ed7ff6">
+
 <img width="141" alt="Screenshot 2023-12-04 at 16 39 40" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/2970acea-9484-4441-bf75-bc34bca9e229">
 
 ### code snippet of insertion in BST
@@ -185,23 +207,50 @@ function remove(root, val) {
 
 ## Tree rotation
 
+- 旋轉是維持 BST 平衡的關鍵，會大量用於 AVL or Red-Black Trees
+- 左右兩邊高度相差大於 1 代表失衡，此時可用旋轉保持平衡
+
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=4923&x=3727&y=965&w=2487&h=1779&store=1&accept=image%2F*&auth=LCA%20dd5a33b77f476df8b55f39c5352e835543a4a173211b06beedee1bf5058e145e-ts%3D1701704902
+
 ### Right Rotation
 
-### [補圖]
+- 在 balance factor > 1 並且 bf > 1 的 target node 跟它附近的 node 正負號相同，則將 target node 右旋轉
+
+### code snippet of right rotation
+
+```jsx
+function rightRotate(root) {
+  let newRoot = root.left;
+  root.left = newRoot.right;
+  newRoot.right = root;
+  return newRoot;
+}
+```
 
 ### Left Rotation
 
-### [補圖]
+- 在 balance factor < -1 並且 bf < -1 的 target node 跟它附近的 node 正負號相同，則將 target node 左旋轉
+
+### code snippet of left rotation
+
+```jsx
+function leftRotate(root) {
+  let newRoot = root.right;
+  root.right = newRoot.left;
+  newRoot.left = root;
+  return newRoot;
+}
+```
 
 # Depth-First Search (DFS)
 
 ## 1. in-order traversal
 
-- 像 iterate through a sorted array 是從左到右，tree 也能從左到右遍歷 (traverse)
-- 不限於 BST，但以下用 BST 示例
-- 從 root node 4 開始，用 recursive callback 找到左邊的 leaf node 2 之後，
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=5234&x=4157&y=3150&w=1393&h=1079&store=1&accept=image%2F*&auth=LCA%20891cb792dd09e707a0c2628f1188913e4d196746c05682714d6c0e1c397957cd-ts%3D1701704902
 
-### [補圖]
+- 在BST中，中序遍歷首先訪問左子樹 (left subtree)，然後訪問根節點 (root node)，最後訪問右子樹 (right subtree)。
+- 例如，對於一棵根節點是 4 的BST，遍歷的順序將是左子節點 (left child node)，然後是根節點4，最後是右子節點 (right child node)。
+- 這種遍歷方式對於排序後的節點值特別有用。
 
 ### code snippet of in-order traversal
 
@@ -219,7 +268,9 @@ function inorder(root) {
 
 ## 2. pre-order traversal
 
-### [補圖]
+- 在BST中，先序遍歷的順序是首先訪問根節點 (root node)，接著訪問左子樹 (left subtree)，最後訪問右子樹 (right subtree)。
+- 在根節點為4的BST中，遍歷的順序會是先訪問根節點4，然後是左子樹，最後是右子樹。
+- 這種遍歷方式適合於創建樹的複本或打印樹的結構。
 
 ### code snippet of pre-order traversal
 
@@ -237,7 +288,9 @@ function preorder(root) {
 
 ## 3. post-order traversal
 
-### [補圖]
+- 在BST中，後序遍歷的順序是首先訪問左子樹 (left subtree)，接著是右子樹 (right subtree)，最後是根節點 (root node)。
+- 在根節點為4的BST中，遍歷的順序會是先訪問左子樹，然後是右子樹，最後是根節點4。
+- 這種遍歷方式適合於釋放或刪除樹節點。
 
 ### code snippet of post-order traversal
 
@@ -255,7 +308,8 @@ function postorder(root) {
 
 ## 4. reverse-order traversal
 
-### [補圖]
+- 在BST中，反向中序遍歷的順序是首先訪問右子樹 (right subtree)，接著是根節點 (root node)，最後是左子樹 (left subtree)。
+- 這是中序遍歷的反向，適合於輸出降序排列的節點值。
 
 ### code snippet of reverse-order traversal (swapped in-order traversal)
 
@@ -275,11 +329,11 @@ function inorder(root) {
 
 # Breadth-First Search (BFS)
 
-- 也就是 level order traversal
-- 不限於 BST，但以下用 BST 示例
-- 從 `root node 4` 開始，通常方向為從左到右 `left child node 3` → `right child node 6`，接著用 queue + iterative method 來遍歷 (go through) 所有 descendant nodes
+- 廣度優先搜尋，也稱為層序遍歷 (level order traversal)，首先訪問根節點 (root node)，然後逐層訪問所有子節點。
+- 在BST中，從根節點4開始，接著訪問左子節點3 (left child node) 和右子節點6 (right child node)，然後遍歷這些節點的子節點。
+- BFS通常使用隊列 (queue) 來追蹤下一個要訪問的節點，這種方法對於尋找最短路徑或與層級相關的問題特別有效。
 
-### [補圖]
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=5554&x=4160&y=4387&w=1313&h=771&store=1&accept=image%2F*&auth=LCA%204eb76bdf0e89db36c08bb8cb1eedd8b3bd7e6c3bd60450365c1f8007510ee3ac-ts%3D1701704902
 
 ### code snippet of BFS
 
@@ -317,9 +371,8 @@ function bfs(root) {
 - H 為 Hash function
 - 將每個資料都各自使用雜湊函數，可以在之後個別驗證單一資料，如果將所有資料一口氣丟進雜湊函數得到一個雜湊值，就無法達到驗證特定數量資料的功能
 - 如果 node 數量為奇數，則複製最後一個的 node 以確保平衡
-    
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b013fe3c-94de-42a9-87a7-8f721b2dbf80)
-    
+
+https://documents.lucid.app/documents/22bc2fe8-79fe-48ad-a88b-5cef4dc64847/pages/0_0?a=1621&x=-464&y=2265&w=2267&h=1189&store=1&accept=image%2F*&auth=LCA%204dfbd69652a127d126cc6aef0823492b3a9784b9c024c5ffa85d6d578d70a272-ts%3D1701704902
 
 ### What is hashing
 
