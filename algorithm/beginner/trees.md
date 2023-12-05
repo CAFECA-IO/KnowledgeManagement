@@ -317,7 +317,7 @@ function bfs(root) {
 - 將每個資料都各自使用雜湊函數，可以在之後個別驗證單一資料，如果將所有資料一口氣丟進雜湊函數得到一個雜湊值，就無法達到驗證特定數量資料的功能
 - 如果 node 數量為奇數，則複製最後一個的 node 以確保平衡
     
-    https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/779c70b1-c348-4aa1-8164-5cb5e71a6c76
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b013fe3c-94de-42a9-87a7-8f721b2dbf80)
     
 
 ### What is hashing
