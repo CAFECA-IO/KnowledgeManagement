@@ -13,11 +13,11 @@
 - node 要連接在同一棵樹上，node 散落在其他地方就不能叫做連貫的 binary tree
 - 在 A node 上面的 nodes 為 A 的 ancestor，在 A node 下面的 node 為 A 的 descendant
 - Height 取決於 **descendant 數量**
-  - 將單一 node 的高度視為 1 ， `node 2` left subtree 共有 2 個 **descendant**（高度為 2+1=3），right subtree 有 1 個 descendant（高度為 1+1=2），則取最高值 3
-  - （另一種做法是將 single node 視為 0）
+    - 將單一 node 的高度視為 1 ， `node 2` left subtree 共有 2 個 **descendant**（高度為 2+1=3），right subtree 有 1 個 descendant（高度為 1+1=2），則取最高值 3
+    - （另一種做法是將 single node 視為 0）
 - Depth 取決於 **ancestor 數量**
-  - 將單一 node 的深度視為 1 ， `node 4` 的有 2 個 **ancestor** ，深度為 2+1=3
-  - （另一種做法是將 single node 視為 0）
+    - 將單一 node 的深度視為 1 ， `node 4` 的有 2 個 **ancestor** ，深度為 2+1=3
+    - （另一種做法是將 single node 視為 0）
 
 https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ff66c067-ff56-4936-836b-88ac23ff07ae
 
@@ -35,6 +35,7 @@ class TreeNode {
     this.right = null;
   }
 }
+
 ```
 
 # Binary Search Tree (BST)
@@ -52,13 +53,13 @@ class TreeNode {
 ## The time complexity of the search
 
 - 如果 BST 本身是平衡 (balanced) 的，也就是 root 的左右兩邊 node 數量差不多，則時間複雜度為 O(log n)，但如果是失衡 (unbalanced) 的，則時間複雜度為 O(n)
-  - 也可將時間複雜度看成 O(h) ，其中 h 為 tree 的高度
-    - h = log n, for a balanced tree
-    - h = n, for an unbalanced tree
+    - 也可將時間複雜度看成 O(h) ，其中 h 為 tree 的高度
+        - h = log n, for a balanced tree
+        - h = n, for an unbalanced tree
 - unbalanced tree
-  <img width="381" alt="Screenshot 2023-12-04 at 16 41 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/fc25d12d-089b-4088-b79a-02e5f60e66c8">
+<img width="381" alt="Screenshot 2023-12-04 at 16 41 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/fc25d12d-089b-4088-b79a-02e5f60e66c8">
 - balanced tree
-  <img width="254" alt="Screenshot 2023-12-04 at 16 41 33" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/37f5808e-0c0e-4918-bd2d-8cab1a251cf2">
+<img width="254" alt="Screenshot 2023-12-04 at 16 41 33" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/37f5808e-0c0e-4918-bd2d-8cab1a251cf2">
 
 ## code snippet of search in BST
 
@@ -76,6 +77,7 @@ function search(root, target) {
     return true;
   }
 }
+
 ```
 
 # BST Insert and Remove
@@ -86,10 +88,10 @@ function search(root, target) {
 
 - 將 value 加在 leaf node 會比較簡單
 - 將 6 加到 BST
-  <img width="165" alt="Screenshot 2023-12-04 at 16 39 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/dc8c2209-b68c-4a6b-a703-4eae9aa2f0b5">
+<img width="165" alt="Screenshot 2023-12-04 at 16 39 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/dc8c2209-b68c-4a6b-a703-4eae9aa2f0b5">
 - 有兩種可能結果
-  <img width="153" alt="Screenshot 2023-12-04 at 16 39 44" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c7d4b63-bd8a-477c-9230-b51db4ed7ff6">
-  <img width="141" alt="Screenshot 2023-12-04 at 16 39 40" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/2970acea-9484-4441-bf75-bc34bca9e229">
+<img width="153" alt="Screenshot 2023-12-04 at 16 39 44" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c7d4b63-bd8a-477c-9230-b51db4ed7ff6">
+<img width="141" alt="Screenshot 2023-12-04 at 16 39 40" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/2970acea-9484-4441-bf75-bc34bca9e229">
 
 ### code snippet of insertion in BST
 
@@ -107,13 +109,14 @@ function insert(root, val) {
   }
   return root;
 }
+
 ```
 
 ## Removal
 
 - 因為刪掉目標 node 之後仍需維持 BST 的特性，所以依照維持難度分為兩個情境
-  1. 目標 node 有 0 或 1 個 child
-  2. 目標 node 有 2 個 children
+    1. 目標 node 有 0 或 1 個 child
+    2. 目標 node 有 2 個 children
 
 <img width="397" alt="Screenshot 2023-12-04 at 16 28 22" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b47c7763-7cb1-49ca-b098-3638dd42609b">
 
@@ -128,15 +131,15 @@ function insert(root, val) {
 ### Case 3: remove node 6
 
 - 刪掉 6 之後，為了補上空缺，需找 6 左邊最大的 node 或右邊最小的 node
-  <img width="766" alt="Screenshot 2023-12-04 at 16 28 38" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/75e126ad-8c4a-4b8f-8d87-879b664d97ac">
+<img width="766" alt="Screenshot 2023-12-04 at 16 28 38" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/75e126ad-8c4a-4b8f-8d87-879b664d97ac">
 
 ## Time complexity of insertion, removal, and search
 
-| Operation | Average  | Worst Case |
-| --------- | -------- | ---------- |
-| Insert    | O(log n) | O(n)       |
-| Remove    | O(log n) | O(n)       |
-| Search    | O(log n) | O(n)       |
+| Operation | Average | Worst Case |
+| --- | --- | --- |
+| Insert | O(log n) | O(n) |
+| Remove | O(log n) | O(n) |
+| Search | O(log n) | O(n) |
 
 ### Case 4: 刪掉 4
 
@@ -176,6 +179,7 @@ function remove(root, val) {
   }
   return root;
 }
+
 ```
 
 ## Tree rotation
@@ -209,6 +213,7 @@ function inorder(root) {
   console.log(root.val);
   inorder(root.right);
 }
+
 ```
 
 ## 2. pre-order traversal
@@ -226,6 +231,7 @@ function preorder(root) {
   preorder(root.left);
   preorder(root.right);
 }
+
 ```
 
 ## 3. post-order traversal
@@ -243,6 +249,7 @@ function postorder(root) {
   postorder(root.right);
   console.log(root.val);
 }
+
 ```
 
 ## 4. reverse-order traversal
@@ -260,6 +267,7 @@ function inorder(root) {
   console.log(root.val);
   inorder(root.left);
 }
+
 ```
 
 ## The time complexity of traversing is O(n)
@@ -272,6 +280,34 @@ function inorder(root) {
 
 ### [補圖]
 
+### code snippet of BFS
+
+```jsx
+function bfs(root) { 
+    let queue = [];
+    if (root != null) {
+        queue.push(root);
+    }    
+    let level = 0;
+    while(queue.length > 0) {
+        console.log("level " + level + ": ");
+        let levelLength = queue.length;
+        for (let i = 0; i < levelLength; i++) {
+            let curr = queue.shift(); 
+            console.log(curr.val + " ");
+            if(curr.left != null) {
+                queue.push(curr.left);  
+            }
+            if(curr.right != null) {
+                queue.push(curr.right);
+            }  
+        }
+        level++;
+        console.log();
+    }
+}
+```
+
 # Merkle Tree (Hash tree)
 
 ## Structure of a Merkle Tree
@@ -280,7 +316,9 @@ function inorder(root) {
 - H 為 Hash function
 - 將每個資料都各自使用雜湊函數，可以在之後個別驗證單一資料，如果將所有資料一口氣丟進雜湊函數得到一個雜湊值，就無法達到驗證特定數量資料的功能
 - 如果 node 數量為奇數，則複製最後一個的 node 以確保平衡
-  ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/779c70b1-c348-4aa1-8164-5cb5e71a6c76)
+    
+    https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/779c70b1-c348-4aa1-8164-5cb5e71a6c76
+    
 
 ### What is hashing
 
@@ -295,13 +333,9 @@ function inorder(root) {
 ### Why use hashing in Merkle Tree
 
 - 資料完整性驗證：雜湊函數可確保每筆交易的唯一性和完整性。當資料被雜湊處理後，任何微小的變動都會導致雜湊值發生巨大變化，從而輕易發現資料被篡改。
-
 - 安全性：雜湊函數具有單向性，這意味著從雜湊值無法逆推原始資料，這增加了資料的安全性。此外，好的雜湊函數具有高碰撞抵抗性，即找到兩個不同輸入但產生相同雜湊值的情況非常困難。
-
 - 效率：在區塊鏈系統中，需要頻繁且快速地驗證大量資料。雜湊函數提供了一種高效的方式來生成和比對資料的指紋（即雜湊值）。通過比較雜湊值而不是完整資料，可以節省大量的計算和存儲資源。
-
 - 簡化驗證過程：在區塊鏈中，使用 Merkle Tree 可以有效地簡化資料驗證過程。只需檢查少數幾個節點的雜湊值，就能驗證單個交易或資料塊的有效性，無需下載整個資料塊或整個區塊鏈。
-
 - 資料結構的整合：Merkle Tree 通過將單獨的資料塊（如交易）的雜湊值組織成樹狀結構，使得整個資料集的雜湊值可以在 Merkle Root 中集中表示。這種結構使得資料的存儲和驗證更加高效和有組織。
 
 # Reference
