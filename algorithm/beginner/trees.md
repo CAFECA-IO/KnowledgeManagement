@@ -1,3 +1,7 @@
+# Overview
+
+- 本文會先介紹 binary tree 的定義，接著介紹 binary search tree (BST) 以及 BST 的 search, insert, remove, rotation，接著介紹泛用於樹狀結構的搜尋方法深度優先搜尋 (Depth-first search, DFS) 跟廣度優先搜尋 (Breadth-first search, BFS)，最後，介紹常見於區塊鏈的樹狀結構 Merkle tree
+
 # Binary Tree
 
 - 每個 node 可以用來儲存 integer, string, object, … 任意資料型態
@@ -9,21 +13,33 @@
 - node 要連接在同一棵樹上，node 散落在其他地方就不能叫做連貫的 binary tree
 - 在 A node 上面的 nodes 為 A 的 ancestor，在 A node 下面的 node 為 A 的 descendant
 - Height 取決於 **descendant 數量**
-  - 將單一 node 的高度視為 1 ， `node 2` left subtree 共有 2 個 **descendant**（高度為 2+1=3），right subtree 有 1 個 descendant（高度為 1+1=2），則取最高值 3
-  - （另一種做法是將 single node 視為 0）
+    - 將單一 node 的高度視為 1 ， `node 2` left subtree 共有 2 個 **descendant**（高度為 2+1=3），right subtree 有 1 個 descendant（高度為 1+1=2），則取最高值 3
+    - （另一種做法是將 single node 視為 0）
 - Depth 取決於 **ancestor 數量**
-  - 將單一 node 的深度視為 1 ， `node 4` 的有 2 個 **ancestor** ，深度為 2+1=3
-  - （另一種做法是將 single node 視為 0）
+    - 將單一 node 的深度視為 1 ， `node 4` 的有 2 個 **ancestor** ，深度為 2+1=3
+    - （另一種做法是將 single node 視為 0）
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ff66c067-ff56-4936-836b-88ac23ff07ae)
+https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ff66c067-ff56-4936-836b-88ac23ff07ae
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/404ce013-1c52-4131-80b5-4ddb0b5e4129)
+https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/404ce013-1c52-4131-80b5-4ddb0b5e4129
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/bc44242e-816d-424e-a5d6-b55e5dbb2681)
+https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/bc44242e-816d-424e-a5d6-b55e5dbb2681
+
+## code snippet
+
+```jsx
+class TreeNode {
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+```
 
 # Binary Search Tree (BST)
 
-- 不會有重複的值
+- 不能有重複的值
 - 是排序好的，其中 parent node 的 left child 小於 parent node ，right child 大於 parent node
 - 本身是 two-branch，但因為 Binary Search Tree 本身是經過排序的，用 one-branch recursion 找到目標值是最簡單的
 
@@ -33,21 +49,16 @@
 
 <img width="385" alt="Screenshot 2023-12-04 at 16 40 38" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/ed88584e-0dcd-4f1a-9b6c-f165473fd8ad">
 
-
 ## The time complexity of the search
 
 - 如果 BST 本身是平衡 (balanced) 的，也就是 root 的左右兩邊 node 數量差不多，則時間複雜度為 O(log n)，但如果是失衡 (unbalanced) 的，則時間複雜度為 O(n)
     - 也可將時間複雜度看成 O(h) ，其中 h 為 tree 的高度
         - h = log n, for a balanced tree
         - h = n, for an unbalanced tree
-
 - unbalanced tree
 <img width="381" alt="Screenshot 2023-12-04 at 16 41 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/fc25d12d-089b-4088-b79a-02e5f60e66c8">
-
 - balanced tree
 <img width="254" alt="Screenshot 2023-12-04 at 16 41 33" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/37f5808e-0c0e-4918-bd2d-8cab1a251cf2">
-
-
 
 ## code snippet
 
@@ -63,8 +74,9 @@ function search(root, target) {
         return search(root.left, target);
     } else {
         return true;
-    }    
+    }
 }
+
 ```
 
 # BST Insert and Remove
@@ -76,7 +88,6 @@ function search(root, target) {
 - 將 value 加在 leaf node 會比較簡單
 - 將 6 加到 BST
 <img width="165" alt="Screenshot 2023-12-04 at 16 39 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/dc8c2209-b68c-4a6b-a703-4eae9aa2f0b5">
-
 - 有兩種可能結果
 <img width="153" alt="Screenshot 2023-12-04 at 16 39 44" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4c7d4b63-bd8a-477c-9230-b51db4ed7ff6">
 <img width="141" alt="Screenshot 2023-12-04 at 16 39 40" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/2970acea-9484-4441-bf75-bc34bca9e229">
@@ -108,18 +119,21 @@ function insert(root, val) {
 
 <img width="397" alt="Screenshot 2023-12-04 at 16 28 22" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b47c7763-7cb1-49ca-b098-3638dd42609b">
 
-### Case 1: 刪掉 2
+### Case 1: remove node 2
+
 <img width="783" alt="Screenshot 2023-12-04 at 16 28 28" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/a08f43fd-30c3-4816-abd7-747861d46e7d">
 
-### Case 2: 刪掉 3 
+### Case 2: remove node 3
+
 <img width="749" alt="Screenshot 2023-12-04 at 16 30 24" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/011e9621-06de-43f1-893b-728283bb46d9">
 
+### Case 3: remove node 6
 
-### Case 3: 刪掉 6
 - 刪掉 6 之後，為了補上空缺，需找 6 左邊最大的 node 或右邊最小的 node
 <img width="766" alt="Screenshot 2023-12-04 at 16 28 38" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/75e126ad-8c4a-4b8f-8d87-879b664d97ac">
 
 ## Time complexity of insertion, removal, and search
+
 | Operation | Average | Worst Case |
 | --- | --- | --- |
 | Insert | O(log n) | O(n) |
@@ -166,50 +180,142 @@ function remove(root, val) {
 }
 ```
 
-# Balanced Binary Search Tree (BBST)
-
-- 在 insert, remove node 時，會自動保持平衡的資料結構
-
 ## Tree rotation
 
 ### Right Rotation
 
-## Time complexity of insertion, removal, and search
+### [補圖]
 
-| Operation | Average | Worst Case |
-| --- | --- | --- |
-| Insert | O(log n) | O(log n) |
-| Remove | O(log n) | O(log n) |
-| Search | O(log n) | O(log n) |
+### Left Rotation
 
+### [補圖]
 
+# Depth-First Search (DFS)
 
-# Depth-First Search (DFS) 適用於任何樹狀資料結構，不限於 BST
+## 1. in-order traversal
 
-## 1. inorder traversal
-
-- 從左到右開始遍歷 (traverse)，
+- 像 iterate through a sorted array 是從左到右，tree 也能從左到右遍歷 (traverse)
 - 不限於 BST，但以下用 BST 示例
+- 從 root node 4 開始，用 recursive callback 找到左邊的 leaf node 2 之後，
 
-## 2. preorder traversal
+### [補圖]
 
-## 3. postorder traversal
+### code snippet
+
+```jsx
+function inorder(root) {
+    if (root == null) {
+        return;
+    }
+    inorder(root.left);
+    console.log(root.val);
+    inorder(root.right);
+}
+```
+
+## 2. pre-order traversal
+
+### [補圖]
+
+### code snippet
+
+```jsx
+function preorder(root) {
+    if (root == null) {
+        return;
+    }
+    console.log(root.val);
+    preorder(root.left);
+    preorder(root.right);
+}
+```
+
+## 3. post-order traversal
+
+### [補圖]
+
+### code snippet
+
+```jsx
+function postorder(root) {
+    if (root == null) {
+        return;
+    }  
+    postorder(root.left);
+    postorder(root.right);
+    console.log(root.val);
+}
+```
 
 ## 4. reverse-order traversal
 
-# Breadth-First Search (BFS) 適用於任何樹狀資料結構，不限於 BST
+### [補圖]
 
--
+### code snippet (swapped in-order traversal)
+
+```jsx
+function inorder(root) {
+    if (root == null) {
+        return;
+    }
+    inorder(root.right);
+    console.log(root.val);
+    inorder(root.left);
+}
+```
+
+## The time complexity of traversing is O(n)
+
+# Breadth-First Search (BFS)
+
+- 也就是 level order traversal
+- 不限於 BST，但以下用 BST 示例
+- 從 `root node 4` 開始，通常方向為從左到右 `left child node 3` → `right child node 6`，接著用 queue + iterative method 來遍歷 (go through) 所有 descendant nodes
+
+### [補圖]
+
+# Merkle Tree (Hash tree)
+
+## Structure of a Merkle Tree
+- D 為 Data
+- H 為 Hash function
+- 如果 node 數量為奇數，則複製最後一個的 node 以確保平衡
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/779c70b1-c348-4aa1-8164-5cb5e71a6c76)
+
+### What is hashing
+
+雜湊（Hashing）是一種將任意長度的輸入數據（通常稱為「訊息」）通過哈希函數處理，轉化成固定長度的輸出值的過程。這個輸出值通常稱為「哈希值」或「數字指紋」
+
+- **不可逆性**：哈希過程是單向的，從生成的哈希值不能直接推算出原始輸入。
+- **唯一性**：理想的哈希函數對於不同的輸入會產生不同的輸出值。即使是微小的輸入差異也會導致截然不同的哈希值。
+- **固定長度的輸出**：無論輸入的長度如何，哈希函數產生的輸出長度都是固定的。
+- **高效計算**：哈希函數能夠快速計算出輸入的哈希值。
+- **碰撞抵抗**：理想的哈希函數讓找到兩個不同輸入但產生相同哈希值（即「碰撞」）的情況變得非常困難。
+
+### Why hashing in Merkle Tree
+
+數據完整性驗證：哈希函數可確保每筆交易的唯一性和完整性。當數據被哈希處理後，任何微小的變動都會導致哈希值發生巨大變化，從而輕易發現數據被篡改。
+
+安全性：哈希函數具有單向性，這意味著從哈希值無法逆推原始數據，這增加了數據的安全性。此外，好的哈希函數具有高碰撞抵抗性，即找到兩個不同輸入但產生相同哈希值的情況非常困難。
+
+效率：在區塊鏈系統中，需要頻繁且快速地驗證大量數據。哈希函數提供了一種高效的方式來生成和比對數據的指紋（即哈希值）。通過比較哈希值而不是完整數據，可以節省大量的計算和存儲資源。
+
+簡化驗證過程：在區塊鏈中，使用Merkle Tree可以有效地簡化數據驗證過程。只需檢查少數幾個節點的哈希值，就能驗證單個交易或數據塊的有效性，無需下載整個數據塊或整個區塊鏈。
+
+數據結構的整合：Merkle Tree通過將單獨的數據塊（如交易）的哈希值組織成樹狀結構，使得整個數據集的哈希值可以在Merkle Root中集中表示。這種結構使得數據的存儲和驗證更加高效和有組織。
 
 
-# Merkle Tree
 
--
+
 
 # Reference
 
-- https://neetcode.io/courses/dsa-for-beginners
+- [Neetcode course](https://neetcode.io/courses/dsa-for-beginners)
 - https://www.scaler.com/topics/data-structures/tree-data-structure/
-- https://www.youtube.com/watch?v=q4fnJZr8ztY
-- https://github.com/CAFECA-IO/KnowledgeManagement/blob/master/algorithm/merialize.md
-- https://github.com/CAFECA-IO/js-Merialize-Laria
+- [balanced binary search tree (BBST)](https://www.youtube.com/watch?v=q4fnJZr8ztY)
+- [KM - merialize](https://github.com/CAFECA-IO/KnowledgeManagement/blob/master/algorithm/merialize.md)
+- [merialize implementation by js](https://github.com/CAFECA-IO/js-Merialize-Laria)
+- [BST visualization](https://www.cs.usfca.edu/~galles/visualization/BST.html)
+- [AVL tree](https://www.youtube.com/watch?v=zP2xbKerIds)
+- [AVL tree visualization](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html)
+- [Merkle tree explained](https://www.youtube.com/watch?v=fB41w3JcR7U)
