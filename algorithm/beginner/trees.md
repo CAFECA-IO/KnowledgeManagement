@@ -1,6 +1,7 @@
 # Overview
 
 - 本文會先介紹 binary tree 的定義，接著介紹 binary search tree (BST) 以及 BST 的 search, insert, remove, rotation，接著介紹泛用於樹狀結構的搜尋方法深度優先搜尋 (Depth-first search, DFS) 跟廣度優先搜尋 (Breadth-first search, BFS)，最後，介紹常見於區塊鏈的樹狀結構 Merkle tree
+- 其中示範的程式碼皆使用 Javascript 
 
 # Binary Tree
 
