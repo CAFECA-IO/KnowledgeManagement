@@ -80,16 +80,14 @@ vi ~/isuncoin/pw.txt
 ```shell
 geth \
 --networkid 8017 \
---unlock "0x3bB01DfDC0d58A3C393b7a839bD1906348b6b029" \
---password ~/isuncoin/pw.txt
---etherbase "0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b" \
---mine true \
---minerthreads 1
+--unlock 0x3bB01DfDC0d58A3C393b7a839bD1906348b6b029 --password ~/isuncoin/pw.txt \
+--mine --miner.etherbase 0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b \
+--http --http.api eth,net,web3 \
 ```
 
 - Workaround
 ```shell
-geth console
+geth --http --http.api eth,net,web3 console
 > miner.setEtherbase("0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b")
 > miner.start(1)
 > eth.getBalance("0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b")
