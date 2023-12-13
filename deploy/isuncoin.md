@@ -9,6 +9,7 @@ last updated on 2023-12-13
 - [Setup SWAP](/linux/setup_swap.md)
 - Setup Compilation Environment
 - Building From Source Code
+- Setup Environment
 - Creating Genesis
 - Initial iSunCoin
 - Starting iSunCoin in Screen
@@ -23,6 +24,13 @@ cd /workspace
 git clone -b v1.11.6 https://github.com/ethereum/go-ethereum
 cd go-ethereum
 make geth
+```
+
+### Setup Environment
+```shell
+export GETHROOT=/usr/local/go-ethereum
+export GETHPATH=$HOME/go-ethereum
+export PATH=$GETHPATH/bin:$GETHROOT/build/bin:$PATH
 ```
 
 ### Creating Genesis
