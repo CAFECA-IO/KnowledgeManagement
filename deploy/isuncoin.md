@@ -31,6 +31,7 @@ make geth
 export GETHROOT=/usr/local/go-ethereum
 export GETHPATH=$HOME/go-ethereum
 export PATH=$GETHPATH/bin:$GETHROOT/build/bin:$PATH
+source ~/.profile
 ```
 
 ### Creating Genesis
