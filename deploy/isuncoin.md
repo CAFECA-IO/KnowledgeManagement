@@ -74,7 +74,6 @@ vi genesis.json
 ```shell
 geth init ~/isuncoin/genesis.json
 geth account new
-vi ~/isuncoin/acc.txt
 vi ~/isuncoin/pw.txt
 ```
 
