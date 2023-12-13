@@ -43,11 +43,18 @@ vi genesis.json
 ```json
 {
   "config": {
-        "chainId": 8017,
-        "homesteadBlock": 0,
-        "eip155Block": 0,
-        "eip158Block": 0
-    },
+    "chainId": 8017,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "berlinBlock": 0,
+    "londonBlock": 0
+  },
   "alloc"      : {},
   "coinbase"   : "0x0000000000000000000000000000000000000000",
   "difficulty" : "0x20000",
@@ -61,4 +68,21 @@ vi genesis.json
 ```
 
 ### Initial iSunCoin
+```shell
+geth init ~/isuncoin/genesis.json
+geth account new
+vi ~/isuncoin/acc.txt
+vi ~/isuncoin/pw.txt
+```
+
 ### Starting iSunCoin in Screen
+```shell
+geth \
+--networkid 8017 \
+--unlock "0x3bB01DfDC0d58A3C393b7a839bD1906348b6b029" \
+--password ~/isuncoin/pw.txt
+--mine \
+--miner.threads=1 \
+--miner.etherbase=0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b
+console
+```
