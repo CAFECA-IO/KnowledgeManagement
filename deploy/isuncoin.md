@@ -14,6 +14,7 @@ last updated on 2023-12-13
 - Initial iSunCoin
 - Starting iSunCoin in Screen
 - Starting ecProxy
+- Final Check
 
 ### Setup Compilation Environment
 - Git
@@ -97,4 +98,16 @@ geth --http --http.api eth,net,web3 console
 ### Starting ecProxy
 ```shell
 bash <(curl https://raw.githubusercontent.com/Luphia/ecProxy/master/shell/install.sh -kL)
+```
+
+### Final Check
+```shell
+curl --location 'localhost:8545' \
+--header 'Content-Type: application/json' \
+--data '{
+	"jsonrpc":"2.0",
+	"method":"eth_blockNumber",
+	"params":[],
+	"id":83
+}'
 ```
