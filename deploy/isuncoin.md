@@ -90,6 +90,7 @@ geth \
 - Workaround
 ```shell
 geth --http --http.api eth,net,web3 console
+> admin.nodeInfo.enode
 > miner.setEtherbase("0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b")
 > miner.start(1)
 > eth.getBalance("0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b")
