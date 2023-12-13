@@ -7,4 +7,17 @@ last updated on 2023-12-13
 ## Step
 - [Setup User](/linux/create_sudoer_user_in_ubuntu.md)
 - [Setup SWAP](/linux/setup_swap.md)
-- 
+- Setup Compilation Environment
+- Building From Source Code
+
+### Setup Compilation Environment
+- Git
+- [Install Golang](/linux/install_golang.md)
+
+### Building From Source Code
+```shell
+cd /workspace
+git clone -b v1.11.6 https://github.com/ethereum/go-ethereum
+cd go-ethereum
+make geth
+```
