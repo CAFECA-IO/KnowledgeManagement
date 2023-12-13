@@ -98,7 +98,7 @@ geth --http --http.api eth,net,web3 console
 
 ### Starting ecProxy
 ```shell
-bash <(curl https://raw.githubusercontent.com/Luphia/ecProxy/master/shell/install.sh -kL)
+bash <(curl https://raw.githubusercontent.com/Luphia/ecProxy/master/shell/install-lite.sh -kL)
 ```
 
 ### Final Check
