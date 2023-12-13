@@ -30,6 +30,7 @@ make geth
 
 ### Setup Environment
 ```shell
+sudo mv go-ethereum/ /usr/local
 export GETHROOT=/usr/local/go-ethereum
 export GETHPATH=$HOME/go-ethereum
 export PATH=$GETHPATH/bin:$GETHROOT/build/bin:$PATH
