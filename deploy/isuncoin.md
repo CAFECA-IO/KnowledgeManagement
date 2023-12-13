@@ -76,12 +76,21 @@ vi ~/isuncoin/pw.txt
 ```
 
 ### Starting iSunCoin in Screen
+- Not Working, to be fixed
 ```shell
 geth \
 --networkid 8017 \
 --unlock "0x3bB01DfDC0d58A3C393b7a839bD1906348b6b029" \
 --password ~/isuncoin/pw.txt
---mine \
---miner.threads=1 \
---miner.etherbase=0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b
+--etherbase "0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b" \
+--mine true \
+--minerthreads 1
+```
+
+- Workaround
+```shell
+geth console
+> miner.setEtherbase("0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b")
+> miner.start(1)
+> eth.getBalance("0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b")
 ```
