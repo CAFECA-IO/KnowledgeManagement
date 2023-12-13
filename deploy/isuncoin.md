@@ -84,5 +84,4 @@ geth \
 --mine \
 --miner.threads=1 \
 --miner.etherbase=0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b
-console
 ```
