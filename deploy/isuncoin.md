@@ -103,7 +103,7 @@ bash <(curl https://raw.githubusercontent.com/Luphia/ecProxy/master/shell/instal
 
 ### Final Check
 ```shell
-curl --location 'localhost:8545' \
+curl --location 'localhost' \
 --header 'Content-Type: application/json' \
 --data '{
 	"jsonrpc":"2.0",
