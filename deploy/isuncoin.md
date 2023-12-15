@@ -85,7 +85,7 @@ geth \
 
 - Workaround
 ```shell
-geth --datadir /workspace/chaindata --http --http.api eth,net,web3 --http.port 8545 --port 30303 --authrpc.port 8551 console
+geth --datadir /workspace/chaindata --networkid 8017 --http --http.api eth,net,web3 --http.port 8545 --port 30303 --authrpc.port 8551 console
 > admin.nodeInfo.enode
 > miner.setEtherbase("0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b")
 > miner.start(1)
