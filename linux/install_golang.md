@@ -10,7 +10,7 @@
 sudo apt-get -y upgrade
 ```
 
-## Download Go Binary
+## Download Go Binary and Setup
 ```shell
 sudo mkdir /workspace
 sudo chown -R ${user} /workspace
@@ -20,6 +20,7 @@ cd temp
 wget https://dl.google.com/go/go1.21.0.linux-amd64.tar.gz
 tar -xvf go1.21.0.linux-amd64.tar.gz
 sudo mv go /usr/local
+sudo ln -s /usr/local/go/bin/go /usr/local/bin
 ```
 
 ## Setup Environment
