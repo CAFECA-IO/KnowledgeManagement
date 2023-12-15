@@ -79,7 +79,6 @@ vi ~/isuncoin/pw.txt
 ```shell
 geth \
 --networkid 8017 \
---unlock 0x3bB01DfDC0d58A3C393b7a839bD1906348b6b029 --password ~/isuncoin/pw.txt \
 --mine --miner.etherbase 0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b \
 --http --http.api eth,net,web3 \
 ```
