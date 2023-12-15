@@ -69,23 +69,23 @@ vi genesis.json
 
 ### Initial iSunCoin
 ```shell
-geth init ~/isuncoin/genesis.json
-geth account new
-vi ~/isuncoin/pw.txt
+geth init --datadir /workspace/chaindata ~/isuncoin/genesis.json
 ```
 
 ### Starting iSunCoin in Screen
-- Not Working, to be fixed
+- Will Single Command
 ```shell
 geth \
+--datadir /workspace/chaindata \
 --networkid 8017 \
---mine --miner.etherbase 0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b \
+--mine --miner.threads=1 --miner.etherbase 0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b \
 --http --http.api eth,net,web3 \
+--http.port 8545 --port 30303 --authrpc.port 8551
 ```
 
 - Workaround
 ```shell
-geth --http --http.api eth,net,web3 console
+geth --datadir /workspace/chaindata --http --http.api eth,net,web3 --http.port 8545 --port 30303 --authrpc.port 8551 console
 > admin.nodeInfo.enode
 > miner.setEtherbase("0x048Adee1B0E93b30f9F7b71f18b963cA9bA5dE3b")
 > miner.start(1)
