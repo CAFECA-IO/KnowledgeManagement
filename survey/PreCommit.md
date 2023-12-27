@@ -370,7 +370,7 @@ settings: {
   - `-m-[5px]` ❌ 
 
 
-# ESLint config of Airbnb
+## ESLint config of Airbnb
 
 - Airbnb ESLint config 本身只有 Javascript 版本，Typescript 版本的是民間高手維護的
 - 以下為 React with Typescript 專案設置 Airbnb ESLint config 的流程跟注意事項，指令都在專案的根目錄下執行
