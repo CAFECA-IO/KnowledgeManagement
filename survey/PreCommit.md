@@ -142,7 +142,7 @@ npm run test
 	{
 	    "$schema": "http://json.schemastore.org/prettierrc",
 	    "arrowParens": "avoid",
-	    "bracketSpacing": false,
+	    "bracketSpacing": true,
 	    "jsxSingleQuote": false,
 	    "printWidth": 100,
 	    "proseWrap": "always",
@@ -371,6 +371,160 @@ settings: {
   - `-m-[5px]` ❌ 
 
 
+# ESLint config of Airbnb
+
+- Airbnb ESLint config 本身只有 Javascript 版本，Typescript 版本的是民間高手維護的
+- 以下為 React with Typescript 專案設置 Airbnb ESLint config 的流程跟注意事項，指令都在專案的根目錄下執行
+- 安裝 eslint-config-airbnb-typescript 跟相關 dependencies，需注意 package.json 裡面標注的版本是否與 [eslint-config-airbnb-typescript](https://github.com/iamturns/eslint-config-airbnb-typescript) 推薦的相符，如果前面已經裝過一樣的 dependencies ，需執行以下步驟；如果沒有跟前面步驟重複，則直接跳到第三步
+    1. 需要先刪除 package.json 的對應 dependencies 
+    2. 刪掉 node_modules 資料夾後，重新安裝，執行指令 `npm install`
+    3. 執行以下指令
+    
+    ```jsx
+    npm install eslint-config-airbnb-typescript \
+                @typescript-eslint/eslint-plugin@^6.0.0 \
+                @typescript-eslint/parser@^6.0.0 \
+                --save-dev
+    ```
+    
+- 接下來執行 `npx eslint . --ext .js,.jsx,.ts,.tsx` 看是否安裝成功
+- 若出現以下錯誤，則執行 `npm i eslint-config-airbnb` ，然後再執行一次 `npx eslint . --ext .js,.jsx,.ts,.tsx`
+    
+    ```jsx
+    Oops! Something went wrong! :(
+    
+    ESLint: 8.56.0
+    
+    ESLint couldn't find the config "airbnb" to extend from. Please check that the name of the config is correct.
+    
+    The config "airbnb" was referenced from the config file in "/Users/shirley/programming/cafeca/ASICEX/.eslintrc.js".
+    
+    If you still have problems, please stop by https://eslint.org/chat/help to chat with the team.
+    ```
+    
+- 如果專案是透過 `npx create-next-app folder_name` 創建的，可能會有地方不符合 Airbnb ESLint 規則（除錯過程可以參考 [issue](https://github.com/CAFECA-IO/ASICEX/issues/28#issuecomment-1869395533) 跟 [PR](https://github.com/CAFECA-IO/ASICEX/pull/84)），其中根據開發經驗，關閉兩條規則
+    1. React JSX props 不准用 spread operator 的規則，理由是 Next.js 專案中的 _app.tsx 需要用這個方式處理 components，並且 spread operator 用在元件上可以避免“因為傳入意料之外的資料而引起的網站 crash”
+    2. { } 需要換行的規則，理由若需符合此規則，需將 `printWidth` 改成 50，為了沿用之前 `.pretterrc` 的程式碼寬度 100 的設定，而關掉此規則
+
+### .eslintrc.js (加上 TailwindCSS 相關設定)
+
+```jsx
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    parser: '@babel/eslint-parser',
+    ecmaVersion: 2020, 
+    sourceType: 'module', 
+    ecmaFeatures: {
+      jsx: true, 
+      experimentalObjectRestSpread: true,
+    },
+    project: './tsconfig.eslint.json',
+  },
+  // 加上 ts 相關規則
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx', '**/*.ts', '**/*.tsx'],
+      extends: [
+        'airbnb',
+        'airbnb-typescript',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:import/recommended',
+      ],
+      parser: '@typescript-eslint/parser',
+      plugins: ['@typescript-eslint'],
+      rules: {
+        'object-curly-newline': 'off',
+        'react/jsx-props-no-spreading': 'off',
+        'no-console': 'error',
+        'tailwindcss/no-contradicting-classname': 'error',
+        'tailwindcss/classnames-order': 'off',
+        'tailwindcss/enforces-negative-arbitrary-values': 'error',
+        'tailwindcss/enforces-shorthand': 'off',
+        'tailwindcss/migration-from-tailwind-2': 'error',
+        'tailwindcss/no-arbitrary-value': 'error',
+        'tailwindcss/no-custom-classname': 'warn',
+      },
+    },
+  ],
+  extends: [
+    'airbnb',
+    'airbnb-typescript',
+    'plugin:import/typescript',
+    'plugin:tailwindcss/recommended',
+    'plugin:@next/next/recommended',
+    'plugin:react/recommended',
+  ],
+  rules: {
+    'no-console': 'error',
+    'tailwindcss/no-contradicting-classname': 'error',
+    'tailwindcss/classnames-order': 'off',
+    'tailwindcss/enforces-negative-arbitrary-values': 'error',
+    'tailwindcss/enforces-shorthand': 'off',
+    'tailwindcss/migration-from-tailwind-2': 'error',
+    'tailwindcss/no-arbitrary-value': 'error',
+    'tailwindcss/no-custom-classname': 'warn',
+    'object-curly-newline': 'off',
+    'react/jsx-props-no-spreading': 'off',
+  },
+
+  // 整合 prettier 和解決 prettier 衝突問題
+  plugins: ['tailwindcss', '@babel', 'prettier', 'react'],
+  settings: {
+    tailwindcss: {
+      // These are the default values but feel free to customize
+      callees: ['classnames', 'clsx', 'ctl'],
+      config: 'tailwind.config.ts',
+      cssFiles: ['**/*.css', '!**/node_modules', '!**/.*', '!**/dist', '!**/build'],
+      cssFilesRefreshRate: '5_000',
+      removeDuplicates: true,
+      whitelist: [],
+    },
+    react: {
+      version: 'detect',
+    },
+  },
+  // 讓 eslint 知道我們在使用 jest ，這樣在跑 test.js 時 eslint 就不會報 jest 關鍵字的錯誤了
+  env: { browser: true, node: true, es6: true, jest: true },
+};
+```
+
+### .tsconfig.json
+
+```jsx
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
+```
+
+### .tsconfig.eslint.json
+
+```jsx
+{
+  "extends": ["./tsconfig.json"],
+  "include": ["**/*.ts", "**/*.tsx", "*.ts", "**/*.js", "**/*.jsx", "*.js"]
+}
+```
 
 ## Reference
 
@@ -389,6 +543,8 @@ React eslint settings: https://ithelp.ithome.com.tw/articles/10215259
 Vue eslint settings: https://pjchender.blogspot.com/2019/07/vue-vue-style-guide-eslint-plugin-vue.html
 
 husky: https://typicode.github.io/husky/#/
+
+airbnb ESLint config: https://github.com/iamturns/eslint-config-airbnb-typescript
 
 
 
