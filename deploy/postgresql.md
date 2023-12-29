@@ -25,6 +25,11 @@ sudo apt install postgresql postgresql-contrib
 ```shell
 sudo su - postgres -c "createuser aha"
 ```
+- Update User Password (Optional)
+```shell
+sudo -u postgres psql
+> ALTER USER aha WITH PASSWORD 'sayaha';
+```
 
 ### Generate Database
 ```shell
