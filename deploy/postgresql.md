@@ -11,6 +11,8 @@ last updated on 2023-12-29
 - Install PostgreSQL
 - Generate User
 - Generate Database
+- Grant Privileges to User
+- Allow Remote Connection
 - Final Check
 
 ### Setup Compilation Environment
