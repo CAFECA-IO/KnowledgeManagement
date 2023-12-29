@@ -21,6 +21,22 @@ sudo apt update
 sudo apt install postgresql postgresql-contrib
 ```
 
+### Generate User
+```shell
+sudo su - postgres -c "createuser aha"
+```
+
+### Generate Database
+```shell
+sudo su - postgres -c "createdb ahadb"
+```
+
+### Grant Privileges to User
+```shell
+sudo -u postgres psql
+> grant all privileges on database ahadb to aha;
+```
+
 ### Final Check
 ```shell
 sudo -u postgres psql -c "SELECT version();"
