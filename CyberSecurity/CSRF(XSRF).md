@@ -15,3 +15,7 @@ CSRF 或 XSRF（Cross-Site Request Forgery）是一種網路攻擊方式，發�
 這種情況下，如果該社交媒體網站使用了CSRF令牌，攻擊者將難以成功進行這樣的攻擊，因為CSRF令牌是唯一的，攻擊者無法模擬或取得。這樣就能更有效地保護用戶免受CSRF攻擊的威脅。
 
 為了防範CSRF/XSRF攻擊，開發者通常會使用驗證令牌等機制，確保請求是由合法的使用者發送的，而不是被冒充的。
+
+ref.
+https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+https://www.synopsys.com/glossary/what-is-csrf.html
