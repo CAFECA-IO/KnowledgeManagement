@@ -9,6 +9,8 @@ last updated on 2023-12-29
 - [Setup SWAP](/linux/setup_swap.md)
 - Setup Compilation Environment
 - Install PostgreSQL
+- Generate User
+- Generate Database
 - Final Check
 
 ### Setup Compilation Environment
