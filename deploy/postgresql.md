@@ -42,6 +42,26 @@ sudo -u postgres psql
 > grant all privileges on database ahadb to aha;
 ```
 
+### Allow Remote Connection
+- listen to IP
+```shell
+sudo vi /etc/postgresql/14/main/postgresql.conf
+```
+```conf
+listen_addresses = '*'                  # what IP address(es) to listen on;
+```
+- allow remote access IP
+```shell
+sudo vi /etc/postgresql/14/main/pg_hba.conf
+```
+```conf
+host    aha           ahadb           0.0.0.0/0       scram-sha-256
+```
+- restart database
+```shell
+sudo /etc/init.d/postgresql restart
+```
+
 ### Final Check
 ```shell
 sudo -u postgres psql -c "SELECT version();"
