@@ -525,6 +525,49 @@ module.exports = {
 }
 ```
 
+## 搭配 Work Guidelines 的 pre-commit 
+
+- 依照 [development-environment](https://github.com/CAFECA-IO/WorkGuidelines/blob/main/newbie/development-environment.md) 另外設置 pre-commit，需做以下調整來避免衝突
+
+- 把 `.prettierrc` 改成 `.prettierrc.yaml`
+    
+    ```jsx
+    $schema: http://json.schemastore.org/prettierrc
+    arrowParens: avoid
+    bracketSpacing: true
+    jsxSingleQuote: false
+    printWidth: 100
+    proseWrap: always
+    quoteProps: as-needed
+    semi: true
+    singleQuote: true
+    tabWidth: 2
+    trailingComma: es5
+    useTabs: false
+    plugins:
+      - prettier-plugin-tailwindcss
+    ```
+    
+- 更改 `.pre-commit-config.yaml` ，讓我們自己的排版規則取代 `pretty-format-json`
+```jsx
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+      - id: check-xml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: 'v4.0.0-alpha.8'
+    hooks:
+      - id: prettier
+        args: ['--config', '.prettierrc.yml']
+```
+- 之後每次開發，在更改檔案之後，執行指令 `pre-commit run --all-files` ，如果排版不符合規定，會先出現提示訊息代表 pre-commit 透過 yaml 幫忙排版，之後再執行一次 `pre-commit run --all-files` 確保所有步驟都成功，就能 commit 
+
+
 ## Reference
 
 jest 官網： https://jestjs.io/docs/configuration
