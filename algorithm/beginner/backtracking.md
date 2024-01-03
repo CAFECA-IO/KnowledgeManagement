@@ -1,12 +1,12 @@
-## Overview
+# Overview
 
 這篇文章談論了一種稱為“回溯法” (backtracking) 的演算法，這種演算法與我們之前討論過的二元樹 (binary tree) 上的深度優先搜索(DFS)類似。它採用了暴力搜尋 (brute-force) 的方式。想像我們需要尋找“圖形鎖的所有可能組合” (**all possible combinations of a pattern lock**)，我們必須進行全面搜索來找出所有可能的組合，即實際上沒有比一個個搜尋所有組合更好的方法來獲得所有組合。這就是回溯法的主旨。我們探索執行任務的一種可能方法，如果不成功，我們就回溯並尋找其他方法，直到找到解決方案。
 
 以下代碼皆使用 Javascript 作為示範。
 
-## Explanation with Example
+# Explanation with Example
 
-問題：確定從樹的根部 (root) 到葉子節點 (leaf node) 是否存在一條路徑。該路徑不能包含任何零。
+## 問題：確定從樹的根部 (root) 到葉子節點 (leaf node) 是否存在一條路徑。該路徑不能包含任何零。
 
 解讀：這個問題基本上是在問我們是否可以從根節點走到葉節點而不遇到值為0的情況。如果存在這樣的路徑，我們返回true；如果不存在，則返回false。
 
@@ -47,6 +47,15 @@ function canReachLeaf(root) {
 ```
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/fc28bf55-891b-4000-9bdd-a4fa330dd7a6)
+
+## 問題：返回路徑的所有值
+
+解讀：在這個問題中，我們可以傳遞一個參數path，這是一個列表，用於儲存有效路徑中的所有節點。因此，給定樹 `[4,0,1,null,7,3,2,null,null,null,0]`，如下圖所示。其中能肯定的是，根節點符合“非零”的條件，所以首先將根節點加入我們的堆疊 (stack) ，目前 path 有 `[4]`
+![Backtracking - backtracking (3)](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/24ca69a1-67ce-430b-b35b-24588462872d)
+
+思路：由於只有一條有效路徑，它要麼在左子樹，要麼在右子樹。優先考慮左子樹而不是右子樹，左子樹無效，因為4的左子節點是0。我們返回false，現在遞迴 (recursively) 檢查右子樹。向右走，1是有效的，所以我們將它加入我們的列表。現在，我們檢查3，它是有效的，所以也被加入到我們的列表。3的左子節點是null，所以我們返回false。檢查3的右子節點時，我們再次達到基礎案例。現在，我們必須從我們的堆疊 (stack) 中移除3，因為如果存在有效路徑，我們已經返回true了。我們回到3的父節點，即1，並檢查其右子樹。我們將2加入到我們的列表中。然後我們探索2，但2是葉子節點，這使得遞迴調用返回true，之後函數返回true。我們的有效路徑是`[4,1,2]`。
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/898c0cb5-18ac-4010-bc88-1d5e82a5eb28)
 
 
 ## Reference
