@@ -87,7 +87,7 @@ function leafPath(root, path) {
 
 ## backtracking 可以解決的問題
 
-- 在二叉樹中找到所有符合指定條件的路徑。
+- 在 binary tree 中找到所有符合指定條件的路徑。
 - 從一組元素中選擇 k 個元素，使得這 k 個元素的總和最大或最小。
 - 將一組元素排列成特定的順序。
 
