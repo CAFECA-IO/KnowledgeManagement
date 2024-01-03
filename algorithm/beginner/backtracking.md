@@ -1,6 +1,6 @@
 # Overview
 
-這篇文章談論了一種稱為“回溯法” (backtracking) 的演算法，這種演算法與我們之前討論過的二元樹 (binary tree) 上的深度優先搜索(DFS)類似。它採用了暴力搜尋 (brute-force) 的方式。想像我們需要尋找“圖形鎖的所有可能組合” (**all possible combinations of a pattern lock**)，我們必須進行全面搜索來找出所有可能的組合，即實際上沒有比一個個搜尋所有組合更好的方法來獲得所有組合。這就是回溯法的主旨。我們探索執行任務的一種可能方法，如果不成功，我們就回溯並尋找其他方法，直到找到解決方案。
+這篇文章談論了一種稱為“回溯法” (backtracking) 的演算法，這種演算法與我們之前討論過的二元樹 (binary tree) 上的[深度優先搜索(DFS)](https://github.com/CAFECA-IO/KnowledgeManagement/blob/master/algorithm/beginner/trees.md#depth-first-search-dfs)類似。它採用了暴力搜尋 (brute-force) 的方式。想像我們需要尋找“圖形鎖的所有可能組合” (**all possible combinations of a pattern lock**)，我們必須進行全面搜索來找出所有可能的組合，即實際上沒有比一個個搜尋所有組合更好的方法來獲得所有組合。這就是回溯法的主旨。我們探索執行任務的一種可能方法，如果不成功，我們就回溯並尋找其他方法，直到找到解決方案。
 
 以下代碼皆使用 Javascript 作為示範。
 
