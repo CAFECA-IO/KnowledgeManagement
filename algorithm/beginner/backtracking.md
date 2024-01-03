@@ -16,8 +16,6 @@
 
 給定的樹為 `[4,0,1,null,7,0,2]`，如以下圖示。如果路徑中有0，則該路徑無效。
 
-現在我們知道了我們的基礎案例，將其轉化為代碼就簡單了。
-
 ![Backtracking - backtracking](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b1941cf9-4b3e-46e1-b2bb-7dc7d8479b9e)
 
 ```jsx
