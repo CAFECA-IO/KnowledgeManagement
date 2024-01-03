@@ -3,7 +3,8 @@
 
 *不只是學會多一門的程式語言，更是智能合約系統的開發*
 
-![Alt text](https://files.oaiusercontent.com/file-sokjvzT1Zs5BYxTskuiE95CO?se=2024-01-03T09%3A05%3A12Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Ded0c1eb8-389b-46a2-8299-042440a84e40.webp&sig=8GmdeXEu8EJvBgiUnR0ZGvQNGyx1A%2BH6yXorkl6VhAY%3D)
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/59311328/e1b855c4-749a-41bc-8e68-63221ce8df2e)
+
 
 ## 前言
 在當今快速變化的數位世界中，區塊鏈技術已成為推動透明性、安全性和去中心化的關鍵力量。其中，智能合約在這場革命中扮演著核心角色，它們不僅重塑了我們對於交易和數據交互的理解，還為各行各業帶來了無限的可能性。在這種背景下，我們將深入探討一個獨特的智能合約系統——動態交易處理合約，旨在有效管理和記錄多樣化的交易。
