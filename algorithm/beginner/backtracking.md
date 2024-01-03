@@ -59,7 +59,52 @@ function canReachLeaf(root) {
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/898c0cb5-18ac-4010-bc88-1d5e82a5eb28)
 
+```jsx
+function leafPath(root, path) {
+    if (root == null || root.val == 0) {
+        return false;
+    }
+    path.push(root.val);
 
-## Reference
+    if (root.left == null && root.right == null) {
+        return true;
+    }
+    if (leafPath(root.left, path)) {
+        return true;
+    }
+    if (leafPath(root.right, path)) {
+        return true;
+    }
+    path.remove(path.size() - 1);
+    return false;
+}
+```
+
+# Time complexity and space complexity
+
+- 樹共有 n 個節點，時間複雜度是 O(n)，必須遍歷 (traverse) 整棵樹
+- 需要用一個堆疊儲存結果，空間複雜度是 O(n)
+
+# Summary
+
+## backtracking 可以解決的問題
+
+- 在二叉樹中找到所有符合指定條件的路徑。
+- 從一組元素中選擇 k 個元素，使得這 k 個元素的總和最大或最小。
+- 將一組元素排列成特定的順序。
+
+## backtracking 的工作原理
+
+1. 從問題的初始狀態開始。
+2. 檢查是否找到答案。如果找到，則返回答案。
+3. 如果沒有找到答案，則嘗試所有可能的選擇。
+4. 對於每個選擇，都將其應用於問題，並重複步驟 2 和 3。
+5. 如果所有可能的選擇都嘗試過，但仍然沒有找到答案，則返回空值。
+
+- backtracking 是一種抽象算法，並不僅限於應用於 binary trees，會在接下來的章節將這種算法應用在其他資料結構上。
+
+# Reference
+
 - [Tree maze](https://neetcode.io/courses/dsa-for-beginners/22)
+
 
