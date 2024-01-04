@@ -1,6 +1,6 @@
 # Overview
 
-堆積（Heap）是一種特殊的基於樹的資料結構，屬於 complete binary tree。它實現了一種稱為 priority queue（Priority Queue）的抽象數據類型。通常，“ 堆積（heap） ”和“ 優先隊列（priority queue） ”這兩個術語可以互換使用。
+堆積（Heap）是一種特殊的基於樹的資料結構，屬於 [complete binary tree](https://courses.cs.vt.edu/~cs3114/Fall09/wmcquain/Notes/T03a.BinaryTreeTheorems.pdf)。它實現了一種稱為 priority queue（Priority Queue）的抽象數據類型。通常，“ 堆積（heap） ”和“ 優先隊列（priority queue） ”這兩個術語可以互換使用。
 
 我們知道，普通隊列是按照先進先出的原則運作的，但在 priority queue 中，元素的移除是基於給定的優先級。優先級最高的元素會首先被移除。
 
