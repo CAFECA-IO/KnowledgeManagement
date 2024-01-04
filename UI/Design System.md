@@ -17,6 +17,23 @@
 
 ## 何謂設計系統
 
+<div align=center>
+
+![atomic-design](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/5d15eb2b-1bd7-4abd-abc3-cf21599c837d)
+
+</div>
+
+### ​​​​Atomic Design 原子設計方法論
+Brad Forst一名美國的設計師於2013年提出此設計概念：
+從介面由什麼組成與如何更有條理建立設計系統下，Brad Forst他高中時期的化學實驗室發現了靈感與相似之處，所有物質（無論是固體、液體、氣體、簡單、複雜等）都是由原子組成的。這些原子單元結合在一起形成分子，分子可以結合成更複雜的有機體，最終創造出宇宙中的所有物質。同樣，介面也是由更小的組件組成的。這意味著我們可以將整個介面分解為基本構建塊並從那裡開始工作。這就是原子設計的基本要點。
+
+從原子設計的方法論中，可以延伸出介面五種不同的階段組合，去創建一個有層次、計畫性的介面設計系統。
+此五種階段與原子設計相對應代表為：
+**Atoms 原子**：為網頁構成的基本元素，頁面中的最小單位，一個標籤、輸入列，或是一個按鈕都能是原子，也可以為非實質的概念，例如色調、字體樣式等。
+**Molecules 分子**：由原子所構成的簡單UI物件，像是由標籤與資訊組合成的表單等。
+**Organisms 組織**：相對分子而言，較為複雜的構成物，由原子及分子所組成，例如導覽列包含了選單，按鈕等。
+**Templates 模板**：以頁面為基礎的架構，將以上元素進行排版設計。
+**Pages 頁面**：將實際內容（圖片、文章等）套件在特定模板。
 
 ## 如何建立一個設計系統
 
@@ -71,3 +88,7 @@ Ant Design設計系統主要為通用元件與通用介面方案，並不是專�
 -[Ant Design](https://ant.design/)
 
 -[從設計師的角度，介紹Ant Design](https://pixso.cn/designskills/mayiantdesign/)
+
+-[網頁設計 : Atomic Design簡介及工作實例](https://medium.com/uxeastmeetswest/%E7%B6%B2%E9%A0%81%E8%A8%AD%E8%A8%88-atomic-design%E7%B0%A1%E4%BB%8B%E5%8F%8A%E5%B7%A5%E4%BD%9C%E5%AF%A6%E4%BE%8B-42e666358d52)
+
+-[atomic design](https://bradfrost.com/blog/post/atomic-web-design/)
