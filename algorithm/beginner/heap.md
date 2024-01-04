@@ -8,14 +8,14 @@ heap 主要有兩種類型：最小堆（Min Heap）和最大堆（Max Heap）�
 
 本文將重點介紹 Min Heap 的實現，但 Max Heap 的實現方式與之完全相同，只是在實現時更注重最大值而非最小值。
 
-# Heap 的性質
+# Heap properties
 
 要使 binary tree 成為 heap ，它必須滿足以下兩個性質：
 
 1. 結構性質 (structure property)：一個 binary heap 是一棵 complete binary tree，這意味著除了最底層外，其他每一層都是完全填滿的，最底層的節點則從左至右連續填充。
 2. 順序性質 (order property)：對於 Min Heap 而言，所有後代節點的值都應大於它們的祖先節點。換句話說，對於以 y 為根的樹，其右子樹和左子樹中的每個節點都應大於或等於 y。這是一個遞歸的性質，與二叉搜索樹類似。在 Max Heap 中，情況則相反。
 
-# Heap 的實現
+# Heap implementation
 
 在概念上， binary heap 是以樹的資料結構來表示的，但實際上，它們是使用數組來實現的。例如，給定一個 binary heap ：`[14,19,16,21,26,19,68,65,30,null,...]`，我們會將它轉化為一個數組。這個數組的大小是節點數量 n 加 1，從索引 1 開始填充，這樣便於後續計算節點的左右子節點和父節點的位置。
 
@@ -39,7 +39,7 @@ class Heap {
 }
 ```
 
-# Push 和 Pop 操作
+# Push and Pop in Heap
 
 ## Percolating up
 
@@ -114,7 +114,7 @@ pop() {
 
 ```
 
-# Heapify
+# Heapify (to build heap)
 
 Heapify 是建立 heap 的一種有效方式。它的概念是確保 binary heap 既是一棵 complete binary tree，也滿足每個節點的值最多與其父節點的值相等。由於葉節點不能違反 Min Heap 的性質，因此不需要對它們進行 Heapify。
 
