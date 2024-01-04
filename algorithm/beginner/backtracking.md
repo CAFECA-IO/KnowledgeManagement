@@ -8,39 +8,39 @@
 
 ## 問題：確定從樹的根部 (root) 到葉子節點 (leaf node) 是否存在一條路徑，該路徑不能包含任何零。
 
-解讀：這個問題基本上是在問我們是否可以從根節點走到葉節點而不遇到值為0的情況。如果存在這樣的路徑，我們返回true；如果不存在，則返回false。
+解讀：這個問題基本上是在問我們是否可以從根節點走到葉節點而不遇到值為 0 的情況。如果存在這樣的路徑，我們返回 true；如果不存在，則返回 false。
 
-思路：首先想到的是使用深度優先搜索。我們的限制是路徑中不能有值為0的節點。我們還知道，如果樹是空的，那麼也不存在有效路徑。最後，如果我們到達一個葉子節點並且還沒有返回false，我們可以返回true，因為這意味著存在從根到葉的路徑。
+思路：首先想到的是使用深度優先搜索。我們的限制是路徑中不能有值為 0 的節點。我們還知道，如果樹是空的，那麼也不存在有效路徑。最後，如果我們到達一個葉子節點並且還沒有返回 false，我們可以返回 true，因為這意味著存在從根到葉的路徑。
 
-為了這個問題，假設只存在一條路徑，所以它必須存在於右子樹 (right subtree) 或左子樹 (left subtree) 中。我們任意選擇先嘗試左邊。如果左子樹中找不到答案，演算法將在右子樹中搜索，如果存在路徑，它將返回true。
+為了這個問題，假設只存在一條路徑，所以它必須存在於右子樹 (right subtree) 或左子樹 (left subtree) 中。我們任意選擇先嘗試左邊。如果左子樹中找不到答案，演算法將在右子樹中搜索，如果存在路徑，它將返回 true。
 
-給定的樹為 `[4,0,1,null,7,0,2]`，如以下圖示。如果路徑中有0，則該路徑無效。
+給定的樹為 `[4,0,1,null,7,0,2]`，如以下圖示。如果路徑中有 0，則該路徑無效。
 
 ![Backtracking - backtracking](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/b1941cf9-4b3e-46e1-b2bb-7dc7d8479b9e)
 
 ```jsx
 class TreeNode {
-    constructor(val) {
-        this.val = val;
-        this.left = null;
-        this.right = null;
-    }
-}   
-  
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
 function canReachLeaf(root) {
-    if (root == null || root.val == 0) {
-        return false;
-    } 
-    if (root.left == null && root.right == null) {
-        return true;
-    }
-    if (canReachLeaf(root.left)) {
-        return true;
-    }
-    if (canReachLeaf(root.right)) {
-        return true;
-    }
+  if (root == null || root.val == 0) {
     return false;
+  }
+  if (root.left == null && root.right == null) {
+    return true;
+  }
+  if (canReachLeaf(root.left)) {
+    return true;
+  }
+  if (canReachLeaf(root.right)) {
+    return true;
+  }
+  return false;
 }
 ```
 
@@ -48,10 +48,10 @@ function canReachLeaf(root) {
 
 ## 問題：返回路徑的所有值
 
-解讀：在這個問題中，我們可以傳遞一個參數path，這是一個列表，用於儲存有效路徑中的所有節點。因此，給定樹 `[4,0,1,null,7,3,2,null,null,null,0]`，如下圖所示。其中能肯定的是，根節點符合“非零”的條件，所以首先將根節點加入我們的堆疊 (stack) ，目前 path 有 `[4]`
+解讀：在這個問題中，我們可以傳遞一個參數 path，這是一個列表，用於儲存有效路徑中的所有節點。因此，給定樹 `[4,0,1,null,7,3,2,null,null,null,0]`，如下圖所示。其中能肯定的是，根節點符合“非零”的條件，所以首先將根節點加入我們的堆疊 (stack) ，目前 path 有 `[4]`
 ![Backtracking - backtracking (3)](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/24ca69a1-67ce-430b-b35b-24588462872d)
 
-思路：由於只有一條有效路徑，它要麼在左子樹，要麼在右子樹。優先考慮左子樹而不是右子樹，左子樹無效，因為4的左子節點是0。我們返回false，現在遞迴 (recursively) 檢查右子樹。向右走，1是有效的，所以我們將它加入我們的列表。現在，我們檢查3，它是有效的，所以也被加入到我們的列表。3的左子節點是null，所以我們返回false。檢查3的右子節點時，我們再次達到基礎案例。現在，我們必須**從我們的堆疊 (stack) 中移除3**，因為如果存在有效路徑，我們已經返回true了。我們回到3的父節點，即1，並檢查其右子樹。我們將2加入到我們的列表中。然後我們探索2，但2是葉子節點，這使得遞迴調用返回true，之後函數返回true。我們的有效路徑是`[4,1,2]`。
+思路：由於只有一條有效路徑，它要麼在左子樹，要麼在右子樹。優先考慮左子樹而不是右子樹，左子樹無效，因為 4 的左子節點是 0。我們返回 false，現在遞迴 (recursively) 檢查右子樹。向右走，1 是有效的，所以我們將它加入我們的列表。現在，我們檢查 3，它是有效的，所以也被加入到我們的列表。3 的左子節點是 null，所以我們返回 false。檢查 3 的右子節點時，我們再次達到基礎案例。現在，我們必須**從我們的堆疊 (stack) 中移除 3**，因為如果存在有效路徑，我們已經返回 true 了。我們回到 3 的父節點，即 1，並檢查其右子樹。我們將 2 加入到我們的列表中。然後我們探索 2，但 2 是葉子節點，這使得遞迴調用返回 true，之後函數返回 true。我們的有效路徑是`[4,1,2]`。
 
 過程如下圖所示
 
@@ -59,31 +59,31 @@ function canReachLeaf(root) {
 
 ```jsx
 function leafPath(root, path) {
-    if (root == null || root.val == 0) {
-        return false;
-    }
-    path.push(root.val);
-
-    if (root.left == null && root.right == null) {
-        return true;
-    }
-    if (leafPath(root.left, path)) {
-        return true;
-    }
-    if (leafPath(root.right, path)) {
-        return true;
-    }
-    path.remove(path.size() - 1);
+  if (root == null || root.val == 0) {
     return false;
+  }
+  path.push(root.val);
+
+  if (root.left == null && root.right == null) {
+    return true;
+  }
+  if (leafPath(root.left, path)) {
+    return true;
+  }
+  if (leafPath(root.right, path)) {
+    return true;
+  }
+  path.remove(path.size() - 1);
+  return false;
 }
 ```
 
-# Time complexity and space complexity
+# Time complexity
 
 - 樹共有 n 個節點，時間複雜度是 O(n)，必須遍歷 (traverse) 整棵樹
 - 需要用一個堆疊儲存結果，空間複雜度是 O(n)
 
-# Summary
+# Takeaway
 
 ## backtracking 可以解決的問題
 
@@ -104,5 +104,3 @@ function leafPath(root, path) {
 # Reference
 
 - [Tree maze](https://neetcode.io/courses/dsa-for-beginners/22)
-
-
