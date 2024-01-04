@@ -1,10 +1,10 @@
-# Heap or Priority Queue
+# Overview
 
 堆積（Heap）是一種特殊的基於樹的資料結構，屬於 complete binary tree。它實現了一種稱為 priority queue（Priority Queue）的抽象數據類型。通常，“ heap ”和“ priority queue ”這兩個術語可以互換使用。
 
 我們知道，普通隊列是按照先進先出的原則運作的，但在 priority queue 中，元素的移除是基於給定的優先級。優先級最高的元素會首先被移除。
 
-heap 主要有兩種類型：最小堆（Min Heap）和最大堆（Max Heap）。在 Min Heap 中，根節點具有最小的值，並且在刪除時，值最小的元素具有最高的優先級。相反，在 Max Heap 中，根節點具有最大的值，刪除時，值最大的元素具有最高的優先級。
+heap 主要有兩種類型：最小堆（Min Heap）和最大堆（Max Heap）。在 Min Heap 中，根節點 (root) 具有最小的值，並且在刪除時，值最小的元素具有最高的優先級。相反，在 Max Heap 中，根節點 (root) 具有最大的值，刪除時，值最大的元素具有最高的優先級。
 
 本文將重點介紹 Min Heap 的實現，但 Max Heap 的實現方式與之完全相同，只是在實現時更注重最大值而非最小值。
 
