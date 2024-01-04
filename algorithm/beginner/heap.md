@@ -1,6 +1,6 @@
 # Overview
 
-堆積（Heap）是一種特殊的基於樹的資料結構，屬於 complete binary tree。它實現了一種稱為 priority queue（Priority Queue）的抽象數據類型。通常，“ heap ”和“ priority queue ”這兩個術語可以互換使用。
+堆積（Heap）是一種特殊的基於樹的資料結構，屬於 complete binary tree。它實現了一種稱為 priority queue（Priority Queue）的抽象數據類型。通常，“ 堆積（heap） ”和“ 優先隊列（priority queue） ”這兩個術語可以互換使用。
 
 我們知道，普通隊列是按照先進先出的原則運作的，但在 priority queue 中，元素的移除是基於給定的優先級。優先級最高的元素會首先被移除。
 
@@ -13,7 +13,7 @@ heap 主要有兩種類型：最小堆（Min Heap）和最大堆（Max Heap）�
 要使 binary tree 成為 heap ，它必須滿足以下兩個性質：
 
 1. 結構性質 (structure property)：一個 binary heap 是一棵 complete binary tree，這意味著除了最底層外，其他每一層都是完全填滿的，最底層的節點則從左至右連續填充。
-2. 順序性質 (order property)：對於 Min Heap 而言，所有後代節點的值都應大於它們的祖先節點。換句話說，對於以 y 為根的樹，其右子樹和左子樹中的每個節點都應大於或等於 y。這是一個遞歸的性質，與二叉搜索樹類似。在 Max Heap 中，情況則相反。
+2. 順序性質 (order property)：對於 Min Heap 而言，所有後代節點的值都應大於它們的祖先節點。換句話說，對於以 y 為根的樹，其右子樹和左子樹中的每個節點都應大於或等於 y。這是一個遞歸的性質，與 binary search tree (BST) 類似。在 Max Heap 中，情況則相反。
 
 # Heap implementation
 
