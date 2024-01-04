@@ -25,7 +25,8 @@ heap 主要有兩種類型：最小堆（Min Heap）和最大堆（Max Heap）�
 - 右子節點 (right child): `2*i + 1`
 - 父節點 (parent): `i / 2`
 
-![Data structure   Algorithm - heap _ priority queue (2)](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/df5095e1-3f27-405e-89ea-144f5229d75f)
+![Data structure   Algorithm - heap](https://github.com/CAFECA-IO/ASICEX/assets/20677913/f41bd479-9ed8-45ac-8c82-d3ae2c2df414)
+
 
 在對 heap 進行添加或刪除操作時，必須確保維持 heap 的性質，並且上述公式依然有效。
 
