@@ -12,8 +12,8 @@ heap 主要有兩種類型：最小堆（Min Heap）和最大堆（Max Heap）�
 
 要使 binary tree 成為 heap ，它必須滿足以下兩個性質：
 
-1. 結構性質：一個 binary heap 是一棵 complete binary tree，這意味著除了最底層外，其他每一層都是完全填滿的，最底層的節點則從左至右連續填充。
-2. 順序性質：對於 Min Heap 而言，所有後代節點的值都應大於它們的祖先節點。換句話說，對於以 y 為根的樹，其右子樹和左子樹中的每個節點都應大於或等於 y。這是一個遞歸的性質，與二叉搜索樹類似。在 Max Heap 中，情況則相反。
+1. 結構性質 (structure property)：一個 binary heap 是一棵 complete binary tree，這意味著除了最底層外，其他每一層都是完全填滿的，最底層的節點則從左至右連續填充。
+2. 順序性質 (order property)：對於 Min Heap 而言，所有後代節點的值都應大於它們的祖先節點。換句話說，對於以 y 為根的樹，其右子樹和左子樹中的每個節點都應大於或等於 y。這是一個遞歸的性質，與二叉搜索樹類似。在 Max Heap 中，情況則相反。
 
 # Heap 的實現
 
@@ -24,6 +24,9 @@ heap 主要有兩種類型：最小堆（Min Heap）和最大堆（Max Heap）�
 - 左子節點 (left child): `2*i`
 - 右子節點 (right child): `2*i + 1`
 - 父節點 (parent): `i / 2`
+
+![Data structure   Algorithm - heap _ priority queue (2)](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/df5095e1-3f27-405e-89ea-144f5229d75f)
+
 
 在對 heap 進行添加或刪除操作時，必須確保維持 heap 的性質，並且上述公式依然有效。
 
