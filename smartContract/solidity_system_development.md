@@ -43,7 +43,7 @@
 
 本文將使用現成的智能合約系統(isuncloud auditing system)做解釋，介紹其概念、並從中提取智能合約的重點概念，包含資料密集型的包含資料密集型的系統設計概念、註冊模式、工廠模式、模組化、重入攻擊防禦(reentrancy defense)等等。目標是使讀書不僅僅是認識solidity 這種語言，更能夠透過本文有智能合約系統開發的整體概念。
 
-另外如果你想玩玩看：[這是整個系統](https://github.com/CAFECA-IO/auditing_system/blob/feature/auto_test)的源碼，你可以按照README.md的使用說明書，操作這個系統。
+另外如果你想玩玩看：[這是整個系統](https://github.com/CAFECA-IO/auditing_system/tree/feature/auto_test)的源碼，你可以按照README.md的使用說明書，操作這個系統。
 
 #### 智能合約
 在開始之前，我們先回顧傳統合約需要具備哪些基本條件：
