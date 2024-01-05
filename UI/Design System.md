@@ -13,7 +13,7 @@
 
 設計系統(Design System)可以幫助不同產品卻能給使用者和諧的體驗與風格，除了能讓使用者預期如何使用公司的產品，也能讓品牌的核心價值得以闡述。
 
-接下來會從何謂設計系統、如何建立設計系統、現有設計系統平台參考做介紹。
+接下來會從何謂設計系統、現有設計系統平台參考做介紹，以便讀者更了解設計系統相關知識，未來在建立設計系統能更了解需要的項目以及注意事項。
 
 ## 何謂設計系統
 > A design system offers a library of visual style, components, and other concerns documented and released by an individual, team or community as code and design tools so that adopting products can be more efficient and cohesive. -- by Nathan Curtis in [Defining Design Systems](https://medium.com/eightshapes-llc/defining-design-systems-6dd4b03e0ff6)
