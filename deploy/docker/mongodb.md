@@ -16,7 +16,7 @@ Pull the Ubuntu 22.04 image from Docker Hub
 
 # Create a Docker Container with Ubuntu 22.04
 
-- `docker run -it --name mongodb_container_1558 ubuntu:22.04`
+- `docker run -it --name <CONTAINER_NAME> ubuntu:22.04`
 
 # Install MongoDB in the Container
 
