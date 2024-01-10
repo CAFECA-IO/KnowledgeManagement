@@ -50,6 +50,14 @@ curl -fsSL https://pgp.mongodb.com/server-7.0.asc | \
 
 - Run it in the background instead (Optional)
   1. `mongod --fork --logpath /var/log/mongod.log`
+- To ensure MongoDB is running in your Docker container, type the command in the terminal
+    - `docker ps`
+    
+    ```jsx
+    CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          PORTS     NAMES
+    dd3af009a186   ubuntu:22.04   "/bin/bash"   16 minutes ago   Up 16 minutes             mongodb_container_1558
+    ```
+    
 - Verify that MongoDB is running
   1. `mongosh`
 
