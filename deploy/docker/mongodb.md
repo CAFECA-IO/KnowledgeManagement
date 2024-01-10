@@ -4,9 +4,10 @@
 
 - Ubuntu 22.04
 
-# Install Docker
+# Install Docker and mongosh
 
 - Download from the [Docker official website](https://www.docker.com/)
+- Download from the [mongosh official website](https://www.mongodb.com/docs/mongodb-shell/install/)
 
 # Pull Ubuntu 22.04 Docker Image
 
@@ -20,7 +21,7 @@ Pull the Ubuntu 22.04 image from Docker Hub
 
 # Install MongoDB in the Container
 
-- Install the community edition
+(Install the community edition)
 
 ```jsx
 apt-get update && \
