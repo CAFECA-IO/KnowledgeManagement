@@ -129,6 +129,7 @@ Variables 該以什麼樣的方式分類，分類須包含哪些項目在裡面�
 ### Style
 
 在 Figma 的 Local Style中，可針對 Typographic、Shadow 及 Grid 進行設定，設計師應對照 Design System 將所有 Style 參數於設計前先設定完成，並在日後的設計中套用。
+
 <img width="241" alt="截圖 2024-01-11 下午1 14 02" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/fe432bee-aea1-4320-929a-3e89ee447f4c">
 
 ## 結語
