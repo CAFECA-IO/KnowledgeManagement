@@ -90,6 +90,7 @@ For Example：
 有了多層結構的 Design Token，對於日後開發維護，或是新增不同的 Mode 時，讓設計師在調整設計稿時有更大的靈活度，也讓開發人員在開發時能更快速並且準確的調整 Code。以上面的數值舉例來說：
 
 Light Mode: {Primary-background-color } = {blue-60} = #3367CC
+
 Dark Mode {Primary-background-color } = {blue-10} = #507CD3
 
 只要改了第二層的 Primary-background-color，則第三層所有套用 Primary-background-color 的物件則會同步一起調整，其中也會包含 button-primary-background-color，同時若因其他考量，想要在不變動其他元素的其況下單獨調整 Button 顏色，則只需修改第三層的 button-primary-background-color，也不會影響到其他設計。
@@ -135,7 +136,7 @@ Variables 該以什麼樣的方式分類，分類須包含哪些項目在裡面�
 ## 結語
 
 一份理想的設計稿應具備完整的Design Token設定，並且在所有元件當中進行套用，應該避免沒有連結 Design Token的文字、顏色以及數值，如此一來在日後設計稿的維護及調整上都可以更加快速且準確，可以避開疏失造成的遺漏或設計稿的不統一。
-Figma 中的所有 Design Token 皆為可發佈的，方便在跨文件時仍能維持一制性。
+Figma 中的所有 Design Token 皆為可發佈的，方便在跨文件時仍能維持一致性。
 
 
 ## Reference
