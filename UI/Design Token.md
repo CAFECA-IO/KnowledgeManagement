@@ -12,6 +12,7 @@ Green 50＝ #44D4CC為一組key-value pairs，而 background-primary-color＝#44
 
 ### Design Token 在設計與開發之間的角色
 Design Tokens 可以說是在團隊開發中不可或缺的一個角色，不僅僅只在設計上大幅度的提升方便性即可變動性，對於開發來說也是同樣的道理，除了讓設計師與開發者在溝通上面更為準確外，在開發時事先定義好 Design Token，也可以在未來設計上有變動時，只需要一行代碼即可快速調整介面。
+
 <img width="718" alt="截圖 2024-01-11 上午9 50 37" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/99a7dbf6-8809-40ab-a874-f35f862c464f">
 
 推薦 Figma Plugin：
