@@ -122,7 +122,7 @@ Design System 是結合了所有與品牌相關的Brand Voice and Tone（亦可�
 ## 於 Figma 建立 Design System 之方法及規則
 
 ### Components
-#88 
+請參考：[Jodie-Components](https://github.com/CAFECA-IO/KnowledgeManagement/blob/master/UI/Component.md)
 
 ### Variables
 
