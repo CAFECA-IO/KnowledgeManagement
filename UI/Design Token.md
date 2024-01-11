@@ -18,6 +18,13 @@ Design Tokens 可以說是在團隊開發中不可或缺的一個角色，不僅
 [Design Tokens](https://www.figma.com/community/plugin/888356646278934516/design-tokens) by Lukas Oppermann
 可直接從Figma 匯出 Style Dictionary的 .json 檔或是匯入 Github
 
+[Sync Design Tokens](https://www.figma.com/community/plugin/1128196356923537195/sync-design-tokens) by suleiman
+可將.json的Url 匯入 Figma 建立 Design Token
+
+[Style Organizer](https://www.figma.com/community/plugin/816627069580757929/style-organizer) by SHOPEE SINGAPORE PRIVATE LIMITED
+可以掃描文件所有顏色及文字的 Style 狀態，方便檢視 Token 與元素的連結狀況
+
+
 ## Design Token 有哪些?
 
 _粗體為 Figma中目前有支援其Variants 或 Style 設定_
