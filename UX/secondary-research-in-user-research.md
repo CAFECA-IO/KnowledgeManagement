@@ -52,21 +52,27 @@ Secondary Research 又可再分為：
 
 - 文獻分析：透過外部機構已存在之文獻報告中做研究。
 可使用的資源：
-[Google Scholar](https://scholar.google.com/)
-[ACM Digital Library](https://dl.acm.org/journals)
+
+  [Google Scholar](https://scholar.google.com/)
+
+  [ACM Digital Library](https://dl.acm.org/journals)
 
 - 產業分析：尋找 Open Resource、白皮書等，針對產業相關的資料進行研究。
 
 - 競品分析： 屬於產業分析的一部分，可分別根據 Direct 及 Indirect 兩個面向尋找競品並進行分析，在新概念的產品開發當中也可能很常碰到沒有 Direct Competitor 的狀況。 詳細競品分析方法可參考：
-[Sample- Competitive audits](https://docs.google.com/spreadsheets/d/1dJXquryDr80mkXhVDtSs_qcwj3j3jMUm8eB6JlMn7aY/edit?usp=share_link&resourcekey=0-vgIOAnquvJ0-Ya3BkDnctw)
-[Sample- Competitive audits report](https://docs.google.com/document/d/1ourq3_8zGki0p7QoTp6ig1fOFpk2UfEMoKrEIp8XHjQ/edit?usp=share_link)
+
+  [Sample- Competitive audits](https://docs.google.com/spreadsheets/d/1dJXquryDr80mkXhVDtSs_qcwj3j3jMUm8eB6JlMn7aY/edit?usp=share_link&resourcekey=0-vgIOAnquvJ0-Ya3BkDnctw)
+  
+  [Sample- Competitive audits report](https://docs.google.com/document/d/1ourq3_8zGki0p7QoTp6ig1fOFpk2UfEMoKrEIp8XHjQ/edit?usp=share_link)
  
 
 以上研究工作都可以搭配 AI 輔助，幫助你處理大量資料及分析。
 關於 AI 可以如何幫助我們工作可以參考：
-[How AI can be your design assistant](https://mermer.com.tw/knowledge-management/km-20230823001)
+
+  [How AI can be your design assistant](https://mermer.com.tw/knowledge-management/km-20230823001)
 
 ## Reference
 
 [Secondary Research in UX by Mayya Azarova](https://www.nngroup.com/articles/secondary-research-in-ux/)
+
 [Harness the Power of Secondary Research in UX BY NIKKI ANDERSON](https://dscout.com/people-nerds/secondary-research)
