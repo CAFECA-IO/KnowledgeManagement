@@ -111,6 +111,138 @@ hashmap["Collin"] = "Seattle";
 
 ## Code Implementation
 
+了解 hashing 背後的原理之後，用簡單的方式嘗試實作
+
+- key-value pair
+
+```jsx
+class Pair {
+    constructor(key, val) {
+        this.key = key;
+        this.val = val;
+    }
+}
+```
+
+- 初始化 HashMap
+
+```jsx
+class HashMap:
+    // Global variables
+    size, capacity, map
+    constructor(size, capacity, map):
+        size = 0
+        capacity = 2
+        map = [None, None]
+```
+
+- 下面的雜湊函數迭代給定鍵中的每個字符，對它們的 ASCII 代碼求和並找到該鍵在數組中的位置。
+
+```jsx
+hash(key) {
+    let index = 0;
+    for (let i = 0; i < key.length; i++) {
+        index+= key.charCodeAt(i);
+    }
+    return index % this.capacity;
+}
+```
+
+- 要檢索該值，我們首先需要檢索位置並檢查該位置是否存在該值。如果是，我們可以傳回該值。否則，我們可以執行開放尋址(open addressing)並在下一個可用索引中找到它。
+
+```jsx
+get(key) {
+    let index = this.hash(key);
+    while (this.map[index] != null) {
+        if (this.map[index].key == key) {
+            return this.map[index].val;
+        }  
+        index += 1;
+        index = index % this.capacity;
+    }    
+    return null;
+}
+```
+
+- 為了添加到映射中，我們首先計算鍵的雜湊值並找到位置。一旦計算出來，就會出現三種情況。
+    1. 索引被佔用
+    2. 索引被同一個key佔用
+    3. 索引為空
+
+```jsx
+put(key, val) {
+    let index = this.hash(key);
+
+    while (true) {
+        if (this.map[index] == null) {
+            this.map[index] = new Pair(key, val);
+            this.size += 1;
+            if (this.size >= this.capacity / 2) {
+                this.rehash();
+            }
+            return;       
+        } else if (this.map[index].key == key) {
+            this.map[index].val = val;
+            return;
+        }
+        index += 1;
+        index = index % this.capacity;
+    }    
+}
+```
+
+- 要刪除，我們找到索引，刪除鍵，並將索引設為空。
+
+```jsx
+remove(key) {
+    if (this.get(key) == null) {
+        return;
+    }
+    
+    let index = this.hash(key);
+    while (true) {
+        if (this.map[index].key == key) {
+            // Removing an element using open-addressing actually causes a bug,
+            // because we may create a hole in the list, and our get() may 
+            // stop searching early when it reaches this hole.
+            this.map[index] = null;
+            this.size -= 1;
+            return;
+        }    
+        index += 1;
+        index = index % this.capacity;
+    }
+}
+```
+
+- 當我們執行重新散列時，我們將容量加倍，將先前映射的值複製到新映射中並將大小設為零。
+
+```jsx
+rehash() {
+    this.capacity = 2 * this.capacity;
+    let newMap = new Array(this.capacity).fill(null);
+    let oldMap = this.map;
+    this.map = newMap;
+    this.size = 0;
+    for (let i = 0; i < oldMap.length; i++) {
+        if (oldMap[i]) {
+            this.put(oldMap[i].key, oldMap[i].val)
+        }
+    }
+}
+```
+
+- 列印所有 pairs
+
+```jsx
+print() {
+    for (let i = 0; i < this.map.length; i++) {
+        if (this.map[i]) {
+            console.log(this.map[i].key + " " + this.map[i].val)
+        }
+    }
+}
+```
 
 # Reference
 
