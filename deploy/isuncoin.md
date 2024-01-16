@@ -23,7 +23,7 @@ last updated on 2023-12-13
 ### Building From Source Code
 ```shell
 cd /workspace
-git clone -b v1.11.6 https://github.com/ethereum/go-ethereum
+git clone https://github.com/CAFECA-IO/isuncoin
 cd go-ethereum
 make geth
 ```
