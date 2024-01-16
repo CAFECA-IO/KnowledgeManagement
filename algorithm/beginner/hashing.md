@@ -109,6 +109,9 @@ hashmap["Collin"] = "Seattle";
 
 > 為了減少發生的碰撞數量，選擇雜湊映射為質數大小在數學上是有意義的。 這是因為質數只能被 11 和它本身整除！ 如果你有興趣，[CS StackExchange](https://cs.stackexchange.com/questions/11029/why-is-it-best-to-use-a-prime-number-as-a-mod-in-a-hashing-function)上的這篇文章提供了數學證明。
 
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/93bbf02a-7d3b-4f7f-b976-da6ca01433d3)
+(sources: [geeksforgeeks](https://www.geeksforgeeks.org/load-factor-in-hashmap-in-java-with-examples/))
+
 ## Code Implementation
 
 了解 hashing 背後的原理之後，用簡單的方式嘗試實作
