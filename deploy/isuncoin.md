@@ -24,14 +24,14 @@ last updated on 2023-12-13
 ```shell
 cd /workspace
 git clone https://github.com/CAFECA-IO/isuncoin
-cd go-ethereum
+cd isuncoin
 make geth
 ```
 
 ### Setup Environment
 ```shell
 sudo mv go-ethereum/ /usr/local
-sudo ln -s /usr/local/go-ethereum/build/bin/geth /usr/local/bin
+sudo ln -s /usr/local/isuncoin/build/bin/geth /usr/local/bin
 ```
 
 ### Creating Genesis
