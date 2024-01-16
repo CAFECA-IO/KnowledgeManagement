@@ -30,7 +30,7 @@ make geth
 
 ### Setup Environment
 ```shell
-sudo mv go-ethereum/ /usr/local
+sudo mv isuncoin/ /usr/local
 sudo ln -s /usr/local/isuncoin/build/bin/geth /usr/local/bin
 ```
 
