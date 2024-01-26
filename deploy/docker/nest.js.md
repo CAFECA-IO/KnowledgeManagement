@@ -75,5 +75,4 @@ MONGO_URI=mongodb://<YOUR_IP_ADDRESS>:27017/<DATABASE_FOR_TEST>
 
 # Reference
 
-- [Containerizing Next.js App with Docker: Quick Guide](https://dev.to/pulkit30/containerizing-nextjs-app-with-docker-quick-guide-51ml)
-- [next.js with docker](https://github.com/vercel/next.js/tree/canary/examples/with-docker)
+- [Dockerizing NestJS Application](https://medium.com/@sujan.dumaru.official/dockerizing-nestjs-application-c4b25139fe4c)
