@@ -114,3 +114,8 @@
 - `docker run --rm -p 3000:3000 --name <container-name> <image-name>`
    ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/a36bc100-22bd-489b-a2d8-53ceb1179add)
    ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/a03f733e-e64e-4a9a-b0c7-cf7cf280d485)
+
+# Reference
+
+- [Containerizing Next.js App with Docker: Quick Guide](https://dev.to/pulkit30/containerizing-nextjs-app-with-docker-quick-guide-51ml)
+- [next.js with docker](https://github.com/vercel/next.js/tree/canary/examples/with-docker)
