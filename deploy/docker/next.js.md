@@ -1,10 +1,3 @@
-### **Build the Docker Image**
-
-- Install Docker on your machine ([official](https://docs.docker.com/get-docker/))
-- At the root of the project:
-    - `docker build -t <your-image-name> .`
-    ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/3acefbcc-69c3-4ef6-a185-b0bb3570d349)
-
 ### In the existing projects
 
 - At the root of the project: create `Dockerfile`
@@ -106,6 +99,15 @@
     .git
     ```
     
+
+
+### **Build the Docker Image**
+
+- Install Docker on your machine ([official](https://docs.docker.com/get-docker/))
+- At the root of the project:
+    - `docker build -t <your-image-name> .`
+    ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/3acefbcc-69c3-4ef6-a185-b0bb3570d349)
+
 
 ### **Run the Docker**
 
