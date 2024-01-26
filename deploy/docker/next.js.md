@@ -117,3 +117,5 @@
 
 - [Containerizing Next.js App with Docker: Quick Guide](https://dev.to/pulkit30/containerizing-nextjs-app-with-docker-quick-guide-51ml)
 - [next.js with docker](https://github.com/vercel/next.js/tree/canary/examples/with-docker)
+- [screenshot of process](https://github.com/CAFECA-IO/KnowledgeManagement/issues/93#issuecomment-1911762584)
+
