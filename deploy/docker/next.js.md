@@ -106,14 +106,12 @@
 - Install Docker on your machine ([official](https://docs.docker.com/get-docker/))
 - At the root of the project:
     - `docker build -t <your-image-name> .`
-    ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/3acefbcc-69c3-4ef6-a185-b0bb3570d349)
 
 
 ### **Run the Docker**
 
 - `docker run --rm -p 3000:3000 --name <container-name> <image-name>`
-   ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/a36bc100-22bd-489b-a2d8-53ceb1179add)
-   ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/a03f733e-e64e-4a9a-b0c7-cf7cf280d485)
+
 
 # Reference
 
