@@ -50,6 +50,13 @@ CMD ["npm", "run", "start:prod"]
 ![Screenshot 2024-01-26 at 17 38 13](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/64d34681-6ead-4a47-af9a-ea9438b252ee)
 
 - connect with mongodb running on docker
+  - modify the way to get mongodb URL
+```tsx
+// in `src/common/common/common.module.ts`
+uri: config.get<string>('MONGO_URI'),
+// uri: config.get<string>('mongo.uri'),
+```
+
   - change the `.env` or `development.env` or `production.end` in the case, we don't have authentication by default
 
 ```jsx
