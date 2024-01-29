@@ -1,5 +1,6 @@
-### In the existing projects
+## In the existing projects
 
+### Create `Dockerfile`
 - At the root of the project: create `Dockerfile`
     
 ```jsx
@@ -34,7 +35,6 @@ CMD ["npm", "run", "start:prod"]
 
     
 
-
 ### **Build the Docker Image**
 
 - Install Docker on your machine ([official](https://docs.docker.com/get-docker/))
@@ -44,8 +44,6 @@ CMD ["npm", "run", "start:prod"]
 
 
 ### **Run the Docker**
-
-- `docker run --rm -p 3001:3001 --name <container-name> <image-name>`
 
 - connect with mongodb running on docker
   - modify the way to get mongodb URL
@@ -67,6 +65,10 @@ MONGO_PORT=27017
 
 MONGO_URI=mongodb://<YOUR_IP_ADDRESS>:27017/<DATABASE_FOR_TEST>
 ```
+- `docker run --rm -p 3001:80 --name <container-name> <image-name>`
+    - `80` is based on the port you configured in `main.ts`
+
+
 
 
 
