@@ -43,7 +43,7 @@ CMD ["npm", "run", "start:prod"]
 
 
 
-### **Run the Docker**
+### Modify config to connect to a local database running on Docker
 
 - connect with mongodb running on docker
   - modify the way to get mongodb URL
@@ -65,6 +65,9 @@ MONGO_PORT=27017
 
 MONGO_URI=mongodb://<YOUR_IP_ADDRESS>:27017/<DATABASE_FOR_TEST>
 ```
+
+### **Run the Docker**
+
 - `docker run --rm -p 3001:80 --name <container-name> <image-name>`
     - `80` is based on the port you configured in `main.ts`
 
