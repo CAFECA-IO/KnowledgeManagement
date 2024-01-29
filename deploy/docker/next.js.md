@@ -1,4 +1,6 @@
-### In the existing projects
+## In the existing projects
+
+### Create `Dockerfile`
 
 - At the root of the project: create `Dockerfile`
     
@@ -98,7 +100,13 @@
     
     .git
     ```
-    
+
+### Modify config to connect to a local backend server running on Docker    
+
+- `.env`
+    - `API_URL=<YOUR_IP_ADDRESS>:3001`
+    - You can get your IP by typing `ipconfig getifaddr en0` in the terminal
+ 
 
 
 ### **Build the Docker Image**
@@ -117,5 +125,5 @@
 
 - [Containerizing Next.js App with Docker: Quick Guide](https://dev.to/pulkit30/containerizing-nextjs-app-with-docker-quick-guide-51ml)
 - [next.js with docker](https://github.com/vercel/next.js/tree/canary/examples/with-docker)
-- [screenshot of process](https://github.com/CAFECA-IO/KnowledgeManagement/issues/93#issuecomment-1911762584)
+- [screenshot of process](https://github.com/CAFECA-IO/KnowledgeManagement/issues/93)
 
