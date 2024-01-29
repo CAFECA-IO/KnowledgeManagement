@@ -66,6 +66,9 @@ MONGO_PORT=27017
 MONGO_URI=mongodb://<YOUR_IP_ADDRESS>:27017/<DATABASE_FOR_TEST>
 ```
 
+You can get your IP by typing `ipconfig getifaddr en0` in the terminal
+
+
 ### **Run the Docker**
 
 - `docker run --rm -p 3001:80 --name <container-name> <image-name>`
