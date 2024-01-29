@@ -78,4 +78,4 @@ MONGO_URI=mongodb://<YOUR_IP_ADDRESS>:27017/<DATABASE_FOR_TEST>
 # Reference
 
 - [Dockerizing NestJS Application](https://medium.com/@sujan.dumaru.official/dockerizing-nestjs-application-c4b25139fe4c)
-- [screenshot of process](https://github.com/CAFECA-IO/KnowledgeManagement/issues/94#issuecomment-1911759715)
+- [screenshot of process](https://github.com/CAFECA-IO/KnowledgeManagement/issues/94)
