@@ -71,7 +71,7 @@
 
 ## 常見量化表格
 - **SEQ (Single Ease Question)**:SEQ 是衡量受測者對於任務感知性的測量方式。
-  例如：在使用點餐APP中覺得完成操作點餐流程整體困難度為何？非常簡單為7 依序遞減到 非常困難為1。
+> 例如：在使用點餐APP中覺得完成操作點餐流程整體困難度為何？非常簡單為7 依序遞減到 非常困難為1。
 <div align=center>
   
 ![5eadfb52b8d39c9d667121a1_SEQHero@1 5x-20](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/13a8faca-e91b-48eb-992d-bf5ea976e289)
@@ -79,7 +79,7 @@
 </div>
 
 - **SUS (System Usability Scale) 系統易用性量表**：SUS是由 John Brooke 提出，主要用於測量產品本身的易用性，是目前最被廣泛使用的測試量化工具之一。問題會透過正反向的問題使結果更加客觀。
-  例如：我想我會經常使用這個點餐APP。從正面到反面回覆依序為：非常同意、同意、普通、不同意、非常不同意．
+> 例如：我想我會經常使用這個點餐APP。從正面到反面回覆依序為：非常同意、同意、普通、不同意、非常不同意．
 
 <div align=center>
 
@@ -89,7 +89,7 @@
 
 - **SUPR-Q (Standardized User Experience Percentile Rank Questionnaire)**：由 MeasuringU 開發的問卷調查工具，主要用於評估用戶對於網站的體驗。
 - **NPS (Net Promoter Score)**：由 Fred Reichheld 在2003年提出衡量淨推薦指數的方式，用於瞭解用戶對產品或服務本身的感受。
-  例如:從0到10分你有多大的可能性會推薦此APP給你的親友。
+> 例如:從0到10分你有多大的可能性會推薦此APP給你的親友。
 
 <div align=center>
 
