@@ -31,7 +31,7 @@
 
 > 所以當你今天設計了一個對於你受眾很難使用的產品，也可以說其實是你對於該產品背後資訊與使用者所需瞭解得太少，並沒有真正對需求瞭解透測以及他們對於功能所具有的預期心理。當使用者在使用一個功能時，往往會有一定的預設立場，就像你今天想提款，你一定會認為有個地方會需要輸入你設定的密碼與金額，設計就是必須透過觀察，來了解這個過程。當然不是說設計師自身的經驗沒有它的價值，但單純依靠經驗是不足以完整了解使用者行為，這就是好的設計需要透過使用者測試來理解使用者是怎麼與產品互動。
 
-### 易用性測試 (Usability testing)
+## 易用性測試 (Usability testing)
 怎麼去定義一個好用的產品？根據 Jakob Nielsen 所提出，傳統上在評估系統或是使用者介面的易用性應該包含以下五個指標：
 - 學習性 (Learnability)：使用者能夠在第一次接觸產品或設計時，快速理解如何使用它。
 - 效率 (Efficiency)：使用者在使用產品或界面時能夠高效完成任務的能力。
@@ -67,10 +67,35 @@
 #### 測試與觀察
 測試使用者的環境如果可以盡量挑選干擾低的房間或環境，避免其他外在因素影響受測進行。測試進行前，要先對受測者做整個測試的過程、目的的說明，也需要跟使用者解釋測試後的數據、個人資料的處理方式。在記錄受測者與產品互動的過程中，以錄影的方式記錄尤佳。例如：如果是進行點餐APP測試，將使用者在測試點餐流程時的使用畫面予以錄影，受測者的說出的話語、表情、手勢都能進行記錄，並在最後與受測者討論時，可以藉由錄影協助。
 #### 結果分析
-完成測試後，測量數值的意義因產品的不同而有不同。常見的量化表格有以下類型：**SEQ (Single Ease Question)**、**SUS (System Usability Scale) 系統易用性量表**、**UMUX-Lite (The Usability Metric for User Experience)**、**SUPR-Q (Standardized User Experience Percentile Rank Questionnaire)**、**NPS (Net Promoter Score)**
+完成測試後，測量數值的意義因產品的不同而有不同。常見的量化表格有以下類型：**SEQ (Single Ease Question)**、**SUS (System Usability Scale) 系統易用性量表**、**SUPR-Q (Standardized User Experience Percentile Rank Questionnaire)**、**NPS (Net Promoter Score)**
 
+## 常見量化表格
+- **SEQ (Single Ease Question)**:SEQ 是衡量受測者對於任務感知性的測量方式。
+  例如：在使用點餐APP中覺得完成操作點餐流程整體困難度為何？非常簡單為7 依序遞減到 非常困難為1。
+<div align=center>
+  
+![5eadfb52b8d39c9d667121a1_SEQHero@1 5x-20](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/13a8faca-e91b-48eb-992d-bf5ea976e289)
 
+</div>
 
+- **SUS (System Usability Scale) 系統易用性量表**：SUS是由 John Brooke 提出，主要用於測量產品本身的易用性，是目前最被廣泛使用的測試量化工具之一。問題會透過正反向的問題使結果更加客觀。
+  例如：我想我會經常使用這個點餐APP。從正面到反面回覆依序為：非常同意、同意、普通、不同意、非常不同意．
+
+<div align=center>
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/8b68a72c-6904-452d-be12-2080d19950ed)
+
+</div>
+
+- **SUPR-Q (Standardized User Experience Percentile Rank Questionnaire)**：由 MeasuringU 開發的問卷調查工具，主要用於評估用戶對於網站的體驗。
+- **NPS (Net Promoter Score)**：由 Fred Reichheld 在2003年提出衡量淨推薦指數的方式，用於瞭解用戶對產品或服務本身的感受。
+  例如:從0到10分你有多大的可能性會推薦此APP給你的親友。
+
+<div align=center>
+
+![64020daae50d701ac16ebd7a_Net Promoter Score](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/1e0e7d91-7e0f-46e1-abb2-233819cf99ad)
+
+</div>
 
 ## Reference 
 -[易用性測試（Usability test）](https://www.webguide.nat.gov.tw/News_Content.aspx?n=531&s=3005)
