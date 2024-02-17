@@ -66,3 +66,10 @@ Empathy Map 就像是研究過程中的基石，我們透過使用者訪談等�
 - **Persona的日常行為：** 盡可能地列出Persona日常生活中可能的規律行為或習慣，這也將影響到產品設計時，我們需考量使用者所處的情境
 - **Persona的需要和想要：** 盡可能列出 Persona 在日常生活中與產品相關連的需求
 ![BAIFA User Research](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/4fb059f0-9935-496d-a3c2-a040b6745714)
+
+
+## Reference
+[Google UX Certificate](https://www.coursera.org/learn/start-ux-design-process/supplement/WMeZK/learn-more-about-personas)
+[50 must-see user persona templates](https://www.justinmind.com/blog/user-persona-templates/)
+[User Persona Template](https://xtensio.com/user-persona-template/)
+[Personas – A Simple Introduction](https://www.interaction-design.org/literature/article/personas-why-and-how-you-should-use-them)
