@@ -1,4 +1,4 @@
-#UX設計師必備技能-進入角色扮演的世界，站在使用者的角度思考
+# Persona & Empathy Map
 
 ## Persona
 
