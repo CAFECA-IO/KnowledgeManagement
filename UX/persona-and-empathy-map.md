@@ -72,6 +72,9 @@ Empathy Map 就像是研究過程中的基石，我們透過使用者訪談等�
 
 ## Reference
 [Google UX Certificate](https://www.coursera.org/learn/start-ux-design-process/supplement/WMeZK/learn-more-about-personas)
+
 [50 must-see user persona templates](https://www.justinmind.com/blog/user-persona-templates/)
+
 [User Persona Template](https://xtensio.com/user-persona-template/)
+
 [Personas – A Simple Introduction](https://www.interaction-design.org/literature/article/personas-why-and-how-you-should-use-them)
