@@ -65,3 +65,4 @@ Empathy Map 就像是研究過程中的基石，我們透過使用者訪談等�
 - **Persona的自傳：** 一小段的Persona 自傳可以刻劃更完善的Persona形象，未來在使用Persona進行設計時更能設身處地的融入其中
 - **Persona的日常行為：** 盡可能地列出Persona日常生活中可能的規律行為或習慣，這也將影響到產品設計時，我們需考量使用者所處的情境
 - **Persona的需要和想要：** 盡可能列出 Persona 在日常生活中與產品相關連的需求
+![BAIFA User Research](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/4fb059f0-9935-496d-a3c2-a040b6745714)
