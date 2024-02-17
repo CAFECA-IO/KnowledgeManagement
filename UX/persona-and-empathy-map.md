@@ -1,5 +1,7 @@
 # Persona & Empathy Map
 
+![22445017_2112 w037 n003 70A p1 70](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/163c7690-e3bd-45db-a75c-c449e7bdbdc1)
+
 ## Persona
 
 ### 前言
