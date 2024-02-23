@@ -103,7 +103,7 @@
 
 <div align=center>
 
-![20210821_144948-1024x717](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/2fbdaa97-d24d-4817-8888-abf04a3a54d0)
+![Lab-usability-testing-1024x512](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/34150095-a211-41f4-8927-6c4cee7ece6f)
 
 </div>
 
@@ -117,7 +117,7 @@
 
 <div align=center>
 
-![desktop-vs-web-app](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/4e964729-b77e-4d9b-bd84-0646c7176642)
+![20210821_144948-1024x717](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/2fbdaa97-d24d-4817-8888-abf04a3a54d0)
 
 </div>
 
@@ -131,7 +131,7 @@
 
 <div align=center>
 
-![62e018f162d750924ee185b5_usability2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/813aa156-b73a-403c-ab62-31c4a673b5df)
+![desktop-vs-web-app](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/4e964729-b77e-4d9b-bd84-0646c7176642)
 
 </div>
 
@@ -143,7 +143,7 @@
 
 <div align=center>
 
-![Customer_satisfaction_Definition_importance__examples_01-1](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/6b34d444-169f-424b-ae95-410f1b4cd1e7)
+![62e018f162d750924ee185b5_usability2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/813aa156-b73a-403c-ab62-31c4a673b5df)
 
 </div>
 
@@ -152,6 +152,12 @@
 > 1.與其他品牌相比，您獲得的體驗如何？滿分5分的話會給幾分？
 
 > 2.1~5分的評分標準，您向朋友或同事推薦我們的可能性有多高？為什麼您會給予這樣的評價？
+
+<div align=center>
+
+![Customer_satisfaction_Definition_importance__examples_01-1](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/6b34d444-169f-424b-ae95-410f1b4cd1e7)
+
+</div>
 
 以上為常見的使用者訪談情境與常見對應的相關問題，當然使用者訪談根據不同產業別、不同產品、不同時間點、對象受眾，訪談內容皆會有所調整，但在詢問問題時，仍要確保自身立場為中立、客觀，避免做出引導式的詢問，當使用者進行回應時，也不能針對回應進行批判或是解釋，使用者回答的內容越貼近真實想法越好，所以並沒有對錯之分，當對回應有過多的額外的情緒反饋讓使用者感覺到，也可能會導致後續使用者的回饋不真實。
 
