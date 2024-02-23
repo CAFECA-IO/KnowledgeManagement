@@ -62,4 +62,17 @@
 
 一個完整的使用者訪談需要注意的事項當然不只有以上內容，且根據不同訪談對象、訪談者、訪談階段，需要注意的環節也會有所調整，但使用者訪談的重點之處，就在於需要與使用者建立一個融洽的關係，讓使用者可以信任你，在這樣的情況下，你才可以獲得較真實的資訊。而在使用者訪談結束後，也可以詢問使用者對於這次訪談的體驗滿意度，過程中對於哪個環節覺得可以改進調整的，之後使用者在參與使用者訪談也能獲得更好的體驗。
 
-## 使用者訪談步驟
+## 常見的使用者訪談問題
+
+## Reference
+- [What is a user interview and why do it?](https://www.freshworks.com/survey/what-is-a-user-interview-and-why-do-it-blog/)
+
+- [User interview 101](https://bootcamp.uxdesign.cc/user-interview-101-2cf31466ecc9)
+
+- [25+ user interview questions to ask (and how to come up with your own)](https://www.hotjar.com/user-interviews/questions/)
+
+- [10 道使用者研究工法：打造用戶喜愛的 UX 設計產品](https://riven.medium.com/10-%E9%81%93%E4%BD%BF%E7%94%A8%E8%80%85%E7%A0%94%E7%A9%B6%E5%B7%A5%E6%B3%95-%E6%89%93%E9%80%A0%E7%94%A8%E6%88%B6%E5%96%9C%E6%84%9B%E7%9A%84-ux-%E8%A8%AD%E8%A8%88%E7%94%A2%E5%93%81-f787e97deec3)
+
+- [淺談使用者研究之訪談執行](https://mymkc.com/article/content/25010)
+
+- [課堂學習筆記 — 使用者訪談](https://wanda225.medium.com/%E8%AA%B2%E5%A0%82%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AA%E8%AB%87-%E4%B8%8A-d44eb0fe7e2b)
