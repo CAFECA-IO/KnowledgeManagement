@@ -90,7 +90,7 @@ useEffect hook 使用了 count 變數，因此它必須包含在依賴陣列中�
 
 ## 1. 停用 Eslint 規則
 
-繞過警告 [React Hook useEffect has a missing dependency](https://bobbyhadz.com/blog/react-hook-useeffect-has-missing-dependency) 的一種方法是為單行或整個文件停用 Eslint 規則。
+繞過警告 React Hook useEffect has a missing dependency 的一種方法是為單行或整個文件停用 Eslint 規則。
 
 App.js :
 
