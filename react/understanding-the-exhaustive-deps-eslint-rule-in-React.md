@@ -337,3 +337,7 @@ export default function App() {
 這一篇官方文件有特別說明這個議題：[You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect)，這份官方文件的內容頗多，所以不在此文討論，會另外再寫成一篇文章來探討。
 
 筆者對於 useEffect 的設計原理及運用很感興趣，因此之後也會再撰寫幾篇文章來探討 useEffect，包括但不限於：useEffect 的運作原理、useEffect 的使用時機、useEffect 的最佳實踐等等。
+
+# 參考資料
+
+[Understanding the exhaustive-deps Eslint rule in React](https://bobbyhadz.com/blog/react-hooks-exhaustive-deps)
