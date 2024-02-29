@@ -333,6 +333,7 @@ export default function App() {
 但是根據 React 官方文件，最好的解決方案仍是遵照 Eslint 的提示處理，將缺少的依賴項添加到 `useEffect` hook 的依賴陣列中。
 
 如果我們發現這樣的做法並不符合我們的需求，或者甚至發生無限重新渲染迴圈。官方文件的建議是，也許我們的情境不需要使用 `useEffect` hook。
+
 這一篇官方文件有特別說明這個議題：[You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect)，這份官方文件的內容頗多，所以不在此文討論，會另外再寫成一篇文章來探討。
 
 筆者對於 useEffect 的設計原理及運用很感興趣，因此之後也會再撰寫幾篇文章來探討 useEffect，包括但不限於：useEffect 的運作原理、useEffect 的使用時機、useEffect 的最佳實踐等等。
