@@ -8,14 +8,14 @@
 
 - 下圖的 B 跟 C 是雙向的，也可以說是無向 (undirected) 的
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/341a6378-84b7-4b67-b0c7-d9dc0f94685b)
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4ec26e81-a11a-4e95-a457-3e588e0c062b)
 
 
 ### 介紹矩陣 (Matrix)
 
 在圖的表示方法中，矩陣是一個非常基本且重要的概念。矩陣是一個二維數組，用於表示節點間的關係。對於一個有 n 個節點的圖，我們可以使用一個 `n x n` 的矩陣來表示它。
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/14d1c6d8-734a-4f7f-9f87-d831b55e4e20)
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/15ff39f4-6d4a-41d2-b2a9-b1638e129e98)
 
 
 ### 介紹鄰接矩陣 (Adjacency Matrix)
