@@ -363,4 +363,5 @@ gsutil cors set ./cors.json gs://你的Bucket名稱
 ```
 
 這樣就能正確上傳檔案了
+
 ![](./GCP%20上傳圖片的方法.md_Attachments/截圖%202024-03-01%20下午1.35.14 1.png)
