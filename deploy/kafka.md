@@ -162,22 +162,30 @@ docker-compose up -d
 
 ![docker_container](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/cd861eca-5cc7-46c3-80d8-36bd9444a394)
 
-### 步驟五：建立主題
+### 步驟五：建立生產者
 
-這個 Node.js 程式創建了一個 AdminClient 對象，用於執行 Kafka 的管理操作。使用其中的 **`createTopics`** 方法來創建新的 Topic。在建立 Topic 時，可以指定 Topic 名稱、Partitions 數量以及副本數量等參數。
+在這個 Node.js 程式中，我們首先創建了一個 AdminClient 對象，用於執行 Kafka 的管理操作。使用其中的 **`createTopics`** 方法來創建新的 Topic。在建立 Topic 時，可以指定 Topic 名稱、Partitions 數量以及副本數量等參數。
 
-(以下程式碼均使用 ChatGPT 生成)
+有了 Topic 後，才能讓 Producer 發送訊息。
 
-```jsx
-// admin-client.js
+(以下程式碼使用 ChatGPT 生成)
+
+```js
+// producer.js
+
 const { Kafka } = require("kafkajs");
 
 const kafka = new Kafka({
-  clientId: "my-admin",
+  clientId: "my-producer",
   brokers: ["localhost:9092"], // 請根據實際情況更換 Kafka Broker 地址
 });
 
 const admin = kafka.admin();
+
+// 定義 topic, 分區數量, 副本數量
+const topic = "topic-for-test";
+const numPartitions = 3;
+const replicationFactor = 1;
 
 // 創建 topic
 async function createTopic() {
@@ -186,13 +194,13 @@ async function createTopic() {
     await admin.createTopics({
       topics: [
         {
-          topic: "test-topic",
-          numPartitions: 3, // 分區數量
-          replicationFactor: 1, // 副本數量
+          topic: topic, // 主題名稱
+          numPartitions: numPartitions, // 分區數量
+          replicationFactor: replicationFactor, // 副本數量
         },
       ],
     });
-    console.log("Topic created successfully!");
+    console.log(`Topic ${topic} created successfully!`);
   } catch (error) {
     console.error("Error creating topic:", error);
   } finally {
@@ -201,24 +209,11 @@ async function createTopic() {
 }
 
 createTopic();
-```
-
-### 步驟六：建立生產者
-
-```jsx
-// producer.js
-const { Kafka } = require("kafkajs");
-
-const kafka = new Kafka({
-  clientId: "my-producer",
-  brokers: ["localhost:9092"], // 請根據實際情況更換 Kafka Broker 地址
-});
 
 // 創建一個生產者實例
 const producer = kafka.producer();
 
-// 定義要發送的主題和消息
-const topic = "test-topic";
+// 定義要發送的消息
 const message = {
   key: "test-key",
   value: "Hello Kafka!",
@@ -251,7 +246,7 @@ produceMessage();
 
 ### 步驟六：建立消費者
 
-```jsx
+```js
 // consumer.js
 
 const { Kafka } = require("kafkajs");
@@ -265,7 +260,7 @@ const kafka = new Kafka({
 const consumer = kafka.consumer({ groupId: "test-group" });
 
 // 訂閱主題
-const topic = "test-topic";
+const topic = "topic-for-test";
 
 // 定義處理消息的函數
 const processMessage = async () => {
