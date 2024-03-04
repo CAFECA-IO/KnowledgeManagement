@@ -310,6 +310,35 @@ node consumer.js
 
 可以看到 Consumer 有確實接收到訊息。
 
+# Kafka **效能檢測**
+
+- 測試內容如下：
+    1. Produce 多筆資料到 topic，記錄所花費的時間
+    2. Consume topic 中的所有訊息，記錄所花費的時間
+    3. 計算資料丟失率
+- 根據實驗結果，得到以下結論：
+    1. Kafka 的 Produce TPS 約為 `每秒 302.52 次`
+    2. Kafka 的 Consume 10 萬筆的 TPS 約為 `每秒 9861.93 次`
+    3. Kafka 在 10 萬筆以下的資料丟失率為 `0%`
+
+### **實驗結果**
+
+- Produce
+
+| 一千筆 | 一萬筆 | 十萬筆 |
+| --- | --- | --- |
+| 3,125 ms | 34,343 ms | 337,391 ms |
+- Consume
+
+| 一千筆 | 一萬筆 | 十萬筆 |
+| --- | --- | --- |
+| 10,123 ms | 10,150 ms | 10,140 ms |
+- Data Loss Percentage
+
+| 一千筆 | 一萬筆 | 十萬筆 |
+| --- | --- | --- |
+| 0% | 0% | 0% |
+
 ## 參考資料
 
 - [Apache Kafka](https://kafka.apache.org/)
