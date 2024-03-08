@@ -2,7 +2,7 @@
 
 ### 介紹圖 (Graph)
 
-圖(Graph)是一種數據結構，用於表示物件間的關係。Linked list 跟 trees 是 graphs 的子集，分別符合 graphs 的規定，但又有各自的限制。
+圖(Graph)是一種非線性的數據結構，用於表示物件間的關係。Linked list 跟 trees 是 graphs 的子集，分別符合 graphs 的規定，但又有各自的限制。
 
 它由`節點（vertex / vertices）`和`連接節點的邊 (edge / edges)`組成。圖可以是有向的（邊有方向）或無向的（邊沒有方向）。
 
@@ -15,8 +15,7 @@
 
 在圖的表示方法中，矩陣是一個非常基本且重要的概念。矩陣是一個二維數組，用於表示節點間的關係。對於一個有 n 個節點的圖，我們可以使用一個 `n x n` 的矩陣來表示它。
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/15ff39f4-6d4a-41d2-b2a9-b1638e129e98)
-
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/7511680f-7956-4930-ad95-9cfe9d08a452)
 
 ### 介紹鄰接矩陣 (Adjacency Matrix)
 
@@ -24,7 +23,10 @@
 
 ### 介紹鄰接列表 (Adjacency List)
 
-鄰接列表是一種比鄰接矩陣更為節省空間的圖表示方法，特別是對於稀疏圖來說。它使用一個列表數組來存儲所有節點的鄰接節點。對於圖中的每一個節點，都有一個列表來存儲與其相連的所有節點。
+鄰接列表是一種比鄰接矩陣更為節省空間的圖表示方法，特別是對於稀疏圖來說。它使用一個陣列來存儲所有節點的鄰接節點。對於圖中的每一個節點，都有一個列表來存儲與其相連的所有節點。實際程式碼下面有介紹。
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/0bb3179b-7be7-4561-9559-767588cc3248)
+
 
 ### **2. Matrix DFS (深度優先搜索)**
 
@@ -152,6 +154,62 @@ return adjList;
 
 - 在鄰接列表上執行深度優先搜索
 
+在這個深度優先搜索（DFS）的例子中，我們使用一個鄰接列表來表示 graph。我們的目標是**找到從起始節點到目標節點的所有路徑**。我們使用一個集合來記錄已經訪問過的節點，以防止在搜索過程中重複訪問。如果我們達到目標節點，我們就返回1，表示找到一條路徑。否則，我們對當前節點的所有鄰居進行DFS，並將找到的路徑數加到計數器上。最後，我們從訪問集合中刪除當前節點，以便於後續的搜索。
+
+```tsx
+// Count paths (backtracking)
+function dfs(node, target, adjList, visit) {
+    if (visit.has(node)) {
+        return 0;
+    }
+    if (node == target) {
+        return 1;
+    }
+    let count = 0;
+    visit = new Set();
+    visit.add(node);
+    for (let neighbor of adjList.get(node)) {
+        count+=dfs(neighbor, target, adjList, visit); 
+    }
+    visit.delete(node);
+    return count;
+}
+
+```
+
 ### **BFS on an adjacency list**
 
 - 在鄰接列表上執行廣度優先搜索
+
+在這個廣度優先搜索（BFS）的例子中，我們也使用一個鄰接列表來表示 graph。我們的目標是找到從起始節點到目標節點的**最短路徑**。我們使用一個集合來記錄已經訪問過的節點，以防止在搜索過程中重複訪問。我們使用一個隊列來存儲待訪問的節點，並從起始節點開始搜索。每次從隊列中取出一個節點，如果該節點是目標節點，則返回當前的路徑長度。否則，我們將該節點的所有未訪問過的鄰居加入隊列。每訪問完一層的節點，路徑長度就增加1。
+
+```tsx
+// Shortest path from node to target.
+function bfs(node, target, adjList) {
+    let length = 0;
+    let visit = new Set();
+    let q = [];
+    visit.add(node);
+    q.push(node);
+
+    while (q.length != 0) {
+        let queueLength = q.length;
+
+        for (let i = 0; i < queueLength; i++) {
+            let curr = q.shift();
+            if (curr === target) {
+                return length;
+            }
+            for (let neighbor of adjList.get(curr)) {
+                if (!visit.has(neighbor)) {
+                    visit.add(neighbor);
+                    q.push(neighbor);
+                }
+            }
+        }
+        length++;
+    }
+    return length;
+}
+
+```
