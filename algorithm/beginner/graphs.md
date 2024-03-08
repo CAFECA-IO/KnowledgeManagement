@@ -15,11 +15,15 @@
 
 在圖的表示方法中，矩陣是一個非常基本且重要的概念。矩陣是一個二維數組，用於表示節點間的關係。對於一個有 n 個節點的圖，我們可以使用一個 `n x n` 的矩陣來表示它。
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/7511680f-7956-4930-ad95-9cfe9d08a452)
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/21f3f6a5-d4f5-4f37-8da5-1d23d0e7ca54)
+
 
 ### 介紹鄰接矩陣 (Adjacency Matrix)
 
 鄰接矩陣是表示圖中節點間相連關係的一種矩陣。對於無向圖來說，如果節點 i 與節點 j 相連，則鄰接矩陣中的元素 A[i][j] 和 A[j][i] 被設為 1；否則設為 0。對於有向圖，如果從節點 i 到節點 j 有邊，則 A[i][j] 為 1，否則為 0。
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/7511680f-7956-4930-ad95-9cfe9d08a452)
+
 
 ### 介紹鄰接列表 (Adjacency List)
 
