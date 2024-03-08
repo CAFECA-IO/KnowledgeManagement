@@ -13,9 +13,10 @@
 
 ### 介紹矩陣 (Matrix)
 
-在圖的表示方法中，矩陣是一個非常基本且重要的概念。矩陣是一個二維數組，用於表示節點間的關係。對於一個有 n 個節點的圖，我們可以使用一個 `n x n` 的矩陣來表示它。
+在圖的表示方法中，矩陣是一個非常基本且重要的概念。矩陣是一個二維陣列，用於表示節點間的關係。對於一個有 n 個節點的圖，我們可以使用一個 `n x n` 的矩陣來表示它。
 
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/21f3f6a5-d4f5-4f37-8da5-1d23d0e7ca54)
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/f21dafbf-c92e-40b4-9437-27f73e617222)
+
 
 
 ### 介紹鄰接矩陣 (Adjacency Matrix)
