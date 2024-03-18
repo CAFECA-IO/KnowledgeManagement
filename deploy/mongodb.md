@@ -69,7 +69,21 @@ security:
 
 ## Start mongodb with config file (background)
 ```shell
-sudo mongod --config /etc/mongod.conf &
+sudo screen mongod --config /etc/mongod.conf
+# Ctrl A + D to detach
+```
+```shell
+# find background process
+sudo screen -ls
+```
+```shell
+There is a screen on:
+	111748.pts-1.tidebit-defi-db	(03/18/2024 06:54:25 PM)	(Detached)
+```
+```shell
+# attach screen
+sudo screen -r 111748.pts-1.tidebit-defi-db
+# Ctrl + C to close
 ```
 ## Start mongodb at system start
 ```shell
