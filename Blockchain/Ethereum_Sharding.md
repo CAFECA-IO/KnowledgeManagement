@@ -59,7 +59,6 @@ Ethereum Sharding（分片技術），顧名思義，即將Ethereum網絡分割�
 
 
 ## 目前的情況
-已經移除 Ethereum Sharding 這個提案。
 ```
 分片是指將以太坊區塊鏈分割，使部分驗證者只需負責所有資料中的一小部分。 這原本是以太坊的擴容方式。 然而，二層網路卷軸的發展速度比預期快得多，並且已經提供大量擴容，並且 Proto-Danksharding 實作後將提供更多功能。 這意味著已不再需要「分片鏈」，並且已將其從開發藍圖中刪除。
 ```
@@ -67,6 +66,7 @@ Ethereum Sharding（分片技術），顧名思義，即將Ethereum網絡分割�
 
 2024年3月，Ethereum進行了名為Dencun的重大升級，旨在透過一系列Ethereum改進提案（EIP）增強區塊鏈的擴展性、效率和安全性。其中，EIP-4844或proto-danksharding是Dencun升級中的關鍵提案之一，預計將通過降低二層（L2）交易的gas費用，直接惠及Ethereum終端用戶。這次升級被視為自合併以來最重要的更新，將為實現使用層二rollups達到大規模擴展的網絡打下基礎 ["](https://www.techopedia.com/ethereum-upgrade-when-is-it-going-live)。
 
+Ethereum的分片方案不是因為技術壁壘被放棄，而是因為二層網絡解決方案，如Rollups的快速發展，已經有效提供了所需的擴容能力。此外，Proto-Danksharding的實施將進一步增強這些能力。這表示Ethereum的擴容策略已根據技術進步和社區需求進行了調整，而非分片技術本身過時或存在無法克服的技術障礙。這種策略調整反映了對目前和未來區塊鏈擴展需求的實際評估。
 
 ## 資源
 
