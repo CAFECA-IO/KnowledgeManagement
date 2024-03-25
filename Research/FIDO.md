@@ -305,6 +305,14 @@ if (verification.verified) {
 FIDO和DeWT提供了兩種不同的解決方案，以應對當前數位世界中的身分驗證挑戰。 FIDO透過生物辨識和實體金鑰提供了一個安全、用戶友好的認證方法，而DeWT則利用區塊鏈技術提供了一種去中心化的認證機制，賦予用戶更大的控制權。選擇哪種方案取決於應用的特定需求、目標使用者群體以及安全性和便利性的平衡點。
 
 ## 參考資料
+- [fido Alliance](https://fidoalliance.org/)
+- [fido Alliance: Developer Resources](https://fidoalliance.org/developers/resources/)
+- [WebAuthn Guide](https://webauthn.guide/)
+- [fido Alliance: Client to Authenticator Protocol (CTAP)](https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html)
+- *[Web Authentication:An API for accessing Public Key CredentialsLevel 2](https://www.w3.org/TR/webauthn-2/)
+- [github: SimpleWebAuthn](https://github.com/MasterKale/SimpleWebAuthn)
+- [fido Alliance: Download Authentication Specifications](https://fidoalliance.org/specifications/download/)
+- [fido Alliance: User Authentication Specifications Overview](https://fidoalliance.org/specifications/)
 - [DeWT](https://github.com/CAFECA-IO/KnowledgeManagement/blob/20906c2d364bdbfc67009c86477edd0313d40cdb/TideBit-DeFi/dewt.md)
 - [網路時代的最佳資安解決方案 1：FIDO的深入解析 (上)](https://www.webcomm.com.tw/blog/fido-introduction1/)
 - [網路時代的最佳資安解決方案 1：FIDO的深入解析 (下)](https://www.webcomm.com.tw/blog/fido-introduction2/)
