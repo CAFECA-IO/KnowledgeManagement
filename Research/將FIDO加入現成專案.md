@@ -1,5 +1,7 @@
 # 將FIDO2加入現成專案
 
+
+示意圖
 ## 研究目標
 
 在現有的專案服務中加入FIDO2功能，以提升使用者的安全性和便利性。
@@ -12,7 +14,10 @@
 npm install @passwordless-id/webauthn
 ```
 
-## 使用情境
+## 前後端添加功能示意圖
+![截圖 2024-03-26 下午5 29 10](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/ae6aaf30-7eb7-4da1-8a93-19e0c00744d5)
+
+## 使用情境：用戶授權給XXX網站登入，有效時間為60分鐘
 
 基本上，FIDO2的加入可以分為兩個部分：註冊和登入。在註冊階段，使用者需要透過FIDO2設備進行身份驗證，並將公鑰傳送至伺服器進行註冊。在登入階段，使用者需要透過FIDO2設備進行身份驗證，並將簽名傳送至伺服器進行登入。
 
@@ -25,7 +30,9 @@ npm install @passwordless-id/webauthn
 
 前端的client部分主要負責調用webauthn API，並將獲得的公鑰傳送至伺服器進行註冊。後端的server部分主要負責驗證從前端獲得的簽名，並進行登入。
 
-## 註冊範例
+## 註冊程式範例
+
+### 前端
 
 1. 前端發送request到後端獲取挑戰，挑戰為一串隨機字串
 2. 前端利用獲取的挑戰生成公鑰與資料
@@ -63,7 +70,9 @@ npm install @passwordless-id/webauthn
     }
     ```
 
-3. 後端收到registration object，並驗證正確性
+### 後端
+
+1. 後端收到registration object，並驗證正確性
 
     ```javascript
     import { server } from '@passwordless-id/webauthn' 
@@ -96,12 +105,15 @@ npm install @passwordless-id/webauthn
     }
     ```
 
-4. 後端將憑證金鑰(credential)儲存至資料庫
+    EdrawMax
+2. 將憑證金鑰(credential)儲存至資料庫
 
-## 登入範例
+## 登入程式範例
 
-1. 前端發送request到後端獲取挑戰，挑戰為一串隨機字串
-2. 前端利用獲取的挑戰生成簽名並傳送至後端
+### 前端
+
+1. 發送request到後端獲取挑戰，挑戰為一串隨機字串
+2. 利用獲取的挑戰生成簽名並傳送至後端
 
    - 傳送範例
 
@@ -129,7 +141,9 @@ npm install @passwordless-id/webauthn
      }
      ```
 
-3. 後端藉由憑證金鑰中的ID讀取資料庫中的資料與預期輸入值
+### 後端
+
+1. 後端藉由authentication中的credentialId讀取資料庫中的資料與預期輸入值
 
     ```javascript
     import { server } from '@passwordless-id/webauthn' 
@@ -149,7 +163,7 @@ npm install @passwordless-id/webauthn
     }
     ```
 
-4. 驗證數據與簽名正確性，並回傳登入結果
+2. 驗證數據與簽名正確性，並回傳登入結果
 
     ```javascript
     const authenticationParsed = await server.verifyAuthentication(authentication, credentialKey, expected)
