@@ -17,6 +17,18 @@ npm install @passwordless-id/webauthn
 ## 前後端添加功能示意圖
 ![截圖 2024-03-26 下午5 29 10](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/ae6aaf30-7eb7-4da1-8a93-19e0c00744d5)
 
+> [!WARNING] 由於瀏覽器安全設定，前端必須屬於Secure Origin才能使用，否則會有安全性限制，無法讀取某些瀏覽器敏感資料，因此API會呼叫失敗。
+
+> [!TIP] 根據Chromium的網站說明，Secure Origin包含但不限制於以下幾種模式：
+>
+> - (https, *,*)
+> - (wss, *,*)
+> - (*, localhost,*)
+> - (*, 127/8,*)
+> - (*, ::1/128,*)
+> - (file, *, —)
+> - (chrome-extension, *, —)
+
 ## 使用情境：用戶授權給XXX網站登入，有效時間為60分鐘
 
 基本上，FIDO2的加入可以分為兩個部分：註冊和登入。在註冊階段，使用者需要透過FIDO2設備進行身份驗證，並將公鑰傳送至伺服器進行註冊。在登入階段，使用者需要透過FIDO2設備進行身份驗證，並將簽名傳送至伺服器進行登入。
@@ -112,15 +124,19 @@ npm install @passwordless-id/webauthn
 
 ### 前端
 
-1. 發送request到後端獲取挑戰，挑戰為一串隨機字串
-2. 利用獲取的挑戰生成簽名並傳送至後端
+1. 確認Session是否已經存在
+2. 發送request到後端獲取挑戰，挑戰為一串隨機字串
+3. 利用獲取的挑戰生成簽名並傳送至後端
 
    - 傳送範例
 
       ```javascript
       import { client } from '@passwordless-id/webauthn'
 
-       const challenge = "56535b13-5d93-4194-a282-f234c1c24500" //挑戰
+       if (session) {
+       return 'session is already exist'
+       }
+       const challenge = async (challenge) => { /* 去後端查詢挑戰 */ return true },
        const credentialId = ["3924HhJdJMy_svnUowT8eoXrOOO6NLP8SK85q2RPxdU"] //使用者名稱
        const authentication = await client.authenticate(credentialId, challenge, {
        "authenticatorType": "auto",
@@ -168,6 +184,9 @@ npm install @passwordless-id/webauthn
     ```javascript
     const authenticationParsed = await server.verifyAuthentication(authentication, credentialKey, expected)
     // authenticationParsed 無實際功能只是回傳值
+    if (authenticationParsed != null) {
+      //實作session並回傳到前端完成登入
+    }
     ```
 
 ## 參考資料
