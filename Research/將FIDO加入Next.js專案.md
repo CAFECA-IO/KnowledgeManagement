@@ -43,7 +43,7 @@ npm install @passwordless-id/webauthn
 
 ## 註冊程式範例
 
-## 在FIDO2中所有簽署動作都伴隨一個挑戰(Challenge)，而挑戰為一串Base64字串，這邊可以利用Utils將想驗證的資訊，例如Create Timestamp轉換以下為範例
+在FIDO2中所有簽署動作都伴隨一個挑戰(Challenge)，而挑戰為一串Base64字串，這邊可以利用Utils將想驗證的資訊，例如Create Timestamp轉換以下為範例
 
 ```javascript
 import { utils } from '@passwordless-id/webauthn'
@@ -52,9 +52,7 @@ import { utils } from '@passwordless-id/webauthn'
      ) {
        let ArrayBuffer = utils.toBuffer(message);
        let challenge = utils.toBase64url(ArrayBuffer);
-       while(!utils.isBase64url(challenge)) {
-          challenge =utils.toBase64url(ArrayBuffer)
-       }
+       challenge =utils.toBase64url(ArrayBuffer)
        return challenge;
      };
 let challenge = await createChallenge('FIDO2.TEST.reg-'+ (Date.now()+ 60000).toString()+ '-hello');
@@ -229,9 +227,8 @@ return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
 3. 前端將登入結果存在localstorage用來做登入檢查
 
 ```javascript
-   if (!localStorage.getItem("authenticationParsed")) {
+
       localStorage.setItem("authenticationParsed", JSON.stringify(authentications);
-   }
    
 ```
 
@@ -239,3 +236,4 @@ return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
 ## 參考資料
 
 - [passwordless-id / webauthn](https://github.com/passwordless-id/webauthn/tree/main)
+- [The Chromium Projects](https://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features/)
