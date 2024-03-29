@@ -12,7 +12,7 @@
 - dd
 - i
 - :wq
-
+- rm -rf
 - pm2
   - start
   - log
@@ -20,7 +20,7 @@
   - kill
   - delete
   - restart 
-- rm -rf
+
 - sh
 
 
@@ -103,5 +103,15 @@
 ![CleanShot 2024-03-29 at 17 24 50@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/6af5cc27-3608-41c6-a876-b97b428faf38)
 ![CleanShot 2024-03-29 at 17 27 53@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/320f1f8d-5cdf-4840-b9c4-0fca2569beed)
 
+### :star: rm 刪除資料夾、檔案
+- rm [資料夾名稱] -rf
+- -r：當 檔案 參數是目錄時，允許遞迴移除目錄及其內容
+- -f：在移除防寫檔案之前不提示，如果指定的檔案不存在，則不顯示錯誤訊息或傳回錯誤狀態
+
+  輸入 `rm 0322gibbstest -rf` 強制刪除此資料夾及其中檔案
+  
+![CleanShot 2024-03-29 at 18 06 15@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/f964dccc-962d-4b19-baf4-66364acd6e01)
+
+### :star: pm2 管理
 
 
