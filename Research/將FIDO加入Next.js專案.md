@@ -1,4 +1,4 @@
-# 將FIDO2加入現成專案
+# 將FIDO2加入Next.js專案
 
 
 示意圖
@@ -33,28 +33,45 @@ npm install @passwordless-id/webauthn
 
 基本上，FIDO2的加入可以分為兩個部分：註冊和登入。在註冊階段，使用者需要透過FIDO2設備進行身份驗證，並將公鑰傳送至伺服器進行註冊。在登入階段，使用者需要透過FIDO2設備進行身份驗證，並將簽名傳送至伺服器進行登入。
 
-圍繞這兩個功能主要會使用到4個modules：
+圍繞這兩個功能主要會使用到3個modules：
 
 - client：用於在瀏覽器中調用webauthn
 - server：用於在伺服器中驗證回應
-- parsers：用於解析部分或全部已編碼數據，無需驗證
 - utils：各種編碼、解碼、挑戰生成器和其他工具
 
 前端的client部分主要負責調用webauthn API，並將獲得的公鑰傳送至伺服器進行註冊。後端的server部分主要負責驗證從前端獲得的簽名，並進行登入。
 
 ## 註冊程式範例
 
+## 在FIDO2中所有簽署動作都伴隨一個挑戰(Challenge)，而挑戰為一串Base64字串，這邊可以利用Utils將想驗證的資訊，例如Create Timestamp轉換以下為範例
+
+```javascript
+import { utils } from '@passwordless-id/webauthn'
+ async function createChallenge(
+       message: string
+     ) {
+       let ArrayBuffer = utils.toBuffer(message);
+       let challenge = utils.toBase64url(ArrayBuffer);
+       while(!utils.isBase64url(challenge)) {
+          challenge =utils.toBase64url(ArrayBuffer)
+       }
+       return challenge;
+     };
+let challenge = await createChallenge('FIDO2.TEST.reg-'+ (Date.now()+ 60000).toString()+ '-hello');
+return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
+```
+> [!WARNING] Base64字串須為URL安全的，因為實測utils.toBase64url仍會出現不符合規定的Base64字串，因此須先人工確定格式。
+
 ### 前端
 
-1. 前端發送request到後端獲取挑戰，挑戰為一串隨機字串
+1. 前端發送request到後端獲取挑戰，
 2. 前端利用獲取的挑戰生成公鑰與資料
 
    - 傳送範例
 
    ```javascript
    import { client } from '@passwordless-id/webauthn' 
-
-   const challenge = "a7c61ef9-dc23-4806-b486-2428938a547e"
+   const challenge = 'RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv';
    const name = "Arnaud"
    const options? = {
      authenticatorType: "auto",
@@ -117,16 +134,40 @@ npm install @passwordless-id/webauthn
     }
     ```
 
-    EdrawMax
 2. 將憑證金鑰(credential)儲存至資料庫
+
+以下為測試時暫存在localstorage的範例
+```javascript
+   if (!localStorage.getItem("registrationParsed")) {
+      localStorage.setItem("registrationParsed", JSON.stringify(registrationArray));
+   }
+   
+```
 
 ## 登入程式範例
 
 ### 前端
 
-1. 確認Session是否已經存在
-2. 發送request到後端獲取挑戰，挑戰為一串隨機字串
-3. 利用獲取的挑戰生成簽名並傳送至後端
+1. 確認是否已經註冊
+```javascript
+   const registration = registration.find((reg) => reg.credential.id === authentication.credentialId);
+    alert(JSON.stringify(registration));
+```
+2. 確認是否已經登入
+   ```javascript
+   import { utils } from '@passwordless-id/webauthn'
+   
+    let existChallenge = existRegistrationArray[0].client.challenge;
+    let originArrayBuffer = utils.parseBase64url(existChallenge);
+    let originChallenge = utils.parseBuffer(originArrayBuffer);
+    let originTimestamp = originChallenge.split('-')[1];
+    if (Number(originTimestamp) > Date.now()) {
+      alert("login is already exist");
+      return "login is already exist";
+    }
+   ```
+4. 發送request到後端獲取挑戰
+5. 利用獲取的挑戰生成簽名並傳送至後端
 
    - 傳送範例
 
@@ -183,11 +224,17 @@ npm install @passwordless-id/webauthn
 
     ```javascript
     const authenticationParsed = await server.verifyAuthentication(authentication, credentialKey, expected)
-    // authenticationParsed 無實際功能只是回傳值
-    if (authenticationParsed != null) {
-      //實作session並回傳到前端完成登入
-    }
+
     ```
+3. 前端將登入結果存在localstorage用來做登入檢查
+
+```javascript
+   if (!localStorage.getItem("authenticationParsed")) {
+      localStorage.setItem("authenticationParsed", JSON.stringify(authentications);
+   }
+   
+```
+
 
 ## 參考資料
 
