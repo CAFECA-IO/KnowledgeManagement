@@ -1,5 +1,8 @@
 # 將FIDO2加入Next.js專案
 
+## 摘要
+
+本文說明如何在Next.js專案中，整合FIDO2標準，以增強應用程序的安全性和用戶體驗。透過安裝`@passwordless-id/webauthn`庫，開發者可以在前端和後端實現無密碼身份驗證功能。前端部分涉及調用WebAuthn API來生成公鑰，並將其發送到後端進行註冊。後端則負責驗證從前端收到的簽名，以完成用戶登入過程。此外，還需注意瀏覽器的安全原則，確保前端運行在安全的來源上，以避免API呼叫失敗。FIDO2的實施分為註冊和登入兩個階段，涉及到客戶端、伺服器端和工具模組的協同工作。註冊過程中，用戶通過FIDO2設備進行身份驗證，並將公鑰註冊到伺服器。登入時，用戶再次透過FIDO2設備進行身份驗證，並將簽名發送到伺服器以完成登入。整個過程強調了Base64編碼的安全性和挑戰/回應模式的重要性，這對於維護安全性和提供無密碼登入體驗至關重要。
 
 示意圖
 ## 研究目標
@@ -53,12 +56,13 @@ import { utils } from '@passwordless-id/webauthn'
        let ArrayBuffer = utils.toBuffer(message);
        let challenge = utils.toBase64url(ArrayBuffer);
        challenge =utils.toBase64url(ArrayBuffer)
+       challenge = challenge.replace(/=/g, "");
        return challenge;
      };
 let challenge = await createChallenge('FIDO2.TEST.reg-'+ (Date.now()+ 60000).toString()+ '-hello');
 return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
 ```
-> [!WARNING] Base64字串須為URL安全的，因為實測utils.toBase64url仍會出現不符合規定的Base64字串，因此須先人工確定格式。
+> [!NOTE] Base64字串須為URL安全的，因為實測utils.toBase64url仍會出現不符合規定的Base64字串，因此須將用來補全的`=`刪除。
 
 ### 前端
 
