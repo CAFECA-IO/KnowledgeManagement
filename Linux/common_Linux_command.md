@@ -1,7 +1,7 @@
 ## 常見的 Linux 指令
 
 本文以 BAIFA-WEB-CRAWLING 為例, 說明常使用的 Linux 指令
-
+可使用 outline 直接點擊欲瀏覽的該指令
 - cd
 - mkdir
 - git clone
