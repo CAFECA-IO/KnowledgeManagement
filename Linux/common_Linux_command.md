@@ -22,7 +22,7 @@
   - kill
   - log
   - 查看log
-- sh
+- du
 
 
  
