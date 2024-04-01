@@ -15,12 +15,13 @@
 - rm -rf
 - pm2
   - start
-  - log
   - stop
-  - kill
+  - restart
+  - list
   - delete
-  - restart 
-
+  - kill
+  - log
+  - 查看log
 - sh
 
 
@@ -94,9 +95,7 @@
 
 ### :star: i 編輯模式
 - 在 vim 環境中, 在要編輯處按下 `i` 進入編輯模式
-  
-- 編輯完後按 `esc` 離開編輯模式
-  
+- 編輯完後按 `esc` 離開編輯模式  
 - 接著按 `:wq` 存檔並離開該檔案
 
 ![CleanShot 2024-03-29 at 17 21 56@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/263e2117-4cb2-437c-b082-bf162c44e5f8)
@@ -113,5 +112,50 @@
 ![CleanShot 2024-03-29 at 18 06 15@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/f964dccc-962d-4b19-baf4-66364acd6e01)
 
 ### :star: pm2 管理
+- 安裝pm2：`npm install pm2 -g`
+- 進到包含有效的 "package.json" 文件（需包含一個 "start" 腳本）路徑中執行指令：
+
+  `pm2 start npm --name 0329ver -- start`
+
+  - `pm2 start`：PM2 的基本命令, 啟動一個新的應用程序
+  - `npm`：指定了要啟動的應用程序是一個 Node.js 應用程序
+  - `--name 0329ver`：給應用程序命名, 這裡名稱被指定為 "0329ver"
+  - `-- start`：告訴 PM2 要運行 npm 的 "start" 腳本來啟動應用程序
+
+- pm2 stop [id 或是 name] --> 停止該應用程序
+![CleanShot 2024-04-01 at 11 08 04@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/414697dc-b54b-421a-90d0-e7310f20e59d)
+![CleanShot 2024-04-01 at 11 13 18@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/8f0a3983-ecdf-4e87-b6d7-97c7969b0f53)
+
+- pm2 restart [id 或是 name] --> 重新啟動該應用程序
+![CleanShot 2024-04-01 at 11 28 57@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/f63a0d42-b467-4465-83ae-ace1c6bd2ad3)
+
+- pm2 list --> 列出目前所有的應用程序
+![CleanShot 2024-04-01 at 11 33 34@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/95d610f7-dab6-46ec-9ced-b5ad792dd2b7)
+
+- pm2 delete [id 或是 name] --> 刪除指定應用程序
+- 若想刪除目前所有應用程序, 直些輸入 `pm2 kill`
+![CleanShot 2024-04-01 at 11 35 25@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/ddc4ab25-ff36-47c2-94f9-b731fa2aef20)
+
+- pm2 log [id 或是 name] --> 顯示指定應用程序最新15筆log (out log 及 error log)
+![CleanShot 2024-04-01 at 11 50 29@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/4912185c-f1df-4c2c-9126-fa1a283b267e)
+
+### :star: 查詢 log 檔案
+- `cd ~` --> 前往根目錄
+- `ls -al` --> 顯示含隱藏的所有檔案
+- `cd .pm2` --> 前往隱藏資料夾 .pm2
+- `cd logs` --> 前往 logs 資料夾
+![CleanShot 2024-04-01 at 13 48 13@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/825ffc6a-8976-4705-a93e-bfa6d4934371)
+
+### :star: du 查詢目錄及檔案使用空間大小
+- `du` --> 檢視檔案與目錄的使用空間狀態
+- `-h` --> 將檔案大小以易讀方式呈現
+- `-a` --> 列出所有檔案及資料夾, 包含隱藏檔
+![CleanShot 2024-04-01 at 14 01 40@2x](https://github.com/CAFECA-IO/KnowledgeManagement/assets/73210852/11798b53-6e3d-43cd-95ad-8085b6592d54)
+
+
+
+
+
+
 
 
