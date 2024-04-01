@@ -7,7 +7,7 @@
 示意圖
 ## 研究目標
 
-在現有的專案服務中加入FIDO2功能，以提升使用者的安全性和便利性。
+在現有的next.js專案服務中加入FIDO2功能，以提升使用者的安全性和便利性。
 
 ## [passwordless-id / webauthn](https://github.com/passwordless-id/webauthn/tree/main)
 
@@ -15,6 +15,25 @@
 
 ```bash
 npm install @passwordless-id/webauthn
+```
+
+### 安裝 next.js 庫
+
+```bash
+npx create-next-app@latest
+```
+
+自由選擇以下所需的設定，不影響後續實作
+
+```bash
+What is your project named? my-app
+Would you like to use TypeScript? No / Yes
+Would you like to use ESLint? No / Yes
+Would you like to use Tailwind CSS? No / Yes
+Would you like to use `src/` directory? No / Yes
+Would you like to use App Router? (recommended) No / Yes
+Would you like to customize the default import alias (@/*)? No / Yes
+What import alias would you like configured? @/*
 ```
 
 ## 前後端添加功能示意圖
@@ -32,6 +51,11 @@ npm install @passwordless-id/webauthn
 > - (file, *, —)
 > - (chrome-extension, *, —)
 
+## 實作原理流程圖
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/58aa050a-f0a8-4cd2-85c3-44cd0f3715b5)
+
+
 ## 使用情境：用戶授權給XXX網站登入，有效時間為60分鐘
 
 基本上，FIDO2的加入可以分為兩個部分：註冊和登入。在註冊階段，使用者需要透過FIDO2設備進行身份驗證，並將公鑰傳送至伺服器進行註冊。在登入階段，使用者需要透過FIDO2設備進行身份驗證，並將簽名傳送至伺服器進行登入。
@@ -44,7 +68,51 @@ npm install @passwordless-id/webauthn
 
 前端的client部分主要負責調用webauthn API，並將獲得的公鑰傳送至伺服器進行註冊。後端的server部分主要負責驗證從前端獲得的簽名，並進行登入。
 
-## 註冊程式範例
+## 程式範例
+
+首先在page.tsx存在的資料夾創建 myButton.tsx，之後會作為page的component引入至page，在myButton.tsx模擬前後端的註冊與登入功能
+
+## 按鈕範例
+
+myButton.tsx
+
+```javascript
+export function MyButton() {
+// 創建挑戰
+// 註冊
+// 登入
+// 驗證註冊
+// 驗證登入
+return (
+    <div>
+      <button
+        className={`mb-3 text-2xl font-semibold`}
+        onClick={() => register()}
+      >
+        register
+      </button>
+      <br />
+      <button className={`mb-3 text-2xl font-semibold`} onClick={() => login()}>
+        login
+      </button>
+      <br />
+    </div>
+  );
+}
+```
+
+page.tsx 
+
+```javascript
+import { MyButton } from "./myButton";
+...
+// 於刪除預設DOM中的element並加入以下element
+<div>
+        <MyButton/>
+</div>
+```
+
+## 創建挑戰範例
 
 在FIDO2中所有簽署動作都伴隨一個挑戰(Challenge)，而挑戰為一串Base64字串，這邊可以利用Utils將想驗證的資訊，例如Create Timestamp轉換以下為範例
 
@@ -63,6 +131,8 @@ let challenge = await createChallenge('FIDO2.TEST.reg-'+ (Date.now()+ 60000).toS
 return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
 ```
 > [!NOTE] Base64字串須為URL安全的，因為實測utils.toBase64url仍會出現不符合規定的Base64字串，因此須將用來補全的`=`刪除。
+
+## 註冊範例
 
 ### 前端
 
@@ -141,12 +211,12 @@ return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
 以下為測試時暫存在localstorage的範例
 ```javascript
    if (!localStorage.getItem("registrationParsed")) {
-      localStorage.setItem("registrationParsed", JSON.stringify(registrationArray));
+      localStorage.setItem("registrationParsed", JSON.stringify(registrationParsed));
    }
    
 ```
 
-## 登入程式範例
+## 登入範例
 
 ### 前端
 
@@ -168,8 +238,8 @@ return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
       return "login is already exist";
     }
    ```
-4. 發送request到後端獲取挑戰
-5. 利用獲取的挑戰生成簽名並傳送至後端
+3. 發送request到後端獲取挑戰
+4. 利用獲取的挑戰生成簽名並傳送至後端
 
    - 傳送範例
 
@@ -232,9 +302,13 @@ return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
 
 ```javascript
 
-      localStorage.setItem("authenticationParsed", JSON.stringify(authentications);
+      localStorage.setItem("authenticationParsed", JSON.stringify(authenticationParsed);
    
 ```
+
+## 實際運行畫面
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/3eb330dd-c80e-4001-a809-c329fc0bb7d9)
 
 
 ## 參考資料
