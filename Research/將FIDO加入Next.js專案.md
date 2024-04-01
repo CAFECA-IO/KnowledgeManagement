@@ -308,8 +308,22 @@ return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
 
 ## 實際運行畫面
 
+**註冊**
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/3eb330dd-c80e-4001-a809-c329fc0bb7d9)
 
+![截圖 2024-04-01 下午3 59 54](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/3462ab5f-b661-477d-aaa7-fc0b2f7879f0)
+
+https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/e56eed8e-65ff-4e96-9125-57b35aae1b34
+
+![截圖 2024-04-01 下午4 16 02](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/d8860868-679b-4ccc-aed2-a5b169e6176a)
+
+**登入**
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/3eb330dd-c80e-4001-a809-c329fc0bb7d9)
+
+https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/38fa5ed9-5551-428a-b505-402153ad7c53
+
+![截圖 2024-04-01 下午4 16 16](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/3e44723d-7a77-42d3-ac7a-6cdf2aa62be7)
 
 ## 參考資料
 
