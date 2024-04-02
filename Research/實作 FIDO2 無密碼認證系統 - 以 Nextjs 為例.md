@@ -68,7 +68,7 @@ What import alias would you like configured? @/*
 
 前端的client部分主要負責調用webauthn API，並將獲得的公鑰傳送至伺服器進行註冊。後端的server部分主要負責驗證從前端獲得的簽名，並進行登入。
 
-## 程式範例
+## 程式範例 [DEMO](https://github.com/CAFECA-IO/webauthntest)
 
 首先在page.tsx存在的資料夾創建 myButton.tsx，之後會作為page的component引入至page，在myButton.tsx模擬前後端的註冊與登入功能
 
@@ -307,7 +307,6 @@ return challenge // RklETzIuVEVTVC5sb2dpbi0xNzExNzAxNjUwNTQ3LWhlbGxv
 ```
 
 ## 實際運行畫面
-
 **註冊**
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/3eb330dd-c80e-4001-a809-c329fc0bb7d9)
 
