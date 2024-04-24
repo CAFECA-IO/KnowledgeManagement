@@ -1,4 +1,4 @@
-# 使用 FastAPI 構建 Surya OCR 服務
+# AI 機器視覺概述：以 Surya 與 FastAPI 快速實現圖像資料萃取
 
 本指南中，我們將學習如何使用FastAPI構建Surya OCR（光學字符識別）服務。我們將涵蓋以下術語和概念：
 
