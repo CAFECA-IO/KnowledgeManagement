@@ -181,8 +181,8 @@
 
 4. 統一發票掃描檔
 
-![results](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/7fbe8f9a-7bb5-4b71-b66b-d3dcc16469b6)
 ![travel](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/5c0e53ef-8897-4324-a876-afd23594631f)
+![results](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/7fbe8f9a-7bb5-4b71-b66b-d3dcc16469b6)
 
 結果：基本上90%都有辨別出字，右上角背景模糊過的數字無法辨識，與收執聯看不懂，其餘基本正確
 
