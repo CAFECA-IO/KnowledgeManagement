@@ -6,7 +6,7 @@
 # 1. 前言
 
 
-B-Tree 是為了讓我們在硬碟中找資料時，不要存取太多次硬碟，因為硬碟讀取速度很慢，但可以存很多東西。所以我們可以在一個Node裡面多塞幾個，然後把整個tree的高度壓扁一點，高度越低訪問硬碟的次數月少。
+B-Tree 是為了讓我們在硬碟中找資料時，不要存取太多次硬碟，因為硬碟讀取速度很慢，但可以存很多東西。所以我們可以在一個Node裡面多塞幾個，然後把整個tree的高度壓扁一點，高度越低訪問硬碟的次數越少。
 
 > 以下python是使用 Type strict去寫，所以code有很多type的設定大家可以忽略
 
@@ -23,7 +23,9 @@ B-Tree 是為了讓我們在硬碟中找資料時，不要存取太多次硬碟�
 6. 除了root以外的node，每個node最多n 個 child，最少 n/2個child，這是為了有效利用BTree的結構，在一個node裡存多一點東西。實做上會用 t = n/2 代替，所以一個node最多2t children, 最少 t children
 7. root 最少要有一個key和兩個child（除了最一開始時)
 8. 所有leaf都在同一個高度
-9. 如果 `n >= 1`, 任何一個有 n個 "key"的 BTree, (並有 `h` 高度，以及node最小children數`t`)時， `h ≥ logt (n+1)/2` （不知道怎麼證明）
+9. BTree最大容納與最小容納數如下
+    9.1 樹狀結構需提供公式告知已知高度 h，node 最多 children 數 m，最少 children 數 t = ceil(m/2)，最大可容納的節點數(Node數量) $f_{\text{maxn}}(m, h) = \frac{m^{h+1} - 1}{m - 1}$
+    9.2. 樹狀結構需提供公式告知已知總節點數 n，node 最多 children 數 m，最少 children 數 t = ceil(m/2)，樹最小高度為 $f_{\text{minh}}(m, n) =\log_m (mn - n + 1) - 1$
 
 
 | 演算法 | **平均**     | **最差**     |
@@ -71,7 +73,7 @@ class BTree():
 ```
 
 ## 3-3 search
-可以先看：[[B tree#3-3 步驟演示]]
+可以先看：[3-3 步驟演示](#3-3-步驟演示)
 
 ### 3-3 範例code
 - 先移動到 尋找值key 可能存在的地方，也就是 比左邊的key都還要大
@@ -122,7 +124,7 @@ class BTree():
 ![](https://cdn.programiz.com/sites/tutorial2program/files/search-6.png)
 
 ## 3-4 Insert
-可以先看 [[B tree#3-4 步驟演示]]
+可以先看 [3-4 步驟演示](#3-4-步驟演示)
 
 ### 3-4 範例code
 ```python
@@ -255,7 +257,7 @@ class BTree():
 ### 3-4 步驟2 insert non root
 以下是在不是root的時候的插入狀況，分以下兩個狀況
 1. 是中間Node(有小孩)：
-	1. 從右邊往左找(不知道為什麼)，找到可以插入的點 i
+	1. 從右邊往左找(此為非約定慣例)，找到可以插入的點 i
 	2. 如果爆倉了，就把 `children[i]`切開，切完後 `keys[i]`會變成`children[i].keys[t-1]`
 	3. 不論有沒有切，遞迴 `i`
 2. 是leaf
@@ -416,7 +418,7 @@ insert root和 下面圖片的邏輯不太一樣，code是用top down的方法�
             node.keys[i] = self.deleteSuccessor(node.children[i + 1])
             return node.keys[i]
         else:
-            # 如果左右小孩都不夠，就合併左右小孩？？？
+            # 如果左右小孩都不夠，就合併左右小孩
             self.mergeSibling(node, i, i + 1)
             return self.deleteInternalNode(node.children[i], keyValue, t - 1)
 
@@ -464,20 +466,20 @@ insert root和 下面圖片的邏輯不太一樣，code是用top down的方法�
         # 先辨認i 和 j 哪個是左兄弟
         # 把右兄弟（source）併到左兄弟(target)
 
-        # 确定合并方向和参与合并的节点
-        targetNode = parentNode.children[i]  # 默认当前节点为目标节点
-        sourceNode = parentNode.children[j]  # 来源节点
+        # 確定合併方向與參與合併的節點
+        targetNode = parentNode.children[i] 
+        sourceNode = parentNode.children[j] 
         sourceIndex = j
         targetIndex = i
 
         if j < i:  # 如果左兄弟是来源
-            targetNode, sourceNode = sourceNode, targetNode  # 交换，确保targetNode是合并后保留的节点
+            targetNode, sourceNode = sourceNode, targetNode  # swap，確保targetNode是合併後最後存留下來的節點
             sourceIndex, targetIndex = targetIndex, sourceIndex 
         
-        # source 併入 target
-        targetNode.keys.append(parentNode.keys[targetIndex])  # 将parent的key下移到target
+        # source 並入 target
+        targetNode.keys.append(parentNode.keys[targetIndex])  # 將parent的key下移到target
 
-        # 将source的key和child移動到target，會剩最後一個child, 因為child比key多一個
+        # 將source的key和child移動到target，會剩最後一個child, 因為child比key多一個
         for k in range(len(sourceNode.keys)):
             targetNode.keys.append(sourceNode.keys[k])
             if sourceNode.children: # 如果有children, 不是leaf
@@ -589,20 +591,20 @@ insert root和 下面圖片的邏輯不太一樣，code是用top down的方法�
         # 先辨認i 和 j 哪個是左兄弟
         # 把右兄弟（source）併到左兄弟(target)
 
-        # 确定合并方向和参与合并的节点
-        targetNode = parentNode.children[i]  # 默认当前节点为目标节点
-        sourceNode = parentNode.children[j]  # 来源节点
+        # 確定合併方向與參與合併的節點
+        targetNode = parentNode.children[i] 
+        sourceNode = parentNode.children[j] 
         sourceIndex = j
         targetIndex = i
 
         if j < i:  # 如果左兄弟是来源
-            targetNode, sourceNode = sourceNode, targetNode  # 交换，确保targetNode是合并后保留的节点
+            targetNode, sourceNode = sourceNode, targetNode  # swap，確保targetNode是合併後最後存留下來的節點
             sourceIndex, targetIndex = targetIndex, sourceIndex 
         
-        # source 併入 target
-        targetNode.keys.append(parentNode.keys[targetIndex])  # 将parent的key下移到target
+        # source 並入 target
+        targetNode.keys.append(parentNode.keys[targetIndex])  # 將parent的key下移到target
 
-        # 将source的key和child移動到target，會剩最後一個child, 因為child比key多一個
+        # 將source的key和child移動到target，會剩最後一個child, 因為child比key多一個
         for k in range(len(sourceNode.keys)):
             targetNode.keys.append(sourceNode.keys[k])
             if sourceNode.children: # 如果有children, 不是leaf
@@ -716,7 +718,7 @@ insert root和 下面圖片的邏輯不太一樣，code是用top down的方法�
             node.keys[i] = self.deleteSuccessor(node.children[i + 1])
             return node.keys[i]
         else:
-            # 如果左右小孩都不夠，就合併左右小孩？？？
+            # 如果左右小孩都不夠，就合併左右小孩
             self.mergeSibling(node, i, i + 1)
             return self.deleteInternalNode(node.children[i], keyValue, t - 1)
 ```
@@ -1071,20 +1073,20 @@ class BTree():
         # 先辨認i 和 j 哪個是左兄弟
         # 把右兄弟（source）併到左兄弟(target)
 
-        # 确定合并方向和参与合并的节点
-        targetNode = parentNode.children[i]  # 默认当前节点为目标节点
-        sourceNode = parentNode.children[j]  # 来源节点
+        # 確定合併方向與參與合併的節點
+        targetNode = parentNode.children[i] 
+        sourceNode = parentNode.children[j] 
         sourceIndex = j
         targetIndex = i
 
         if j < i:  # 如果左兄弟是来源
-            targetNode, sourceNode = sourceNode, targetNode  # 交换，确保targetNode是合并后保留的节点
+            targetNode, sourceNode = sourceNode, targetNode  # swap，確保targetNode是合併後最後存留下來的節點
             sourceIndex, targetIndex = targetIndex, sourceIndex 
         
-        # source 併入 target
-        targetNode.keys.append(parentNode.keys[targetIndex])  # 将parent的key下移到target
+        # source 並入 target
+        targetNode.keys.append(parentNode.keys[targetIndex])  # 將parent的key下移到target
 
-        # 将source的key和child移動到target，會剩最後一個child, 因為child比key多一個
+        # 將source的key和child移動到target，會剩最後一個child, 因為child比key多一個
         for k in range(len(sourceNode.keys)):
             targetNode.keys.append(sourceNode.keys[k])
             if sourceNode.children: # 如果有children, 不是leaf
