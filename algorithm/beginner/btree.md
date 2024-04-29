@@ -23,9 +23,9 @@ B-Tree 是為了讓我們在硬碟中找資料時，不要存取太多次硬碟�
 6. 除了root以外的node，每個node最多n 個 child，最少 n/2個child，這是為了有效利用BTree的結構，在一個node裡存多一點東西。實做上會用 t = n/2 代替，所以一個node最多2t children, 最少 t children
 7. root 最少要有一個key和兩個child（除了最一開始時)
 8. 所有leaf都在同一個高度
-9. BTree最大容納與最小容納數如下
-    9.1 樹狀結構需提供公式告知已知高度 h，node 最多 children 數 m，最少 children 數 t = ceil(m/2)，最大可容納的節點數(Node數量) $f_{\text{maxn}}(m, h) = \frac{m^{h+1} - 1}{m - 1}$
-    9.2. 樹狀結構需提供公式告知已知總節點數 n，node 最多 children 數 m，最少 children 數 t = ceil(m/2)，樹最小高度為 $f_{\text{minh}}(m, n) =\log_m (mn - n + 1) - 1$
+9. BTree最大容納與最小容納數如下:
+    1. 樹狀結構需提供公式告知已知高度 h，node 最多 children 數 m，最少 children 數 t = ceil(m/2)，最大可容納的節點數(Node數量) $f_{\text{maxn}}(m, h) = \frac{m^{h+1} - 1}{m - 1}$
+    2. 樹狀結構需提供公式告知已知總節點數 n，node 最多 children 數 m，最少 children 數 t = ceil(m/2)，樹最小高度為 $f_{\text{minh}}(m, n) =\log_m (mn - n + 1) - 1$
 
 
 | 演算法 | **平均**     | **最差**     |
