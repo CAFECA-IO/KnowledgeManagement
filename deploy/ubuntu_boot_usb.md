@@ -1,4 +1,7 @@
 # Ubuntu Boot USB
+## Environment
+- MacOS X
+- Ubuntu 24.04 ISO
 
 ## Setup USB with Mac OS
 - Find USB Disk
@@ -20,11 +23,11 @@ Unmount of all volumes on disk17 was successful
 ```
 - Create DMG
 ```
-hdiutil convert -format UDRW -o ubuntu-22.04.4-live-server-amd64.dmg ubuntu-22.04.4-live-server-amd64.iso
+hdiutil convert -format UDRW -o ubuntu-24.04-live-server-amd64.dmg ubuntu-24.04-live-server-amd64.iso
 ```
 - Create Boot Disk with DMG
 ```
-sudo dd if=ubuntu-22.04.4-live-server-amd64.dmg of=/dev/rdisk17 bs=1m
+sudo dd if=ubuntu-24.04-live-server-amd64.dmg of=/dev/rdisk17 bs=1m
 ```
 - Eject USB
 ```
