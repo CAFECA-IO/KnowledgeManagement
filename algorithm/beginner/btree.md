@@ -819,7 +819,7 @@ insert root和 下面圖片的邏輯不太一樣，code是用top down的方法�
 - [Github總集合：yt-challenge](https://github.com/michaelg29/yt-challenges)
 - [Programming Challenges](https://www.youtube.com/playlist?list=PLysLvOneEETP-XQZQ6VTdMIHmxbGxX6nX)
 - [Eric O Meehan](https://www.youtube.com/@eom-dev/videos)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mHI-7bCgDtM?si=O3d5E-H5Bt0lVLn4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+- [Programming Challenges - 30 - B-Tree Search/Insertion (C)](https://www.youtube.com/watch?v=mHI-7bCgDtM)
 
 # 備註：全部檔案
 
