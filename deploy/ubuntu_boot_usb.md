@@ -31,11 +31,24 @@ sudo diskutil zeroDisk /dev/disk17
 ```
 ```
 Started erase on disk17
-[ / 0%..10%.............................................. ] 10.9% 
+[ / 0%..10%.............................................. ] 10.9%
+Finished erase on disk17
 ```
 - Format Disk
 ```shell
-sudo diskutil eraseDisk FAT32 Ubuntu24U /dev/disk2
+sudo diskutil eraseDisk FAT32 Ubuntu24U /dev/disk17
+```
+```
+Started erase on disk17
+Unmounting disk
+Creating the partition map
+Waiting for partitions to activate
+Formatting disk17s2 as MS-DOS (FAT32) with name Ubuntu24U
+512 bytes per physical sector
+/dev/rdisk17s2: 120702144 sectors in 1885971 FAT32 clusters (32768 bytes/cluster)
+bps=512 spc=64 res=32 nft=2 mid=0xf8 spt=32 hds=255 hid=411648 drv=0x80 bsec=120731648 bspf=14735 rdcl=2 infs=1 bkbs=6
+Mounting disk
+Finished erase on disk17
 ```
 
 ## Setup USB with Mac OS
