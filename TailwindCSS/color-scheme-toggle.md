@@ -2,7 +2,8 @@
 
 暗黑模式/明亮模式的切換是現代網站越來越常見的需求，這篇文章探討使用 TailwindCSS 實作暗黑模式/明亮模式切換的方法，以及在產品迭代跟團隊協作中的最佳實踐作法。
 
-本文使用 Next.js 作為示範，每個段落都有對應的程式碼實踐，其中在 [延伸] 段落有 [Live demo](https://dark-mode-tailwindcss-best-practice.vercel.app/)。
+本文使用 Next.js 作為示範，每個段落都有對應的程式碼實踐，其中在 "[延伸] 實作多個配色方案的模式切換 (best practice)"
+ 有 [Live demo](https://dark-mode-tailwindcss-best-practice.vercel.app/)。
 
 # 在 Tailwind CSS 實現模式切換的方法
 
