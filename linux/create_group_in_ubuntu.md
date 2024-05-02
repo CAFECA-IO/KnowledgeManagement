@@ -35,4 +35,5 @@ These commands need to be executed with administrative privileges, usually acqui
 change the owner of the folder and all files under the folder to developer Group
 ```shell
 sudo chown -R :developer /your_folder/
+sudo chmod -R 775 /your_folder/
 ```
