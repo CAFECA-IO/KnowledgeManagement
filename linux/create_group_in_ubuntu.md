@@ -30,3 +30,9 @@ developer:x:1004:user1,user2,user3
 
 # Note
 These commands need to be executed with administrative privileges, usually acquired by using sudo to gain the necessary permissions. Make sure you have the proper rights before running these commands and that the user accounts already exist in the system.
+
+## Change File Owner to the Group
+change the owner of the folder and all files under the folder to developer Group
+```shell
+sudo chown -R :developer /your_folder/
+```
