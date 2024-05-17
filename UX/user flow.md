@@ -24,3 +24,8 @@ User Flow 使用者流程圖主要的功能是為了顯示使用者在使用產�
 ## User Flows Type 使用者流程圖的類型
 
 ## Reference
+- [What are User Flows in User Experience (UX) Design?](https://careerfoundry.com/en/blog/ux-design/what-are-user-flows/)
+
+- [11 User Flow Examples + How to Inform UX Design With Them](https://userpilot.com/blog/user-flow-examples/)
+
+- [User Flow-The Beginner’s Guide](https://medium.com/@nasir-ahmed03/user-flow-the-beginners-guide-12b1956ced7e)
