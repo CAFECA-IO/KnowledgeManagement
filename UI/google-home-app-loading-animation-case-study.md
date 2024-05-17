@@ -58,4 +58,19 @@ The Google Home app loader has revolutionized the waiting experience by transfor
 ## Gunner
 
 Gunner is an illustration and animation studio based in Detroit, MI. They partnered with Google to create a fun and informative onboarding experience within google Home app. 
-From hand-drawing to final animation, the entire Gunner team contributed design ideas, with Ian Sigmon and John Hughes tag-teaming the illustration and animation. They utilized Lottie, an open-source tool created by Airbnb Design, to code the animations, allowing them to scale seamlessly across different devices.
+From hand-drawing to final animation, the entire Gunner team contributed design ideas, with Ian Sigmon and John Hughes tag-teaming the illustration and animation. 
+
+<img width="1198" alt="截圖 2024-05-17 上午11 26 19" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/8d828e0e-38e2-42e5-a364-9f34eb81cb9e">
+
+<img width="1160" alt="截圖 2024-05-17 上午11 26 29" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/8ccc45b1-50f4-4a90-9aab-da43d9f6b352">
+
+
+They utilized Lottie, an open-source tool created by Airbnb Design, to code the animations, allowing them to scale seamlessly across different devices.
+
+![OOBE_Grid_WEB_FULL_1](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/5221e7df-9770-4ea9-a516-b0a0eecab7ed)
+
+## Award
+
+Since its launch in 2017, the Google Home app has been downloaded more than 50 million times. The animations have been implemented across other Google apps, contributing to a total installs count exceeding 1 billion.
+
+Additionally, the team received a Motion Award in the Interactive UI/UX category.
