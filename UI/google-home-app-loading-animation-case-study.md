@@ -74,3 +74,18 @@ They utilized Lottie, an open-source tool created by Airbnb Design, to code the 
 Since its launch in 2017, the Google Home app has been downloaded more than 50 million times. The animations have been implemented across other Google apps, contributing to a total installs count exceeding 1 billion.
 
 Additionally, the team received a Motion Award in the Interactive UI/UX category.
+
+
+## Reference
+
+[Gunner](https://legacy.gunner.work/googlehome#/)
+
+[Google Home Case Study](https://vimeo.com/249860593)
+
+[John Hughes-Behance](https://www.behance.net/gallery/60610079/Google-Home-Animations)
+
+[John Hughes](https://johnhughes.work/projects)
+
+[Gunner Behance](https://www.behance.net/gunneranimation)
+
+[Airbnb-Lottie](https://airbnb.design/introducing-lottie/)
