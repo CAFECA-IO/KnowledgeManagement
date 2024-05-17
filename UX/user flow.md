@@ -18,6 +18,8 @@ User Flow 使用者流程圖主要的功能是為了顯示使用者在使用產�
 > 使用者流程圖的類型(範例說明)
 
 ## What are User Flows 什麼是使用者流程?
+User Flows 使用者流程圖是表示使用者如何在網站或應用程式或產品中移動的直覺表示，並且會顯示使用者在使用的過程中每個步驟會發生的情況。使用者流程圖顯示使用者在產品旅程中每一步會發生的情況，可以說使用者流程就是一個記錄好的地圖路線，還包含了感受跟選擇路線的原因，而這樣的使用者流程圖可以幫助產品設計師和UX相關工作者暸解用戶在使用過稱中哪一個步驟會感到困惑甚至是哪個環節是使用者會遇到問題，從中釐清後續他們需要做出哪些改變才能使他們的體驗更加順暢和輕鬆。
+
 
 ## Why we need User Flows 為什麼設計師需要使用者流程圖？
 
@@ -29,3 +31,5 @@ User Flow 使用者流程圖主要的功能是為了顯示使用者在使用產�
 - [11 User Flow Examples + How to Inform UX Design With Them](https://userpilot.com/blog/user-flow-examples/)
 
 - [User Flow-The Beginner’s Guide](https://medium.com/@nasir-ahmed03/user-flow-the-beginners-guide-12b1956ced7e)
+
+- [What are User Flows in UX?](https://www.simplilearn.com/tutorials/ui-ux-career-resources/user-flows-in-ux)
