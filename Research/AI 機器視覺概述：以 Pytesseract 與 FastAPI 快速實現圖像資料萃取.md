@@ -1,4 +1,4 @@
-# 使用 FastAPI 構建 Surya OCR 服務
+# 使用 FastAPI 構建 Pytesseract OCR 服務
 
 本指南中，我們將學習如何使用FastAPI構建 OCR（光學字符識別）服務。我們將涵蓋以下術語和概念：
 
@@ -346,49 +346,7 @@ off / ae 6 Ni
 辨識率： 75% 字太小導致自字多的地方辨識不佳。
 準確率： 50% 圖片下半部就模糊，因此準確率每況愈下。
 
-![1000003033](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/8548b722-83ec-4eaa-a9b3-f7e4dd4b1c69)
 
-辨識結果：
-geeeremed 9 帳 傳 票
-peng 111 年12月9      編號 : 1229001
-銀行存款-富幫外雁       港幣119940*#d. 916                     469, 685
-
-28%                         手續費-港幣60*3, 916                          295
-
-12.4 7-3 % 120000*3. 916 P                 ;
-
-tit
-
-營業收入
-
-也
-9
-6
-6
-7
-0
-
-核准        TH       ae         we r
-
-辨識率： 60% 間隔忽大忽小以及紙透光到後面的字導致辨識不佳
-準確率： 70% 左上角光線以及彎曲導致辨識不佳
-
-![1000003031](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/97ff188d-264f-4fdf-afa1-e40940fdeea1)
-
-辨識結果：
-了    。       當         發    mf  ter,
-20620301        tet Be
-
-Teuncloud Lrmited     POP RRA 2 A og a
-LE
-
-和  i 路街 段 巷 二 號 樓 室
-踢
-
-KM ~ ERE EAZBEMRAP HM LRM ER: El  了
-
-辨識率：30% 間隔忽大忽小以及紙透光到後面的字導致辨識不佳
-準確率：20% 準確率又因手寫體與照片模糊，效果極差
 
 
 
