@@ -12,3 +12,44 @@ Are you tired of watching that endless spinner, not knowing when it will stop?
 ![loading-error-old-windows-b710w19ee9p7iqr8](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/083edc19-c6f0-4fe9-af48-ee62567a51cc)
 
 And isn’t it even more frustrating when, after all that waiting, an annoying warning window pops up on your screen?
+
+Today we are going to introduce how goole change the game.
+
+
+## Google home app
+
+### Introduction
+
+The Google Home app is a versatile tool that allows you to set up, manage, and control your Google Nest, Chromecast devices, and other smart home products. With the app, you can configure your devices, control them remotely, stream media, and integrate various smart home systems for seamless automation. It also provides personalized recommendations, updates, and insights, making it easier to create a connected and efficient home environment.
+
+### When to use loader
+
+Throughout the user experience, there are several steps that may take some time to load and that's when the Google Home app loader appears.
+
+### Customize
+
+In older loading systems, we typically used one or two types of loaders, such as spinners or loading bars, to maintain design consistency within an app.
+Today, Google uses over 10 different loaders for various functions, situations, and environments. Each loader is tailored to fit the specific context the user is experiencing, providing a visual cue of their current step without the need for words.
+
+For example:
+
+![Web_UI_wifi_home](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/410b744f-858a-4736-a74d-d258f333b184)
+
+In the animation, different shapes are used to build a house like Lego pieces, indicating that you are on the home page. On the other hand, the WiFi icon is used to help users understand that their device is connecting to the internet.
+
+![547d1760610079 5aa27ef8dabff](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/b5823195-dc61-4a69-9996-1cb1aec44f76)
+
+
+
+### Sending information without words
+
+Instead of displaying an annoying pop-up message, Google has transformed the loading process into a game. For example, in wifi-connecting, if an error occurs, all the shapes drop and turn grey, indicating the failure of the process.
+
+![f41c5260610079 5b466a9b9597d](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/03e33c10-c8c7-4f13-a61b-5f58264e9b7e)
+
+
+![2de32f60610079 5b466a9b954de](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/898b2139-64b5-4f92-b336-36fbae0ac530)
+
+
+
+
