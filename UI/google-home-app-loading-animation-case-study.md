@@ -55,3 +55,7 @@ Instead of displaying an annoying pop-up message, Google has transformed the loa
 
 The Google Home app loader has revolutionized the waiting experience by transforming it into an engaging and informative process. By using various animations and interactive elements, it keeps users informed about their progress, reduces frustration, and adds a touch of fun to traditionally dull moments. This innovative approach enhances user satisfaction and sets a new standard for loading screens.
 
+## Gunner
+
+Gunner is an illustration and animation studio based in Detroit, MI. They partnered with Google to create a fun and informative onboarding experience within google Home app. 
+From hand-drawing to final animation, the entire Gunner team contributed design ideas, with Ian Sigmon and John Hughes tag-teaming the illustration and animation. They utilized Lottie, an open-source tool created by Airbnb Design, to code the animations, allowing them to scale seamlessly across different devices.
