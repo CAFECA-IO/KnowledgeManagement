@@ -47,6 +47,41 @@ User Flows 使用者流程圖是表示使用者如何在網站或應用程式或
 4. 溝通更順利 - 當設計團隊有設計或更新產品或頁面的想法時，需要解釋向產品經理、工程師來解釋為什麼你會有這個想法誕生。而在此運用User Flows能夠有助於您的簡報與講解。
 
 ## User Flows Type 使用者流程圖的類型
+使用者流程圖可用於各種產品介面和網頁設計之中，但須針對你所想建立的內容來使用對應的類型的User Flows，如果建立的內容與使用的流程圖不對應，能夠獲得的價值就會偏低，例如在一個關注受眾與產品互動的內容中，使用一個任務的流程圖，會看不出任何受眾與產品之間的互動，設計團隊想獲得的反饋也無法取得。以下針對常見的流程圖與使用情境做說明：
+
+### 任務類型使用者流程圖 Task flows
+任務類型使用者流程圖主要著重的目的在於使用者在執行特定任務時是如何完成這整個任務。通常只會顯示從頭到尾的一條路徑，不像一般的使用者流程圖那樣有不同形狀、多個分支或路徑結果。以下三種情境都適用任務類型使用者流程圖：
+1. 想粗略地了解產品的主要操作流程
+2. 或想確定執行某一功能的流程是否有誤
+3. 使用者都會以類似方式完成任務(例如:註冊流程、購物流程)
+
+使用任務類型使用者流程圖時，需要假設使用者都是在一個共同的起點，且執行任務的方式變數小，可參考下圖：
+
+<div align=center>
+  
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/c3aa7d83-7584-437a-abca-90008e6e0e01)
+
+</div>
+
+### 線框版本使用者流程圖 Wire flows
+線框版本使用者流程圖是Wireframe和User Flows流程圖的組合。利用各個Frame所顯示的資訊作為流程圖中的元素。Wireframe線框本身有助於傳達每個單獨頁面上的佈局和設計，優點是可以理解整個流程中有哪些頁面、各個頁面的功能又是如何進行，缺點是缺乏傳達高度動態介面的頁面到頁面流程的能力。
+常見的線框版本使用者流程圖可參考下圖：
+
+<div align=center>
+  
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/8ace5a11-5e64-48d4-b9c3-313d9ede7967)
+
+</div>
+
+### 使用者流程圖 User Flows
+使用者流程圖主要目的為專注於目標受眾與產品互動的方式。所有使用者可能不會執行相同的任務，並且有可能在選擇的環節會走不同的路徑。在這類型的流程圖通常還會附加特定的角色人物誌和使用產品入口點。
+可參考下圖：
+
+<div align=center>
+  
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/77717533/b8a980a0-67f5-43fe-9d8a-144499b8cb95)
+
+</div>
 
 ## Reference
 - [What are User Flows in User Experience (UX) Design?](https://careerfoundry.com/en/blog/ux-design/what-are-user-flows/)
