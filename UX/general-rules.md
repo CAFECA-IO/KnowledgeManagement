@@ -30,3 +30,10 @@ Figma 文件中須包含幾個必要的Page，包含 Thumbnail、Design Guidelin
 而在編碼前，也記得根據Project traker 的最後一個編碼往下編排。
 
 
+## 5. 圖層命名
+
+在figma檔案中，除向量圖中的形狀外，其餘frame皆須命名，避免出現 ”Frame流水號“ 之圖層名，命名也須正確描述該圖層之功能。
+
+## 6. Design Token命名
+
+為了方便銜接開發人員的作業，需準確設立Design token，且命名方式比照 Tailwind 常見模式，一律英文小寫，字串中由"-" 連接，避免出現空格或特殊符號。
