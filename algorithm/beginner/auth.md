@@ -9,9 +9,7 @@
 本文將身份認證跟授權統稱為權限管理。
 
 ![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/65d86732-3b52-47b0-b4cf-88adfe7aab83)
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/70b77033-5d1a-4bac-b124-b143bfc5c784)
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/690406c0-0c73-4b00-b8b8-49913b752214)
-![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/970fd559-b48b-4298-875d-00aeb787dd32)
+
 
 # 身份認證（Authentication）
 
@@ -24,6 +22,9 @@
 |  | 生物識別認證（Biometric Authentication） | 使用用戶的生物特徵（如指紋、臉部識別）來驗證身份 | 蘋果的 Face ID 或 Touch ID |
 |  | 單點登錄（Single Sign-On, SSO） | 用戶可以通過一個帳號登錄多個應用系統 | Google 或 Facebook 登錄 |
 
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/70b77033-5d1a-4bac-b124-b143bfc5c784)
+
+
 # 授權（Authorization）
 
 授權：使用者在服務裡的存取權限，現代應用常見的做法有以下：
@@ -35,6 +36,8 @@
 | 自由訪問控制（DAC） | 1. 設置對象所有者  2. 對象所有者管理其數據的訪問權限  3. 使用中間件驗證對象所有者 | 對象所有者管理自己的數據 | 由對象所有者設置和管理權限，靈活性高但安全性相對較低 |
 | 基於規則的訪問控制（RuBAC） | 1. 設置訪問規則  2. 使用中間件驗證訪問規則 | 不使用固定角色，根據規則動態控制訪問 | 根據預定規則管理訪問權限，如時間段、操作類型等 |
 | 基於屬性的訪問控制（ABAC） | 1. 設置用戶屬性和環境屬性  2. 使用中間件驗證屬性 | 根據用戶屬性（如角色、部門）配置訪問權限 | 根據屬性動態分配權限，提供更精細的控制 |
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/690406c0-0c73-4b00-b8b8-49913b752214)
 
 # 權限管理實作
 
@@ -50,12 +53,16 @@
     - 伺服器生成一個 JWT，並使用私鑰簽名。
     - JWT 發送給客戶端，通常存儲在本地存儲（Local Storage）。
     - 之後的請求都會帶上 JWT，通常放在 Authorization 標頭中，前綴 "Bearer"。
+
 2. **特點**：
     - **存儲位置**：客戶端（本地存儲）。
     - **狀態管理**：無狀態。
     - **優點**：適合分散式系統，無需伺服器端儲存會話數據，效能高。
     - **缺點**：可能被劫持，難以在有效期內使之失效。
     - **使用情境**：需要高度擴展性、效能要求高的分散式應用程序。
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/97179645-88e4-42ed-a5d6-5ea0159923d1)
+
 
 ### **Cookie-Session**
 
@@ -71,6 +78,13 @@
     - **優點**：易於實作，對傳統 Web 應用友好。
     - **缺點**：受限於 CSRF 攻擊，需要存儲會話數據，橫向擴展困難。
     - **使用情境**：傳統的 Web 應用，會話管理簡單且不需要高度擴展性的應用程序。
+
+session 存在 DB:
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/9c8c4303-bda0-4bab-9b66-ad25a9602439)
+
+session 存在內存:
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/4a8ac949-027c-4126-9955-db92eae276f7)
+
 
 ### **OAuth2.0**
 
@@ -88,6 +102,9 @@
     - **缺點**：實作相對複雜，需要處理訪問令牌的有效期與刷新。
     - **使用情境**：需要第三方授權的應用，例如社交登錄，允許應用程序安全地訪問用戶資源。
 
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/06a1f8ce-e14a-4f17-a407-1afd3644002b)
+
+
 ### **總結表格**
 
 | 方法 | 存儲位置 | 狀態管理 | 優點 | 缺點 | 使用情境 |
@@ -95,6 +112,9 @@
 | JWT | 客戶端（本地存儲） | 無狀態 | 高效能，適合分散式系統 | 可能被劫持，難以失效 | 分散式應用，高度擴展性需求 |
 | Cookie-Session | 伺服器端（數據庫或內存） | 有狀態 | 易於實作，對傳統 Web 應用友好 | 受限於 CSRF 攻擊，橫向擴展困難 | 傳統 Web 應用，會話管理簡單 |
 | OAuth2.0 | 客戶端與第三方提供者 | 無狀態 | 安全地訪問第三方資源，無需透露用戶憑證 | 實作複雜，需要管理訪問令牌 | 第三方授權應用，社交登錄 |
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/20677913/970fd559-b48b-4298-875d-00aeb787dd32)
+
 
 # Reference
 
