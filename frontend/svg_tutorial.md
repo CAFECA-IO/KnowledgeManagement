@@ -1,5 +1,3 @@
-
-
 ## [Notion 好讀版](https://www.notion.so/SVG-Tutorial-ce07d75d7c5241f29a9689212611d172#3474e9de80ea4d5ea94ddd59969612af)
 
 - [什麼是 SVG ？](#什麼是-svg-)
@@ -190,7 +188,7 @@ SVG 有以下基礎圖形供開發人員使用：
 
 ![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/c3adedca-b604-4185-a358-aa1d5802a4b6)
 
-Polygon 有個特別的屬性 `fill-rule` ，詳細用法請參考[這裡](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule)。
+> Polygon 有個特別的屬性 `fill-rule` ，詳細用法請參考[這裡](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule)。
 
 ### 路徑
 
@@ -241,7 +239,7 @@ SVG 也支援文字，使用 `<text>` 元素
 
 我們可以將重複出現的 `<circle>` 和 `<rect>` 用 `<g>` 組合成群組，再將整個圖形用 `<defs>` 包裝起來，改寫成以下這樣：
 
-```html
+```xml
 <svg height="50" width="50" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <g id="stop-sign">
@@ -265,7 +263,7 @@ SVG 也支援文字，使用 `<text>` 元素
 
 以下是一個 `viewport`大小為 200x200 像素的例子：
 
-```html
+```xml
 <svg width="200" height="200">
   <!-- SVG Element -->
 </svg>
@@ -273,7 +271,7 @@ SVG 也支援文字，使用 `<text>` 元素
 
 `viewBox` 屬性則是定義 SVG 圖像的**坐標和縮放**行為。使用`min-x`、`min-y`、`width`、`height` 這四個值來描述。這些值決定了內容的可見區域和其比例，可以把 `viewBox` 想像是一個「相片」。其語法如下：
 
-```html
+```xml
 <svg width="200" height="300" viewBox="0 0 100 150">
   <!-- SVG 内容 -->
 </svg>
@@ -283,8 +281,8 @@ SVG 也支援文字，使用 `<text>` 元素
 
 更多動畫範例請參考以下連結：
 
-- [SVG 研究之路 (23) - 理解 viewport 與 viewbox](https://www.oxxostudio.tw/articles/201409/svg-23-viewpoint-viewBox.html)
-- [[技術分享] 理解 SVG 中的 Viewport 和 ViewBox－拖曳與縮放功能實做（上）](https://pjchender.blogspot.com/2017/03/svg-viewport-viewbox-zoomdrag.html)
+- [SVG 研究之路 (23) - 理解 viewport 與 viewbox](https://www.oxxostudio.tw/articles/201409/svg-23-viewpoint-viewBox.xml)
+- [[技術分享] 理解 SVG 中的 Viewport 和 ViewBox－拖曳與縮放功能實做（上）](https://pjchender.blogspot.com/2017/03/svg-viewport-viewbox-zoomdrag.xml)
 - [SVG Viewport and viewBox (For Complete Beginners)](https://www.youtube.com/watch?v=6LCUStriM_o&t=524s)
 
 **總結：**
@@ -333,7 +331,7 @@ SVG 也支援文字，使用 `<text>` 元素
 
 呈現結果：
 
-![截圖 2024-05-30 下午3.13.36.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/e2c3f4e0-2003-477f-8f8c-ded517ab3b1c/%E6%88%AA%E5%9C%96_2024-05-30_%E4%B8%8B%E5%8D%883.13.36.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/a87794d6-8885-4a19-bf85-a2907233d485)
 
 ### Fill
 
@@ -346,7 +344,7 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 
 **線型漸層 `<linearGradient>` ：**
 
-```html
+```xml
 <svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="line1" x1="0" y1="0" x2="0" y2="1">
@@ -366,11 +364,11 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 
 呈現結果：
 
-![截圖 2024-05-30 下午4.45.35.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/f8ec026a-e066-46c6-b9f7-b6175b3d6fd5/%E6%88%AA%E5%9C%96_2024-05-30_%E4%B8%8B%E5%8D%884.45.35.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/99ab6753-4df7-4d56-9d9e-8a4e0bd07e38)
 
 **放射漸層 `<radialGradient>` ：**
 
-```html
+```xml
 <svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <radialGradient id="radial1" cx="0.5" cy="0.5" r="0.5">
@@ -390,7 +388,7 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 
 呈現結果：
 
-![截圖 2024-05-30 下午4.58.31.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/48c35522-0ab8-400e-a298-b179585599f7/%E6%88%AA%E5%9C%96_2024-05-30_%E4%B8%8B%E5%8D%884.58.31.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/19a461b9-f086-4081-a16c-4c4fecdfe954)
 
 ## SVG 濾鏡
 
@@ -406,11 +404,11 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 
 `userSpaceOnUse` 的範例，因為濾鏡的座標是基於整個 SVG 來計算的，所以只涵蓋了一小塊：
 
-![截圖 2024-05-31 下午4.59.23.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/83aaffa5-7020-48e6-ac0f-03923c7477a3/%E6%88%AA%E5%9C%96_2024-05-31_%E4%B8%8B%E5%8D%884.59.23.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/c62c1f98-f876-476b-8be1-a3d7b3cccae1)
 
 `objectBoundingBox` 的範例，因為濾鏡的座標以套用元素的邊界計算，所以看起來是一大片：
 
-![截圖 2024-05-31 下午5.05.08.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/6efcae07-b464-4b64-9d5d-d76fd32fa8b7/%E6%88%AA%E5%9C%96_2024-05-31_%E4%B8%8B%E5%8D%885.05.08.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/7ddc2e10-29ab-43a0-9e57-85e90a8fa37d)
 
 由於多數濾鏡效果在 Chrome、Firefox、Safari 等瀏覽器上實測不佳，所以這裡只介紹兩個常用的濾鏡：
 
@@ -418,7 +416,7 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 
 模糊濾鏡 `<feGaussianBlur>` 只有一個屬性 `stdDeviation` ，數值越大就越模糊。設定兩個數值的話則可以實現橫向或縱向模糊 (x,y)。
 
-```html
+```xml
 <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter 
@@ -452,7 +450,7 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 | flood-color | 投影的填充顏色 |
 | flood-opacity | 投影的透明度 |
 
-```html
+```xml
 <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="shadow">
@@ -477,7 +475,7 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 </svg>
 ```
 
-![截圖 2024-05-31 下午5.37.17.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/ee924ab5-21fa-4ead-bae3-daca7f53a93d/%E6%88%AA%E5%9C%96_2024-05-31_%E4%B8%8B%E5%8D%885.37.17.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/75e14661-f3b2-4ac6-8065-b3a6760b3fbb)
 
 ## SVG 動畫
 
@@ -495,7 +493,7 @@ SVG 的動畫元素應該放置在需要應用動畫效果的元素內部，總�
 | to | 變更的值 |
 | begin | 開始執行的時間 |
 
-```html
+```xml
 <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
     <circle cx="100" cy="100" r="25" fill="red">
         <set attributeName="r" to="50" begin="3s" />
@@ -503,12 +501,10 @@ SVG 的動畫元素應該放置在需要應用動畫效果的元素內部，總�
 </svg>
 ```
 
-![test.svg](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/530cf0b0-3e29-491f-954b-f669dd62b087/test.svg)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/cdccbac0-44bb-4a40-bf2e-5c3d6ef1f875)
 
-<aside>
-💡 如果沒有看到放大效果，可以在新分頁中開啟圖片重新播放動畫
+> 💡 如果沒有看到放大效果，可以在新分頁中開啟圖片重新播放動畫
 
-</aside>
 
 ### <animate>
 
@@ -525,7 +521,7 @@ SVG 的動畫元素應該放置在需要應用動畫效果的元素內部，總�
 | values | 非必要。定義一組中間值，允許動畫在多個值之間進行變化，如果有 value，則 from 和 to 的值會被忽略。 |
 | keyTimes | 非必要。提供精細控制動畫進行的時間點。 |
 
-```html
+```xml
 <svg width="300" height="50" xmlns="http://www.w3.org/2000/svg">
     <rect x="0" y="0" width="50" height="50" fill="red">
         <animate
@@ -540,7 +536,7 @@ SVG 的動畫元素應該放置在需要應用動畫效果的元素內部，總�
 </svg>
 ```
 
-![test.svg](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/0cdb8485-8f30-4238-8b3b-163a8611b963/test.svg)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/5949d76a-3d43-4e5e-8966-eaff8f1dc5e2)
 
 ### <animateTransform>
 
@@ -558,7 +554,7 @@ SVG 的動畫元素應該放置在需要應用動畫效果的元素內部，總�
 | values | 非必要。定義一組中間值，允許動畫在多個值之間進行變化，如果有 value，則 from 和 to 的值會被忽略。 |
 | keyTimes | 非必要。提供精細控制動畫進行的時間點。 |
 
-```html
+```xml
 <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
     <rect x="25" y="25" width="50" height="50" fill="red">
         <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="10s" repeatCount="indefinite" /> 
@@ -566,9 +562,9 @@ SVG 的動畫元素應該放置在需要應用動畫效果的元素內部，總�
 </svg>
 ```
 
-![test.svg](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/b96266eb-dc49-48c1-bb09-596a32be0c3a/test.svg)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/d59967d0-f002-442a-803d-fa6bc539e3fd)
 
-### <**animateMotion**>
+### <animateMotion>
 
 讓 SVG 元素沿著路徑移動。
 
@@ -580,7 +576,7 @@ SVG 的動畫元素應該放置在需要應用動畫效果的元素內部，總�
 | repeatCount | 播放次數 |
 | rotate | 控制元素是否隨著路徑旋轉 |
 
-```html
+```xml
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
   <!-- 地圖路徑 -->
   <path id="myPath" fill="none" stroke="red" stroke-width="4"
@@ -598,11 +594,11 @@ SVG 的動畫元素應該放置在需要應用動畫效果的元素內部，總�
 </svg>
 ```
 
-![test.svg](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/df32cb53-0284-4e5f-9dcf-d6935e07e72b/test.svg)
+![test](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/3f4c7429-4515-42f9-a2c4-921b3d5fb018)
 
 # 其他瀏覽器和設備對 SVG 的支援程度
 
-![截圖 2024-06-03 下午5.19.17.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/c3416d10-7115-45bb-bd0a-9762fcb2dd35/%E6%88%AA%E5%9C%96_2024-06-03_%E4%B8%8B%E5%8D%885.19.17.png)
+<img width="1390" alt="截圖 2024-06-03 下午5 19 17" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/2b8611f6-c607-4bfc-a576-fba9e9bf7e50">
 
 ### 總結
 
