@@ -120,9 +120,9 @@ Natural Language Processing (NLP)自然語言處理是一種機器學習的技�
 
 2. 命名實體識別（Named Entity Recognition, NER）：識別文本中的實體，如人名、地名、組織名等。
 
-> 例如：輸入句子："Staw Ho was born in Chiayi."
+> 例如：輸入句子："Straw Ho was born in Chiayi."
 
-> NER 結果：["Staw Ho/PERSON", "Chiayi/LOCATION"]
+> NER 結果：["Straw Ho/PERSON", "Chiayi/LOCATION"]
 
 3. 句法解析（Syntactic Parsing）：分析句子的語法結構，構建句法樹。
 
