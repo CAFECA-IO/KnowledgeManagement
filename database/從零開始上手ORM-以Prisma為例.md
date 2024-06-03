@@ -1008,7 +1008,7 @@ main()
 
 在使用 Prisma Client 時，為了避免多次實例化帶來的資源浪費和潛在的連接問題，建議使用 Singleton 模式來管理 Prisma Client 的實例。以下是如何在 TypeScript 中設置 Prisma Client Singleton 的步驟。
 
-### 10.1 創建 `client.ts` 文件
+### 10.1.1 創建 `client.ts` 文件
 在專案的根目錄下創建一個名為 `client.ts` 的文件，並添加以下代碼。這將實例化一個 Prisma Client 實例。
 
 ```ts
@@ -1029,7 +1029,7 @@ export default prisma;
 if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma;
 ```
 
-### 10.2 在其他文件中使用 Prisma Client
+### 10.1.2 在其他文件中使用 Prisma Client
 在需要使用 Prisma Client 的文件中，導入並使用這個單例實例。
 
 ```ts
@@ -1045,6 +1045,65 @@ async function main() {
 1. **資源管理**：避免多次實例化 Prisma Client，節省資源。
 2. **連接管理**：減少資料庫連接數量，避免潛在的連接問題。
 3. **一致性**：確保應用程式中使用的是同一個 Prisma Client 實例，避免狀態不一致的問題。
+   
+## 10.2 使用交易
+
+在 Prisma 中使用交易（transaction）可以確保多個資料庫操作在一個原子操作中執行，如果其中任何一個操作失敗，所有的變更都會被回滾。以下是如何使用交易的說明：
+
+### 使用交易的範例
+
+假設你有以下的 CRUD 操作方法：
+
+```js
+const prisma = require('./db');
+
+async function createUser(data) {
+  return await prisma.user.create({
+    data,
+  });
+}
+
+async function updateUser(id, data) {
+  return await prisma.user.update({
+    where: { id },
+    data,
+  });
+}
+```
+
+你可以在一個交易中使用這些方法來鏈接多個操作：
+
+```js
+async function performTransaction() {
+  let result;
+
+  try {
+    result = await prisma.$transaction(async (tx) => {
+      const user = await createUser({ name: 'John' });
+      const updatedUser = await updateUser(user.id, { name: 'Jane' });
+
+      // 你可以在交易中執行更多操作
+
+      return updatedUser;
+    });
+  } catch (error) {
+    console.error('Transaction failed:', error);
+    throw error;
+  }
+
+  console.log('Transaction completed:', result);
+}
+
+performTransaction()
+  .catch((error) => {
+    // 在這裡處理錯誤
+  })
+  .finally(async () => {
+    await prisma.$disconnect(); 
+  });
+```
+
+在這個範例中，`performTransaction` 使用 `createUser` 和 `updateUser` 方法在一個交易中執行多個操作。如果交易中的任何一個操作失敗，所有的變更都會被回滾。
 
 ## 結論
 
@@ -1086,3 +1145,4 @@ Prisma 不僅讓你的數據庫操作變得簡單直觀，還提供了強大的�
 5. **其他資源**
    - [GitHub 討論關於可選字段](https://github.com/prisma/prisma/discussions/18360)
    - [GitHub 問題關於可選字段](https://github.com/prisma/prisma/issues/11927)
+   - [如何在交易中返回 Prisma Promise](https://github.com/prisma/prisma/discussions/21225)
