@@ -1,4 +1,6 @@
-![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/18393874-5e17-426d-8449-7b7150e66c66)![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/04e0dfe6-542d-48f9-aaee-72111fcc45bb)> ## [Notion 好讀版](https://www.notion.so/SVG-Tutorial-ce07d75d7c5241f29a9689212611d172#3474e9de80ea4d5ea94ddd59969612af)
+
+
+## [Notion 好讀版](https://www.notion.so/SVG-Tutorial-ce07d75d7c5241f29a9689212611d172#3474e9de80ea4d5ea94ddd59969612af)
 
 - [什麼是 SVG ？](#什麼是-svg-)
 - [SVG 的優點](#svg-的優點)
@@ -98,7 +100,7 @@ SVG 有以下基礎圖形供開發人員使用：
 
 呈現結果：
 
-![截圖 2024-03-22 上午11.45.05.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/a13b8db1-608f-492f-a486-6dc2f6e1f9e5/%E6%88%AA%E5%9C%96_2024-03-22_%E4%B8%8A%E5%8D%8811.45.05.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/3646bd26-9363-4cd6-b641-1746953d8418)
 
 ### 橢圓
 
@@ -122,7 +124,7 @@ SVG 有以下基礎圖形供開發人員使用：
 
 呈現結果：
 
-![截圖 2024-03-22 上午11.54.06.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/8654f674-2fb5-4385-80ef-43d2e5c672d4/%E6%88%AA%E5%9C%96_2024-03-22_%E4%B8%8A%E5%8D%8811.54.06.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/9dd04e33-ad57-4f18-817b-3a8871dca792)
 
 ### 線段
 
@@ -147,7 +149,7 @@ SVG 有以下基礎圖形供開發人員使用：
 
 呈現結果：
 
-![截圖 2024-03-22 下午12.04.15.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/cd7788e8-ec77-4b47-87c0-3be2d708a493/%E6%88%AA%E5%9C%96_2024-03-22_%E4%B8%8B%E5%8D%8812.04.15.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/d1a0f21c-e739-4710-b6ac-2b7dc2483bc6)
 
 ### 折線
 
@@ -164,7 +166,7 @@ SVG 有以下基礎圖形供開發人員使用：
 
 呈現結果：
 
-![截圖 2024-03-22 下午2.16.02.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/7dbccaee-a5b5-4c93-b91f-f814b22fcf20/%E6%88%AA%E5%9C%96_2024-03-22_%E4%B8%8B%E5%8D%882.16.02.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/a100456a-469e-4adc-86c6-c3da715af99c)
 
 ### 多邊形
 
@@ -182,12 +184,11 @@ SVG 有以下基礎圖形供開發人員使用：
   <polygon id="star" points="300,200 240,398 390,278 210,278 360,398" fill="steelblue" />
   <polygon id="anotherStar" points="500,200 442,380 586,270 404,270 558,380" fill="tomato" fill-rule="evenodd" />
 </svg>
-
 ```
 
 呈現結果：
 
-![截圖 2024-03-22 下午1.52.51.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/d723d1e7-058e-4a3e-8fe4-860b4c10f9f9/%E6%88%AA%E5%9C%96_2024-03-22_%E4%B8%8B%E5%8D%881.52.51.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/c3adedca-b604-4185-a358-aa1d5802a4b6)
 
 Polygon 有個特別的屬性 `fill-rule` ，詳細用法請參考[這裡](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule)。
 
@@ -230,13 +231,13 @@ SVG 也支援文字，使用 `<text>` 元素
 
 呈現結果：
 
-![截圖 2024-03-22 下午3.04.27.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/980826ff-5a20-460b-b306-51f5e2ad5fc9/%E6%88%AA%E5%9C%96_2024-03-22_%E4%B8%8B%E5%8D%883.04.27.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/eb56edf7-0e3b-487f-a231-8293299147eb)
 
 ### <defs>
 
 這個標籤是用來包裝重複性的元素，可以包裝圖形、色彩和遮罩等，在 SVG 中是不可或缺的元素。例如以下這個圖形：
 
-![截圖 2024-05-31 上午10.55.12.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/52ec67e4-f49a-420f-b0e2-3f5c0a19f202/%E6%88%AA%E5%9C%96_2024-05-31_%E4%B8%8A%E5%8D%8810.55.12.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/3e5b2f34-3465-4eac-bc71-670c8b629133)
 
 我們可以將重複出現的 `<circle>` 和 `<rect>` 用 `<g>` 組合成群組，再將整個圖形用 `<defs>` 包裝起來，改寫成以下這樣：
 
@@ -254,7 +255,7 @@ SVG 也支援文字，使用 `<text>` 元素
 </svg>
 ```
 
-![截圖 2024-05-31 上午10.57.03.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/84ff18b3-3c08-4f24-a85e-0719a50f4f0c/b31078c9-af3a-4d8e-b73a-603a1f79e392/%E6%88%AA%E5%9C%96_2024-05-31_%E4%B8%8A%E5%8D%8810.57.03.png)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/2d977405-65f5-4a65-8f7d-76df65b11064)
 
 ## SVG 屬性
 
