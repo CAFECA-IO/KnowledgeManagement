@@ -451,7 +451,7 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 | flood-opacity | 投影的透明度 |
 
 ```xml
-<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="shadow">
        <feDropShadow dx="8" dy="8" stdDeviation="1" flood-opacity="0.7"/>
@@ -475,7 +475,7 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 </svg>
 ```
 
-![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/75e14661-f3b2-4ac6-8065-b3a6760b3fbb)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/99948151-0f37-47c2-99cd-f2ce8d93891d)
 
 ## SVG 動畫
 
