@@ -229,31 +229,31 @@ SVG 也支援文字，使用 `<text>` 元素
 
 呈現結果：
 
-![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/eb56edf7-0e3b-487f-a231-8293299147eb)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/39f65c77-943e-4ba5-b9af-acab130f474a)
 
-### <defs>
+### \<defs>
 
 這個標籤是用來包裝重複性的元素，可以包裝圖形、色彩和遮罩等，在 SVG 中是不可或缺的元素。例如以下這個圖形：
 
-![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/3e5b2f34-3465-4eac-bc71-670c8b629133)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/51d37479-2948-4aa7-8e42-a327bf29dc4e)
 
 我們可以將重複出現的 `<circle>` 和 `<rect>` 用 `<g>` 組合成群組，再將整個圖形用 `<defs>` 包裝起來，改寫成以下這樣：
 
 ```xml
-<svg height="50" width="50" xmlns="http://www.w3.org/2000/svg">
+<svg height="80" width="150" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <g id="stop-sign">
-            <circle cx="10" cy="10" r="8" fill="red" stroke="white" stroke-width="1" />
-            <rect x="5" y="9" width="10" height="2" fill="white" />
+          <circle cx="40" cy="40" r="30" fill="red" stroke="white" stroke-width="5" />
+          <rect x="25" y="38" width="30" height="5" fill="white" />
         </g>
     </defs>
 
     <use href="#stop-sign" x="0" y="0" />
-    <use href="#stop-sign" x="20" y="0" />
+    <use href="#stop-sign" x="70" y="0" />
 </svg>
 ```
 
-![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/2d977405-65f5-4a65-8f7d-76df65b11064)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/439bcdbd-cbb9-401e-a332-84c52137e2ae)
 
 ## SVG 屬性
 
@@ -331,7 +331,7 @@ SVG 也支援文字，使用 `<text>` 元素
 
 呈現結果：
 
-![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/a87794d6-8885-4a19-bf85-a2907233d485)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/b564f111-e33b-4d95-a778-e9d749dcc735)
 
 ### Fill
 
