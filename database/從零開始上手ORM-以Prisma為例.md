@@ -69,8 +69,6 @@ model Post {
 > ⚠️ **注意：Prisma 命名 Model 和變數的方式與傳統 DB 不同**
 在使用 Prisma 時，命名模型（Model）和變數的方式通常與傳統資料庫中的命名方式不同。這是因為 Prisma 推薦使用單數形式和 PascalCase 的命名規範，而傳統資料庫則常使用複數形式和 snake_case 的命名方式。為了在不改變底層資料庫結構的情況下，讓 Prisma Client API 的命名更符合開發者的習慣，我們可以使用 @map 和 @@map 屬性來映射名稱。
 
-## Prisma 命名 Model 和變數的方式與傳統 DB 不同，因此需要 map 名稱的原因與方式
-
 ### 使用 `@map` 和 `@@map` 的原因
 
 1. **表命名規範不同**：資料庫中表的命名通常使用複數形式和 snake_case，而 Prisma 推薦使用單數形式和 PascalCase。
