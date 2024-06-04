@@ -66,6 +66,45 @@ model Post {
 }
 ```
 
+> ⚠️ **注意：Prisma 命名 Model 和變數的方式與傳統 DB 不同**
+在使用 Prisma 時，命名模型（Model）和變數的方式通常與傳統資料庫中的命名方式不同。這是因為 Prisma 推薦使用單數形式和 PascalCase 的命名規範，而傳統資料庫則常使用複數形式和 snake_case 的命名方式。為了在不改變底層資料庫結構的情況下，讓 Prisma Client API 的命名更符合開發者的習慣，我們可以使用 @map 和 @@map 屬性來映射名稱。
+
+## Prisma 命名 Model 和變數的方式與傳統 DB 不同，因此需要 map 名稱的原因與方式
+
+### 使用 `@map` 和 `@@map` 的原因
+
+1. **表命名規範不同**：資料庫中表的命名通常使用複數形式和 snake_case，而 Prisma 推薦使用單數形式和 PascalCase。
+2. **變數與欄位命名不同**: 資料庫中的欄位名稱通常使用 snake_case，而 Prisma 推薦使用 camelCase。
+3. **保持資料庫結構不變**：在不改變底層資料庫結構的情況下，讓 Prisma Client API 的命名更符合開發者的習慣。
+4. **提升代碼可讀性**：使用更符合開發者習慣的命名方式，可以提升代碼的可讀性和可維護性。
+
+### 使用 `@map` 和 `@@map` 的方式
+
+#### 映射表及欄位名稱
+
+假設資料庫中的表 `my_user` 有以下欄位：
+
+```prisma
+model my_user {{  
+  user_id    Int     @id @default(autoincrement())  
+  first_name String?  
+  last_name  String  @unique  
+}}
+```
+
+我們可以使用 `@map` 屬性將其映射為符合命名規範的欄位名稱：
+
+```prisma
+model MyUser {{  
+  userId    Int     @id @default(autoincrement()) @map("user_id")  
+  firstName String? @map("first_name")  
+  lastName  String  @unique @map("last_name")  
+  @@map("my_user")  
+}}
+```
+
+這樣，Prisma Client 會自動將 `MyUser` 模型映射到底層資料庫中的 `my_user` 表，並將欄位名稱映射為 `user_id`、`first_name` 和 `last_name`。
+
 > ⚠️ **警告：Prisma 模型和 TypeScript 對於可選字段的預設回傳值不同**
 
 在使用 Prisma 模型和 TypeScript 時，需注意兩者對於可選字段的處理方式可能不同，這可能會導致 TypeScript 代碼中出現意外行為。
