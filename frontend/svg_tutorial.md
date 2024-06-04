@@ -216,7 +216,7 @@ SVG 也支援文字，使用 `<text>` 元素
 範例：
 
 ```xml
-<svg height="300" width="300" xmlns="http://www.w3.org/2000/svg">
+<svg height="80" width="300" xmlns="http://www.w3.org/2000/svg">
   <text id="line1" x="10" y="15" fill="lightpink" font-size='16'>Let's learn SVG</text>
   <text id="line2" x="10" y="35" fill="none" stroke="lightblue" stroke-width="0.4" font-size='16'>and have some fun!</text>
   <text id="line3" x="10" y="55" fill="lightgreen" rotate="20" textLength='200' font-size='16'>It's easy and cool!</text>
@@ -345,7 +345,7 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 **線型漸層 `<linearGradient>` ：**
 
 ```xml
-<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+<svg width="440" height="210" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="line1" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="red"></stop>
@@ -364,12 +364,12 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 
 呈現結果：
 
-![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/99ab6753-4df7-4d56-9d9e-8a4e0bd07e38)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/17e730f2-aa8d-400d-9088-544f0adb93c3)
 
 **放射漸層 `<radialGradient>` ：**
 
 ```xml
-<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+<svg width="440" height="210" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <radialGradient id="radial1" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0%" stop-color="red"></stop>
@@ -388,7 +388,7 @@ SVG 支援的填色 `fill` 方法包括純色和漸層。前面已經有不少�
 
 呈現結果：
 
-![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/19a461b9-f086-4081-a16c-4c4fecdfe954)
+![mySVG](https://github.com/CAFECA-IO/KnowledgeManagement/assets/114177573/c969ee80-2e7c-4cab-870c-c7369f2c6d1f)
 
 ## SVG 濾鏡
 
