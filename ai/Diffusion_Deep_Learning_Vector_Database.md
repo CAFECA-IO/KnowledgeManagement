@@ -256,11 +256,12 @@ $$
 2. **Hidden Layer**：這層是由任意數量的 Activation Function 組成的，可以有多層。每層的節點數量和使用的 Activation Function 可以不同。例如，第一層可以使用5000個 Sigmoid 函數，而第二層可以使用3000個 ReLU 函數。從 Input Layer 得到的自變數在每個節點會產生一個值，這些值作為新的自變數輸入到下一層。每個 Hidden Layer 的輸出都會輸入到下一層的所有節點中，最終輸出到 Output Layer。
 
 3. **Output Layer**：這一層作為分類器，將經過 Hidden Layer 非線性轉換的資料分類。例如，經過多層非線性轉換後，資料點會轉換成容易被分類的型態，找出資料的特徵(Feature)，再利用 Output Layer 把資料分類成多個類別。常用的分類函數是 Softmax function，它將 hidden layer 中的資料壓縮到 0 到 1 之間，計算出每個類別的後驗機率，最大值對應的類別即為預測類別。
+
 $$
 \text{Softmax}(x_i) = \frac{e^{x_i}}{\sum_{j=1}^{N} e^{x_j}}
 $$
 
-4. **Fully Connected Feedforward Network**：這是最常見的連接各層的方法。每個節點的輸出都會傳遞到下一層的所有節點，而每個節點也會使用上一層所有節點的輸出。這種結構被稱為 Fully Connected，資料從 Input Layer 傳遞到 Hidden Layer，再傳遞到 Output Layer，呈現順向結構。
+5. **Fully Connected Feedforward Network**：這是最常見的連接各層的方法。每個節點的輸出都會傳遞到下一層的所有節點，而每個節點也會使用上一層所有節點的輸出。這種結構被稱為 Fully Connected，資料從 Input Layer 傳遞到 Hidden Layer，再傳遞到 Output Layer，呈現順向結構。
 
 這種架構允許任意改變以適應不同的需求，並提供了強大的靈活性和可擴展性，使其成為深度學習領域的基礎。
 
