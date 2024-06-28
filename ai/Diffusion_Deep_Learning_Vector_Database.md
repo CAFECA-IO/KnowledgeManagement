@@ -192,7 +192,9 @@ networks. ](https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf)
 1999年後，隨著GPU的發展，訓練多層隱藏層變得可能，Multilayer Perceptron 被重新命名為 Deep Learning（深度學習）。2006年，Hinton等人提出使用 Restricted Boltzmann machines (RBM) 來初始化深度學習的權重，吸引了許多研究者的關注。一些人認為使用RBM才算是深度學習，但隨著研究深入，發現不需要RBM也能訓練深度學習模型。因此，Deep Learning 與 Multilayer Perceptron（Neural Network）成為同一種演算法的不同名稱，「深度學習」與「神經網絡」常被交互使用。
 
 ## 深度學習5個組件
+
 ### 1. Activation Function
+
 Activation function 是深度學習中最基本的單位，可以想像它是神經網路中的
 一個節點(node)，執行最簡單的非線性轉換。 常見的有Sigmoid 和 ReLU等：
 
@@ -264,6 +266,7 @@ $$
 
 
 ### 3. Loss Function
+
 在深度學習中，評估模型好壞需要使用 Loss Function。Loss Function 通過比較模型預測結果與真實資料來計算一個分數（Loss），分數越低表示預測結果越接近真實資料，模型性能越好。常用的 Loss Function 包括 Cross Entropy，特別是在分類任務中。
 
 Cross Entropy 的優勢在於當模型預測與真實資料相差較大時，微分後的斜率較大，有助於訓練，而平方差公式在相同情況下則較平緩，不利於訓練。Loss Function 必須可微，以便使用 Gradient Descent 找出最符合真實情況的模型。根據不同情況，也可以選擇其他 Loss Function 或自定義 Loss Function。
@@ -280,6 +283,7 @@ $$
     <p>紅色為平方差，黑色為 Cross Entropy</p>
   </div>
 </div>
+
 ### 4. Gradient Descent
 
 想像模型中的每個權重 (weight) 代表空間中的一軸，把所有權重帶入 Loss Function 中形成高低起伏的空間，每個點表示一組權重計算出的 Loss。最佳模型擁有最低的 Loss，即整個空間中最底點的位置。計算全部權重組合的 Loss 會耗費大量資源，因此使用 Gradient Descent 來找出答案。
