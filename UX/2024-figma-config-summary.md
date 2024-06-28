@@ -104,3 +104,31 @@ Figma 推出的超強簡報製作工具，可以讓你直接在簡報中展示pr
 利用AI生成文字內容，還可以針對不同應用場景，選擇文字語調
 
 [點我試用看看Figma Slide](https://www.figma.com/community/file/1383476600772937799)
+
+
+## Dev Mode 優化
+
+### 新增多種狀態標記
+
+![5b46c29046c0f5d61662c8bb0bb1193ef49f1d5e-1080x864](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/4ce31039-7f1b-4d97-a675-053388ebce4c)
+
+除了原本的 Ready for develop外，還新增了Changed 和 Completed 的狀態，更方便設計師與開發人員溝通
+另外新增加 Focus模式，直接將 Ready for develop的頁面單獨拉出，讓開發人員專注在需開發的頁面上，避免開發人員要從廣大的設計稿中尋找，也能更加專注在需開發的頁面上。
+
+### Code Connect
+
+<img width="792" alt="68747470733a2f2f7374617469632e6669676d612e636f6d2f75706c6f6164732f643938653734373631336530313638356436613066396464336532646364303232666632383963302e706e67" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/18dcc1ba-508c-46a4-baba-f3ae9ce4ee86">
+
+這次最強大的優化莫過於 Code Connect的功能了，雖然目前還處於Beta版，但 Code Connect 可以讓開發人員直接將你的 component codebase上傳到 Figma的Dev Mode當中
+
+如此一來可以快速的統一所有Component的寫法，並且公佈於figma當中方便其他的開發人員直接使用。
+
+安裝方式：
+
+若要在 React 專案中本地端安裝 Code Connect，您可以遵循 [React README](https://github.com/figma/code-connect/blob/main/cli/README.md#installation) 中的指示。
+
+對於其他平台，首先需要在您的電腦上安裝 Node.js v16 或更新版本。您可以通過運行 node -v 來檢查是否已經安裝 Node.js 以及其版本。如果需要安裝 Node.js，所有平台的安裝說明都可以在 Node.js 官網上找到。
+
+安裝 Node.js 後，您可以全域安裝 Code Connect，使其可以在您的電腦任何地方運行，方法是運行以下指令：
+
+```npm install --global @figma/code-connect```
