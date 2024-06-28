@@ -296,6 +296,7 @@ $$
 ### 5. Backpropagation
 
 > 參考影片：
+
 <iframe width="540" height="400" src="https://www.youtube.com/embed/ibJpTrp5mcE?si=ITgK5Ima4WK61AVT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Backpropagation是在Deep Leaning Model中計算Gradient的方法，在計算之前我們要先了解微積分的Chain Rule。
