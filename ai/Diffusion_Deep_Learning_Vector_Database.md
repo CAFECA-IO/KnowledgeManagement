@@ -41,10 +41,12 @@ Defusion Model 是模仿Markov chain，利用常態分佈(高斯分佈)逐漸對
 
 > 公式
 
+
 $$
 q(\mathbf{x}_{1:T} | \mathbf{x}_0) := \prod_{t=1}^T q(\mathbf{x}_t | \mathbf{x}_{t-1}), \quad 
 q(\mathbf{x}_t | \mathbf{x}_{t-1}) := \mathcal{N}(\mathbf{x}_t; \sqrt{1 - \beta_t}\mathbf{x}_{t-1}, \beta_t \mathbf{I})
 $$
+
 
 ```python
 n_steps = 100
@@ -69,6 +71,7 @@ def gather(consts: torch.Tensor, t: torch.Tensor):
 ```
 
 ### Reverse process (逆擴散過程)
+
 上面說到模型需要給定圖片`x_t`，預測雜訊`eps`，實際上是要讓模型學會產生`eps`的常態分配的平均值和標準差。
 
 有了上面的`beta_t`，可以算出`alpha_t = 1 - beta_t`, `alpha_bar_t = 從 t=0 連乘到t=t`，接著按下面步驟算出：
@@ -79,10 +82,13 @@ def gather(consts: torch.Tensor, t: torch.Tensor):
 5. 新的圖片 `main + √var*eps`
 > 公式：
 
+
 $$
 p_\theta(\mathbf{x}_{0:T}) := p(\mathbf{x}_T) \prod_{t=1}^T p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t), \quad 
 p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t) := \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_t, t), \Sigma_\theta(\mathbf{x}_t, t))
 $$
+
+
 
 ```python
 # Set up some parameters
@@ -111,6 +117,7 @@ def p_xt(xt, noise, t):
 
 #### Loss Function
 學習的時候會使用下面這個loss function來計算，其實就是算出污染`x_t`圖片的雜訊`eps_t`與模型預測的雜訊`pred_noise_t`平方差的平方 (mse)
+
 $$
 L_{\text{simple}}(\theta) := \mathbb{E}_{t, \mathbf{x}_0, \epsilon} \left[ \left\| \epsilon - \epsilon_\theta \left( \sqrt{\bar{\alpha}_t} \mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_t} \epsilon, t \right) \right\|^2 \right]
 $$
@@ -139,6 +146,7 @@ $$
 
 
 #### Sampling
+
 訓練好之後就可以來產圖了，產圖流程如下：
 1. 先獲得一個雜訊，就做`x_T`
 2. 執行大T(n_step)次去噪動作，以下為loop
