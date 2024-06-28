@@ -44,7 +44,7 @@ q(\mathbf{x}_{1:T} | \mathbf{x}_0) := \prod_{t=1}^T q(\mathbf{x}_t | \mathbf{x}_
 q(\mathbf{x}_t | \mathbf{x}_{t-1}) := \mathcal{N}(\mathbf{x}_t; \sqrt{1 - \beta_t}\mathbf{x}_{t-1}, \beta_t \mathbf{I})
 $$
 
-```python=
+```python
 n_steps = 100
 beta = torch.linspace(0.0001, 0.04, n_steps)
 
@@ -82,7 +82,7 @@ p_\theta(\mathbf{x}_{0:T}) := p(\mathbf{x}_T) \prod_{t=1}^T p_\theta(\mathbf{x}_
 p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t) := \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_t, t), \Sigma_\theta(\mathbf{x}_t, t))
 $$
 
-```python=
+```python
 # Set up some parameters
 n_steps = 100
 beta = torch.linspace(0.0001, 0.04, n_steps).cuda()
