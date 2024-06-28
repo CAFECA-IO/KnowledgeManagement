@@ -383,6 +383,7 @@ $$
 $$
 
 而 $\frac{\partial{C}}{\partial{w}}$ 後面的部分是:
+
 $$
 \frac{\partial{C}}{\partial{z}} = \frac{\partial{a}}{\partial{z}} \cdot \frac{\partial{C}}{\partial{a}}
 $$
@@ -401,6 +402,7 @@ $$
 $$
 
 從上面的圖片我們可以知道
+
 $$
 \begin{aligned}
 \frac{\partial{z'}}{\partial{a}} = w_1 \\
@@ -424,7 +426,7 @@ $$
 \end{aligned}
 $$
 
-而我們知道了 $\frac{\partial{C}}{\partial{z'}}$和$\frac{\partial{C}}{\partial{z''}}$ 就可以算出 $\frac{\partial{C}}{\partial{z}}$
+而我們知道了 $\frac{\partial{C}}{\partial{z'}}$ 和 $\frac{\partial{C}}{\partial{z''}}$ 就可以算出 $\frac{\partial{C}}{\partial{z}}$
 
 $$
 \frac{\partial{C}}{\partial{z}} = \sigma'(x)\left[w_3 \cdot \frac{\partial{y_1}}{\partial{z'}} \cdot \frac{\partial{C}}{\partial{y_1}} + w_4\cdot \frac{\partial{y_2}}{\partial{z''}} \cdot \frac{\partial{C}}{\partial{y_2}}\right]
