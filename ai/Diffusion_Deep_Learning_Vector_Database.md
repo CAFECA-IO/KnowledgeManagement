@@ -214,9 +214,11 @@ $$
 Activation function 可以產生相當於邏輯運算子的效果，舉例來說，如果有四的點，分別為(0,0)、(1,0)、(0,1)、(1,1)。如果要將(0,0)與(1,1)分為一類，(1,0)與(0,1)分為另一類，會發現若單純使用一次方程會不能輕易區分。
 
 但如果我們用以以下兩個Function做轉換
+
 $$
 \text{w} = \max(0, x - 0.5 y)
 $$
+
 $$
 \text{z} = \max(0, -0.9x + y)
 $$
@@ -317,7 +319,8 @@ $$
 \frac{\mathrm{d}z}{\mathrm{d}x} = \frac{\mathrm{d}z}{\mathrm{d}y} \cdot \frac{\mathrm{d}y}{\mathrm{d}x}
 $$
 
-又如果有一個值 $s$ 同時影響$x$和$y$, 而$x$和$y$又影響$z$:
+又如果有一個值 $s$ 同時影響 $x$ 和 $y$, 而 $x$ 和 $y$ 又影響 $z$ :
+
 $$
 \begin{aligned}
 x &= g(s) \\
@@ -326,7 +329,8 @@ z &= k(x,y)
 \end{aligned}
 $$
 
-則$s$對$z$的微分如下
+則 $s$ 對 $z$ 的微分如下
+
 $$
 \frac{\mathrm{d}z}{\mathrm{d}s} = \frac{\partial{z}}{\partial{x}} \cdot \frac{\mathrm{d}x}{\mathrm{d}s} + \frac{\partial{z}}{\partial{y}} \cdot \frac{\mathrm{d}y}{\mathrm{d}s}
 $$
@@ -357,17 +361,17 @@ $$
 
 
 
-從下圖可以看到完整的function邏輯，input layer傳入參數$x_1$, $x_2$,並與$w_1$, $w_2$, $b$組成 $z$, 將$z$帶入 activation function $\sigma{(z)}$產出$a$, $a$再作為下一層layer的參數。
+從下圖可以看到完整的function邏輯，input layer傳入參數 $x_1$ , $x_2$ ,並與 $w_1$ , $w_2$ , $b$ 組成 $z$, 將 $z$ 帶入 activation function $\sigma{(z)}$ 產出 $a$, $a$ 再作為下一層layer的參數。
 
 ![圖片](https://hackmd.io/_uploads/BkihfRo80.png)
 
-為了要更新參數 $w$ ，我們需要用$w$對Loss function做偏微分，依照chain rule如下：
+為了要更新參數 $w$ ，我們需要用 $w$ 對Loss function做偏微分，依照chain rule如下：
 
 $$
 \frac{\partial{C}}{\partial{w}} = \frac{\partial{z}}{\partial{w}} \cdot \frac{\partial{C}}{\partial{z}}
 $$
 
-而我們可以輕易知道$\frac{\partial{z}}{\partial{w_1}}$就是$x_1$，而這個$x_1$從上一層傳過來的，因此也叫做前向傳播。
+而我們可以輕易知道 $\frac{\partial{z}}{\partial{w_1}}$ 就是 $x_1$ ，而這個 $x_1$ 從上一層傳過來的，因此也叫做前向傳播。
 
 > 前向傳播 (Forward Propagation)
 
@@ -378,17 +382,17 @@ $$
 \end{aligned}
 $$
 
-而$\frac{\partial{C}}{\partial{w}}$後面的部分是:
+而 $\frac{\partial{C}}{\partial{w}}$ 後面的部分是:
 $$
 \frac{\partial{C}}{\partial{z}} = \frac{\partial{a}}{\partial{z}} \cdot \frac{\partial{C}}{\partial{a}}
 $$
 
-其中activation function $\sigma(z)$的微分已知：
+其中activation function $\sigma(z)$ 的微分已知：
 $$
 \frac{\partial{a}}{\partial{z}} = \sigma'(z)
 $$
 
-而$\frac{\partial{C}}{\partial{a}}$又可以繼續如下(因為$a$出來的值又會向下影響到下一層的參數function $z'$ 和 $z''$)
+而 $\frac{\partial{C}}{\partial{a}}$ 又可以繼續如下(因為$a$出來的值又會向下影響到下一層的參數function $z'$ 和 $z''$ )
 
 > Chain Rule
 
@@ -404,13 +408,13 @@ $$
 \end{aligned}
 $$
 
-雖然$\frac{\partial{C}}{\partial{z'}}$和$\frac{\partial{C}}{\partial{z''}}$仍然未知，但我們先假設我們知道怎麼算，可以從上面的算是中得出
+雖然 $\frac{\partial{C}}{\partial{z'}}$ 和 $\frac{\partial{C}}{\partial{z''}}$ 仍然未知，但我們先假設我們知道怎麼算，可以從上面的算是中得出
 
 $$
 \frac{\partial{C}}{\partial{z}} = \sigma'(x)\left[w_3 \cdot \frac{\partial{C}}{\partial{z'}} + w_4\cdot \frac{\partial{C}}{\partial{z''}}\right]
 $$
 
-最後假設$z'$和$z''$下一層就是進入Output layer並產出預測的結果$y_1$和$y_2$, 並有相對應的答案(Ground Truth) $\hat{y}_1$和$\hat{y}_2$，我們便可以算出$\frac{\partial{C}}{\partial{z'}}$和$\frac{\partial{C}}{\partial{z''}}$:
+最後假設 $z'$ 和 $z''$ 下一層就是進入Output layer並產出預測的結果 $y_1$ 和 $y_2$ , 並有相對應的答案(Ground Truth) $\hat{y}_1$和$\hat{y}_2$ ，我們便可以算出 $\frac{\partial{C}}{\partial{z'}}$ 和 $\frac{\partial{C}}{\partial{z''}}$ :
 
 
 $$
@@ -420,16 +424,16 @@ $$
 \end{aligned}
 $$
 
-而我們知道了$\frac{\partial{C}}{\partial{z'}}$和$\frac{\partial{C}}{\partial{z''}}$就可以算出$\frac{\partial{C}}{\partial{z}}$
+而我們知道了 $\frac{\partial{C}}{\partial{z'}}$和$\frac{\partial{C}}{\partial{z''}}$ 就可以算出 $\frac{\partial{C}}{\partial{z}}$
 
 $$
 \frac{\partial{C}}{\partial{z}} = \sigma'(x)\left[w_3 \cdot \frac{\partial{y_1}}{\partial{z'}} \cdot \frac{\partial{C}}{\partial{y_1}} + w_4\cdot \frac{\partial{y_2}}{\partial{z''}} \cdot \frac{\partial{C}}{\partial{y_2}}\right]
 $$
 
 
-再搭配前向傳播的$x_1$可以組出來：
+再搭配前向傳播的 $x_1$ 可以組出來：
 $$
 \frac{\partial{C}}{\partial{w_1}} = x_1 \cdot \frac{\partial{C}}{\partial{z}} \cdot \sigma'(x)\left[w_3 \cdot \frac{\partial{y_1}}{\partial{z'}} \cdot \frac{\partial{C}}{\partial{y_1}} + w_4\cdot \frac{\partial{y_2}}{\partial{z''}} \cdot \frac{\partial{C}}{\partial{y_2}}\right]
 $$
 
-我們就可以用$\frac{\partial{C}}{\partial{w_1}}$去調整$w_1$了
+我們就可以用 $\frac{\partial{C}}{\partial{w_1}}$ 去調整 $w_1$ 了
