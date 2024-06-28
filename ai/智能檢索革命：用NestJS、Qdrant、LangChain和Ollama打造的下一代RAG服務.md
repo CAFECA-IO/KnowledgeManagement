@@ -8,6 +8,13 @@
 **應用場景**：
 這個 RAG 服務可以應用於多種自然語言處理（NLP）場景，如聊天機器人、智慧客服等。
 
+**參考流程**
+
+![image](https://github.com/CAFECA-IO/KnowledgeManagement/assets/123862185/2ba70f8b-f712-443c-bb60-2044a3086e29)
+
+credit: [AWS](https://aws.amazon.com/tw/what-is/retrieval-augmented-generation/)
+
+
 ## 2. 準備工作
 
 **環境設置**：
