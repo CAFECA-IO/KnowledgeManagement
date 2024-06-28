@@ -1,4 +1,6 @@
 # 1. Image Generation
+- [HackMD好讀版](https://hackmd.io/@HWjmtqGJQRmj4pwClBcCKg/HkQKvTWIC)
+
 > 參考資料：
 >- [基於 Diffusion Models 的生成圖像演算法](https://d246810g2000.medium.com/%E5%9F%BA%E6%96%BC-diffusion-models-%E7%9A%84%E7%94%9F%E6%88%90%E5%9C%96%E5%83%8F%E6%BC%94%E7%AE%97%E6%B3%95-984212710610)
 >- [AIAIART #7](https://colab.research.google.com/drive/1NFxjNI-UIR7Ku0KERmv7Yb_586vHQW43?usp=sharing#scrollTo=g7btoXL7Im7M)
@@ -158,7 +160,7 @@ $$
   </div>
 </div>
 
-### 模型 UNet
+### UNet 模型
 
 > 參考資料
 >- [UNet 原始論文:U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597)
@@ -173,3 +175,260 @@ U Net 是用來預測雜訊 `pred_eps`的模型本體，他可以輸入兩個值
 2. middle(bottom)，兩次的convolution，在這裡要加數步驟t的embedding資訊，模型才會知道現在在第幾步驟
 3. up:2次的 3\*3 convolution 搭配一次2\*2 up-conv(逆convolution)，共執行4次
 ![image](https://hackmd.io/_uploads/HJDoCe4LA.png)
+
+# 2. Deep Learning
+> 參考資料
+> - [李宏毅. 2016d. ML Lecture 6: Brief Introduction of Deep Learning. YouTube](https://www.youtube.com/watch?v=Dr-WRlEFefw.)
+> - [李宏毅. 2016g. ML Lecture 11: Why Deep? YouTube.](https://www.youtube.com/watch?v=XsC9byQkUH8)
+> - [李宏毅. 2016d. ML Lecture 6: Brief Introduction of Deep Learning. YouTube.](https://www.youtube.com/watch?v=Dr-WRlEFefw)
+> - [李宏毅. 2017a. ML Lecture 5: Logistic Regression. YouTube.](https://www.youtube.com/watch?v=hSXFuypLukA)
+> - [李宏毅. 2016a. ML Lecture 1: Regression - Case Study. YouTube.](https://tdr.lib.ntu.edu.tw/jspui/bitstream/123456789/8399/1/U0001-1204202115134100.pdf)
+> - [Glorot, X., and Y. Bengio. 2010. Understanding the difficulty of training deep feedforward neural
+networks. ](https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf)
+
+## 名稱的由來
+1958年，Frank Rosenblatt 提出 Perceptron 演算法，用於線性分類。1962年，Marvin Minsky 批評其局限性，導致研究熱潮迅速平息。1980年代中期，Multilayer Perceptron（多層感知器）被提出，實際上是多層 Logistic Model 的連接，被稱為 Neural Network（神經網路）。1986年，Rumelhart 等提出 Back-propagation 演算法，可調整神經網路中各單元的權重。然而，隱藏層超過三層時效果不佳，1989年，多數學者認為一層隱藏層足夠。
+
+1999年後，隨著GPU的發展，訓練多層隱藏層變得可能，Multilayer Perceptron 被重新命名為 Deep Learning（深度學習）。2006年，Hinton等人提出使用 Restricted Boltzmann machines (RBM) 來初始化深度學習的權重，吸引了許多研究者的關注。一些人認為使用RBM才算是深度學習，但隨著研究深入，發現不需要RBM也能訓練深度學習模型。因此，Deep Learning 與 Multilayer Perceptron（Neural Network）成為同一種演算法的不同名稱，「深度學習」與「神經網絡」常被交互使用。
+
+## 深度學習5個組件
+### 1. Activation Function
+Activation function 是深度學習中最基本的單位，可以想像它是神經網路中的
+一個節點(node)，執行最簡單的非線性轉換。 常見的有Sigmoid 和 ReLU等：
+
+> **Sigmoid 函數:**
+
+
+$$
+\sigma(x) = \frac{1}{1 + e^{-x}}
+$$
+
+
+> **ReLU 函數:**
+
+
+$$
+\text{ReLU}(x) = \max(0, x)
+$$
+
+Activation function 可以產生相當於邏輯運算子的效果，舉例來說，如果有四的點，分別為(0,0)、(1,0)、(0,1)、(1,1)。如果要將(0,0)與(1,1)分為一類，(1,0)與(0,1)分為另一類，會發現若單純使用一次方程會不能輕易區分。
+
+但如果我們用以以下兩個Function做轉換
+$$
+\text{w} = \max(0, x - 0.5 y)
+$$
+$$
+\text{z} = \max(0, -0.9x + y)
+$$
+轉換後的四個點分別為(0,0)、(0.5,0.1)、(1,0)、(0,1)，就可以被一次方程分成兩邊。
+
+<table>
+  <tr>
+    <td style="text-align: center;">
+      <img src="https://hackmd.io/_uploads/SyXMZjjU0.png" alt="Image 1" style="max-width:95%;">
+      <p>轉換前</p>
+    </td>
+    <td style="text-align: center;">
+      <img src="https://hackmd.io/_uploads/SJY7Wss8R.png" alt="Image 2" style="max-width:100%;">
+      <p>轉換後</p>
+    </td>
+  </tr>
+</table>
+
+
+### 2. 深度學習架構
+
+深度學習架構可以靈活變化以滿足不同需求。這邊使用最基礎的 Fully Connected Feedforward Network 架構，由 Input Layer、Output Layer 和任意數量的 Hidden Layer 組成。
+
+1. **Input Layer**：這一層並不是真正的一層，而是表示輸入向量。每個自變數都會輸入到下一層的所有節點中。
+
+2. **Hidden Layer**：這層是由任意數量的 Activation Function 組成的，可以有多層。每層的節點數量和使用的 Activation Function 可以不同。例如，第一層可以使用5000個 Sigmoid 函數，而第二層可以使用3000個 ReLU 函數。從 Input Layer 得到的自變數在每個節點會產生一個值，這些值作為新的自變數輸入到下一層。每個 Hidden Layer 的輸出都會輸入到下一層的所有節點中，最終輸出到 Output Layer。
+
+3. **Output Layer**：這一層作為分類器，將經過 Hidden Layer 非線性轉換的資料分類。例如，經過多層非線性轉換後，資料點會轉換成容易被分類的型態，找出資料的特徵(Feature)，再利用 Output Layer 把資料分類成多個類別。常用的分類函數是 Softmax function，它將 hidden layer 中的資料壓縮到 0 到 1 之間，計算出每個類別的後驗機率，最大值對應的類別即為預測類別。
+$$
+\text{Softmax}(x_i) = \frac{e^{x_i}}{\sum_{j=1}^{N} e^{x_j}}
+$$
+
+4. **Fully Connected Feedforward Network**：這是最常見的連接各層的方法。每個節點的輸出都會傳遞到下一層的所有節點，而每個節點也會使用上一層所有節點的輸出。這種結構被稱為 Fully Connected，資料從 Input Layer 傳遞到 Hidden Layer，再傳遞到 Output Layer，呈現順向結構。
+
+這種架構允許任意改變以適應不同的需求，並提供了強大的靈活性和可擴展性，使其成為深度學習領域的基礎。
+
+<div align="center">
+  <div>
+    <img src="https://hackmd.io/_uploads/Hk94VsjU0.png" alt="Image 1" style="max-width:95%;">
+    <p>Fully Connected Feedforward Network</p>
+  </div>
+</div>
+
+
+### 3. Loss Function
+在深度學習中，評估模型好壞需要使用 Loss Function。Loss Function 通過比較模型預測結果與真實資料來計算一個分數（Loss），分數越低表示預測結果越接近真實資料，模型性能越好。常用的 Loss Function 包括 Cross Entropy，特別是在分類任務中。
+
+Cross Entropy 的優勢在於當模型預測與真實資料相差較大時，微分後的斜率較大，有助於訓練，而平方差公式在相同情況下則較平緩，不利於訓練。Loss Function 必須可微，以便使用 Gradient Descent 找出最符合真實情況的模型。根據不同情況，也可以選擇其他 Loss Function 或自定義 Loss Function。
+
+> Cross Entropy
+
+$$
+L = -\sum_{i=1}^{N} y_i \log(\hat{y}_i)
+$$
+
+<div align="center">
+  <div>
+    <img src="https://hackmd.io/_uploads/B1KWUiiIR.png" alt="Image 1" style="max-width:95%;">
+    <p>紅色為平方差，黑色為 Cross Entropy</p>
+  </div>
+</div>
+### 4. Gradient Descent
+
+想像模型中的每個權重 (weight) 代表空間中的一軸，把所有權重帶入 Loss Function 中形成高低起伏的空間，每個點表示一組權重計算出的 Loss。最佳模型擁有最低的 Loss，即整個空間中最底點的位置。計算全部權重組合的 Loss 會耗費大量資源，因此使用 Gradient Descent 來找出答案。
+
+Gradient Descent 從 Loss 組成的波浪中選擇一個點，朝著該點斜率的反方向走一步，重複此步驟直到斜率為0的最底點。要得到此斜率需要把 Loss Function 對每一個權重做偏微分，得到的
+值組成一個向量就叫做梯度(Gradient)，可用符號∇表示
+
+而為了要求得最低值，需要將原本的權重減去 Gradient，才會朝最低值前進。原先的點差距太遠而非像最低點前進，於是在減 Gradient 時會乘上一個數來限制Gradient 的步伐長度，這個數稱之為 Learning Rate，可用符號 η 表示。以上步驟可表示如下：
+
+$$
+w^{(T+1)} = w^{(T)} - \eta \nabla \text{Loss}(w^{(T)})
+$$
+
+除了基本的 Gradient Descent，還有許多變形方法，如每次只使用一筆資料的 Stochastic Gradient Descent、處理不均衡自變數的 Adagrad，結合動量概念的 Adam。
+
+### 5. Backpropagation
+
+> 參考影片：
+<iframe width="540" height="400" src="https://www.youtube.com/embed/ibJpTrp5mcE?si=ITgK5Ima4WK61AVT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Backpropagation是在Deep Leaning Model中計算Gradient的方法，在計算之前我們要先了解微積分的Chain Rule。
+
+> Chain Rule:
+
+如果有兩個function如下
+
+$$
+\begin{aligned}
+y &= g(x) \\
+z &= h(y)
+\end{aligned}
+$$
+
+則$x$對$z$的微分如下：
+$$
+\frac{\mathrm{d}z}{\mathrm{d}x} = \frac{\mathrm{d}z}{\mathrm{d}y} \cdot \frac{\mathrm{d}y}{\mathrm{d}x}
+$$
+
+又如果有一個值 $s$ 同時影響$x$和$y$, 而$x$和$y$又影響$z$:
+$$
+\begin{aligned}
+x &= g(s) \\
+y &= h(s) \\
+z &= k(x,y)
+\end{aligned}
+$$
+
+則$s$對$z$的微分如下
+$$
+\frac{\mathrm{d}z}{\mathrm{d}s} = \frac{\partial{z}}{\partial{x}} \cdot \frac{\mathrm{d}x}{\mathrm{d}s} + \frac{\partial{z}}{\partial{y}} \cdot \frac{\mathrm{d}y}{\mathrm{d}s}
+$$
+
+接著我們先定義深度學習模型會要使用的幾個function:
+>activation function 用sigmoid function
+
+$$
+a = \sigma_{z}
+$$
+
+> 填入activation function中的$z$如下
+$$
+z = x_1w_1 +x_2w_2 +b
+$$
+> loss function 用 Cross Entropy
+
+$$
+L(\theta) = \sum_{n=1}^{N} C^n(\theta)
+$$
+
+> 也可以改寫如下
+
+
+$$
+\frac{\partial L(\theta)}{\partial w} = \sum_{n=1}^{N} \frac{\partial c^n(\theta)}{\partial w}
+$$
+
+
+
+從下圖可以看到完整的function邏輯，input layer傳入參數$x_1$, $x_2$,並與$w_1$, $w_2$, $b$組成 $z$, 將$z$帶入 activation function $\sigma{(z)}$產出$a$, $a$再作為下一層layer的參數。
+
+![圖片](https://hackmd.io/_uploads/BkihfRo80.png)
+
+為了要更新參數 $w$ ，我們需要用$w$對Loss function做偏微分，依照chain rule如下：
+
+$$
+\frac{\partial{C}}{\partial{w}} = \frac{\partial{z}}{\partial{w}} \cdot \frac{\partial{C}}{\partial{z}}
+$$
+
+而我們可以輕易知道$\frac{\partial{z}}{\partial{w_1}}$就是$x_1$，而這個$x_1$從上一層傳過來的，因此也叫做前向傳播。
+
+> 前向傳播 (Forward Propagation)
+
+$$
+\begin{aligned}
+\frac{\partial{z}}{\partial{w_1}} = x_1 \\
+\frac{\partial{z}}{\partial{w_2}} = x_2
+\end{aligned}
+$$
+
+而$\frac{\partial{C}}{\partial{w}}$後面的部分是:
+$$
+\frac{\partial{C}}{\partial{z}} = \frac{\partial{a}}{\partial{z}} \cdot \frac{\partial{C}}{\partial{a}}
+$$
+
+其中activation function $\sigma(z)$的微分已知：
+$$
+\frac{\partial{a}}{\partial{z}} = \sigma'(z)
+$$
+
+而$\frac{\partial{C}}{\partial{a}}$又可以繼續如下(因為$a$出來的值又會向下影響到下一層的參數function $z'$ 和 $z''$)
+
+> Chain Rule
+
+$$
+\frac{\partial{C}}{\partial{a}} = \frac{\partial{z'}}{\partial{a}} \cdot \frac{\partial{C}}{\partial{z'}} + \frac{\partial{z''}}{\partial{a}} \cdot \frac{\partial{C}}{\partial{z''}}
+$$
+
+從上面的圖片我們可以知道
+$$
+\begin{aligned}
+\frac{\partial{z'}}{\partial{a}} = w_1 \\
+\frac{\partial{z''}}{\partial{a}} = w_2
+\end{aligned}
+$$
+
+雖然$\frac{\partial{C}}{\partial{z'}}$和$\frac{\partial{C}}{\partial{z''}}$仍然未知，但我們先假設我們知道怎麼算，可以從上面的算是中得出
+
+$$
+\frac{\partial{C}}{\partial{z}} = \sigma'(x)\left[w_3 \cdot \frac{\partial{C}}{\partial{z'}} + w_4\cdot \frac{\partial{C}}{\partial{z''}}\right]
+$$
+
+最後假設$z'$和$z''$下一層就是進入Output layer並產出預測的結果$y_1$和$y_2$, 並有相對應的答案(Ground Truth) $\hat{y}_1$和$\hat{y}_2$，我們便可以算出$\frac{\partial{C}}{\partial{z'}}$和$\frac{\partial{C}}{\partial{z''}}$:
+
+
+$$
+\begin{aligned}
+\frac{\partial{C}}{\partial{z'}} = \frac{\partial{y_1}}{\partial{z'}} \cdot \frac{\partial{C}}{\partial{y_1}} \\
+\frac{\partial{C}}{\partial{z''}} = \frac{\partial{y_2}}{\partial{z''}} \cdot \frac{\partial{C}}{\partial{y_2}}
+\end{aligned}
+$$
+
+而我們知道了$\frac{\partial{C}}{\partial{z'}}$和$\frac{\partial{C}}{\partial{z''}}$就可以算出$\frac{\partial{C}}{\partial{z}}$
+
+$$
+\frac{\partial{C}}{\partial{z}} = \sigma'(x)\left[w_3 \cdot \frac{\partial{y_1}}{\partial{z'}} \cdot \frac{\partial{C}}{\partial{y_1}} + w_4\cdot \frac{\partial{y_2}}{\partial{z''}} \cdot \frac{\partial{C}}{\partial{y_2}}\right]
+$$
+
+
+再搭配前向傳播的$x_1$可以組出來：
+$$
+\frac{\partial{C}}{\partial{w_1}} = x_1 \cdot \frac{\partial{C}}{\partial{z}} \cdot \sigma'(x)\left[w_3 \cdot \frac{\partial{y_1}}{\partial{z'}} \cdot \frac{\partial{C}}{\partial{y_1}} + w_4\cdot \frac{\partial{y_2}}{\partial{z''}} \cdot \frac{\partial{C}}{\partial{y_2}}\right]
+$$
+
+我們就可以用$\frac{\partial{C}}{\partial{w_1}}$去調整$w_1$了
