@@ -37,16 +37,16 @@ Defusion Model 是模仿Markov chain，利用常態分佈(高斯分佈)逐漸對
 ### Diffusion process (擴散過程)
 下面是的意思是，我們會逐步對一張圖片加上常態分配的雜訊，這個步驟總共會做T次，其中的一次叫做t。`Beta_t`是一個會隨著t越大而增加的值，而雜訊的常態分配的平均數(mean)是`Beta_t`*上一步驟t-1的圖片, 變異數(var)是`Beta_t`，可以算出雜訊eps, 接著新的圖片會是`main + √var*eps`。
 
-我們模型要訓練的其實是給定一張被雜訊污染的`X_t`，要求模型幫我們預測出是什麼雜訊污染他，也就是預測`eps`
+我們模型要訓練的其實是給定一張被雜訊污染的`X_t`，要求模型幫我們預測出是什麼雜訊污染他，也就是預測`eps`:
 
 > 公式
-
 
 $$
 q(\mathbf{x}_{1:T} | \mathbf{x}_0) := \prod_{t=1}^T q(\mathbf{x}_t | \mathbf{x}_{t-1}), \quad 
 q(\mathbf{x}_t | \mathbf{x}_{t-1}) := \mathcal{N}(\mathbf{x}_t; \sqrt{1 - \beta_t}\mathbf{x}_{t-1}, \beta_t \mathbf{I})
 $$
 
+> 程式碼：
 
 ```python
 n_steps = 100
@@ -88,7 +88,7 @@ p_\theta(\mathbf{x}_{0:T}) := p(\mathbf{x}_T) \prod_{t=1}^T p_\theta(\mathbf{x}_
 p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t) := \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_t, t), \Sigma_\theta(\mathbf{x}_t, t))
 $$
 
-
+> 程式碼：
 
 ```python
 # Set up some parameters
