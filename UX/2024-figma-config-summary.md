@@ -60,3 +60,17 @@
 
 在設計中我們可能會遇到需要生成不同語系的狀況，以往可能需要透過第三方軟體、人員等進行翻譯的工作，翻譯後還需要慢慢更改設計稿。
 現在 Figma AI 直接將設計稿轉換成你所選擇的語系，相當方便。
+
+
+### 自動生成設計稿
+
+最後，也是此次Figma AI 最強大的地方！自動生成mockup及Prototype
+
+<img width="780" alt="截圖 2024-06-28 下午12 54 23" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/31288a40-fcb0-47cb-8f49-3c9487a0bd35">
+
+您只需要對AI輸入Prompt，如：Make a form with filter for receipt app，下一秒AI就會根據你描述的內容直接產出可調整的設計稿。
+中途如果遇到想要增加、刪減或調整的地方，也只需要再對ＡＩ下新指令，就可以直接生成您想要的內容，是不是非常強大呢？
+
+<img width="780" alt="截圖 2024-06-28 下午12 59 36" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/b4975899-e470-4115-a81e-a8523e890768">
+
+另外，現在您也只需要一個按鍵，AI 就可以自動判斷設計稿內容，直接相Prototpye都拉好，大幅提升Prototype製作效率
