@@ -297,9 +297,7 @@ $$
 
 ### 5. Backpropagation
 
-> 參考影片：
-
-<iframe width="540" height="400" src="https://www.youtube.com/embed/ibJpTrp5mcE?si=ITgK5Ima4WK61AVT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+> 參考影片：[ML Lecture 7: Backpropagation](https://www.youtube.com/embed/ibJpTrp5mcE?si=ITgK5Ima4WK61AVT)
 
 Backpropagation是在Deep Leaning Model中計算Gradient的方法，在計算之前我們要先了解微積分的Chain Rule。
 
@@ -314,7 +312,8 @@ z &= h(y)
 \end{aligned}
 $$
 
-則$x$對$z$的微分如下：
+則 $x$ 對 $z$ 的微分如下：
+
 $$
 \frac{\mathrm{d}z}{\mathrm{d}x} = \frac{\mathrm{d}z}{\mathrm{d}y} \cdot \frac{\mathrm{d}y}{\mathrm{d}x}
 $$
