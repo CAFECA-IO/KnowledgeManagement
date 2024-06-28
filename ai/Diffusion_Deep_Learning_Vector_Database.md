@@ -341,10 +341,12 @@ $$
 a = \sigma_{z}
 $$
 
-> 填入activation function中的$z$如下
+> 填入activation function中的 $z$ 如下
+
 $$
 z = x_1w_1 +x_2w_2 +b
 $$
+
 > loss function 用 Cross Entropy
 
 $$
