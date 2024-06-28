@@ -41,13 +41,10 @@ Defusion Model 是模仿Markov chain，利用常態分佈(高斯分佈)逐漸對
 
 > 公式
 
-$$
-q(\mathbf{x}_{1:T} | \mathbf{x}_0) := \prod_{t=1}^T q(\mathbf{x}_t | \mathbf{x}_{t-1}), \quad
-$$
 
-$$
-q(\mathbf{x}_t | \mathbf{x}_{t-1}) := \mathcal{N}(\mathbf{x}_t; \sqrt{1 - \beta_t}\mathbf{x}_{t-1}, \beta_t \mathbf{I})
-$$
+![圖片](https://github.com/CAFECA-IO/KnowledgeManagement/assets/55581222/06a6f2ab-25a4-4e41-827a-a6e4107fc17c)
+
+
 
 
 ```python
@@ -82,16 +79,13 @@ def gather(consts: torch.Tensor, t: torch.Tensor):
 3. var: 就是`beta_t`
 4. 新的雜訊eps: 用torch生成隨機數
 5. 新的圖片 `main + √var*eps`
+
 > 公式：
 
 
-$$
-p_\theta(\mathbf{x}_{0:T}) := p(\mathbf{x}_T) \prod_{t=1}^T p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t), \quad
-$$
+![圖片](https://github.com/CAFECA-IO/KnowledgeManagement/assets/55581222/c5c14395-b96e-4b2c-85de-f127d00149f0)
 
-$$
-p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t) := \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_t, t), \Sigma_\theta(\mathbf{x}_t, t))
-$$
+
 
 > 程式碼：
 
@@ -459,3 +453,385 @@ $$
 $$
 
 我們就可以用 $\frac{\partial{C}}{\partial{w_1}}$ 去調整 $w_1$ 了
+
+
+# 3. Embedding 與 向量資料庫
+
+> 參考資料：
+> - [極速ChatGPT開發者兵器指南：跨界整合Prompt Flow、LangChain與Semantic Kernel框架](https://www.books.com.tw/products/0010987469)
+> - [TinyMurky/embed_and_vector_database_practice](https://github.com/TinyMurky/embed_and_vector_database_practice)
+
+## Embedding
+
+Embedding 是大型語言模型開發中的一個重要關鍵技術，可以將文字轉成依照向量 (vector)的方式存在，方便輸入到深度學習的模型中。經由特殊Embedding模型embed後的文字，還可以讓類似詞意的文字在向量空間中在一起。Embedding也不一定要限制在詞，也可以針對整個句子的句義抽取出訊息變成 vector (像是Openai 可以提供將句子變成 1,536為度的向量)
+
+### One-hard encoding
+最簡單的Embedding是 one-hard encoding，就是一個跟字典一樣長的vector，在該詞的位置上標上1，其他都是0。
+例如 `你好嗎？` 就可以變成 `你`, `好`, `嗎`的字典，並表示如下：
+1. 你：`[1, 0, 0]`
+2. 好：`[0, 1, 0]`
+3. 嗎：`[0, 0, 1]`
+
+這樣的好處是很好Embedding，壞處是vector會變得太長。
+
+### Hugging Face
+
+我們可以用Hugging fac上的模型`all-MiniLM-L6-v2`來做embed，他會把一整個句子直接抽取成 384為度的向量，如下面所表示
+
+```python=
+from sentence_transformers import SentenceTransformer
+
+class EmbeddingModel:
+    """
+    this class is responsible for the embedding model
+    """
+
+    def __init__(self, model_name="sentence-transformers/all-MiniLM-L6-v2"):
+        self.model: SentenceTransformer = SentenceTransformer(model_name)
+
+    def encode(self, text: list[str]):
+        """
+        change the texts into embeddings
+        """
+        return self.model.encode(text)
+```
+
+下面我們將三個句子做Embed
+```python=
+def main():
+    embedding_model = EmbeddingModel()
+    sentences = ["Hello, World!", "I am Kyaru!", "I am a virtual YouTuber!"]
+
+    embeddings = embedding_model.encode(sentences)
+    print("Dimension: ", len(embeddings[0]))  # 384 個向量
+    print("embeddings: ", embeddings)
+```
+
+得到下面結果，三個長度為384的 float list
+```
+Dimension:  384
+
+embeddings:  [[-0.03817715  0.03291114 -0.0054594  ... -0.04089032  0.03187141
+   0.0181632 ]
+ [-0.03684668 -0.03121175  0.11125965 ...  0.00893893 -0.08519208
+   0.01065892]
+ [-0.03827702 -0.10684672 -0.0039953  ...  0.05886666 -0.01260292
+  -0.01910227]]
+```
+
+### 向量資料庫
+
+向量資料庫可以把Embedding後的vector當作key，並在裡面存放資料。並且可以藉由向量的相似程度來搜尋出相似的資料，主要用在推薦系統，大型語言模型的RAG時使用等。
+
+#### Qdrant
+
+向量資料庫有很多種，下面介紹[Qdrant](https://qdrant.tech/), Qdrant是開源的Rust語言寫成的向量資料庫，並且可以在本地端用docker架設
+
+##### docker compose
+
+docker-compose.yml 如下設定
+```yml=
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.6.1
+    restart: always
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - ./qdrant/storage:/qurant/storage
+      - ./qdrant/config.yaml:/qurant/config/production.yaml
+```
+
+上面比較重要的是 volumn的設定。
+- `/qurant/storage`：是設定向量資料庫真實的檔案是要存在你的電腦裡面的哪裡，我就是存在專案資料夾下面的 `./qdrant/storage` 資料夾
+- `/qurant/config/production.yaml`：是設定Qdrand config檔在你的電腦上的真實位置，像是我的就是在專案資料夾下面的 `./qdrant/config.yaml`。
+    - config.yaml下載：[點我](https://github.com/qdrant/qdrant/blob/master/config/config.yaml)
+
+
+另外在config.yaml找到 下面這個部份可以設定密碼
+```yaml
+service:
+  api_key: your_secret_api_key_here
+```
+
+接著在comand line中輸入下面指令就可以啟用了
+```
+docker-compose up -d
+```
+
+##### Qdrand Python SDK
+
+Qdrand有提供Python 的SDK，可使用pip下載
+```
+poetry add qdrant-client openai
+```
+
+以下的是完整的程式碼，解說在後面
+
+```python
+from app.embedding.model import EmbeddingModel
+from qdrant_client import QdrantClient
+from qdrant_client.http import models
+from qdrant_client.http.models import PointStruct
+
+
+class QdrantSingleton:
+    _instance = None
+    _initialized = False
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(QdrantSingleton, cls).__new__(cls)
+        return cls._instance
+
+    def __init__(self):
+        if not QdrantSingleton._initialized:
+            self.qdrant_client = QdrantClient(
+                url="http://localhost",
+                port=6333,
+                # api_key="api_key",
+            )
+            self.embedding_model = EmbeddingModel()
+            QdrantSingleton._initialized = True
+
+    def recreate_collection(self, collection_name: str):
+        """
+        這個方法會重新建立collection，並設定collection的參數
+        https://ithelp.ithome.com.tw/articles/10335513
+        """
+        # https://python-client.qdrant.tech/qdrant_client.http.models.models#qdrant_client.http.models.models.VectorParams
+        # 一個用cosine算距離的向量，長度是384
+        vectors_config = models.VectorParams(
+            distance=models.Distance.COSINE,
+            size=384,
+        )
+
+        # m代表每個節點近鄰數量。m值越大，查詢速度越快，但內存和構建時間也會增加。
+        # ef_construct這是用於構建圖時的效率參數。較大的ef_construct值會導致更好的查詢品質，但會增加構建時間。代表在構建索引時搜索的節點數量
+        hnsw_config = models.HnswConfigDiff(on_disk=True, m=16, ef_construct=100)
+
+        # memmap_threshold是這表示當數據大小超過20000時，將使用內存映射來管理數據，這可以有效地處理大量數據並減少內存使用。
+        optimizers_config = models.OptimizersConfigDiff(memmap_threshold=20000)
+
+        self.qdrant_client.recreate_collection(
+            collection_name=collection_name,
+            vectors_config=vectors_config,
+            hnsw_config=hnsw_config,
+            optimizers_config=optimizers_config,
+        )
+        return self.qdrant_client
+
+    def create_collection(self, collection_name: str):
+        """
+        create collection
+        """
+        vectors_config = models.VectorParams(
+            distance=models.Distance.COSINE,
+            size=384,
+        )
+
+        hnsw_config = models.HnswConfigDiff(on_disk=True, m=16, ef_construct=100)
+
+        optimizers_config = models.OptimizersConfigDiff(memmap_threshold=20000)
+        if not self.qdrant_client.collection_exists(collection_name):
+            self.qdrant_client.create_collection(
+                collection_name=collection_name,
+                vectors_config=vectors_config,
+                hnsw_config=hnsw_config,
+                optimizers_config=optimizers_config,
+            )
+        return self.qdrant_client
+
+    def get_embedding(self, text: str) -> list[float]:
+        """
+        get embedding
+        """
+        embedding_list = self.embedding_model.encode([text])
+        embedding = embedding_list[0]
+        embedding_to_float_list = embedding.tolist()
+        return embedding_to_float_list
+
+    def upsert_vectors(
+        self, vectors: list[list[float]], collection_name: str, data: list
+    ):
+        """
+        upsert vectors
+        payload is metadata, can be any data in dict
+        """
+        for i, vector in enumerate(vectors):
+            self.qdrant_client.upsert(
+                collection_name=collection_name,
+                points=[
+                    PointStruct(
+                        id=i,
+                        vector=vector,
+                        payload=data[i],
+                    )
+                ],
+            )
+        print("upsert_vectors done")
+
+    def search_for_qdrant(self, text: str, collection_name: str, limit_k: int):
+        """
+        search for qdrant
+        """
+        embedding_vector = self.get_embedding(text)
+        search_result = self.qdrant_client.search(
+            collection_name=collection_name,
+            query_vector=embedding_vector,
+            limit=limit_k,
+            append_payload=True,
+        )
+        return search_result
+```
+
+這邊看起來叫複雜，但其實這個是python的Singleton的寫法，在呼叫這個class的時候都只會回傳同一個init。最重要的是`QdrantClient`，這裡要放和Qdrant的連線資訊，另外EmbeddingModel則是上面的Class引入。
+```python
+class QdrantSingleton:
+    _instance = None
+    _initialized = False
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(QdrantSingleton, cls).__new__(cls)
+        return cls._instance
+
+    def __init__(self):
+        if not QdrantSingleton._initialized:
+            self.qdrant_client = QdrantClient(
+                url="http://localhost",
+                port=6333,
+                # api_key="api_key",
+            )
+            self.embedding_model = EmbeddingModel()
+            QdrantSingleton._initialized = True
+```
+
+接著我們要在向量資料庫中建立一個collection，collection就像是一般資料庫的table,用來存放我們的資料，由於是練習，我選擇使用`recreate_collection`，這樣如果呼叫撞名的collection就可以先刪除再重新創一個，如果不想一直刪除也可以選擇上面的`create_collection`
+
+在這裡我們可以用`VectorParams`設定向量之間的距離怎麼算，我選擇COSINE，也可以用`models.Distance.EUCLID`選擇兩點直線距離。
+
+並且`VectorParams`還可以設定當作key的vector的長度有多長，因為我使用Hugging face的`all-MiniLM-L6-v2`固定會產生 384 維度的vector，所以寫384
+```python
+  def recreate_collection(self, collection_name: str):
+        """
+        這個方法會重新建立collection，並設定collection的參數
+        https://ithelp.ithome.com.tw/articles/10335513
+        """
+        # https://python-client.qdrant.tech/qdrant_client.http.models.models#qdrant_client.http.models.models.VectorParams
+        # 一個用cosine算距離的向量，長度是384
+        vectors_config = models.VectorParams(
+            distance=models.Distance.COSINE,
+            size=384,
+        )
+
+        # m代表每個節點近鄰數量。m值越大，查詢速度越快，但內存和構建時間也會增加。
+        # ef_construct這是用於構建圖時的效率參數。較大的ef_construct值會導致更好的查詢品質，但會增加構建時間。代表在構建索引時搜索的節點數量
+        hnsw_config = models.HnswConfigDiff(on_disk=True, m=16, ef_construct=100)
+
+        # memmap_threshold是這表示當數據大小超過20000時，將使用內存映射來管理數據，這可以有效地處理大量數據並減少內存使用。
+        optimizers_config = models.OptimizersConfigDiff(memmap_threshold=20000)
+
+        self.qdrant_client.recreate_collection(
+            collection_name=collection_name,
+            vectors_config=vectors_config,
+            hnsw_config=hnsw_config,
+            optimizers_config=optimizers_config,
+        )
+        return self.qdrant_client
+```
+呼叫之後進入[localhost:6333/dashboard](http://localhost:6333/dashboard)應該可以看到下面的面
+![image](https://hackmd.io/_uploads/ByymCXEIA.png)
+
+以下則是利用Hugging face的`all-MiniLM-L6-v2`將文字產出vector，我設計成一次用一個句子embedding，但要注意回傳的embedding會是 tensor, shape是(1, 384)，所以要拿出第0個之後呼叫to_list，轉成float array後才能放入Qdrant
+```python
+    def get_embedding(self, text: str) -> list[float]:
+        """
+        get embedding
+        """
+        embedding_list = self.embedding_model.encode([text])
+        embedding = embedding_list[0]
+        embedding_to_float_list = embedding.tolist()
+        return embedding_to_float_list
+```
+
+接著可以用upsert(其實insert也可以)的方法，把vector當作key, data當作value(在Qdrant裡面叫做payload)，data可以是任何型態的資料組成的array，像是python 的dictionary, 會存成json的形式
+```python
+    def upsert_vectors(
+        self, vectors: list[list[float]], collection_name: str, data: list
+    ):
+        """
+        upsert vectors
+        payload is metadata, can be any data in dict
+        """
+        for i, vector in enumerate(vectors):
+            self.qdrant_client.upsert(
+                collection_name=collection_name,
+                points=[
+                    PointStruct(
+                        id=i,
+                        vector=vector,
+                        payload=data[i],
+                    )
+                ],
+            )
+        print("upsert_vectors done")
+```
+
+最後是查詢，只要提供一段文字，會先進行embed之後，用這個vector去資料庫查詢，並查出最接近的`limit_k`的資料，然後把裡面的payload拿出來。
+```python
+    def search_for_qdrant(self, text: str, collection_name: str, limit_k: int):
+        """
+        search for qdrant
+        """
+        embedding_vector = self.get_embedding(text)
+        search_result = self.qdrant_client.search(
+            collection_name=collection_name,
+            query_vector=embedding_vector,
+            limit=limit_k,
+            append_payload=True,
+        )
+        return search_result
+```
+
+##### Qdrant實戰演練
+
+以下是我有`American Idiots`前四句的歌詞，我們把他一個一個embed好，再用embed的vector當作key, 把歌詞的資料當作payload存在向量資料庫
+```python
+def main():
+
+    # qdrant
+    american_idiots = [
+        {"id": "1", "lyric": "Don't wanna be an American idiot"},
+        {"id": "2", "lyric": "Don't want a nation under the new media"},
+        {"id": "3", "lyric": "And can you hear the sound of hysteria?"},
+        {"id": "4", "lyric": "The subliminal * America"},
+    ]
+
+    qdrant = QdrantSingleton()
+    collection_name = "Lyrics"
+    qdrant.recreate_collection(collection_name)
+
+    embedding_array = [qdrant.get_embedding(text["lyric"]) for text in american_idiots]
+
+    qdrant.upsert_vectors(embedding_array, collection_name, american_idiots)
+```
+
+在 [localhost:6333/dashboard](http://localhost:6333/dashboard)中可以看到已經存進去了。
+
+![image](https://hackmd.io/_uploads/B1oYkr4IC.png)
+
+
+接著我們用一句話進去搜查，並且設定我們只想要找到最相近的一個值
+
+```python
+    query_text = "stupid american"
+    search_result = qdrant.search_for_qdrant(query_text, collection_name, limit_k=1)
+
+    print(f"尋找: {query_text}", search_result)
+```
+output可以看到最接近的歌詞是`"Don't wanna be an American idiot"`
+```
+尋找: stupid american [ScoredPoint(id=0, version=0, score=0.5378643, payload={'id': '1', 'lyric': "Don't wanna be an American idiot"}, vector=None, shard_key=None)]
+```
