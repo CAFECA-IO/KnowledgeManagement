@@ -82,3 +82,25 @@
 <img width="780" alt="截圖 2024-06-28 下午12 59 36" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/b4975899-e470-4115-a81e-a8523e890768">
 
 另外，現在您也只需要一個按鍵，AI 就可以自動判斷設計稿內容，直接相Prototpye都拉好，大幅提升Prototype製作效率
+
+
+## Figma Slide
+
+![283fee8728bc43aa2b12ce431353d20aef6d4bae-1080x864](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/ae119b3b-1299-45b6-854d-bb2594e97191)
+
+Figma 推出的超強簡報製作工具，可以讓你直接在簡報中展示prototype、根據brand voice或其他需求產生不同語調的文字、快速設定主題色及強大的Smart animate 功能。
+
+### 展示 prototype
+
+<img width="538" alt="截圖 2024-06-28 下午1 28 33" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/368aabfc-724e-4c3d-b73c-1cf36bcd7eea">
+
+在過去簡報製作中，如果想展示產品的prototype，通常只能透過螢幕錄影的方式，非常耗時間外，也無法針對簡報當下的情境做調整。
+現在Figma Slide可以直接將你的Prototype搭配上裝置的mockup，在簡報中直接機動性地做展示。
+
+### 智慧內容生成
+
+![ddb878f159e52052dd683f73341afa69d7563569-1080x864](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/8cc10016-dee0-45c8-acdb-910ba6df3c69)
+
+利用AI生成文字內容，還可以針對不同應用場景，選擇文字語調
+
+[點我試用看看Figma Slide](https://www.figma.com/community/file/1383476600772937799)
