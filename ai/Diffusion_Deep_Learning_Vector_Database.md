@@ -418,7 +418,7 @@ $$
 \frac{\partial{C}}{\partial{z}} = \sigma'(x)\left[w_3 \cdot \frac{\partial{C}}{\partial{z'}} + w_4\cdot \frac{\partial{C}}{\partial{z''}}\right]
 $$
 
-最後假設 $z'$ 和 $z''$ 下一層就是進入Output layer並產出預測的結果 $y_1$ 和 $y_2$ , 並有相對應的答案(Ground Truth) $\hat{y}_1$和$\hat{y}_2$ ，我們便可以算出 $\frac{\partial{C}}{\partial{z'}}$ 和 $\frac{\partial{C}}{\partial{z''}}$ :
+最後假設 $z'$ 和 $z''$ 下一層就是進入Output layer並產出預測的結果 $y_1$ 和 $y_2$ , 並有相對應的答案(Ground Truth) $\hat{y}_1$ 和 $\hat{y}_2$ ，我們便可以算出 $\frac{\partial{C}}{\partial{z'}}$ 和 $\frac{\partial{C}}{\partial{z''}}$ :
 
 
 $$
@@ -428,7 +428,7 @@ $$
 \end{aligned}
 $$
 
-而我們知道了 $\frac{\partial{C}}{\partial{z'}}$ 和 $\frac{\partial{C}}{\partial{z''}}$ 就可以算出 $\frac{\partial{C}}{\partial{z}}$
+而我們知道了 $\frac{\partial{C}}{\partial{z'}}$ 和 $\frac{\partial{C}}{\partial{z''}}$ 就可以算出 $\frac{\partial{C}}{\partial{z}}$ :
 
 $$
 \frac{\partial{C}}{\partial{z}} = \sigma'(x)\left[w_3 \cdot \frac{\partial{y_1}}{\partial{z'}} \cdot \frac{\partial{C}}{\partial{y_1}} + w_4\cdot \frac{\partial{y_2}}{\partial{z''}} \cdot \frac{\partial{C}}{\partial{y_2}}\right]
@@ -436,6 +436,7 @@ $$
 
 
 再搭配前向傳播的 $x_1$ 可以組出來：
+
 $$
 \frac{\partial{C}}{\partial{w_1}} = x_1 \cdot \frac{\partial{C}}{\partial{z}} \cdot \sigma'(x)\left[w_3 \cdot \frac{\partial{y_1}}{\partial{z'}} \cdot \frac{\partial{C}}{\partial{y_1}} + w_4\cdot \frac{\partial{y_2}}{\partial{z''}} \cdot \frac{\partial{C}}{\partial{y_2}}\right]
 $$
