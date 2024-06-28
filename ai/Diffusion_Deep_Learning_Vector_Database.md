@@ -464,7 +464,7 @@ $$
 
 Embedding 是大型語言模型開發中的一個重要關鍵技術，可以將文字轉成依照向量 (vector)的方式存在，方便輸入到深度學習的模型中。經由特殊Embedding模型embed後的文字，還可以讓類似詞意的文字在向量空間中在一起。Embedding也不一定要限制在詞，也可以針對整個句子的句義抽取出訊息變成 vector (像是Openai 可以提供將句子變成 1,536為度的向量)
 
-### One-hard encoding
+### One-hot encoding
 最簡單的Embedding是 one-hard encoding，就是一個跟字典一樣長的vector，在該詞的位置上標上1，其他都是0。
 例如 `你好嗎？` 就可以變成 `你`, `好`, `嗎`的字典，並表示如下：
 1. 你：`[1, 0, 0]`
@@ -499,7 +499,7 @@ class EmbeddingModel:
 ```python
 def main():
     embedding_model = EmbeddingModel()
-    sentences = ["Hello, World!", "I am Kyaru!", "I am a virtual YouTuber!"]
+    sentences = ["Hello, World!", "I am Murky!", "I am Happy !"]
 
     embeddings = embedding_model.encode(sentences)
     print("Dimension: ", len(embeddings[0]))  # 384 個向量
