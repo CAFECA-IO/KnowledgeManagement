@@ -479,7 +479,7 @@ Embedding 是大型語言模型開發中的一個重要關鍵技術，可以將�
 
 我們可以用Hugging fac上的模型`all-MiniLM-L6-v2`來做embed，他會把一整個句子直接抽取成 384為度的向量，如下面所表示
 
-```python=
+```python
 from sentence_transformers import SentenceTransformer
 
 class EmbeddingModel:
@@ -498,7 +498,7 @@ class EmbeddingModel:
 ```
 
 下面我們將三個句子做Embed
-```python=
+```python
 def main():
     embedding_model = EmbeddingModel()
     sentences = ["Hello, World!", "I am Kyaru!", "I am a virtual YouTuber!"]
@@ -531,7 +531,7 @@ embeddings:  [[-0.03817715  0.03291114 -0.0054594  ... -0.04089032  0.03187141
 ##### docker compose
 
 docker-compose.yml 如下設定
-```yml=
+```yml
 services:
   qdrant:
     image: qdrant/qdrant:v1.6.1
