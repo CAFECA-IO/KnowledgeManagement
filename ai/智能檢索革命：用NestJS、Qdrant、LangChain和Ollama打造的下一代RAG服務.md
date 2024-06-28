@@ -33,6 +33,15 @@
    ```bash
    docker run -d --name qdrant -p 6333:6333 -v /qdrant_data:/data qdrant/qdrant
    ```
+5. **以 Docker 建立 ollama 服務**
+```bash
+docker run --name ollama -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 ollama/ollama
+```
+
+6. 下載 ollama 模型
+```bash
+docker exec -it ollama ollama run nomic-embed-text && docker exec -it ollama ollama run llama3
+```
 
 ## 3. 建立 NestJS 項目
 
