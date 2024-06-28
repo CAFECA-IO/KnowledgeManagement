@@ -390,6 +390,7 @@ $$
 $$
 
 其中activation function $\sigma(z)$ 的微分已知：
+
 $$
 \frac{\partial{a}}{\partial{z}} = \sigma'(z)
 $$
