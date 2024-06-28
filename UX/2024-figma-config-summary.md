@@ -132,3 +132,32 @@ Figma 推出的超強簡報製作工具，可以讓你直接在簡報中展示pr
 安裝 Node.js 後，您可以全域安裝 Code Connect，使其可以在您的電腦任何地方運行，方法是運行以下指令：
 
 ```npm install --global @figma/code-connect```
+
+
+## 現有功能優化
+
+### Suggest auto layout
+
+![f46bbf1483725fea0270b4ef5e705cae8981832d-1080x864](https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/694791f4-983c-4fc6-86e2-387595c38fda)
+
+以往在使用Auto Layout 設計較複雜的版面時，設計師需自行判斷元素該如何分類，以包裹子層的方式使用不同方向Auto layout來達到最終期望的效果。
+
+現在有了Suggest auto layout，系統直接針對設計稿編排的位子，建立好全部的Auto layout，節省設計時間。
+
+### Prototype for any screen size
+
+<img width="540" alt="截圖 2024-06-28 下午3 18 54" src="https://github.com/CAFECA-IO/KnowledgeManagement/assets/98379087/4f21e954-d1d3-44c7-82af-e8b1c17be95a">
+
+現在在預覽Prototype時，可直接以拖拉的方式更改視窗大小，來檢視不同裝置下響應式網站的樣式。
+
+
+
+## 總結
+
+2024的Figma在AI上有了重大的突破，在許多小細節上面都可以看到AI協作的影子，對於介面設計來說絕對是一個重大的里程碑。
+
+也希望未來在開發者模式當中能加入更多對於開發者更友善的設計，以此來無痛銜接設計端與開發端。
+
+也期待在Figma AI在未來訓練後，能夠更精準的協助設計師完成工作。
+
+此次的改版非常有感，也需要設計師加緊腳步，對於新的介面及功能更快上手。
