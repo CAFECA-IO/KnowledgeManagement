@@ -258,7 +258,7 @@ $$
 3. **Output Layer**：這一層作為分類器，將經過 Hidden Layer 非線性轉換的資料分類。例如，經過多層非線性轉換後，資料點會轉換成容易被分類的型態，找出資料的特徵(Feature)，再利用 Output Layer 把資料分類成多個類別。常用的分類函數是 Softmax function，它將 hidden layer 中的資料壓縮到 0 到 1 之間，計算出每個類別的後驗機率，最大值對應的類別即為預測類別。
 
 $$
-\text{Softmax}(x_i) = \frac{e^{x_i}}{\sum_{j=1}^{N} e^{x_j}}
+\text{Softmax}(x_i) = \frac{e^{x_i}}{\sum\limits_{j=1}^N e^{x_j}}
 $$
 
 5. **Fully Connected Feedforward Network**：這是最常見的連接各層的方法。每個節點的輸出都會傳遞到下一層的所有節點，而每個節點也會使用上一層所有節點的輸出。這種結構被稱為 Fully Connected，資料從 Input Layer 傳遞到 Hidden Layer，再傳遞到 Output Layer，呈現順向結構。
