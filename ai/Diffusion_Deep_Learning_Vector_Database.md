@@ -18,17 +18,18 @@ Defusion Model 是模仿Markov chain，利用常態分佈(高斯分佈)逐漸對
 ![image](https://hackmd.io/_uploads/BJz50T7LR.png)
 
 可以看下左這張圖逐漸從雜訊中生出一張圖。
-<div style="display: flex; justify-content: space-around;">
-  <div style="text-align: center;">
-    <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*4GmL_x9gzQu3uiH8JKdfaQ.gif" alt="Image 1" style="max-width:97%;">
-    <p>生成過程</p>
-  </div>
-  <div style="text-align: center;">
-    <img src="https://truth.bahamut.com.tw/s01/202304/4adfdcb747b978c794f5709339986662.JPG" alt="Image 2" style=";">
-    <p>我的train壞掉的版本</p>
-  </div>
-</div>
-
+<table>
+  <tr>
+    <td style="text-align: center;">
+      <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*4GmL_x9gzQu3uiH8JKdfaQ.gif" alt="Image 1" style="max-width:97%;">
+      <p>生成過程</p>
+    </td>
+    <td style="text-align: center;">
+      <img src="https://truth.bahamut.com.tw/s01/202304/4adfdcb747b978c794f5709339986662.JPG" alt="Image 2" style="max-width:97%;">
+      <p>我的train壞掉的版本</p>
+    </td>
+  </tr>
+</table>
 
 
 ### Diffusion process (擴散過程)
