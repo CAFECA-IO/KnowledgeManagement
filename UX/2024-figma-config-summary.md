@@ -161,3 +161,12 @@ Figma 推出的超強簡報製作工具，可以讓你直接在簡報中展示pr
 也期待在Figma AI在未來訓練後，能夠更精準的協助設計師完成工作。
 
 此次的改版非常有感，也需要設計師加緊腳步，對於新的介面及功能更快上手。
+
+
+## Reference
+
+[Figma 2024 Config](https://config.figma.com/home.html?mkt_tok=Nzc4LU1FVS0yODEAAAGT-TRCnO4ySYGmnFPHM0x5Jr5nkJNtBlygNYw_ToE-1mDtO8VaKS_zse5qDbhqDjnPgE284hTZ0ZL77ElSfQuSu00IaQsj8xXe-kCJWMAwzZk)
+
+[Figma](https://www.figma.com/whats-new/)
+
+[Figma product launch keynote](https://www.youtube.com/watch?v=n5gJgkO2Dg0)
