@@ -117,9 +117,7 @@ def p_xt(xt, noise, t):
 #### Loss Function
 學習的時候會使用下面這個loss function來計算，其實就是算出污染`x_t`圖片的雜訊`eps_t`與模型預測的雜訊`pred_noise_t`平方差的平方 (mse)
 
-$$
-L_{\text{simple}}(\theta) := \mathbb{E}_{t, \mathbf{x}_0, \epsilon} \left[ \left\| \epsilon - \epsilon_\theta \left( \sqrt{\bar{\alpha}_t} \mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_t} \epsilon, t \right) \right\|^2 \right]
-$$
+![圖片](https://github.com/CAFECA-IO/KnowledgeManagement/assets/55581222/1775ade6-5e52-4136-bba0-884d27758fa5)
 
 #### Training
 重複以下4個步驟直到loss降低
