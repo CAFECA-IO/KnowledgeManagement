@@ -256,9 +256,7 @@ curl http://127.0.0.1:5000/api/meetings
             "time": "時間 : 09:10~10:40",
             "location": "地點 : 紅樓302會議室",
             "title": "立法院朝野黨團協商通知 議事轉播IVOD網際網路多媒體隨選視訊系統(另開視窗)",
-            "meeting
-
-_url": "http://ivod.ly.gov.tw/Demand/Meetvod?Meet=00415253294285367115",
+            "meeting_url": "http://ivod.ly.gov.tw/Demand/Meetvod?Meet=00415253294285367115",
             "meeting_id": "00415253294285367115",
             "description": "一、本院內政委員會報告併案審查行政院函請審議、台灣民眾黨黨團及委員陳亭妃等16人分別擬具「詐欺犯罪危害防制條例草案」案\n二、委員何欣純等21人擬具「詐欺犯罪危害防制條例草案」。"
         }
