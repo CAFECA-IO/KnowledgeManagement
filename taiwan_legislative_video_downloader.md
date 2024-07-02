@@ -230,33 +230,16 @@ def download():
 ```python
 # app/scraper.py
 
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
-import time
 import re
-from .utils import setup_logger
+from .utils import parse_meeting_date, setup_logger, init_driver
 
-# 配置瀏覽器選項
-options = webdriver.ChromeOptions()
-options.add_argument('--headless')
-options.add_argument('--disable-gpu')
-options.add_argument('--no-sandbox')
-options.add_argument('start-maximized')
-options.add_argument('disable-infobars')
-options.add_argument('--disable-extensions')
-
-base_url = 'https://www.ly.gov.tw/Pages/MeetingList.aspx?nodeid=135'
+# 設置 logger
 logger = setup_logger('scraper', 'scraper.log')
-
-def init_driver():
-    """初始化瀏覽器驅動"""
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 def get_url(page=None, start_date=None, end_date=None, q=None, committee=None):
     """生成會議列表的URL"""
-    url = base_url
+    url = 'https://www.ly.gov.tw/Pages/MeetingList.aspx?nodeid=135'
     params = []
 
     if page is not None:
@@ -281,6 +264,10 @@ def parse_meeting_element(date, meeting_element):
     """解析單個會議元素，提取會議信息"""
     meeting = {'date': date}
 
+    time_div = meeting_element.find('div', class_='room', string=lambda text: '時間' in text)
+    if time_div:
+        meeting['time'] = time_div.text.strip()
+
     committee_div = meeting_element.find('div', class_='room', attrs={'data-name': True})
     if committee_div:
         meeting['committee'] = committee_div.text.strip()
@@ -289,15 +276,9 @@ def parse_meeting_element(date, meeting_element):
     if label_div:
         meeting['label'] = label_div.text.strip()
 
-    time_div = meeting_element.find('div', class_='room', string=lambda text: '時間' in text)
-    if time_div:
-        meeting['time'] = time_div.text.strip()
-
     location_div = meeting_element.find('div', class_='label', string=lambda text: '地點' in text)
     if location_div:
-        meeting['location
-
-'] = location_div.text.strip()
+        meeting['location'] = location_div.text.strip()
 
     heading_div = meeting_element.find('div', class_='heading')
     if heading_div:
@@ -317,7 +298,7 @@ def parse_meeting_element(date, meeting_element):
 
     return meeting
 
-def scrape_meetings(start_date=None, end_date=None, page=None, q=None, committee=None, max_meetings=100):
+def scrape_meetings(start_date=None, end_date=None, page=None, q=None, committee=None, limit=100):
     """爬取會議列表"""
     driver = init_driver()
     meetings = []
@@ -330,25 +311,25 @@ def scrape_meetings(start_date=None, end_date=None, page=None, q=None, committee
         soup = BeautifulSoup(driver.page_source, 'html.parser')
 
         meeting_elements = soup.select('ul.list-group.newsType2 li')
-        date = ''
+        date = None
         for meeting_element in meeting_elements:
             date_element = meeting_element.find('div', class_='date')
             if date_element:
-                year = date_element.find('b').text.strip()
-                date_hr = date_element.find('strong').text.strip()
-                date = f"{year}/{date_hr}"
+                date = parse_meeting_date(date_element)
             meeting = parse_meeting_element(date, meeting_element)
             meetings.append(meeting)
-            if len(meetings) >= max_meetings:
+            if len(meetings) >= limit:
                 break
 
-        if len(meetings) >= max_meetings:
+        if len(meetings) >= limit:
             break
 
         # 檢查是否還有更多頁面
         pagination = soup.select_one('ul.pagination')
-        if not pagination:
-            break
+        if pagination is None:
+            driver.get(url)
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            pagination = soup.select_one('ul.pagination')
         pagination_items = pagination.find_all('li')
         if not pagination_items:
             break
@@ -365,7 +346,7 @@ def scrape_meetings(start_date=None, end_date=None, page=None, q=None, committee
                 break
 
     driver.quit()
-    return meetings, len(meetings) >= max_meetings, current_page
+    return meetings, len(meetings) >= limit, current_page
 
 def parse_video_element(video_element):
     """解析單個視頻元素，提取視頻信息"""
@@ -508,33 +489,11 @@ print("視頻源地址：", filelink)
 
 import subprocess
 import os
-import logging
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 import time
-from .utils import setup_logger
+from .utils import setup_logger, init_driver
 
-options = webdriver.ChromeOptions()
-options.add_argument('--headless')
-options.add_argument('--disable-gpu')
-options.add_argument('--no-sandbox')
-options.add_argument('start-maximized')
-options.add_argument('disable-infobars')
-options.add_argument('--disable-extensions')
-
+# 設置 logger
 logger = setup_logger('downloader', 'downloader.log')
-
-def get_output_filename(video_url):
-    """取得輸出文件名"""
-    last_value = video_url.split('/')[-1]
-    downloads_dir = os.path.join(os.getcwd(), 'downloads')
-    
-    if not os.path.exists(downloads_dir):
-        os.makedirs(downloads_dir)
-    
-    output_filename = os.path.join(downloads_dir, f'downloaded_meeting_{last_value}.mp4')
-    return output_filename
 
 def download_video(m3u8_url, output_filename):
     command = [
@@ -549,20 +508,30 @@ def download_video(m3u8_url, output_filename):
         subprocess.run(command, check=True)
         if os.path.exists(output_filename):
             logger.info(f"視頻已成功下載至：{output_filename}")
+            file_size = os.path.getsize(output_filename)
+            logger.info(f"下載的文件大小：{file_size} 字節")
         else:
             logger.error(f"文件下載失敗：{output_filename} 不存在")
     except subprocess.CalledProcessError as e:
         logger.error(f"錯誤：{e}")
 
 def get_video_source(url):
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = init_driver()
     driver.get(url)
     time.sleep(10)
     filelink = driver.execute_script("return _filelink;")
-    logger.info(f"視頻源地址：{filelink}")
+    logger.info("視頻源地址：", filelink)
     driver.quit()
 
     return filelink
+
+def get_output_filename(video_url):
+    downloads_dir = os.path.join(os.getcwd(), 'downloads')
+    if not os.path.exists(downloads_dir):
+        os.makedirs(downloads_dir)
+    last_value = video_url.split('/')[-1]
+    output_filename = os.path.join(downloads_dir, f'downloaded_meeting_{last_value}.mp4')
+    return output_filename
 ```
 
 ### `utils.py` 文件
@@ -574,6 +543,12 @@ def get_video_source(url):
 
 import logging
 
+import logging
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+# 配置日誌紀錄
 def setup_logger(name, log_file, level=logging.INFO):
     """
     配置日誌紀錄
@@ -591,6 +566,40 @@ def setup_logger(name, log_file, level=logging.INFO):
     logger.addHandler(handler)
 
     return logger
+
+# 日期解析函数
+def parse_meeting_date(date_element):
+    """
+    解析會議信息中的日期元素
+    :param date_element: BeautifulSoup解析后的日期元素
+    :return: 解析後的日期字符串，格式為 "YYYY/MM/DD"
+    """
+    if not date_element:
+        return None
+    
+    year = date_element.find('b').text.strip()
+    month_day = date_element.find('strong').text.strip()
+    if year and month_day:
+        return f"{year}/{month_day}"
+
+    return None
+
+# 初始化瀏覽器驅動
+def init_driver():
+    """
+    配置瀏覽器選項
+    """
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('start-maximized')
+    options.add_argument('disable-infobars')
+    options.add_argument('--disable-extensions')
+
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+# 其他工具函数可以根据需要添加
 ```
 
 ### `run.py` 文件
@@ -616,9 +625,7 @@ pip freeze > requirements.txt
 
 ### 總結
 
-通過將代碼模塊化並使用 `__init__.py` 文件來初始化和組織你的 Flask 應用，你可以更好地管理和維護你的項目。這樣做可以使代碼更具可讀性和可擴展性
-
-，並且方便以後的開發和調試。
+通過將代碼模塊化並使用 `__init__.py` 文件來初始化和組織你的 Flask 應用，你可以更好地管理和維護你的項目。這樣做可以使代碼更具可讀性和可擴展性，並且方便以後的開發和調試。
 
 ### 完整的 `requirements.txt` 示例
 
@@ -719,3 +726,6 @@ GET http://localhost:5000/api/meetings/00998826079593390403
 ```sh
 python run.py
 ```
+
+## 專案位置
+[Top-Ten-LiFaYuan/SmartLegiCrawler](https://github.com/CAFECA-IO/Top-Ten-LiFaYuan/tree/feature/smart_legi_crawler/SmartLegiCrawler)
