@@ -76,3 +76,11 @@ As these technologies advance, they are set to transform many industries, boosti
 Businesses that wisely integrate AI and Blockchain will be in a prime position to benefit from their synergies, enhancing efficiency, security, and growth in the digital era.
 
 ## Reference
+
+[Integration of AI and Blockchain: All You Need to Know](https://appinventiv.com/blog/ai-in-blockchain/)
+
+[Blockchain and AI: How They Can Work Together](https://crypto.com/university/blockchain-and-ai)
+
+[When AI and Blockchain Meet, How Can Each Technology Benefit? - Ep. 516](https://www.youtube.com/watch?v=KGJZE6G7QAg)
+
+[5 Use Cases of AI in Blockchain](https://unchainedcrypto.com/use-cases-of-ai-in-blockchain/)
