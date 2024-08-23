@@ -37,9 +37,9 @@ NewsGenerator/
 - `main.py`：主程式，用於調用所有功能並執行完整的新聞播報生成流程。
 - `data/`：用於存放生成過程中的輸入、輸出和臨時文件。
 
-##環境配置
+## 環境配置
 
-###創建虛擬環境
+### 創建虛擬環境
 
 在專案根目錄下，創建並啟用虛擬環境，以確保依賴項不會與其他專案衝突。
 
@@ -55,10 +55,11 @@ source venv/bin/activate  # 在Windows上使用 `venv\Scripts\activate`
 
 ```
 requests
-flux1_sdk
-animatediff_sdk
-cosyvoice_sdk
-suno_sdk
+diffusers
+torch
+transformers
+torchaudio
+bark-suno
 ```
 
 然後在虛擬環境中安裝它們：
@@ -66,7 +67,9 @@ suno_sdk
 ```bash
 pip install -r requirements.txt
 ```
+
 ### 安裝 FFmpeg：
+
 確保你的系統中已安裝了 FFmpeg，這是合成影片時所必需的工具。可以通過以下指令檢查是否已安裝：
 ```bash
 ffmpeg -version
@@ -77,15 +80,55 @@ sudo apt-get install ffmpeg
 ```
 在 Windows 上，請從 [FFmpeg 官網](https://ffmpeg.org/download.html) 下載並安裝。
 
+### 下載和設置 CosyVoice
+CosyVoice 是一個強大的語音合成工具，可以參考他們的 [README.md](https://github.com/FunAudioLLM/CosyVoice/blob/main/README.md) 安裝
+
+#### 1. 安裝 CosyVoice
+
+首先，git clone CosyVoice 的 GitHub 專案並安裝必要的依賴項：
+
+```bash
+# git clone
+git clone --recursive https://github.com/FunAudioLLM/CosyVoice.git
+
+# 進入CosyVoice
+cd CosyVoice
+
+# 更新子模組
+git submodule update --init --recursive
+
+# 安裝 Conda（若尚未安裝，請參考官方文件進行安裝）
+# 建立 Conda 環境並啟用
+conda create -n cosyvoice python=3.8
+conda activate cosyvoice
+
+# 使用 Conda 安裝 pynini（WeTextProcessing 需要）
+conda install -y -c conda-forge pynini==2.1.5
+
+# 安裝其他依賴項
+pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host=mirrors.aliyun.com
+```
+
+#### 2. 下載預訓練模型
+
+CosyVoice 提供了多個預訓練模型供使用。建議下載以下模型：
+
+```python
+from modelscope import snapshot_download
+
+# 下載 CosyVoice 預訓練模型
+snapshot_download('iic/CosyVoice-300M', local_dir='pretrained_models/CosyVoice-300M')
+snapshot_download('iic/CosyVoice-300M-SFT', local_dir='pretrained_models/CosyVoice-300M-SFT')
+snapshot_download('iic/CosyVoice-300M-Instruct', local_dir='pretrained_models/CosyVoice-300M-Instruct')
+snapshot_download('iic/CosyVoice-ttsfrd', local_dir='pretrained_models/CosyVoice-ttsfrd')
+```
+
 ### 配置文件
 
 在 `config/config.py` 中存放 API 金鑰和其他配置信息：
 
 ```python
-FLUX1_API_KEY = 'Your-Flux1-API-Key'
-ANIMATEDIFF_API_KEY = 'Your-Animatediff-API-Key'
-COSYVOICE_API_KEY = 'Your-CosyVoice-API-Key'
-SUNO_API_KEY = 'Your-Suno-API-Key'
+SOME_PRIVATE_KEY = 'some-private-key'
 ```
 
 ## 腳本詳細說明與檔案命名
@@ -118,14 +161,19 @@ def generate_news_script(summary):
 這個腳本用於生成分鏡稿圖片：
 
 ```python
-from flux1_sdk import Flux1Client
+from diffusers import DiffusionPipeline
+import torch
 
 def generate_storyboard_images(script):
-    client = Flux1Client(api_key='Your-Flux1-API-Key')
-    
     try:
-        images = client.generate_images(prompt=script)
-        # 假設返回的是圖片的路徑列表
+        # 加載 FLUX.1 [schnell] 模型
+        pipe = DiffusionPipeline.from_pretrained("black-forest-labs/FLUX.1-schnell", torch_dtype=torch.bfloat16)
+        pipe.enable_model_cpu_offload()  # 可選：通過將部分處理卸載到 CPU 來節省顯存
+
+        # 從文本提示生成圖片
+        images = pipe(script, guidance_scale=0.0, num_inference_steps=4).images
+
+        # 返回圖片列表
         return images
     except Exception as e:
         print(f"生成分鏡稿圖片時出錯: {e}")
@@ -137,15 +185,22 @@ def generate_storyboard_images(script):
 這個腳本負責生成主播圖片：
 
 ```python
-from flux1_sdk import Flux1Client
+from diffusers import DiffusionPipeline
+import torch
 
 def generate_anchor_image():
-    client = Flux1Client(api_key='Your-Flux1-API-Key')
-    
     try:
-        anchor_image = client.generate_images(prompt="Generate an image of a news anchor")
-        # 假設返回的是單個圖片的路徑
-        return anchor_image[0]
+        # 加載 FLUX.1 [schnell] 模型
+        pipe = DiffusionPipeline.from_pretrained("black-forest-labs/FLUX.1-schnell", torch_dtype=torch.bfloat16)
+        pipe.enable_model_cpu_offload()  # 可選：通過將部分處理卸載到 CPU 來節省顯存
+
+        # 從文本提示生成主播圖片
+        prompt = "Generate an image of a news anchor"
+        anchor_image = pipe(prompt, guidance_scale=0.0, num_inference_steps=4).images[0]
+
+        # 保存並返回圖片路徑
+        anchor_image.save("news_anchor.png")
+        return "news_anchor.png"
     except Exception as e:
         print(f"生成主播圖片時出錯: {e}")
         return None
@@ -156,20 +211,24 @@ def generate_anchor_image():
 這個腳本用於將分鏡稿圖片生成動畫：
 
 ```python
-from animatediff_sdk import AnimatediffClient
+from diffusers import DiffusionPipeline
+import torch
 
-def generate_animation_from_images(images):
-    client = AnimatediffClient(api_key='Your-Animatediff-API-Key')
-    animations = []
-    
+def generate_animation_from_images(prompt):
     try:
-        for image in images:
-            animation = client.generate_animation(image)
-            animations.append(animation)
-        return animations
+        # 加載 AnimateDiff 模型
+        pipeline = DiffusionPipeline.from_pretrained("animate-diffusion-model/animatediff", torch_dtype=torch.float16)
+        pipeline.to("cuda")  # 假設您有 CUDA 支持
+
+        # 生成動畫
+        animation = pipeline(prompt, num_inference_steps=50)
+
+        # 保存生成的動畫
+        animation.save("generated_animation.mp4")
+        return "generated_animation.mp4"
     except Exception as e:
         print(f"生成動畫時出錯: {e}")
-        return []
+        return None
 ```
 
 ### `scripts/generate_anchor_animation.py`
@@ -177,14 +236,22 @@ def generate_animation_from_images(images):
 這個腳本使用 Animatediff 來將主播圖片和語音結合生成動畫。
 
 ```python
-from animatediff_sdk import AnimatediffClient
+from diffusers import DiffusionPipeline
+import torch
 
 def generate_anchor_animation(anchor_image, voiceover):
-    client = AnimatediffClient(api_key='Your-Animatediff-API-Key')
-    
     try:
-        anchor_animation = client.generate_animation_with_voice(image=anchor_image, voice=voiceover)
-        return anchor_animation
+        # 加載 AnimateDiff 模型
+        pipeline = DiffusionPipeline.from_pretrained("animate-diffusion-model/animatediff", torch_dtype=torch.float16)
+        pipeline.to("cuda")  # 假設您有 CUDA 支持
+
+        # 生成動畫，將主播圖片和語音結合
+        prompt = f"A news anchor speaking with the voiceover '{voiceover}'"
+        animation = pipeline(prompt, num_inference_steps=50)
+
+        # 保存生成的動畫
+        animation.save("anchor_animation.mp4")
+        return "anchor_animation.mp4"
     except Exception as e:
         print(f"生成主播動畫時出錯: {e}")
         return None
@@ -195,14 +262,19 @@ def generate_anchor_animation(anchor_image, voiceover):
 這個腳本使用 CosyVoice 生成新聞播報的語音：
 
 ```python
-from cosyvoice_sdk import CosyVoiceClient
+from cosyvoice.cli.cosyvoice import CosyVoice
+from cosyvoice.utils.file_utils import load_wav
+import torchaudio
 
 def generate_voiceover(script):
-    client = CosyVoiceClient(api_key='Your-CosyVoice-API-Key')
-    
     try:
-        voiceover = client.generate_voice(script)
-        return voiceover
+        # 使用 SFT 模型進行推理
+        cosyvoice = CosyVoice('pretrained_models/CosyVoice-300M-SFT')
+        output = cosyvoice.inference_sft(script, '中文女')
+        
+        # 保存生成的語音文件
+        torchaudio.save('news_voiceover.mp3', output['tts_speech'], 22050)
+        return 'news_voiceover.mp3'
     except Exception as e:
         print(f"生成語音時出錯: {e}")
         return None
@@ -210,17 +282,23 @@ def generate_voiceover(script):
 
 ### `scripts/generate_background_music.py`
 
-這個腳本使用 Suno 生成背景音樂：
+使用 Suno 的 Bark 模型進行音樂生成
+Suno 是一個專注於生成式 AI 的公司，他們開發了多種語音和音樂生成工具，其中 Bark 模型可用於高品質的語音和音樂合成。
 
 ```python
-from suno_sdk import SunoClient
+from bark import SAMPLE_RATE, generate_audio, preload_models
+import torchaudio
+import torch
 
-def generate_background_music(script):
-    client = SunoClient(api_key='Your-Suno-API-Key')
-    
+def generate_background_music(prompt):
     try:
-        background_music = client.generate_music(script)
-        return background_music
+        preload_models()  # 預加載模型
+
+        audio_array = generate_audio(prompt)
+
+        # 保存音頻
+        torchaudio.save('background_music.wav', torch.tensor(audio_array).unsqueeze(0), SAMPLE_RATE)
+        return 'background_music.wav'
     except Exception as e:
         print(f"生成背景音樂時出錯: {e}")
         return None
@@ -260,18 +338,10 @@ from scripts.generate_news_script import generate_news_script
 from scripts.generate_storyboard_images import generate_storyboard_images
 from scripts.generate_anchor_image import generate_anchor_image
 from scripts.generate_animation import generate_animation_from_images
+from scripts.generate_anchor_animation import generate_anchor_animation
 from scripts.generate_voiceover import generate_voiceover
 from scripts.generate_background_music import generate_background_music
 from scripts.combine_media import combine_media
-
-summary = """
-1. 使用者向總統和相關部門官員提出關於 Peer-to-Peer(P2 P) 監管問題的擔憂，尤其是在缺乏法律約束和自我監管下的非法活動
-2. 官員承認在目前的法律框架下， 對於 P2p 平臺的 管理存在困難， 但強調正在研究各種選項， 包括成立行業協會和逐步實施分級管理。
-3. 用戶表達了對政府在面對金融科技快速發展時， 是否具備明确的戰略和行動計劃的疑慮。
-4. 金融監督管理委員會（FSC）表示， 他們正在努力平衡創新和風險管理， 同時呼籲企業遵守相關法律法規。
-5. 會上還提及了房地產市場泡沫和銀行信貸比例過高的問題， 官方承諾將與中央 bank 協調， 採取相應措施防止金融危機。
-6. 與會者同意進一步研究並追蹤相關議題， 以促進金融業的健康發展。
-"""
 
 def create_news_broadcast(summary):
     script = generate_news_script(summary)
@@ -309,7 +379,15 @@ def create_news_broadcast(summary):
 
 # 示例使用：使用生成的逐字稿摘要來創建新聞播報
 if __name__ == "__main__":
-    summary = "這是一個關於台灣立法院的簡單摘要..."
+    summary = """
+    1. 使用者向總統和相關部門官員提出關於 Peer-to-Peer(P2P) 監管問題的擔憂，尤其是在缺乏法律約束和自我監管下的非法活動。
+    2. 官員承認在目前的法律框架下，對於 P2P 平臺的管理存在困難，但強調正在研究各種選項，包括成立行業協會和逐步實施分級管理。
+    3. 用戶表達了對政府在面對金融科技快速發展時，是否具備明確的戰略和行動計劃的疑慮。
+    4. 金融監督管理委員會（FSC）表示，他們正在努力平衡創新和風險管理，同時呼籲企業遵守相關法律法規。
+    5. 會上還提及了房地產市場泡沫和銀行信貸比例過高的問題，官方承諾將與中央銀行協調，採取相應措施防止金融危機。
+    6. 與會者同意進一步研究並追蹤相關議題，以促進金融業的健康發展。
+    """
+
     create_news_broadcast(summary)
 ```
 
