@@ -2,152 +2,151 @@
 
 ## 背景
 
-本文件旨在記錄如何利用多種 AI 工具來構建一個自動化新聞播報系統，並詳細說明了各個步驟的實施方法。系統將基於從台灣立法院爬取的影片逐字稿和生成的簡單摘要，生成完整的新聞播報影片。這個文件將作為日後實施類似項目的參考指南。
+本文件旨在記錄如何利用多種 AI 工具來構建一個自動化新聞播報系統，並詳細說明了各個步驟的實施方法。系統將基於從台灣立法院爬取的影片轉成逐字稿後生成的簡單摘要，來生成完整的新聞播報影片。這個文件將作為日後實施類似項目的參考指南。
 
 ## 環境設定
 
 為了順利運行此系統，首先需要設定相關的開發環境，包括安裝所需的工具、庫和配置 API 金鑰。
 
-1. **安裝 Node.js 和 npm**：
-   - 確保你已經安裝了 Node.js 和 npm，可以通過命令行輸入以下指令來檢查是否已安裝：
-     ```bash
-     node -v
-     npm -v
-     ```
-
-2. **安裝所需的 npm 包**：
-   - 在專案目錄下，運行以下命令來安裝所需的 npm 包：
-     ```bash
-     npm install axios cheerio
-     ```
-
-3. **安裝 Python 和 pip**：
-   - 確保你的系統上已經安裝了 Python 和 pip。檢查方法如下：
+1. **安裝 Python 和 pip**：
+   - 確保你已經安裝了 Python 和 pip，可以通過命令行輸入以下指令來檢查是否已安裝：
      ```bash
      python --version
      pip --version
      ```
 
-4. **安裝所需的 Python 包**：
-   - 使用 pip 安裝所需的 Python 包：
+2. **安裝所需的 Python 包**：
+   - 在專案目錄下，運行以下命令來安裝所需的 Python 庫：
+     ```bash
+     pip install requests
+     ```
+   - 如 Flux.1、Animatediff、CosyVoice 和 Suno有專門的 Python SDK，根據這些工具的官方文檔安裝相應的 SDK。例如：
      ```bash
      pip install flux1_sdk animatediff_sdk cosyvoice_sdk suno_sdk
      ```
 
-5. **配置 API 金鑰**：
-   - 你需要從相關服務提供商那裡獲取 API 金鑰，並將它們配置在腳本中。通常，這些金鑰需要設置為環境變數或直接寫入代碼中（如 `Your-Flux1-API-Key`）。
+3. **安裝 FFmpeg**：
+   - 確保你的系統中已安裝了 FFmpeg，這是合成影片時所必需的工具。可以通過以下指令檢查是否已安裝：
+     ```bash
+     ffmpeg -version
+     ```
+   - 如果未安裝，請根據你的操作系統安裝 FFmpeg。例如，在 Ubuntu 上可以使用以下命令安裝：
+     ```bash
+     sudo apt-get install ffmpeg
+     ```
+   - 在 Windows 上，請從 [FFmpeg 官網](https://ffmpeg.org/download.html) 下載並安裝。
+
+3. **配置 API 金鑰**：
+   - 你需要從相關服務提供商那裡獲取 API 金鑰，並將它們配置在腳本中。這些金鑰需要設置為環境變數或直接寫入代碼中（如 `Your-Flux1-API-Key`）。
 
 ## 完整的自動化腳本
 
 以下是完整的自動化腳本，將所有的步驟整合在一起，從新聞摘要生成到最終影片合成的全過程：
 
-```javascript
-// Importing necessary libraries
-const axios = require('axios');
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+```python
+import requests
+import subprocess
+import os
 
-// Importing Python tools through child process or using respective SDKs
-const { spawn } = require('child_process');
+# 設定 API 金鑰
+FLUX1_API_KEY = 'Your-Flux1-API-Key'
+ANIMATEDIFF_API_KEY = 'Your-Animatediff-API-Key'
+COSYVOICE_API_KEY = 'Your-CosyVoice-API-Key'
+SUNO_API_KEY = 'Your-Suno-API-Key'
 
-// Environment variables for API keys
-const FLUX1_API_KEY = 'Your-Flux1-API-Key';
-const ANIMATEDIFF_API_KEY = 'Your-Animatediff-API-Key';
-const COSYVOICE_API_KEY = 'Your-CosyVoice-API-Key';
-const SUNO_API_KEY = 'Your-Suno-API-Key';
-
-// Helper function to execute Python scripts
-function executePythonScript(script, args = []) {
-    return new Promise((resolve, reject) => {
-        const pythonProcess = spawn('python', [script, ...args]);
-        pythonProcess.stdout.on('data', (data) => {
-            resolve(data.toString());
-        });
-        pythonProcess.stderr.on('data', (data) => {
-            reject(data.toString());
-        });
-    });
-}
-
-// Generate news script using LLaMA
-async function generateNewsScript(summary) {
-    const aiUrl = 'http://211.22.118.146:11434/api/generate';
-    const requestData = {
-        model: "llama3.1",
-        prompt: `根據以下摘要生成新聞稿：「${summary}」`,
-    };
-
-    try {
-        const response = await axios.post(aiUrl, requestData, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        return response.data;
-    } catch (error) {
-        console.error('生成新聞稿時出錯:', error);
+# 生成新聞講稿 (LLaMA)
+def generate_news_script(summary):
+    ai_url = 'http://211.22.118.146:11434/api/generate'
+    request_data = {
+        "model": "llama3.1",
+        "prompt": f"根據以下摘要生成新聞稿：「{summary}」"
     }
-}
+    
+    try:
+        response = requests.post(ai_url, json=request_data, headers={'Content-Type': 'application/json'})
+        response.raise_for_status()
+        return response.text
+    except requests.exceptions.RequestException as e:
+        print(f"生成新聞稿時出錯: {e}")
+        return None
 
-// Generate storyboard and anchor images using Flux.1
-async function generateStoryboardImages(script) {
-    // Assuming the Python script uses flux1_sdk to generate images
-    return await executePythonScript('generate_storyboard_images.py', [script, FLUX1_API_KEY]);
-}
+# 生成分鏡稿和主播圖片 (Flux.1)
+def generate_storyboard_images(script):
+    # 假設這個函數用 flux1_sdk 生成分鏡稿
+    # 示例代碼，實際需要依照 flux1_sdk 文檔實現
+    images = []  # 模擬生成的圖片列表
+    return images
 
-async function generateAnchorImage() {
-    // Assuming the Python script uses flux1_sdk to generate the anchor image
-    return await executePythonScript('generate_anchor_image.py', [FLUX1_API_KEY]);
-}
+def generate_anchor_image():
+    # 假設這個函數用 flux1_sdk 生成主播圖片
+    # 示例代碼，實際需要依照 flux1_sdk 文檔實現
+    anchor_image = "path_to_anchor_image.png"
+    return anchor_image
 
-// Generate animations using Animatediff
-async function generateAnimationFromImages(images) {
-    // Assuming the Python script uses animatediff_sdk to generate animations
-    return await executePythonScript('generate_animation.py', [images, ANIMATEDIFF_API_KEY]);
-}
+# 生成動畫 (Animatediff)
+def generate_animation_from_images(images):
+    animations = []
+    # 假設這個函數用 animatediff_sdk 生成動畫
+    # 示例代碼，實際需要依照 animatediff_sdk 文檔實現
+    return animations
 
-async function generateAnchorAnimation(anchorImage, voiceover) {
-    // Assuming the Python script uses animatediff_sdk to generate animations with voice
-    return await executePythonScript('generate_anchor_animation.py', [anchorImage, voiceover, ANIMATEDIFF_API_KEY]);
-}
+def generate_anchor_animation(anchor_image, voiceover):
+    # 假設這個函數用 animatediff_sdk 生成主播動畫
+    # 示例代碼，實際需要依照 animatediff_sdk 文檔實現
+    anchor_animation = "path_to_anchor_animation.mp4"
+    return anchor_animation
 
-// Generate voiceover using CosyVoice
-async function generateVoiceover(script) {
-    // Assuming the Python script uses cosyvoice_sdk to generate voiceover
-    return await executePythonScript('generate_voiceover.py', [script, COSYVOICE_API_KEY]);
-}
+# 生成語音 (CosyVoice)
+def generate_voiceover(script):
+    # 假設這個函數用 cosyvoice_sdk 生成語音
+    # 示例代碼，實際需要依照 cosyvoice_sdk 文檔實現
+    voiceover = "path_to_voiceover.mp3"
+    return voiceover
 
-// Generate background music using Suno
-async function generateBackgroundMusic(script) {
-    // Assuming the Python script uses suno_sdk to generate background music
-    return await executePythonScript('generate_background_music.py', [script, SUNO_API_KEY]);
-}
+# 生成背景音樂 (Suno)
+def generate_background_music(script):
+    # 假設這個函數用 suno_sdk 生成背景音樂
+    # 示例代碼，實際需要依照 suno_sdk 文檔實現
+    background_music = "path_to_background_music.mp3"
+    return background_music
 
-// Combine animations, voiceover, and music using FFmpeg
-async function combineMedia(animationFilePath, voiceoverFilePath, musicFilePath) {
-    const command = `ffmpeg -i ${animationFilePath} -i ${voiceoverFilePath} -i ${musicFilePath} -c:v copy -c:a aac final_news_video.mp4`;
-    execSync(command);
-    console.log('新聞播報影片已生成：final_news_video.mp4');
-}
+# 使用 FFmpeg 合成影片
+def combine_media(animation_file_path, voiceover_file_path, music_file_path):
+    output_file_path = 'final_news_video.mp4'
+    command = [
+        'ffmpeg',
+        '-i', animation_file_path,
+        '-i', voiceover_file_path,
+        '-i', music_file_path,
+        '-c:v', 'copy',
+        '-c:a', 'aac',
+        output_file_path
+    ]
+    try:
+        subprocess.run(command, check=True)
+        print(f'新聞播報影片已生成：{output_file_path}')
+    except subprocess.CalledProcessError as e:
+        print(f'合成影片時出錯: {e}')
 
-// Main function to orchestrate the entire process
-async function createNewsBroadcast(summary) {
-    const script = await generateNewsScript(summary);
-    const storyboardImages = await generateStoryboardImages(script);
-    const anchorImage = await generateAnchorImage();
-    const animations = await generateAnimationFromImages(storyboardImages);
-    const voiceover = await generateVoiceover(script);
-    const backgroundMusic = await generateBackgroundMusic(script);
-    const anchorAnimation = await generateAnchorAnimation(anchorImage, voiceover);
+# 主流程
+def create_news_broadcast(summary):
+    script = generate_news_script(summary)
+    if not script:
+        return
 
-    // Combine all media elements into the final video
-    await combineMedia('path_to_animation.mp4', 'path_to_voiceover.mp3', 'path_to_background_music.mp3');
-}
+    storyboard_images = generate_storyboard_images(script)
+    anchor_image = generate_anchor_image()
+    animations = generate_animation_from_images(storyboard_images)
+    voiceover = generate_voiceover(script)
+    background_music = generate_background_music(script)
+    anchor_animation = generate_anchor_animation(anchor_image, voiceover)
 
-// Example usage: Use the generated transcript summary to create a news broadcast
-const summary = "這是一個關於台灣立法院的簡單摘要...";
-createNewsBroadcast(summary);
+    # 假設 animations 和 anchor_animation 是視頻片段，進行合成
+    combine_media('path_to_animation.mp4', voiceover, background_music)
+
+# 使用生成的逐字稿摘要來創建新聞播報
+summary = "這是一個關於台灣立法院的簡單摘要..."
+create_news_broadcast(summary)
 ```
 
 ## 整體流程
