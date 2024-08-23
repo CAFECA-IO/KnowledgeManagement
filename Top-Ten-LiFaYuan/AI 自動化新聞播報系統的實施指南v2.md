@@ -19,6 +19,7 @@ NewsGenerator/
 │   ├── generate_storyboard_images.py
 │   ├── generate_anchor_image.py
 │   ├── generate_animation.py
+│   ├── generate_anchor_animation.py
 │   ├── generate_voiceover.py
 │   ├── generate_background_music.py
 │   └── combine_media.py
@@ -43,7 +44,7 @@ NewsGenerator/
 在專案根目錄下，創建並啟用虛擬環境，以確保依賴項不會與其他專案衝突。
 
 ```bash
-cd ai_news_broadcast
+cd NewsGenerator
 python -m venv venv
 source venv/bin/activate  # 在Windows上使用 `venv\Scripts\activate`
 ```
@@ -76,7 +77,6 @@ sudo apt-get install ffmpeg
 ```
 在 Windows 上，請從 [FFmpeg 官網](https://ffmpeg.org/download.html) 下載並安裝。
 
-
 ### 配置文件
 
 在 `config/config.py` 中存放 API 金鑰和其他配置信息：
@@ -101,7 +101,7 @@ def generate_news_script(summary):
     ai_url = 'http://211.22.118.146:11434/api/generate'
     request_data = {
         "model": "llama3.1",
-        "prompt": f"根據以下摘要生成新聞稿：「{summary}」"
+        "prompt": f"根據以下摘要生成新聞稿：「{summary}」，並用「哎呦呦，這件事情在我看來...」做總結"
     }
     
     try:
@@ -118,10 +118,18 @@ def generate_news_script(summary):
 這個腳本用於生成分鏡稿圖片：
 
 ```python
+from flux1_sdk import Flux1Client
+
 def generate_storyboard_images(script):
-    # 假設這個函數用 flux1_sdk 生成分鏡稿
-    images = []  # 模擬生成的圖片列表
-    return images
+    client = Flux1Client(api_key='Your-Flux1-API-Key')
+    
+    try:
+        images = client.generate_images(prompt=script)
+        # 假設返回的是圖片的路徑列表
+        return images
+    except Exception as e:
+        print(f"生成分鏡稿圖片時出錯: {e}")
+        return []
 ```
 
 ### `scripts/generate_anchor_image.py`
@@ -129,10 +137,18 @@ def generate_storyboard_images(script):
 這個腳本負責生成主播圖片：
 
 ```python
+from flux1_sdk import Flux1Client
+
 def generate_anchor_image():
-    # 假設這個函數用 flux1_sdk 生成主播圖片
-    anchor_image = "path_to_anchor_image.png"
-    return anchor_image
+    client = Flux1Client(api_key='Your-Flux1-API-Key')
+    
+    try:
+        anchor_image = client.generate_images(prompt="Generate an image of a news anchor")
+        # 假設返回的是單個圖片的路徑
+        return anchor_image[0]
+    except Exception as e:
+        print(f"生成主播圖片時出錯: {e}")
+        return None
 ```
 
 ### `scripts/generate_animation.py`
@@ -140,32 +156,74 @@ def generate_anchor_image():
 這個腳本用於將分鏡稿圖片生成動畫：
 
 ```python
+from animatediff_sdk import AnimatediffClient
+
 def generate_animation_from_images(images):
+    client = AnimatediffClient(api_key='Your-Animatediff-API-Key')
     animations = []
-    # 假設這個函數用 animatediff_sdk 生成動畫
-    return animations
+    
+    try:
+        for image in images:
+            animation = client.generate_animation(image)
+            animations.append(animation)
+        return animations
+    except Exception as e:
+        print(f"生成動畫時出錯: {e}")
+        return []
+```
+
+### `scripts/generate_anchor_animation.py`
+
+這個腳本使用 Animatediff 來將主播圖片和語音結合生成動畫。
+
+```python
+from animatediff_sdk import AnimatediffClient
+
+def generate_anchor_animation(anchor_image, voiceover):
+    client = AnimatediffClient(api_key='Your-Animatediff-API-Key')
+    
+    try:
+        anchor_animation = client.generate_animation_with_voice(image=anchor_image, voice=voiceover)
+        return anchor_animation
+    except Exception as e:
+        print(f"生成主播動畫時出錯: {e}")
+        return None
 ```
 
 ### `scripts/generate_voiceover.py`
 
-這個腳本用於生成新聞播報的語音：
+這個腳本使用 CosyVoice 生成新聞播報的語音：
 
 ```python
+from cosyvoice_sdk import CosyVoiceClient
+
 def generate_voiceover(script):
-    # 假設這個函數用 cosyvoice_sdk 生成語音
-    voiceover = "path_to_voiceover.mp3"
-    return voiceover
+    client = CosyVoiceClient(api_key='Your-CosyVoice-API-Key')
+    
+    try:
+        voiceover = client.generate_voice(script)
+        return voiceover
+    except Exception as e:
+        print(f"生成語音時出錯: {e}")
+        return None
 ```
 
 ### `scripts/generate_background_music.py`
 
-這個腳本用於生成背景音樂：
+這個腳本使用 Suno 生成背景音樂：
 
 ```python
+from suno_sdk import SunoClient
+
 def generate_background_music(script):
-    # 假設這個函數用 suno_sdk 生成背景音樂
-    background_music = "path_to_background_music.mp3"
-    return background_music
+    client = SunoClient(api_key='Your-Suno-API-Key')
+    
+    try:
+        background_music = client.generate_music(script)
+        return background_music
+    except Exception as e:
+        print(f"生成背景音樂時出錯: {e}")
+        return None
 ```
 
 ### `scripts/combine_media.py`
@@ -206,20 +264,48 @@ from scripts.generate_voiceover import generate_voiceover
 from scripts.generate_background_music import generate_background_music
 from scripts.combine_media import combine_media
 
+summary = """
+1. 使用者向總統和相關部門官員提出關於 Peer-to-Peer(P2 P) 監管問題的擔憂，尤其是在缺乏法律約束和自我監管下的非法活動
+2. 官員承認在目前的法律框架下， 對於 P2p 平臺的 管理存在困難， 但強調正在研究各種選項， 包括成立行業協會和逐步實施分級管理。
+3. 用戶表達了對政府在面對金融科技快速發展時， 是否具備明确的戰略和行動計劃的疑慮。
+4. 金融監督管理委員會（FSC）表示， 他們正在努力平衡創新和風險管理， 同時呼籲企業遵守相關法律法規。
+5. 會上還提及了房地產市場泡沫和銀行信貸比例過高的問題， 官方承諾將與中央 bank 協調， 採取相應措施防止金融危機。
+6. 與會者同意進一步研究並追蹤相關議題， 以促進金融業的健康發展。
+"""
+
 def create_news_broadcast(summary):
     script = generate_news_script(summary)
     if not script:
         return
 
     storyboard_images = generate_storyboard_images(script)
-    anchor_image = generate_anchor_image()
-    animations = generate_animation_from_images(storyboard_images)
-    voiceover = generate_voiceover(script)
-    background_music = generate_background_music(script)
-    anchor_animation = generate_anchor_animation(anchor_image, voiceover)
+    if not storyboard_images:
+        return
 
-    # 假設 animations 和 anchor_animation 是視頻片段，進行合成
-    combine_media('path_to_animation.mp4', voiceover, background_music)
+    anchor_image = generate_anchor_image()
+    if not anchor_image:
+        return
+
+    # 使用 generate_animation_from_images 來生成整個新聞播報的動畫，基於分鏡稿圖片生成動畫片段。
+    animations = generate_animation_from_images(storyboard_images)
+    if not animations:
+        return
+
+    voiceover = generate_voiceover(script)
+    if not voiceover:
+        return
+
+    background_music = generate_background_music(script)
+    if not background_music:
+        return
+
+    # 使用 generate_anchor_animation 來生成基於主播圖片和語音的動畫，這樣動畫的重點將是主播與新聞講稿的同步呈現。
+    anchor_animation = generate_anchor_animation(anchor_image, voiceover)
+    if not anchor_animation:
+        return
+
+    # 有兩種視頻片段可以進行合成 animations 和 anchor_animation 
+    combine_media(anchor_animation, voiceover, background_music)
 
 # 示例使用：使用生成的逐字稿摘要來創建新聞播報
 if __name__ == "__main__":
