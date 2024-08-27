@@ -30,9 +30,9 @@ React 是用來建構使用者介面的 JavaScript 函式庫（Library）。
 
 假如習慣使用像是 create-react-app 這些 boilerplate 來建立 React 專案，可能會以為 React 本身一手包辦了所有事情。但其實打開 create-react-app 專案的 package.json 檔案，你會發現它只幫你先裝好了常用的套件，像是 React-DOM、Webpack 等等。**事實上 React 本身只負責 UI 的建造，其餘工作必須交給其他第三方套件執行**，像是 React-DOM 負責真實操控 DOM、React-Router 負責路由切換等等，因此會說 React 只是一個 library。
 
-Libray 好處是讓專案的自由度高，開發者可依需求自由挑選工具，像是可使用不同 React Renderer (ex: React Native) 將 UI 渲染到不同裝置上，且通常與第三方套件的相容性也會比較高；但自由度高也意味著需要額外花時間精力來選擇、設定各式工具。
+Library 好處是讓專案的自由度高，開發者可依需求自由挑選工具，像是可使用不同 React Renderer (ex: React Native) 將 UI 渲染到不同裝置上，且通常與第三方套件的相容性也會比較高；但自由度高也意味著需要額外花時間精力來選擇、設定各式工具。
 
-相較於 library，框架則提供較為完整的 solutions，而  **Next.js 除了整合 React.js 負責 UI 建造外，也提供了 routing、rendering、data fetching、intergrations 等任務的解決方案。**
+相較於 library，框架則提供較為完整的 solutions，而  **Next.js 除了整合 React.js 負責 UI 建造外，也提供了 routing、rendering、data fetching、integrations 等任務的解決方案。**
 
 但 React 到底是個 library 還是框架，其實一直存在不同的觀點。像今年 React core team 的成員之一 Sebastian 在接受 Vercel 的[訪談](https://www.youtube.com/watch?v=g5BGoLyGjY0&t=1076s)時，提到 React 也是用 framework 這個詞，他也說他沒很在意到底該說 library 還是 framework，所以這部分或許挺見仁見智。
 
@@ -117,7 +117,7 @@ What import alias would you like configured? @/*
 // alias 預設使用 @ 是否修改
 ```
 
-這裡先選擇使用 App Roueter ，建置完成後，初始專案架構主要分成以下三大類：
+這裡先選擇使用 App Router ，建置完成後，初始專案架構主要分成以下三大類：
 
 - app：放置 components、pages 與 api 等檔案
   - layout.tsx：在多個頁面之間定義共用 UI，其狀態將會被保存，如：nav、header、footer 等元
