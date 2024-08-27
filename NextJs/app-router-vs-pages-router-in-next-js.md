@@ -87,6 +87,8 @@ React 可透過「搭建後端 Server + 處理 Hydration + Webpack 打包配置�
 
 # Next.js 路由系統：App Router vs Page Router
 
+## 建置 Next.js 專案
+
 首先在終端輸入指令 `npx create-next-app` 建置 Next.js 專案。
 
 接著會依序出現下列幾個提問，分別如下：
