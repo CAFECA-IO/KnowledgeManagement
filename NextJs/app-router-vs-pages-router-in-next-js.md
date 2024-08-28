@@ -1,5 +1,7 @@
 _（目前文章狀態：草稿）_
 
+文章標題：App Router vs Pages Router in Next.js
+
 # 前言
 
 此篇文章的目的在於，了解 App Router 和 Pages Router 之間的差異，以便於判斷之後的專案是否要改用 App Router。（目前的專案都是使用 Pages Router）
