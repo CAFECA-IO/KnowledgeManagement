@@ -378,7 +378,7 @@ export default async function Page() {
 ### App Router 處理 4 種渲染的方式總結
 
 - **CSR**：使用客戶端 hook（`useEffect` 等）進行管理。
-- **SSR**：在伺服器元件中自動應用（無需 `'use client'` 指令）。
+- **SSR**：在伺服器元件中自動應用。
 - **SSG**：通過使用沒有運行時依賴的伺服器元件來實現。（簡單來說，就是如果伺服器元件在構建頁面時不需要依賴於運行時才有的資料或條件，那麼 Next.js 就能夠在構建階段生成這個頁面，並在頁面發佈後不再需要動態生成。）
 - **ISR**：使用 `fetch` 並指定 `revalidate` 選項來實現。
 
