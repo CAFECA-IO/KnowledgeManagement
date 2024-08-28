@@ -252,7 +252,9 @@ _（撰寫中）_
 
 # 結論
 
-## 初步比較差異——App Router vs Page Router
+## 差異整理及綜合比較
+
+### 初步比較差異——App Router vs Page Router
 
 - App Router 在  `app`  目錄底下；Page Router 在  `page`底下
 - 都是由目錄結構產生實際路由，但兩邊路由不可重複。即`app/profile/page.tsx`  與  `page/profile.tsx`會產生相同路徑，執行時會噴錯提醒
@@ -261,7 +263,7 @@ _（撰寫中）_
 - 蒐集網址參數(動態路由)命名一樣是`[param]`或`[...params]`，差別在 App Router 僅能是目錄，而 Page Router 可以是檔名
 - 在組件裡取得路由(Dynamic route)參數，Page Router 是用`useRouter()`； App Router 是直接在 props 傳入，如  `page({params})`
 
-## 深入比較差異——以 App Router 為視角
+### 深入比較差異——以 App Router 為視角
 
 - React Component 須使用`'use client'`, `'use server'`標記組件類型
 - `app/`目錄底下不標記的話，預設皆是 RSC(React Server Component)
@@ -288,4 +290,10 @@ _（撰寫中）_
 - 會有全域 provider (如 redux, react query)的三方套件。官方推薦針對他增加一個`provider.tsx`，在最上層使用`'use client'`，再放到`layout.tsx`裡。具體範例可參考[官方 / Rendering third-party context providers in Server Components](https://nextjs.org/docs/getting-started/react-essentials#rendering-third-party-context-providers-in-server-components)
 - 若有些函式可能包含機密資訊，但寫法又可以在 Client 運作，想要限制他僅能在 Server 的話，可使用`server-only`套件保護。用法可見[官方 / The “server only” package](https://nextjs.org/docs/getting-started/react-essentials#the-server-only-package)
 
+## 適用情境
+
+_（撰寫中）_
+
 # 參考資料
+
+_（撰寫中）_
