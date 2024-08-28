@@ -334,7 +334,6 @@ export default SSRPage;
 - SSG 是透過 `getStaticProps` 函數實現的，該函數會在建構時抓取資料並將其作為屬性傳遞給頁面元件。
 - 這種方法會在建構期間為頁面生成靜態 HTML 文件，提高效能並減少伺服器負荷。
 - 簡單來說就是，SSG 會在網頁打包（built time）時，就由 Server 產生所有需要用到的內容，因此每次 Server 收到 Request 均回傳相同的 HTML 給 Client。
-- 因 HTML 內容不變可搭配快取機制，適用於資料變動較小的頁面，無法動態更新。
 - 執行函數：`getStaticProps()`
 
 範例：
