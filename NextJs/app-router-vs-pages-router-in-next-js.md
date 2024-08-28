@@ -218,7 +218,7 @@ What import alias would you like configured? @/*
 
 ![image](https://github.com/user-attachments/assets/6918e8a7-398b-456d-ae27-288757d0d2ce)
 
-# Rendering——渲染的四種方式、路由系統對四種渲染的應用差異
+# Rendering——渲染的四種方式、路由系統對四種渲染的應用差異、App Router 渲染概念
 
 ## 了解 Next.js 中的渲染方法：CSR vs SSR vs SSG vs ISR
 
@@ -485,6 +485,18 @@ export default async function Page() {
 - **SSR**：在伺服器元件中自動應用。
 - **SSG**：通過使用沒有運行時依賴的伺服器元件來實現。（簡單來說，就是如果伺服器元件在構建頁面時不需要依賴於運行時才有的資料或條件，那麼 Next.js 就能夠在構建階段生成這個頁面，並在頁面發佈後不再需要動態生成。）
 - **ISR**：使用 `fetch` 並指定 `revalidate` 選項來實現。
+
+## App Router 渲染概念
+
+雖然前面講述 App Router 處理 4 種渲染的方式，但在 App Router 在渲染的概念上，已經不用先前的 CSR、SSR、SSG、ISR 來說明（那主要是 Page Router 在使用的概念），而是以伺服器元件（React Server Component, RSC）和客戶端元件（Client Component）來說明。
+
+### 1. 伺服器元件（React Server Component, RSC）
+
+_（撰寫中）_
+
+### 2. 客戶端元件（Client Component）
+
+_（撰寫中）_
 
 # Routing——路由使用差異
 
