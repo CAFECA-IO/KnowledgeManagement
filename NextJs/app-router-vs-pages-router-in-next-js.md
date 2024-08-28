@@ -30,7 +30,7 @@ React 是用來建構使用者介面的 JavaScript 函式庫（Library）。
 
 開發一個 app 包含了許多面向，像是 UI、routing、data fetching、rendering、部署等等，而一個「框架」應該要能全面地 cover 這些需求。
 
-假如習慣使用像是 create-react-app 這些 boilerplate 來建立 React 專案，可能會以為 React 本身一手包辦了所有事情。但其實打開 create-react-app 專案的 package.json 檔案，你會發現它只幫你先裝好了常用的套件，像是 React-DOM、Webpack 等等。**事實上 React 本身只負責 UI 的建造，其餘工作必須交給其他第三方套件執行**，像是 React-DOM 負責真實操控 DOM、React-Router 負責路由切換等等，因此會說 React 只是一個 library。
+假如習慣使用像是 create-react-app 這些 boilerplate 來建立 React 專案的人，可能會以為 React 本身一手包辦了所有事情。但其實打開 create-react-app 專案的 package.json 檔案，我們會發現它只幫我們先裝好了常用的套件，像是 React-DOM、Webpack 等等。**事實上 React 本身只負責 UI 的建造，其餘工作必須交給其他第三方套件執行**，像是 React-DOM 負責真實操控 DOM、React-Router 負責路由切換等等，因此會說 React 只是一個 library。
 
 Library 好處是讓專案的自由度高，開發者可依需求自由挑選工具，像是可使用不同 React Renderer (ex: React Native) 將 UI 渲染到不同裝置上，且通常與第三方套件的相容性也會比較高；但自由度高也意味著需要額外花時間精力來選擇、設定各式工具。
 
@@ -141,7 +141,7 @@ What import alias would you like configured? @/*
 // alias 預設使用 @ 是否修改
 ```
 
-這裡先選擇使用 App Router ，建置完成後，初始專案架構主要分成以下三大類：
+這裡先選擇使用 App Router ，建立完成後，初始專案架構主要分成以下三大類：
 
 - app：放置 components、pages 與 api 等檔案
   - layout.tsx：在多個頁面之間定義共用 UI，其狀態將會被保存，如：nav、header、footer 等元
@@ -245,7 +245,7 @@ _（撰寫中）_
 ### 1. 客戶端渲染 (CSR)
 
 **概述：**
-客戶端渲染 (CSR) 是指瀏覽器下載一個最小化的 HTML 頁面和必要的 JavaScript，然後在客戶端渲染頁面。頁面是在初始 HTML 加載後在瀏覽器中動態渲染的。
+客戶端渲染 (CSR) 是指瀏覽器下載一個最小化的 HTML 頁面和必要的 JavaScript，然後在客戶端渲染頁面。頁面是在初始 HTML 載入後在瀏覽器中動態渲染的。
 
 **主要特徵：**
 
@@ -268,7 +268,7 @@ _（撰寫中）_
 ### 3. 靜態網站生成 (SSG)
 
 **概述：**
-靜態網站生成 (SSG) 是指頁面的 HTML 在建置時生成，並將相同的 HTML 提供給所有使用者。內容是靜態的，這意味著在下一次建置之前不會發生變化。
+靜態網站生成 (SSG) 是指頁面的 HTML 在建置(build)時生成，並將相同的 HTML 提供給所有使用者。內容是靜態的，這意味著在下一次建置之前不會發生變化。
 
 **主要特徵：**
 
@@ -279,7 +279,7 @@ _（撰寫中）_
 ### 4. 增量靜態重生成 (ISR)
 
 **概述：**
-增量靜態重生成 (ISR) 允許你在建置後更新靜態頁面，而不需要完整重建。頁面可以在新的請求進來時在背景中重新生成，確保它們保持最新狀態，同時不犧牲靜態生成的效能優勢。
+增量靜態重生成 (ISR) 允許我們在建置後更新靜態頁面，而不需要完整重建。頁面可以在新的請求進來時在背景中重新生成，確保它們保持最新狀態，同時不犧牲靜態生成的效能優勢。
 
 **主要特徵：**
 
@@ -321,8 +321,8 @@ export default function Page() {
 
 ### 2. 伺服器端渲染（SSR）在 App Router 中的實作
 
-- 在 App Router 中，SSR 通常在伺服器元件中自動實現。當你建立一個不使用 `'use client'` 指令的元件時，它會自動在伺服器上進行渲染。
-- 你可以在伺服器元件中獲取資料，伺服器會在發送 HTML 給客戶端之前先渲染好 HTML。
+- 在 App Router 中，SSR 通常在伺服器元件中自動實現。當我們建立一個不使用 `'use client'` 指令的元件時，它會自動在伺服器上進行渲染。
+- 可以在伺服器元件中獲取資料，伺服器會在發送 HTML 給客戶端之前先渲染好 HTML。
 
 #### 範例：
 
@@ -359,7 +359,7 @@ export default async function Page() {
 
 ### 4. 增量靜態再生（ISR）在 App Router 中的實作
 
-- App Router 中的 ISR 通過 `fetch` 函數的 `revalidate` 選項來支援。當你在伺服器元件中使用 `fetch` 並指定 `next: { revalidate: seconds }` 選項時，Next.js 會在指定的秒數後重新生成頁面。
+- App Router 中的 ISR 通過 `fetch` 函數的 `revalidate` 選項來支援。在伺服器元件中使用 `fetch` 並指定 `next: { revalidate: seconds }` 選項時，Next.js 會在指定的秒數後重新生成頁面。
 - 這允許頁面在不進行完全重建(rebuild)的情況下保持最新狀態。
 
 #### 範例：
