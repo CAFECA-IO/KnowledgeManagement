@@ -293,10 +293,6 @@ Next.js 提供了一個稱為 **Page Router** 的多功能路由系統，允許�
 
 ### 1. 客戶端渲染 (CSR)
 
-**客戶端渲染 (CSR)** 在 Next.js 中指的是直接在瀏覽器中使用 JavaScript 來渲染內容。這種方法通常用於希望頁面在初次載入後能快速載入並具備高度互動性的情況。
-
-#### 在 Next.js 中的實現方式
-
 - CSR 是透過使用在頁面載入後僅在客戶端進行資料抓取的 React 元件來實現的。
 - 為了強制使用 CSR，請避免在頁面元件中使用 `getServerSideProps`、`getStaticProps` 或 `getInitialProps`。這樣頁面就可以靜態傳遞，然後任何動態資料抓取僅在客戶端進行。
 
@@ -323,10 +319,6 @@ export default CSRPage;
 
 ### 2. 伺服器端渲染 (SSR)
 
-**伺服器端渲染 (SSR)** 是指頁面在每次請求時都在伺服器上進行渲染。這種方法適用於需要動態更新且經常需要使用者特定內容的頁面。
-
-#### 在 Next.js 中的實現方式
-
 - SSR 是透過 `getServerSideProps` 函數來實現的，該函數會在請求時抓取資料並將其作為屬性傳遞給頁面元件。
 - 此函數在每次請求時都在伺服器端執行，確保資料總是最新的。
 
@@ -352,10 +344,6 @@ export default SSRPage;
 
 ### 3. 靜態網站生成 (SSG)
 
-**靜態網站生成 (SSG)** 允許我們在建構時預先渲染頁面。這種方法非常適合資料不經常變動或不需要使用者特定內容的公開頁面。
-
-#### 在 Next.js 中的實現方式
-
 - SSG 是透過 `getStaticProps` 函數實現的，該函數會在建構時抓取資料並將其作為屬性傳遞給頁面元件。
 - 這種方法會在建構期間為頁面生成靜態 HTML 文件，提高效能並減少伺服器負載。
 
@@ -380,10 +368,6 @@ export default SSGPage;
 ```
 
 ### 4. 增量靜態再生 (ISR)
-
-**增量靜態再生 (ISR)** 允許我們在建構後更新靜態頁面，而不需要重新建構整個網站。這種方法適用於會定期更改的內容，讓我們能在效能和內容新鮮度之間取得平衡。
-
-#### 在 Next.js 中的實現方式
 
 - ISR 是 SSG 的擴展，使用 `getStaticProps` 及 `revalidate` 屬性來實現。`revalidate` 屬性指定頁面應重新驗證的間隔時間（以秒為單位）。
 - 當 `revalidate` 時間過後有請求進來時，Next.js 會在背景中重新生成頁面。
@@ -420,12 +404,12 @@ export default ISRPage;
 
 Next.js 的 App Router 引入了一種新的處理客戶端渲染（CSR）、伺服器端渲染（SSR）、靜態網站生成（SSG）和增量靜態再生（ISR）的方法。以下是這些渲染方法的實作方式：
 
-### 1. 客戶端渲染（CSR）在 App Router 中的實作
+### 1. 客戶端渲染（CSR）
 
 - 在 App Router 中，CSR 的處理方式類似於傳統的 React 應用程式。元件在客戶端進行渲染，資料獲取則使用 React 的 hook，例如 `useEffect`，或使用像 SWR 這樣的庫。
 - 在 App Router 中要進行客戶端渲染的話，需要特別在元件的開頭加上 `'use client'` 指令。
 
-#### 範例：
+範例：
 
 ```jsx
 "use client";
@@ -448,12 +432,12 @@ export default function Page() {
 }
 ```
 
-### 2. 伺服器端渲染（SSR）在 App Router 中的實作
+### 2. 伺服器端渲染（SSR）
 
 - 在 App Router 中，SSR 通常在伺服器元件中自動實現。當我們建立一個不使用 `'use client'` 指令的元件時，它會自動在伺服器上進行渲染。
 - 可以在伺服器元件中獲取資料，伺服器會在發送 HTML 給客戶端之前先渲染好 HTML。
 
-#### 範例：
+範例：
 
 ```jsx
 export default async function Page() {
@@ -464,7 +448,7 @@ export default async function Page() {
 }
 ```
 
-### 3. 靜態網站生成（SSG）在 App Router 中的實作
+### 3. 靜態網站生成（SSG）
 
 - 在 App Router 中，靜態生成是通過在建構時渲染伺服器元件（server components）來實現的。
 - 如果元件在建構時獲取資料並且不依賴於運行時變數（例如查詢參數），則會進行靜態生成。
@@ -473,7 +457,7 @@ export default async function Page() {
   而在 App Router 中，靜態生成是通過伺服器端元件來實現的。Next.js 會自動處理這些伺服器端元件的預渲染過程，確保在構建時生成靜態頁面。
   總而言之，在 App Router 中，我們已不必使用 `getStaticProps` 來實現靜態網站生成，因為 Next.js 的伺服器端元件已經處理了這部分的工作。
 
-#### 範例：
+範例：
 
 ```jsx
 export default async function Page() {
@@ -486,12 +470,12 @@ export default async function Page() {
 // 如果不依賴於運行時變數（例如查詢參數），Next.js 將在建構時靜態生成這個頁面。
 ```
 
-### 4. 增量靜態再生（ISR）在 App Router 中的實作
+### 4. 增量靜態再生（ISR）
 
 - App Router 中的 ISR 通過 `fetch` 函數的 `revalidate` 選項來支援。在伺服器元件中使用 `fetch` 並指定 `next: { revalidate: seconds }` 選項時，Next.js 會在指定的秒數後重新生成頁面。
 - 這允許頁面在不進行完全重建(rebuild)的情況下保持最新狀態。
 
-#### 範例：
+範例：
 
 ```jsx
 export default async function Page() {
