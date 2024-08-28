@@ -287,6 +287,135 @@ _（撰寫中）_
 - **自動更新：** 頁面會在指定的時間間隔後或有新資料時重新生成。
 - **SEO 友好：** 由於頁面是靜態生成的，因此很容易被搜尋引擎索引。
 
+## Page Router 處理 4 種渲染的方式
+
+Next.js 提供了一個稱為 **Page Router** 的多功能路由系統，允許開發者實現多種渲染方法：**客戶端渲染 (CSR)**、**伺服器端渲染 (SSR)**、**靜態網站生成 (SSG)** 和 **增量靜態再生 (ISR)**。每種方法都有其特定的使用場景和優勢，Next.js 提供了實現這些方法的特定機制。
+
+### 1. 客戶端渲染 (CSR)
+
+**客戶端渲染 (CSR)** 在 Next.js 中指的是直接在瀏覽器中使用 JavaScript 來渲染內容。這種方法通常用於希望頁面在初次載入後能快速載入並具備高度互動性的情況。
+
+#### 在 Next.js 中的實現方式
+
+- CSR 是透過使用在頁面載入後僅在客戶端進行資料抓取的 React 元件來實現的。
+- 為了強制使用 CSR，請避免在頁面元件中使用 `getServerSideProps`、`getStaticProps` 或 `getInitialProps`。這樣頁面就可以靜態傳遞，然後任何動態資料抓取僅在客戶端進行。
+
+範例：
+
+```jsx
+// pages/csr-page.js
+import { useEffect, useState } from "react";
+
+function CSRPage() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/data")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+
+  return <div>{data ? JSON.stringify(data) : "Loading..."}</div>;
+}
+
+export default CSRPage;
+```
+
+### 2. 伺服器端渲染 (SSR)
+
+**伺服器端渲染 (SSR)** 是指頁面在每次請求時都在伺服器上進行渲染。這種方法適用於需要動態更新且經常需要使用者特定內容的頁面。
+
+#### 在 Next.js 中的實現方式
+
+- SSR 是透過 `getServerSideProps` 函數來實現的，該函數會在請求時抓取資料並將其作為屬性傳遞給頁面元件。
+- 此函數在每次請求時都在伺服器端執行，確保資料總是最新的。
+
+範例：
+
+```jsx
+// pages/ssr-page.js
+export async function getServerSideProps(context) {
+  const res = await fetch("<https://api.example.com/data>");
+  const data = await res.json();
+
+  return {
+    props: { data }, // 會作為屬性傳遞給頁面元件
+  };
+}
+
+function SSRPage({ data }) {
+  return <div>{JSON.stringify(data)}</div>;
+}
+
+export default SSRPage;
+```
+
+### 3. 靜態網站生成 (SSG)
+
+**靜態網站生成 (SSG)** 允許我們在建構時預先渲染頁面。這種方法非常適合資料不經常變動或不需要使用者特定內容的公開頁面。
+
+#### 在 Next.js 中的實現方式
+
+- SSG 是透過 `getStaticProps` 函數實現的，該函數會在建構時抓取資料並將其作為屬性傳遞給頁面元件。
+- 這種方法會在建構期間為頁面生成靜態 HTML 文件，提高效能並減少伺服器負載。
+
+範例：
+
+```jsx
+// pages/ssg-page.js
+export async function getStaticProps() {
+  const res = await fetch("<https://api.example.com/data>");
+  const data = await res.json();
+
+  return {
+    props: { data }, // 會作為屬性傳遞給頁面元件
+  };
+}
+
+function SSGPage({ data }) {
+  return <div>{JSON.stringify(data)}</div>;
+}
+
+export default SSGPage;
+```
+
+### 4. 增量靜態再生 (ISR)
+
+**增量靜態再生 (ISR)** 允許我們在建構後更新靜態頁面，而不需要重新建構整個網站。這種方法適用於會定期更改的內容，讓我們能在效能和內容新鮮度之間取得平衡。
+
+#### 在 Next.js 中的實現方式
+
+- ISR 是 SSG 的擴展，使用 `getStaticProps` 及 `revalidate` 屬性來實現。`revalidate` 屬性指定頁面應重新驗證的間隔時間（以秒為單位）。
+- 當 `revalidate` 時間過後有請求進來時，Next.js 會在背景中重新生成頁面。
+
+範例：
+
+```jsx
+// pages/isr-page.js
+export async function getStaticProps() {
+  const res = await fetch("<https://api.example.com/data>");
+  const data = await res.json();
+
+  return {
+    props: { data },
+    revalidate: 10, // 以秒為單位，頁面每 10 秒重新驗證一次
+  };
+}
+
+function ISRPage({ data }) {
+  return <div>{JSON.stringify(data)}</div>;
+}
+
+export default ISRPage;
+```
+
+### Page Router 處理 4 種渲染的方式總結
+
+- **CSR**：使用 React 在客戶端進行內容渲染。不使用特定的函數（`getStaticProps`、`getServerSideProps`）。
+- **SSR**：使用 `getServerSideProps` 在伺服器上於每次請求時進行內容渲染。
+- **SSG**：使用 `getStaticProps` 在建構時進行內容渲染，生成靜態 HTML 文件。
+- **ISR**：SSG 的變體，使用 `getStaticProps` 和 `revalidate` 屬性允許定期更新靜態內容。
+
 ## App Router 處理 4 種渲染的方式
 
 Next.js 的 App Router 引入了一種新的處理客戶端渲染（CSR）、伺服器端渲染（SSR）、靜態網站生成（SSG）和增量靜態再生（ISR）的方法。以下是這些渲染方法的實作方式：
