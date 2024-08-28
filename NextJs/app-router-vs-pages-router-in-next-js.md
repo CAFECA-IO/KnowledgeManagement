@@ -256,7 +256,9 @@ _（待實作）_
 
 # 結論
 
-### 初步整理差異——App Router vs Page Router
+### 初步條列式整理差異——App Router vs Page Router
+
+_（再整理）_
 
 - App Router 在  `app`  目錄底下；Page Router 在  `page`底下
 - 都是由目錄結構產生實際路由，但兩邊路由不可重複。即`app/profile/page.tsx`  與  `page/profile.tsx`會產生相同路徑，執行時會噴錯提醒
@@ -265,7 +267,9 @@ _（待實作）_
 - 蒐集網址參數(動態路由)命名一樣是`[param]`或`[...params]`，差別在 App Router 僅能是目錄，而 Page Router 可以是檔名
 - 在組件裡取得路由(Dynamic route)參數，Page Router 是用`useRouter()`； App Router 是直接在 props 傳入，如  `page({params})`
 
-### 深入整理差異——以 App Router 為視角
+### 深入條列式整理差異——以 App Router 為視角
+
+_（再整理）_
 
 - React Component 須使用`'use client'`, `'use server'`標記組件類型
 - `app/`目錄底下不標記的話，預設皆是 RSC(React Server Component)
