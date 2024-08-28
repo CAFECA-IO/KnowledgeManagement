@@ -496,7 +496,79 @@ _（撰寫中）_
 
 ### 2. 客戶端元件（Client Component）
 
-_（撰寫中）_
+客戶端元件允許你撰寫可互動的使用者介面，這些介面是[在伺服器上預先渲染](https://github.com/reactwg/server-components/discussions/4)的，並且可以使用客戶端的 JavaScript 在瀏覽器中執行。
+
+#### 客戶端渲染的好處
+
+在客戶端執行渲染有幾個好處，包括：
+
+- **互動性**：客戶端元件可以使用狀態(state)、效果(effects)和事件監聽器(event listeners)，這意味著它們可以給使用者即時的回饋，並更新使用者介面。
+- **瀏覽器 API**：客戶端元件可以訪問瀏覽器 API，例如[地理位置](https://developer.mozilla.org/docs/Web/API/Geolocation_API)或[本地儲存](https://developer.mozilla.org/docs/Web/API/Window/localStorage)。
+
+#### 在 Next.js 中使用客戶端元件
+
+要使用客戶端元件，你可以在檔案頂部引入 React 的[`"use client"`指令](https://react.dev/reference/react/use-client)，放在所有匯入語句之前。
+
+`"use client"` 用於在伺服器端元件和客戶端元件之間建立[界限](https://nextjs.org/docs/app/building-your-application/rendering#network-boundary)。這意味著在檔案中定義 `"use client"` 後，所有匯入其中的其他模組，包括子元件，都會被視為客戶端包的一部分。
+
+app/counter.tsx
+
+```jsx
+"use client";
+
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+```
+
+下圖顯示，如果未定義 `"use client"` 指令，在巢狀元件 (`toggle.js`) 中使用 `onClick` 和 `useState` 將會導致錯誤。這是因為預設情況下，應用程式路由中的所有元件都是伺服器元件，這些 API 無法使用。通過在 `toggle.js` 中定義 `"use client"` 指令，你可以告訴 React 進入客戶端邊界，這些 API 在此可用。
+
+![image](https://github.com/user-attachments/assets/328123ef-503e-45bb-b9c8-35d583a49c5a)
+
+
+> 補充：定義多個 use client 入口點
+>
+> 你可以在 React 元件樹中定義多個 `"use client"` 入口點。這允許你將應用程式分割為多個客戶端包(client bundles)。
+>
+> 但是，`"use client"` 並不需要在每個需要在客戶端渲染的元件中定義。只要你定義了邊界，所有子元件和匯入其中的模組都會被視為客戶端包的一部分。
+
+#### 客戶端元件如何被渲染？
+
+在 Next.js 中，客戶端元件的渲染方式取決於請求是屬於**整頁載入**（例如首次訪問應用程式或由瀏覽器重新整理觸發的頁面載入）或者是**後續的導航**。
+
+**整頁載入（Full page load）:**
+
+為了優化初次頁面載入，Next.js 將使用 React 的 API 在伺服器上為客戶端元件和伺服器元件渲染靜態 HTML 預覽。這意味著，當使用者首次訪問你的應用程式時，他們將立即看到頁面的內容，而無需等待客戶端下載、解析和執行客戶端元件的 JavaScript 包。
+
+在伺服器上：
+
+1. React 將伺服器元件渲染為一種稱為[**React 伺服器元件有效負載 (RSC Payload)**](https://nextjs.org/docs/app/building-your-application/rendering/server-components#what-is-the-react-server-component-payload-rsc)的特殊資料格式，其中包含對客戶端元件的引用。
+2. Next.js 使用 RSC 負載和客戶端元件的 JavaScript 指令，在伺服器上渲染路徑的 **HTML**。
+
+接著，在客戶端：
+
+1. 使用 HTML 立即顯示快速但不可互動的初始預覽。
+2. 使用 React 伺服器元件負載來調和客戶端元件和伺服器元件樹，並更新 DOM。
+3. 使用 JavaScript 指令來[hydrate](https://react.dev/reference/react-dom/client/hydrateRoot) 客戶端元件，讓它們的使用者介面可互動。
+
+> 補充：什麼是 Hydration？
+>
+> Hydration 是將事件監聽器附加到 DOM 的過程，使靜態 HTML 變得可互動。Hydration 的背後是使用 [`hydrateRoot`](https://react.dev/reference/react-dom/client/hydrateRoot) React API 完成的。
+
+**後續導航（Subsequent Navigations）:**
+
+在後續導航中，客戶端元件完全在客戶端渲染，無需伺服器渲染的 HTML。
+
+這意味著客戶端元件的 JavaScript 包將被下載並解析。一旦包準備就緒，React 將使用 [RSC 負載](https://nextjs.org/docs/app/building-your-application/rendering/server-components#what-is-the-react-server-component-payload-rsc)來調和客戶端元件和伺服器元件樹，並更新 DOM。
 
 # Routing——路由使用差異
 
