@@ -220,32 +220,15 @@ What import alias would you like configured? @/*
 
 # Rendering——渲染的四種方式、路由系統對四種渲染的應用差異
 
-_（撰寫中）_
-
-針對 Next.js 支援的網頁渲染方式，以及如何在 Next.js 搭配使用，列點整理如下：
-
-- Client-side Rendering（CSR）：客戶端渲染
-  - Client（瀏覽器）第一次發送 Request 給 Server => Server 回傳只有容器不含內容的 HTML 檔 => 再由瀏覽器執行 JavaScript 動態產生資料 => 最後將資料渲染到畫面上
-  - 因此第一次渲染較為費時，而只有容器沒有內容的原始碼也將不利於 SEO
-  - 執行函數：`useEffect()`  或使用由 Next.js 團隊開發的  [SWR](https://swr.vercel.app/)  開源套件
-- Server-side Rendering（SSR）：伺服器端渲染
-  - Server（伺服器）在每次收到 Request 時，會建立好完整的 HTML 內容並發送給 Client
-  - 適用於需經常更新數據的頁面，缺點是可能導致伺服器負荷較大
-  - 執行函數：`getServerSideProps()`，只會在 Server side 執行，可跳過呼叫 API 步驟直接到資料庫抓取資料
-- Static Site Generation（SSG）：靜態網站生成
-  - 在網頁打包（built time）時，就由 Server 產生所有需要用到的內容，因此每次 Server 收到 Request 均回傳相同的 HTML 給 Client
-  - 因 HTML 內容不變可搭配快取機制，適用於資料變動較小的頁面，無法動態更新
-  - 執行函數：`getStaticProps()`
-- Incremental Site Rendering（ISR）：增量式網站渲染
-  - 結合 SSG 和 SSR 的渲染方式，可設定條件保存上一次渲染結果，當靜態檔案過期，將觸發 Server 重新 build HTML 檔案以更新頁面
-  - 執行函數: `getStaticProps()`  搭配  `revalidate`  屬性
-
 ## 了解 Next.js 中的渲染方法：CSR vs SSR vs SSG vs ISR
 
 ### 1. 客戶端渲染 (Client-side Rendering, CSR)
 
 **概述：**
 客戶端渲染 (CSR) 是指瀏覽器下載一個最小化的 HTML 頁面和必要的 JavaScript，然後在客戶端渲染頁面。頁面是在初始 HTML 載入後在瀏覽器中動態渲染的。
+
+步驟大概像這樣：
+Client（瀏覽器）第一次發送 Request 給 Server => Server 回傳只有容器不含內容的 HTML 檔 => 再由瀏覽器執行 JavaScript 動態產生資料 => 最後將資料渲染到畫面上。（因此第一次渲染較為費時，而只有容器沒有內容的原始碼也不利於 SEO）
 
 **主要特徵：**
 
@@ -258,6 +241,8 @@ _（撰寫中）_
 
 **概述：**
 伺服器端渲染 (SSR) 是指頁面的 HTML 是在每次請求時由伺服器生成的。伺服器會獲取所需的資料，渲染頁面，並將完整渲染的 HTML 發送給客戶端。
+
+也就是當 Server（伺服器）在每次收到 Request 時，就會建立好完整的 HTML 內容並發送給 Client（瀏覽器）。
 
 **主要特徵：**
 
@@ -295,6 +280,7 @@ Next.js 提供了一個稱為 **Page Router** 的多功能路由系統，允許�
 
 - CSR 是透過使用在頁面載入後僅在客戶端進行資料抓取的 React 元件來實現的。
 - 為了強制使用 CSR，請避免在頁面元件中使用 `getServerSideProps`、`getStaticProps` 或 `getInitialProps`。這樣頁面就可以靜態傳遞，然後任何動態資料抓取僅在客戶端進行。
+- 執行函數：`useEffect()` 或使用由 Next.js 團隊開發的 [SWR](https://swr.vercel.app/) 開源套件
 
 範例：
 
@@ -321,6 +307,7 @@ export default CSRPage;
 
 - SSR 是透過 `getServerSideProps` 函數來實現的，該函數會在請求時抓取資料並將其作為屬性傳遞給頁面元件。
 - 此函數在每次請求時都在伺服器端執行，確保資料總是最新的。
+- 執行函數：`getServerSideProps()`，只會在 Server side 執行，可跳過呼叫 API 步驟直接到資料庫抓取資料。
 
 範例：
 
@@ -345,7 +332,10 @@ export default SSRPage;
 ### 3. 靜態網站生成 (SSG)
 
 - SSG 是透過 `getStaticProps` 函數實現的，該函數會在建構時抓取資料並將其作為屬性傳遞給頁面元件。
-- 這種方法會在建構期間為頁面生成靜態 HTML 文件，提高效能並減少伺服器負載。
+- 這種方法會在建構期間為頁面生成靜態 HTML 文件，提高效能並減少伺服器負荷。
+- 簡單來說就是，SSG 會在網頁打包（built time）時，就由 Server 產生所有需要用到的內容，因此每次 Server 收到 Request 均回傳相同的 HTML 給 Client。
+- 因 HTML 內容不變可搭配快取機制，適用於資料變動較小的頁面，無法動態更新。
+- 執行函數：`getStaticProps()`
 
 範例：
 
@@ -371,6 +361,8 @@ export default SSGPage;
 
 - ISR 是 SSG 的擴展，使用 `getStaticProps` 及 `revalidate` 屬性來實現。`revalidate` 屬性指定頁面應重新驗證的間隔時間（以秒為單位）。
 - 當 `revalidate` 時間過後有請求進來時，Next.js 會在背景中重新生成頁面。
+- 簡單來說就是，ISR 是結合 SSG 和 SSR 的渲染方式，可設定條件保存上一次渲染結果，當靜態檔案過期，將觸發 Server 重新 build HTML 檔案以更新頁面。
+- 執行函數: `getStaticProps()` 搭配 `revalidate` 屬性
 
 範例：
 
