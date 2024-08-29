@@ -516,7 +516,7 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 
 ### 伺服器元件如何渲染？
 
-在伺服器上，Next.js 使用 React 的 API 來協調渲染。渲染工作被分割成區塊：依照單獨的路由段(individual route segments)和 [Suspense Boundaries](https://react.dev/reference/react/Suspense) 來分割。
+在伺服器上，Next.js 使用 React 的 API 來協調渲染。渲染工作被分割成區塊：依照單獨的路由段(route segments)和 [Suspense Boundaries](https://react.dev/reference/react/Suspense) 來分割。
 
 每個區塊的渲染分為兩個步驟：
 
@@ -592,13 +592,13 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 
 ![image](https://github.com/user-attachments/assets/e812544d-3f50-4ba0-af6e-3a3a37f80321)
 
-串流使我們可以逐步從伺服器渲染 UI。工作被拆分成多個區塊，並在準備好時逐步串流到客戶端。這使得使用者可以在整個內容渲染完成之前立即看到部分頁面內容。
+串流使我們可以逐步從伺服器渲染 UI。渲染工作被拆分成多個區塊，並在準備好時逐步串流到客戶端。這讓使用者可以在整個內容渲染完成之前立即看到部分頁面內容。
 
 ![image](https://github.com/user-attachments/assets/2e0e5c4d-d9f4-4154-87aa-f9018cf1147c)
 
-串流是 Next.js App Router 的內建功能。這有助於提高初次頁面載入效能，以及依賴較慢資料獲取的 UI，這些資料會阻塞整個路由的渲染。例如，產品頁面上的評論。
+串流是 Next.js App Router 預設內建的功能。這有助於提高初次頁面載入效能，以及需要依賴較慢資料獲取的 UI（這些資料會阻塞整個路由的渲染）。例如，產品頁面上的評論。
 
-我們可以使用 `loading.js` 和 [React Suspense](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) 開始串流路由段和 UI 元件。請參見 [Loading UI 和串流](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) 部分以獲取更多資訊。
+我們可以使用 `loading.js` 和 [React Suspense](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) 開始串流路由段和 UI 元件。請參見 [Loading UI 和串流](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) 以獲取更多資訊。
 
 ## 2. 客戶端元件（Client Component）
 
@@ -608,7 +608,7 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 
 在客戶端執行渲染有幾個好處，包括：
 
-- **互動性**：客戶端元件可以使用狀態(state)、效果(effects)和事件監聽器(event listeners)，這意味著它們可以給使用者即時的回饋，並更新使用者介面。
+- **互動性**：客戶端元件可以使用狀態 (state)、效果 (effects) 和事件監聽器 (event listeners)，這意味著它們可以給使用者即時的回饋，並更新使用者介面。
 - **瀏覽器 API**：客戶端元件可以訪問瀏覽器 API，例如[地理位置](https://developer.mozilla.org/docs/Web/API/Geolocation_API)或[本地儲存](https://developer.mozilla.org/docs/Web/API/Window/localStorage)。
 
 ### 在 Next.js 中使用客戶端元件
