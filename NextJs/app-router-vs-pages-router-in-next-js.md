@@ -131,7 +131,7 @@ Would you like to use Tailwind CSS? No / Yes
 // 是否使用 Tailwind CSS
 
 Would you like to use `src/` directory? No / Yes
-// 是否在 /app 外加一層 src 資料夾
+// 是否外加一層 src 資料夾 (會新增一個 src 資料夾，除了 public 資料夾外，所有檔案都會放在 src 資料夾底下)
 
 Would you like to use App Router? (recommended) No / Yes
 // 是否使用 App Router
