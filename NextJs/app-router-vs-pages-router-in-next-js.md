@@ -702,7 +702,7 @@ export default function Counter() {
 
 這意味著客戶端元件的 JavaScript 包將被下載並解析。一旦包準備就緒，React 將使用 [RSC Payload](https://nextjs.org/docs/app/building-your-application/rendering/server-components#what-is-the-react-server-component-payload-rsc) 來調和客戶端元件和伺服器元件樹，並更新 DOM。
 
-# Routing——路由使用差異
+# Routing——路由差異
 
 _（撰寫中）_
 
