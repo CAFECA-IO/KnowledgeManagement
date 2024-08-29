@@ -486,26 +486,26 @@ export default async function Page() {
 - **SSG**：通過使用沒有運行時依賴的伺服器元件來實現。（簡單來說，就是如果伺服器元件在構建頁面時不需要依賴於運行時才有的資料或條件，那麼 Next.js 就能夠在構建階段生成這個頁面，並在頁面發佈後不再需要動態生成。）
 - **ISR**：使用 `fetch` 並指定 `revalidate` 選項來實現。
 
-## App Router 渲染概念
+# Rendering——App Router 渲染概念
 
 雖然前面講述 App Router 處理 4 種渲染的方式，但在 App Router 在渲染的概念上，已經不用先前的 CSR、SSR、SSG、ISR 來說明（那主要是 Page Router 在使用的概念），而是以伺服器元件（React Server Component, RSC）和客戶端元件（Client Component）來說明。
 
-### 1. 伺服器元件（React Server Component, RSC）
+## 1. 伺服器元件（React Server Component, RSC）
 
 _（撰寫中）_
 
-### 2. 客戶端元件（Client Component）
+## 2. 客戶端元件（Client Component）
 
 客戶端元件允許你撰寫可互動的使用者介面，這些介面是[在伺服器上預先渲染](https://github.com/reactwg/server-components/discussions/4)的，並且可以使用客戶端的 JavaScript 在瀏覽器中執行。
 
-#### _客戶端渲染的好處_
+### 客戶端渲染的好處
 
 在客戶端執行渲染有幾個好處，包括：
 
 - **互動性**：客戶端元件可以使用狀態(state)、效果(effects)和事件監聽器(event listeners)，這意味著它們可以給使用者即時的回饋，並更新使用者介面。
 - **瀏覽器 API**：客戶端元件可以訪問瀏覽器 API，例如[地理位置](https://developer.mozilla.org/docs/Web/API/Geolocation_API)或[本地儲存](https://developer.mozilla.org/docs/Web/API/Window/localStorage)。
 
-#### _在 Next.js 中使用客戶端元件_
+### 在 Next.js 中使用客戶端元件
 
 要使用客戶端元件，你可以在檔案頂部引入 React 的[`"use client"`指令](https://react.dev/reference/react/use-client)，放在所有匯入語句之前。
 
@@ -540,11 +540,11 @@ export default function Counter() {
 >
 > 但是，`"use client"` 並不需要在每個需要在客戶端渲染的元件中定義。只要你定義了邊界，所有子元件和匯入其中的模組都會被視為客戶端包的一部分。
 
-#### _客戶端元件如何被渲染？_
+### 客戶端元件如何被渲染？
 
 在 Next.js 中，客戶端元件的渲染方式取決於請求是屬於**整頁載入**（例如首次訪問應用程式或由瀏覽器重新整理觸發的頁面載入）或者是**後續的導航**。
 
-**・整頁載入（Full page load）:**
+#### 整頁載入（Full page load）:
 
 為了優化初次頁面載入，Next.js 將使用 React 的 API 在伺服器上為客戶端元件和伺服器元件渲染靜態 HTML 預覽。這意味著，當使用者首次訪問你的應用程式時，他們將立即看到頁面的內容，而無需等待客戶端下載、解析和執行客戶端元件的 JavaScript 包。
 
@@ -563,7 +563,7 @@ export default function Counter() {
 >
 > Hydration 是將事件監聽器附加到 DOM 的過程，使靜態 HTML 變得可互動。Hydration 的背後是使用 [`hydrateRoot`](https://react.dev/reference/react-dom/client/hydrateRoot) React API 完成的。
 
-**・後續導航（Subsequent Navigations）:**
+#### 後續導航（Subsequent Navigations）:
 
 在後續導航中，客戶端元件完全在客戶端渲染，無需伺服器渲染的 HTML。
 
