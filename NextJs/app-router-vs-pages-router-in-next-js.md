@@ -563,11 +563,11 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 >
 > 了解更多關於 [完整路由快取](https://nextjs.org/docs/app/building-your-application/caching#full-route-cache) 和 [資料快取](https://nextjs.org/docs/app/building-your-application/caching#data-cache) 的資訊。
 
-（🌰 的書籤）
+##### 切換到動態渲染 (Switching to Dynamic Rendering)：
 
-切換到動態渲染：
+在渲染過程中，如果發現 [動態函數](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-functions) 或未快取資料請求，Next.js 將切換到動態渲染整個路由。
 
-在渲染過程中，如果發現 [動態函數](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-functions) 或未快取資料請求，Next.js 將切換到動態渲染整個路由。下表總結了動態函數和資料快取如何影響路由是靜態還是動態渲染：
+下表總結了動態函數和資料快取如何影響路由是靜態還是動態渲染：
 
 | 動態函數 | 資料   | 路由     |
 | -------- | ------ | -------- |
@@ -580,9 +580,9 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 
 作為開發者，我們不需要在靜態和動態渲染之間進行選擇，因為 Next.js 將根據所使用的功能和 API 自動選擇每個路由的最佳渲染策略。我們可以選擇何時 [快取](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching) 或 [重新驗證特定資料](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration)，並且我們可以選擇 [串流](https://nextjs.org/docs/app/building-your-application/rendering/server-components#streaming) UI 的部分內容。
 
-動態函數：
+##### 動態函數 (Dynamic Functions)：
 
-動態函數依賴於僅在請求時才能知道的資訊，例如使用者的 cookies、當前請求的標頭或 URL 的搜尋參數。在 Next.js 中，這些動態 API 包括：
+動態函數依賴於只能在請求時才能知道的資訊，例如使用者的 cookies、當前請求的標頭或 URL 的搜尋參數。在 Next.js 中，這些動態 API 包括：
 
 - [`cookies()`](https://nextjs.org/docs/app/api-reference/functions/cookies)
 - [`headers()`](https://nextjs.org/docs/app/api-reference/functions/headers)
@@ -590,19 +590,17 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 - [`unstable_after()`](https://nextjs.org/docs/app/api-reference/functions/unstable_after)
 - [`searchParams` prop](https://nextjs.org/docs/app/api-reference/file-conventions/page#searchparams-optional)
 
-使用任何這些函數將使整個路由在請求時進入動態渲染模式。
+使用這些函數其中的任何一個，都會在請求時，讓整個路由進入動態渲染模式。
+
+（🌰 書籤）
 
 #### 3. 串流
 
 _（圖一）_
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d06fa267-5063-4931-8ade-fa45a882a2e2/76845164-0ccf-4c15-8071-7b470c2d4f94/image.png)
-
 串流使我們可以逐步從伺服器渲染 UI。工作被拆分成多個區塊，並在準備好時逐步串流到客戶端。這使得使用者可以在整個內容渲染完成之前立即看到部分頁面內容。
 
 _（圖二）_
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d06fa267-5063-4931-8ade-fa45a882a2e2/486d153f-d0b5-40ae-a4d2-75530f1ab35b/image.png)
 
 串流是 Next.js App Router 的內建功能。這有助於提高初次頁面載入效能，以及依賴較慢資料獲取的 UI，這些資料會阻塞整個路由的渲染。例如，產品頁面上的評論。
 
@@ -665,12 +663,12 @@ export default function Counter() {
 在伺服器上：
 
 1. React 將伺服器元件渲染為一種稱為 [**RSC Payload**](https://nextjs.org/docs/app/building-your-application/rendering/server-components#what-is-the-react-server-component-payload-rsc) 的特殊資料格式，其中包含對客戶端元件的引用。
-2. Next.js 使用 RSC 負載和客戶端元件的 JavaScript 指令，在伺服器上渲染路徑的 **HTML**。
+2. Next.js 使用 RSC Payload 和客戶端元件的 JavaScript 指令，在伺服器上渲染路徑的 **HTML**。
 
 接著，在客戶端：
 
 1. 使用 HTML 立即顯示快速但不可互動的初始預覽。
-2. 使用 React 伺服器元件負載來調和客戶端元件和伺服器元件樹，並更新 DOM。
+2. 使用 RSC Payload 來調和客戶端元件和伺服器元件樹，並更新 DOM。
 3. 使用 JavaScript 指令來 [hydrate](https://react.dev/reference/react-dom/client/hydrateRoot) 客戶端元件，讓它們的使用者介面可互動。
 
 > 補充：什麼是 Hydration？
@@ -681,7 +679,7 @@ export default function Counter() {
 
 在後續導航中，客戶端元件完全在客戶端渲染，無需伺服器渲染的 HTML。
 
-這意味著客戶端元件的 JavaScript 包將被下載並解析。一旦包準備就緒，React 將使用 [RSC 負載](https://nextjs.org/docs/app/building-your-application/rendering/server-components#what-is-the-react-server-component-payload-rsc)來調和客戶端元件和伺服器元件樹，並更新 DOM。
+這意味著客戶端元件的 JavaScript 包將被下載並解析。一旦包準備就緒，React 將使用 [RSC Payload](https://nextjs.org/docs/app/building-your-application/rendering/server-components#what-is-the-react-server-component-payload-rsc) 來調和客戶端元件和伺服器元件樹，並更新 DOM。
 
 # Routing——路由使用差異
 
