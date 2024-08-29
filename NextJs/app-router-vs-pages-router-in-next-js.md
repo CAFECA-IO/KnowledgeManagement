@@ -145,9 +145,7 @@ What import alias would you like configured? @/*
 
 在 `Would you like to use App Router? (recommended) No / Yes` 這個步驟選擇 Yes，即可建立 App Router 專案；若選擇 No 則會建立 Page Router 專案。
 
-初始專案架構主要分成以下三大類，並且如果是選擇使用 App Router 來建立專案的話，就會預設出現一個 `app` 資料夾；而如果使用 Page Router 就會預設出現一個 `pages` 資料夾。
-
-選擇 App Router 的話，初始專案專案結構如下：
+初始專案架構主要分成以下三大類：（選擇建立 App Router 的情況）
 
 - `app` 資料夾：放置 components、pages 與 api 等檔案
   - layout.tsx：在多個頁面之間定義共用 UI，其狀態將會被保存，如：nav、header、footer 等元件
@@ -157,7 +155,11 @@ What import alias would you like configured? @/*
   - 需要引入 /public/next.svg 檔案時，路徑可直接指向 /next.svg
 - 各類設定檔：包含 next.config.js、tsconfig.json、package.json 等用於設定專案配置的檔案
 
-而選擇 Page Router 的話，也是會類似上述的資料夾結構，但原先的 `app` 資料夾會改為 `pages` 資料夾。在 `pages` 資料夾底下會放置所有頁面元件（每個檔案會成為一個路由），同時我們會特別建立一個 `components` 資料夾專門用來放置非頁面元件。這個 `components` 資料夾是我們自己建立的，並不是 Next.js 預設的資料夾，我們通常會放在 `/src` 資料夾底下。
+注意：如果是選擇使用 App Router 來建立專案的話，就會預設出現一個 `app` 資料夾；而如果使用 Page Router 就會預設出現一個 `pages` 資料夾。
+
+所以如果是選擇建立 Page Router 的話，也是會出現類似上述的資料夾結構。只是就不會有 `app` 資料夾，而是會出現 `pages` 資料夾。
+
+在 `pages` 資料夾內會用來放置所有頁面元件（每個檔案會成為一個路由），同時我們會特別建立一個 `components` 資料夾專門用來放置非頁面元件。這個 `components` 資料夾是我們自己建立的，並不是 Next.js 預設的資料夾，我們通常會放在 `/src` 資料夾底下。
 
 這裡提供我們團隊的資料夾結構慣例：
 
