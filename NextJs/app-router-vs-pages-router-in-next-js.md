@@ -496,7 +496,7 @@ _（撰寫中）_
 
 ## 2. 客戶端元件（Client Component）
 
-客戶端元件允許你撰寫可互動的使用者介面，這些介面是[在伺服器上預先渲染](https://github.com/reactwg/server-components/discussions/4)的，並且可以使用客戶端的 JavaScript 在瀏覽器中執行。
+客戶端元件允許我們撰寫可互動的使用者介面，這些介面是[在伺服器上預先渲染](https://github.com/reactwg/server-components/discussions/4)的，並且可以使用客戶端的 JavaScript 在瀏覽器中執行。
 
 ### 客戶端渲染的好處
 
@@ -507,7 +507,7 @@ _（撰寫中）_
 
 ### 在 Next.js 中使用客戶端元件
 
-要使用客戶端元件，你可以在檔案頂部引入 React 的[`"use client"`指令](https://react.dev/reference/react/use-client)，放在所有匯入語句之前。
+要使用客戶端元件，我們可以在檔案頂部引入 React 的[`"use client"`指令](https://react.dev/reference/react/use-client)，放在所有匯入語句之前。
 
 `"use client"` 用於在伺服器端元件和客戶端元件之間建立[界限](https://nextjs.org/docs/app/building-your-application/rendering#network-boundary)。這意味著在檔案中定義 `"use client"` 後，所有匯入其中的其他模組，包括子元件，都會被視為客戶端包的一部分。
 
@@ -530,15 +530,15 @@ export default function Counter() {
 }
 ```
 
-下圖顯示，如果未定義 `"use client"` 指令，在巢狀元件 (`toggle.js`) 中使用 `onClick` 和 `useState` 將會導致錯誤。這是因為預設情況下，應用程式路由中的所有元件都是伺服器元件，這些 API 無法使用。通過在 `toggle.js` 中定義 `"use client"` 指令，你可以告訴 React 進入客戶端邊界，這些 API 在此可用。
+下圖顯示，如果未定義 `"use client"` 指令，在巢狀元件 (`toggle.js`) 中使用 `onClick` 和 `useState` 將會導致錯誤。這是因為預設情況下，應用程式路由中的所有元件都是伺服器元件，這些 API 無法使用。通過在 `toggle.js` 中定義 `"use client"` 指令，可以告訴 React 進入客戶端邊界，這些 API 在此可用。
 
 ![image](https://github.com/user-attachments/assets/328123ef-503e-45bb-b9c8-35d583a49c5a)
 
 > 補充：定義多個 use client 入口點
 >
-> 你可以在 React 元件樹中定義多個 `"use client"` 入口點。這允許你將應用程式分割為多個客戶端包(client bundles)。
+> 我們可以在 React 元件樹中定義多個 `"use client"` 入口點。這樣就可將應用程式分割為多個客戶端包(client bundles)。
 >
-> 但是，`"use client"` 並不需要在每個需要在客戶端渲染的元件中定義。只要你定義了邊界，所有子元件和匯入其中的模組都會被視為客戶端包的一部分。
+> 但是，`"use client"` 並不需要在每個需要在客戶端渲染的元件中定義。只要定義了邊界，所有子元件和匯入其中的模組都會被視為客戶端包的一部分。
 
 ### 客戶端元件如何被渲染？
 
@@ -546,7 +546,7 @@ export default function Counter() {
 
 #### 整頁載入（Full page load）:
 
-為了優化初次頁面載入，Next.js 將使用 React 的 API 在伺服器上為客戶端元件和伺服器元件渲染靜態 HTML 預覽。這意味著，當使用者首次訪問你的應用程式時，他們將立即看到頁面的內容，而無需等待客戶端下載、解析和執行客戶端元件的 JavaScript 包。
+為了優化初次頁面載入，Next.js 將使用 React 的 API 在伺服器上為客戶端元件和伺服器元件渲染靜態 HTML 預覽。這意味著，當使用者首次訪問我們的應用程式時，他們將立即看到頁面的內容，而無需等待客戶端下載、解析和執行客戶端元件的 JavaScript 包。
 
 在伺服器上：
 
