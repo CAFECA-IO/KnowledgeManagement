@@ -73,31 +73,33 @@ React 可透過「搭建後端 Server + 處理 Hydration + Webpack 打包配置�
 
 而根據版本不同，Next.js 提供兩種管理頁面路由的方式，分別是舊版本適用的 Pages Router 以及 v13 後推出的 App Router，兩者差異在於：
 
-- Pages Router
+Pages Router :
 
-  1. 定義頁面層級的路由
-  2. 所有元件為 React Client Component（客戶端元件）
-  3. 只能使用 Next.js 提供的預設規則，如：檔案名稱即為路徑
+1. 定義頁面層級的路由
+2. 所有元件為 React Client Component（客戶端元件）
+3. 只能使用 Next.js 提供的預設規則，如：檔案名稱即為路徑
 
-- App Router
-  1. 定義應用程式層級的路由
-  2. 所有元件預設為 React Server Component（伺服器端元件）
-  3. 可自定義路由規則，如：使用正規表達式匹配特定路徑
+App Router :
+
+1. 定義應用程式層級的路由
+2. 所有元件預設為 React Server Component（伺服器端元件）
+3. 可自定義路由規則，如：使用正規表達式匹配特定路徑
 
 如上所言，在 App Router 中所有元件預設為 React Server Component（RSC），意思是由伺服器將 React Component 準備好，再傳給 Client 顯示在畫面上。
 
 而 RSC 的優缺點如下：
 
-- 優點
+優點:
 
-  1. 整合後端操作，如存取資料庫（DB）、讀取檔案（File System）
-  2. 降低資料間的依賴關係，改善請求瀑布流（Waterfall）導致的效能問題
-  3. 降低 JS Bundle Size 以提升頁面效能
+1. 整合後端操作，如存取資料庫（DB）、讀取檔案（File System）
+2. 降低資料間的依賴關係，改善請求瀑布流（Waterfall）導致的效能問題
+3. 降低 JS Bundle Size 以提升頁面效能
 
-- 缺點
-  1. 無法使用 React Hooks
-  2. 無法使用瀏覽器 API
-  3. 無法操作 DOM 事件監聽
+缺點:
+
+1. 無法使用 React Hooks
+2. 無法使用瀏覽器 API
+3. 無法操作 DOM 事件監聽
 
 面對上述缺點，Next.js 可依照使用情境不同，將元件定義為 Server Component 或 Client Component。舉例來說，當某個元件需要使用 Hooks 管理時，可透過在程式碼開頭加上 'use client' 來標示元件類型，該元件底下的子元件也會自動視為 Client Component。
 
@@ -141,17 +143,25 @@ What import alias would you like configured? @/*
 // alias 預設使用 @ 是否修改
 ```
 
-這裡先選擇使用 App Router ，建立完成後，初始專案架構主要分成以下三大類：
+在 `Would you like to use App Router? (recommended) No / Yes` 這個步驟選擇 Yes，即可建立 App Router 專案；若選擇 No 則會建立 Page Router 專案。
 
-- app：放置 components、pages 與 api 等檔案
-  - layout.tsx：在多個頁面之間定義共用 UI，其狀態將會被保存，如：nav、header、footer 等元
+初始專案架構主要分成以下三大類，並且如果是選擇使用 App Router 來建立專案的話，就會預設出現一個 `app` 資料夾；而如果使用 Page Router 就會預設出現一個 `pages` 資料夾。
+
+選擇 App Router 的話，初始專案專案結構如下：
+
+- `app` 資料夾：放置 components、pages 與 api 等檔案
+  - layout.tsx：在多個頁面之間定義共用 UI，其狀態將會被保存，如：nav、header、footer 等元件
   - page.tsx：在資料夾底下需包含 page.tsx 檔案，才會被定義為一個 route segment，如：app/blog/page.tsx
   - globals.css：定義全域樣式
-- public：放置靜態檔案，如圖片等
+- `public` 資料夾：放置靜態檔案，如圖片等
   - 需要引入 /public/next.svg 檔案時，路徑可直接指向 /next.svg
-- 設定檔：包含 next.config.js、tsconfig.json、package.json 等用於設定專案配置的檔案
+- 各類設定檔：包含 next.config.js、tsconfig.json、package.json 等用於設定專案配置的檔案
 
-## Page Router 資料夾結構
+而選擇 Page Router 的話，也是會類似上述的資料夾結構，但原先的 `app` 資料夾會改為 `pages` 資料夾。在 `pages` 資料夾底下會放置所有頁面元件（每個檔案會成為一個路由），同時我們會特別建立一個 `components` 資料夾專門用來放置非頁面元件。
+
+接下來會介紹兩個路由系統的資料夾內部結構比較。
+
+## Page Router 資料夾結構與對應路由
 
 ```
 └── pages
@@ -179,7 +189,7 @@ What import alias would you like configured? @/*
 
 （圖片來源：[官方文件](https://nextjs.org/blog/layouts-rfc#how-routing-currently-works)）
 
-## App Router 資料夾結構
+## App Router 資料夾結構與對應路由
 
 ```
 └── app
@@ -204,7 +214,7 @@ What import alias would you like configured? @/*
     └── page.tsx
 ```
 
-文件目錄與對應的頁面路由如下：
+資料夾與對應的頁面路由如下：
 
 - `app/page.tsx` → `/`
 - `app/login/page.tsx` → `/login`
