@@ -492,11 +492,11 @@ export default async function Page() {
 
 ## 1. 伺服器元件（React Server Component, RSC）
 
-React 伺服器元件讓我們能撰寫可以在伺服器上渲染和選擇性快取的 UI。在 Next.js 中，渲染工作進一步被分割成路由段，以實現串流和部分渲染，並且有三種不同的伺服器渲染策略：
+React 伺服器元件讓我們能撰寫可以在伺服器上渲染和選擇性快取的 UI。在 Next.js 中，渲染工作進一步被分割成**路由段(route segments)**，以實現串流和部分渲染，並且有三種不同的伺服器渲染策略：
 
-- [靜態渲染](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default)
-- [動態渲染](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-rendering)
-- [串流](https://nextjs.org/docs/app/building-your-application/rendering/server-components#streaming)
+- [靜態渲染 (Static Rendering)](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default)
+- [動態渲染 (Dynamic Rendering)](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-rendering)
+- [串流 (Streaming)](https://nextjs.org/docs/app/building-your-application/rendering/server-components#streaming)
 
 ### 伺服器渲染的優勢
 
@@ -555,15 +555,15 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 
 動態渲染適用於具有個人化資料的路由，或者具有僅在請求時才能知道的資訊，例如 cookies 或 URL 的搜尋參數。
 
-> 使用快取資料的動態路由
+> 使用快取資料的動態路由 (Dynamic Routes with Cached Data)
 >
 > 大多數網站的路由既不是完全靜態的也不是完全動態的——它們是處於一個光譜中。例如，一個電子商務頁面，使用快取的產品資料並定期重新驗證，但同時也具有未快取的個人化客戶資料。
 >
-> 在 Next.js 中，我們可以動態渲染包含快取和未快取資料的路由。這是因為 RSC Payload 和資料是分開快取的。這讓我們可以選擇動態渲染，並且不用擔心在請求時獲取所有資料對效能的影響。
+> 在 Next.js 中，我們可以動態渲染包含快取和未快取資料的路由。這是因為 RSC Payload 和資料(data)是分開快取的。這讓我們可以選擇動態渲染，並且不用擔心在請求時獲取所有資料對效能的影響。
 >
 > 了解更多關於 [完整路由快取](https://nextjs.org/docs/app/building-your-application/caching#full-route-cache) 和 [資料快取](https://nextjs.org/docs/app/building-your-application/caching#data-cache) 的資訊。
 
-##### 切換到動態渲染 (Switching to Dynamic Rendering)：
+**_切換到動態渲染 (Switching to Dynamic Rendering)：_**
 
 在渲染過程中，如果發現 [動態函數](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-functions) 或未快取資料請求，Next.js 將切換到動態渲染整個路由。
 
@@ -580,7 +580,7 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 
 作為開發者，我們不需要在靜態和動態渲染之間進行選擇，因為 Next.js 將根據所使用的功能和 API 自動選擇每個路由的最佳渲染策略。我們可以選擇何時 [快取](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching) 或 [重新驗證特定資料](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration)，並且我們可以選擇 [串流](https://nextjs.org/docs/app/building-your-application/rendering/server-components#streaming) UI 的部分內容。
 
-##### 動態函數 (Dynamic Functions)：
+**_動態函數 (Dynamic Functions)：_**
 
 動態函數依賴於只能在請求時才能知道的資訊，例如使用者的 cookies、當前請求的標頭或 URL 的搜尋參數。在 Next.js 中，這些動態 API 包括：
 
