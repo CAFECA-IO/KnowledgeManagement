@@ -664,7 +664,7 @@ export default function Counter() {
 
 在伺服器上：
 
-1. React 將伺服器元件渲染為一種稱為 [**React 伺服器元件有效負載 (RSC Payload)**](https://nextjs.org/docs/app/building-your-application/rendering/server-components#what-is-the-react-server-component-payload-rsc) 的特殊資料格式，其中包含對客戶端元件的引用。
+1. React 將伺服器元件渲染為一種稱為 [**RSC Payload**](https://nextjs.org/docs/app/building-your-application/rendering/server-components#what-is-the-react-server-component-payload-rsc) 的特殊資料格式，其中包含對客戶端元件的引用。
 2. Next.js 使用 RSC 負載和客戶端元件的 JavaScript 指令，在伺服器上渲染路徑的 **HTML**。
 
 接著，在客戶端：
