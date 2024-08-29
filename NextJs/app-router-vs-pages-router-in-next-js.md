@@ -590,11 +590,11 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 
 ### 伺服器渲染策略 -- 3. 串流
 
-_（圖一）_
+![image](https://github.com/user-attachments/assets/e812544d-3f50-4ba0-af6e-3a3a37f80321)
 
 串流使我們可以逐步從伺服器渲染 UI。工作被拆分成多個區塊，並在準備好時逐步串流到客戶端。這使得使用者可以在整個內容渲染完成之前立即看到部分頁面內容。
 
-_（圖二）_
+![image](https://github.com/user-attachments/assets/2e0e5c4d-d9f4-4154-87aa-f9018cf1147c)
 
 串流是 Next.js App Router 的內建功能。這有助於提高初次頁面載入效能，以及依賴較慢資料獲取的 UI，這些資料會阻塞整個路由的渲染。例如，產品頁面上的評論。
 
