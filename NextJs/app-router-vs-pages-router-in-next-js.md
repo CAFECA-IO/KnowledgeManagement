@@ -157,9 +157,26 @@ What import alias would you like configured? @/*
   - 需要引入 /public/next.svg 檔案時，路徑可直接指向 /next.svg
 - 各類設定檔：包含 next.config.js、tsconfig.json、package.json 等用於設定專案配置的檔案
 
-而選擇 Page Router 的話，也是會類似上述的資料夾結構，但原先的 `app` 資料夾會改為 `pages` 資料夾。在 `pages` 資料夾底下會放置所有頁面元件（每個檔案會成為一個路由），同時我們會特別建立一個 `components` 資料夾專門用來放置非頁面元件。
+而選擇 Page Router 的話，也是會類似上述的資料夾結構，但原先的 `app` 資料夾會改為 `pages` 資料夾。在 `pages` 資料夾底下會放置所有頁面元件（每個檔案會成為一個路由），同時我們會特別建立一個 `components` 資料夾專門用來放置非頁面元件。這個 `components` 資料夾是我們自己建立的，並不是 Next.js 預設的資料夾，我們通常會放在 `/src` 資料夾底下。
 
-接下來會介紹兩個路由系統的資料夾內部結構比較。
+這裡提供我們團隊的資料夾結構慣例：
+
+```
+└── public
+└── src
+    ├── components
+    ├── constants
+    ├── contexts
+    ├── interfaces
+    ├── lib
+    ├── locales
+    ├── pages
+    ├── styles
+    └── ... other folders
+└── config files
+```
+
+接下來會介紹兩個路由系統所提供的資料夾 `app` 與 `pages` 各別所對應的路由定義規則。
 
 ## Page Router 資料夾結構與對應路由
 
@@ -238,7 +255,7 @@ What import alias would you like configured? @/*
 客戶端渲染 (CSR) 是指瀏覽器下載一個最小化的 HTML 頁面和必要的 JavaScript，然後在客戶端渲染頁面。頁面是在初始 HTML 載入後在瀏覽器中動態渲染的。
 
 步驟大概像這樣：
-Client（瀏覽器）第一次發送 Request 給 Server => Server 回傳只有容器不含內容的 HTML 檔 => 再由瀏覽器執行 JavaScript 動態產生資料 => 最後將資料渲染到畫面上。（因此第一次渲染較為費時，而只有容器沒有內容的原始碼也不利於 SEO）
+Client（瀏覽器）第一次發送 Request 給 Server → Server 回傳只有容器不含內容的 HTML 檔 → 再由瀏覽器執行 JavaScript 動態產生資料 → 最後將資料渲染到畫面上。（因此第一次渲染較為費時，而只有容器沒有內容的原始碼也不利於 SEO）
 
 **主要特徵：**
 
