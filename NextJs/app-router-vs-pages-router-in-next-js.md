@@ -559,7 +559,7 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 >
 > 了解更多關於 [完整路由快取](https://nextjs.org/docs/app/building-your-application/caching#full-route-cache) 和 [資料快取](https://nextjs.org/docs/app/building-your-application/caching#data-cache) 的資訊。
 
-#### 切換到動態渲染 (Switching to Dynamic Rendering)：
+#### 切換到動態渲染：
 
 在渲染過程中，如果發現 [動態函數](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-functions) 或未快取資料請求，Next.js 將切換到動態渲染整個路由。
 
@@ -572,13 +572,13 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 | 否       | 未快取 | 動態渲染 |
 | 是       | 未快取 | 動態渲染 |
 
-在上表中，若要使路由完全靜態，所有資料必須被快取。然而，我們可以擁有一個動態渲染的路由，該路由使用快取和未快取的資料獲取。
+在上表中，若要使路由完全靜態，所有資料必須被快取。反之，我們可以擁有一個動態渲染的路由，該路由使用快取和未快取的資料獲取。
 
 作為開發者，我們不需要在靜態和動態渲染之間進行選擇，因為 Next.js 將根據所使用的功能和 API 自動選擇每個路由的最佳渲染策略。我們可以選擇何時 [快取](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching) 或 [重新驗證特定資料](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration)，並且我們可以選擇 [串流](https://nextjs.org/docs/app/building-your-application/rendering/server-components#streaming) UI 的部分內容。
 
-#### 動態函數 (Dynamic Functions)：
+#### 動態函數：
 
-動態函數依賴於只能在請求時才能知道的資訊，例如使用者的 cookies、當前請求的標頭或 URL 的搜尋參數。在 Next.js 中，這些動態 API 包括：
+動態函數 (Dynamic Functions) 依賴於只能在請求時才能知道的資訊，例如使用者的 cookies、當前請求的標頭或 URL 的搜尋參數。在 Next.js 中，這些動態 API 包括：
 
 - [`cookies()`](https://nextjs.org/docs/app/api-reference/functions/cookies)
 - [`headers()`](https://nextjs.org/docs/app/api-reference/functions/headers)
@@ -646,7 +646,7 @@ export default function Counter() {
 >
 > 但是，`"use client"` 並不需要在每個需要在客戶端渲染的元件中定義。只要定義了邊界，所有子元件和匯入其中的模組都會被視為客戶端包的一部分。
 
-### 客戶端元件如何被渲染？
+### 客戶端元件如何渲染？
 
 在 Next.js 中，客戶端元件的渲染方式取決於請求是屬於**整頁載入**（例如首次訪問應用程式或由瀏覽器重新整理觸發的頁面載入）或者是**後續的導航**。
 
