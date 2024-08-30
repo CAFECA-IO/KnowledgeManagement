@@ -732,7 +732,7 @@ export default function Counter() {
 - **App Router**：支援內建佈局和模板，允許巢狀佈局和可重用的模板應用於不同路由。
 - **Page Router**：沒有支援內建的佈局和模板，需要在每個頁面手動實作佈局元件。
 
-**優勢**：**App Router** 擁有內建支援佈局和模板的優勢，減少程式碼的重複性和簡化佈局管理。（但如果頁面的佈局變化不大，這方面的優勢就不明顯）
+說明：**App Router** 擁有內建支援佈局和模板的優勢，減少程式碼的重複性和簡化佈局管理。（但如果頁面的佈局變化不大，這方面的優勢就不明顯）
 
 像是 App Router 可以透過特殊檔案  `layout.tsx`  更簡單地實現 persistent layout。
 
@@ -750,35 +750,35 @@ export default function Counter() {
 - **App Router**：透過巢狀錯誤邊界支援進階錯誤處理，允許對應用程式的不同部分進行更精細的錯誤控制。
 - **Page Router**：錯誤處理通常涉及建立自訂的 `_error.js` 頁面來進行全域錯誤處理，或使用 `getInitialProps` 在頁面層級捕獲錯誤。
 
-**優勢**：**App Router** 提供更細粒度的錯誤處理，讓開發人員可以將錯誤隔離到特定的路由或元件。
+說明：**App Router** 提供更細粒度的錯誤處理，讓開發人員可以將錯誤隔離到特定的路由或元件。
 
 ## 5. **載入 UI 和串流（Loading UI and Streaming）**
 
 - **App Router**：提供對載入狀態和串流的進階支援，透過允許部分 UI 漸進式載入來改善使用者體驗。
 - **Page Router**：載入狀態通常是使用 React 的 `useState` 或 `useEffect` 手動處理的。沒有內建的串流支援。
 
-**優勢**：**App Router** 更適合需要複雜載入策略和串流支援的應用程式。
+說明：**App Router** 更適合需要複雜載入策略和串流支援的應用程式。
 
 ## 6. **重新導向（Redirecting）**
 
 - **App Router**：由於其靈活的路由結構，支援更複雜的重新導向邏輯。可以針對每個路由或一組路由配置重新導向。
 - **Page Router**：重新導向通常在 `next.config.js` 中使用 `redirects` 配置，或在個別頁面元件內部處理。
 
-**優勢**：**App Router** 提供更多重新導向的彈性和控制。
+說明：**App Router** 提供更多重新導向的彈性和控制。
 
 ## 7. **路由分組（Route Groups）**
 
 - **App Router**：允許分組路由以便更好地組織和共享路由配置。
 - **Page Router**：不支援路由分組。路由是單獨定義在 `/pages` 目錄內。
 
-**優勢**：**App Router** 在將路由分組以便共享配置方面有明顯優勢。
+說明：**App Router** 在將路由分組以便共享配置方面有明顯優勢。
 
 ## 8. **專案組織（Project Organization）**
 
 - **App Router**：鼓勵更模組化和有組織的檔案結構，將相關的元件、路由和佈局組合在一起。
 - **Page Router**：具有較扁平的檔案結構，所有路由都在 `/pages` 目錄中定義。
 
-**優勢**：**App Router** 更適合大型應用程式的組織。
+說明：**App Router** 更適合大型應用程式的組織。
 
 ## 9. **動態路由（Dynamic Routes）**
 
@@ -792,21 +792,21 @@ export default function Counter() {
 - **App Router**：原生支援平行路由，允許同時渲染多個路由。
 - **Page Router**：不直接支援平行路由；要實現類似效果，需要更複雜的自訂實作。
 
-**優勢**：**App Router** 原生支援平行路由，對需要同時渲染多個路由的複雜應用程式有利。
+說明：**App Router** 原生支援平行路由，對需要同時渲染多個路由的複雜應用程式有利。
 
 ## 11. **攔截路由（Intercepting Routes）**
 
 - **App Router**：允許攔截路由以進行自訂邏輯或處理。
 - **Page Router**：沒有直接的路由攔截概念。類似的功能需要透過中介軟體或自訂元件手動實作。
 
-**優勢**：**App Router** 提供更多彈性，具有內建的路由攔截功能。
+說明：**App Router** 提供更多彈性，具有內建的路由攔截功能。
 
 ## 12. **路由處理程式（Route Handlers）**
 
 - **App Router**：支援自訂路由處理程式，可以管理路由或 HTTP 方法的特定邏輯。
 - **Page Router**：不直接支援路由處理程式；處理邏輯通常嵌入在頁面元件中。
 
-**優勢**：**App Router** 提供更細粒度的控制，使用路由處理程式。
+說明：**App Router** 提供更細粒度的控制，使用路由處理程式。
 
 ## 13. **中介軟體（Middleware）**
 
@@ -820,7 +820,7 @@ export default function Counter() {
 - **App Router**：原生支援國際化 (i18n)，使處理多語言內容更容易。
 - **Page Router**：也支援國際化，但通常需要在 `next.config.js` 中進行更多手動設置。
 
-**優勢**：**App Router** 在國際化方面可能提供更整合的體驗。
+說明：**App Router** 在國際化方面可能提供更整合的體驗。
 
 # Data Fetching——資料獲取差異
 
