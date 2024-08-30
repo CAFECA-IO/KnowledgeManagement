@@ -389,17 +389,16 @@ npm install -D lint-staged
 
 ```jsx
 {
-  "/*.+(js|jsx|ts|tsx)": [
-  "./node_modules/.bin/eslint --fix",
-  "./node_modules/.bin/prettier --write",
-  "git add"
+  "**/*.+(js|jsx|ts|tsx)": [
+    "./node_modules/.bin/prettier --write",
+    "./node_modules/.bin/eslint --fix"
   ],
-  "/*.+(css)": [
-  "./node_modules/.bin/eslint/tailwindcss --fix",
-  "./node_modules/.bin/prettier --write",
-  "git add"
+  "**/*.+(css)": [
+    "./node_modules/.bin/prettier --write",
+    "./node_modules/.bin/eslint/tailwindcss --fix"
   ]
 }
+
 ```
 
 在 package.json 加上 script:
@@ -702,6 +701,7 @@ module.exports = {
   // 讓 eslint 知道我們在使用 jest ，這樣在跑 test.js 時 eslint 就不會報 jest 關鍵字的錯誤了
   env: { browser: true, node: true, es6: true, jest: true },
 };
+
 
 ```
 
