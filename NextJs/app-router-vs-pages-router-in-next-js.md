@@ -184,6 +184,14 @@ What import alias would you like configured? @/*
 
 ## Page Router 資料夾結構與對應路由
 
+在 App Router 推出之前，都是遵循 Pages Router 的規則來定義路由：專案中會有一個 pages 資料夾，Next 會根據裡面的  `.js/.jsx/.ts/.tsx`  檔案檔名，或是資料夾中的  `index.tsx`  生成 route segment。
+
+比方說，`/pages/about.tsx` 定義的 UI 就會顯示在 /about 中；`/pages/notes/index.tsx` 定義的 UI 就會顯示在 /notes 中；`/pages/blog/first-post.tsx` 定義的 UI 就會顯示在 /blog/first-post 中。
+
+這樣的路由定義模式，會限制專案的檔案結構，因為頁面檔案需統一放在 pages 資料夾中，而與這個 route 相關的 `/components`、`/utils`、`/lib` 等必須放在 pages 資料夾外。
+
+以部落格網站做範例：
+
 ```
 └── pages
     ├── index.tsx
@@ -206,11 +214,13 @@ What import alias would you like configured? @/*
   - 檔名可作為動態路由的參數，透過 [useRoute](https://nextjs.org/docs/pages/api-reference/functions/use-router) 這個 Hook 取得 route 相關資訊
 - 呼叫 API：`page/api/user.tsx`
 
-![image](https://github.com/user-attachments/assets/e258e384-5006-4cda-b3f7-bad23eb6aa5d)
-
-（圖片來源：[官方文件](https://nextjs.org/blog/layouts-rfc#how-routing-currently-works)）
-
 ## App Router 資料夾結構與對應路由
+
+App Router 的 routing system 則改成，根目錄或 `/src` 中會有一個 `/app`，`/app` 底下資料夾中若有 `pages.js/.jsx/.ts/.tsx`，才會生成一個對應資料夾名稱的 route segment，而 `page.tsx` 則定義該 route segment 的 UI 。
+
+舉例來說，`/app/about/pages.js` 會出現在 /about 中。而 `/about` 裡的其他檔案，除了幾個官方保留的特殊檔案，例如 `pages.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx` 等 (後續會再介紹)，不會被影響到 URL；或是 `/app/analytics` 中沒有 `pages.tsx`，就不會有 /analytics 這個 route segment。
+
+以部落格網站做範例：
 
 ```
 └── app
@@ -245,7 +255,7 @@ What import alias would you like configured? @/*
 - `@` 開頭的 folder 不會對路由造成影響：
   - `app/@analytics/page.tsx` 實際渲染的路由為 `/`，這個特殊的檔案夾是用來切分同一個路由底下的不同邏輯區塊。
 
-以下是目錄對應頁面路由的示意圖 （[官方文件](https://nextjs.org/docs/app/building-your-application/routing)）：
+以下來自[官方文件提供的示意圖](https://nextjs.org/docs/app/building-your-application/routing)，可以看得更清楚：
 
 ![image](https://github.com/user-attachments/assets/6918e8a7-398b-456d-ae27-288757d0d2ce)
 
