@@ -103,13 +103,17 @@ AnimateDiff模型組件有非常多的模型可以做使用，這次使用到的
 ![image](https://github.com/user-attachments/assets/e760f8eb-35ea-47e7-b99a-cee2f6ac71fb)
 
 #### 將連續圖片做成影片
-這邊會使用到處理影片的處理影片的節點模型-VideoHelper，
+這邊會使用到處理影片的處理影片的節點模型-VideoHelper，這邊選擇合併成影片。並把採樣器的圖像管道與合併成影片的圖像管道進行連結。
+![image](https://github.com/user-attachments/assets/1283d154-d4ff-46f3-82ce-9508e018c5e8)
+![image](https://github.com/user-attachments/assets/c2aa42fe-03df-43eb-8c25-59d278123211)
+
+調整合併影片的參數，調整幀數參考前面在加載器所設置批次大小的數字，循環次數的部分則是影片循環播放的次數(0則為不循環)，文件名稱與格式則依自身需求調整，Ping-Pong指的是影片從頭到尾再從尾巴到頭，來回播放。
+調整完成後，點擊生成就會發現圖片已經變成影片。
+
+https://github.com/user-attachments/assets/a920bb26-20e1-4501-9b3b-6d8315cbc727
 
 ## 總結
-
-
-
-
+這次使用 ComfyUI 的初步建立生成圖片與將圖片轉換成影片的過程中，即便沒有程式語言的背景，其實也是能夠輕鬆進入 AI 創作的領域。ComfyUI提供強大的模組功能，以及許多社群都有開源可以參考的工作流，甚至有許多從0到1的教學影片，都讓人快速掌握並創建出高質量的圖片與動畫。不僅拓展了使用者的創作能力，對 AI 技術的未來發展應用更是有了深入的理解與對開發人員的敬佩。ComfyUI 讓每一位使用者都能輕鬆實現他們的視覺構想，也是進一步展現了現代 AI 技術的無限潛力。
 
 ## Reference
 - [ComfyUI初階②基本操作手冊](https://vocus.cc/article/654798f8fd89780001d4ffaa)
