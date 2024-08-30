@@ -750,7 +750,7 @@ export default function Counter() {
 - **App Router**：透過巢狀錯誤邊界支援進階錯誤處理，允許對應用程式的不同部分進行更精細的錯誤控制。
 - **Page Router**：錯誤處理通常涉及建立自訂的 `_error.js` 頁面來進行全域錯誤處理，或使用 `getInitialProps` 在頁面層級捕獲錯誤。
 
-說明：**App Router** 提供更細粒度的錯誤處理，讓開發人員可以將錯誤隔離到特定的路由或元件。
+說明：**App Router** 提供更精細的錯誤處理，讓開發人員可以將錯誤隔離到特定的路由或元件。
 
 ## 5. **載入 UI 和串流（Loading UI and Streaming）**
 
