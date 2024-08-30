@@ -67,25 +67,27 @@ React 可透過「搭建後端 Server + 處理 Hydration + Webpack 打包配置�
 
 而 Next.js 實際使用案例可參考  [Showcase](https://nextjs.org/showcase)  頁面，如 Notion、Tik Tok 以及 Twitch 等網站。
 
-## Next.js Router System 路由系統
+## 初步認識 Next.js 路由架構——App Router 與 Pages Router
 
-由於 Next.js 使用基於檔案系統的路由（file-system based router），會依照專案的檔案結構自動定義路由。
+Next.js 使用基於檔案系統的路由（file-system based router），意思是路由會根據專案的檔案結構自動被定義，不需額外去做設定。
 
-而根據版本不同，Next.js 提供兩種管理頁面路由的方式，分別是舊版本適用的 Pages Router 以及 v13 後推出的 App Router，兩者差異在於：
+究竟什麼是 App Router 跟 Pages Router 呢？簡單來說，它們是  **Next 開發的兩套路由架構**。
+
+根據版本不同，Next.js 提供兩種管理頁面路由的方式，分別是舊版本適用的 Pages Router 以及 v13 後推出的 App Router，兩者最明顯的差異在於：
 
 Pages Router :
 
 1. 定義頁面層級的路由
 2. 所有元件為 React Client Component（客戶端元件）
-3. 只能使用 Next.js 提供的預設規則，如：檔案名稱即為路徑
 
 App Router :
 
 1. 定義應用程式層級的路由
 2. 所有元件預設為 React Server Component（伺服器端元件）
-3. 可自定義路由規則，如：使用正規表達式匹配特定路徑
 
-如上所言，在 App Router 中所有元件預設為 React Server Component（RSC），意思是由伺服器將 React Component 準備好，再傳給 Client 顯示在畫面上。
+定義路由分為頁面層級和應用程式層級，簡單來說 Pages Router 是在 `/pages` 目錄中定義的，此目錄中的每個檔案自動成為一個路由；App Router 的路由則是透過 `/app` 目錄中的資料夾結構定義的。
+
+另外，在 App Router 中所有元件預設為 React Server Component（RSC），意思是由伺服器將 React Component 準備好，再傳給 Client 顯示在畫面上。
 
 而 RSC 的優缺點如下：
 
@@ -109,7 +111,7 @@ App Router :
 
 以下章節將會針對 App Router 與 Page Router 的差異進行比較，並介紹 App Router 的幾個重要功能。
 
-# 專案建立——資料夾結構差異
+# 專案建立——專案架構差異
 
 ## 建立 Next.js 專案
 
