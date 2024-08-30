@@ -352,7 +352,7 @@ npx eslint .
 ```jsx
   "scripts": {
 		...
-    "validate": "npm run test && npm run check-format && npm run lint"
+    "validate": "prettier --ignore-path .gitignore --write \"**/*.+(js|jsx|ts|tsx|json|css)\" && next lint && eslint --fix --ext .js,.jsx,.ts,.tsx . && npm run test",
   }
 ```
 
@@ -772,7 +772,7 @@ npx eslint .
 ```jsx
   "scripts": {
 		...
-    "validate": "npm run test && npm run check-format && npm run lint"
+    "validate": "prettier --ignore-path .gitignore --write \"**/*.+(js|jsx|ts|tsx|json|css)\" && next lint && eslint --fix --ext .js,.jsx,.ts,.tsx . && npm run test",
   }
 ```
 
