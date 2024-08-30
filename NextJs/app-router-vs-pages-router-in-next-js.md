@@ -725,8 +725,6 @@ export default function Counter() {
 - **App Router**：路由是透過 `/app` 目錄中的資料夾結構定義的。目錄結構直接對應到 URL 路徑，不依賴於檔案命名規範。
 - **Page Router**：路由是在 `/pages` 目錄中定義的。此目錄中的每個檔案自動成為一個路由，且資料夾結構決定動態路由。這種方法簡單明瞭，但在組織路由方面彈性較小。
 
-**優勢**：**App Router** 提供了基於巢狀目錄和檔案的更靈活的路由結構，這有助於更好地控制複雜的路由需求。（但也有人覺得這樣做反而更複雜，並沒有比 **Page Router** 更直覺）
-
 定義路由的詳細說明已在前面章節提過了，這裡就不贅述。請參考《專案建立——專案架構差異》此章節。
 
 ## 2. **佈局和模板（Layouts and Templates）**
@@ -735,6 +733,10 @@ export default function Counter() {
 - **Page Router**：沒有支援內建的佈局和模板，需要在每個頁面手動實作佈局元件。
 
 **優勢**：**App Router** 擁有內建支援佈局和模板的優勢，減少程式碼的重複性和簡化佈局管理。（但如果頁面的佈局變化不大，這方面的優勢就不明顯）
+
+像是 App Router 可以透過特殊檔案  `layout.tsx`  更簡單地實現 persistent layout。
+
+什麼是 persistent layout？簡單來說就是**路由切換時，沒有變動的部分不會 re-render，讓 state 和頁面狀態 ( ex: 滾輪位置 ) 可以維持一樣。**
 
 ## 3. **連結和導航（Linking and Navigating）**
 
