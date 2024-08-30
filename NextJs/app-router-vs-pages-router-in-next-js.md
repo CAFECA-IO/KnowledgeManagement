@@ -743,7 +743,7 @@ export default function Counter() {
 - **App Router**：使用 `Link` 元件進行客戶端導航，與 Page Router 相似，但受益於內建的優化功能，可能更好地與 App Router 中的元件層次結構配合。
 - **Page Router**：同樣使用 `Link` 元件進行客戶端導航，對大多數使用情況來說是直接有效的。
 
-**優勢**：兩者在這方面的功能類似，但 **App Router** 可能因其巢狀結構而在先進路由功能的無縫整合方面佔據優勢。
+說明：兩者在這方面的功能類似，但 **App Router** 可能因其巢狀結構而在先進路由功能的無縫整合方面佔據優勢。
 
 ## 4. **錯誤處理（Error Handling）**
 
@@ -785,7 +785,7 @@ export default function Counter() {
 - **App Router**：透過目錄結構中的 `[param]` 語法支援動態路由，並且可以處理更複雜的巢狀動態路由。
 - **Page Router**：同樣支援動態路由，使用 `/pages` 目錄中的 `[param].js` 檔案。
 
-**優勢**：兩者皆支援動態路由，但 **App Router** 可能在支援巢狀動態路由方面更具優勢。
+說明：兩者皆支援動態路由，但 **App Router** 可能在支援巢狀動態路由方面更具優勢。
 
 ## 10. **平行路由（Parallel Routes）**
 
@@ -813,7 +813,7 @@ export default function Counter() {
 - **App Router**：完全支援中介軟體功能來處理請求、修改響應以及在渲染前執行動作。
 - **Page Router**：也支援中介軟體，但通常需要更多配置，因為中介軟體是在 `/pages/_middleware.js` 檔案中聲明的。
 
-**優勢**：兩者皆支援中介軟體，但 **App Router** 可能因其路由結構而更無縫整合。
+說明：兩者皆支援中介軟體，但 **App Router** 可能因其路由結構而更無縫整合。
 
 ## 14. **國際化（Internationalization）**
 
