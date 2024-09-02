@@ -1314,10 +1314,43 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
 
 ## 5. **載入 UI 和串流（Loading UI and Streaming）**
 
-- **App Router**：提供對載入狀態和串流的進階支援，透過允許部分 UI 漸進式載入來改善使用者體驗。
+- **App Router**：提供對載入狀態和串流的進階支援，透過允許部分 UI 漸進式載入來改善使用者體驗，因此更適合需要複雜載入策略和串流支援的應用程式。
 - **Page Router**：載入狀態通常是使用 React 的 `useState` 或 `useEffect` 手動處理的。沒有內建的串流支援。
 
-說明：**App Router** 更適合需要複雜載入策略和串流支援的應用程式。
+說明：
+
+特殊檔案 `loading.js` 幫助你使用 [React Suspense](https://react.dev/reference/react/Suspense) 創建有意義的載入 UI。透過這個約定，你可以在路由片段的內容載入時，從伺服器顯示 [即時載入狀態](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states)。一旦渲染完成，新內容會自動替換。
+
+![image](https://github.com/user-attachments/assets/52f8bef3-59e6-45ba-be4e-da59f2090d9c)
+
+### 即時載入狀態
+
+即時載入狀態（Instant Loading States）是導航時立即顯示的後備 UI（fallback UI）。你可以預渲染載入指示器，例如：骨架畫面（skeletons）或轉圈圈（spinners），或是未來畫面的某個小但有意義的部分，如封面照片、標題等。這有助於使用者理解應用程式正在回應，並提供更好的使用者體驗。
+
+在資料夾中新增一個 `loading.js` 檔案來建立一個載入狀態。
+
+![image](https://github.com/user-attachments/assets/68ad32ea-3dba-4c9b-8715-b8e4f7ccc917)
+
+app/dashboard/loading.tsx
+
+```jsx
+export default function Loading() {
+  // You can add any UI inside Loading, including a Skeleton.
+  return <LoadingSkeleton />;
+}
+```
+
+在同一資料夾中，`loading.js` 會被置入於 `layout.js` 裡面。它會自動將 `page.js` 檔案和其之下的所有子元件都包裹在 `<Suspense>` 邊界內。
+
+![image](https://github.com/user-attachments/assets/e4e1b2b5-ebf8-487d-aeac-adcea4a5fd47)
+
+> 值得注意：
+>
+> - 即使使用 [以伺服器為中心的路由](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#how-routing-and-navigation-works)，導航（Navigation）也是即時的。
+> - 導航是可中斷的，這意味著更改路由不需要等待路由內容完全載入後才導航到另一個路由。
+> - 共享佈局在新路由片段載入時仍然保持互動性。
+
+> 建議：盡量對於路由片段（佈局和頁面）使用 loading.js 約定，因為 Next.js 優化了此功能。
 
 ## 6. **重新導向（Redirecting）**
 
