@@ -732,17 +732,22 @@ export default function Counter() {
 - **App Router**：支援內建佈局和模板，允許巢狀佈局和可重用的模板應用於不同路由。
 - **Page Router**：沒有支援內建的佈局和模板，需要在每個頁面手動實作佈局元件。
 
-說明：**App Router** 擁有內建支援佈局和模板的優勢，減少程式碼的重複性和簡化佈局管理。（但如果頁面的佈局變化不大，這方面的優勢就不明顯）
+說明：
+
+**App Router** 擁有內建支援佈局和模板的優勢，減少程式碼的重複性和簡化佈局管理。（但如果網站頁面的佈局變化不大，這方面的優勢就不明顯）
 
 像是 App Router 可以透過特殊檔案  `layout.tsx`  更簡單地實現 persistent layout。
 
-> 什麼是 persistent layout？簡單來說就是**路由切換時，沒有變動的部分不會 re-render，讓 state 和頁面狀態 ( ex: 滾輪位置 ) 可以維持一樣。**
+> 什麼是 persistent layout？ <br>
+> 簡單來說就是**路由切換時，沒有變動的部分不會 re-render，讓 state 和頁面狀態(ex: 滾輪位置)可以維持一樣。**
 
 Layout 是一個可以在路徑底下的子路徑中，共用的 UI。它不會影響 routing 而且當使用者在子路由之間切換時，也不會 re-render。
 
-以下的範例是參考[這篇文章](https://ithelp.ithome.com.tw/articles/10316237)，內文有提到同樣的需求在 Page Router 可以實現的方式。
+以下的範例是參考[這篇文章](https://ithelp.ithome.com.tw/articles/10316237)，內文有提到同樣的需求在 Page Router 可以實現的方式，這裡只截取 App Router 的部分。
 
-假設我們有個需求，想要做一個設定頁面 ( /settings )，sub routes 包含像是 /profile、 /account、/notifications 等不同設定。每個 sub routes 都有一個共用的 scroll bar，這個 scroll bar 的寬度固定，超出寬度的部分則用 overflow-auto 來讓使用者左右滾動查看。點 scrollbar 上的選項時，則會轉到對應的頁面 ( ex: 點 Profile -> settings/profile )。
+假設我們有個需求，想要做一個設定頁面 `/settings`，sub routes 包含像是 `/profile`、 `/account`、`/notifications` 等不同設定。
+
+每個 sub routes 都有一個共用的 scroll bar，這個 scroll bar 的寬度固定，超出寬度的部分則用 `overflow-auto` 來讓使用者左右滾動查看。點擊 scrollbar 上的選項時，則會轉到對應的頁面 (ex: 點 Profile 文字按鈕 → 轉至頁面 settings/profile)。
 
 ## 3. **連結和導航（Linking and Navigating）**
 
