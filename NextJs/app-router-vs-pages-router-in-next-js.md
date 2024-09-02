@@ -1220,7 +1220,7 @@ export function Signup() {
 
 #### 處理伺服器元件中的預期錯誤
 
-在伺服器元件內部抓取資料時，我們可以使用響應來有條件地渲染錯誤訊息或 [`redirect`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirect-function)。
+在伺服器元件內部抓取資料時，我們可以使用 response 來有條件地渲染錯誤訊息或 [`redirect`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirect-function)。
 
 app/page.tsx
 
@@ -1286,7 +1286,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
 錯誤會冒泡到最近的父級錯誤邊界。這讓我們可以透過在[路由層次結構（route hierarchy）](https://nextjs.org/docs/app/building-your-application/routing#component-hierarchy)的不同層級放置 `error.tsx` 檔案，來進行更精細的錯誤處理。
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d06fa267-5063-4931-8ade-fa45a882a2e2/0d3c811c-9cb0-4c8f-80b8-4052e392a4ff/image.png)
+![image](https://github.com/user-attachments/assets/7357c4a9-7b6a-4e27-8c04-a7b833942c1f)
 
 #### 處理全域錯誤
 
