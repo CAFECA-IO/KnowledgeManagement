@@ -1186,6 +1186,107 @@ export function LocaleSwitcher() {
 
 說明：兩者皆支援動態路由，但 **App Router** 可能在支援巢狀動態路由方面更具優勢。
 
+介紹：
+當我們無法事先知道確切的路徑名稱，且希望從動態資料中建立路由時，我們可以使用動態路徑段，這些路徑段會在請求時填充，或是在建構時[預先渲染](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params)。
+
+### 約定
+
+可以通過將資料夾的名稱用方括號包裹來創建動態路徑段：`[folderName]`。例如，`[id]` 或 `[slug]`。
+
+動態路徑段會作為 `params` 屬性傳遞給 [`layout`](https://nextjs.org/docs/app/api-reference/file-conventions/layout)、[`page`](https://nextjs.org/docs/app/api-reference/file-conventions/page)、[`route`](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 和 [`generateMetadata`](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function) 函數。
+
+### 範例
+
+例如，一個部落格可以包含如下路由 `app/blog/[slug]/page.js`，其中 `[slug]` 是部落格文章的動態路徑段。
+
+`app/blog/[slug]/page.tsx`
+
+```tsx
+export default function Page({ params }: { params: { slug: string } }) {
+  return <div>My Post: {params.slug}</div>;
+}
+```
+
+| 路由                      | 範例網址  | `params`        |
+| ------------------------- | --------- | --------------- |
+| `app/blog/[slug]/page.js` | `/blog/a` | `{ slug: 'a' }` |
+| `app/blog/[slug]/page.js` | `/blog/b` | `{ slug: 'b' }` |
+| `app/blog/[slug]/page.js` | `/blog/c` | `{ slug: 'c' }` |
+
+請參閱 [generateStaticParams()](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params) 頁面，以了解如何生成此路徑段的參數。
+
+> 注意：動態路徑段相當於 pages 目錄中的動態路由。
+
+### 生成靜態參數
+
+`generateStaticParams` 函數可以與[動態路徑段](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)結合使用，以在建構時[靜態生成](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default)路由，而非在請求時動態生成。
+
+`app/blog/[slug]/page.tsx`
+
+```tsx
+export async function generateStaticParams() {
+  const posts = await fetch("https://.../posts").then((res) => res.json());
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+```
+
+`generateStaticParams` 函數的主要優點是其智能資料擷取功能。如果在 `generateStaticParams` 函數內使用 `fetch` 請求獲取內容，這些請求會[自動記憶化](https://nextjs.org/docs/app/building-your-application/caching#request-memoization)。這意味著跨多個 `generateStaticParams`、佈局和頁面的相同參數 `fetch` 請求只會執行一次，從而縮短建構時間。
+
+如果我們要從 `pages` 目錄遷移，可以參考[遷移指南](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#dynamic-paths-getstaticpaths)。
+
+欲了解更多資訊和進階用法，請參閱 [`generateStaticParams` 伺服器函數文檔](https://nextjs.org/docs/app/api-reference/functions/generate-static-params)。
+
+### 捕獲所有路徑段
+
+動態路徑段可以透過在方括號內添加省略號來擴展為**捕獲所有**後續路徑段：`[...folderName]`。
+
+例如，`app/shop/[...slug]/page.js` 將匹配 `/shop/clothes`，也會匹配 `/shop/clothes/tops`、`/shop/clothes/tops/t-shirts` 等等。
+
+| 路由                         | 範例網址      | `params`                    |
+| ---------------------------- | ------------- | --------------------------- |
+| `app/shop/[...slug]/page.js` | `/shop/a`     | `{ slug: ['a'] }`           |
+| `app/shop/[...slug]/page.js` | `/shop/a/b`   | `{ slug: ['a', 'b'] }`      |
+| `app/shop/[...slug]/page.js` | `/shop/a/b/c` | `{ slug: ['a', 'b', 'c'] }` |
+
+### 可選捕獲所有路徑段
+
+捕獲所有路徑段可以透過將參數包在雙重方括號內來設為**可選**：`[[...folderName]]`。
+
+例如，`app/shop/[[...slug]]/page.js` 不僅會匹配 `/shop`，還會匹配 `/shop/clothes`、`/shop/clothes/tops`、`/shop/clothes/tops/t-shirts`。
+
+**捕獲所有**和**可選捕獲所有**路徑段的區別在於使用可選時，沒有參數的路由也會匹配（如上述範例中的 `/shop`）。
+
+| 路由                           | 範例網址      | `params`                    |
+| ------------------------------ | ------------- | --------------------------- |
+| `app/shop/[[...slug]]/page.js` | `/shop`       | `{}`                        |
+| `app/shop/[[...slug]]/page.js` | `/shop/a`     | `{ slug: ['a'] }`           |
+| `app/shop/[[...slug]]/page.js` | `/shop/a/b`   | `{ slug: ['a', 'b'] }`      |
+| `app/shop/[[...slug]]/page.js` | `/shop/a/b/c` | `{ slug: ['a', 'b', 'c'] }` |
+
+### TypeScript
+
+當使用 TypeScript 時，我們可以根據配置的路徑段為 `params` 添加類型。
+
+`app/blog/[slug]/page.tsx`
+
+```tsx
+export default function Page({ params }: { params: { slug: string } }) {
+  return <h1>My Page</h1>;
+}
+```
+
+| 路由                                | `params` 類型定義                        |
+| ----------------------------------- | ---------------------------------------- |
+| `app/blog/[slug]/page.js`           | `{ slug: string }`                       |
+| `app/shop/[...slug]/page.js`        | `{ slug: string[] }`                     |
+| `app/shop/[[...slug]]/page.js`      | `{ slug?: string[] }`                    |
+| `app/[categoryId]/[itemId]/page.js` | `{ categoryId: string, itemId: string }` |
+
+> 注意：這可能會在未來由 TypeScript 插件自動完成。
+
 ## 10. **平行路由（Parallel Routes）**
 
 - **App Router**：原生支援平行路由，允許同時渲染多個路由。
