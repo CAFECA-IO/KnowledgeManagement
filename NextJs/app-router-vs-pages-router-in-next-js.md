@@ -1352,6 +1352,52 @@ export default function Loading() {
 
 > 建議：盡量對於路由片段（佈局和頁面）使用 loading.js 約定，因為 Next.js 優化了此功能。
 
+### 使用 Suspense 進行串流
+
+除了 `loading.js`，你還可以手動為自己的 UI 元件創建 Suspense 邊界。App Router 支援在 [Node.js 和 Edge 執行環境](https://nextjs.org/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes)中使用 [Suspense](https://react.dev/reference/react/Suspense) 進行串流。
+
+> 值得注意：
+>
+> - [某些瀏覽器](https://bugs.webkit.org/show_bug.cgi?id=252413)會緩衝串流響應。你可能在響應超過 1024 位元組之前看不到串流響應。這通常只影響「Hello World」應用程式，而不影響實際應用程式。
+
+#### 什麼是串流？
+
+要了解 React 和 Next.js 中的串流如何運作，首先要了解 **伺服器端渲染（SSR）** 及其局限性。
+
+使用 SSR，需要完成一系列步驟才能讓使用者看到並與頁面互動：
+
+1. 首先，在伺服器上抓取給定頁面的所有資料。
+2. 然後，伺服器渲染該頁面的 HTML。
+3. 將該頁面的 HTML、CSS 和 JavaScript 發送到客戶端。
+4. 使用生成的 HTML 和 CSS 顯示非互動的使用者介面。
+5. 最後，React [hydrate](https://react.dev/reference/react-dom/client/hydrateRoot#hydrating-server-rendered-html) 使用者介面，使其變得互動。
+
+![image](https://github.com/user-attachments/assets/d512e321-a6ca-4c7a-866b-145ecfecd7cb)
+
+這些步驟是按特定順序的（sequential）且阻塞（blocking）的，這意味著伺服器只能在抓取完所有資料後渲染頁面的 HTML。而且，在客戶端，React 只能在下載完頁面中所有元件的程式碼後，才可以進行 hydrate。
+
+結合 React 和 Next.js 的 SSR 透過盡快向使用者顯示非互動式頁面，來幫助改善感知載效能。
+
+> 補充：具體來說，當你使用 SSR 時，伺服器會在將頁面傳送給使用者之前，先將頁面的 HTML 在伺服器端生成。這樣使用者可以盡快看到頁面的內容，即使這時候頁面還不能進行互動（例如按鈕還不能點擊、表單還不能提交），但至少頁面的視覺內容已經顯示出來了，讓使用者不會覺得網站很慢或者沒有反應。
+>
+> 這種方式能讓使用者感覺網站載入得更快，因為他們在資料尚未完全載入或 JavaScript 還沒完全執行之前，就已經能夠看到頁面的主要內容了。
+
+![image](https://github.com/user-attachments/assets/2c99379e-3896-4d26-a931-61d75a34083b)
+
+然而，由於伺服器上需要完成所有資料獲取，才能將頁面顯示給使用者，它仍然可能較慢。
+
+**串流（Streaming）**允許你將頁面的 HTML 分解為較小的塊，並逐步將這些塊從伺服器發送到客戶端。
+
+![image](https://github.com/user-attachments/assets/72e1b3f0-f925-4751-acfd-b2c6951707f0)
+
+這使得頁面的部分內容可以更快顯示，而不必等待所有資料載入完成後才能渲染任何 UI。
+
+串流與 React 的元件模型配合良好，因為每個元件都可以被視為一個塊。優先級較高的元件（例如產品資訊）或不依賴資料的元件可以優先發送（例如佈局），React 可以更早開始 hydrate。優先級較低的元件（例如評論、相關產品）可以在其資料獲取後在同一伺服器請求中發送。
+
+![image](https://github.com/user-attachments/assets/5364d837-4214-48c6-8222-a040209ce6fc)
+
+當你想避免長時間的資料請求阻塞頁面渲染時，串流特別有用，因為它可以減少 [首字節時間 (TTFB)](https://web.dev/ttfb/) 和 [首次內容渲染 (FCP)](https://web.dev/first-contentful-paint/)。它還有助於提高 [互動時間 (TTI)](https://developer.chrome.com/en/docs/lighthouse/performance/interactive/)，尤其是在較慢的設備上。
+
 ## 6. **重新導向（Redirecting）**
 
 - **App Router**：由於其靈活的路由結構，支援更複雜的重新導向邏輯。可以針對每個路由或一組路由配置重新導向。
