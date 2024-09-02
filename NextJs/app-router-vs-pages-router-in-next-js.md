@@ -777,20 +777,42 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 /settings 底下的頁面元件就會以 children props 的方式傳入 Layout 中，達到元件共用且切換路由時 scroll bar 會維持原本位置的效果！
 
-Layout 又分為 Root Layout 與 Regular Layout：
+### 版面配置 (Layouts)
 
-#### Root Layout
+版面配置是一種在多個路由之間**共用**的 UI。導航時，版面配置會保留狀態，保持互動性且不會重新渲染(re-render)。而且，版面配置還可以[巢狀](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#nesting-layouts)(nested)。
 
-在 `/app` 根目錄中的 `layout.tsx`，root layout 中定義的 UI 會套用到所有頁面中，可以用來取代 Pages Router 中的 `_app.tsx` 和 `_document.tsx`。
+我們可以透過在 `layout.js` 檔案中預設匯出一個 React 元件來定義版面配置。而該元件接受一個 `children` 屬性，且該屬性在渲染時會填入**子版面配置（如果存在的話）**或**頁面**。
 
-![image](https://github.com/user-attachments/assets/3ef1c1a4-56e8-4705-99bf-dfdccae285ac)
+例如，此版面配置將與 `/dashboard` 和 `/dashboard/settings` 頁面共用：
 
-注意事項：
+![image](https://github.com/user-attachments/assets/f3c5aaa3-1b52-4b7a-a4b8-4f59f4c9d78b)
 
-1. App Router 中**一定要有至少一個 root layout** ( 可以透過 route groups 來創造多個 root layout，之後會和大家分享 )。
-2. Root layout 中一定要包含 `<html>` 和 `<body>` tags，因為 Next.js 不會自動生成
-3. 你可以自訂初始 HTML 檔案的內容，像是 `<head>` `<title>` 等，但後續會跟大家分享官方建議設定 metadata 的方式。
-4. Root layout 只能是 Server Components。
+app/dashboard/layout.tsx
+
+```tsx
+export default function DashboardLayout({
+  children, // will be a page or nested layout
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <section>
+      {/* Include shared UI here e.g. a header or sidebar */}
+      <nav></nav>
+
+      {children}
+    </section>
+  );
+}
+```
+
+在 Layout 中有個最特殊的 layout，就是 Root Layout，它的有些規則與一般的 Layouts 不同。
+
+### 根版面配置 (Root Layout) - 必要
+
+根版面配置定義在 `app` 目錄的頂層，並適用於所有路由。此版面配置是**必要**的，且必須包含 `html` 和 `body` 標籤，允許我們修改伺服器回傳的初始 HTML。
+
+app/layout.tsx
 
 ```tsx
 /* app/layout.tsx */
@@ -818,20 +840,52 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-#### Regular Layout
+注意：
 
-`/app` 底下資料夾中的 `layout.tsx`，該 route 的子路由都會套用 regular layout 定義的 UI。
+- App Router 中一定要有至少一個根版面配置（root layout）。
+- 只有根版面配置（root layout）可以包含 `<html>` 和 `<body>` 標籤。
+- Root layout 只能是 Server Components。
+- 可以使用[路由群組](https://nextjs.org/docs/app/building-your-application/routing/route-groups)來建立多個根版面配置（root layouts）。請參閱[這裡的範例](https://nextjs.org/docs/app/building-your-application/routing/route-groups#creating-multiple-root-layouts)。
+- 根版面配置（root layout）取代了 `pages` 目錄中的 [`_app.js`](https://nextjs.org/docs/pages/building-your-application/routing/custom-app) 和 [`_document.js`](https://nextjs.org/docs/pages/building-your-application/routing/custom-document) 檔案。[查看遷移指南](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#migrating-_documentjs-and-_appjs)。
 
-比方說，在 `/dashboard` 中建立一個 `layout.tsx`，則 /dashboard/about，與 /dashboard/settings，都會套用到此 layout。
+### 巢狀版面配置 (Nesting Layouts)
 
-![image](https://github.com/user-attachments/assets/7a193c2b-529a-4467-b590-c09a15fe84bd)
+預設情況下，資料夾層級(folder hierarchy)中的 layouts 是**巢狀**的，意思就是，layouts 會通過其 `children` 屬性來包裹子版面配置(child layouts)。
 
+在特定的路由片段（也就是資料夾）中添加 `layout.js` ，會自動**巢狀**版面配置。
 
-注意事項：
+例如，在 `/dashboard` 路由建立一個版面配置，也就是在 `dashboard` 目錄中新增一個 `layout.js` 檔案：
 
-1. layout 預設會是巢狀的，意思是 regular layout 也會被以 children props 的形式傳到 root layout。以上方圖片為例，/dashboard 的子路由會同時吃到 root layout 和 dashboard layout。
-   ![image](https://github.com/user-attachments/assets/840404cd-e5ba-4744-b665-c953f266ad76)
-2. Regular layout 中不能使用 `<head>` 和 `<body>` tag。
+![image](https://github.com/user-attachments/assets/23258661-81b0-4ba0-91dc-48f2b401359a)
+
+app/dashboard/layout.tsx
+
+```tsx
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return <section>{children}</section>;
+}
+```
+
+將上面兩個版面配置結合起來，根版面配置（`app/layout.js`）會包裹 dashboard 的版面配置（`app/dashboard/layout.js`），而 dashboard 的版面配置則包裹 `app/dashboard/*` 內的路由片段。
+
+簡單來說就是，一般的 layout 會被以 children props 的形式傳到 root layout。
+
+也就是說，`app/dashboard` 的子路由（像是 /dashboard/about 或者 /dashboard/settings）會同時吃到 root layout 和 dashboard layout。
+
+這兩個版面配置會呈現巢狀，如下圖：
+
+![image](https://github.com/user-attachments/assets/5d1c333e-d172-4013-80bb-40614a5a3218)
+
+關於 Layouts 需要了解的事：
+
+- 版面配置（Layouts）可以使用 `.js`、`.jsx` 或 `.tsx` 檔案副檔名。
+- 當 `layout.js` 和 `page.js` 檔案在同一個目錄中定義時，layout 會包裹該 page。
+- 版面配置預設為[伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)，但可以設定為 [Client Component](https://nextjs.org/docs/app/building-your-application/rendering/client-components)。
+- 版面配置可以獲取資料。
+- 無法在父版面配置（parent layout）與它的子版面配置之間傳遞資料。但可以在路由中多次獲取相同資料，React 將會[自動對 request 進行重複資料刪除（dedupe）](https://nextjs.org/docs/app/building-your-application/caching#request-memoization)，而不會影響效能。
+- 版面配置無法訪問 `pathname`（[了解更多](https://nextjs.org/docs/app/api-reference/file-conventions/layout)）。但匯入的客戶端元件可以使用 [`usePathname`](https://nextjs.org/docs/app/api-reference/functions/use-pathname) hook 來訪問 pathname。
+- 版面配置無法訪問其下方的路由片段。要訪問所有路由片段，可以在客戶端元件中使用 [`useSelectedLayoutSegment`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segment) 或 [`useSelectedLayoutSegments`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments)。
+- 可以使用[路由群組](https://nextjs.org/docs/app/building-your-application/routing/route-groups)來選擇性地將特定路由片段包含在共用版面配置中或排除在外。
 
 ## 3. **連結和導航（Linking and Navigating）**
 
