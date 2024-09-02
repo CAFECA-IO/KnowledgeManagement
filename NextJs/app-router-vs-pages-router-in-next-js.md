@@ -870,13 +870,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
 將上面兩個版面配置結合起來，根版面配置（`app/layout.js`）會包裹 dashboard 的版面配置（`app/dashboard/layout.js`），而 dashboard 的版面配置則包裹 `app/dashboard/*` 內的路由片段。
 
-簡單來說就是，一般的 layout 會被以 children props 的形式傳到 root layout。
-
-也就是說，`app/dashboard` 的子路由（像是 /dashboard/about 或者 /dashboard/settings）會同時吃到 root layout 和 dashboard layout。
+簡單來說就是，巢狀會讓一般的 layout 被以 children props 的形式傳到 root layout。因此，`app/dashboard` 的子路由（像是 /dashboard/about 或者 /dashboard/settings）會同時吃到 root layout 和 dashboard layout。
 
 這兩個版面配置會呈現巢狀，如下圖：
 
 ![image](https://github.com/user-attachments/assets/5d1c333e-d172-4013-80bb-40614a5a3218)
+
+或者也可以參考這張圖：
+
+![image](https://github.com/user-attachments/assets/c9b99aca-7b84-4bf1-ac5a-5ec5ca3da184)
+
+<img src="https://github.com/user-attachments/assets/c9b99aca-7b84-4bf1-ac5a-5ec5ca3da184" width=720>
 
 關於 Layouts 需要了解的事：
 
