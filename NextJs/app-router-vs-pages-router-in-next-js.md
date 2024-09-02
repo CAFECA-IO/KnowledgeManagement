@@ -1146,10 +1146,171 @@ export function LocaleSwitcher() {
 
 ## 4. **錯誤處理（Error Handling）**
 
-- **App Router**：透過巢狀錯誤邊界支援進階錯誤處理，允許對應用程式的不同部分進行更精細的錯誤控制。
+- **App Router**：透過巢狀錯誤邊界支援進階錯誤處理，允許對應用程式的不同部分進行更精細的錯誤控制，讓開發人員可以將錯誤隔離到特定的路由或元件。
 - **Page Router**：錯誤處理通常涉及建立自訂的 `_error.js` 頁面來進行全域錯誤處理，或使用 `getInitialProps` 在頁面層級捕獲錯誤。
 
-說明：**App Router** 提供更精細的錯誤處理，讓開發人員可以將錯誤隔離到特定的路由或元件。
+說明：
+
+錯誤可以分為兩類：**預期錯誤（expected errors）**和**未捕獲的例外情況（uncaught exceptions）**：
+
+- **將預期錯誤建模為回傳值**：避免在伺服器操作（Server Actions）中使用 `try`/`catch` 來處理預期錯誤。使用 `useFormState` 來管理這些錯誤並將它們回傳給客戶端。
+- **使用錯誤邊界處理未預期的錯誤**：使用 `error.tsx` 和 `global-error.tsx` 文件實現錯誤邊界，來處理未預期的錯誤並提供回退的 UI（fallback UI）。
+
+### 處理預期錯誤（Expected Errors）
+
+預期錯誤是指應用程式正常操作期間可能發生的錯誤，例如：來自 [伺服器端表單驗證](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#server-side-form-validation) 或失敗的請求。這些錯誤應該被明確處理並回傳給客戶端。
+
+#### 處理伺服器操作中的預期錯誤（Expected Errors from Server Actions）
+
+使用 `useFormState` hook 來管理伺服器操作的狀態，包括錯誤處理。
+
+這種方法避免使用 `try`/`catch` 區塊來處理預期錯誤，這些錯誤應被建模為回傳值，而非拋出異常。
+
+app/actions.ts
+
+```tsx
+"use server";
+
+import { redirect } from "next/navigation";
+
+export async function createUser(prevState: any, formData: FormData) {
+  const res = await fetch("https://...");
+  const json = await res.json();
+
+  if (!res.ok) {
+    return { message: "Please enter a valid email" };
+  }
+
+  redirect("/dashboard");
+}
+```
+
+接著，我們可以將 action 傳遞給 `useFormState` hook，並使用回傳的 `state` 來顯示錯誤訊息。
+
+app/ui/signup.tsx
+
+```tsx
+"use client";
+
+import { useFormState } from "react";
+import { createUser } from "@/app/actions";
+
+const initialState = {
+  message: "",
+};
+
+export function Signup() {
+  const [state, formAction] = useFormState(createUser, initialState);
+
+  return (
+    <form action={formAction}>
+      <label htmlFor='email'>Email</label>
+      <input type='text' id='email' name='email' required />
+      {/* ... */}
+      <p aria-live='polite'>{state?.message}</p>
+      <button>Sign up</button>
+    </form>
+  );
+}
+```
+
+> 注意：這些範例使用了 Next.js App Router 內建的 React `useFormState` hook。如果使用的是 React 19，則要改用 useActionState。（可參考 [React 文件](https://react.dev/reference/react/useActionState)）
+
+我們還可以使用回傳的狀態來顯示來自客戶端元件的 toast 提示訊息。
+
+#### 處理伺服器元件中的預期錯誤（Expected Errors from Server Components）
+
+在伺服器元件內部抓取資料時，我們可以使用響應來有條件地渲染錯誤訊息或 [`redirect`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirect-function)。
+
+app/page.tsx
+
+```tsx
+export default async function Page() {
+  const res = await fetch(`https://...`);
+  const data = await res.json();
+
+  if (!res.ok) {
+    return "There was an error.";
+  }
+
+  return "...";
+}
+```
+
+### 未捕獲的例外情況（Uncaught Exceptions）
+
+未捕獲的例外情況，這裡的例外情況，意思就是意外的異常、未預期的錯誤，這些錯誤表示應用程式正常流程中不應該發生的問題或 bug。這些應該通過拋出錯誤來處理，然後由錯誤邊界捕獲。
+
+- **常見做法**：使用 `error.js` 在根佈局以下處理未捕獲的錯誤。
+- **可選作法**：使用巢狀的 `error.js` 檔案（例如 `app/dashboard/error.js`）來處理更精細的未捕獲錯誤。
+- **不常見做法**：使用 `global-error.js` 在根佈局中處理未捕獲的錯誤。
+
+#### 使用錯誤邊界（Using Error Boundaries）
+
+Next.js 使用錯誤邊界來處理未捕獲的錯誤。錯誤邊界會捕獲其子元件中的錯誤並顯示回退 UI（fallback UI），而不是崩潰的元件樹。
+
+通過在路由段中新增一個 `error.tsx` 文件並導出一個 React 元件來建立錯誤邊界：
+
+app/dashboard/error.tsx
+
+```tsx
+"use client"; // Error boundaries must be Client Components
+
+import { useEffect } from "react";
+
+export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  useEffect(() => {
+    // Log the error to an error reporting service
+    console.error(error);
+  }, [error]);
+
+  return (
+    <div>
+      <h2>Something went wrong!</h2>
+      <button
+        onClick={
+          // Attempt to recover by trying to re-render the segment
+          () => reset()
+        }
+      >
+        Try again
+      </button>
+    </div>
+  );
+}
+```
+
+如果我們希望錯誤向上冒泡到父級錯誤邊界（parent error boundary），可以在渲染 `error` 元件時 `throw`。
+
+#### 處理巢狀路由中的錯誤（Handling Errors in Nested Routes）
+
+錯誤會冒泡到最近的父級錯誤邊界。這讓我們可以透過在[路由層次結構（route hierarchy）](https://nextjs.org/docs/app/building-your-application/routing#component-hierarchy)的不同層級放置 `error.tsx` 檔案，來進行更精細的錯誤處理。
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d06fa267-5063-4931-8ade-fa45a882a2e2/0d3c811c-9cb0-4c8f-80b8-4052e392a4ff/image.png)
+
+#### 處理全域錯誤（Handling Global Errors）
+
+雖然較少見，但我們可以在根佈局中使用 `app/global-error.js` 處理錯誤，這個檔案位於根 app 目錄中，即使在使用[國際化（internationalization）](https://nextjs.org/docs/app/building-your-application/routing/internationalization)時也是如此。
+
+全域錯誤 UI 必須定義自己的 `<html>` 和 `<body>` 標籤，因為當它啟用時，會取代根佈局（root layout）或範本（template）。
+
+app/global-error.tsx
+
+```tsx
+"use client"; // Error boundaries must be Client Components
+
+export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  return (
+    // global-error must include html and body tags
+    <html>
+      <body>
+        <h2>Something went wrong!</h2>
+        <button onClick={() => reset()}>Try again</button>
+      </body>
+    </html>
+  );
+}
+```
 
 ## 5. **載入 UI 和串流（Loading UI and Streaming）**
 
