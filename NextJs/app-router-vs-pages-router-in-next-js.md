@@ -877,10 +877,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 ![image](https://github.com/user-attachments/assets/5d1c333e-d172-4013-80bb-40614a5a3218)
 
 或者也可以參考這張圖：
-
-![image](https://github.com/user-attachments/assets/c9b99aca-7b84-4bf1-ac5a-5ec5ca3da184)
-
-<img src="https://github.com/user-attachments/assets/c9b99aca-7b84-4bf1-ac5a-5ec5ca3da184" width=720>
+![image](https://github.com/user-attachments/assets/93815c69-5b43-4db7-a9f6-0c807283f6bf)
 
 關於 Layouts 需要了解的事：
 
