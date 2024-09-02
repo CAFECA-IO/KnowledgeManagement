@@ -54,7 +54,7 @@ React 可透過「搭建後端 Server + 處理 Hydration + Webpack 打包配置�
 
 ### 3. Next.js 特色
 
-由  [Vercel](https://github.com/vercel/next.js)  團隊創建的 Next.js，解決了上述幾點網頁開發遇到的問題，以下是官網提及有關 Next.js v14（發布於 2023 年 12 月）的幾項特點：
+由  [Vercel](https://github.com/vercel/next.js)  團隊建立的 Next.js，解決了上述幾點網頁開發遇到的問題，以下是官網提及有關 Next.js v14（發布於 2023 年 12 月）的幾項特點：
 
 - Data Fetching：可控制資料載入的時機點
 - CSS Support：內建支援 CSS、Sass 檔案，並支援 CSS 模組化
@@ -749,7 +749,7 @@ App Router 可以透過特殊檔案  `layout.tsx`  更簡單地實現 persiste
 
 1. 寫一個 ScrollBar 的共用元件，並在 `/pages/settings` 的頁面檔案導入：
    每個要用的頁面都要 import Scrollbar，而且每個頁面切換時，scroll bar 都會重新 render。而作為 SPA 重點之一，persistent layout 即是希望當 URL 切換時，不需改動的 UI 元素可以不 re-render，保留某些狀態 (ex: 當前 scroll bar 位置)，增強使用者體驗。
-2. 使用 `getLayout()` 創建一個含有 scroll bar 的 layout：
+2. 使用 `getLayout()` 建立一個含有 scroll bar 的 layout：
    這個做法達到了 persistent layout，但每個要使用的頁面都要 import 這個 layout。
 3. 在 `_app.tsx` 中加入 scroll bar，並用 URL 判斷是否顯示：
    這個做法也可以達到 persistent layout，也不用每個要使用的檔案都 import layout，但假如今天 layout 很多，可能會讓 `_app.tsx` 很難維護。
@@ -1319,13 +1319,13 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
 
 說明：
 
-特殊檔案 `loading.js` 幫助你使用 [React Suspense](https://react.dev/reference/react/Suspense) 創建有意義的載入 UI。透過這個約定，你可以在路由片段的內容載入時，從伺服器顯示 [即時載入狀態](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states)。一旦渲染完成，新內容會自動替換。
+特殊檔案 `loading.js` 幫助我們使用 [React Suspense](https://react.dev/reference/react/Suspense) 建立有意義的載入 UI。透過這個約定，我們可以在路由片段的內容載入時，從伺服器顯示 [即時載入狀態](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states)。一旦渲染完成，新內容會自動替換。
 
 ![image](https://github.com/user-attachments/assets/52f8bef3-59e6-45ba-be4e-da59f2090d9c)
 
 ### 即時載入狀態
 
-即時載入狀態（Instant Loading States）是導航時立即顯示的後備 UI（fallback UI）。你可以預渲染載入指示器，例如：骨架畫面（skeletons）或轉圈圈（spinners），或是未來畫面的某個小但有意義的部分，如封面照片、標題等。這有助於使用者理解應用程式正在回應，並提供更好的使用者體驗。
+即時載入狀態（Instant Loading States）是導航時立即顯示的後備 UI（fallback UI）。我們可以預渲染載入指示器，例如：骨架畫面（skeletons）或轉圈圈（spinners），或是未來畫面的某個小但有意義的部分，如封面照片、標題等。這有助於使用者理解應用程式正在回應，並提供更好的使用者體驗。
 
 在資料夾中新增一個 `loading.js` 檔案來建立一個載入狀態。
 
@@ -1385,7 +1385,7 @@ export default function Loading() {
 
 ### 約定
 
-可以通過將資料夾的名稱用方括號包裹來創建動態路徑段：`[folderName]`。例如，`[id]` 或 `[slug]`。
+可以通過將資料夾的名稱用方括號包裹來建立動態路徑段：`[folderName]`。例如，`[id]` 或 `[slug]`。
 
 動態路徑段會作為 `params` 屬性傳遞給 [`layout`](https://nextjs.org/docs/app/api-reference/file-conventions/layout)、[`page`](https://nextjs.org/docs/app/api-reference/file-conventions/page)、[`route`](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 和 [`generateMetadata`](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function) 函數。
 
