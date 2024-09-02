@@ -718,7 +718,7 @@ export default function Counter() {
 
 # Routing——路由差異
 
-以下根據 Next.js 官方文件的說明，總結 App Router 和 Page Router 兩種路由架構系統在路由設定上的差異。
+以下根據 Next.js 官方文件的說明，總結 App Router 和 Page Router 兩種路由架構系統在路由設定上的差異，並且介紹 App Router 的功能和特性。（因版面有限，就不特別介紹 Page Router 了）
 
 ## 1. **定義路由（Defining Routes）**
 
@@ -897,6 +897,253 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
 說明：兩者在這方面的功能類似，但 **App Router** 可能因其巢狀結構而在先進路由功能的無縫整合方面佔據優勢。
 
+在 Next.js 中有四種方式可以在路由之間進行導航：
+
+- 使用 [`<Link>` 元件](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#link-component)
+- 使用 [`useRouter` hook](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#userouter-hook)（[客戶端元件](https://nextjs.org/docs/app/building-your-application/rendering/client-components)）
+- 使用 [`重新導向` 函式](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#redirect-function)（[伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)）
+- 使用原生 [History API](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#using-the-native-history-api)
+
+### `<Link>` 元件
+
+`<Link>` 是一個內建的元件，它擴展了 HTML 的 `<a>` 標籤，提供了[預取](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#2-prefetching)(prefetching) 和客戶端的路由導航功能。它是 Next.js 中在路由之間進行導航的最主要和最推薦的方式。
+
+你可以從 `next/link` 中導入它，並將 `href` 屬性傳遞給這個元件來使用它：
+
+app/page.tsx
+
+```tsx
+import Link from "next/link";
+
+export default function Page() {
+  return <Link href='/dashboard'>Dashboard</Link>;
+}
+```
+
+你還可以將其他可選的屬性傳遞給 `<Link>`。詳情請參閱 [API 參考資料](https://nextjs.org/docs/app/api-reference/components/link)。
+
+#### 範例 - 連結到動態片段
+
+當你要連結到[動態片段](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)時，你可以使用[模板字面值和插值](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals)（template literals and interpolation）來生成一個連結清單。
+
+例如，生成一個部落格文章列表：
+
+app/blog/PostList.js
+
+```jsx
+import Link from "next/link";
+
+export default function PostList({ posts }) {
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>
+          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
+#### 範例 - 檢查活躍連結
+
+你可以使用 [`usePathname()`](https://nextjs.org/docs/app/api-reference/functions/use-pathname) 來判斷連結是否處於活躍狀態。
+
+例如，要為活躍的連結添加一個 class，你可以檢查當前的 `pathname` 是否與連結的 `href` 相符：
+
+@/app/ui/nav-links.tsx
+
+```tsx
+"use client";
+
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
+export function Links() {
+  const pathname = usePathname();
+
+  return (
+    <nav>
+      <Link className={`link ${pathname === "/" ? "active" : ""}`} href='/'>
+        Home
+      </Link>
+
+      <Link className={`link ${pathname === "/about" ? "active" : ""}`} href='/about'>
+        About
+      </Link>
+    </nav>
+  );
+}
+```
+
+#### 範例 - 滾動至指定的 `id`
+
+Next.js App Router 的預設行為是**滾動到新路由的頂部，或保持在回退和前進導航中的滾動位置。**
+
+如果你希望在導航時滾動到特定的 `id`，你可以在網址後附加 `#` 錨點連結，或者直接將錨點連結傳遞給 `href` 屬性。由於 `<Link>` 會渲染為 `<a>` 元素，因此這是可行的。
+
+```jsx
+<Link href="/dashboard#settings">Settings</Link>
+
+// 輸出
+<a href="/dashboard#settings">Settings</a>
+
+```
+
+> 需要了解：
+>
+> - 如果在導航時頁面不在視窗中可見，Next.js 將滾動到[頁面](https://nextjs.org/docs/app/building-your-application/routing/pages)。
+
+#### 範例 - 禁用滾動還原
+
+Next.js App Router 的預設行為是**滾動到新路由的頂部，或保持在回退和前進導航中的滾動位置。** 如果你想禁用此行為，可以將 `scroll={false}` 傳遞給 `<Link>` 元件，或將 `scroll: false` 傳遞給 `router.push()` 或 `router.replace()`。
+
+```jsx
+// next/link
+<Link href='/dashboard' scroll={false}>
+  Dashboard
+</Link>
+```
+
+```jsx
+// useRouter
+import { useRouter } from "next/navigation";
+
+const router = useRouter();
+
+router.push("/dashboard", { scroll: false });
+```
+
+## `useRouter()` hook
+
+`useRouter` hook 允許你從[客戶端元件](https://nextjs.org/docs/app/building-your-application/rendering/client-components)程式化地更改路由。
+
+app/page.js
+
+```jsx
+"use client";
+
+import { useRouter } from "next/navigation";
+
+export default function Page() {
+  const router = useRouter();
+
+  return (
+    <button type='button' onClick={() => router.push("/dashboard")}>
+      Dashboard
+    </button>
+  );
+}
+```
+
+有關 `useRouter` 方法的完整列表，請參閱 [API 參考資料](https://nextjs.org/docs/app/api-reference/functions/use-router)。
+
+> 建議： 除非有特定需求才使用 useRouter，否則請使用 <Link> 元件在路由之間進行導航。
+
+## `重新導向` 函式
+
+對於[伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)，請改為使用 `重新導向` 函式。
+
+app/team/[id]/page.tsx
+
+```tsx
+import { redirect } from "next/navigation";
+
+async function fetchTeam(id: string) {
+  const res = await fetch("https://...");
+  if (!res.ok) return undefined;
+  return res.json();
+}
+
+export default async function Profile({ params }: { params: { id: string } }) {
+  const team = await fetchTeam(params.id);
+  if (!team) {
+    redirect("/login");
+  }
+
+  // ...
+}
+```
+
+> 需要了解：
+>
+> - `重新導向` 預設回傳 307（暫時重新導向）狀態碼。當在伺服器操作中使用時，它回傳 303，這通常用於 POST 請求後重新導向到成功頁面。
+> - `重新導向` 在內部會引發錯誤，因此應在 `try/catch` blocks 外調用。
+> - `重新導向` 可以在客戶端元件的渲染過程中調用，但不能在事件處理器中調用。你可以改用 [`useRouter` hook](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#userouter-hook)。
+> - `重新導向` 也接受絕對 URL，並且可以用於重新導向到外部連結。
+> - 如果你想在渲染過程之前進行重新導向，請使用 [`next.config.js`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs) 或 [Middleware](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware)。
+
+有關更多資訊，請參閱 [`重新導向` API 參考資料](https://nextjs.org/docs/app/api-reference/functions/redirect)。
+
+## 使用原生的 History API
+
+Next.js 允許你使用原生的 [`window.history.pushState`](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState) 和 [`window.history.replaceState`](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState) 方法來更新瀏覽器的歷史紀錄堆疊，而不需要重新載入頁面。
+
+`pushState` 和 `replaceState` 的調用會與 Next.js Router 整合，讓你能夠與 [`usePathname`](https://nextjs.org/docs/app/api-reference/functions/use-pathname) 和 [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) 同步。
+
+### `window.history.pushState`
+
+使用此方法來新增一個新的瀏覽器歷史紀錄。使用者可以回到先前的狀態。例如，要對商品清單進行排序：
+
+使用此方法來新增一個條目到瀏覽器的歷史記錄堆疊（也就是：新增一個新的瀏覽器歷史紀錄）。使用者可以回到之前的狀態。
+
+例如，用來對產品列表進行排序：
+
+```tsx
+"use client";
+
+import { useSearchParams } from "next/navigation";
+
+export default function SortProducts() {
+  const searchParams = useSearchParams();
+
+  function updateSorting(sortOrder: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("sort", sortOrder);
+    window.history.pushState(null, "", `?${params.toString()}`);
+  }
+
+  return (
+    <>
+      <button onClick={() => updateSorting("asc")}>升序排序</button>
+      <button onClick={() => updateSorting("desc")}>降序排序</button>
+    </>
+  );
+}
+```
+
+### `window.history.replaceState`
+
+使用此方法來替換瀏覽器歷史記錄堆疊中的當前條目（也就是：直接取代當前瀏覽器的歷史紀錄）。使用者無法回到之前的狀態。
+
+例如，用來切換應用程式的語言：
+
+```tsx
+"use client";
+
+import { usePathname } from "next/navigation";
+
+export function LocaleSwitcher() {
+  const pathname = usePathname();
+
+  function switchLocale(locale: string) {
+    // e.g. '/en/about' or '/fr/contact'
+    const newPath = `/${locale}${pathname}`;
+    window.history.replaceState(null, "", newPath);
+  }
+
+  return (
+    <>
+      <button onClick={() => switchLocale("en")}>English</button>
+      <button onClick={() => switchLocale("fr")}>French</button>
+    </>
+  );
+}
+```
+
+如果對路由與導航的運作方式有興趣，可以參考文末的補充資訊，有附上解說。
+
 ## 4. **錯誤處理（Error Handling）**
 
 - **App Router**：透過巢狀錯誤邊界支援進階錯誤處理，允許對應用程式的不同部分進行更精細的錯誤控制。
@@ -985,6 +1232,73 @@ _（撰寫中）_
 # 實作——App Router
 
 _（待實作）_
+
+# 補充資訊
+
+## 1. 路由與導航的運作方式
+
+App Router 使用混合式的方法來處理路由與導航。在伺服器端，你的應用程式程式碼會自動根據路由片段（route segments）進行程式碼拆分（code-split）。而在客戶端，Next.js 會[預取](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#2-prefetching)（prefetches）和[快取](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#3-caching)（caches）這些路由片段。這意味著當使用者導航至新路由時，瀏覽器不會重新載入頁面，只會重新渲染變更的路由片段，從而改善導航體驗和性能。
+
+### 1. 程式碼拆分（Code Splitting）
+
+程式碼拆分允許你將應用程式程式碼拆分為更小的包，讓瀏覽器可以下載和執行這些包。這樣可以減少每個請求傳輸的資料量和執行時間，從而提升性能。
+
+[伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)允許你的應用程式程式碼自動根據路由片段進行程式碼拆分。這意味著只有導航時所需的程式碼會被加載。
+
+### 2. 預先取回（Prefetching）
+
+預先取回（或稱「預取」）是一種在使用者訪問之前，在背景中預載（preload）路由的方法。
+
+在 Next.js 中，路由預取有兩種方式：
+
+- **`<Link>` 元件**: 當路由變得可見於使用者的視窗時，路由會自動進行預取。預取會在頁面首次載入或滾動時進入視窗時發生。
+- **`router.prefetch()`**: 可以使用 `useRouter` 鉤子來程式化地預取路由。
+
+`<Link>` 的預設預取行為（即當 `prefetch` 屬性未指定或設為 `null` 時）會根據你使用 [`loading.js`](https://nextjs.org/docs/app/api-reference/file-conventions/loading) 的方式有所不同。
+
+只有共享佈局，沿著渲染的元件「樹」向下直到第一個 `loading.js` 文件，會被預取和快取 30 秒。
+
+這樣可以減少獲取整個動態路由的成本，也意味著你可以顯示 [即時載入狀態](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states) 來提供更好的視覺回饋給使用者。
+
+你可以通過將 `prefetch` 屬性設為 `false` 來禁用預取。或者，你可以通過將 `prefetch` 屬性設為 `true` 來預取超過載入邊界（beyond the loading boundaries）的完整頁面資料。
+
+詳情請參閱 [`<Link>` API 參考](https://nextjs.org/docs/app/api-reference/components/link)。
+
+> 提醒：
+>
+> - 預取功能只在生產環境中啟用，開發環境中不會啟用。
+
+### 3. 快取（Caching）
+
+Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/docs/app/building-your-application/caching#client-side-router-cache) 的**內存客戶端快取（in-memory client-side cache）**。當使用者在應用程式中導航時，預取的路由片段和訪問過的路由的 React 伺服器元件有效載荷會被儲存在快取中。
+
+這意味著在導航時，快取會盡可能被重用，而不是向伺服器發出新的請求，從而通過減少請求次數和傳輸的資料量來提高性能。
+
+了解更多 [路由快取](https://nextjs.org/docs/app/building-your-application/caching#client-side-router-cache) 的工作原理和配置方法。
+
+### 4. 部分渲染（Partial Rendering）
+
+部分渲染意味著在客戶端上，只有在導航時變更的路由片段會重新渲染，共享的段落會被保留。
+
+例如，在導航兩個相鄰路由 `/dashboard/settings` 和 `/dashboard/analytics` 之間時，`settings` 和 `analytics` 頁面會被渲染，共享的 `dashboard` 佈局會被保留。
+
+![image](https://github.com/user-attachments/assets/ad903b4d-bc40-4b68-9c11-8923ad2ea7da)
+
+如果沒有部分渲染，每次導航都會導致客戶端上的整個頁面重新渲染。僅渲染變更的段落可以減少傳輸的資料量和執行時間，從而提升性能。
+
+### 5. 軟導航（Soft Navigation）
+
+在瀏覽器中，頁面之間的導航通常是「硬導航（hard navigation）」。Next.js 的 App Router 啟用了頁面之間的「軟導航」，確保只有變更的路由片段會重新渲染（部分渲染），這樣可以在導航過程中保留客戶端的 React 狀態。
+
+### 6. 前進和後退導航（Back and Forward Navigation）
+
+預設情況下，Next.js 會維持向後和向前導航的滾動位置，並重複利用 [路由快取](https://nextjs.org/docs/app/building-your-application/caching#client-side-router-cache) 中的路由片段（route segments）。
+
+### 7. 在 `pages/` 和 `app/` 之間的路由
+
+在從 `pages/` 逐步遷移到 `app/` 時，Next.js 路由器會自動處理兩者之間的硬導航。為了檢測從 `pages/` 遷移到 `app/` 的轉換，會有一個客戶端路由過濾器，利用機率檢查應用路由，這可能偶爾會導致誤報。預設情況下，此類情況應該非常罕見，因為我們將誤報的可能性配置為 0.01%。這個可能性可以通過 `next.config.js` 中的 `experimental.clientRouterFilterAllowedRate` 選項來自定義。需要注意的是，降低誤報率會增加客戶端包中生成的過濾器的大小。
+
+另外，如果你希望完全禁用這個處理並手動管理 `pages/` 和 `app/` 之間的路由，可以在 `next.config.js` 中將 `experimental.clientRouterFilter` 設為 `false`。當此功能被禁用時，任何與 app 路由重疊的 pages 中的動態路由將無法正常導航。
 
 # 結論
 
