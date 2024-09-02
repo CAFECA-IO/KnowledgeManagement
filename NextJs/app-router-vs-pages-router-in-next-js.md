@@ -1160,7 +1160,7 @@ export function LocaleSwitcher() {
 
 預期錯誤是指應用程式正常操作期間可能發生的錯誤，例如：來自 [伺服器端表單驗證](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#server-side-form-validation) 或失敗的請求。這些錯誤應該被明確處理並回傳給客戶端。
 
-#### 處理伺服器操作中的預期錯誤（Expected Errors from Server Actions）
+#### 處理伺服器操作中的預期錯誤
 
 使用 `useFormState` hook 來管理伺服器操作的狀態，包括錯誤處理。
 
@@ -1218,7 +1218,7 @@ export function Signup() {
 
 我們還可以使用回傳的狀態來顯示來自客戶端元件的 toast 提示訊息。
 
-#### 處理伺服器元件中的預期錯誤（Expected Errors from Server Components）
+#### 處理伺服器元件中的預期錯誤
 
 在伺服器元件內部抓取資料時，我們可以使用響應來有條件地渲染錯誤訊息或 [`redirect`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirect-function)。
 
@@ -1245,11 +1245,11 @@ export default async function Page() {
 - **可選作法**：使用巢狀的 `error.js` 檔案（例如 `app/dashboard/error.js`）來處理更精細的未捕獲錯誤。
 - **不常見做法**：使用 `global-error.js` 在根佈局中處理未捕獲的錯誤。
 
-#### 使用錯誤邊界（Using Error Boundaries）
+#### 使用錯誤邊界（Error Boundaries）
 
-Next.js 使用錯誤邊界來處理未捕獲的錯誤。錯誤邊界會捕獲其子元件中的錯誤並顯示回退 UI（fallback UI），而不是崩潰的元件樹。
+Next.js 使用錯誤邊界（Error Boundaries）來處理未捕獲的錯誤。錯誤邊界會捕獲其子元件中的錯誤並顯示回退 UI（fallback UI），而不是崩潰的元件樹。
 
-通過在路由段中新增一個 `error.tsx` 文件並導出一個 React 元件來建立錯誤邊界：
+通過在路由段中新增一個 `error.tsx` 檔案並導出一個 React 元件來建立錯誤邊界：
 
 app/dashboard/error.tsx
 
@@ -1282,13 +1282,13 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
 如果我們希望錯誤向上冒泡到父級錯誤邊界（parent error boundary），可以在渲染 `error` 元件時 `throw`。
 
-#### 處理巢狀路由中的錯誤（Handling Errors in Nested Routes）
+#### 處理巢狀路由中的錯誤
 
 錯誤會冒泡到最近的父級錯誤邊界。這讓我們可以透過在[路由層次結構（route hierarchy）](https://nextjs.org/docs/app/building-your-application/routing#component-hierarchy)的不同層級放置 `error.tsx` 檔案，來進行更精細的錯誤處理。
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d06fa267-5063-4931-8ade-fa45a882a2e2/0d3c811c-9cb0-4c8f-80b8-4052e392a4ff/image.png)
 
-#### 處理全域錯誤（Handling Global Errors）
+#### 處理全域錯誤
 
 雖然較少見，但我們可以在根佈局中使用 `app/global-error.js` 處理錯誤，這個檔案位於根 app 目錄中，即使在使用[國際化（internationalization）](https://nextjs.org/docs/app/building-your-application/routing/internationalization)時也是如此。
 
