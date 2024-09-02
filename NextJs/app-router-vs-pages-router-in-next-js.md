@@ -1354,11 +1354,11 @@ export default function Loading() {
 
 ### 使用 Suspense 進行串流
 
-除了 `loading.js`，你還可以手動為自己的 UI 元件創建 Suspense 邊界。App Router 支援在 [Node.js 和 Edge 執行環境](https://nextjs.org/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes)中使用 [Suspense](https://react.dev/reference/react/Suspense) 進行串流。
+除了 `loading.js`，我們還可以手動為自己的 UI 元件創建 Suspense 邊界。App Router 支援在 [Node.js 和 Edge 執行環境](https://nextjs.org/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes)中使用 [Suspense](https://react.dev/reference/react/Suspense) 進行串流。
 
 > 值得注意：
 >
-> - [某些瀏覽器](https://bugs.webkit.org/show_bug.cgi?id=252413)會緩衝串流響應。你可能在響應超過 1024 位元組之前看不到串流響應。這通常只影響「Hello World」應用程式，而不影響實際應用程式。
+> - [某些瀏覽器](https://bugs.webkit.org/show_bug.cgi?id=252413)會緩衝串流響應。我們可能在響應超過 1024 位元組之前看不到串流響應。這通常只影響「Hello World」應用程式，而不影響實際應用程式。
 
 #### 什麼是串流？
 
@@ -1378,7 +1378,7 @@ export default function Loading() {
 
 結合 React 和 Next.js 的 SSR 透過盡快向使用者顯示非互動式頁面，來幫助改善感知載效能。
 
-> 補充：具體來說，當你使用 SSR 時，伺服器會在將頁面傳送給使用者之前，先將頁面的 HTML 在伺服器端生成。這樣使用者可以盡快看到頁面的內容，即使這時候頁面還不能進行互動（例如按鈕還不能點擊、表單還不能提交），但至少頁面的視覺內容已經顯示出來了，讓使用者不會覺得網站很慢或者沒有反應。
+> 補充：具體來說，當我們使用 SSR 時，伺服器會在將頁面傳送給使用者之前，先將頁面的 HTML 在伺服器端生成。這樣使用者可以盡快看到頁面的內容，即使這時候頁面還不能進行互動（例如按鈕還不能點擊、表單還不能提交），但至少頁面的視覺內容已經顯示出來了，讓使用者不會覺得網站很慢或者沒有反應。
 >
 > 這種方式能讓使用者感覺網站載入得更快，因為他們在資料尚未完全載入或 JavaScript 還沒完全執行之前，就已經能夠看到頁面的主要內容了。
 
@@ -1386,7 +1386,7 @@ export default function Loading() {
 
 然而，由於伺服器上需要完成所有資料獲取，才能將頁面顯示給使用者，它仍然可能較慢。
 
-**串流（Streaming）**允許你將頁面的 HTML 分解為較小的塊，並逐步將這些塊從伺服器發送到客戶端。
+**串流（Streaming）** 允許我們將頁面的 HTML 分解為較小的塊，並逐步將這些塊從伺服器發送到客戶端。
 
 ![image](https://github.com/user-attachments/assets/72e1b3f0-f925-4751-acfd-b2c6951707f0)
 
@@ -1396,7 +1396,7 @@ export default function Loading() {
 
 ![image](https://github.com/user-attachments/assets/5364d837-4214-48c6-8222-a040209ce6fc)
 
-當你想避免長時間的資料請求阻塞頁面渲染時，串流特別有用，因為它可以減少 [首字節時間 (TTFB)](https://web.dev/ttfb/) 和 [首次內容渲染 (FCP)](https://web.dev/first-contentful-paint/)。它還有助於提高 [互動時間 (TTI)](https://developer.chrome.com/en/docs/lighthouse/performance/interactive/)，尤其是在較慢的設備上。
+當我們想避免長時間的資料請求阻塞頁面渲染時，串流特別有用，因為它可以減少 [首字節時間 (TTFB)](https://web.dev/ttfb/) 和 [首次內容渲染 (FCP)](https://web.dev/first-contentful-paint/)。它還有助於提高 [互動時間 (TTI)](https://developer.chrome.com/en/docs/lighthouse/performance/interactive/)，尤其是在較慢的設備上。
 
 ## 6. **重新導向（Redirecting）**
 
