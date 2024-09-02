@@ -777,6 +777,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 /settings 底下的頁面元件就會以 children props 的方式傳入 Layout 中，達到元件共用且切換路由時 scroll bar 會維持原本位置的效果！
 
+這裡針對 Layouts 的部分再進一步說明，而 [Templates](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#templates) 就先不談。
+
 ### 版面配置 (Layouts)
 
 版面配置是一種在多個路由之間**共用**的 UI。導航時，版面配置會保留狀態，保持互動性且不會重新渲染(re-render)。而且，版面配置還可以[巢狀](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#nesting-layouts)(nested)。
@@ -808,7 +810,7 @@ export default function DashboardLayout({
 
 在 Layout 中有個最特殊的 layout，就是 Root Layout，它的有些規則與一般的 Layouts 不同。
 
-### 根版面配置 (Root Layout) - 必要
+#### 根版面配置 (Root Layout) - 必要
 
 根版面配置定義在 `app` 目錄的頂層，並適用於所有路由。此版面配置是**必要**的，且必須包含 `html` 和 `body` 標籤，允許我們修改伺服器回傳的初始 HTML。
 
@@ -848,7 +850,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 - 可以使用[路由群組](https://nextjs.org/docs/app/building-your-application/routing/route-groups)來建立多個根版面配置（root layouts）。請參閱[這裡的範例](https://nextjs.org/docs/app/building-your-application/routing/route-groups#creating-multiple-root-layouts)。
 - 根版面配置（root layout）取代了 `pages` 目錄中的 [`_app.js`](https://nextjs.org/docs/pages/building-your-application/routing/custom-app) 和 [`_document.js`](https://nextjs.org/docs/pages/building-your-application/routing/custom-document) 檔案。[查看遷移指南](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#migrating-_documentjs-and-_appjs)。
 
-### 巢狀版面配置 (Nesting Layouts)
+#### 巢狀版面配置 (Nesting Layouts)
 
 預設情況下，資料夾層級(folder hierarchy)中的 layouts 是**巢狀**的，意思就是，layouts 會通過其 `children` 屬性來包裹子版面配置(child layouts)。
 
