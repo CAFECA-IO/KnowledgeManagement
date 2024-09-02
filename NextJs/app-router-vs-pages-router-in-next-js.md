@@ -1015,7 +1015,7 @@ const router = useRouter();
 router.push("/dashboard", { scroll: false });
 ```
 
-## `useRouter()` hook
+### `useRouter()` hook
 
 `useRouter` hook 允許我們從[客戶端元件](https://nextjs.org/docs/app/building-your-application/rendering/client-components)程式化地更改路由。
 
@@ -1041,7 +1041,7 @@ export default function Page() {
 
 > 建議： 除非有特定需求才使用 useRouter，否則請使用 <Link> 元件在路由之間進行導航。
 
-## `redirect` 函式
+### `redirect` 函式
 
 對於[伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)，請改為使用 `redirect` 函式。
 
@@ -1076,13 +1076,13 @@ export default async function Profile({ params }: { params: { id: string } }) {
 
 有關更多資訊，請參閱 [`redirect` API 參考資料](https://nextjs.org/docs/app/api-reference/functions/redirect)。
 
-## 使用原生的 History API
+### 使用原生的 History API
 
 Next.js 允許我們使用原生的 [`window.history.pushState`](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState) 和 [`window.history.replaceState`](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState) 方法來更新瀏覽器的歷史紀錄堆疊，而不需要重新載入頁面。
 
 `pushState` 和 `replaceState` 的調用會與 Next.js Router 整合，讓我們能夠與 [`usePathname`](https://nextjs.org/docs/app/api-reference/functions/use-pathname) 和 [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) 同步。
 
-### `window.history.pushState`
+#### `window.history.pushState`
 
 使用此方法來新增一個新的瀏覽器歷史紀錄。使用者可以回到先前的狀態。例如，要對商品清單進行排序：
 
@@ -1113,7 +1113,7 @@ export default function SortProducts() {
 }
 ```
 
-### `window.history.replaceState`
+#### `window.history.replaceState`
 
 使用此方法來替換瀏覽器歷史記錄堆疊中的當前條目（也就是：直接取代當前瀏覽器的歷史紀錄）。使用者無法回到之前的狀態。
 
