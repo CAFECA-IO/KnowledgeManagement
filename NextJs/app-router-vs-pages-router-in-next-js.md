@@ -824,7 +824,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 比方說，在 `/dashboard` 中建立一個 `layout.tsx`，則 /dashboard/about，與 /dashboard/settings，都會套用到此 layout。
 
-![image](https://github.com/user-attachments/assets/660eab58-e41f-42e8-b79e-90a2b0b8cc8e)
+![image](https://github.com/user-attachments/assets/7a193c2b-529a-4467-b590-c09a15fe84bd)
+
 
 注意事項：
 
