@@ -126,14 +126,14 @@ App Router :
 3. URL：
    ![image](https://github.com/user-attachments/assets/8cfd70a7-d35c-4b82-b6a0-b719045fec57)
 
-   - URL 段 (URL Segment)：由斜線分隔的 URL 路徑的一部分。「段」、或稱「片段」。
+   - URL 段 (URL Segment)：由斜線分隔的 URL 路徑的一部分。
    - URL 路徑 (URL Path)：在域名之後出現的 URL 部分 (由段組成) 。
 
 4. 資料夾和檔案的角色：
    Next.js 使用基於檔案系統 (file-system based) 的路由器，其中：
 
-   - **資料夾 (Folders) ：**用於定義路由。一個路由是巢狀資料夾的一個單一路徑，它遵循檔案系統的層次結構，從 **根資料夾** 到包含 `page.js` 檔案的最終 **葉資料夾**。
-   - **檔案 (Files) ：**用於為路由段建立 UI。
+   - 資料夾 (Folders)：用於定義路由。一個路由是巢狀資料夾的一個單一路徑，它遵循檔案系統的層次結構，從 **根資料夾** 到包含 `page.js` 檔案的最終 **葉資料夾**。
+   - 檔案 (Files)：用於為路由段建立 UI。
 
 5. 路由段 (Route Segments)：
    路由中的每個資料夾代表一個路由段。每個路由段都對應到 URL 路徑中的一個段。
@@ -993,9 +993,9 @@ export default function Page() {
 
 我們還可以將其他可選的屬性傳遞給 `<Link>`。詳情請參閱 [API 參考資料](https://nextjs.org/docs/app/api-reference/components/link)。
 
-#### 範例 - 連結到動態片段
+#### 範例 - 連結到動態段 (Dynamic Segments)
 
-當我們要連結到[動態片段](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)時，可以使用[模板字面值和插值](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals)（template literals and interpolation）來生成一個連結清單。
+當我們要連結到[動態路由 (dynamic segments)](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)時，可以使用[模板字面值和插值](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals)（template literals and interpolation）來生成一個連結清單。
 
 例如，生成一個部落格文章列表：
 
