@@ -1354,11 +1354,11 @@ export default function Loading() {
 
 ### 使用 Suspense 進行串流
 
-除了 `loading.js`，我們還可以手動為自己的 UI 元件創建 Suspense 邊界。App Router 支援在 [Node.js 和 Edge 執行環境](https://nextjs.org/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes)中使用 [Suspense](https://react.dev/reference/react/Suspense) 進行串流。
+除了 `loading.js`，我們還可以手動為自己的 UI 元件建立 Suspense 邊界。App Router 支援在 [Node.js 和 Edge 執行環境](https://nextjs.org/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes)中使用 [Suspense](https://react.dev/reference/react/Suspense) 進行串流。
 
 > 值得注意：
 >
-> - [某些瀏覽器](https://bugs.webkit.org/show_bug.cgi?id=252413)會緩衝串流響應。我們可能在響應超過 1024 位元組之前看不到串流響應。這通常只影響「Hello World」應用程式，而不影響實際應用程式。
+> - [某些瀏覽器](https://bugs.webkit.org/show_bug.cgi?id=252413)會緩衝串流回應。我們可能在回應超過 1024 bytes 之前看不到串流回應。這通常只影響「Hello World」應用程式，而不影響實際應用程式。
 
 #### 什麼是串流？
 
@@ -1404,7 +1404,50 @@ export default function Loading() {
 
 ![image](https://github.com/user-attachments/assets/5364d837-4214-48c6-8222-a040209ce6fc)
 
-當我們想避免長時間的資料請求阻塞頁面渲染時，串流特別有用，因為它可以減少 [首字節時間 (TTFB)](https://web.dev/ttfb/) 和 [首次內容渲染 (FCP)](https://web.dev/first-contentful-paint/)。它還有助於提高 [互動時間 (TTI)](https://developer.chrome.com/en/docs/lighthouse/performance/interactive/)，尤其是在較慢的設備上。
+當我們想避免長時間的資料請求阻塞頁面渲染時，
+串流特別有用，因為它可以減少 [第一個位元組時間 (TTFB)](https://web.dev/ttfb/) 和 [首次顯示內容所需時間 (FCP)](https://web.dev/first-contentful-paint/)。它還有助於提高 [互動準備時間 (TTI)](https://developer.chrome.com/en/docs/lighthouse/performance/interactive/)，尤其是在較慢的設備上。
+
+#### 範例
+
+`<Suspense>` 的運作方式是包裹執行異步操作（例如抓取資料）的元件，當它進行時顯示 fallback UI（例如骨架畫面或轉圈圈），然後在操作完成後替換你的元件。
+
+app/dashboard/page.tsx
+
+```jsx
+import { Suspense } from "react";
+import { PostFeed, Weather } from "./Components";
+
+export default function Posts() {
+  return (
+    <section>
+      <Suspense fallback={<p>Loading feed...</p>}>
+        <PostFeed />
+      </Suspense>
+      <Suspense fallback={<p>Loading weather...</p>}>
+        <Weather />
+      </Suspense>
+    </section>
+  );
+}
+```
+
+透過使用 Suspense，你可以享受到以下優點：
+
+1. **串流伺服器渲染** - 從伺服器到客戶端逐步渲染 HTML。
+2. **選擇性 hydrate** - React 根據使用者互動優先考慮哪些元件首先進行互動。
+
+要了解更多 Suspense 的範例和用例，請參閱 [React 文件](https://react.dev/reference/react/Suspense)。
+
+#### SEO
+
+- Next.js 會等待 [`generateMetadata`](https://nextjs.org/docs/app/api-reference/functions/generate-metadata) 中的資料抓取完成後，才開始將 UI 串流到客戶端。這樣可以保證串流回應（response）的第一部分包含 `<head>` 標籤。
+- 由於串流是由伺服器渲染的，因此不會影響 SEO。你可以使用 Google 的 [Rich Results Test](https://search.google.com/test/rich-results) 工具來查看你的頁面在 Google 網頁爬蟲中的顯示方式，並檢視序列化後的 HTML（[來源](https://web.dev/rendering-on-the-web/#seo-considerations)）。
+
+#### 狀態碼
+
+在串流過程中，會回傳 `200` 狀態碼(Status Codes)來表示請求成功。
+
+伺服器仍然可以在串流的內容中向客戶端傳達錯誤或問題，例如使用 [`redirect`](https://nextjs.org/docs/app/api-reference/functions/redirect) 或 [`notFound`](https://nextjs.org/docs/app/api-reference/functions/not-found) 時。由於回應標頭（response headers）已經傳送給客戶端，因此回應的狀態碼無法更新。這不會影響 SEO。
 
 ## 6. **重新導向（Redirecting）**
 
