@@ -1154,7 +1154,7 @@ export function LocaleSwitcher() {
 錯誤可以分為兩類：**預期錯誤（expected errors）**和**未捕獲的例外情況（uncaught exceptions）**：
 
 - **將預期錯誤建模為回傳值**：避免在伺服器操作（Server Actions）中使用 `try`/`catch` 來處理預期錯誤。使用 `useFormState` 來管理這些錯誤並將它們回傳給客戶端。
-- **使用錯誤邊界處理未預期的錯誤**：使用 `error.tsx` 和 `global-error.tsx` 文件實現錯誤邊界，來處理未預期的錯誤並提供回退的 UI（fallback UI）。
+- **使用錯誤邊界處理未預期的錯誤**：使用 `error.tsx` 和 `global-error.tsx` 文件實現錯誤邊界，來處理未預期的錯誤並提供備援 UI (fallback UI)。
 
 ### 處理預期錯誤（Expected Errors）
 
@@ -1247,7 +1247,7 @@ export default async function Page() {
 
 #### 使用錯誤邊界（Error Boundaries）
 
-Next.js 使用錯誤邊界（Error Boundaries）來處理未捕獲的錯誤。錯誤邊界會捕獲其子元件中的錯誤並顯示回退 UI（fallback UI），而不是崩潰的元件樹。
+Next.js 使用錯誤邊界（Error Boundaries）來處理未捕獲的錯誤。錯誤邊界會捕獲其子元件中的錯誤並顯示備援 UI (fallback UI)，而不是崩潰的元件樹。
 
 通過在路由段中新增一個 `error.tsx` 檔案並導出一個 React 元件來建立錯誤邊界：
 
@@ -1325,7 +1325,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
 
 ### 即時載入狀態
 
-即時載入狀態（Instant Loading States）是導航時立即顯示的後備 UI（fallback UI）。我們可以預渲染載入指示器，例如：骨架畫面（skeletons）或轉圈圈（spinners），或是未來畫面的某個小但有意義的部分，如封面照片、標題等。這有助於使用者理解應用程式正在回應，並提供更好的使用者體驗。
+即時載入狀態（Instant Loading States）是導航時立即顯示的備援 UI (fallback UI)。我們可以預渲染載入指示器，例如：骨架畫面（skeletons）或轉圈圈（spinners），或是未來畫面的某個小但有意義的部分，如封面照片、標題等。這有助於使用者理解應用程式正在回應，並提供更好的使用者體驗。
 
 在資料夾中新增一個 `loading.js` 檔案來建立一個載入狀態。
 
@@ -1409,7 +1409,7 @@ export default function Loading() {
 
 #### 範例
 
-`<Suspense>` 的運作方式是包裹執行異步操作（例如抓取資料）的元件，當它進行時顯示 fallback UI（例如骨架畫面或轉圈圈），然後在操作完成後替換你的元件。
+`<Suspense>` 的運作方式是包裹執行異步操作（例如抓取資料）的元件，當它進行時顯示 fallback UI（例如骨架畫面或轉圈圈），然後在操作完成後替換我們的元件。
 
 app/dashboard/page.tsx
 
@@ -1431,7 +1431,7 @@ export default function Posts() {
 }
 ```
 
-透過使用 Suspense，你可以享受到以下優點：
+透過使用 Suspense，可以享受到以下優點：
 
 1. **串流伺服器渲染** - 從伺服器到客戶端逐步渲染 HTML。
 2. **選擇性 hydrate** - React 根據使用者互動優先考慮哪些元件首先進行互動。
@@ -1441,7 +1441,7 @@ export default function Posts() {
 #### SEO
 
 - Next.js 會等待 [`generateMetadata`](https://nextjs.org/docs/app/api-reference/functions/generate-metadata) 中的資料抓取完成後，才開始將 UI 串流到客戶端。這樣可以保證串流回應（response）的第一部分包含 `<head>` 標籤。
-- 由於串流是由伺服器渲染的，因此不會影響 SEO。你可以使用 Google 的 [Rich Results Test](https://search.google.com/test/rich-results) 工具來查看你的頁面在 Google 網頁爬蟲中的顯示方式，並檢視序列化後的 HTML（[來源](https://web.dev/rendering-on-the-web/#seo-considerations)）。
+- 由於串流是由伺服器渲染的，因此不會影響 SEO。可以使用 Google 的 [Rich Results Test](https://search.google.com/test/rich-results) 工具來查看我們的頁面在 Google 網頁爬蟲中的顯示方式，並檢視序列化後的 HTML（[來源](https://web.dev/rendering-on-the-web/#seo-considerations)）。
 
 #### 狀態碼
 
