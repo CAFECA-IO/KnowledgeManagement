@@ -109,7 +109,74 @@ App Router :
 
 另外，**App Router 與 Page Router 是可以並存的**，但也是有一些基本的限制，像是兩個目錄不能同時定義一個 router，否則會報錯。官網有提供如何從 Page Router migrate App Router 的[教學文章](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration)，可以參考如何轉換。
 
-以下章節將會針對 App Router 與 Page Router 的差異進行比較，並介紹 App Router 的幾個重要功能。
+以下章節將會針對 App Router 與 Page Router 的差異進行比較，並介紹 App Router 的幾個重要功能。但在介紹之前，先趁現在介紹一些可能會在文件中看到的術語。
+
+1. 路由 (Route)：每個應用程式的骨架就是路由，路由指的是網址的路徑，例如 `/about`、`/blog` 等
+
+2. 元件樹：
+   ![image](https://github.com/user-attachments/assets/f5c20deb-0589-47f5-a73c-32e3b58e683c)
+
+   - 樹狀結構 (Tree)：用於視覺化階層結構的慣例。例如，父元件和子元件組成的元件樹、資料夾結構等。
+   - 子樹 (Subtree)：樹狀結構的一部分，從新的根節點 (第一個) 開始，到樹葉 (最後一個) 結束。
+   - 根節點 (Root)：樹或子樹中的第一個節點，例如根布局。
+   - 葉節點 (Leaf)：子樹中沒有子節點的節點，例如 URL 路徑中的最後一段。
+
+3. URL：
+   ![image](https://github.com/user-attachments/assets/8cfd70a7-d35c-4b82-b6a0-b719045fec57)
+
+   - URL 段 (URL Segment)：由斜線分隔的 URL 路徑的一部分。「段」、或稱「片段」。
+   - URL 路徑 (URL Path)：在域名之後出現的 URL 部分 (由段組成) 。
+
+4. 資料夾和檔案的角色：
+   Next.js 使用基於檔案系統 (file-system based) 的路由器，其中：
+
+   - **資料夾 (Folders) ：**用於定義路由。一個路由是巢狀資料夾的一個單一路徑，它遵循檔案系統的層次結構，從 **根資料夾** 到包含 `page.js` 檔案的最終 **葉資料夾**。
+   - **檔案 (Files) ：**用於為路由段建立 UI。
+
+5. 路由段 (Route Segments)：
+   路由中的每個資料夾代表一個路由段。每個路由段都對應到 URL 路徑中的一個段。
+   ![image](https://github.com/user-attachments/assets/1243f3ed-6862-40fa-89aa-14bf33b1d74d)
+
+   - 路由段 (Route Segment)：由檔案或資料夾名稱定義的路由部分。例如，`/app/blog/page.tsx` 中的 `blog` 是路由段。
+   - 路由檔案 (Route File)：定義路由段的檔案。例如，`/app/blog/page.tsx` 是一個路由檔案。
+   - 路由資料夾 (Route Folder)：包含路由檔案的資料夾。例如，`/app/blog` 是一個路由資料夾。
+   - 路由根 (Route Root)：路由樹的根。例如，`/app` 是一個路由根。
+
+6. 巢狀路由 (Nested Routes) ：
+   要建立一個巢狀路由，就將資料夾巢狀在一起。例如，可以透過在 `app` 目錄中巢狀兩個新資料夾來添加新的 `/dashboard/settings` 路由。
+   `/dashboard/settings` 路由由三個段組成：
+
+   - `/` (根段)
+   - `dashboard` (段)
+   - `settings` (葉段)
+
+7. 檔案慣例 (File Conventions)：
+   Next.js 提供了一組特殊檔案名稱，是專門用來在巢狀路由中，建立具有特定行為的 UI：
+   | [`layout`](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#layouts) | 用於段及其子段的共享 UI |
+   | [`page`](https://nextjs.org/docs/app/building-your-application/routing/pages) | 路由的唯一 UI，並使路由公開可訪問 |
+   | [`loading`](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) | 用於段及其子段的載入 UI |
+   | [`not-found`](https://nextjs.org/docs/app/api-reference/file-conventions/not-found) | 用於段及其子段的未找到 UI |
+   | [`error`](https://nextjs.org/docs/app/building-your-application/routing/error-handling) | 用於段及其子段的錯誤 UI |
+   | [`global-error`](https://nextjs.org/docs/app/building-your-application/routing/error-handling) | 全域錯誤 UI |
+   | [`route`](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) | 伺服器端 API 端點 |
+   | [`template`](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#templates) | 專門重新渲染的佈局 UI |
+   | [`default`](https://nextjs.org/docs/app/api-reference/file-conventions/default) | 並行路由 的備用 UI |
+
+   > 注意：這些特殊檔案的副檔名可以是 .js、.jsx 或 .tsx。
+
+8. 元件層次結構 (Component Hierarchy)：
+   在路由段的特殊檔案中定義的 React 元件會以特定的層次結構渲染：
+
+   - `layout.js`
+   - `template.js`
+   - `error.js`（React 錯誤邊界）
+   - `loading.js`（React 延遲邊界）
+   - `not-found.js`（React 錯誤邊界）
+   - `page.js` 或巢狀 `layout.js` <br>
+
+   ![image](https://github.com/user-attachments/assets/5164bd1c-1b6b-433f-8a21-96350726ac08)
+   在巢狀路由中，某段的元件會巢狀在其父段的元件內部。
+   ![image](https://github.com/user-attachments/assets/4bfed3fc-6b4f-4a9b-91ec-4cd813dbcc4e)
 
 # 專案建立——專案架構差異
 
@@ -258,6 +325,8 @@ App Router 的 routing system 則改成，根目錄或 `/src` 中會有一個 `/
 以下來自[官方文件提供的示意圖](https://nextjs.org/docs/app/building-your-application/routing)，可以看得更清楚：
 
 ![image](https://github.com/user-attachments/assets/6918e8a7-398b-456d-ae27-288757d0d2ce)
+
+除了特殊文件之外，還可以將其他的文件（例如元件、樣式、測試等）一起放置在 app 目錄中的資料夾內。只有 page.js 或 route.js 回傳的內容是公開可訪問的。
 
 # Rendering——渲染的四種方式、路由系統對四種渲染的應用差異、App Router 渲染概念
 
