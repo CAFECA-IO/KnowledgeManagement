@@ -710,7 +710,7 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 
 串流是 Next.js App Router 預設內建的功能。這有助於提高初次頁面載入效能，以及需要依賴較慢資料獲取的 UI（這些資料會阻塞整個路由的渲染）。例如，產品頁面上的評論。
 
-我們可以使用 `loading.js` 和 [React Suspense](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) 開始串流路由段和 UI 元件。請參見 [Loading UI 和串流](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) 以獲取更多資訊。
+我們可以使用 `loading.js` 和 [React Suspense](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) 開始串流路由段和 UI 元件。請參考 [Loading UI 和串流](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) 以獲取更多資訊。
 
 ## 2. 客戶端元件（Client Component）
 
@@ -1585,7 +1585,7 @@ export async function createPost(id: string) {
 > - `redirect` 也接受絕對 URL，並且可以用於重新導向到外部連結。
 > - 如果你想在渲染過程之前進行重新導向，請使用 [`next.config.js`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs) 或 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware)。
 
-請參見 [`redirect` API 參考](https://nextjs.org/docs/app/api-reference/functions/redirect) 以獲取更多資訊。
+請參考 [`redirect` API 參考](https://nextjs.org/docs/app/api-reference/functions/redirect) 以獲取更多資訊。
 
 ### `permanentRedirect` 函數
 
@@ -1619,7 +1619,7 @@ export async function updateUsername(username: string, formData: FormData) {
 > - `permanentRedirect` 也接受絕對 URL，並且可以用於重新導向到外部連結。
 > - 如果你想在渲染過程之前進行重新導向，請使用 [`next.config.js`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs) 或 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware)。
 
-請參見 [`permanentRedirect` API 參考](https://nextjs.org/docs/app/api-reference/functions/permanentRedirect) 以獲取更多資訊。
+請參考 [`permanentRedirect` API 參考](https://nextjs.org/docs/app/api-reference/functions/permanentRedirect) 以獲取更多資訊。
 
 ### `useRouter()` hook
 
@@ -1647,7 +1647,7 @@ export default function Page() {
 >
 > - 如果你不需要程式化地為使用者導航，應該直接使用 [`<Link>`](https://nextjs.org/docs/app/api-reference/components/link) 元件。
 
-請參見 [`useRouter` API 參考](https://nextjs.org/docs/app/api-reference/functions/use-router) 以獲取更多資訊。
+請參考 [`useRouter` API 參考](https://nextjs.org/docs/app/api-reference/functions/use-router) 以獲取更多資訊。
 
 ### `next.config.js` 中的 `redirects`
 
@@ -1680,7 +1680,7 @@ module.exports = {
 };
 ```
 
-請參見 [`redirects` API 參考](https://nextjs.org/docs/app/api-reference/next-config-js/redirects) 以獲取更多資訊。
+請參考 [`redirects` API 參考](https://nextjs.org/docs/app/api-reference/next-config-js/redirects) 以獲取更多資訊。
 
 > 了解一下:
 >
@@ -1707,7 +1707,9 @@ export function middleware(request: Request) {
 }
 ```
 
-請參見 [`NextResponse.redirect` API 參考](https://nextjs.org/docs/app/api-reference/next-response#redirect) 以獲取更多資訊。
+請參考 [`NextResponse.redirect` API 參考](https://nextjs.org/docs/app/api-reference/next-response#redirect) 以獲取更多資訊。
+
+如果要大規模管理重新導向（超過 1000 個），可以參考 [Managing redirects at scale (advanced)](https://nextjs.org/docs/app/building-your-application/routing/redirecting#managing-redirects-at-scale-advanced)，這裡就先不贅述。
 
 ## 7. **路由分組（Route Groups）**
 
