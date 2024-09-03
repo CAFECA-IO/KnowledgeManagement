@@ -1522,10 +1522,192 @@ export default function Posts() {
 
 ## 6. **重新導向（Redirecting）**
 
-- **App Router**：由於其靈活的路由結構，支援更複雜的重新導向邏輯。可以針對每個路由或一組路由配置重新導向。
+- **App Router**：由於其靈活的路由結構，支援更複雜的重新導向邏輯。可以針對每個路由或一組路由配置重新導向，提供更多重新導向的彈性和控制。
 - **Page Router**：重新導向通常在 `next.config.js` 中使用 `redirects` 配置，或在個別頁面元件內部處理。
 
-說明：**App Router** 提供更多重新導向的彈性和控制。
+說明：
+
+在 Next.js 中，有幾種方法可以處理重新導向。以下介紹每種可用的選項、使用案例，以及如何管理大量的重新導向。
+
+| API                             | 目的                         | 位置                               | 狀態碼                           |
+| ------------------------------- | ---------------------------- | ---------------------------------- | -------------------------------- |
+| `redirect`                      | 在變更或事件後重新導向使用者 | 伺服器元件、伺服器操作、路由處理器 | 307 (暫時性) 或 303 (伺服器操作) |
+| `permanentRedirect`             | 在變更或事件後重新導向使用者 | 伺服器元件、伺服器操作、路由處理器 | 308 (永久)                       |
+| `useRouter`                     | 執行客戶端導航               | 客戶端元件中的事件處理器           | 不適用                           |
+| `redirects` in `next.config.js` | 根據路徑重新導向傳入的請求   | `next.config.js` 檔案              | 307 (暫時性) 或 308 (永久)       |
+| `NextResponse.redirect`         | 根據條件重新導向傳入的請求   | 中介軟體                           | 任何                             |
+
+> 提供英文做參考
+>
+> 伺服器元件 : Server Components
+>
+> 伺服器操作 : Server Actions
+>
+> 路由處理器 : Route Handlers
+>
+> 客戶端元件中的事件處理器 : Event Handlers in Client Components
+>
+> 中介軟體 : Middleware
+
+### `redirect` 函數
+
+`redirect` 函數允許你將使用者重新導向到另一個 URL。你可以在 [伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)、[路由處理器](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 和 [伺服器操作](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) 中呼叫 `redirect`。
+
+`redirect` 通常在變更或事件後使用。
+
+例如，建立一篇文章：
+
+app/actions.tsx
+
+```tsx
+"use server";
+
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+
+export async function createPost(id: string) {
+  try {
+    // Call database
+  } catch (error) {
+    // Handle errors
+  }
+
+  revalidatePath("/posts"); // Update cached posts
+  redirect(`/post/${id}`); // Navigate to the new post page
+}
+```
+
+> 了解一下:
+>
+> - `redirect` 預設回傳 307 (暫時性重新導向) 狀態碼。當在伺服器操作中使用時，回傳 303 (查看其他)，這通常用於在 POST 請求後重新導向到成功頁面。
+> - `redirect` 內部會拋出錯誤，因此應在 `try/catch` 區塊之外呼叫。
+> - `redirect` 可以在客戶端元件的渲染過程中呼叫，但不能在事件處理器中呼叫。你可以使用 [`useRouter` hook](https://nextjs.org/docs/app/building-your-application/routing/redirecting#userouter-hook) 來代替。
+> - `redirect` 也接受絕對 URL，並且可以用於重新導向到外部連結。
+> - 如果你想在渲染過程之前進行重新導向，請使用 [`next.config.js`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs) 或 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware)。
+
+請參見 [`redirect` API 參考](https://nextjs.org/docs/app/api-reference/functions/redirect) 以獲取更多資訊。
+
+### `permanentRedirect` 函數
+
+`permanentRedirect` 函數允許你**永久性**地將使用者重新導向到另一個 URL。你可以在 [伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)、[路由處理器](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 和 [伺服器操作](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) 中呼叫 `permanentRedirect`。
+
+`permanentRedirect` 通常在變更或事件後使用，該事件改變了實體的標準 URL，例如在使用者更改使用者名稱後更新使用者的資料頁面 URL：
+
+app/actions.ts
+
+```tsx
+"use server";
+
+import { permanentRedirect } from "next/navigation";
+import { revalidateTag } from "next/cache";
+
+export async function updateUsername(username: string, formData: FormData) {
+  try {
+    // Call database
+  } catch (error) {
+    // Handle errors
+  }
+
+  revalidateTag("username"); // Update all references to the username
+  permanentRedirect(`/profile/${username}`); // Navigate to the new user profile
+}
+```
+
+> 了解一下:
+>
+> - `permanentRedirect` 預設回傳 308 (永久重新導向) 狀態碼。
+> - `permanentRedirect` 也接受絕對 URL，並且可以用於重新導向到外部連結。
+> - 如果你想在渲染過程之前進行重新導向，請使用 [`next.config.js`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs) 或 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware)。
+
+請參見 [`permanentRedirect` API 參考](https://nextjs.org/docs/app/api-reference/functions/permanentRedirect) 以獲取更多資訊。
+
+### `useRouter()` hook
+
+如果你需要在客戶端元件中的事件處理器內進行重新導向，你可以使用 `useRouter` hook 的 `push` 方法。例如：
+
+app/page.tsx
+
+```tsx
+"use client";
+
+import { useRouter } from "next/navigation";
+
+export default function Page() {
+  const router = useRouter();
+
+  return (
+    <button type='button' onClick={() => router.push("/dashboard")}>
+      Dashboard
+    </button>
+  );
+}
+```
+
+> 了解一下:
+>
+> - 如果你不需要程式化地為使用者導航，應該直接使用 [`<Link>`](https://nextjs.org/docs/app/api-reference/components/link) 元件。
+
+請參見 [`useRouter` API 參考](https://nextjs.org/docs/app/api-reference/functions/use-router) 以獲取更多資訊。
+
+### `next.config.js` 中的 `redirects`
+
+`next.config.js` 文件中的 `redirects` 選項允許你將傳入的請求路徑重新導向到不同的目的地路徑。當你更改頁面的 URL 結構或有預先知道的重新導向列表時，這非常有用。
+
+`redirects` 支援 [路徑](https://nextjs.org/docs/app/api-reference/next-config-js/redirects#path-matching)、[標頭、cookie 和查詢匹配](https://nextjs.org/docs/app/api-reference/next-config-js/redirects#header-cookie-and-query-matching) (path, header, cookie, and query matching)，提供你根據傳入請求進行重新導向的靈活性。
+
+要使用 `redirects`，請將選項添加到你的 `next.config.js` 文件中：
+
+next.config.js
+
+```tsx
+module.exports = {
+  async redirects() {
+    return [
+      // 基本重新導向
+      {
+        source: "/about",
+        destination: "/",
+        permanent: true,
+      },
+      // 通配符路徑匹配
+      {
+        source: "/blog/:slug",
+        destination: "/news/:slug",
+        permanent: true,
+      },
+    ];
+  },
+};
+```
+
+請參見 [`redirects` API 參考](https://nextjs.org/docs/app/api-reference/next-config-js/redirects) 以獲取更多資訊。
+
+> 了解一下:
+>
+> - `redirects` 可以回傳 307 (暫時性重新導向) 或 308 (永久重新導向) 狀態碼，具體取決於 `permanent` 選項。
+> - `redirects` 可能在平台上有限制。例如，在 Vercel 上，有 1,024 次重新導向的限制。要管理大量的重新導向 (1000+)，可以考慮使用 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware) 來處理。
+
+### `NextResponse.redirect` 中介軟體
+
+`NextResponse.redirect` 是 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware) 的一部分，可以根據條件重新導向傳入的請求。中介軟體是一種強大的工具，可以在請求處理管道的早期進行處理和轉換。
+
+app/middleware.ts
+
+```tsx
+import { NextResponse } from "next/server";
+
+export function middleware(request: Request) {
+  const url = request.nextUrl.clone();
+
+  if (url.pathname === "/old-path") {
+    return NextResponse.redirect(new URL("/new-path", request.url));
+  }
+
+  return NextResponse.next();
+}
+```
+
+請參見 [`NextResponse.redirect` API 參考](https://nextjs.org/docs/app/api-reference/next-response#redirect) 以獲取更多資訊。
 
 ## 7. **路由分組（Route Groups）**
 
