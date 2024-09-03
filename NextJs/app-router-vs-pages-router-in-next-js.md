@@ -923,7 +923,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 #### 巢狀版面配置 (Nesting Layouts)
 
-預設情況下，資料夾層級(folder hierarchy)中的 layouts 是**巢狀**的，意思就是，layouts 會通過其 `children` 屬性來包裹子版面配置(child layouts)。
+預設情況下，資料夾層次結構(folder hierarchy)中的 layouts 是**巢狀**的，意思就是，layouts 會通過其 `children` 屬性來包裹子版面配置(child layouts)。
 
 在特定的路由段（也就是資料夾）中添加 `layout.js` ，會自動**巢狀**版面配置。
 
@@ -1711,12 +1711,58 @@ export function middleware(request: Request) {
 
 如果要大規模管理重新導向（超過 1000 個），可以參考 [Managing redirects at scale (advanced)](https://nextjs.org/docs/app/building-your-application/routing/redirecting#managing-redirects-at-scale-advanced)，這裡就先不贅述。
 
-## 7. **路由分組（Route Groups）**
+## 7. **路由群組（Route Groups）**
 
-- **App Router**：允許分組路由以便更好地組織和共享路由配置。
-- **Page Router**：不支援路由分組。路由是單獨定義在 `/pages` 目錄內。
+- **App Router**：允許路由群組以便更好地組織和共享路由配置。
+- **Page Router**：不支援路由群組。路由是單獨定義在 `/pages` 目錄內。
 
-說明：**App Router** 在將路由分組以便共享配置方面有明顯優勢。
+說明：
+
+在 `app` 目錄中，巢狀的資料夾通常會對應到 URL 路徑。但我們可以透過將資料夾標記為 **路由群組** ，來避免該資料夾被包含在路由的 URL 路徑中。
+
+這樣可以將路由段和專案檔案組織成邏輯群組，而不會影響 URL 路徑結構。
+
+路由群組適用於：
+
+- [將路由組織成群組](https://nextjs.org/docs/app/building-your-application/routing/route-groups#organize-routes-without-affecting-the-url-path)，例如按網站部分、用途或團隊。
+- 在相同的路由段層級啟用[巢狀佈局](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates)：
+  - [在相同段中建立多個巢狀佈局，包括多個根佈局](https://nextjs.org/docs/app/building-your-application/routing/route-groups#creating-multiple-root-layouts)
+  - [將佈局添加到常見段中的部分路由](https://nextjs.org/docs/app/building-your-application/routing/route-groups#opting-specific-segments-into-a-layout)
+
+### 慣例
+
+可以通過將資料夾的名稱包裹在括號中來建立路由群組：`(folderName)`
+
+#### 範例 - 組織路由而不影響 URL 路徑 (Organize routes without affecting the URL path)
+
+為了組織路由而不影響 URL，建立一個群組來保持相關路由在一起。括號中的資料夾將會從 URL 中省略（例如 `(marketing)` 或 `(shop)`）。
+
+![image](https://github.com/user-attachments/assets/cb415406-1862-4c85-8750-cb44f353c938)
+
+即使 `(marketing)` 和 `(shop)` 內的路由共享相同的 URL 層次結構，你仍可以通過在它們的資料夾內添加 `layout.js` 檔案來為每個群組建立不同的佈局。
+
+![image](https://github.com/user-attachments/assets/fd851435-b128-497f-8460-782f5697fcf3)
+
+#### 範例 - 將特定段加入佈局 (Opting specific segments into a layout)
+
+要將特定路由加入佈局，請建立一個新的路由群組（例如 `(shop)`），並將共享相同佈局的路由移入該群組（例如 `account` 和 `cart`）。群組外的路由將不會共享此佈局（例如 `checkout`）。
+
+![image](https://github.com/user-attachments/assets/027afbdc-f24f-471b-991f-9257a58606f4)
+
+#### 範例 - 建立多個根佈局 (Creating multiple root layouts)
+
+要建立多個[根佈局](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#root-layout-required)，請移除頂層的 `layout.js` 檔案，並在每個路由群組內添加 `layout.js` 檔案。這對於將應用程式劃分為具有完全不同 UI 或體驗的部分非常有用。每個根佈局需要添加 `<html>` 和 `<body>` 標籤。
+
+![image](https://github.com/user-attachments/assets/8be449ad-1272-4bfb-a045-fdbc569f7405)
+
+在上面的範例中，`(marketing)` 和 `(shop)` 各自擁有自己的根佈局。
+
+> 注意：
+>
+> - 路由群組的命名除了組織作用外，沒有其他特殊意義。它們不會影響 URL 路徑。
+> - 包含路由群組的路由**不應**解析為與其他路由相同的 URL 路徑。例如，由於路由群組不影響 URL 結構，`(marketing)/about/page.js` 和 `(shop)/about/page.js` 都會解析為 `/about`，並導致錯誤。
+> - 如果我們在沒有頂層 `layout.js` 檔案的情況下使用多個根佈局，那麼首頁 `page.js` 檔案應該定義在其中一個路由群組中，例如：`app/(marketing)/page.js`。
+> - **跨多個根佈局** 的導航將導致**整頁載入**（而不是客戶端導航）。例如，從使用 `app/(shop)/layout.js` 的 `/cart` 導航到使用 `app/(marketing)/layout.js` 的 `/blog` 會導致整頁載入。這**僅適用於**多個根佈局。
 
 ## 8. **專案組織（Project Organization）**
 
