@@ -103,13 +103,15 @@ App Router :
 2. 無法使用瀏覽器 API
 3. 無法操作 DOM 事件監聽
 
-面對上述缺點，Next.js 可依照使用情境不同，將元件定義為 Server Component 或 Client Component。舉例來說，當某個元件需要使用 Hooks 管理時，可透過在程式碼開頭加上 'use client' 來標示元件類型，該元件底下的子元件也會自動視為 Client Component。
+面對上述缺點，Next.js 可依照使用情境不同，將元件定義為 Server Component 或 Client Component。舉例來說，當某個元件需要使用 Hooks 管理時，可透過在程式碼開頭加上 `'use client'` 來標示元件類型，該元件底下的子元件也會自動視為 Client Component。
 
 但也因為如此，相較於 Page Router，新版的 App Router 學習曲線會較高，需瞭解 Server 如何運作，以及判斷哪些元件適合放在 Server 或 Client 端，在使用時須特別注意。
 
 另外，**App Router 與 Page Router 是可以並存的**，但也是有一些基本的限制，像是兩個目錄不能同時定義一個 router，否則會報錯。官網有提供如何從 Page Router migrate App Router 的[教學文章](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration)，可以參考如何轉換。
 
-以下章節將會針對 App Router 與 Page Router 的差異進行比較，並介紹 App Router 的幾個重要功能。但在介紹之前，先趁現在介紹一些可能會在文件中看到的術語。
+以下章節將會針對 App Router 與 Page Router 的差異進行比較，並介紹 App Router 的幾個重要功能。但在介紹之前，先趁現在介紹一些可能會在文件中看到的術語，以及路由的基本概念。
+
+### 相關術語和路由基本概念
 
 1. 路由 (Route)：每個應用程式的骨架就是路由，路由指的是網址的路徑，例如 `/about`、`/blog` 等
 
@@ -923,7 +925,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 預設情況下，資料夾層級(folder hierarchy)中的 layouts 是**巢狀**的，意思就是，layouts 會通過其 `children` 屬性來包裹子版面配置(child layouts)。
 
-在特定的路由片段（也就是資料夾）中添加 `layout.js` ，會自動**巢狀**版面配置。
+在特定的路由段（也就是資料夾）中添加 `layout.js` ，會自動**巢狀**版面配置。
 
 例如，在 `/dashboard` 路由建立一個版面配置，也就是在 `dashboard` 目錄中新增一個 `layout.js` 檔案：
 
@@ -937,7 +939,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 }
 ```
 
-將上面兩個版面配置結合起來，根版面配置（`app/layout.js`）會包裹 dashboard 的版面配置（`app/dashboard/layout.js`），而 dashboard 的版面配置則包裹 `app/dashboard/*` 內的路由片段。
+將上面兩個版面配置結合起來，根版面配置（`app/layout.js`）會包裹 dashboard 的版面配置（`app/dashboard/layout.js`），而 dashboard 的版面配置則包裹 `app/dashboard/*` 內的路由段。
 
 簡單來說就是，巢狀會讓一般的 layout 被以 children props 的形式傳到 root layout。因此，`app/dashboard` 的子路由（像是 /dashboard/about 或者 /dashboard/settings）會同時吃到 root layout 和 dashboard layout。
 
@@ -956,8 +958,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 - 版面配置可以獲取資料。
 - 無法在父版面配置（parent layout）與它的子版面配置之間傳遞資料。但可以在路由中多次獲取相同資料，React 將會[自動對 request 進行重複資料刪除（dedupe）](https://nextjs.org/docs/app/building-your-application/caching#request-memoization)，而不會影響效能。
 - 版面配置無法訪問 `pathname`（[了解更多](https://nextjs.org/docs/app/api-reference/file-conventions/layout)）。但匯入的客戶端元件可以使用 [`usePathname`](https://nextjs.org/docs/app/api-reference/functions/use-pathname) hook 來訪問 pathname。
-- 版面配置無法訪問其下方的路由片段。要訪問所有路由片段，可以在客戶端元件中使用 [`useSelectedLayoutSegment`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segment) 或 [`useSelectedLayoutSegments`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments)。
-- 可以使用[路由群組](https://nextjs.org/docs/app/building-your-application/routing/route-groups)來選擇性地將特定路由片段包含在共用版面配置中或排除在外。
+- 版面配置無法訪問其下方的路由段。要訪問所有路由段，可以在客戶端元件中使用 [`useSelectedLayoutSegment`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segment) 或 [`useSelectedLayoutSegments`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments)。
+- 可以使用[路由群組](https://nextjs.org/docs/app/building-your-application/routing/route-groups)來選擇性地將特定路由段包含在共用版面配置中或排除在外。
 
 ## 3. **連結和導航（Linking and Navigating）**
 
@@ -1388,7 +1390,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
 
 說明：
 
-特殊檔案 `loading.js` 幫助我們使用 [React Suspense](https://react.dev/reference/react/Suspense) 建立有意義的載入 UI。透過這個約定，我們可以在路由片段的內容載入時，從伺服器顯示 [即時載入狀態](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states)。一旦渲染完成，新內容會自動替換。
+特殊檔案 `loading.js` 幫助我們使用 [React Suspense](https://react.dev/reference/react/Suspense) 建立有意義的載入 UI。透過這個約定，我們可以在路由段的內容載入時，從伺服器顯示 [即時載入狀態](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#instant-loading-states)。一旦渲染完成，新內容會自動替換。
 
 ![image](https://github.com/user-attachments/assets/52f8bef3-59e6-45ba-be4e-da59f2090d9c)
 
@@ -1417,9 +1419,9 @@ export default function Loading() {
 >
 > - 即使使用 [以伺服器為中心的路由](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#how-routing-and-navigation-works)，導航（Navigation）也是即時的。
 > - 導航是可中斷的，這意味著更改路由不需要等待路由內容完全載入後才導航到另一個路由。
-> - 共享佈局在新路由片段載入時仍然保持互動性。
+> - 共享佈局在新路由段載入時仍然保持互動性。
 
-> 建議：盡量對於路由片段（佈局和頁面）使用 loading.js 約定，因為 Next.js 優化了此功能。
+> 建議：盡量對於路由段（佈局和頁面）使用 loading.js 約定，因為 Next.js 優化了此功能。
 
 ### 使用 Suspense 進行串流
 
@@ -1696,15 +1698,15 @@ _（待實作）_
 
 # 補充資訊
 
-## 1. 路由與導航的運作方式
+## 1. 路由與導航的運作方式 (How Routing and Navigation Works)
 
-App Router 使用混合式的方法來處理路由與導航。在伺服器端，我們的應用程式程式碼會自動根據路由片段（route segments）進行程式碼拆分（code-split）。而在客戶端，Next.js 會[預取](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#2-prefetching)（prefetches）和[快取](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#3-caching)（caches）這些路由片段。這意味著當使用者導航至新路由時，瀏覽器不會重新載入頁面，只會重新渲染變更的路由片段，從而改善導航體驗和性能。
+App Router 使用混合式的方法來處理路由與導航。在伺服器端，我們的應用程式程式碼會自動根據路由段（route segments）進行程式碼拆分（code-split）。而在客戶端，Next.js 會[預取](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#2-prefetching)（prefetches）和[快取](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#3-caching)（caches）這些路由段。這意味著當使用者導航至新路由時，瀏覽器不會重新載入頁面，只會重新渲染變更的路由段，從而改善導航體驗和性能。
 
 ### 1. 程式碼拆分（Code Splitting）
 
 程式碼拆分允許我們將應用程式程式碼拆分為更小的包，讓瀏覽器可以下載和執行這些包。這樣可以減少每個請求傳輸的資料量和執行時間，從而提升性能。
 
-[伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)允許我們的應用程式程式碼自動根據路由片段進行程式碼拆分。這意味著只有導航時所需的程式碼會被加載。
+[伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)允許我們的應用程式程式碼自動根據路由段進行程式碼拆分。這意味著只有導航時所需的程式碼會被加載。
 
 ### 2. 預先取回（Prefetching）
 
@@ -1731,7 +1733,7 @@ App Router 使用混合式的方法來處理路由與導航。在伺服器端，
 
 ### 3. 快取（Caching）
 
-Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/docs/app/building-your-application/caching#client-side-router-cache) 的**內存客戶端快取（in-memory client-side cache）**。當使用者在應用程式中導航時，預取的路由片段和訪問過的路由的 React 伺服器元件有效載荷會被儲存在快取中。
+Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/docs/app/building-your-application/caching#client-side-router-cache) 的**內存客戶端快取（in-memory client-side cache）**。當使用者在應用程式中導航時，預取的路由段和訪問過的路由的 React 伺服器元件有效載荷會被儲存在快取中。
 
 這意味著在導航時，快取會盡可能被重用，而不是向伺服器發出新的請求，從而通過減少請求次數和傳輸的資料量來提高性能。
 
@@ -1739,21 +1741,21 @@ Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/d
 
 ### 4. 部分渲染（Partial Rendering）
 
-部分渲染意味著在客戶端上，只有在導航時變更的路由片段會重新渲染，共享的段落會被保留。
+部分渲染意味著在客戶端上，只有在導航時變更的路由段會重新渲染，共享的段 (segments)會被保留。
 
 例如，在導航兩個相鄰路由 `/dashboard/settings` 和 `/dashboard/analytics` 之間時，`settings` 和 `analytics` 頁面會被渲染，共享的 `dashboard` 佈局會被保留。
 
 ![image](https://github.com/user-attachments/assets/ad903b4d-bc40-4b68-9c11-8923ad2ea7da)
 
-如果沒有部分渲染，每次導航都會導致客戶端上的整個頁面重新渲染。僅渲染變更的段落可以減少傳輸的資料量和執行時間，從而提升性能。
+如果沒有部分渲染，每次導航都會導致客戶端上的整個頁面重新渲染。只渲染變更的段 (segment)可以減少傳輸的資料量和執行時間，從而提升性能。
 
 ### 5. 軟導航（Soft Navigation）
 
-在瀏覽器中，頁面之間的導航通常是「硬導航（hard navigation）」。Next.js 的 App Router 啟用了頁面之間的「軟導航」，確保只有變更的路由片段會重新渲染（部分渲染），這樣可以在導航過程中保留客戶端的 React 狀態。
+在瀏覽器中，頁面之間的導航通常是「硬導航（hard navigation）」。Next.js 的 App Router 啟用了頁面之間的「軟導航」，確保只有變更的路由段會重新渲染（部分渲染），這樣可以在導航過程中保留客戶端的 React 狀態。
 
 ### 6. 前進和後退導航（Back and Forward Navigation）
 
-預設情況下，Next.js 會維持向後和向前導航的滾動位置，並重複利用 [路由快取](https://nextjs.org/docs/app/building-your-application/caching#client-side-router-cache) 中的路由片段（route segments）。
+預設情況下，Next.js 會維持向後和向前導航的滾動位置，並重複利用 [路由快取](https://nextjs.org/docs/app/building-your-application/caching#client-side-router-cache) 中的路由段（route segments）。
 
 ### 7. 在 `pages/` 和 `app/` 之間的路由
 
