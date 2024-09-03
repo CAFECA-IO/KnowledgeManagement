@@ -1733,7 +1733,7 @@ export function middleware(request: Request) {
 
 可以通過將資料夾的名稱包裹在括號中來建立路由群組：`(folderName)`
 
-#### 範例 - 組織路由而不影響 URL 路徑 (Organize routes without affecting the URL path)
+### 範例 - 組織路由而不影響 URL 路徑 (Organize routes without affecting the URL path)
 
 為了組織路由而不影響 URL，建立一個群組來保持相關路由在一起。括號中的資料夾將會從 URL 中省略（例如 `(marketing)` 或 `(shop)`）。
 
@@ -1743,13 +1743,13 @@ export function middleware(request: Request) {
 
 ![image](https://github.com/user-attachments/assets/fd851435-b128-497f-8460-782f5697fcf3)
 
-#### 範例 - 將特定段加入佈局 (Opting specific segments into a layout)
+### 範例 - 將特定段加入佈局 (Opting specific segments into a layout)
 
 要將特定路由加入佈局，請建立一個新的路由群組（例如 `(shop)`），並將共享相同佈局的路由移入該群組（例如 `account` 和 `cart`）。群組外的路由將不會共享此佈局（例如 `checkout`）。
 
 ![image](https://github.com/user-attachments/assets/027afbdc-f24f-471b-991f-9257a58606f4)
 
-#### 範例 - 建立多個根佈局 (Creating multiple root layouts)
+### 範例 - 建立多個根佈局 (Creating multiple root layouts)
 
 要建立多個[根佈局](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#root-layout-required)，請移除頂層的 `layout.js` 檔案，並在每個路由群組內添加 `layout.js` 檔案。這對於將應用程式劃分為具有完全不同 UI 或體驗的部分非常有用。每個根佈局需要添加 `<html>` 和 `<body>` 標籤。
 
@@ -1766,10 +1766,129 @@ export function middleware(request: Request) {
 
 ## 8. **專案組織（Project Organization）**
 
-- **App Router**：鼓勵更模組化和有組織的檔案結構，將相關的元件、路由和佈局組合在一起。
+- **App Router**：鼓勵更模組化和有組織的檔案結構，將相關的元件、路由和佈局組合在一起，因此 App Router 更適合大型應用程式的組織。
 - **Page Router**：具有較扁平的檔案結構，所有路由都在 `/pages` 目錄中定義。
 
-說明：**App Router** 更適合大型應用程式的組織。
+說明：
+
+除了[路由資料夾和檔案慣例](https://nextjs.org/docs/getting-started/project-structure#app-routing-conventions) (routing folder and file conventions)之外，Next.js 對於如何組織和放置專案檔案並無特定要求。
+
+本小節介紹了可以用來組織專案的預設行為及功能。
+
+- [預設情況下的安全共置](https://nextjs.org/docs/app/building-your-application/routing/colocation#safe-colocation-by-default)
+- [專案組織功能](https://nextjs.org/docs/app/building-your-application/routing/colocation#project-organization-features)
+- [專案組織策略](https://nextjs.org/docs/app/building-your-application/routing/colocation#project-organization-strategies)
+
+### 預設情況下的安全共置 (Safe colocation by default)
+
+在 `app` 資料夾中，[巢狀資料夾層次結構](https://nextjs.org/docs/app/building-your-application/routing#route-segments) 定義了路由結構。
+
+每個資料夾代表一個路由段 (route segment)，並對應於 URL 路徑中的相應段 (segment)。
+
+然而，即使路由結構是通過資料夾定義的，除非在路由段中新增 `page.js` 或 `route.js` 檔案，否則該路由**無法公開訪問**。
+
+![image](https://github.com/user-attachments/assets/688e8034-c42f-443b-8994-ccf6ae9a2277)
+
+而且，即使某個路由已公開訪問，只有 `page.js` 或 `route.js` 回傳的內容會被傳送到客戶端。
+
+![image](https://github.com/user-attachments/assets/ff646af0-e2f8-492c-adca-7b41d5da24d8)
+
+這意味著專案檔案可以安全地共置在 `app` 目錄中的路由段內，而不會意外成為可路由的 (routable)。
+
+![image](https://github.com/user-attachments/assets/496b3c66-814d-4df4-9b02-4b90e6cbc88d)
+
+> 值得注意的是：
+>
+> - 這與 `pages` 目錄不同，`pages` 中的任何檔案都被視為路由。
+> - 雖然**可以**將專案檔案共置在 `app` 目錄中，但**不必**這樣做。如果我們想要，也是可以[將它們保存在 `app` 目錄外](https://nextjs.org/docs/app/building-your-application/routing/colocation#store-project-files-outside-of-app)。
+
+### 專案組織功能
+
+Next.js 提供了多項功能來幫助我們組織專案。
+
+#### 私人資料夾 (Private Folders)
+
+私人資料夾可以通過在資料夾前加上底線來建立：`_folderName`
+
+這表示該資料夾是私人實作細節，不應被路由系統考慮，因此**將該資料夾及其所有子資料夾**排除在路由之外。
+
+![image](https://github.com/user-attachments/assets/770632d6-1427-499a-bad4-4b9d614e636b)
+
+由於 `app` 目錄中的檔案可以[預設情況下安全共置](https://nextjs.org/docs/app/building-your-application/routing/colocation#safe-colocation-by-default)，因此不需要使用私人資料夾來共置。
+
+然而，私人資料夾對於以下情況可能很有用：
+
+- 將 UI 邏輯與路由邏輯分開。
+- 在專案和 Next.js 生態系統中一致地組織內部檔案。
+- 在程式碼編輯器中對檔案進行分類和分組。
+- 避免與未來 Next.js 檔案約定可能發生的命名衝突。
+
+> 值得注意的是：
+>
+> - 雖然這不是框架規定，但也可以考慮使用相同的底線模式將私人資料夾外的檔案標記為「私人」。
+> - 可以透過在資料夾名稱前加上 `%5F`（底線的 URL 編碼形式）前綴來建立以底線開頭的 URL 段：`%5FfolderName`。
+> - 如果不使用私人資料夾，了解 Next.js [特殊檔案慣例](https://nextjs.org/docs/getting-started/project-structure#routing-files) 對於防止意外的命名衝突會很有幫助。
+
+#### 路由群組 (Route groups)
+
+路由群組可以通過將資料夾包裹在括號中建立：`(folderName)`
+
+這表示該資料夾是為了組織用途，**不應包含**在路由的 URL 路徑中。
+
+![image](https://github.com/user-attachments/assets/29491c46-f485-49e3-9097-abe0df094734)
+
+路由群組對於以下情況很有用：
+
+- [按組織路由進行分組](https://nextjs.org/docs/app/building-your-application/routing/route-groups#organize-routes-without-affecting-the-url-path)，例如按網站部分、意圖或團隊劃分。
+- 在相同的路由段層級啟用巢狀佈局：
+  - [在相同段中建立多個巢狀佈局，包括多個根佈局](https://nextjs.org/docs/app/building-your-application/routing/route-groups#creating-multiple-root-layouts)
+  - [在共同段中的部分路由加入佈局](https://nextjs.org/docs/app/building-your-application/routing/route-groups#opting-specific-segments-into-a-layout)
+
+#### `src` 目錄
+
+Next.js 支援將應用程式程式碼（包括 `app`）儲存在可選的 [`src` 目錄](https://nextjs.org/docs/app/building-your-application/configuring/src-directory)中。這樣可以將應用程式程式碼與專案配置檔案分開，後者主要位於專案的根目錄。
+
+![image](https://github.com/user-attachments/assets/e19c7c5a-b7ad-4891-93c2-ff3a35b83aeb)
+
+#### 模組路徑別名 (Module Path Aliases)
+
+Next.js 支援[模組路徑別名](https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases)，這使得在深度巢狀的專案檔案中讀取和維護匯入更加容易。
+
+app/dashboard/settings/analytics/page.js
+
+```jsx
+// before
+import { Button } from "../../../components/button";
+
+// after
+import { Button } from "@/components/button";
+```
+
+### 專案組織策略
+
+在 Next.js 專案中，如何組織自己的檔案和資料夾沒有對或錯之分。
+
+以下部分列出了一些非常高水準的常見策略概述。最簡單的結論是，選擇一個適合團隊的策略，並在專案中保持一致。
+
+> 值得注意的是：在這裡的範例中使用 components 和 lib 資料夾作為泛指的佔位符，它們的命名對框架並無特別意義，專案可能使用其他資料夾如 ui、utils、hooks、styles 等等。
+
+#### 將專案檔案儲存在 `app` 目錄外
+
+這種策略將所有應用程式程式碼儲存在專案根目錄的共享資料夾中，並將 `app` 目錄純粹用於路由目的。
+
+![image](https://github.com/user-attachments/assets/fb7499d9-776a-43fe-9190-f2f0ba9b3f96)
+
+#### 將專案檔案儲存在 `app` 目錄內的頂層資料夾中
+
+這種策略將所有應用程式程式碼儲存在 `app` 目錄根目錄中的共享資料夾中。
+
+![image](https://github.com/user-attachments/assets/c41c7308-4fb1-4caa-abe7-aced31f1d043)
+
+#### 根據功能或路由拆分專案檔案
+
+此策略將全域共用的應用程式程式碼儲存在根目錄的 `app` 資料夾中，並將更特定的應用程式程式碼**拆分**到使用它們的路由段中。
+
+![image](https://github.com/user-attachments/assets/11c3f54b-5f6b-45cf-9366-c19421d63c53)
 
 ## 9. **動態路由（Dynamic Routes）**
 
