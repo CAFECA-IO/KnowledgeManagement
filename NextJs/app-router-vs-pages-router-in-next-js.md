@@ -1551,7 +1551,7 @@ export default function Posts() {
 
 ### `redirect` 函數
 
-`redirect` 函數允許你將使用者重新導向到另一個 URL。你可以在 [伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)、[路由處理器](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 和 [伺服器操作](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) 中呼叫 `redirect`。
+`redirect` 函數可以將使用者重新導向到另一個 URL。我們可以在 [伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)、[路由處理器](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 和 [伺服器操作](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) 中呼叫 `redirect`。
 
 `redirect` 通常在變更或事件後使用。
 
@@ -1581,15 +1581,15 @@ export async function createPost(id: string) {
 >
 > - `redirect` 預設回傳 307 (暫時性重新導向) 狀態碼。當在伺服器操作中使用時，回傳 303 (查看其他)，這通常用於在 POST 請求後重新導向到成功頁面。
 > - `redirect` 內部會拋出錯誤，因此應在 `try/catch` 區塊之外呼叫。
-> - `redirect` 可以在客戶端元件的渲染過程中呼叫，但不能在事件處理器中呼叫。你可以使用 [`useRouter` hook](https://nextjs.org/docs/app/building-your-application/routing/redirecting#userouter-hook) 來代替。
+> - `redirect` 可以在客戶端元件的渲染過程中呼叫，但不能在事件處理器中呼叫。我們可以使用 [`useRouter` hook](https://nextjs.org/docs/app/building-your-application/routing/redirecting#userouter-hook) 來代替。
 > - `redirect` 也接受絕對 URL，並且可以用於重新導向到外部連結。
-> - 如果你想在渲染過程之前進行重新導向，請使用 [`next.config.js`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs) 或 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware)。
+> - 如果想在渲染過程之前進行重新導向，請使用 [`next.config.js`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs) 或 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware)。
 
 請參考 [`redirect` API 參考](https://nextjs.org/docs/app/api-reference/functions/redirect) 以獲取更多資訊。
 
 ### `permanentRedirect` 函數
 
-`permanentRedirect` 函數允許你**永久性**地將使用者重新導向到另一個 URL。你可以在 [伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)、[路由處理器](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 和 [伺服器操作](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) 中呼叫 `permanentRedirect`。
+`permanentRedirect` 函數可以**永久性**地將使用者重新導向到另一個 URL。我們可以在 [伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)、[路由處理器](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 和 [伺服器操作](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) 中呼叫 `permanentRedirect`。
 
 `permanentRedirect` 通常在變更或事件後使用，該事件改變了實體的標準 URL，例如在使用者更改使用者名稱後更新使用者的資料頁面 URL：
 
@@ -1617,13 +1617,13 @@ export async function updateUsername(username: string, formData: FormData) {
 >
 > - `permanentRedirect` 預設回傳 308 (永久重新導向) 狀態碼。
 > - `permanentRedirect` 也接受絕對 URL，並且可以用於重新導向到外部連結。
-> - 如果你想在渲染過程之前進行重新導向，請使用 [`next.config.js`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs) 或 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware)。
+> - 如果想在渲染過程之前進行重新導向，請使用 [`next.config.js`](https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs) 或 [中介軟體](https://nextjs.org/docs/app/building-your-application/routing/redirecting#nextresponseredirect-in-middleware)。
 
 請參考 [`permanentRedirect` API 參考](https://nextjs.org/docs/app/api-reference/functions/permanentRedirect) 以獲取更多資訊。
 
 ### `useRouter()` hook
 
-如果你需要在客戶端元件中的事件處理器內進行重新導向，你可以使用 `useRouter` hook 的 `push` 方法。例如：
+如果需要在客戶端元件中的事件處理器內進行重新導向，可以使用 `useRouter` hook 的 `push` 方法。例如：
 
 app/page.tsx
 
@@ -1645,17 +1645,17 @@ export default function Page() {
 
 > 了解一下:
 >
-> - 如果你不需要程式化地為使用者導航，應該直接使用 [`<Link>`](https://nextjs.org/docs/app/api-reference/components/link) 元件。
+> - 如果不需要程式化地為使用者導航，應該直接使用 [`<Link>`](https://nextjs.org/docs/app/api-reference/components/link) 元件。
 
 請參考 [`useRouter` API 參考](https://nextjs.org/docs/app/api-reference/functions/use-router) 以獲取更多資訊。
 
 ### `next.config.js` 中的 `redirects`
 
-`next.config.js` 文件中的 `redirects` 選項允許你將傳入的請求路徑重新導向到不同的目的地路徑。當你更改頁面的 URL 結構或有預先知道的重新導向列表時，這非常有用。
+`next.config.js` 文件中的 `redirects` 選項允許我們將傳入的請求路徑重新導向到不同的目的地路徑。當我們更改頁面的 URL 結構或有預先知道的重新導向列表時，這非常有用。
 
-`redirects` 支援 [路徑](https://nextjs.org/docs/app/api-reference/next-config-js/redirects#path-matching)、[標頭、cookie 和查詢匹配](https://nextjs.org/docs/app/api-reference/next-config-js/redirects#header-cookie-and-query-matching) (path, header, cookie, and query matching)，提供你根據傳入請求進行重新導向的靈活性。
+`redirects` 支援 [路徑](https://nextjs.org/docs/app/api-reference/next-config-js/redirects#path-matching)、[標頭、cookie 和查詢匹配](https://nextjs.org/docs/app/api-reference/next-config-js/redirects#header-cookie-and-query-matching) (path, header, cookie, and query matching)，提供根據傳入請求進行重新導向的靈活性。
 
-要使用 `redirects`，請將選項添加到你的 `next.config.js` 文件中：
+要使用 `redirects`，請將選項添加到我們的 `next.config.js` 文件中：
 
 next.config.js
 
@@ -1739,7 +1739,7 @@ export function middleware(request: Request) {
 
 ![image](https://github.com/user-attachments/assets/cb415406-1862-4c85-8750-cb44f353c938)
 
-即使 `(marketing)` 和 `(shop)` 內的路由共享相同的 URL 層次結構，你仍可以通過在它們的資料夾內添加 `layout.js` 檔案來為每個群組建立不同的佈局。
+即使 `(marketing)` 和 `(shop)` 內的路由共享相同的 URL 層次結構，我們仍可以透過在它們的資料夾內添加 `layout.js` 檔案來為每個群組建立不同的佈局。
 
 ![image](https://github.com/user-attachments/assets/fd851435-b128-497f-8460-782f5697fcf3)
 
@@ -2184,7 +2184,7 @@ export default function Page() {
 
 > 值得注意：
 >
-> - 用來攔截路由的命名規則（例如 `(.)`）取決於我們的文件系統結構。參考[攔截路由命名規則](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes#convention)。
+> - 用來攔截路由的命名規則（例如 `(.)`）可參考[攔截路由命名規則](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes#convention)。
 > - 通過將 `<Modal>` 功能與彈窗內容（`<Login>`）分開，我們可以確保彈窗內的任何內容（如[表單](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms)）都是伺服器元件。參考[混合使用客戶端和伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#supported-pattern-passing-server-components-to-client-components-as-props)了解更多資訊。
 
 #### 開啟彈窗
@@ -2310,7 +2310,7 @@ export default function CatchAll() {
 
 ### 約定 (Convention)
 
-攔截路由可以通過使用 **`(..)` 約定**來定義，這與相對路徑的**約定 `../`** 類似，但適用於路由段。
+攔截路由可以使用 **`(..)` 約定**來定義，這與相對路徑的**約定 `../`** 類似，但針對的是段 (segments)。
 
 可以使用：
 
@@ -2324,6 +2324,31 @@ export default function CatchAll() {
 ![image](https://github.com/user-attachments/assets/6a1dc4ee-2704-4a63-844c-c8396368541f)
 
 > 注意：`(..)` 約定是基於路由段 (_route segments_)，而非檔案系統 (file-system)。
+>
+> 補充說明：假設有個目錄結構如下
+>
+> ```
+> app/
+> │
+> ├── dashboard/
+> │   ├── page.tsx            (1)
+> │   ├── settings/
+> │   │   ├── page.tsx        (2)
+> │   │   └── profile/
+> │   │       ├── page.tsx    (3)
+> │   └── @modals/
+> │       ├── default.tsx     (4)
+> │       └── (.)profile/
+> │           └── page.tsx    (5)
+> │
+> └── profile/
+>     └── page.tsx            (6)
+> ```
+>
+> 其中的攔截路由：
+>
+> 1. 假設是 **`@modals/(.)profile/page.tsx`** 就表示它攔截了 `dashboard/settings/profile` 路徑中的 `profile` 段，這樣可以將其作為彈窗或其他自定義內容來渲染。
+> 2. 假設是 **`@modals/(..)profile/page.tsx`** 就表示它攔截了 `app/profile` 路徑中的 `profile` 段，這樣就能在不離開 `dashboard` 頁面的情況下展示 `profile` 路由的內容。
 
 ### 範例 - 彈窗 (Modals)
 
@@ -2351,7 +2376,7 @@ export default function CatchAll() {
 - **App Router**：支援自訂路由處理程式，可以管理路由或 HTTP 方法的特定邏輯。
 - **Page Router**：不直接支援路由處理程式；處理邏輯通常嵌入在頁面元件中。
 
-說明：**App Router** 提供更細粒度的控制，使用路由處理程式。
+說明：**App Router** 提供更精細的控制，使用路由處理程式。
 
 ## 13. **中介軟體（Middleware）**
 
