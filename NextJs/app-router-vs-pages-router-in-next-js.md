@@ -2794,7 +2794,7 @@ export const preferredRegion = "auto";
 
 Middleware 允許我們在請求完成之前運行程式碼。然後，根據傳入的請求，我們可以透過重寫、重新導向、修改請求、回應標頭，或直接回應來修改回應內容。
 
-Middleware 在快取內容和路由匹配之前運行。詳情請參閱[匹配路徑](https://nextjs.org/docs/app/building-your-application/routing/middleware#matching-paths)。
+Middleware 在快取內容和路由匹配之前運行。詳情請看後面會提到的匹配路徑。
 
 ### 使用案例
 
