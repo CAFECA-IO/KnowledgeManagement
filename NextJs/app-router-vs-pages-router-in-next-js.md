@@ -2802,12 +2802,12 @@ Middleware 在快取內容和路由匹配之前運行。詳情請參閱[匹配�
 
 一些 Middleware 特別有效的常見情境包括：
 
-- **認證和授權 (Authentication and Authorization)：**在授予對特定頁面或 API 路由的存取權之前，確保使用者身份並檢查會話 Cookie。
-- **伺服器端重新導向 (Server-Side Redirects)：**根據特定條件（例如語言環境、使用者角色）在伺服器層級重新導向使用者。
-- **路徑重寫 (Path Rewriting)：**透過動態重寫路徑至 API 路由或頁面來支援 A/B 測試、功能發布或傳統路徑。
-- **機器人檢測 (Bot Detection)：**透過檢測和阻擋機器人流量來保護我們的資源。
-- **日誌記錄和分析 (Logging and Analytics)：**在頁面或 API 處理之前捕捉和分析請求資料以獲得洞察。
-- **功能標記 (Feature Flagging)：**動態啟用或停用功能，以無縫進行功能發布或測試。
+- **認證和授權 (Authentication and Authorization)：** 在授予對特定頁面或 API 路由的存取權之前，確保使用者身份並檢查會話 Cookie。
+- **伺服器端重新導向 (Server-Side Redirects)：** 根據特定條件（例如語言環境、使用者角色）在伺服器層級重新導向使用者。
+- **路徑重寫 (Path Rewriting)：** 透過動態重寫路徑至 API 路由或頁面來支援 A/B 測試、功能發布或傳統路徑。
+- **機器人檢測 (Bot Detection)：** 透過檢測和阻擋機器人流量來保護我們的資源。
+- **日誌記錄和分析 (Logging and Analytics)：** 在頁面或 API 處理之前捕捉和分析請求資料以獲得洞察。
+- **功能標記 (Feature Flagging)：** 動態啟用或停用功能，以無縫進行功能發布或測試。
 
 同樣重要的是，要認識到 Middleware 也可能不是最佳方法的情境。以下是需要注意的一些情境：
 
