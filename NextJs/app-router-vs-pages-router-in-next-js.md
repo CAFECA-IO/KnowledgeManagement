@@ -376,7 +376,7 @@ Client（瀏覽器）第一次發送 Request 給 Server → Server 回傳只有�
 ### 4. 增量靜態再生 (Incremental Static Regeneration, ISR)
 
 **概述：**
-增量靜態再生 (ISR)讓我們能在建置後更新靜態頁面，而不需要完整重建。頁面可以在新的請求進來時在背景中重新生成，確保它們保持最新狀態，同時不犧牲靜態生成的效能優勢。
+增量靜態再生 (ISR) 讓我們能在建置後更新靜態頁面，而不需要完整重建。頁面可以在新的請求進來時在背景中重新生成，確保它們保持最新狀態，同時不犧牲靜態生成的效能優勢。
 
 **主要特徵：**
 
@@ -443,8 +443,8 @@ export default SSRPage;
 
 ### 3. 靜態網站生成 (SSG)
 
-- SSG 是透過 `getStaticProps` 函數實現的，該函數會在建構時抓取資料並將其作為屬性傳遞給頁面元件。
-- 這種方法會在建構期間為頁面生成靜態 HTML 文件，提高效能並減少伺服器負荷。
+- SSG 是透過 `getStaticProps` 函數實現的，該函數會在建置時抓取資料並將其作為屬性傳遞給頁面元件。
+- 這種方法會在建置期間 (build time) 為頁面生成靜態 HTML 文件，提高效能並減少伺服器負荷。
 - 簡單來說就是，SSG 會在網頁打包（built time）時，就由 Server 產生所有需要用到的內容，因此每次 Server 收到 Request 均回傳相同的 HTML 給 Client。
 - 執行函數：`getStaticProps()`
 
@@ -500,7 +500,7 @@ export default ISRPage;
 
 - **CSR**：使用 React 在客戶端進行內容渲染。不使用特定的函數（`getStaticProps`、`getServerSideProps`）。
 - **SSR**：使用 `getServerSideProps` 在伺服器上於每次請求時進行內容渲染。
-- **SSG**：使用 `getStaticProps` 在建構時進行內容渲染，生成靜態 HTML 文件。
+- **SSG**：使用 `getStaticProps` 在建置時進行內容渲染，生成靜態 HTML 文件。
 - **ISR**：SSG 的變體，使用 `getStaticProps` 和 `revalidate` 屬性允許定期更新靜態內容。
 
 ## App Router 處理 4 種渲染的方式
@@ -553,8 +553,8 @@ export default async function Page() {
 
 ### 3. 靜態網站生成（SSG）
 
-- 在 App Router 中，靜態生成是通過在建構時渲染伺服器元件（server components）來實現的。
-- 如果元件在建構時獲取資料並且不依賴於運行時變數（例如查詢參數），則會進行靜態生成。
+- 在 App Router 中，靜態生成是透過在建置時渲染伺服器元件（server components）來實現的。
+- 如果元件在建置時獲取資料並且不依賴於執行階段變數（例如查詢參數），則會進行靜態生成。
 - 詳細說明： <br />
   在傳統的 Next.js 中，`getStaticProps` 用來在構建時獲取資料並生成靜態頁面。這是一種靜態網站生成 (SSG) 的方法。 <br />
   而在 App Router 中，靜態生成是通過伺服器端元件來實現的。Next.js 會自動處理這些伺服器端元件的預渲染過程，確保在構建時生成靜態頁面。 <br />
@@ -570,7 +570,7 @@ export default async function Page() {
   return <div>{data}</div>;
 }
 
-// 如果不依賴於運行時變數（例如查詢參數），Next.js 將在建構時靜態生成這個頁面。
+// 如果不依賴於執行階段的變數（例如查詢參數），Next.js 將在建置時靜態生成這個頁面。
 ```
 
 ### 4. 增量靜態再生（ISR）
@@ -595,7 +595,7 @@ export default async function Page() {
 
 - **CSR**：使用客戶端 hook（`useEffect` 等）進行管理。
 - **SSR**：在伺服器元件中自動應用。
-- **SSG**：通過使用沒有運行時依賴的伺服器元件來實現。（簡單來說，就是如果伺服器元件在構建頁面時不需要依賴於運行時才有的資料或條件，那麼 Next.js 就能夠在構建階段生成這個頁面，並在頁面發佈後不再需要動態生成。）
+- **SSG**：透過使用沒有執行階段依賴的伺服器元件來實現。（簡單來說，就是如果伺服器元件在構建頁面時不需要依賴於**執行階段才有的資料或條件**，那麼 Next.js 就能夠在構建階段生成這個頁面，並在頁面發佈後不再需要動態生成。）
 - **ISR**：使用 `fetch` 並指定 `revalidate` 選項來實現。
 
 # Rendering——App Router 渲染概念
@@ -1898,7 +1898,7 @@ import { Button } from "@/components/button";
 說明：兩者皆支援動態路由，但 **App Router** 可能在支援巢狀動態路由方面更具優勢。
 
 介紹：
-當我們無法事先知道確切的路徑名稱，且希望從動態資料中建立路由時，我們可以使用動態路徑段，這些路徑段會在請求時填充，或是在建構時[預先渲染](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params)。
+當我們無法事先知道確切的路徑名稱，且希望從動態資料中建立路由時，我們可以使用動態路徑段，這些路徑段會在請求時填充，或是在建置時[預先渲染](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params)。
 
 ### 約定
 
@@ -1930,7 +1930,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
 ### 生成靜態參數
 
-`generateStaticParams` 函數可以與[動態路徑段](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)結合使用，以在建構時[靜態生成](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default)路由，而非在請求時動態生成。
+`generateStaticParams` 函數可以與[動態路徑段](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)結合使用，以在建置時[靜態生成](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default)路由，而非在請求時動態生成。
 
 `app/blog/[slug]/page.tsx`
 
@@ -1944,7 +1944,7 @@ export async function generateStaticParams() {
 }
 ```
 
-`generateStaticParams` 函數的主要優點是其智能資料擷取功能。如果在 `generateStaticParams` 函數內使用 `fetch` 請求獲取內容，這些請求會[自動記憶化](https://nextjs.org/docs/app/building-your-application/caching#request-memoization)。這意味著跨多個 `generateStaticParams`、佈局和頁面的相同參數 `fetch` 請求只會執行一次，從而縮短建構時間。
+`generateStaticParams` 函數的主要優點是其智慧資料擷取功能。如果在 `generateStaticParams` 函數內使用 `fetch` 請求獲取內容，這些請求會[自動記憶化](https://nextjs.org/docs/app/building-your-application/caching#request-memoization)。這意味著跨多個 `generateStaticParams`、佈局和頁面的相同參數 `fetch` 請求只會執行一次，從而縮短建置時間。
 
 如果我們要從 `pages` 目錄遷移，可以參考[遷移指南](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#dynamic-paths-getstaticpaths)。
 
