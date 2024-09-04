@@ -2083,9 +2083,85 @@ export default function Layout({ auth }: { auth: React.ReactNode }) {
 
 當使用者導航到 `app/@auth/login`（或在 URL 欄中輸入 `/login`）時，`loginSegment` 將等於字串 `"login"`。
 
-### 範例
+平行路由允許我們在相同的佈局 (layout) 內同時或有條件地渲染一個或多個頁面。這在應用程式中非常動態的部分，像是儀表板和社交網站的動態牆，特別有用。
 
-#### 條件路由
+例如，有一個儀表板，我們可以使用平行路由同時渲染 `team` 和 `analytics` 頁面：
+
+![image](https://github.com/user-attachments/assets/db19743d-a8f5-4350-b0f6-47328332c203)
+
+### 插槽 (Slots)
+
+平行路由是使用命名的 **插槽（slots）** 來建立的。定義插槽的方式是： `@folder` 。例如，下列的檔案結構定義了兩個插槽：`@analytics` 和 `@team`：
+
+![image](https://github.com/user-attachments/assets/28238ec4-2da2-4f51-9cea-b447ba49afb7)
+
+插槽會作為 props 傳遞給共用的父佈局。對於上面的例子，`app/layout.js` 中的元件現在接受 `@analytics` 和 `@team` 插槽的 props，並可以將它們與 `children` prop 並行渲染：
+
+app/layout.tsx
+
+```tsx
+export default function Layout({ children, team, analytics }: { children: React.ReactNode; analytics: React.ReactNode; team: React.ReactNode }) {
+  return (
+    <>
+      {children}
+      {team}
+      {analytics}
+    </>
+  );
+}
+```
+
+然而，插槽**不是**[路由段](https://nextjs.org/docs/app/building-your-application/routing#route-segments)，並不會影響 URL 結構。例如，對於 `/@analytics/views`，URL 將會是 `/views`，因為 `@analytics` 是一個插槽。
+
+> 值得注意：
+>
+> - `children` prop 是一個隱式插槽，不需要對應到一個資料夾。這意味著 `app/page.js` 等同於 `app/@children/page.js`。
+
+### 活動狀態和導航 (Active state and navigation)
+
+預設情況下，Next.js 會追蹤每個插槽的活動*狀態*（或子頁面）。然而，插槽中渲染的內容將取決於導航的類型：
+
+- [\*\*軟導航](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#5-soft-navigation) (Soft Navigation)\*\*：在客戶端導航期間，Next.js 會進行[部分渲染](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#4-partial-rendering)，更改插槽內的子頁面，同時保持其他插槽的活動子頁面，即使它們不符合當前的 URL。
+- **硬導航 (Hard Navigation)**：在全頁載入（瀏覽器刷新）後，Next.js 無法確定不符合當前 URL 的插槽的活動狀態。相反，它將為未匹配的插槽渲染一個 [`default.js`](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#defaultjs) 文件，或者如果不存在 `default.js`，則會顯示 `404`。
+
+> 值得注意：
+>
+> - 未匹配路由的 `404` 有助於確保我們不會意外地在沒有計畫要渲染平行路由的頁面上進行渲染。
+
+#### `default.js`
+
+可以定義一個 `default.js` 檔案作為初次載入或全頁重新載入時未匹配插槽的備援渲染。
+
+注意以下資料夾結構，`@team` 插槽有一個 `/settings` 頁面，但 `@analytics` 沒有。
+
+![image](https://github.com/user-attachments/assets/40b1f17f-81a3-451f-bc4a-9a87c20732f2)
+
+當導航到 `/settings` 時，`@team` 插槽將渲染 `/settings` 頁面，同時保持 `@analytics` 插槽的當前活動頁面。
+
+刷新時，Next.js 會為 `@analytics` 渲染一個 `default.js`。如果 `default.js` 不存在，則會顯示 `404`。
+
+另外，由於 `children` 是一個隱式插槽，當 Next.js 無法恢復父頁面的活動狀態時，我們還需要建立一個 `default.js` 文件來作為 `children` 的備援渲染。
+
+#### `useSelectedLayoutSegment(s)`
+
+[`useSelectedLayoutSegment`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segment) 和 [`useSelectedLayoutSegments`](https://nextjs.org/docs/app/api-reference/functions/use-selected-layout-segments) 都接受一個 `parallelRoutesKey` 參數，這讓我們可以讀取插槽內的活動路由段。
+
+app/layout.tsx
+
+```tsx
+"use client";
+
+import { useSelectedLayoutSegment } from "next/navigation";
+
+export default function Layout({ auth }: { auth: React.ReactNode }) {
+  const loginSegment = useSelectedLayoutSegment("auth");
+  // ...
+}
+```
+
+當使用者導航到 `app/@auth/login`（或在 URL 欄中輸入 `/login`）時，`loginSegment` 將等於字串 `"login"`。
+
+### 範例 - 條件路由
 
 可以使用平行路由來根據特定條件（如使用者角色）有條件地渲染路由。例如，為 `/admin` 或 `/user` 角色渲染不同的儀表板頁面：
 
@@ -2102,7 +2178,7 @@ export default function Layout({ user, admin }: { user: React.ReactNode; admin: 
 }
 ```
 
-#### 分頁群組 (Tab Groups)
+### 範例 - 分頁群組 (Tab Groups)
 
 可以在插槽內添加一個 `layout`，以允許使用者獨立導航該插槽。這對於建立分頁（Tabs）非常有用。
 
@@ -2130,7 +2206,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 }
 ```
 
-#### 互動視窗 (Modals)
+### 範例 - 互動視窗 (Modals)
 
 平行路由可以與[攔截路由](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes) (Intercepting Routes) 一起使用，以建立支援深度連結的互動視窗。這使我們能解決構建互動視窗時的常見挑戰，例如：
 
@@ -2189,7 +2265,7 @@ export default function Page() {
 > - 用來攔截路由的命名規則（例如 `(.)`）取決於我們的文件系統結構。參考[攔截路由命名規則](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes#convention)。
 > - 通過將 `<Modal>` 功能與互動視窗內容（`<Login>`）分開，我們可以確保互動視窗內的任何內容（如[表單](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms)）都是伺服器元件。參考[混合使用客戶端和伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#supported-pattern-passing-server-components-to-client-components-as-props)了解更多資訊。
 
-**1. 開啟互動視窗：**
+#### 開啟互動視窗
 
 現在，我們可以借助 Next.js router 來開啟和關閉互動視窗。這確保當互動視窗開啟時，URL 會正確更新，並且在向前或向後導航時也能保持一致。
 
@@ -2215,7 +2291,7 @@ export default function Layout({ auth, children }: { auth: React.ReactNode; chil
 
 當使用者點擊 `<Link>` 時，互動視窗會開啟，而不會導航到 `/login` 頁面。然而，在刷新或初次載入時，導航到 `/login` 會將使用者帶到主登入頁面。
 
-**2. 關閉互動視窗：**
+#### 關閉互動視窗
 
 可以透過呼叫 `router.back()` 或使用 `Link` 元件來關閉互動視窗。
 
@@ -2285,7 +2361,7 @@ export default function CatchAll() {
 > - 其他範例包括在畫廊 (gallery) 中開啟照片互動視窗，同時擁有一個專門的 `/photo/[id]` 頁面，或在側邊互動視窗中開啟購物車。
 > - [查看一個範例](https://github.com/vercel-labs/nextgram)，使用攔截和平行路由實現互動視窗。
 
-#### 載入與錯誤 UI
+### 範例 - 載入與錯誤 UI
 
 平行路由可以獨立進行串流，讓我們為每個路由定義獨立的錯誤和載入狀態：
 
