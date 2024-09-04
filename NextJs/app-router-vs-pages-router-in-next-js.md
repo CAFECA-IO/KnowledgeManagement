@@ -2315,8 +2315,8 @@ export default function CatchAll() {
 可以使用：
 
 - `(.)` 來匹配**相同層級**的路由段
-- `(..)` 來匹配**上層一級**的路由段
-- `(..)(..)` 來匹配**上層兩級**的路由段
+- `(..)` 來匹配**上一層**的路由段
+- `(..)(..)` 來匹配**上兩層**的路由段
 - `(...)` 來匹配從 `app` 目錄**根目錄**開始的路由段
 
 例如，可以透過在 `feed` 段 (segment) 中建立一個 `(..)photo` 目錄來攔截 `photo` 段。
@@ -2324,31 +2324,39 @@ export default function CatchAll() {
 ![image](https://github.com/user-attachments/assets/6a1dc4ee-2704-4a63-844c-c8396368541f)
 
 > 注意：`(..)` 約定是基於路由段 (_route segments_)，而非檔案系統 (file-system)。
->
+
 > 補充說明：假設有個目錄結構如下
 >
 > ```
 > app/
 > │
 > ├── dashboard/
-> │   ├── page.tsx            (1)
+> │   ├── page.tsx            (1)  // /dashboard
 > │   ├── settings/
-> │   │   ├── page.tsx        (2)
+> │   │   ├── page.tsx        (2)  // /dashboard/settings
 > │   │   └── profile/
-> │   │       ├── page.tsx    (3)
+> │   │       ├── page.tsx    (3)  // /dashboard/settings/profile
 > │   └── @modals/
-> │       ├── default.tsx     (4)
-> │       └── (.)profile/
-> │           └── page.tsx    (5)
+> │       ├── default.tsx     (4)  // 無攔截時不顯示
+> │       ├── (.)profile/
+> │       │   └── page.tsx    (5)  // 攔截 /dashboard/profile
+> │       └── (..)profile/
+> │           └── page.tsx    (6)  // 攔截 /profile
 > │
 > └── profile/
->     └── page.tsx            (6)
+>     └── page.tsx            (7)  // /profile
 > ```
 >
-> 其中的攔截路由：
+> 攔截邏輯解析：
 >
-> 1. 假設是 **`@modals/(.)profile/page.tsx`** 就表示它攔截了 `dashboard/settings/profile` 路徑中的 `profile` 段，這樣可以將其作為彈窗或其他自定義內容來渲染。
-> 2. 假設是 **`@modals/(..)profile/page.tsx`** 就表示它攔截了 `app/profile` 路徑中的 `profile` 段，這樣就能在不離開 `dashboard` 頁面的情況下展示 `profile` 路由的內容。
+> 1. **`@modals/(.)profile/page.tsx`**
+>    - **位置**：`app/dashboard/@modals/(.)profile/page.tsx`
+>    - **作用**：攔截 **與 `@modals` 同一層級** 的 `profile` 路由片段，即 `/dashboard/profile`。
+>    - **效果**：當使用者訪問 `/dashboard/profile` 時，會渲染 `@modals/(.)profile/page.tsx` 中定義的內容（例如彈窗），而不是 `app/dashboard/profile/page.tsx` 的原始內容。
+> 2. **`@modals/(..)profile/page.tsx`**
+>    - **位置**：`app/dashboard/@modals/(..)profile/page.tsx`
+>    - **作用**：攔截 **比 `@modals` 高一層** 的 `profile` 路由片段，即 `/profile`。
+>    - **效果**：當使用者訪問 `/profile` 時，會渲染 `@modals/(..)profile/page.tsx` 中定義的內容（例如彈窗），而不是 `app/profile/page.tsx` 的原始內容。
 
 ### 範例 - 彈窗 (Modals)
 
