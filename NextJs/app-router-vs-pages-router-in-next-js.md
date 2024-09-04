@@ -2478,11 +2478,11 @@ export async function GET() {
 }
 ```
 
-### 範例 - 動態函式
+### 範例 - 動態函式 (Dynamic Functions)
 
 路由處理器可以與 Next.js 的動態函式一起使用，例如 [`cookies`](https://nextjs.org/docs/app/api-reference/functions/cookies) 和 [`headers`](https://nextjs.org/docs/app/api-reference/functions/headers)。
 
-### 範例 - Cookies
+#### Cookies
 
 可以使用 `next/headers` 提供的 [`cookies`](https://nextjs.org/docs/app/api-reference/functions/cookies) 來讀取或設置 Cookie。此伺服器函式可以直接在路由處理器中調用，或者嵌套在另一個函式中。
 
@@ -2516,7 +2516,7 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-### 範例 - 標頭 (Headers)
+#### 標頭 (Headers)
 
 可以使用 `next/headers` 提供的 [`headers`](https://nextjs.org/docs/app/api-reference/functions/headers) 來讀取標頭。此伺服器函式可以直接在路由處理器中調用，或嵌套在另一個函式中。
 
