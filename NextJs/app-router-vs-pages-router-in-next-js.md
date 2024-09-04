@@ -3382,7 +3382,7 @@ App Router 使用混合式的方法來處理路由與導航。在伺服器端，
 
 ### 3. 快取（Caching）
 
-Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/docs/app/building-your-application/caching#client-side-router-cache) 的**內存客戶端快取（in-memory client-side cache）**。當使用者在應用程式中導航時，預取的路由段和訪問過的路由的 React 伺服器元件有效載荷會被儲存在快取中。
+Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/docs/app/building-your-application/caching#client-side-router-cache) 的**內存客戶端快取（in-memory client-side cache）**。當使用者在應用程式中導航時，預取的路由段和訪問過的路由的 React 伺服器元件 payload 會被儲存在快取中。
 
 這意味著在導航時，快取會盡可能被重用，而不是向伺服器發出新的請求，從而通過減少請求次數和傳輸的資料量來提高性能。
 
