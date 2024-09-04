@@ -2005,9 +2005,9 @@ export default function Page({ params }: { params: { slug: string } }) {
 
 說明：
 
-平行路由允許我們在相同的佈局 (layout) 內同時或有條件地渲染一個或多個頁面。這在應用程式中非常動態的部分，像是儀表板和社交網站的動態牆，特別有用。
+平行路由允許我們在相同的佈局 (layout) 內同時或有條件地渲染一個或多個頁面。這對於應用程式中高度動態的部分非常有用，例如儀表板 (dashboards) 和社交網站的動態牆 (feeds)。
 
-例如，有一個儀表板，我們可以使用平行路由同時渲染 `team` 和 `analytics` 頁面：
+例如，在儀表板上，我們可以使用平行路由同時渲染 `team` 和 `analytics` 頁面：
 
 ![image](https://github.com/user-attachments/assets/db19743d-a8f5-4350-b0f6-47328332c203)
 
