@@ -2189,7 +2189,7 @@ export default function Page() {
 > - 用來攔截路由的命名規則（例如 `(.)`）取決於我們的文件系統結構。參考[攔截路由命名規則](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes#convention)。
 > - 通過將 `<Modal>` 功能與互動視窗內容（`<Login>`）分開，我們可以確保互動視窗內的任何內容（如[表單](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms)）都是伺服器元件。參考[混合使用客戶端和伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#supported-pattern-passing-server-components-to-client-components-as-props)了解更多資訊。
 
-##### 1. 開啟互動視窗
+**1. 開啟互動視窗：**
 
 現在，我們可以借助 Next.js router 來開啟和關閉互動視窗。這確保當互動視窗開啟時，URL 會正確更新，並且在向前或向後導航時也能保持一致。
 
@@ -2215,7 +2215,7 @@ export default function Layout({ auth, children }: { auth: React.ReactNode; chil
 
 當使用者點擊 `<Link>` 時，互動視窗會開啟，而不會導航到 `/login` 頁面。然而，在刷新或初次載入時，導航到 `/login` 會將使用者帶到主登入頁面。
 
-##### 2. 關閉互動視窗
+**2. 關閉互動視窗：**
 
 可以透過呼叫 `router.back()` 或使用 `Link` 元件來關閉互動視窗。
 
