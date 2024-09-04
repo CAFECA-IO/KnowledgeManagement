@@ -2128,16 +2128,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 }
 ```
 
-### 範例 - 互動視窗 (Modals)
+### 範例 - 彈窗 (Modals)
 
-平行路由可以與[攔截路由](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes) (Intercepting Routes) 一起使用，以建立支援深度連結的互動視窗。這使我們能解決構建互動視窗時的常見挑戰，例如：
+平行路由可以與[攔截路由](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes) (Intercepting Routes) 一起使用，以建立支援深度連結的彈窗。這使我們能解決構建彈窗時的常見挑戰，例如：
 
-- 使互動視窗內容能夠**通過 URL 進行分享**。
-- 當頁面刷新時，**保留上下文**，而不是關閉互動視窗。
-- **在向後導航時關閉互動視窗**，而不是回到上一個路由。
-- **在向前導航時重新打開互動視窗**。
+- 使彈窗內容能夠**通過 URL 進行分享**。
+- 當頁面刷新時，**保留上下文**，而不是關閉彈窗。
+- **在向後導航時關閉彈窗**，而不是回到上一個路由。
+- **在向前導航時重新打開彈窗**。
 
-考慮以下的 UI 模式，使用者可以透過客戶端導航從佈局中打開登入互動視窗，或者訪問單獨的 `/login` 頁面：
+考慮以下的 UI 模式，使用者可以透過客戶端導航從佈局中打開登入彈窗，或者訪問單獨的 `/login` 頁面：
 
 ![image](https://github.com/user-attachments/assets/96904fae-19f7-46ea-bab3-0f5b659feba9)
 
@@ -2155,7 +2155,7 @@ export default function Page() {
 }
 ```
 
-然後，在 `@auth` 插槽中，新增一個回傳 `null` 的 [`default.js`](https://nextjs.org/docs/app/api-reference/file-conventions/default) 檔案。這樣可以確保當互動視窗未啟動時，互動視窗不會被渲染。
+然後，在 `@auth` 插槽中，新增一個回傳 `null` 的 [`default.js`](https://nextjs.org/docs/app/api-reference/file-conventions/default) 檔案。這樣可以確保當彈窗未啟動時，彈窗不會被渲染。
 
 app/@auth/default.tsx
 
@@ -2185,13 +2185,13 @@ export default function Page() {
 > 值得注意：
 >
 > - 用來攔截路由的命名規則（例如 `(.)`）取決於我們的文件系統結構。參考[攔截路由命名規則](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes#convention)。
-> - 通過將 `<Modal>` 功能與互動視窗內容（`<Login>`）分開，我們可以確保互動視窗內的任何內容（如[表單](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms)）都是伺服器元件。參考[混合使用客戶端和伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#supported-pattern-passing-server-components-to-client-components-as-props)了解更多資訊。
+> - 通過將 `<Modal>` 功能與彈窗內容（`<Login>`）分開，我們可以確保彈窗內的任何內容（如[表單](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms)）都是伺服器元件。參考[混合使用客戶端和伺服器元件](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#supported-pattern-passing-server-components-to-client-components-as-props)了解更多資訊。
 
-#### 開啟互動視窗
+#### 開啟彈窗
 
-現在，我們可以借助 Next.js router 來開啟和關閉互動視窗。這確保當互動視窗開啟時，URL 會正確更新，並且在向前或向後導航時也能保持一致。
+現在，我們可以借助 Next.js router 來開啟和關閉彈窗。這確保當彈窗開啟時，URL 會正確更新，並且在向前或向後導航時也能保持一致。
 
-要開啟互動視窗，將 `@auth` slot 作為一個 prop 傳遞給父佈局，並將它與 `children` prop 一起渲染。
+要開啟彈窗，將 `@auth` slot 作為一個 prop 傳遞給父佈局，並將它與 `children` prop 一起渲染。
 
 app/layout.tsx
 
@@ -2211,11 +2211,11 @@ export default function Layout({ auth, children }: { auth: React.ReactNode; chil
 }
 ```
 
-當使用者點擊 `<Link>` 時，互動視窗會開啟，而不會導航到 `/login` 頁面。然而，在刷新或初次載入時，導航到 `/login` 會將使用者帶到主登入頁面。
+當使用者點擊 `<Link>` 時，彈窗會開啟，而不會導航到 `/login` 頁面。然而，在刷新或初次載入時，導航到 `/login` 會將使用者帶到主登入頁面。
 
-#### 關閉互動視窗
+#### 關閉彈窗
 
-可以透過呼叫 `router.back()` 或使用 `Link` 元件來關閉互動視窗。
+可以透過呼叫 `router.back()` 或使用 `Link` 元件來關閉彈窗。
 
 app/ui/modal.tsx
 
@@ -2279,9 +2279,9 @@ export default function CatchAll() {
 
 > 值得注意:
 >
-> - 我們在 `@auth` slot 中使用捕獲所有的路由 (catch-all route) 來關閉互動視窗，這在前面 [活動狀態和導航](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#active-state-and-navigation) 小節中有提到。由於客戶端導航到不再匹配 slot 的路由時，slot 仍會保持可見，因此我們需要匹配到一個回傳 `null` 的路由來關閉互動視窗。
-> - 其他範例包括在畫廊 (gallery) 中開啟照片互動視窗，同時擁有一個專門的 `/photo/[id]` 頁面，或在側邊互動視窗中開啟購物車。
-> - [查看一個範例](https://github.com/vercel-labs/nextgram)，使用攔截和平行路由實現互動視窗。
+> - 我們在 `@auth` slot 中使用捕獲所有的路由 (catch-all route) 來關閉彈窗，這在前面 [活動狀態和導航](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#active-state-and-navigation) 小節中有提到。由於客戶端導航到不再匹配 slot 的路由時，slot 仍會保持可見，因此我們需要匹配到一個回傳 `null` 的路由來關閉彈窗。
+> - 其他範例包括在畫廊 (gallery) 中開啟照片彈窗，同時擁有一個專門的 `/photo/[id]` 頁面，或在側邊彈窗中開啟購物車。
+> - [查看一個範例](https://github.com/vercel-labs/nextgram)，使用攔截和平行路由實現彈窗。
 
 ### 範例 - 載入與錯誤 UI
 
@@ -2293,10 +2293,58 @@ export default function CatchAll() {
 
 ## 11. **攔截路由（Intercepting Routes）**
 
-- **App Router**：允許攔截路由以進行自訂邏輯或處理。
+- **App Router**：具有內建的路由攔截功能，可以進行自訂邏輯或處理。
 - **Page Router**：沒有直接的路由攔截概念。類似的功能需要透過中介軟體或自訂元件手動實作。
 
-說明：**App Router** 提供更多彈性，具有內建的路由攔截功能。
+說明：
+
+**攔截路由**讓我們可以在當前的佈局中載入應用程式的其他部分的路由。這種路由模式在我們想顯示某個路由的內容，但不想讓使用者切換到不同的上下文 (context) 時非常有用。
+
+例如，在一個動態消息中點擊一張照片時，可以在一個覆蓋在動態消息上的彈窗中顯示這張照片。在這種情況下，Next.js 攔截了 `/photo/123` 路由，隱藏了 URL，並將其覆蓋在 `/feed` 之上。
+
+![image](https://github.com/user-attachments/assets/7e60416c-b41b-483c-b003-1a3bbfd21c61)
+
+然而，當透過點擊可分享的 URL 或重新整理頁面來導航到這張照片時，應該渲染整個照片頁面，而不是彈窗。不應該發生路由攔截。
+
+![image](https://github.com/user-attachments/assets/f96e9971-4429-41ba-aabc-1628b1ae8db9)
+
+### 約定 (Convention)
+
+攔截路由可以通過使用 **`(..)` 約定**來定義，這與相對路徑的**約定 `../`** 類似，但適用於路由段。
+
+可以使用：
+
+- `(.)` 來匹配**相同層級**的路由段
+- `(..)` 來匹配**上層一級**的路由段
+- `(..)(..)` 來匹配**上層兩級**的路由段
+- `(...)` 來匹配從 `app` 目錄**根目錄**開始的路由段
+
+例如，可以透過在 `feed` 段 (segment) 中建立一個 `(..)photo` 目錄來攔截 `photo` 段。
+
+![image](https://github.com/user-attachments/assets/6a1dc4ee-2704-4a63-844c-c8396368541f)
+
+> 注意：`(..)` 約定是基於路由段 (_route segments_)，而非檔案系統 (file-system)。
+
+### 範例 - 彈窗 (Modals)
+
+攔截路由可以與[平行路由](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes)一起使用來建立彈窗。這能解決建立彈窗時常見的挑戰，例如：
+
+- 使彈窗內容**可以通過 URL 分享**。
+- **保留上下文**，當頁面重新整理時，不會關閉彈窗。
+- 在**向後導航**時關閉彈窗，而不是返回到前一個路由。
+- 在**向前導航**時重新打開彈窗。
+
+考慮以下的 UI 模式，使用者可以透過客戶端導航從相簿中打開照片彈窗，或直接從可分享的 URL 導航到照片頁面：
+
+![image](https://github.com/user-attachments/assets/81b6954c-8254-4a7b-93cd-3cee805b3723)
+
+在上述範例中，由於 `@modal` 是一個插槽而**不是**一個路由段，因此可以使用 `(..)` 匹配器來定義到 `photo` 段的路徑。這意味著儘管在檔案系統中 `photo` 路由比彈窗高出兩個層級，但在路由段層級中僅比彈窗高出一個層級。
+
+請參考[平行路由](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#modals)文件提供的逐步範例，或查看[圖片畫廊範例](https://github.com/vercel-labs/nextgram)。
+
+> 重要提示：
+>
+> - 其他範例可能包括在頂部導航欄中打開登入彈窗，同時也有專用的 `/login` 頁面，或在側邊彈窗中打開購物車。
 
 ## 12. **路由處理程式（Route Handlers）**
 
