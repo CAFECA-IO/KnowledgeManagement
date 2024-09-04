@@ -2797,7 +2797,174 @@ export const preferredRegion = "auto";
 - **App Router**：原生支援國際化 (i18n)，使處理多語言內容更容易。
 - **Page Router**：也支援國際化，但通常需要在 `next.config.js` 中進行更多手動設置。
 
-說明：**App Router** 在國際化方面可能提供更整合的體驗。
+說明：
+
+Next.js 能夠配置路由和內容渲染，以支援多種語言。讓網站適應不同的地區設定，包括翻譯內容（本地化）和國際化路由。
+
+### 術語
+
+- **Locale（地區設定）：** 一組語言和格式偏好的識別碼。這通常包括使用者的偏好語言，並可能包括其地理區域。
+  - `en-US`：美國使用的英文
+  - `nl-NL`：荷蘭使用的荷蘭語
+  - `nl`：荷蘭語，沒有特定的區域
+
+### 路由概覽
+
+建議使用者瀏覽器中的語言偏好來選擇使用哪種地區設定。更改你偏好的語言將修改應用程式中傳入的 `Accept-Language` 標頭。
+
+例如，使用以下庫，可以查看傳入的 `Request` 來根據 `Headers`、我們計畫支援的地區設定和預設地區設定來選擇要使用的地區設定。
+
+middleware.js
+
+```javascript
+import { match } from "@formatjs/intl-localematcher";
+import Negotiator from "negotiator";
+
+let headers = { "accept-language": "en-US,en;q=0.5" };
+let languages = new Negotiator({ headers }).languages();
+let locales = ["en-US", "nl-NL", "nl"];
+let defaultLocale = "en-US";
+
+match(languages, locales, defaultLocale); // -> 'en-US'
+```
+
+路由可以通過子路徑 (`/fr/products`) 或網域 (`my-site.fr/products`) 來實現國際化。有了這些資訊，現在可以在 [中介軟體 (Middleware)](https://nextjs.org/docs/app/building-your-application/routing/middleware) 中根據地區設定來重新導向使用者。
+
+middleware.js
+
+```javascript
+import { NextResponse } from "next/server";
+
+let locales = ['en-US', 'nl-NL', 'nl']
+
+// 獲取偏好地區設定，可以類似上面的方法或使用庫
+function getLocale(request) { ... }
+
+export function middleware(request) {
+// 檢查路徑名中是否有任何支援的地區設定
+const { pathname } = request.nextUrl
+const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  )
+
+if (pathnameHasLocale) return
+
+// 如果沒有地區設定，進行重新導向
+const locale = getLocale(request)
+request.nextUrl.pathname = `/${locale}${pathname}`
+// 例如，傳入的請求是 /products
+// 新的 URL 現在是 /en-US/products
+return NextResponse.redirect(request.nextUrl)
+}
+
+export const config = {
+  matcher: [
+// 跳過所有內部路徑 (_next)
+'/((?!_next).*)',
+// 可選：僅在根目錄 (/) URL 上運行
+// '/'
+  ],
+}
+```
+
+最後，確保 `app/` 內的所有特殊檔案都嵌套在 `app/[lang]` 下。這使得 Next.js 路由器可以動態處理路徑中的不同地區設定，並將 `lang` 參數轉發給每個佈局和頁面。例如：
+
+app/[lang]/page.js
+
+```javascript
+// 你現在可以獲取當前的地區設定
+// 例如，/en-US/products -> `lang` 是 "en-US"
+export default async function Page({ params: { lang } }) {
+  return ...
+}
+```
+
+根佈局也可以嵌套在新資料夾中（例如 `app/[lang]/layout.js`）。
+
+### 本地化 (Localization)
+
+根據使用者偏好的地區設定更改顯示的內容（或稱本地化）並非 Next.js 特有。下面描述的模式可以在任何 Web 應用程式中使用。
+
+假設我們希望在應用程式中支援英文和荷蘭文內容。我們可能會維護兩個不同的“字典”，這些字典是將某些鍵對應到本地化字串的物件。例如：
+
+dictionaries/en.json
+
+```json
+{
+  "products": {
+    "cart": "Add to Cart"
+  }
+}
+```
+
+dictionaries/nl.json
+
+```json
+{
+  "products": {
+    "cart": "Toevoegen aan Winkelwagen"
+  }
+}
+```
+
+然後，我們可以建立一個 `getDictionary` 函式來載入請求地區設定的翻譯：
+
+app/[lang]/dictionaries.js
+
+```javascript
+import "server-only";
+
+const dictionaries = {
+  en: () => import("./dictionaries/en.json").then((module) => module.default),
+  nl: () => import("./dictionaries/nl.json").then((module) => module.default),
+};
+
+export const getDictionary = async (locale) => dictionaries[locale]();
+```
+
+根據當前選定的語言，我們可以在佈局或頁面中取得字典。
+
+app/[lang]/page.js
+
+```javascript
+import { getDictionary } from "./dictionaries";
+
+export default async function Page({ params: { lang } }) {
+  const dict = await getDictionary(lang); // en
+  return <button>{dict.products.cart}</button>; // Add to Cart
+}
+```
+
+由於 `app/` 目錄中的所有佈局和頁面預設為 [伺服器端組件](https://nextjs.org/docs/app/building-your-application/rendering/server-components)，我們不需要擔心翻譯檔案的大小會影響客戶端的 JavaScript 包大小。這段代碼 **只會在伺服器上運行**，並且只會將生成的 HTML 發送到瀏覽器。
+
+### 靜態生成 (Static Generation)
+
+要為一組地區設定生成靜態路由，我們可以在任何頁面或佈局中使用 `generateStaticParams`。這可以是全域的，例如，在根佈局中：
+
+app/[lang]/layout.js
+
+```javascript
+export async function generateStaticParams() {
+  return [{ lang: "en-US" }, { lang: "de" }];
+}
+
+export default function Root({ children, params }) {
+  return (
+    <html lang={params.lang}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+### 相關資源可供參考
+
+- [最小化的 i18n 路由和翻譯](https://github.com/vercel/next.js/tree/canary/examples/app-dir-i18n-routing)
+- [`next-intl`](https://next-intl-docs.vercel.app/docs/next-13)
+- [`next-international`](https://github.com/QuiiBz/next-international)
+- [`next-i18n-router`](https://github.com/i18nexus/next-i18n-router)
+- [`paraglide-next`](https://inlang.com/m/osslbuzt/paraglide-next-i18n)
+- [`lingui`](https://lingui.dev/)
 
 # Data Fetching——資料獲取差異
 
