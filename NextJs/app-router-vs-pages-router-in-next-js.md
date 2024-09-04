@@ -2384,7 +2384,406 @@ export default function CatchAll() {
 - **App Router**：支援自訂路由處理程式，可以管理路由或 HTTP 方法的特定邏輯。
 - **Page Router**：不直接支援路由處理程式；處理邏輯通常嵌入在頁面元件中。
 
-說明：**App Router** 提供更精細的控制，使用路由處理程式。
+說明：
+
+路由處理器 (Route Handlers) 允許我們使用 Web [Request](https://developer.mozilla.org/docs/Web/API/Request) 和 [Response](https://developer.mozilla.org/docs/Web/API/Response) API，為特定路由建立自定義的請求處理器。
+
+![image](https://github.com/user-attachments/assets/4bfdd0d4-5bb7-4c5a-99ef-b7fde300af8d)
+
+> 注意：路由處理器僅在 app 目錄內可用。它們相當於 pages 目錄中的 [API Routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes)，這意味著不需要同時使用 API Routes 和路由處理器。
+
+### 慣例
+
+路由處理器是在 `app` 目錄內的 [`route.js|ts` 檔案](https://nextjs.org/docs/app/api-reference/file-conventions/route)中定義的：
+
+app/api/route.ts
+
+```tsx
+export async function GET(request: Request) {}
+```
+
+路由處理器可以像 `page.js` 和 `layout.js` 一樣嵌套在 `app` 目錄的任何位置。但在同一個路由段層級下，**不能**同時存在 `route.js` 和 `page.js` 檔案。
+
+#### 支援的 HTTP 方法
+
+支援以下 [HTTP 方法](https://developer.mozilla.org/docs/Web/HTTP/Methods)：`GET`、`POST`、`PUT`、`PATCH`、`DELETE`、`HEAD` 和 `OPTIONS`。如果調用了不支援的方法，Next.js 會回傳 `405 Method Not Allowed` 回應。
+
+#### 擴展的 `NextRequest` 和 `NextResponse` API
+
+除了支援原生的 [Request](https://developer.mozilla.org/docs/Web/API/Request) 和 [Response](https://developer.mozilla.org/docs/Web/API/Response) API 之外，Next.js 還通過 [`NextRequest`](https://nextjs.org/docs/app/api-reference/functions/next-request) 和 [`NextResponse`](https://nextjs.org/docs/app/api-reference/functions/next-response) 進行擴展，為進階使用情境提供方便的輔助工具。
+
+### 行為 - 快取
+
+路由處理器預設不會快取。不過，也可以選擇為 `GET` 方法啟用快取。要這麼做，請在路由處理器檔案中使用[路由配置選項](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)，例如 `export const dynamic = 'force-static'`。
+
+app/items/route.ts
+
+```tsx
+export const dynamic = "force-static";
+
+export async function GET() {
+  const res = await fetch("<https://data.mongodb-api.com/>...", {
+    headers: {
+      "Content-Type": "application/json",
+      "API-Key": process.env.DATA_API_KEY,
+    },
+  });
+  const data = await res.json();
+
+  return Response.json({ data });
+}
+```
+
+### 行為 - 特殊路由處理器
+
+像是 [`sitemap.ts`](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap)、[`opengraph-image.tsx`](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image)、[`icon.tsx`](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/app-icons) 以及其他[中繼資料檔案](https://nextjs.org/docs/app/api-reference/file-conventions/metadata) 等特殊路由處理器，預設會保持靜態，除非它們使用了動態函式或動態配置選項。
+
+### 行為 - 路由解析
+
+`route` 可以視為最低層級的路由原語。
+
+- 它們 **不會** 像 `page` 一樣參與佈局或客戶端導覽。
+- 在與 `page.js` 相同的路由下，**不能** 同時存在 `route.js` 檔案。
+
+每個 `route.js` 或 `page.js` 檔案都會接管該路由的所有 HTTP 請求方法。
+
+app/page.js
+
+```jsx
+export default function Page() {
+  return <h1>Hello, Next.js!</h1>;
+}
+
+// ❌ 衝突
+// `app/route.js`
+export async function POST(request) {}
+```
+
+以下範例展示了如何將路由處理器與其他 Next.js API 和功能結合使用。
+
+### 範例 - 重新驗證快取資料
+
+可以使用增量靜態再生 (ISR) [重新驗證快取資料](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration)：
+
+app/posts/route.ts
+
+```tsx
+export const revalidate = 60;
+
+export async function GET() {
+  let data = await fetch("<https://api.vercel.app/blog>");
+  let posts = await data.json();
+
+  return Response.json(posts);
+}
+```
+
+### 範例 - 動態函式
+
+路由處理器可以與 Next.js 的動態函式一起使用，例如 [`cookies`](https://nextjs.org/docs/app/api-reference/functions/cookies) 和 [`headers`](https://nextjs.org/docs/app/api-reference/functions/headers)。
+
+### 範例 - Cookies
+
+可以使用 `next/headers` 提供的 [`cookies`](https://nextjs.org/docs/app/api-reference/functions/cookies) 來讀取或設置 Cookie。此伺服器函式可以直接在路由處理器中調用，或者嵌套在另一個函式中。
+
+另外，可以使用 [`Set-Cookie`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie) 標頭回傳一個新的 `Response`。
+
+app/api/route.ts
+
+```tsx
+import { cookies } from "next/headers";
+
+export async function GET(request: Request) {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+
+  return new Response("Hello, Next.js!", {
+    status: 200,
+    headers: { "Set-Cookie": `token=${token.value}` },
+  });
+}
+```
+
+也可以使用底層的 Web API 從請求中讀取 Cookie ([`NextRequest`](https://nextjs.org/docs/app/api-reference/functions/next-request))：
+
+app/api/route.ts
+
+```tsx
+import { type NextRequest } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const token = request.cookies.get("token");
+}
+```
+
+### 範例 - 標頭 (Headers)
+
+可以使用 `next/headers` 提供的 [`headers`](https://nextjs.org/docs/app/api-reference/functions/headers) 來讀取標頭。此伺服器函式可以直接在路由處理器中調用，或嵌套在另一個函式中。
+
+這個 `headers` 實例是唯讀的。要設置標頭的話，需要回傳一個帶有新 `headers` 的新 `Response`。
+
+app/api/route.ts
+
+```tsx
+import { headers } from "next/headers";
+
+export async function GET(request: Request) {
+  const headersList = headers();
+  const referer = headersList.get("referer");
+
+  return new Response("Hello, Next.js!", {
+    status: 200,
+    headers: { referer: referer },
+  });
+}
+```
+
+也可以使用底層的 Web API 從請求中讀取標頭 ([`NextRequest`](https://nextjs.org/docs/app/api-reference/functions/next-request))：
+
+app/api/route.ts
+
+```tsx
+import { type NextRequest } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const requestHeaders = new Headers(request.headers);
+}
+```
+
+### 範例 - 重新導向 (Redirects)
+
+app/api/route.ts
+
+```tsx
+import { redirect } from "next/navigation";
+
+export async function GET(request: Request) {
+  redirect("<https://nextjs.org/>");
+}
+```
+
+### 範例 - 動態路由段 (Dynamic Route Segments)
+
+> 建議在繼續之前，先閱讀 定義路由 頁面。
+
+路由處理器可以使用 [動態段](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) 從動態資料中建立請求處理器。
+
+app/items/[slug]/route.ts
+
+```tsx
+export async function GET(request: Request, { params }: { params: { slug: string } }) {
+  const slug = params.slug; // 'a', 'b', or 'c'
+}
+```
+
+| 路由                        | 範例 URL   | `params`        |
+| --------------------------- | ---------- | --------------- |
+| `app/items/[slug]/route.js` | `/items/a` | `{ slug: 'a' }` |
+| `app/items/[slug]/route.js` | `/items/b` | `{ slug: 'b' }` |
+| `app/items/[slug]/route.js` | `/items/c` | `{ slug: 'c' }` |
+
+### 範例 - URL 查詢參數
+
+傳遞給路由處理器的請求物件是 `NextRequest` 實例，它包含了一些[方便的額外方法](https://nextjs.org/docs/app/api-reference/functions/next-request#nexturl)，包括更容易處理查詢參數。
+
+app/api/search/route.ts
+
+```tsx
+import { type NextRequest } from "next/server";
+
+export function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const query = searchParams.get("query");
+  // query 在 /api/search?query=hello 時為 "hello"
+}
+```
+
+### 範例 - 串流 (Streaming)
+
+串流通常與大型語言模型 (LLMs) 一起使用，例如 OpenAI，用於生成 AI 內容。了解更多關於 [AI SDK](https://sdk.vercel.ai/docs/introduction) 的資訊。
+
+app/api/chat/route.ts
+
+```tsx
+import { openai } from "@ai-sdk/openai";
+import { StreamingTextResponse, streamText } from "ai";
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  const result = await streamText({
+    model: openai("gpt-4-turbo"),
+    messages,
+  });
+
+  return new StreamingTextResponse(result.toAIStream());
+}
+```
+
+這些抽象層使用 Web API 來建立串流。我們也可以直接使用底層的 Web API。
+
+app/api/route.ts
+
+```tsx
+// <https://developer.mozilla.org/docs/Web/API/ReadableStream#convert_async_iterator_to_stream>
+function iteratorToStream(iterator: any) {
+  return new ReadableStream({
+    async pull(controller) {
+      const { value, done } = await iterator.next();
+
+      if (done) {
+        controller.close();
+      } else {
+        controller.enqueue(value);
+      }
+    },
+  });
+}
+
+function sleep(time: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+}
+
+const encoder = new TextEncoder();
+
+async function* makeIterator() {
+  yield encoder.encode("<p>One</p>");
+  await sleep(200);
+  yield encoder.encode("<p>Two</p>");
+  await sleep(200);
+  yield encoder.encode("<p>Three</p>");
+}
+
+export async function GET() {
+  const iterator = makeIterator();
+  const stream = iteratorToStream(iterator);
+
+  return new Response(stream);
+}
+```
+
+### 範例 - 請求正文 (Request Body)
+
+可以使用標準的 Web API 方法來讀取 `Request` 正文：
+
+app/items/route.ts
+
+```typescript
+export async function POST(request: Request) {
+  const res = await request.json();
+  return Response.json({ res });
+}
+```
+
+### 範例 - 表單資料 (Request Body FormData)
+
+可以使用 `request.formData()` 函式來讀取 `FormData`：
+
+app/items/route.ts
+
+```typescript
+export async function POST(request: Request) {
+  const formData = await request.formData();
+  const name = formData.get("name");
+  const email = formData.get("email");
+  return Response.json({ name, email });
+}
+```
+
+由於 `formData` 的資料都是字串，我們可能想使用 [`zod-form-data`](https://www.npmjs.com/zod-form-data) 來驗證請求並以我們偏好的格式（例如 `number`）取得資料。
+
+### 範例 - 跨域資源共享 (CORS)
+
+可以使用標準的 Web API 方法為特定的路由處理器設置 CORS 標頭：
+
+app/api/route.ts
+
+```typescript
+export async function GET(request: Request) {
+  return new Response("Hello, Next.js!", {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
+}
+```
+
+> **值得知道**：
+>
+> - 若要為多個路由處理器添加 CORS 標頭，可以使用 [中介軟體 (Middleware)](https://nextjs.org/docs/app/building-your-application/routing/middleware#cors) 或 [`next.config.js` 檔案](https://nextjs.org/docs/app/api-reference/next-config-js/headers#cors)。
+> - 或者，參考 [CORS 範例](https://github.com/vercel/examples/blob/main/edge-functions/cors/lib/cors.ts) 套件。
+
+### 範例 - Webhooks
+
+可以使用路由處理器來接收第三方服務的 Webhooks：
+
+app/api/route.ts
+
+```typescript
+export async function POST(request: Request) {
+  try {
+    const text = await request.text();
+    // 處理 Webhook 負載
+  } catch (error) {
+    return new Response(`Webhook error: ${error.message}`, {
+      status: 400,
+    });
+  }
+
+  return new Response("Success!", {
+    status: 200,
+  });
+}
+```
+
+值得注意的是，與使用頁面路由的 API Routes 不同，我們不需要使用 `bodyParser` 來進行任何額外的配置。
+
+### 範例 - 非 UI 回應 (Non-UI Responses)
+
+可以使用路由處理器來回傳非 UI 內容。請注意， [`sitemap.xml`](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap#generating-a-sitemap-using-code-js-ts)、[`robots.txt`](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots#generate-a-robots-file)、[`應用程式圖示`](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/app-icons#generate-icons-using-code-js-ts-tsx) 和 [Open Graph 圖像](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image) 都有內建支援。
+
+app/rss.xml/route.ts
+
+```typescript
+export async function GET() {
+  return new Response(
+    `<?xml version="1.0" encoding="UTF-8" ?>
+    <rss version="2.0">
+      <channel>
+        <title>Next.js Documentation</title>
+        <link>https://nextjs.org/docs</link>
+        <description>The React Framework for the Web</description>
+      </channel>
+    </rss>`,
+    {
+      headers: {
+        "Content-Type": "text/xml",
+      },
+    }
+  );
+}
+```
+
+### 範例 - 路由段配置選項 (Segment Config Options)
+
+路由處理器使用與頁面和佈局相同的 [路由段配置](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config)。
+
+app/items/route.ts
+
+```typescript
+export const dynamic = "auto";
+export const dynamicParams = true;
+export const revalidate = false;
+export const fetchCache = "auto";
+export const runtime = "nodejs";
+export const preferredRegion = "auto";
+```
+
+有關更多詳情，請參考 [API reference](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config)。
 
 ## 13. **中介軟體（Middleware）**
 
