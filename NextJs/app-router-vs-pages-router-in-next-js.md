@@ -369,7 +369,7 @@ Client（瀏覽器）第一次發送 Request 給 Server → Server 回傳只有�
 
 **主要特徵：**
 
-- **建置時渲染：** 頁面在建置時預先渲染，使其在提供給使用者時速度極快。
+- **建置期間渲染：** 頁面在建置期間預先渲染，使其在提供給使用者時速度極快。
 - **SEO 友好：** 由於 HTML 是預先渲染的，因此很容易被搜尋引擎索引。
 - **適用於靜態內容：** SSG 適合不經常變動的內容，例如部落格文章或行銷頁面。
 
@@ -443,7 +443,7 @@ export default SSRPage;
 
 ### 3. 靜態網站生成 (SSG)
 
-- SSG 是透過 `getStaticProps` 函數實現的，該函數會在建置時抓取資料並將其作為屬性傳遞給頁面元件。
+- SSG 是透過 `getStaticProps` 函數實現的，該函數會在建置期間抓取資料並將其作為屬性傳遞給頁面元件。
 - 這種方法會在建置期間 (build time) 為頁面生成靜態 HTML 文件，提高效能並減少伺服器負荷。
 - 簡單來說就是，SSG 會在網頁打包（built time）時，就由 Server 產生所有需要用到的內容，因此每次 Server 收到 Request 均回傳相同的 HTML 給 Client。
 - 執行函數：`getStaticProps()`
@@ -500,7 +500,7 @@ export default ISRPage;
 
 - **CSR**：使用 React 在客戶端進行內容渲染。不使用特定的函數（`getStaticProps`、`getServerSideProps`）。
 - **SSR**：使用 `getServerSideProps` 在伺服器上於每次請求時進行內容渲染。
-- **SSG**：使用 `getStaticProps` 在建置時進行內容渲染，生成靜態 HTML 文件。
+- **SSG**：使用 `getStaticProps` 在建置期間進行內容渲染，生成靜態 HTML 文件。
 - **ISR**：SSG 的變體，使用 `getStaticProps` 和 `revalidate` 屬性允許定期更新靜態內容。
 
 ## App Router 處理 4 種渲染的方式
@@ -553,11 +553,11 @@ export default async function Page() {
 
 ### 3. 靜態網站生成（SSG）
 
-- 在 App Router 中，靜態生成是透過在建置時渲染伺服器元件（server components）來實現的。
-- 如果元件在建置時獲取資料並且不依賴於執行階段變數（例如查詢參數），則會進行靜態生成。
+- 在 App Router 中，靜態生成是透過在建置期間渲染伺服器元件（server components）來實現的。
+- 如果元件在建置期間獲取資料並且不依賴於執行階段變數（例如查詢參數），則會進行靜態生成。
 - 詳細說明： <br />
-  在傳統的 Next.js 中，`getStaticProps` 用來在構建時獲取資料並生成靜態頁面。這是一種靜態網站生成 (SSG) 的方法。 <br />
-  而在 App Router 中，靜態生成是通過伺服器端元件來實現的。Next.js 會自動處理這些伺服器端元件的預渲染過程，確保在構建時生成靜態頁面。 <br />
+  在傳統的 Next.js 中，`getStaticProps` 用來在建置期間獲取資料並生成靜態頁面。這是一種靜態網站生成 (SSG) 的方法。 <br />
+  而在 App Router 中，靜態生成是通過伺服器端元件來實現的。Next.js 會自動處理這些伺服器端元件的預渲染過程，確保在建置期間生成靜態頁面。 <br />
   總而言之，在 App Router 中，我們已不必使用 `getStaticProps` 來實現靜態網站生成，因為 Next.js 的伺服器端元件已經處理了這部分的工作。 <br />
 
 範例：
@@ -570,7 +570,7 @@ export default async function Page() {
   return <div>{data}</div>;
 }
 
-// 如果不依賴於執行階段的變數（例如查詢參數），Next.js 將在建置時靜態生成這個頁面。
+// 如果不依賴於執行階段的變數（例如查詢參數），Next.js 將在建置期間靜態生成這個頁面。
 ```
 
 ### 4. 增量靜態再生（ISR）
@@ -595,7 +595,7 @@ export default async function Page() {
 
 - **CSR**：使用客戶端 hook（`useEffect` 等）進行管理。
 - **SSR**：在伺服器元件中自動應用。
-- **SSG**：透過使用沒有執行階段依賴的伺服器元件來實現。（簡單來說，就是如果伺服器元件在構建頁面時不需要依賴於**執行階段才有的資料或條件**，那麼 Next.js 就能夠在構建階段生成這個頁面，並在頁面發佈後不再需要動態生成。）
+- **SSG**：透過使用沒有執行階段依賴的伺服器元件來實現。（簡單來說，就是如果伺服器元件在建置頁面時不需要依賴於**執行階段才有的資料或條件**，那麼 Next.js 就能夠在建置階段生成這個頁面，並在頁面發佈後不再需要動態生成。）
 - **ISR**：使用 `fetch` 並指定 `revalidate` 選項來實現。
 
 # Rendering——App Router 渲染概念
@@ -653,9 +653,9 @@ Next.js 預設就是使用伺服器元件，自動實現伺服器渲染，不需
 
 ### 伺服器渲染策略—— 1. 靜態渲染（預設）
 
-靜態渲染是指在 **構建時** 或在 [資料重新驗證](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration) 之後的背景中進行路由渲染。結果會被快取並推送到 [內容傳遞網路 (CDN)](https://developer.mozilla.org/docs/Glossary/CDN)。這種優化讓我們可以在使用者和伺服器請求之間共享渲染工作的結果。
+靜態渲染是指在 **建置期間** 或在 [資料重新驗證](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration) 之後的背景中進行路由渲染。結果會被快取並推送到 [內容傳遞網路 (CDN)](https://developer.mozilla.org/docs/Glossary/CDN)。這種優化讓我們可以在使用者和伺服器請求之間共享渲染工作的結果。
 
-靜態渲染適用於具有非個人化資料的路由，這些資料在構建時可以知道，例如靜態部落格文章或產品頁面。
+靜態渲染適用於具有非個人化資料的路由，這些資料在建置期間可以知道，例如靜態部落格文章或產品頁面。
 
 ### 伺服器渲染策略—— 2. 動態渲染
 
@@ -1898,7 +1898,7 @@ import { Button } from "@/components/button";
 說明：兩者皆支援動態路由，但 **App Router** 可能在支援巢狀動態路由方面更具優勢。
 
 介紹：
-當我們無法事先知道確切的路徑名稱，且希望從動態資料中建立路由時，我們可以使用動態路徑段，這些路徑段會在請求時填充，或是在建置時[預先渲染](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params)。
+當我們無法事先知道確切的路徑名稱，且希望從動態資料中建立路由時，我們可以使用動態路徑段，這些路徑段會在請求時填充，或是在建置期間[預先渲染](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#generating-static-params)。
 
 ### 約定
 
@@ -1930,7 +1930,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
 ### 生成靜態參數
 
-`generateStaticParams` 函數可以與[動態路徑段](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)結合使用，以在建置時[靜態生成](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default)路由，而非在請求時動態生成。
+`generateStaticParams` 函數可以與[動態路徑段](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)結合使用，以在建置期間[靜態生成](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default)路由，而非在請求時動態生成。
 
 `app/blog/[slug]/page.tsx`
 
@@ -2787,10 +2787,377 @@ export const preferredRegion = "auto";
 
 ## 13. **中介軟體（Middleware）**
 
-- **App Router**：完全支援中介軟體功能來處理請求、修改響應以及在渲染前執行動作。
+- **App Router**：完全支援中介軟體功能來處理請求、修改回應以及在渲染前執行動作。
 - **Page Router**：也支援中介軟體，但通常需要更多配置，因為中介軟體是在 `/pages/_middleware.js` 檔案中聲明的。
 
-說明：兩者皆支援中介軟體，但 **App Router** 可能因其路由結構而更無縫整合。
+說明：
+
+Middleware 允許我們在請求完成之前運行程式碼。然後，根據傳入的請求，我們可以透過重寫、重新導向、修改請求、回應標頭，或直接回應來修改回應內容。
+
+Middleware 在快取內容和路由匹配之前運行。詳情請參閱[匹配路徑](https://nextjs.org/docs/app/building-your-application/routing/middleware#matching-paths)。
+
+### 使用案例
+
+將 Middleware 整合到我們的應用程式中，可以顯著改善效能、安全性和使用者體驗。
+
+一些 Middleware 特別有效的常見情境包括：
+
+- **認證和授權 (Authentication and Authorization)：**在授予對特定頁面或 API 路由的存取權之前，確保使用者身份並檢查會話 Cookie。
+- **伺服器端重新導向 (Server-Side Redirects)：**根據特定條件（例如語言環境、使用者角色）在伺服器層級重新導向使用者。
+- **路徑重寫 (Path Rewriting)：**透過動態重寫路徑至 API 路由或頁面來支援 A/B 測試、功能發布或傳統路徑。
+- **機器人檢測 (Bot Detection)：**透過檢測和阻擋機器人流量來保護我們的資源。
+- **日誌記錄和分析 (Logging and Analytics)：**在頁面或 API 處理之前捕捉和分析請求資料以獲得洞察。
+- **功能標記 (Feature Flagging)：**動態啟用或停用功能，以無縫進行功能發布或測試。
+
+同樣重要的是，要認識到 Middleware 也可能不是最佳方法的情境。以下是需要注意的一些情境：
+
+- 複雜的資料獲取和操作：Middleware 不適合用於直接資料獲取或操作，這些應該在路由處理器或伺服器端工具中進行。
+- 繁重的計算任務：Middleware 應該輕量化並快速回應，否則可能會導致頁面載入延遲。繁重的計算任務或長時間執行的程序應該在專用的路由處理器中進行。
+- 廣泛的會話 (Session) 管理：雖然 Middleware 可以處理基本的會話任務，但廣泛的會話管理應該由專用的認證服務或路由處理器管理。
+- 直接的資料庫操作：不建議在 Middleware 中執行直接的資料庫操作。資料庫互動應該在路由處理器或伺服器端工具中進行。
+
+### 約定
+
+使用專案根目錄中的 `middleware.ts`（或 `.js`）檔案來定義 Middleware。例如，將其放置在與 `pages` 或 `app` 同一層級，或是（若適用）放置在 `src` 目錄內。
+
+> 注意：雖然每個專案只支援一個 `middleware.ts` 檔案，但仍可以模組化地組織 Middleware 邏輯。將 Middleware 的功能拆分到單獨的 `.ts` 或 `.js` 檔案中，並在主要的 `middleware.ts` 檔案中匯入它們。這樣可以更簡潔地管理針對特定路由的 Middleware，並在 `middleware.ts` 中集中控制。強制使用單一 Middleware 檔案有助於簡化配置、避免潛在的衝突，並透過避免多層 Middleware 來優化效能。
+
+### 範例
+
+middleware.ts
+
+```tsx
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+// This function can be marked `async` if using `await` inside
+export function middleware(request: NextRequest) {
+  return NextResponse.redirect(new URL("/home", request.url));
+}
+
+// See "Matching Paths" below to learn more
+export const config = {
+  matcher: "/about/:path*",
+};
+```
+
+### 匹配路徑 (Matching Paths)
+
+Middleware 將會在**專案中的每一個路由**上被觸發。鑑於此，使用匹配器 (matchers) 來精確地針對或排除特定路由是至關重要的。以下是執行順序：
+
+1. `headers` 來自 `next.config.js`
+2. `redirects` 來自 `next.config.js`
+3. Middleware（`rewrites`、`redirects` 等）
+4. `beforeFiles`（`rewrites`）來自 `next.config.js`
+5. 檔案系統路由（`public/`、`_next/static/`、`pages/`、`app/` 等）
+6. `afterFiles`（`rewrites`）來自 `next.config.js`
+7. 動態路由（`/blog/[slug]`）
+8. `fallback`（`rewrites`）來自 `next.config.js`
+
+有兩種方式來定義 Middleware 運行的路徑：
+
+1. [自訂匹配器設定](https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher) (Custom matcher config)
+2. [條件語句](https://nextjs.org/docs/app/building-your-application/routing/middleware#conditional-statements) (Conditional statements)
+
+#### 匹配器 (Matcher)
+
+`matcher` 允許我們過濾 Middleware 以運行於特定的路徑上。
+
+middleware.js
+
+```jsx
+export const config = {
+  matcher: "/about/:path*",
+};
+```
+
+我們可以使用陣列語法來匹配單一路徑或多個路徑：
+
+middleware.js
+
+```jsx
+export const config = {
+  matcher: ["/about/:path*", "/dashboard/:path*"],
+};
+```
+
+`matcher` 設定支援完整的正規表達式，因此可以使用像是負向預測（negative lookaheads）或字符匹配。以下是一個負向預測的範例，用來匹配所有除了特定路徑之外的路徑：
+
+middleware.js
+
+```jsx
+export const config = {
+  matcher: [
+    /*
+     * 匹配所有請求路徑，除了以下開頭的路徑：
+     * - api（API 路由）
+     * - _next/static（靜態檔案）
+     * - _next/image（影像優化檔案）
+     * - favicon.ico、sitemap.xml、robots.txt（元資料檔案）
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+  ],
+};
+```
+
+我們也可以透過使用 `missing` 或 `has` 陣列，或是兩者的組合，來繞過某些請求的 Middleware：
+
+middleware.js
+
+```jsx
+export const config = {
+  matcher: [
+    /*
+     * 匹配所有請求路徑，除了以下開頭的路徑：
+     * - api（API 路由）
+     * - _next/static（靜態檔案）
+     * - _next/image（影像優化檔案）
+     * - favicon.ico、sitemap.xml、robots.txt（元資料檔案）
+     */
+    {
+      source: "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+      missing: [
+        { type: "header", key: "next-router-prefetch" },
+        { type: "header", key: "purpose", value: "prefetch" },
+      ],
+    },
+
+    {
+      source: "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+      has: [
+        { type: "header", key: "next-router-prefetch" },
+        { type: "header", key: "purpose", value: "prefetch" },
+      ],
+    },
+
+    {
+      source: "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+      has: [{ type: "header", key: "x-present" }],
+      missing: [{ type: "header", key: "x-missing", value: "prefetch" }],
+    },
+  ],
+};
+```
+
+> 值得注意： `matcher`值需要是常數，以便在建置期間進行靜態分析。像變數這樣的動態值會被忽略。
+
+配置的匹配器 (Configured matchers)：
+
+1. **必須**以 `/` 開頭
+2. 可以包括命名參數：`/about/:path` 匹配 `/about/a` 和 `/about/b`，但不匹配 `/about/a/c`
+3. 可以對命名參數進行修飾（以 `:` 開頭）：`/about/:path*` 匹配 `/about/a/b/c`，因為 `*` 表示「零個或多個」。`?` 表示「零個或一個」，`+` 表示「一個或多個」
+4. 可以使用括號中的正規表達式：`/about/(.*)` 等同於 `/about/:path*`
+
+詳細資訊請參閱 [path-to-regexp](https://github.com/pillarjs/path-to-regexp#path-to-regexp-1) 文件。
+
+> 值得注意：為了向下相容，Next.js 始終將 `/public` 視為 `/public/index`。因此，`/public/:path` 的匹配器會匹配。
+
+#### 條件語句 (Conditional Statements)
+
+middleware.ts
+
+```tsx
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/about")) {
+    return NextResponse.rewrite(new URL("/about-2", request.url));
+  }
+
+  if (request.nextUrl.pathname.startsWith("/dashboard")) {
+    return NextResponse.rewrite(new URL("/dashboard/user", request.url));
+  }
+}
+```
+
+### NextResponse
+
+`NextResponse` API 可以：
+
+- 將進來的請求 `redirect` 到不同的 URL
+- 通過顯示給定的 URL 來 `rewrite` 回應
+- 為 API 路由、`getServerSideProps` 和 `rewrite` 目標設定請求標頭 (request headers)
+- 設定回應的 cookies
+- 設定回應的標頭
+
+要從 Middleware 產生回應，可以：
+
+1. `rewrite` 到產生回應的路由（[Page](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates) 或 [Route Handler](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)）
+2. 直接回傳一個 `NextResponse`。請參考 [產生回應](https://nextjs.org/docs/app/building-your-application/routing/middleware#producing-a-response)
+
+### 使用 Cookies
+
+Cookies 是普通的標頭。在 `Request` 中，它們儲存在 `Cookie` 標頭中。在 `Response` 中，它們則在 `Set-Cookie` 標頭中。Next.js 提供了一個方便的方式來通過 `NextRequest` 和 `NextResponse` 上的 `cookies` 擴展來訪問和操作這些 cookies。
+
+1. 對於進來的請求，`cookies` 提供以下方法：`get`、`getAll`、`set` 和 `delete` cookies。還可以使用 `has` 檢查 cookie 是否存在，或使用 `clear` 移除所有 cookies。
+2. 對於發出的回應，`cookies` 也有 `get`、`getAll`、`set` 和 `delete` 方法。
+
+middleware.ts
+
+```tsx
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(request: NextRequest) {
+  // 假設進來的請求中有一個 "Cookie:nextjs=fast" 標頭
+  // 使用 `RequestCookies` API 從請求中獲取 cookies
+  let cookie = request.cookies.get("nextjs");
+  console.log(cookie); // => { name: 'nextjs', value: 'fast', Path: '/' }
+  const allCookies = request.cookies.getAll();
+  console.log(allCookies); // => [{ name: 'nextjs', value: 'fast' }]
+
+  request.cookies.has("nextjs"); // => true
+  request.cookies.delete("nextjs");
+  request.cookies.has("nextjs"); // => false
+
+  // 使用 `ResponseCookies` API 在回應中設定 cookies
+  const response = NextResponse.next();
+  response.cookies.set("vercel", "fast");
+  response.cookies.set({
+    name: "vercel",
+    value: "fast",
+    path: "/",
+  });
+  cookie = response.cookies.get("vercel");
+  console.log(cookie); // => { name: 'vercel', value: 'fast', Path: '/' }
+  // 發出的回應將會有一個 `Set-Cookie:vercel=fast;path=/` 標頭。
+
+  return response;
+}
+```
+
+### 設定標頭 (Setting Headers)
+
+可以使用 `NextResponse` API 設定請求和回應標頭（從 Next.js v13.0.0 開始支援設定 _請求_ 標頭）。
+
+middleware.ts
+
+```tsx
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(request: NextRequest) {
+  // Clone the request headers and set a new header `x-hello-from-middleware1`
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-hello-from-middleware1", "hello");
+
+  // You can also set request headers in NextResponse.next
+  const response = NextResponse.next({
+    request: {
+      // New request headers
+      headers: requestHeaders,
+    },
+  });
+
+  // Set a new response header `x-hello-from-middleware2`
+  response.headers.set("x-hello-from-middleware2", "hello");
+  return response;
+}
+```
+
+> 值得知道：避免設定過大的標頭，因為這可能會導致  [431 Request Header Fields Too Large](https://developer.mozilla.org/docs/Web/HTTP/Status/431) 錯誤，這取決於後端網路伺服器配置。
+
+#### CORS
+
+可以在 Middleware 中設定 CORS 標頭，以允許跨來源請求，包括 [簡單請求](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests) 和 [預檢請求](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests)。
+
+middleware.ts
+
+```tsx
+import { NextRequest, NextResponse } from "next/server";
+
+const allowedOrigins = ["https://acme.com", "https://my-app.org"];
+
+const corsOptions = {
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
+export function middleware(request: NextRequest) {
+  // Check the origin from the request
+  const origin = request.headers.get("origin") ?? "";
+  const isAllowedOrigin = allowedOrigins.includes(origin);
+
+  // Handle preflighted requests
+  const isPreflight = request.method === "OPTIONS";
+
+  if (isPreflight) {
+    const preflightHeaders = {
+      ...(isAllowedOrigin && { "Access-Control-Allow-Origin": origin }),
+      ...corsOptions,
+    };
+    return NextResponse.json({}, { headers: preflightHeaders });
+  }
+
+  // Handle simple requests
+  const response = NextResponse.next();
+
+  if (isAllowedOrigin) {
+    response.headers.set("Access-Control-Allow-Origin", origin);
+  }
+
+  Object.entries(corsOptions).forEach(([key, value]) => {
+    response.headers.set(key, value);
+  });
+
+  return response;
+}
+
+export const config = {
+  matcher: "/api/:path*",
+};
+```
+
+> 值得知道： 可以在 [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#cors) 中為個別路由配置 CORS 標頭。
+
+### 產生回應 (Producing a Response)
+
+可以直接透過回傳 `Response` 或 `NextResponse` 實例來從 Middleware 中回應（從 [Next.js v13.1.0](https://nextjs.org/blog/next-13-1#nextjs-advanced-middleware) 開始支援）。
+
+middleware.ts
+
+```tsx
+import type { NextRequest } from "next/server";
+import { isAuthenticated } from "@lib/auth";
+
+// 限制 Middleware 僅對以 `/api/` 開頭的路徑有效
+export const config = {
+  matcher: "/api/:function*",
+};
+
+export function middleware(request: NextRequest) {
+  // 調用我們的認證函數來檢查請求
+  if (!isAuthenticated(request)) {
+    // 回應 JSON，表示錯誤消息
+    return Response.json({ success: false, message: "authentication failed" }, { status: 401 });
+  }
+}
+```
+
+#### `waitUntil` 和 `NextFetchEvent`
+
+`NextFetchEvent` 物件擴展了原生的 [`FetchEvent`](https://developer.mozilla.org/docs/Web/API/FetchEvent) 物件，並包含 [`waitUntil()`](https://developer.mozilla.org/docs/Web/API/ExtendableEvent/waitUntil) 方法。
+
+`waitUntil()` 方法接受一個 promise 作為參數，並延長 Middleware 的生命周期直到該 promise 完成。這對於在背景中執行工作非常有用。
+
+middleware.ts
+
+```tsx
+import { NextResponse } from "next/server";
+import type { NextFetchEvent, NextRequest } from "next/server";
+
+export function middleware(req: NextRequest, event: NextFetchEvent) {
+  event.waitUntil(
+    fetch("<https://my-analytics-platform.com>", {
+      method: "POST",
+      body: JSON.stringify({ pathname: req.nextUrl.pathname }),
+    })
+  );
+
+  return NextResponse.next();
+}
+```
 
 ## 14. **國際化（Internationalization）**
 
