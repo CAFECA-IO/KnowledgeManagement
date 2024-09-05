@@ -3616,6 +3616,8 @@ export const getPost = cache(async (id) => {
 在元件內進行資料獲取時，我們需要了解兩種資料獲取模式：平行與序列。
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d06fa267-5063-4931-8ade-fa45a882a2e2/3c2db0c2-cdcc-49d2-bade-ddef694dae2d/image.png)
+![image](https://github.com/user-attachments/assets/2aaaeffb-11e8-4ade-87b3-95d40cb5e25f)
+
 
 - **序列**：元件樹中的請求彼此依賴，這可能會導致較長的載入時間。
 - **平行**：路由中的請求會立即啟動並同時載入資料，這可以縮短總的資料載入時間。
