@@ -2043,7 +2043,7 @@ export default function Layout({ children, team, analytics }: { children: React.
 
 預設情況下，Next.js 會追蹤每個插槽的活動*狀態*（或子頁面）。然而，插槽中渲染的內容將取決於導航的類型：
 
-- [\*\*軟導航](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#5-soft-navigation) (Soft Navigation)\*\*：在客戶端導航期間，Next.js 會進行[部分渲染](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#4-partial-rendering)，更改插槽內的子頁面，同時保持其他插槽的活動子頁面，即使它們不符合當前的 URL。
+- **[軟導航](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#5-soft-navigation) (Soft Navigation)**：在客戶端導航期間，Next.js 會進行[部分渲染](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#4-partial-rendering)，更改插槽內的子頁面，同時保持其他插槽的活動子頁面，即使它們不符合當前的 URL。
 - **硬導航 (Hard Navigation)**：在全頁載入（瀏覽器刷新）後，Next.js 無法確定不符合當前 URL 的插槽的活動狀態。相反，它將為未匹配的插槽渲染一個 [`default.js`](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#defaultjs) 文件，或者如果不存在 `default.js`，則會顯示 `404`。
 
 > 值得注意：
