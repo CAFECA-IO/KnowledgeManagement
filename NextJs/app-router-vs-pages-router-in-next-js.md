@@ -3337,7 +3337,7 @@ export default function Root({ children, params }) {
 
 在 Next.js 中，**Page Router** 和 **App Router** 的 **資料獲取** 方式有明顯差異，這是因為框架的進化。以下是它們的不同之處：
 
-### 1. Page Router
+### Page Router
 
 - **使用的函式**：`getStaticProps`，`getServerSideProps`，`getInitialProps`。
 - **基於檔案的資料獲取**：資料獲取發生在頁面元件中（`pages` 目錄）使用這些特定的函式：
@@ -3347,7 +3347,7 @@ export default function Root({ children, params }) {
 - **靜態與動態渲染**：頁面可以根據使用的函式，進行靜態生成或伺服器端渲染。
 - **僅限於頁面**：這些函式只能在頁面元件中使用，無法用於其他部分如 `components/`。
 
-### 2. App Router
+### App Router
 
 - **使用的函式**：`fetch`，`use`，`Suspense`，伺服器元件，並且 `getStaticProps` 被 **React Server Components（RSC）** 取代，來進行靜態與動態渲染。
 - **基於元件的資料獲取**：資料可以在 `app` 目錄中的任何元件內進行獲取（不僅限於頁面元件）。
@@ -3822,6 +3822,235 @@ export async function Page() {
   );
 }
 ```
+
+## 增量靜態再生 (Incremental Static Regeneration, ISR)
+
+增量靜態再生 (ISR) 讓我們可以：
+
+- 更新靜態內容而不需要重建整個網站
+- 透過預先渲染的靜態頁面來處理大多數請求，減少伺服器負載
+- 確保自動為頁面添加適當的 `cache-control` 標頭
+- 處理大量內容頁面而不需要很長的 `next build` 時間
+
+這是一個最小的範例：
+
+app/blog/[id]/page.tsx
+
+```tsx
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+}
+
+// Next.js will invalidate the cache when a
+// request comes in, at most once every 60 seconds.
+export const revalidate = 60;
+
+// We'll prerender only the params from `generateStaticParams` at build time.
+// If a request comes in for a path that hasn't been generated,
+// Next.js will server-render the page on-demand.
+export const dynamicParams = true; // or false, to 404 on unknown paths
+
+export async function generateStaticParams() {
+  let posts: Post[] = await fetch("https://api.vercel.app/blog").then((res) => res.json());
+  return posts.map((post) => ({
+    id: post.id,
+  }));
+}
+
+export default async function Page({ params }: { params: { id: string } }) {
+  let post = await fetch(`https://api.vercel.app/blog/${params.id}`).then((res) => res.json());
+  return (
+    <main>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
+    </main>
+  );
+}
+```
+
+這個範例的工作方式如下：
+
+1. 在 `next build` 過程中，所有已知的部落格文章都會被生成（此範例中有 25 篇）
+2. 對這些頁面的所有請求（例如 `/blog/1`）都會被快取，並且即時返回
+3. 在 60 秒過後，下次的請求仍然會顯示快取的（過期）頁面
+4. 快取會被無效化，並且新的頁面版本會在後台開始生成
+5. 一旦成功生成，Next.js 會顯示並快取更新後的頁面
+6. 如果請求了 `/blog/26`，Next.js 會按需生成並快取這個頁面
+
+#### 參考範例：
+
+- [Next.js Commerce](https://vercel.com/templates/next.js/nextjs-commerce)
+- [On-Demand ISR](https://on-demand-isr.vercel.app/)
+- [Next.js Forms](https://github.com/vercel/next.js/tree/canary/examples/next-forms)
+
+#### 參考資料：
+
+1. 路由段配置
+   - [`revalidate`](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate)
+   - [`dynamicParams`](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams)
+2. 函數
+   - [`revalidatePath`](https://nextjs.org/docs/app/api-reference/functions/revalidatePath)
+   - [`revalidateTag`](https://nextjs.org/docs/app/api-reference/functions/revalidateTag)
+
+### 範例
+
+#### 基於時間的重新驗證
+
+此範例會在 `/blog` 上抓取並顯示一份部落格文章列表。一小時後，當下次訪問該頁面時，快取將會失效。隨後，頁面會在背景中生成最新的部落格文章。
+
+```tsx
+export const revalidate = 3600; // 每小時失效一次
+
+export default async function Page() {
+  let data = await fetch("<https://api.vercel.app/blog>");
+  let posts = await data.json();
+  return (
+    <main>
+      <h1>部落格文章</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </main>
+  );
+}
+```
+
+建議設置較高的重新驗證時間。例如，一小時，而不是一秒。如果我們需要更精確的控制，考慮使用按需重新驗證。如果我們需要即時資料，考慮切換到[動態渲染](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-rendering)。
+
+#### 使用 `revalidatePath` 的按需重新驗證 (On-demand revalidation)
+
+如果需要更精確的重新驗證方式，可以使用 `revalidatePath` 函數按需使頁面快取失效。
+
+例如，在新增文章後可以調用這個伺服器端動作。不論我們在伺服器元件中是使用 `fetch` 還是連接資料庫來獲取資料，這個方法都會清除整個路由的快取，讓伺服器元件重新獲取最新的資料。
+
+```tsx
+"use server";
+
+import { revalidatePath } from "next/cache";
+
+export async function createPost() {
+  // 使 /posts 路由在快取中失效
+  revalidatePath("/posts");
+}
+```
+
+[查看範例](https://on-demand-isr.vercel.app/)並[探索源代碼](https://github.com/vercel/on-demand-isr)。
+
+#### 使用 `revalidateTag` 的按需重新驗證 (On-demand revalidation)
+
+對於大多數情況，建議重新驗證整個路徑。如果需要更細微的控制，可以使用 `revalidateTag` 函數。
+
+例如，可以標記個別的 `fetch` 請求：
+
+```tsx
+export default async function Page() {
+  let data = await fetch("<https://api.vercel.app/blog>", {
+    next: { tags: ["posts"] },
+  });
+  let posts = await data.json();
+  // ...
+}
+```
+
+如果使用 ORM 或連接資料庫，可以使用 `unstable_cache`：
+
+```tsx
+import { unstable_cache } from "next/cache";
+import { db, posts } from "@/lib/db";
+
+const getCachedPosts = unstable_cache(
+  async () => {
+    return await db.select().from(posts);
+  },
+  ["posts"],
+  { revalidate: 3600, tags: ["posts"] }
+);
+
+export default async function Page() {
+  let posts = getCachedPosts();
+  // ...
+}
+```
+
+然後，可以在[伺服器動作](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)或[路由處理器](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)中使用 `revalidateTag`：
+
+```tsx
+"use server";
+
+import { revalidateTag } from "next/cache";
+
+export async function createPost() {
+  // 使快取中所有標記為 'posts' 的資料失效
+  revalidateTag("posts");
+}
+```
+
+#### 處理未捕捉的例外狀況
+
+如果在嘗試重新驗證資料時拋出錯誤，系統將繼續從快取中提供最後一次成功生成的資料。在下一次後續請求時，Next.js 會重新嘗試重新驗證資料。[了解更多錯誤處理](https://nextjs.org/docs/app/building-your-application/routing/error-handling)。
+
+#### 自訂快取位置
+
+快取和重新驗證頁面（增量靜態再生）使用相同的共享快取。當[部署到 Vercel](https://vercel.com/docs/incremental-static-regeneration?utm_source=next-site&utm_medium=docs&utm_campaign=next-website)時，ISR 快取會自動保存到耐久性儲存裝置。
+
+自我託管時，ISR 快取會儲存在 Next.js 伺服器的檔案系統（磁碟上）。這在使用 Pages 與 App Router 進行自我託管時會自動運作。
+
+如果我們想將快取頁面和資料保存到耐久性儲存裝置，或者將快取共享給多個容器或 Next.js 應用程式實例，可以配置 Next.js 的快取位置。[了解更多](https://nextjs.org/docs/app/building-your-application/deploying#caching-and-isr)。
+
+### 疑難排解
+
+#### 在本地開發中調試快取資料 (Debugging cached data in local development)
+
+如果使用 `fetch` API，可以添加額外的日誌來了解哪些請求是已快取或未快取的。[了解更多關於 `logging` 選項的資訊](https://nextjs.org/docs/app/api-reference/next-config-js/logging)。
+
+`next.config.js`
+
+```js
+module.exports = {
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+};
+```
+
+#### 驗證正確的生產環境行為
+
+要驗證我們的頁面在生產環境中是否正確地被快取和重新驗證，我們可以透過執行 `next build` 然後 `next start` 來本地測試生產環境的 Next.js 伺服器。
+
+這將允許我們測試 ISR 在生產環境中的行為。為了進一步調試，將以下環境變數添加到 `.env` 檔案中：
+
+`.env`
+
+```bash
+NEXT_PRIVATE_DEBUG_CACHE=1
+
+```
+
+這將讓 Next.js 伺服器的控制台記錄 ISR 快取命中與未命中的情況。我們可以檢查輸出來查看哪些頁面在 `next build` 期間生成，以及如何在按需存取路徑時更新頁面。
+
+### 注意事項
+
+- ISR 僅支援使用 Node.js 執行環境（預設）。
+- ISR 不支援[靜態導出](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)。
+- 如果我們在一個靜態渲染的路由中有多個 `fetch` 請求，且每個請求都有不同的 `revalidate` 週期，則 ISR 會使用最短的時間。然而，這些 `revalidate` 週期仍會被[資料快取](https://nextjs.org/docs/app/building-your-application/caching#data-cache)尊重。
+- 如果在路由中任何 `fetch` 請求的 `revalidate` 時間為 `0`，或明確設置 `no-store`，則該路由將會[動態渲染](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-rendering)。
+- 中介軟體不會對按需 ISR 請求執行，因此中介軟體中的任何路徑重寫或邏輯將不會應用。請確保我們重新驗證的路徑是精確的。例如，`/post/1` 而不是重寫過的 `/post-1`。
+
+### 版本歷史
+
+| 版本      | 變更                                                                                                       |
+| --------- | ---------------------------------------------------------------------------------------------------------- |
+| `v14.1.0` | 自訂 `cacheHandler` 穩定版。                                                                               |
+| `v13.0.0` | 引入 App Router。                                                                                          |
+| `v12.2.0` | Pages Router：按需 ISR 穩定版。                                                                            |
+| `v12.0.0` | Pages Router：[支援 Bot 感知的 ISR 後備機制](https://nextjs.org/blog/next-12#bot-aware-isr-fallback)新增。 |
+| `v9.5.0`  | Pages Router：[ISR 穩定版推出](https://nextjs.org/blog/next-9-5)。                                         |
 
 # 逐步遷移的方式
 
