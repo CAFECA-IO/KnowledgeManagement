@@ -3333,7 +3333,40 @@ export default function Root({ children, params }) {
 - [`paraglide-next`](https://inlang.com/m/osslbuzt/paraglide-next-i18n)
 - [`lingui`](https://lingui.dev/)
 
-# Data Fetching——App Router 如何資料獲取
+# Data Fetching——資料獲取差異
+
+在 Next.js 中，**Page Router** 和 **App Router** 的 **資料獲取** 方式有明顯差異，這是因為框架的進化。以下是它們的不同之處：
+
+### 1. Page Router
+
+- **使用的函式**：`getStaticProps`，`getServerSideProps`，`getInitialProps`。
+- **基於檔案的資料獲取**：資料獲取發生在頁面元件中（`pages` 目錄）使用這些特定的函式：
+  - `getStaticProps`：在建置期間進行靜態資料獲取。
+  - `getServerSideProps`：在每次請求時於伺服器端進行資料獲取。
+  - `getInitialProps`：舊方法，允許在伺服器與客戶端進行資料獲取。
+- **靜態與動態渲染**：頁面可以根據使用的函式，進行靜態生成或伺服器端渲染。
+- **僅限於頁面**：這些函式只能在頁面元件中使用，無法用於其他部分如 `components/`。
+
+### 2. App Router
+
+- **使用的函式**：`fetch`，`use`，`Suspense`，伺服器元件，並且 `getStaticProps` 被 **React Server Components（RSC）** 取代，來進行靜態與動態渲染。
+- **基於元件的資料獲取**：資料可以在 `app` 目錄中的任何元件內進行獲取（不僅限於頁面元件）。
+  - **伺服器元件**：在 App Router 中，元件預設為伺服器元件，允許直接在伺服器端進行資料獲取，而無需明確使用伺服器端函式。
+  - **使用 `fetch` 進行資料獲取**：由於 App Router 更傾向於元件導向，可以在伺服器元件內使用 `fetch` 來進行資料獲取。
+- **靜態與動態段**：App Router 允許在同一頁面（或路由段）內進行部分靜態生成與動態資料獲取。
+- **內建 Suspense**：內建的 Suspense 邊界用來處理載入狀態，使得管理非同步資料獲取變得更容易。
+
+### 主要差異總結：
+
+| 功能              | Page Router                                               | App Router                         |
+| ----------------- | --------------------------------------------------------- | ---------------------------------- |
+| **資料獲取 API**  | `getStaticProps`，`getServerSideProps`，`getInitialProps` | 伺服器元件、`fetch`、Suspense 邊界 |
+| **使用位置**      | 僅限於頁面（`pages` 目錄）                                | 任何元件（`app` 目錄）             |
+| **伺服器元件**    | 不可用                                                    | 預設即為伺服器元件（RSC）          |
+| **渲染方式**      | 根據函式進行靜態或伺服器端渲染                            | 結合靜態與動態渲染於元件內         |
+| **Suspense 支援** | 需手動新增                                                | 內建用於處理非同步操作             |
+
+接著介紹如何在 App Router 中進行資料獲取。
 
 ## 資料獲取與快取 (Data Fetching and Caching)
 
