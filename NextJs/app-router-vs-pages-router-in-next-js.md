@@ -2893,7 +2893,7 @@ export const config = {
      * - api（API 路由）
      * - _next/static（靜態檔案）
      * - _next/image（影像優化檔案）
-     * - favicon.ico、sitemap.xml、robots.txt（元資料檔案）
+     * - favicon.ico、sitemap.xml、robots.txt（後設資料檔案）
      */
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
@@ -2912,7 +2912,7 @@ export const config = {
      * - api（API 路由）
      * - _next/static（靜態檔案）
      * - _next/image（影像優化檔案）
-     * - favicon.ico、sitemap.xml、robots.txt（元資料檔案）
+     * - favicon.ico、sitemap.xml、robots.txt（後設資料檔案）
      */
     {
       source: "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
@@ -3333,9 +3333,462 @@ export default function Root({ children, params }) {
 - [`paraglide-next`](https://inlang.com/m/osslbuzt/paraglide-next-i18n)
 - [`lingui`](https://lingui.dev/)
 
-# Data Fetching——資料獲取差異
+# Data Fetching——App Router 如何資料獲取
 
-_（撰寫中）_
+## 資料獲取與快取 (Data Fetching and Caching)
+
+這是一個簡單的 Next.js 資料獲取範例：
+
+app/page.tsx
+
+```tsx
+export default async function Page() {
+  let data = await fetch("https://api.vercel.app/blog");
+  let posts = await data.json();
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+此範例展示了在 React 伺服器端元件中，透過 `fetch` API 進行的基本伺服器端資料獲取。
+
+- 可以進一步參考的資料：
+
+  - [`fetch`](https://nextjs.org/docs/app/api-reference/functions/fetch)
+  - React [`cache`](https://react.dev/reference/react/cache)
+  - Next.js [`unstable_cache`](https://nextjs.org/docs/app/api-reference/functions/unstable_cache)
+
+- 可以進一步參考的其他範例：
+  - [Next.js Commerce](https://vercel.com/templates/next.js/nextjs-commerce)
+  - [On-Demand ISR](https://on-demand-isr.vercel.app/)
+  - [Next.js Forms](https://github.com/vercel/next.js/tree/canary/examples/next-forms)
+
+### 範例 - 使用 `fetch` API 在伺服器端獲取資料
+
+此元件將取得並顯示一份部落格文章列表。來自 `fetch` 的回應將自動被快取 (cache)。
+
+app/page.tsx
+
+```tsx
+export default async function Page() {
+  let data = await fetch("https://api.vercel.app/blog");
+  let posts = await data.json();
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+如果在這條路由中沒有使用任何 [動態函數](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-rendering)，該頁面將在 `next build` 期間被預渲染為靜態頁面。然後可以通過[增量靜態再生 (ISR)](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration) 更新資料。
+
+如果*不想* 快取 `fetch` 的回應，可以使用以下方式：
+
+```tsx
+let data = await fetch("<https://api.vercel.app/blog>", { cache: "no-store" });
+```
+
+### 範例 - 使用 ORM 或資料庫在伺服器端獲取資料
+
+此元件將取得並顯示部落格文章列表。來自資料庫的回應將會被快取。
+
+app/page.tsx
+
+```tsx
+import { db, posts } from "@/lib/db";
+
+export default async function Page() {
+  let allPosts = await db.select().from(posts);
+  return (
+    <ul>
+      {allPosts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+如果在這條路由中沒有使用任何 [動態函數](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-rendering)，該頁面將在 `next build` 期間被預渲染為靜態頁面。然後可以通過 [增量靜態再生](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration)更新資料。
+
+如果*不想* 快取資料庫的回應，可以在檔案中加入以下內容：
+
+```tsx
+export const dynamic = "force-dynamic";
+```
+
+然而，通常我們會使用 `cookies()`、`headers()` 或從 page props 讀取傳入的 `searchParams`，這會自動使頁面動態渲染。在這種情況下，我們*不需要* 明確地使用 `force-dynamic`。
+
+### 範例 - 在客戶端獲取資料
+
+建議首先嘗試在伺服器端獲取資料。
+
+不過，某些情況下客戶端資料獲取是合理的。在這些情境中，可以在 `useEffect` 中手動呼叫 `fetch`（不推薦），或者依賴社群中的受歡迎 React 函式庫（例如 [SWR](https://swr.vercel.app/) 或 [React Query](https://tanstack.com/query/latest)）進行客戶端資料獲取。
+
+app/page.tsx
+
+```tsx
+"use client";
+
+import { useState, useEffect } from "react";
+
+export function Posts() {
+  const [posts, setPosts] = useState(null);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      let res = await fetch("https://api.vercel.app/blog");
+      let data = await res.json();
+      setPosts(data);
+    }
+    fetchPosts();
+  }, []);
+
+  if (!posts) return <div>Loading...</div>;
+
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### 範例 - 使用 ORM 或資料庫進行資料快取
+
+可以使用 `unstable_cache` API 快取回應，以便在執行 `next build` 時預渲染頁面。
+
+app/page.tsx
+
+```tsx
+import { unstable_cache } from "next/cache";
+import { db, posts } from "@/lib/db";
+
+const getPosts = unstable_cache(
+  async () => {
+    return await db.select().from(posts);
+  },
+  ["posts"],
+  { revalidate: 3600, tags: ["posts"] }
+);
+
+export default async function Page() {
+  const allPosts = await getPosts();
+
+  return (
+    <ul>
+      {allPosts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+此範例將資料庫查詢結果快取 1 小時（3600 秒）。它也添加了 `posts` 的快取標籤，該標籤可以通過[增量靜態再生 (ISR)](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration) 無效化快取。
+
+> 補充：
+>
+> 1. **快取結果**：這個例子將資料庫查詢的結果快取 1 小時（3600 秒）。這意味著一旦執行查詢並取得結果後，結果會被儲存在快取中。如果在接下來的一小時內再次請求相同的查詢，會從快取中取回結果，而不是重新查詢資料庫。這可以透過減少資料庫負擔並加快回應速度來提升效能。
+> 2. **快取標籤**：快取被標記為「posts」。這是一種對快取資料進行標籤或分類的方式。透過標記快取，您可以更有效地管理它。例如，如果您想要使所有與「posts」相關的快取無效，您可以使用這個標籤來進行操作。
+> 3. **使用 ISR 進行無效化**：增量靜態再生（ISR）是 Next.js 的一項功能，允許您逐步更新靜態內容。使用 ISR 時，您可以在不重建整個網站的情況下更新靜態頁面。當頁面被重新生成時，它會替換掉舊的快取版本。在這種情況下，快取標籤「posts」可以用來使相關頁面無效或更新。這確保了資料保持最新並反映最新的變更。
+>
+> 總之這個範例，資料庫查詢結果會被快取 1 小時，並且使用標籤來方便管理，並可以通過增量靜態再生來使快取失效或更新，以確保資料保持最新。
+
+### 範例 - 重複使用跨多個函數的資料
+
+Next.js 使用像是 `generateMetadata` 和 `generateStaticParams` 這樣的 API，我們會需要使用與 `page` 中相同的資料。
+
+如果我們使用的是 `fetch`，請求會自動 [記憶化 (memoized)](https://nextjs.org/docs/app/building-your-application/caching#request-memoization)。這意味著我們可以安全地使用相同選項呼叫相同的 URL，而且只會發送一次請求。
+
+app/page.tsx
+
+```tsx
+import { notFound } from "next/navigation";
+
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+}
+
+async function getPost(id: string) {
+  let res = await fetch(`https://api.example.com/posts/${id}`);
+  let post: Post = await res.json();
+  if (!post) notFound();
+  return post;
+}
+
+export async function generateStaticParams() {
+  let posts = await fetch("https://api.example.com/posts").then((res) => res.json());
+
+  return posts.map((post: Post) => ({
+    id: post.id,
+  }));
+}
+
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  let post = await getPost(params.id);
+
+  return {
+    title: post.title,
+  };
+}
+
+export default async function Page({ params }: { params: { id: string } }) {
+  let post = await getPost(params.id);
+
+  return (
+    <article>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
+    </article>
+  );
+}
+```
+
+如果我們*沒有* 使用 `fetch`，而是直接使用 ORM 或資料庫，我們可以將資料獲取包裹在 React 的 `cache` 函數中。這樣會去除重複 (de-duplicate)，只會發送一次查詢。
+
+```tsx
+import { cache } from "react";
+import { db, posts, eq } from "@/lib/db"; // Example with Drizzle ORM
+import { notFound } from "next/navigation";
+
+export const getPost = cache(async (id) => {
+  const post = await db.query.posts.findFirst({
+    where: eq(posts.id, parseInt(id)),
+  });
+
+  if (!post) notFound();
+  return post;
+});
+```
+
+### 範例 - 重新驗證快取資料
+
+了解更多關於透過[增量靜態再生 (ISR)](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration) 重新驗證快取資料。
+
+### 模式 - 平行與序列資料獲取 (Parallel and sequential data fetching)
+
+在元件內進行資料獲取時，我們需要了解兩種資料獲取模式：平行與序列。
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d06fa267-5063-4931-8ade-fa45a882a2e2/3c2db0c2-cdcc-49d2-bade-ddef694dae2d/image.png)
+
+- **序列**：元件樹中的請求彼此依賴，這可能會導致較長的載入時間。
+- **平行**：路由中的請求會立即啟動並同時載入資料，這可以縮短總的資料載入時間。
+
+#### 序列資料獲取 (Sequential data fetching)
+
+如果我們有巢狀的元件，每個元件都獲取自己的資料，那麼如果這些資料請求未被 [記憶化](https://nextjs.org/docs/app/building-your-application/caching#request-memoization)，資料獲取將會按序進行。
+
+有時候我們可能希望使用這種模式，因為一個獲取依賴於另一個的結果。例如，`Playlists` 元件只有在 `Artist` 元件完成資料獲取後才開始獲取資料，因為 `Playlists` 依賴於 `artistID` 屬性：
+
+app/artist/[username]/page.tsx
+
+```tsx
+export default async function Page({ params: { username } }: { params: { username: string } }) {
+  // Get artist information
+  const artist = await getArtist(username);
+
+  return (
+    <>
+      <h1>{artist.name}</h1>
+      {/* Show fallback UI while the Playlists component is loading */}
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* Pass the artist ID to the Playlists component */}
+        <Playlists artistID={artist.id} />
+      </Suspense>
+    </>
+  );
+}
+
+async function Playlists({ artistID }: { artistID: string }) {
+  // Use the artist ID to fetch playlists
+  const playlists = await getArtistPlaylists(artistID);
+
+  return (
+    <ul>
+      {playlists.map((playlist) => (
+        <li key={playlist.id}>{playlist.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+我們可以使用 [`loading.js`](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming)（針對路由段）或 [React `<Suspense>`](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense)（針對巢狀元件）來顯示即時的載入狀態，同時 React 正在串流結果。
+
+這將防止整個路由因資料請求而被阻塞，使用者將能夠與已準備好的頁面部分互動。
+
+#### 平行資料獲取 (Parallel Data Fetching)
+
+預設情況下，佈局和頁面段落會平行渲染。這意味著請求會被平行啟動。
+
+然而，由於 `async`/`await` 的特性，同一段落或元件中的 `await` 請求會阻塞其下方的請求。
+
+為了平行獲取資料，我們可以將請求定義在使用這些資料的元件外部。這樣可以通過平行啟動兩個請求來節省時間，但直到兩個 promises 都被解析後，使用者才會看到渲染結果。
+
+在以下範例中，`getArtist` 和 `getAlbums` 函數被定義在 `Page` 元件外部，並在元件內部使用 `Promise.all` 來啟動：
+
+app/artist/[username]/page.tsx
+
+```tsx
+import Albums from "./albums";
+
+async function getArtist(username: string) {
+  const res = await fetch(`https://api.example.com/artist/${username}`);
+  return res.json();
+}
+
+async function getAlbums(username: string) {
+  const res = await fetch(`https://api.example.com/artist/${username}/albums`);
+  return res.json();
+}
+
+export default async function Page({ params: { username } }: { params: { username: string } }) {
+  const artistData = getArtist(username);
+  const albumsData = getAlbums(username);
+
+  // 平行啟動兩個請求
+  const [artist, albums] = await Promise.all([artistData, albumsData]);
+
+  return (
+    <>
+      <h1>{artist.name}</h1>
+      <Albums list={albums} />
+    </>
+  );
+}
+```
+
+此外，我們可以添加 [Suspense Boundary](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) 來拆分渲染工作，並盡早顯示部分結果。
+
+### 模式 - 預載資料 (Preloading Data)
+
+另一種防止資料請求延遲的方式是使用 _預載_ 模式，通過建立一個實用函數 (utility function)，並在阻塞請求之前急切地調用它。
+
+例如，`checkIsAvailable()` 阻止 `<Item/>` 渲染，因此我們可以在它之前調用 `preload()` 來急切地啟動 `<Item/>` 的資料依賴。當 `<Item/>` 渲染時，它的資料已經被獲取。
+
+注意，`preload` 函數不會阻止 `checkIsAvailable()` 的執行。
+
+components/Item.tsx
+
+```tsx
+import { getItem } from "@/utils/get-item";
+
+export const preload = (id: string) => {
+  // void 會評估給定的表達式並回傳 undefined
+  void getItem(id);
+};
+export default async function Item({ id }: { id: string }) {
+  const result = await getItem(id);
+  // ...
+}
+```
+
+> void 相關資訊可參考 [void operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void)
+
+app/item/[id]/page.tsx
+
+```tsx
+import Item, { preload, checkIsAvailable } from "@/components/Item";
+
+export default async function Page({ params: { id } }: { params: { id: string } }) {
+  // 開始載入項目資料
+  preload(id);
+  // 執行另一個異步任務
+  const isAvailable = await checkIsAvailable();
+
+  return isAvailable ? <Item id={id} /> : null;
+}
+```
+
+> 值得注意： "preload" 函數也可以有其他名稱，因為它是一種模式，而不是 API。
+
+#### 將 React `cache` 、 `server-only` 與預載模式結合使用
+
+我們可以結合 `cache` 函數、`preload` 模式和 `server-only` 套件來建立一個可以在整個應用程式中使用的資料獲取工具。
+
+utils/get-item.ts
+
+```tsx
+import { cache } from "react";
+import "server-only";
+
+export const preload = (id: string) => {
+  void getItem(id);
+};
+
+export const getItem = cache(async (id: string) => {
+  // ...
+});
+```
+
+使用這種方法，我們可以急切地獲取資料、快取回應，並保證這些資料獲取[只在伺服器端進行](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#keeping-server-only-code-out-of-the-client-environment)。
+
+`utils/get-item` 的導出可以被 Layouts、Pages 或其他元件使用，讓它們控制何時獲取項目的資料。
+
+> 值得注意：
+>
+> - 建議使用 [`server-only` 套件](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#keeping-server-only-code-out-of-the-client-environment) 確保伺服器端資料獲取函數不會在客戶端使用。
+
+### 模式 - 防止敏感資料暴露給客戶端
+
+建議使用 React 的 taint API、[`taintObjectReference`](https://react.dev/reference/react/experimental_taintObjectReference) 和 [`taintUniqueValue`](https://react.dev/reference/react/experimental_taintUniqueValue)，來防止整個物件實例 (instances) 或敏感的值被傳遞給客戶端。
+
+要在應用程式中啟用 tainting，將 Next.js 配置中的 `experimental.taint` 選項設置為 `true`：
+
+next.config.js
+
+```jsx
+module.exports = {
+  experimental: {
+    taint: true,
+  },
+};
+```
+
+然後將我們想要 taint 的物件或值傳遞給 `experimental_taintObjectReference` 或 `experimental_taintUniqueValue` 函數：
+
+app/utils.ts
+
+```tsx
+import { queryDataFromDB } from "./api";
+import { experimental_taintObjectReference, experimental_taintUniqueValue } from "react";
+
+export async function getUserData() {
+  const data = await queryDataFromDB();
+  experimental_taintObjectReference("Do not pass the whole user object to the client", data);
+  experimental_taintUniqueValue("Do not pass the user's address to the client", data, data.address);
+  return data;
+}
+```
+
+app/page.tsx
+
+```tsx
+import { getUserData } from "./data";
+
+export async function Page() {
+  const userData = getUserData();
+  return (
+    <ClientComponent
+      user={userData} // this will cause an error because of taintObjectReference
+      address={userData.address} // this will cause an error because of taintUniqueValue
+    />
+  );
+}
+```
 
 # 逐步遷移的方式
 
