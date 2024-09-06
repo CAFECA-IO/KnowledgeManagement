@@ -5488,6 +5488,159 @@ Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/d
 
 另外，如果我們希望完全禁用這個處理並手動管理 `pages/` 和 `app/` 之間的路由，可以在 `next.config.js` 中將 `experimental.clientRouterFilter` 設為 `false`。當此功能被禁用時，任何與 app 路由重疊的 pages 中的動態路由將無法正常導航。
 
+## 混用客戶端元件和伺服器元件
+
+在 Next.js 的 App Router 中，Server Components 和 Client Components 可以混合使用。
+
+混合使用的注意事項：
+
+- 注意 `props` 的傳遞
+- Server Components 無法使用客戶端專屬的功能
+- Client Components 只能由 Server Components 包裹
+
+混合使用 Server Components 和 Client Components 時，傳遞 `props` 是一個需要特別注意的部分，因為伺服器與客戶端的運作環境不同。
+
+以下是 props 傳遞時的主要注意事項：
+
+#### 1. Server Components 可以傳遞任何類型的 `props`
+
+- **Server Components** 只在伺服器端執行，所以可以安全地傳遞任何 JavaScript 物件或資料類型，例如 `string`、`number`、`array`、`object` 等。
+- Server Components 內可以獲取資料庫、API 呼叫等伺服器端資料，並將其作為 `props` 傳遞給子元件（包括 Client Components）。
+
+```jsx
+export default async function ServerComponent() {
+  const data = await fetchDataFromAPI();
+  return <ClientComponent data={data} />;
+}
+```
+
+#### 2. Client Components 只能接收序列化後的 `props`
+
+- 因為 **Client Components** 會在瀏覽器上執行，所有傳遞給 Client Components 的 `props` 必須是可以**序列化**的。
+- 具體來說，不能傳遞函數、無法序列化的類型（如 `Date` 物件、`Map`、`Set` 等），這些資料類型無法在伺服器與客戶端之間傳遞。
+- 如果你嘗試傳遞無法序列化的 `props`，Next.js 會拋出錯誤。
+
+```jsx
+// 這樣是行不通的，因為函數無法序列化
+export default function ServerComponent() {
+  const myFunction = () => console.log('Hello');
+  return <ClientComponent onClick={myFunction} />;
+}
+
+// 改成這樣，傳遞可序列化的資料
+export default function ServerComponent() {
+  const message = 'Hello';
+  return <ClientComponent message={message} />;
+}
+
+```
+
+#### 3. Server Components 可以從其他 Server Components 接收 `props`
+
+- Server Components 可以從其他 Server Components 接收任意類型的 `props`，因為它們全都在伺服器端運行，不受序列化限制。
+
+```jsx
+export default function ParentServerComponent() {
+  const data = { name: "John", age: 30 };
+  return <ChildServerComponent person={data} />;
+}
+
+function ChildServerComponent({ person }) {
+  return <div>{person.name}</div>;
+}
+```
+
+#### 4. Client Components 從 Server Components 接收 `props` 的限制
+
+- 當 Server Components 將 `props` 傳遞給 Client Components 時，需要確保傳遞的是基本的 JavaScript 值（如字串、數字、陣列、物件）。如果需要傳遞較複雜的資料類型，建議將其轉換為可序列化的格式（例如將 `Date` 物件轉換為 ISO 字串）。
+
+```jsx
+export default function ServerComponent() {
+  const date = new Date().toISOString(); // 確保可以序列化
+  return <ClientComponent dateString={date} />;
+}
+
+("use client");
+export function ClientComponent({ dateString }) {
+  const date = new Date(dateString);
+  return <p>{date.toDateString()}</p>;
+}
+```
+
+#### 5. 避免傳遞大型物件或敏感資料
+
+- 由於 Client Components 會在客戶端執行，傳遞太大的 `props` 會增加 JavaScript bundle 大小，影響效能。
+- 同時，也應避免將敏感資料（例如 API 密鑰或伺服器端私密資料）作為 `props` 傳遞給 Client Components，因為這些資料會暴露在瀏覽器中。
+
+### 不能在 Server Components 使用的功能
+
+在 Next.js App Router 中，Client Components 和 Server Components 各自有不同的用途和限制。具體來說，Client Components 可以使用許多 React 客戶端的功能，但這些功能無法在 Server Components 中使用。
+
+以下是一些**只能在 Client Components 使用**，而**不能在 Server Components 使用**的功能：
+
+#### 1. React Hooks
+
+- **`useState`**：用於管理元件內的本地狀態，會在客戶端運行。
+- **`useEffect`**：用於處理副作用，這些副作用只會在瀏覽器中執行，如訂閱、API 請求等。
+- **`useContext`**：用於讀取(access) React 的 context API，與狀態管理相關。
+- **`useReducer`**、**`useRef`**：這些都是與客戶端元件狀態或 DOM 互動相關的 hooks，無法在伺服器端執行。
+
+#### 2. 事件處理 (Event Handlers)
+
+- **`onClick`**、**`onChange`**、**`onSubmit`** 等事件處理函數只在客戶端執行。這類事件函數涉及與 DOM 的互動，必須在瀏覽器中運行。
+- 任何函數作為 `props` 傳遞，並作為事件處理邏輯，只能在 **Client Components** 使用，因為伺服器無法執行客戶端的 JavaScript 行為。
+
+#### 3. 瀏覽器 API
+
+- 瀏覽器 API 像 **`window`**、**`document`**、**`localStorage`**、**`sessionStorage`**、**`navigator`** 等只能在客戶端執行，因為這些物件在伺服器端並不存在。
+- 任何需要直接操作 DOM 的邏輯，如 **`document.getElementById`** 或 **`window.addEventListener`**，只能在 Client Components 中執行。
+
+#### 4. 動態導入和互動行為
+
+- **`useEffect`** 中的 **API 請求**：雖然 Server Components 可以直接在伺服器端進行 API 請求（例如透過 fetch 來獲取資料），但需要在客戶端發起的動態 API 請求（例如在表單提交時調用 API）只能在 Client Components 中處理。
+- **`import()`** 動態導入：這種導入方式在客戶端執行時使用，無法在伺服器端動態導入客戶端模組。
+
+#### 5. CSS-in-JS 和客戶端樣式處理
+
+- 一些 CSS-in-JS 庫需要在客戶端生成樣式，像 **styled-components** 或 **emotion**。雖然你可以在伺服器端預先生成樣式，但動態樣式生成只能在 Client Components 中運行。
+- **`useLayoutEffect`**：這個 hook 在瀏覽器 DOM 加載後運行，用來計算佈局，不能在伺服器端使用，因為伺服器端無法讀取瀏覽器的 DOM。
+
+#### 6. React Portals
+
+- **`ReactDOM.createPortal`**：用於將元件渲染到 DOM 節點的其他部分（例如 Modal 彈窗等），只能在客戶端使用。
+
+#### 7. 互動式第三方庫
+
+- 例如 **chart.js**、**mapbox-gl**、**three.js** 等需要在客戶端渲染的互動式 JavaScript 庫，這些庫依賴於 DOM 和瀏覽器的渲染引擎，因此只能在 Client Components 中使用。
+
+#### 8. Cookies 和 Storage 的操作
+
+- 在客戶端讀取 **`localStorage`**、**`sessionStorage`** 或使用 **`cookie`**（瀏覽器中的 client-side cookies）只能在 Client Components 中完成。雖然 Server Components 可以在伺服器端讀取或寫入 cookie，但這是在 HTTP 層面進行的，不是透過 JavaScript 操作的瀏覽器儲存。
+
+#### 9. 使用者互動的第三方工具
+
+- 例如 **Google Analytics**、**Facebook Pixel** 或 **Intercom** 這類工具，通常需要在瀏覽器中運行和初始化。這類工具的腳本只會在客戶端執行，不能在伺服器端執行。
+
+#### 10. WebSockets 或 SSE (Server-Sent Events)
+
+- 這類需要在客戶端進行的即時通訊技術，如 **WebSockets** 或 **Server-Sent Events (SSE)**，只能在 Client Components 中進行。
+
+### 注意元件包裹順序
+
+客戶端元件不能包裹伺服器元件，這是因為伺服器元件是在伺服器端執行並生成靜態 HTML，而客戶端元件是在客戶端執行的動態 JavaScript 元件。
+
+具體原因如下：
+
+1. **執行環境不同**：
+   **伺服器元件** 是在伺服器端運行，負責處理資料並生成靜態內容，而**客戶端元件**在客戶端運行，負責處理互動和更新 UI。因為**客戶端元件**需要在瀏覽器上運行，它無法先包裹一個在伺服器端生成的靜態內容（伺服器元件）。
+2. **渲染順序**：
+   Next.js 的渲染流程是由伺服器先處理並生成伺服器元件的靜態 HTML，然後在瀏覽器上載入客戶端元件並處理互動。
+   伺服器元件可以包裹客戶端元件，因為伺服器會先渲染出靜態的部分，然後由客戶端補充動態部分。但反過來，若由客戶端元件包裹 伺服器元件，瀏覽器將無法在客戶端進行伺服器端的邏輯運算。
+
+總結：
+
+在 **Next.js App Router** 中，**客戶端元件**不能包裹**伺服器元件**，只能是**伺服器元件**包裹**客戶端元件**。這是因為渲染流程是先由伺服器處理，再由客戶端補充互動功能。
+
 # 結論
 
 這篇 KM 主要在整理 App Router 與 Pages Router 之間的差異，以評估目前團隊現有專案是否適合使用 App Router 來取代 Pages Router。
