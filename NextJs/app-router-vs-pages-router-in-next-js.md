@@ -5667,4 +5667,12 @@ export function ClientComponent({ dateString }) {
 
 # 參考資料
 
-_（撰寫中）_
+- https://nextjs.org/docs/app/building-your-application/routing
+- https://nextjs.org/docs/app/building-your-application/rendering
+- https://nextjs.org/docs/app/building-your-application/data-fetching
+- https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration
+- https://heidiliu2020.github.io/next-react-ssr/
+- https://ithelp.ithome.com.tw/articles/10321914
+- https://ithelp.ithome.com.tw/articles/10314422
+- https://ithelp.ithome.com.tw/articles/10315960
+- https://ithelp.ithome.com.tw/articles/10316237
