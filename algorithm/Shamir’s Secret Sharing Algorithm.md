@@ -400,9 +400,7 @@ def _extended_gcd(a: int, n: int) -> tuple[int, int]:
 ```
 
 接著是 `_divmod` 這是在有限域 中的除法實做, 我們要算出：
-$$
-\frac{num}{den}
-$$
+$$\frac{num}{den}$$
 
 可以先找出 $den$ 在質數 $prime$ 狀態下的模反元素 $inv$ ，再用 $inv$ 乘上 $num$ 就可以得到在 質數 $prime$ 的有限域中 兩個數字相除會是什麼數字。 
 ```python
@@ -432,7 +430,7 @@ $$\ell _{j}(x) = \prod _{\begin{smallmatrix}m\,=\,0\\m\,\neq \,j\end{smallmatrix
 
 算好之後就要計算下面這邊的部份，首先先把 `dens` 連乘起來 然後通分。接著分子是 `nums` * `den(通分)` * `y_j`  然後先 mod `prime` 接著用有限域除法 `dens[i]`。最後把加總的再除一次通分的 `den`。
 
-$$f(0)=\sum _{j=0}^{k-1}y_{j}\cdot\ell _{j}(x)$$
+$$f(0)=\sum_{j=0}^{k-1}y_{j}\cdot\ell_{j}(x)$$
 
 ```python
 def _lagrange_interpolation(x: int, x_shares: list[int], y_shares: list[int], prime: int) -> int:
