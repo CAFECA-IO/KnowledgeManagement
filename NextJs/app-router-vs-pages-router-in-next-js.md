@@ -4784,6 +4784,26 @@ Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/d
 
 # 結論
 
+這篇 KM 主要在整理 App Router 與 Pages Router 之間的差異，以評估目前團隊現有專案是否適合使用 App Router 來取代 Pages Router。
+
+由於版面限制，主要只有針對 Rendering、Data Fetching、Routing 這三個章節進行比較，並且在各章節主要補充介紹 App Router 的使用方式。
+
+### 將現有專案路由架構從 Pages Router 換成 App Router 需要做的事
+
+1. 需要大量改變路由資料夾的結構
+2. 原本都是客戶端元件，換成 App Router 之後會預設成伺服器元件，如果要維持原本的客戶端元件，也就是為了要繼續使用瀏覽器 API（像是監聽事件）、React hooks（像是 state、effect）的話，就要在元件的第一行加上`'use client'`。
+3. 原本 Pages Router 的渲染方式會用到的 `getStaticProps` 都需要移除。
+4. 不確定目前使用的第三方套件是否有影響，要確定是否都能支援
+5. 整個專案需要重新測試
+
+### 後端工程師對於轉換架構的看法
+
+如果轉換成 App Router 的話，後端工程師會覺得比較好，像是：
+
+1. 可以不使用第三方套件 formidable，因為 App Router 有內建支援。
+2. App Router 提供的 API handler，可以直接使用 http methods。
+3. App Router 提供的 middleware 功能更為齊全，可以完成更多功能，像是 URL 可以改名等。
+
 # 參考資料
 
 _（撰寫中）_
