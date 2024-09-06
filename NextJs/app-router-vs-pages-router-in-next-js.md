@@ -4804,7 +4804,7 @@ Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/d
 
 1. 可以不使用第三方套件 formidable，因為 App Router 有內建支援。
 2. App Router 提供的 API handler，可以直接使用 http methods。
-3. App Router 提供的 middleware 功能更為齊全，可以完成更多功能，像是 URL 可以改名等。
+3. App Router 提供的 middleware 功能更為齊全，可以完成更多功能。像是 URL 路徑的命名可以自定義，不需要被路由資料夾名稱所限制。
 
 # 參考資料
 
