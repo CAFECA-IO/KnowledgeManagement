@@ -3823,6 +3823,665 @@ export async function Page() {
 }
 ```
 
+## 伺服器操作與變更 (Server Actions and Mutations)
+
+[伺服器操作](https://react.dev/reference/rsc/server-actions)是執行於伺服器的**非同步函數**。它們可以在伺服器和客戶端元件中被呼叫，用於處理表單提交 (form submissions) 和資料變更 (data mutations) 的操作，在 Next.js 應用程式中非常實用。
+
+> 🎥 觀看: 了解更多關於伺服器操作的資料變更 → [YouTube (10 分鐘)](https://www.youtube.com/watch?si=cJZHlUu_jFhCzHUg&v=dDpZfOQBMaU&feature=youtu.be)。
+
+### 約定
+
+可以使用 React 的 [`"use server"`](https://react.dev/reference/react/use-server) 指令來定義伺服器操作。
+
+可以在 `async` 函數的頂部使用該指令，將該函數標記為伺服器操作，或者在單獨的檔案頂部使用，將檔案中所有匯出的函數都標記為伺服器操作。
+
+#### 伺服器元件
+
+伺服器元件可以使用內嵌函數級別 (inline function level) 或模組級別 (module level) 的 `"use server"` 指令。要內嵌伺服器操作，請在函數的開頭加上 `"use server"`：
+
+app/page.tsx
+
+```tsx
+export default function Page() {
+  // 伺服器操作
+  async function create() {
+    "use server";
+    // 資料變更
+  }
+
+  return "...";
+}
+```
+
+#### 客戶端元件
+
+要在客戶端元件中呼叫伺服器操作，請建立一個新檔案，並在檔案頂部加上 `"use server"` 指令。該檔案中的所有函數將被標記為伺服器操作，可在客戶端和伺服器元件中重複使用：
+
+app/actions.ts
+
+```tsx
+"use server";
+
+export async function create() {}
+```
+
+app/ui/button.tsx
+
+```tsx
+"use client";
+
+import { create } from "@/app/actions";
+
+export function Button() {
+  return <Button onClick={create} />;
+}
+```
+
+#### 以屬性傳遞操作 (Passing actions as props)
+
+也可以將伺服器操作作為屬性 (props) 傳遞給客戶端元件：
+
+```tsx
+<ClientComponent updateItemAction={updateItem} />
+```
+
+app/client-component.tsx
+
+```tsx
+"use client";
+
+export default function ClientComponent({ updateItemAction }: { updateItemAction: (formData: FormData) => void }) {
+  return <form action={updateItemAction}>{/* ... */}</form>;
+}
+```
+
+通常，Next.js 的 TypeScript plugin 會在 `client-component.tsx` 中標記 `updateItemAction`，因為它是一個函數，通常無法跨越客戶端與伺服器之間序列化。然而，名稱為 `action` 或以 `Action` 結尾的 props 會被假定為接收伺服器操作。這只是一種啟發式方法(heuristic)，因為 TypeScript plugin 實際上並不知道它是否接收到伺服器操作或普通函數。執行期間的型別檢查仍會確保我們不會意外地將一個普通函數傳遞給客戶端元件。
+
+### 行為
+
+- 可以使用 [`<form>` 元素](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms) 的 `action` 屬性來呼叫伺服器操作：
+  - 伺服器元件預設支援漸進式增強 (progressive enhancement)，這意味著即使 JavaScript 尚未載入或已禁用，表單仍會提交。
+  - 在客戶端元件中，當 JavaScript 尚未載入時，會將表單提交排入佇列，優先考慮客戶端的 hydration。
+  - 在 hydration 完成後，表單提交時瀏覽器不會重新整理。
+- 伺服器操作不限於 `<form>` 元素，還可以從事件處理器、`useEffect`、第三方函式庫 (third-party libraries) 和其他表單元素如 `<button>` 中呼叫。
+- 伺服器操作與 Next.js 的 [快取與重新驗證](https://nextjs.org/docs/app/building-your-application/caching) 架構互相整合。當操作被呼叫時，Next.js 可以在一次伺服器請求中回傳更新的 UI 和新資料。
+- 伺服器操作背後使用的是 `POST` 方法，且只有此 HTTP 方法可以呼叫它們。
+- 伺服器操作的參數和回傳值必須是可由 React 序列化的。請參閱 React 文件中關於 [可序列化的參數和回傳值](https://react.dev/reference/react/use-server#serializable-parameters-and-return-values) 的列表。
+- 伺服器操作是函數，因此可以在應用程式的任何地方重複使用。
+- 伺服器操作會繼承頁面或佈局的 [執行環境](https://nextjs.org/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes)。
+- 伺服器操作會繼承頁面或佈局的 [路由段配置](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config)，包括 `maxDuration` 等欄位。
+
+### 範例 - 表單 (Forms)
+
+React 擴展了 HTML [`<form>`](https://developer.mozilla.org/docs/Web/HTML/Element/form) 元素，以允許使用 `action` 屬性呼叫伺服器操作。
+
+當伺服器操作在表單中被呼叫時，該操作會自動接收 [`FormData`](https://developer.mozilla.org/docs/Web/API/FormData/FormData) 物件。不需要使用 React 的 `useState` 來管理欄位，而是可以使用原生的 [`FormData` 方法](https://developer.mozilla.org/en-US/docs/Web/API/FormData#instance_methods) 來獲取資料：
+
+app/invoices/page.tsx
+
+```tsx
+export default function Page() {
+  async function createInvoice(formData: FormData) {
+    "use server";
+
+    const rawFormData = {
+      customerId: formData.get("customerId"),
+      amount: formData.get("amount"),
+      status: formData.get("status"),
+    };
+
+    // 變更資料
+    // 重新驗證快取
+  }
+
+  return <form action={createInvoice}>...</form>;
+}
+```
+
+> 注意：
+>
+> - 範例: [具有載入和錯誤狀態的表單](https://github.com/vercel/next.js/tree/canary/examples/next-forms)
+> - 當處理具有多個欄位的表單時，建議考慮使用 [`entries()`](https://developer.mozilla.org/en-US/docs/Web/API/FormData/entries) 方法與 JavaScript 的 [`Object.fromEntries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries)。例如：`const rawFormData = Object.fromEntries(formData)`。需要注意的是，`formData` 會包含額外的 `$ACTION_` 屬性。
+> - 查看 [React `<form>` 文件](https://react.dev/reference/react-dom/components/form#handle-form-submission-with-a-server-action) 以了解更多。
+
+### 範例 - 傳遞額外參數 (Passing additional arguments)
+
+可以使用 JavaScript 的 `bind` 方法來傳遞額外參數給伺服器操作。
+
+app/client-component.tsx
+
+```tsx
+"use client";
+
+import { updateUser } from "./actions";
+
+export function UserProfile({ userId }: { userId: string }) {
+  const updateUserWithId = updateUser.bind(null, userId);
+
+  return (
+    <form action={updateUserWithId}>
+      <input type='text' name='name' />
+      <button type='submit'>更新使用者名稱</button>
+    </form>
+  );
+}
+```
+
+伺服器操作會接收 `userId` 參數，還有表單資料：
+
+app/actions.js
+
+```tsx
+"use server";
+
+export async function updateUser(userId, formData) {}
+```
+
+> 值得注意：
+>
+> - 另一種方法是將參數作為隱藏欄位傳遞給表單（例如 `<input type="hidden" name="userId" value={userId} />`）。但是，該值將會成為渲染的 HTML 的一部分，且不會被編碼 (encoded)。
+> - `.bind` 在伺服器和客戶端元件中都可以使用，並且支援漸進式增強。
+
+### 範例 - 巢狀表單元素 (Nested form elements)
+
+我們也可以在巢狀於 `<form>` 內的元素中呼叫伺服器操作，例如 `<button>`、`<input type="submit">` 和 `<input type="image">`。這些元素接受 `formAction` 屬性或 [事件處理器](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#event-handlers)。
+
+這在我們想在一個表單內呼叫多個伺服器操作時很有用。例如，我們可以建立一個特定的 `<button>` 元素來儲存草稿，並且提供發佈功能。更多資訊請參考 [React `<form>` 文件](https://react.dev/reference/react-dom/components/form#handling-multiple-submission-types)。
+
+### 範例 - 程式化表單提交 (Programmatic form submission)
+
+可以使用 [`requestSubmit()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit) 方法程式化觸發表單提交。例如，當使用者按下 `⌘` + `Enter` 鍵盤快捷鍵提交表單時，我們可以監聽 `onKeyDown` 事件：
+
+app/entry.tsx
+
+```tsx
+"use client";
+
+export function Entry() {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === "Enter" || e.key === "NumpadEnter")) {
+      e.preventDefault();
+      e.currentTarget.form?.requestSubmit();
+    }
+  };
+
+  return (
+    <div>
+      <textarea name='entry' rows={20} required onKeyDown={handleKeyDown} />
+    </div>
+  );
+}
+```
+
+這會觸發最近的 `<form>` 祖先元素的提交，並呼叫伺服器操作。
+
+### 範例 - 伺服器端表單驗證 (Server-side form validation)
+
+可以使用 HTML 屬性如 `required` 和 `type="email"` 來進行基本的客戶端表單驗證。
+
+對於更進階的伺服器端驗證，我們可以使用像 [zod](https://zod.dev/) 這樣的函式庫來在變更資料前驗證表單欄位：
+
+app/actions.ts
+
+```tsx
+"use server";
+
+import { z } from "zod";
+
+const schema = z.object({
+  email: z.string({
+    invalid_type_error: "無效的電子郵件",
+  }),
+});
+
+export default async function createUser(formData: FormData) {
+  const validatedFields = schema.safeParse({
+    email: formData.get("email"),
+  });
+
+  // 如果表單資料無效，提前回傳
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  // 變更資料
+}
+```
+
+一旦欄位在伺服器端完成驗證，我們可以在伺服器操作中回傳一個可序列化的物件，並使用 React 的 `useFormState` hook 來向使用者顯示訊息。
+
+- 將操作傳遞給 `useFormState` 時，該操作的函數簽名會變更，會接收一個新的 `prevState` 或 `initialState` 參數作為第一個參數。
+- `useFormState` 是一個 React hook，因此必須在客戶端元件中使用。
+
+app/actions.ts
+
+```tsx
+"use server";
+
+import { redirect } from "next/navigation";
+
+export async function createUser(prevState: any, formData: FormData) {
+  const res = await fetch("https://...");
+  const json = await res.json();
+
+  if (!res.ok) {
+    return { message: "請輸入有效的電子郵件" };
+  }
+
+  redirect("/dashboard");
+}
+```
+
+然後，我們可以將我們的伺服器操作傳遞給 `useFormState` hook，並使用回傳的 `state` 來顯示錯誤訊息。
+
+app/ui/signup.tsx
+
+```tsx
+"use client";
+
+import { useFormState } from "react";
+import { createUser } from "@/app/actions";
+
+const initialState = {
+  message: "",
+};
+
+export function Signup() {
+  const [state, formAction] = useFormState(createUser, initialState);
+
+  return (
+    <form action={formAction}>
+      <label htmlFor='email'>電子郵件</label>
+      <input type='text' id='email' name='email' required />
+      {/* ... */}
+      <p aria-live='polite'>{state?.message}</p>
+      <button>註冊</button>
+    </form>
+  );
+}
+```
+
+> 值得注意：
+>
+> - 這些範例使用 React 的 `useFormState` hook，它與 Next.js App Router 綁定。如果使用的是 React 19，請改用 `useActionState`。更多資訊請參考 [React 文件](https://react.dev/reference/react/useActionState)。
+
+### 範例 - 等待中的狀態 (Pending states)
+
+> 在變更資料之前，應該始終確保使用者有權限執行該操作。請參閱[身份驗證與授權](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#authentication-and-authorization)。
+
+[`useFormStatus`](https://react.dev/reference/react-dom/hooks/useFormStatus) hook 提供一個 `pending` 布林值，可以在伺服器操作執行期間用來顯示載入中的指示。
+
+app/submit-button.tsx
+
+```tsx
+"use client";
+
+import { useFormStatus } from "react";
+
+export function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button disabled={pending} type='submit'>
+      註冊
+    </button>
+  );
+}
+```
+
+> 值得注意：
+>
+> - 在 React 19 中，`useFormStatus` 回傳的物件包含額外的鍵值，如 data、method 和 action。如果未使用 React 19，則只有 `pending` 鍵可用。
+> - 在 React 19 中，`useActionState` 也包含一個 `pending` 鍵在回傳的狀態中。
+
+### 範例 - 樂觀更新 (Optimistic updates)
+
+可以使用 React 的 [`useOptimistic`](https://react.dev/reference/react/useOptimistic) hook，在伺服器操作完成前，樂觀地更新使用者介面，而不用等待回應：
+
+app/page.tsx
+
+```tsx
+"use client";
+
+import { useOptimistic } from "react";
+import { send } from "./actions";
+
+type Message = {
+  message: string;
+};
+
+export function Thread({ messages }: { messages: Message[] }) {
+  const [optimisticMessages, addOptimisticMessage] = useOptimistic<Message[], string>(messages, (state, newMessage) => [
+    ...state,
+    { message: newMessage },
+  ]);
+
+  const formAction = async (formData) => {
+    const message = formData.get("message") as string;
+    addOptimisticMessage(message);
+    await send(message);
+  };
+
+  return (
+    <div>
+      {optimisticMessages.map((m, i) => (
+        <div key={i}>{m.message}</div>
+      ))}
+      <form action={formAction}>
+        <input type='text' name='message' />
+        <button type='submit'>發送</button>
+      </form>
+    </div>
+  );
+}
+```
+
+### 範例 - 事件處理器 (Event handlers)
+
+雖然通常會在 `<form>` 元素中使用伺服器操作，但它們也可以透過事件處理器（例如 `onClick`）來呼叫。例如，要增加點讚次數：
+
+app/like-button.tsx
+
+```tsx
+"use client";
+
+import { incrementLike } from "./actions";
+import { useState } from "react";
+
+export default function LikeButton({ initialLikes }: { initialLikes: number }) {
+  const [likes, setLikes] = useState(initialLikes);
+
+  return (
+    <>
+      <p>總點讚數：{likes}</p>
+      <button
+        onClick={async () => {
+          const updatedLikes = await incrementLike();
+          setLikes(updatedLikes);
+        }}
+      >
+        點讚
+      </button>
+    </>
+  );
+}
+```
+
+我們也可以將事件處理器添加到表單元素中，例如，在 `onChange` 時保存表單欄位的內容：
+
+app/ui/edit-post.tsx
+
+```tsx
+"use client";
+
+import { publishPost, saveDraft } from "./actions";
+
+export default function EditPost() {
+  return (
+    <form action={publishPost}>
+      <textarea
+        name='content'
+        onChange={async (e) => {
+          await saveDraft(e.target.value);
+        }}
+      />
+      <button type='submit'>發佈</button>
+    </form>
+  );
+}
+```
+
+在這種情況下，當多個事件可能會在短時間內快速觸發時，建議使用 **防抖動 (debouncing)** 技術來避免不必要的伺服器操作呼叫。
+
+### 範例 - `useEffect`
+
+我們可以使用 React 的 [`useEffect`](https://react.dev/reference/react/useEffect) hook 來在元件掛載或相依性變更時呼叫伺服器操作。這對於依賴全域事件或需要自動觸發的資料變更很有幫助。例如，`onKeyDown` 用於應用程式的快捷鍵、無限滾動的交叉觀察者 hook，或在元件掛載時更新查看次數：
+
+app/view-count.tsx
+
+```tsx
+"use client";
+
+import { incrementViews } from "./actions";
+import { useState, useEffect } from "react";
+
+export default function ViewCount({ initialViews }: { initialViews: number }) {
+  const [views, setViews] = useState(initialViews);
+
+  useEffect(() => {
+    const updateViews = async () => {
+      const updatedViews = await incrementViews();
+      setViews(updatedViews);
+    };
+
+    updateViews();
+  }, []);
+
+  return <p>總查看次數：{views}</p>;
+}
+```
+
+記得考慮 `useEffect` 的[行為與注意事項](https://react.dev/reference/react/useEffect#caveats)。
+
+### 範例 - 錯誤處理
+
+當發生錯誤時，錯誤將會被最接近的 [`error.js`](https://nextjs.org/docs/app/building-your-application/routing/error-handling) 或客戶端的 `<Suspense>` 邊界捕捉。建議使用 `try/catch` 來回傳錯誤，讓我們的使用者介面來處理。
+
+例如，我們的伺服器操作可能會處理建立新項目時的錯誤並回傳一則訊息：
+
+app/actions.ts
+
+```tsx
+"use server";
+
+export async function createTodo(prevState: any, formData: FormData) {
+  try {
+    // 變更資料
+  } catch (e) {
+    throw new Error("建立任務失敗");
+  }
+}
+```
+
+> 值得注意：
+>
+> - 除了拋出錯誤外，我們也可以回傳一個物件，供 `useFormState` 處理。請參閱[伺服器端驗證與錯誤處理](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#server-side-form-validation)。
+
+### 範例 - 重新驗證資料
+
+可以在伺服器操作中使用 [`revalidatePath`](https://nextjs.org/docs/app/api-reference/functions/revalidatePath) API 來重新驗證 [Next.js Cache](https://nextjs.org/docs/app/building-your-application/caching)：
+
+app/actions.ts
+
+```tsx
+"use server";
+
+import { revalidatePath } from "next/cache";
+
+export async function createPost() {
+  try {
+    // ...
+  } catch (error) {
+    // ...
+  }
+
+  revalidatePath("/posts");
+}
+```
+
+或使用 [`revalidateTag`](https://nextjs.org/docs/app/api-reference/functions/revalidateTag) 來使特定資料抓取的快取標籤失效：
+
+app/actions.ts
+
+```tsx
+"use server";
+
+import { revalidateTag } from "next/cache";
+
+export async function createPost() {
+  try {
+    // ...
+  } catch (error) {
+    // ...
+  }
+
+  revalidateTag("posts");
+}
+```
+
+### 範例 - 重新導向
+
+如果我們希望在伺服器操作完成後將使用者重新導向到其他路由，可以使用 [`redirect`](https://nextjs.org/docs/app/api-reference/functions/redirect) API。`redirect` 需要在 `try/catch` 區塊外部呼叫：
+
+app/actions.ts
+
+```tsx
+"use server";
+
+import { redirect } from "next/navigation";
+import { revalidateTag } from "next/cache";
+
+export async function createPost(id: string) {
+  try {
+    // ...
+  } catch (error) {
+    // ...
+  }
+
+  revalidateTag("posts"); // 更新快取的貼文
+  redirect(`/post/${id}`); // 導向到新貼文頁面
+}
+```
+
+### 範例 - Cookies
+
+可以在伺服器操作中使用 [`cookies`](https://nextjs.org/docs/app/api-reference/functions/cookies) API 來 `取得`、`設定` 或 `刪除` cookies：
+
+app/actions.ts
+
+```tsx
+"use server";
+
+import { cookies } from "next/headers";
+
+export async function exampleAction() {
+  // 取得 cookie
+  const value = cookies().get("name")?.value;
+
+  // 設定 cookie
+  cookies().set("name", "Delba");
+
+  // 刪除 cookie
+  cookies().delete("name");
+}
+```
+
+請參閱[額外範例](https://nextjs.org/docs/app/api-reference/functions/cookies#deleting-cookies)來了解如何在伺服器操作中刪除 cookies。
+
+### 安全性
+
+#### 驗證與授權
+
+應該將伺服器操作視為公開的 API 端點，並確保使用者有權執行該操作。例如：
+
+app/actions.ts
+
+```tsx
+"use server";
+
+import { auth } from "./lib";
+
+export function addItem() {
+  const { user } = auth();
+  if (!user) {
+    throw new Error("你必須登入才能執行此操作");
+  }
+
+  // ...
+}
+```
+
+#### 閉包與加密
+
+在元件內定義伺服器操作會建立一個[閉包](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)，操作可以存取外部函數的作用域。例如，`publish` 操作可以存取 `publishVersion` 變數：
+
+app/page.tsx
+
+```tsx
+export default async function Page() {
+  const publishVersion = await getLatestVersion();
+
+  async function publish() {
+    "use server";
+    if (publishVersion !== await getLatestVersion()) {
+      throw new Error('自按下發佈以來，版本已變更');
+    }
+    ...
+  }
+
+  return (
+    <form>
+      <button formAction={publish}>發佈</button>
+    </form>
+  );
+}
+
+```
+
+當我們需要在渲染時捕獲資料的*快照 (snapshot)*（例如 `publishVersion`）以便稍後在呼叫操作時使用它，閉包非常有用。
+
+然而，為了實現這一點，捕獲到的變數會在操作被呼叫時，從伺服器被發送到客戶端再回傳至伺服器。為了防止敏感資料暴露給客戶端，Next.js 會自動加密這些封閉變數 (closed-over variables)。每次建立 Next.js 應用程式時，都會為每個操作產生一個新的私鑰。這意味著只能針對特定的建置 (build) 呼叫操作。
+
+> 值得注意： 不建議僅依賴加密來防止敏感值暴露給客戶端。相反，應該使用 React taint API 主動防止特定資料發送到客戶端。
+
+#### 覆寫加密密鑰（進階）
+
+當在跨多個伺服器上自我託管 (self-hosting) Next.js 應用程式時，每個伺服器實例最終可能會使用不同的加密密鑰，從而導致潛在的不一致性。
+
+為了緩解這個情況，可以使用 `process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY` 環境變數來覆寫加密密鑰。指定此變數可以確保我們的加密密鑰在各版本建置 (builds) 中保持一致，並且所有伺服器實例都使用相同的密鑰。
+
+這是一個進階用例，適用於需要在多次部署中保持一致加密行為的應用程式。我們應該考慮標準的安全實踐，例如密鑰輪換 (key rotation) 與簽名 (signing)。
+
+> 值得注意： 部署到 Vercel 的 Next.js 應用程式會自動處理這一點。
+
+#### 允許的來源（進階）
+
+由於伺服器操作可以在 `<form>` 元素中被呼叫，因此它們可能會遭受[跨站請求偽造 (CSRF) 攻擊](https://developer.mozilla.org/en-US/docs/Glossary/CSRF)。
+
+在背後，伺服器操作使用 `POST` 方法，而只有這個 HTTP 方法可以呼叫它們。這在現代瀏覽器中防止了大多數 CSRF 漏洞，特別是[SameSite cookies](https://web.dev/articles/samesite-cookies-explained) 成為預設值的情況下。
+
+作為額外的保護，Next.js 中的伺服器操作還會將 [Origin 標頭](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin) 與 [Host 標頭](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Host)（或 `X-Forwarded-Host`）進行比較。如果它們不匹配，請求將被中止。換句話說，伺服器操作只能在與其所在頁面相同的主機上被呼叫。
+
+對於使用反向代理或多層後端架構的大型應用程式（伺服器 API 與生產域名不同的情況），建議使用配置選項 [`serverActions.allowedOrigins`](https://nextjs.org/docs/app/api-reference/next-config-js/serverActions) 來指定一個安全來源的清單。該選項接受一個字串陣列。
+
+next.config.js
+
+```jsx
+/** @type {import('next').NextConfig} */
+module.exports = {
+  experimental: {
+    serverActions: {
+      allowedOrigins: ["my-proxy.com", "*.my-proxy.com"],
+    },
+  },
+};
+```
+
+了解更多關於[安全性與伺服器操作](https://nextjs.org/blog/security-nextjs-server-components-actions)。
+
+### 其他資源
+
+想要了解更多資訊，請參閱以下 React 文件：
+
+- [伺服器操作](https://react.dev/reference/rsc/server-actions)
+- [`"use server"`](https://react.dev/reference/react/use-server)
+- [`<form>`](https://react.dev/reference/react-dom/components/form)
+- [`useFormStatus`](https://react.dev/reference/react-dom/hooks/useFormStatus)
+- [`useActionState`](https://react.dev/reference/react/useActionState)
+- [`useOptimistic`](https://react.dev/reference/react/useOptimistic)
+
 ## 增量靜態再生 (Incremental Static Regeneration, ISR)
 
 增量靜態再生 (ISR) 讓我們可以：
