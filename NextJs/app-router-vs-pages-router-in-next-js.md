@@ -4788,7 +4788,7 @@ Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/d
 
 由於版面限制，主要只有針對 Rendering、Data Fetching、Routing 這三個章節進行比較，並且在各章節主要補充介紹 App Router 的使用方式。
 
-對於專案是否要轉換架構，筆者以前端工程師的角度認為都可以。前端使用 Pages Router 的架構下，到目前為止我們沒有遇到什麼問題是一定要轉換成 App Router 才能處理的，但因為 App Router 有更多新功能可以使用，也許對未來前端會更有幫助，只是需要花時間處理轉換架構就好。而後端工程師則認為 App Router 更為方便。
+對於專案是否要轉換架構，筆者以前端工程師的角度認為都可以。前端使用 Pages Router 的架構下，到目前為止我們沒有遇到什麼問題是一定要轉換成 App Router 才能處理的，但因為 App Router 有更多新功能可以使用，也許對未來前端會更有幫助，只是轉換架構會需要額外花費較多的時間和精力，這部分需要評估。而後端工程師則認為 App Router 更為方便。
 
 ### 將現有專案路由架構從 Pages Router 換成 App Router 需要做的事
 
