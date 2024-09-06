@@ -14,9 +14,9 @@ _（目前文章狀態：草稿）_
 
 ### 1. React vs Next.js：函式庫與框架
 
-React 是用來建構使用者介面的 JavaScript 函式庫（Library）。
+React 是用來建構使用者介面的 JavaScript 函式庫 (Library)。
 
-而 Next.js 則是建立 React 之上的框架，除了客戶端渲染（Client-side Rendering），還支援兩種形式的預渲染：靜態網頁生成（Static Site Generation）和伺服器端渲染（Server-side Rendering）。
+而 Next.js 則是建立 React 之上的框架，除了客戶端渲染 (Client-side Rendering)，還支援兩種形式的預渲染：靜態網站生成 (Static Site Generation) 和伺服器端渲染 (Server-side Rendering)。
 
 可參考官網的標語介紹：
 
@@ -60,7 +60,7 @@ React 可透過「搭建後端 Server + 處理 Hydration + Webpack 打包配置�
 - CSS Support：內建支援 CSS、Sass 檔案，並支援 CSS 模組化
 - Route Handlers：基於檔案架構的路由系統，如  `page/home.tsx`
 - API Routes：支援 API 路由，易於建立與管理 API 端點
-- Pre-rendering：支援兩種形式的預渲染，分別是靜態網頁生成（SSG）和伺服器渲染（SSR）
+- Pre-rendering：支援兩種形式的預渲染，分別是靜態網站生成 (SSG) 和伺服器渲染 (SSR)
 - Built-in Optimizations：針對圖片、字體、JavaScript 載入進行自動優化，包括延遲載入與緩存處理
 
 綜合上述優點，Next.js 有助於優化網頁效能與 SEO，適合用於建立著陸頁面（Landing Page）或是產品展示頁面，但較不適合應用在經常變動的網站，避免伺服器負荷過大。
@@ -4713,11 +4713,717 @@ NEXT_PRIVATE_DEBUG_CACHE=1
 
 # 逐步遷移的方式
 
-_（撰寫中）_
+> 🎥 觀看: 了解如何逐步採用 App Router → [YouTube (16 分鐘)](https://www.youtube.com/watch?v=YQMSietiFm0)。
+
+遷移到 App Router 可能是我們首次使用 Next.js 基於 React 的功能，如 Server Components、Suspense 等。當這些功能與 Next.js 的新功能結合使用時，例如 [特殊檔案](https://nextjs.org/docs/app/building-your-application/routing#file-conventions) 和 [佈局](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#layouts)，遷移意味著我們需要學習新的概念、心智模型和行為改變。
+
+建議將這些更新拆解為較小的步驟，從而減少綜合複雜度。**`app` 目錄有意設計成可以與 `pages` 目錄同時工作，允許逐頁遷移。**
+
+- `app` 目錄支援巢狀路由 _與_ 佈局。[了解更多](https://nextjs.org/docs/app/building-your-application/routing)。
+- 使用巢狀資料夾來[定義路由](https://nextjs.org/docs/app/building-your-application/routing/defining-routes)，並使用特殊的 `page.js` 檔案使路由段可公開訪問。[了解更多](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#step-4-migrating-pages)。
+- [特殊檔案約定](https://nextjs.org/docs/app/building-your-application/routing#file-conventions) 用來為每個路由段建立 UI。最常見的特殊檔案是 `page.js` 和 `layout.js`。
+  - 使用 `page.js` 來定義路由專屬的 UI。
+  - 使用 `layout.js` 來定義多個路由共用的 UI。
+  - 特殊檔案可以使用 `.js`、`.jsx` 或 `.tsx` 擴展名。
+- 我們可以將其他檔案，如元件、樣式、測試等，放置在 `app` 目錄中。[了解更多](https://nextjs.org/docs/app/building-your-application/routing)。
+- 像 `getServerSideProps` 和 `getStaticProps` 這樣的資料獲取函數已被替換為 [新的 API](https://nextjs.org/docs/app/building-your-application/data-fetching)，`getStaticPaths` 已被 [`generateStaticParams`](https://nextjs.org/docs/app/api-reference/functions/generate-static-params) 取代。
+- `pages/_app.js` 和 `pages/_document.js` 已被單一的 `app/layout.js` 根佈局取代。[了解更多](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#root-layout-required)。
+- `pages/_error.js` 已被更精細的 `error.js` 特殊檔案取代。[了解更多](https://nextjs.org/docs/app/building-your-application/routing/error-handling)。
+- `pages/404.js` 已被 [`not-found.js`](https://nextjs.org/docs/app/api-reference/file-conventions/not-found) 檔案取代。
+- `pages/api/*` API 路由已被 [`route.js`](https://nextjs.org/docs/app/api-reference/file-conventions/route)（路由處理器）特殊檔案取代。
+
+## 第一步：建立 `app` 目錄
+
+升級到最新的 Next.js 版本（需要 13.4 或更新版本）：
+
+```bash
+npm install next@latest
+```
+
+然後，在專案的根目錄（或 `src/` 目錄）中建立一個新的 `app` 目錄。
+
+## 第二步：建立根佈局 (root layout)
+
+在 `app` 目錄中建立一個新的 `app/layout.tsx` 檔案。這是一個 [根佈局](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#root-layout-required)，將適用於 `app` 目錄內的所有路由。
+
+app/layout.tsx
+
+```tsx
+export default function RootLayout({
+  // Layouts must accept a children prop.
+  // This will be populated with nested layouts or pages
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang='en'>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+- `app` 目錄 **必須** 包含一個根佈局。
+- 根佈局必須定義 `<html>` 和 `<body>` 標籤，因為 Next.js 不會自動建立它們。
+- 根佈局取代了 `pages/_app.tsx` 和 `pages/_document.tsx` 檔案。
+- 佈局檔案可以使用 `.js`、`.jsx` 或 `.tsx` 擴展名。
+
+要管理 `<head>` HTML 元素，我們可以使用 [內建的 SEO 支援](https://nextjs.org/docs/app/building-your-application/optimizing/metadata)：
+
+app/layout.tsx
+
+```tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Welcome to Next.js",
+};
+```
+
+### 遷移 `_document.js` 和 `_app.js`
+
+如果我們已有 `_app` 或 `_document` 檔案，可以將內容（例如全域樣式）複製到根佈局 (`app/layout.tsx`) 中。`app/layout.tsx` 中的樣式 _不會_ 影響 `pages/*`。在遷移過程中，我們應保留 `_app` 和 `_document`，以防止 `pages/*` 路由出錯。當完全遷移完成後，我們可以安全地刪除它們。
+
+如果我們正在使用任何 React Context providers，它們需要移動到 [客戶端元件](https://nextjs.org/docs/app/building-your-application/rendering/client-components) 中。
+
+### 遷移 `getLayout()` 模式到佈局（可選）
+
+Next.js 曾建議在 `pages` 目錄中為頁面元件添加 [屬性](https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts#layout-pattern#per-page-layouts)，以實現每頁佈局。這種模式可以透過 `app` 目錄中對 [巢狀路由](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates#layouts) 的內建支援來替代。
+
+- 以下為前後對比範例：
+  **遷移前**
+  components/DashboardLayout.js
+
+  ```tsx
+  export default function DashboardLayout({ children }) {
+    return (
+      <div>
+        <h2>My Dashboard</h2>
+        {children}
+      </div>
+    );
+  }
+  ```
+
+  pages/dashboard/index.js
+
+  ```tsx
+  import DashboardLayout from "../components/DashboardLayout";
+
+  export default function Page() {
+    return <p>My Page</p>;
+  }
+
+  Page.getLayout = function getLayout(page) {
+    return <DashboardLayout>{page}</DashboardLayout>;
+  };
+  ```
+
+  **遷移後**
+
+  - 從 `pages/dashboard/index.js` 移除 `Page.getLayout` 屬性，並按照[頁面遷移步驟](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#step-4-migrating-pages)遷移到 `app` 目錄。
+    app/dashboard/page.js
+    ```tsx
+    export default function Page() {
+      return <p>My Page</p>;
+    }
+    ```
+  - 將 `DashboardLayout` 的內容移到新的 [客戶端元件](https://nextjs.org/docs/app/building-your-application/rendering/client-components) 中，保留 `pages` 目錄的行為。
+    app/dashboard/DashboardLayout.js
+
+    ```tsx
+    "use client"; // this directive should be at top of the file, before any imports.
+
+    // This is a Client Component
+    export default function DashboardLayout({ children }) {
+      return (
+        <div>
+          <h2>My Dashboard</h2>
+          {children}
+        </div>
+      );
+    }
+    ```
+
+  - 將 `DashboardLayout` 引入到 `app` 目錄中的新的 `layout.js` 檔案中。
+    app/dashboard/layout.js
+
+    ```tsx
+    import DashboardLayout from "./DashboardLayout";
+
+    // This is a Server Component
+    export default function Layout({ children }) {
+      return <DashboardLayout>{children}</DashboardLayout>;
+    }
+    ```
+
+  - You can incrementally move non-interactive parts of `DashboardLayout.js` (Client Component) into `layout.js` (Server Component) to reduce the amount of component JavaScript you send to the client.
+
+## 第三步：遷移 `next/head`
+
+在 `pages` 目錄中，`next/head` React 元件用於管理 `<head>` HTML 元素，如 `title` 和 `meta`。在 `app` 目錄中，`next/head` 被新的 [內建 SEO 支援](https://nextjs.org/docs/app/building-your-application/optimizing/metadata) 取代。
+
+**遷移前：**
+
+pages/index.tsx
+
+```tsx
+import Head from "next/head";
+
+export default function Page() {
+  return (
+    <>
+      <Head>
+        <title>My page title</title>
+      </Head>
+    </>
+  );
+}
+```
+
+**遷移後：**
+
+app/page.tsx
+
+```tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Page Title",
+};
+
+export default function Page() {
+  return "...";
+}
+```
+
+[查看所有 metadata 選項](https://nextjs.org/docs/app/api-reference/functions/generate-metadata)。
+
+## 第四步：遷移 Pages
+
+- 位於 [`app` 目錄](https://nextjs.org/docs/app/building-your-application/routing) 下的 Pages 預設為 [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)。這與 `pages` 目錄不同，`pages` 目錄中的 Pages 是 [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components)。
+- `app` 目錄的 [資料獲取](https://nextjs.org/docs/app/building-your-application/data-fetching) 方式已經改變，不再使用 `getServerSideProps`、`getStaticProps` 和 `getInitialProps`，取而代之的是更簡化的 API。
+- `app` 目錄使用巢狀資料夾來 [定義路由](https://nextjs.org/docs/app/building-your-application/routing/defining-routes)，並且透過特殊的 `page.js` 檔案來使路由段對外公開。
+  | `pages` 目錄 | `app` 目錄 | 路由 |
+  | ---------------- | --------------------- | -------------- |
+  | `index.js` | `page.js` | `/` |
+  | `about.js` | `about/page.js` | `/about` |
+  | `blog/[slug].js` | `blog/[slug]/page.js` | `/blog/post-1` |
+
+**建議將頁面的遷移分為兩個主要步驟：**
+
+- 1. 將預設導出的 Page 元件移動到新的 Client Component 中。
+- 2. 將新的 Client Component 匯入 `app` 目錄中的 `page.js` 檔案中。
+
+> 溫馨提醒：這是最容易的遷移路徑，因為它的行為與 pages 目錄最為相似。
+
+### 1. 建立新的 Client Component
+
+1. 在 `app` 目錄內建立一個新的檔案（例如 `app/home-page.tsx`），並導出一個 Client Component。要定義 Client Components，請在檔案頂部加入 `'use client'` 指令（必須在任何 `import` 之前）。
+   - 與 Pages Router 類似，這裡有一個[優化步驟](https://nextjs.org/docs/app/building-your-application/rendering/client-components#full-page-load)，用於在初次載入頁面時預先渲染 Client Components 成靜態 HTML。
+2. 將 `pages/index.js` 中預設導出的頁面元件移動到 `app/home-page.tsx`。
+
+app/home-page.tsx
+
+```tsx
+"use client";
+
+// 這是一個 Client Component（與 `pages` 目錄中的元件相同）
+// 它透過 props 接收資料，並且有存取 state 和 effect 的權限，且在初次載入頁面時於伺服器上預先渲染。
+export default function HomePage({ recentPosts }) {
+  return (
+    <div>
+      {recentPosts.map((post) => (
+        <div key={post.id}>{post.title}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+### 2. 建立一個新的頁面
+
+- 在 `app` 目錄中建立一個新的 `app/page.tsx` 檔案。此頁面預設為 Server Component。
+- 導入 `home-page.tsx` 中的 Client Component。
+- 如果之前在 `pages/index.js` 中進行了資料獲取操作，請將資料獲取邏輯直接移動到 Server Component，並使用新的 [資料獲取 API](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching)。詳情請參閱 [資料獲取升級指南](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#step-6-migrating-data-fetching-methods)。
+
+app/page.tsx
+
+```tsx
+// 導入 Client Component
+import HomePage from "./home-page";
+
+async function getPosts() {
+  const res = await fetch("https://...");
+  const posts = await res.json();
+  return posts;
+}
+
+export default async function Page() {
+  // 在 Server Component 中獲取資料
+  const recentPosts = await getPosts();
+  // 將獲取的資料傳遞給 Client Component
+  return <HomePage recentPosts={recentPosts} />;
+}
+```
+
+- 如果之前的頁面使用了 `useRouter`，則需要更新到新的路由 hooks。詳情請參閱[了解更多](https://nextjs.org/docs/app/api-reference/functions/use-router)。
+- 啟動開發伺服器並訪問 `http://localhost:3000`。我們應該可以看到現有的 index 路由，現在透過 `app` 目錄提供服務。
+
+## 第五步：遷移路由 Hooks
+
+為了支援 `app` 目錄中的新行為，新增了新的路由器 (router)。
+
+在 `app` 中，我們應該使用從 `next/navigation` 匯入的三個新 hooks：[`useRouter()`](https://nextjs.org/docs/app/api-reference/functions/use-router)、[`usePathname()`](https://nextjs.org/docs/app/api-reference/functions/use-pathname) 和 [`useSearchParams()`](https://nextjs.org/docs/app/api-reference/functions/use-search-params)。
+
+- 新的 `useRouter` hook 從 `next/navigation` 導入，其行為與從 `next/router` 匯入的 `useRouter` hook 不同。
+  > 注意：從 `next/router` 導入的 [`useRouter` hook](https://nextjs.org/docs/pages/api-reference/functions/use-router) 不支援在 `app` 目錄中使用，但仍可在 `pages` 目錄中使用。
+- 新的 `useRouter` 不再回傳 `pathname` 字串。請改用 `usePathname` hook。
+- 新的 `useRouter` 不再回傳 `query` 物件。搜尋參數與動態路由參數現在是分開的。請改用 `useSearchParams` 和 `useParams` hooks。
+- 我們可以結合使用 `useSearchParams` 和 `usePathname` 來監聽頁面變更。詳情請參閱 [路由事件](https://nextjs.org/docs/app/api-reference/functions/use-router#router-events) 部分。
+- 這些新 hooks 僅支援在 Client Components 中使用，不能在 Server Components 中使用。
+
+app/example-client-component.tsx
+
+```tsx
+"use client";
+
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+
+export default function ExampleClientComponent() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // ...
+}
+```
+
+此外，新的 `useRouter` hook 有以下變更：
+
+- `isFallback` 已被移除，因為 `fallback` 已[被取代](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#replacing-fallback)。
+- `locale`、`locales`、`defaultLocales` 和 `domainLocales` 值已被移除，因為 `app` 目錄不再需要內建 i18n 功能。詳情請參閱[了解更多關於 i18n](https://nextjs.org/docs/app/building-your-application/routing/internationalization)。
+- `basePath` 已被移除，其替代方案不會成為 `useRouter` 的一部分，目前尚未實作。
+- `asPath` 已被移除，因為新的路由器中移除了 `as` 的概念。
+- `isReady` 已被移除，因為它已不再需要。任何使用 [`useSearchParams()`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) hook 的元件，將跳過預渲染步驟，並在客戶端執行時渲染。
+
+[了解更多 `useRouter()` API 參考](https://nextjs.org/docs/app/api-reference/functions/use-router)。
+
+## 第六步：遷移資料獲取方法 (Data Fetching Methods)
+
+在 `pages` 目錄中，使用 `getServerSideProps` 和 `getStaticProps` 來為頁面獲取資料。在 `app` 目錄中，這些資料獲取函數被新的 [簡化 API](https://nextjs.org/docs/app/building-your-application/data-fetching) 取代，該 API 基於 `fetch()` 和 `async` React Server Components。
+
+app/page.tsx
+
+```tsx
+export default async function Page() {
+  // 這個請求應該被快取，直到手動失效。
+  // 類似於 `getStaticProps`。
+  // `force-cache` 是預設值，可以省略。
+  const staticData = await fetch(`https://...`, { cache: "force-cache" });
+
+  // 這個請求應該在每次請求時重新抓取。
+  // 類似於 `getServerSideProps`。
+  const dynamicData = await fetch(`https://...`, { cache: "no-store" });
+
+  // 這個請求應該被快取 10 秒的時間。
+  // 類似於 `getStaticProps` 帶有 `revalidate` 選項。
+  const revalidatedData = await fetch(`https://...`, {
+    next: { revalidate: 10 },
+  });
+
+  return <div>...</div>;
+}
+```
+
+### 伺服器端渲染（`getServerSideProps`）
+
+在 `pages` 目錄中，`getServerSideProps` 用於在伺服器上獲取資料並將資料傳遞到檔案中的預設匯出的 React 元件。頁面的初始 HTML 是從伺服器預渲染的，隨後在瀏覽器中「hydrating」（使其具有互動性）。
+
+pages/dashboard.js
+
+```jsx
+// `pages` 目錄
+
+export async function getServerSideProps() {
+  const res = await fetch(`https://...`);
+  const projects = await res.json();
+
+  return { props: { projects } };
+}
+
+export default function Dashboard({ projects }) {
+  return (
+    <ul>
+      {projects.map((project) => (
+        <li key={project.id}>{project.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+在 App Router 中，我們可以將資料獲取與 React 元件一起放置，使用 [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)。這允許我們傳送更少的 JavaScript 到客戶端，同時保持伺服器上渲染的 HTML。
+
+通過將 `cache` 選項設置為 `no-store`，我們可以指示獲取的資料 [永不被快取](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching)。這類似於 `pages` 目錄中的 `getServerSideProps`。
+
+app/dashboard/page.tsx
+
+```tsx
+// `app` 目錄
+
+// 這個函數可以命名為任何名稱
+async function getProjects() {
+  const res = await fetch(`https://...`, { cache: "no-store" });
+  const projects = await res.json();
+
+  return projects;
+}
+
+export default async function Dashboard() {
+  const projects = await getProjects();
+
+  return (
+    <ul>
+      {projects.map((project) => (
+        <li key={project.id}>{project.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### 讀取 Request 物件 (Accessing Request Object)
+
+在 `pages` 目錄中，我們可以基於 Node.js HTTP API 來取得與請求相關的資料 (request-based data)。
+
+例如，我們可以在 `getServerSideProps` 中取得 `req` 物件，並使用它來取得請求的 cookie 和標頭。
+
+pages/index.js
+
+```jsx
+// `pages` 目錄
+
+export async function getServerSideProps({ req, query }) {
+  const authHeader = req.getHeaders()['authorization'];
+  const theme = req.cookies['theme'];
+
+  return { props: { ... }}
+}
+
+export default function Page(props) {
+  return ...
+}
+
+```
+
+`app` 目錄中，公開了新的唯讀函數來獲取請求資料 (request data)：
+
+- [`headers()`](https://nextjs.org/docs/app/api-reference/functions/headers)：基於 Web Headers API，可以在 [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) 中使用來取得請求標頭。
+- [`cookies()`](https://nextjs.org/docs/app/api-reference/functions/cookies)：基於 Web Cookies API，可以在 [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) 中使用來取得 cookie。
+
+app/page.tsx
+
+```tsx
+// `app` 目錄
+import { cookies, headers } from "next/headers";
+
+async function getData() {
+  const authHeader = headers().get("authorization");
+
+  return "...";
+}
+
+export default async function Page() {
+  // 我們可以在伺服器元件中直接使用 `cookies()` 或 `headers()`
+  // 或者在資料獲取函數中使用
+  const theme = cookies().get("theme");
+  const data = await getData();
+  return "...";
+}
+```
+
+### 靜態網站生成 SSG (`getStaticProps`)
+
+在 `pages` 目錄中，`getStaticProps` 函數用於在建置期間預渲染頁面。此函數可用來從外部 API 或直接從資料庫中獲取資料，並在建置期間將這些資料傳遞給整個頁面。
+
+pages/index.js
+
+```jsx
+// `pages` 目錄
+
+export async function getStaticProps() {
+  const res = await fetch(`https://...`);
+  const projects = await res.json();
+
+  return { props: { projects } };
+}
+
+export default function Index({ projects }) {
+  return projects.map((project) => <div>{project.name}</div>);
+}
+```
+
+在 `app` 目錄中，使用 [`fetch()`](https://nextjs.org/docs/app/api-reference/functions/fetch) 來獲取資料時，預設的快取行為為 `cache: 'force-cache'`，這會將請求的資料快取，直到手動失效。這類似於 `pages` 目錄中的 `getStaticProps`。
+
+app/page.js
+
+```jsx
+// `app` 目錄
+
+// 這個函數可以命名為任何名稱
+async function getProjects() {
+  const res = await fetch(`https://...`);
+  const projects = await res.json();
+
+  return projects;
+}
+
+export default async function Index() {
+  const projects = await getProjects();
+
+  return projects.map((project) => <div>{project.name}</div>);
+}
+```
+
+### 動態路徑 Dynamic paths (`getStaticPaths`)
+
+在 `pages` 目錄中，`getStaticPaths` 函數用於定義應在建置期間預渲染的動態路徑。
+
+pages/posts/[id].js
+
+```jsx
+// `pages` 目錄
+import PostLayout from "@/components/post-layout";
+
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { id: "1" } }, { params: { id: "2" } }],
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const res = await fetch(`https://.../posts/${params.id}`);
+  const post = await res.json();
+
+  return { props: { post } };
+}
+
+export default function Post({ post }) {
+  return <PostLayout post={post} />;
+}
+```
+
+在 `app` 目錄中，`getStaticPaths` 被 [`generateStaticParams`](https://nextjs.org/docs/app/api-reference/functions/generate-static-params) 取代。
+
+[`generateStaticParams`](https://nextjs.org/docs/app/api-reference/functions/generate-static-params) 的行為類似於 `getStaticPaths`，但它提供了更簡化的 API 來回傳路由參數，並且可以在 [佈局](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates) 中使用。`generateStaticParams` 的回傳格式是一個段的陣列，而不是一個巢狀的 `param` 物件陣列或解析路徑的字串。
+
+app/posts/[id]/page.js
+
+```jsx
+// `app` 目錄
+import PostLayout from "@/components/post-layout";
+
+export async function generateStaticParams() {
+  return [{ id: "1" }, { id: "2" }];
+}
+
+async function getPost(params) {
+  const res = await fetch(`https://.../posts/${params.id}`);
+  const post = await res.json();
+
+  return post;
+}
+
+export default async function Post({ params }) {
+  const post = await getPost(params);
+
+  return <PostLayout post={post} />;
+}
+```
+
+使用 `generateStaticParams` 作為新的 `app` 目錄中的模型名稱，比 `getStaticPaths` 更合適。`get` 前綴被更具描述性的 `generate` 取代，這在 `getStaticProps` 和 `getServerSideProps` 不再需要時更具語義性。而 `Paths` 後綴則被 `Params` 取代，對於多層巢狀動態路徑來說，`Params` 更為合適。
+
+### 取代 `fallback`
+
+在 `pages` 目錄中，`getStaticPaths` 回傳的 `fallback` 屬性用於定義未在建置期間預渲染的頁面行為。此屬性可以設定為 `true` ，讓頁面正在生成時，顯示一個備援頁面；設為 `false` 則顯示 404 頁面；或設為 `blocking` 以在請求時生成頁面。
+
+pages/posts/[id].js
+
+```jsx
+// `pages` 目錄
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: 'blocking'
+  };
+}
+
+export async function getStaticProps({ params }) {
+  ...
+}
+
+export default function Post({ post }) {
+  return ...
+}
+
+```
+
+在 `app` 目錄中， [`config.dynamicParams` 屬性](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams) 控制了如何處理不在 [`generateStaticParams`](https://nextjs.org/docs/app/api-reference/functions/generate-static-params) 中的參數：
+
+- **`true`**: 是預設值，對於不包含在 `generateStaticParams` 中的動態段 (dynamic segments)，將按需生成。
+- **`false`**: 不包含在 `generateStaticParams` 中的動態段會回傳 404 頁面。
+
+這取代了 `pages` 目錄中 `getStaticPaths` 的 `fallback: true | false | 'blocking'` 選項。由於 `'blocking'` 和 `true` 的差異在串流中微乎其微，因此在 `dynamicParams` 中未包含 `fallback: 'blocking'`。
+
+app/posts/[id]/page.js
+
+```jsx
+// `app` 目錄
+
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  return [...]
+}
+
+async function getPost(params) {
+  ...
+}
+
+export default async function Post({ params }) {
+  const post = await getPost(params);
+
+  return ...
+}
+```
+
+當 [`dynamicParams`](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamicparams) 設為 `true` (預設值) 時，當請求尚未生成的路由段時，它將由伺服器渲染並快取。
+
+> 補充：這段話的意思是：
+>
+> 當 `dynamicParams` 設為 `true`（預設值）時，如果有一個路由段（例如 URL 的某一部分）被請求，但這個路由段尚未被生成，那麼系統會在伺服器端生成這個路由段的內容並快取起來。這樣，下次有相同的請求時，系統可以直接從快取中提供這個路由段的內容，而不需要重新生成。
+>
+> 簡單來說，這樣做可以保證即使路由段還未被預先生成，系統也會在第一次請求時生成它，並將結果保存起來，以便後續請求可以更快地回應。
+
+### 增量靜態再生 ISR (`getStaticProps` 與 `revalidate`)
+
+在 `pages` 目錄中，`getStaticProps` 函數允許添加 `revalidate` 欄位，以在指定時間後自動重新生成頁面。
+
+pages/index.js
+
+```jsx
+// `pages` 目錄
+
+export async function getStaticProps() {
+  const res = await fetch(`https://.../posts`);
+  const posts = await res.json();
+
+  return {
+    props: { posts },
+    revalidate: 60,
+  };
+}
+
+export default function Index({ posts }) {
+  return (
+    <Layout>
+      <PostList posts={posts} />
+    </Layout>
+  );
+}
+```
+
+在 `app` 目錄中，使用 [`fetch()`](https://nextjs.org/docs/app/api-reference/functions/fetch) 獲取資料時，可以使用 `revalidate`，這將快取請求指定秒數。
+
+app/page.js
+
+```jsx
+// `app` 目錄
+
+async function getPosts() {
+  const res = await fetch(`https://.../posts`, { next: { revalidate: 60 } });
+  const data = await res.json();
+
+  return data.posts;
+}
+
+export default async function PostList() {
+  const posts = await getPosts();
+
+  return posts.map((post) => <div>{post.name}</div>);
+}
+```
+
+### API 路由 (API Routes)
+
+API 路由在 `pages/api` 目錄中可以繼續運作，不需任何更改。然而，在 `app` 目錄中，它們已被 [路由處理器 (Route Handlers)](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 所取代。
+
+路由處理器允許我們使用 Web 的 [Request](https://developer.mozilla.org/docs/Web/API/Request) 和 [Response](https://developer.mozilla.org/docs/Web/API/Response) API 為特定路由建立自訂請求處理器。
+
+app/api/route.ts
+
+```tsx
+export async function GET(request: Request) {}
+```
+
+> 注意：如果以前使用 API 路由從客戶端呼叫外部 API，現在可以使用伺服器元件來安全地獲取資料。了解更多有關[資料獲取](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching)的資訊。
+
+## 第七步：樣式 (Styling)
+
+在 `pages` 目錄中，全域樣式表 (global stylesheets) 只限於 `pages/_app.js` 使用。在 `app` 目錄中，此限制已被取消。全域樣式可以添加到任何佈局、頁面或元件中。
+
+- [CSS 模組](https://nextjs.org/docs/app/building-your-application/styling/css#css-modules)
+- [Tailwind CSS](https://nextjs.org/docs/app/building-your-application/styling/tailwind-css)
+- [全域樣式](https://nextjs.org/docs/app/building-your-application/styling/css#global-styles)
+- [CSS-in-JS](https://nextjs.org/docs/app/building-your-application/styling/css-in-js)
+- [外部樣式表](https://nextjs.org/docs/app/building-your-application/styling/css#external-stylesheets)
+- [Sass](https://nextjs.org/docs/app/building-your-application/styling/sass)
+
+### Tailwind CSS
+
+如果正在使用 Tailwind CSS，需要將 `app` 目錄添加到 `tailwind.config.js` 檔案中：
+
+tailwind.config.js
+
+```jsx
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}", // <-- Add this line
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+};
+```
+
+我們還需要在 `app/layout.js` 檔案中導入我們的全域樣式：
+
+app/layout.js
+
+```jsx
+import "../styles/globals.css";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang='en'>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+了解更多有關 [使用 Tailwind CSS 的樣式](https://nextjs.org/docs/app/building-your-application/styling/tailwind-css) 的資訊。
+
+## Codemods
+
+Next.js 提供了 Codemod 轉換工具，當某個功能被棄用時，這些工具有助於升級我們的程式碼庫。參閱 [Codemods](https://nextjs.org/docs/app/building-your-application/upgrading/codemods) 了解更多詳情。
 
 # 補充資訊
 
-## 1. 路由與導航的運作方式 (How Routing and Navigation Works)
+## 路由與導航的運作方式 (How Routing and Navigation Works)
 
 App Router 使用混合式的方法來處理路由與導航。在伺服器端，我們的應用程式程式碼會自動根據路由段（route segments）進行程式碼拆分（code-split）。而在客戶端，Next.js 會[預取](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#2-prefetching)（prefetches）和[快取](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#3-caching)（caches）這些路由段。這意味著當使用者導航至新路由時，瀏覽器不會重新載入頁面，只會重新渲染變更的路由段，從而改善導航體驗和性能。
 
