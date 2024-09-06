@@ -4788,10 +4788,12 @@ Next.js 具有一個名為 [路由快取（Router Cache）](https://nextjs.org/d
 
 由於版面限制，主要只有針對 Rendering、Data Fetching、Routing 這三個章節進行比較，並且在各章節主要補充介紹 App Router 的使用方式。
 
+對於專案是否要轉換架構，筆者以前端工程師的角度認為都可以。前端使用 Pages Router 的架構下，到目前為止我們沒有遇到什麼問題是一定要轉換成 App Router 才能處理的，但因為 App Router 有更多新功能可以使用，也許對未來前端會更有幫助，只是需要花時間處理轉換架構就好。而後端工程師則認為 App Router 更為方便。
+
 ### 將現有專案路由架構從 Pages Router 換成 App Router 需要做的事
 
 1. 需要大量改變路由資料夾的結構
-2. 原本都是客戶端元件，換成 App Router 之後會預設成伺服器元件，如果要維持原本的客戶端元件，也就是為了要繼續使用瀏覽器 API（像是監聽事件）、React hooks（像是 state、effect）的話，就要在元件的第一行加上`'use client'`。
+2. 原本都是客戶端元件，換成 App Router 之後會預設成伺服器元件，如果要維持原本的客戶端元件，也就是為了要繼續使用瀏覽器 API (像是監聽事件)、React hooks (像是 state、effect) 的話，就要在元件的第一行加上`'use client'`。
 3. 原本 Pages Router 的渲染方式會用到的 `getStaticProps` 都需要移除。
 4. 不確定目前使用的第三方套件是否有影響，要確定是否都能支援
 5. 整個專案需要重新測試
