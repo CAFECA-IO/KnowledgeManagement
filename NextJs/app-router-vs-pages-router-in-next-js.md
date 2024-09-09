@@ -1,5 +1,3 @@
-_（目前文章狀態：草稿）_
-
 文章標題：App Router vs Pages Router in Next.js
 
 # 前言
