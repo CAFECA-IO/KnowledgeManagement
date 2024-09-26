@@ -38,6 +38,7 @@
 當用戶未得到預期結果時，這些控制功能可以加入改善提示。例如，當用戶點擊「停止」時，可以顯示提示或建議如何改善請求，甚至引入參數調整。
 
 例如：Adobe Acrobat 將Loading提示結合了清楚的控制按鈕。
+
 <img width="303" alt="截圖 2024-09-26 上午11 49 36" src="https://github.com/user-attachments/assets/6ff3a944-a3f7-4b87-8c52-421836e7e3b5">
 
 
