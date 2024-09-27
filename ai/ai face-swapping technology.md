@@ -105,6 +105,12 @@ AI face-swapping technology 在技術層面上的核心也是生成對抗網絡(
 
 真實性難度：隨著技術的進步，生成逼真的換臉變得更加容易，但部分細節還需要克服，目前還是有部分失真和假象，像是在眼睛、嘴唇移動和光線反應上。換臉技術的發展速度很快，尤其是在影視遊戲娛樂產業和虛擬實境等領域，它提供了極大的創新潛力，但隨之而來的也是日益增長的技術與道德挑戰。
 
+<div align=center>
+
+![image](https://github.com/user-attachments/assets/e17e026f-cfff-4592-8456-5e8d38c4cec2)
+
+</div>
+
 ## AI換臉法律相關責任與疑慮
 
 
@@ -117,3 +123,5 @@ AI face-swapping technology 在技術層面上的核心也是生成對抗網絡(
 - [深度學習Paper系列(10)：CycleGAN](https://tomohiroliu22.medium.com/%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92paper%E7%B3%BB%E5%88%97-10-cyclegan-d7c88cc8dd60)
 
 - [AI可以換臉嗎？](https://www.isuperman.tw/ai%E5%8F%AF%E4%BB%A5%E6%8F%9B%E8%87%89%E5%97%8E%EF%BC%9F/)
+
+- [【科技新知】什麼是Deepfake？人工換臉技術？](https://1on1.today/blog/%E4%BB%80%E9%BA%BC%E6%98%AFdeepfake-%E4%BA%BA%E5%B7%A5%E6%8F%9B%E8%87%89%E6%8A%80%E8%A1%93/)
