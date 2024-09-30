@@ -77,32 +77,20 @@ Testing：https://{merchantId}.testing.oen.tw/checkout/subscription/create/{data
 2. 完成支付流程與回呼
 用戶被引導至應援科技的綁定信用卡頁面後，將在該頁面輸入信用卡資訊並完成 token 申請。交易成功或失敗後，應援科技會將用戶導回我們預先設定的 redirectUrl，同時也會將交易結果以 POST 請求的方式回傳至我們指定的 callbackUrl。我們需要在伺服器端處理這個回呼請求，以確認交易狀態並取得對應的 token。
 
-### Webhook structure
+Webhook Request Body
 
-| Description | Key               | Type               | Optional | Note                                                                                   |
-|-------------|-------------------|--------------------|----------|----------------------------------------------------------------------------------------|
-| 商戶 ID      | merchantId        | string             |          |                                                                                        |
-| 是否成功     | success           | boolean            |          |                                                                                        |
-| 交易 ID      | id（transactionId）| string             |          | example：2gZlnLRUiOZlnzEFvMrcURtTlHg                                                   |
-| 交易目的     | purpose           | string             |          | charge：金流交易<br>token：卡號換 token                                                 |
-| 交易狀態     | status            | string             | V        | 當交易目的為 charge 時才會有值<br>initiated：已建立付款意向<br>charging：交易中<br>failed：交易失敗<br>charged：交易成功 |
-| 交易 HID     | transactionHid    | string             | V        | 當交易目的為 charge 時才會有值<br>example：P20240517VRTJYBAJ                            |
-| 交易種類     | action            | string             | V        | 當交易目的為 charge 時才會有值<br>onetime：單次交易<br>subscription：定期定額交易         |
-| 交易金額     | amount            | number             | V        | 當交易目的為 charge 時才會有值                                                          |
-| 交易幣別     | currency          | string             | V        | 當交易目的為 charge 時才會有值                                                          |
-| 訂單編號     | orderId           | string             | V        | 當交易目的為 charge 時且呼叫 API 時有帶入才會有值                                      |
-| 消費者 ID    | userId            | string             | V        | 當交易目的為 charge 時且呼叫 API 時有帶入才會有值                                      |
-| 自定資料     | customId          | string             | V        | 呼叫 API 時有帶入才會有值                                                              |
-| 付款方式     | paymentMethod     | string             | V        | 當交易目的為 charge 時才會有值<br>card：信用卡<br>atm：虛擬帳號<br>cvs：超商代碼         |
-| 交易資料     | paymentInfo       | string             | V        | 當交易目的為 charge 且付款方式為 card 時才會有值<br>卡號末四碼                          |
-| 交易授權碼   | authCode          | number             | V        | 當交易目的為 charge 且付款方式為 card 時才會有值                                       |
-| 商品詳細     | productDetails    | array of object    | V        | 當交易目的為 charge 時且有開發票才會有值<br>參考交易時需帶入的格式                      |
-| Token        | token             | string             | V        | 當交易目的為 token 時才會有值                                                          |
-| 定期定額 id  | subscriptionId    | string             | V        | 當交易目的為 charge 時且為定期定額交易才會有值                                         |
-| 當前期數     | period            | number             | V        | 當交易目的為 charge 時且為定期定額交易才會有值                                         |
-| 總期數       | numberOfPeriods   | number             | V        | 當交易目的為 charge 時且為定期定額交易才會有值<br>若是 0 表則此定期定額為無限期         |
-| 下次扣款日期 | nextChargeAt      | string             | V        | 當交易目的為 charge 時且為定期定額交易才會有值                                         |
-| 交易錯誤訊息 | message           | string             | V        | 若交易有發生錯誤才會有值                                                               |
+```json
+{
+  "success": true,
+  "purpose": "token",
+  "merchantId": "exampleMerchant",
+  "transactionId": "123abc456def789ghi",
+  "message": null,
+  "customId": "{\"orderId\": 9999, \"subPlan\": \"premium\", \"subPeriod\": 60}",
+  "token": "xyz123456789token",
+  "id": "123abc456def789ghi"
+}
+```
 
 ## 4. 儲存 Token 進行後續交易
 
