@@ -14,26 +14,25 @@
 
 在進行應援科技金流 API 的串接之前，完整的準備工作能確保整合流程順利進行，並減少因環境或設定不當而產生的問題。以下是我們在串接前必須完成的準備步驟：
 
-1. 取得 API token 與相關文件
-首先，我們需要向應援科技申請帳戶，並取得一組 API token。這組 token 是與應援科技 API 溝通的憑證，必須妥善保管，避免洩露。此外，建議閱讀並熟悉應援科技提供的 API 文件，了解各個端點的使用方式、參數格式，以及交易流程。
-
-[Oen Tech Payment API](https://documenter.getpostman.com/view/26859697/2s9YsQ7VJA#bb2c0c40-3467-44fb-9a25-844e21f9e84a)
-
-2. 確認金流串接環境
+1. 確認金流串接環境
 應援科技提供 Sandbox（測試環境）與正式環境兩種模式。我們應先在 Sandbox 環境中測試整個串接流程，以確保所有功能正確運作，待測試無誤後再切換至正式環境進行實際交易。通常，Sandbox 環境會模擬實際交易流程，但不會真正扣款，這有助於我們在開發階段進行完整測試。
 
-（建議插入 Sandbox 與正式環境設定頁面的截圖，標註出兩者的差異）
+<img width="1000" alt="截圖 2024-09-30 下午5 15 08" src="https://github.com/user-attachments/assets/38ae1814-c2d3-485d-aebc-1d330f886109">
+
+2. 取得 API token 與相關文件 [Oen Tech Payment API](https://documenter.getpostman.com/view/26859697/2s9YsQ7VJA#bb2c0c40-3467-44fb-9a25-844e21f9e84a)
+首先，我們需要向應援科技申請帳戶，並在總設定取得一組 API token(如下圖)。這組 token 是與應援科技 API 溝通的憑證，必須妥善保管，避免洩露。此外，建議閱讀並熟悉應援科技提供的 API 文件，了解各個端點的使用方式、參數格式，以及交易流程。
+
+<img width="1000" alt="截圖 2024-09-30 下午5 17 23" src="https://github.com/user-attachments/assets/6f57f122-938a-4eaa-b235-79fe5c2fdc84">
 
 3. 設置伺服器與安全憑證接收交易回呼
 為確保金流資料的傳輸安全，我們的網站必須使用 HTTPS，並安裝有效的 SSL 憑證，這是確保所有交易資料在傳輸過程中被加密的重要一步。此外，確認您的伺服器設定能夠處理應援科技 API 的請求和回應，並準備好用於接收交易回呼通知的 URL (callbackUrl)，以便後續對交易狀態進行確認。
 
-（建議插入一張 SSL 憑證設定流程或伺服器設定的畫面，並附上簡單的程式碼範例）
 
 ## 3. 跳轉方式取得 Token
 
 應援金流提供之流程圖
 
-(https://content.pstmn.io/7002c5b8-e29c-4a79-ac9d-b8cfb5f66d8d/VW50aXRsZWQucG5n)
+<img width="1000" alt="應援流程" src="https://content.pstmn.io/7002c5b8-e29c-4a79-ac9d-b8cfb5f66d8d/VW50aXRsZWQucG5n">
 
 在選擇跳轉支付方式後，整個交易流程的第一步是引導用戶至應援科技的支付頁面，並在完成交易後取得 token 作為後續的交易憑證。這個過程涉及以下幾個關鍵步驟：
 
