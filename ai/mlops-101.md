@@ -9,7 +9,6 @@
   - [LLMOps：大型語言模型的 MLOps](#llmops大型語言模型的-mlops)
 - [FTI pipeline or 3-pipeline design](#fti-pipeline-or-3-pipeline-design)
   - [FTI pipeline (Feature/Training/Inference Pipelines) 的架構](#fti-pipeline-featuretraininginference-pipelines-的架構)
-  - [FTI pipeline 設計的解決方案](#fti-pipeline-設計的解決方案)
   - [FTI pipeline 設計的架構](#fti-pipeline-設計的架構)
   - [3-pipeline 設計的優勢](#3-pipeline-設計的優勢)
 - [批處理與流處理](#批處理與流處理)
@@ -152,6 +151,9 @@ MLOps 主要解決以下問題：
 
 ## MLOps 的架構
 
+![image](https://github.com/user-attachments/assets/130ae511-a70a-44ca-8433-8c68a4c719dc)
+(picture from https://mlops-for-all.github.io/en/docs/introduction/component/)
+
 MLOps 的架構通常包括以下幾個主要組件：
 
 1. 實驗環境 (Experiment Environment)
@@ -282,22 +284,19 @@ LLMOps 是 MLOps（機器學習操作）的一個專門子集。 MLOps 涵蓋了
 
 # FTI pipeline or 3-pipeline design
 
-## FTI pipeline (Feature/Training/Inference Pipelines) 的架構
+儘管 MLOps 工具不斷進步，但將 prototype 轉化為可迭代的產品，仍是一大挑戰。
 
-儘管 MLOps 工具不斷進步，但將 prototype 轉化為可迭代的產品，仍是一大挑戰。2022 年，只有 54% 的模型能夠進入生產環境。這種情況的原因可能包括：
-
-- 模型尚未成熟
-- 安全風險（如數據隱私）
-- 數據不足
-
-然而，更常見的情況是：
+更常見的情況是：
 
 - ML 系統的架構主要考慮研究需求
 - ML 系統變成一個龐大的單體結構，難以從離線環境重構到在線環境
 
 因此，良好的軟件工程流程和明確定義的架構與使用合適的工具和高精度模型同樣重要。
 
-## FTI pipeline 設計的解決方案
+## FTI pipeline (Feature/Training/Inference Pipelines) 的架構
+
+![CleanShot 2024-09-30 at 17 47 46@2x](https://github.com/user-attachments/assets/0617ce2c-0e29-490f-bd69-e0b9d98ac338)
+(picture from https://medium.com/decodingml/an-end-to-end-framework-for-production-ready-llm-systems-by-building-your-llm-twin-2cc6bb01141f)
 
 3-pipeline 設計（也稱為 Feature/Training/Inference，簡稱 FTI 架構）是一種心智模型，幫助簡化開發過程並將單體 ML 流水線拆分為三個組件：
 
