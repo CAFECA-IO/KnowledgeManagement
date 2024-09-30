@@ -70,8 +70,12 @@ Example Response
 Production：https://{merchantId}.oen.tw/checkout/subscription/create/{data.id}
 Testing：https://{merchantId}.testing.oen.tw/checkout/subscription/create/{data.id}
 
+綁定信用卡頁面
+<img width="920" alt="截圖 2024-09-30 下午5 32 57" src="https://github.com/user-attachments/assets/a55ef004-5f05-451b-8eb6-2f7f56eeb02f">
+
+
 2. 完成支付流程與回呼
-用戶被引導至應援科技的支付頁面後，將在該頁面輸入信用卡資訊並完成 token 申請。交易成功或失敗後，應援科技會將用戶導回我們預先設定的 redirectUrl，同時也會將交易結果以 POST 請求的方式回傳至我們指定的 callbackUrl。我們需要在伺服器端處理這個回呼請求，以確認交易狀態並取得對應的 token。
+用戶被引導至應援科技的綁定信用卡頁面後，將在該頁面輸入信用卡資訊並完成 token 申請。交易成功或失敗後，應援科技會將用戶導回我們預先設定的 redirectUrl，同時也會將交易結果以 POST 請求的方式回傳至我們指定的 callbackUrl。我們需要在伺服器端處理這個回呼請求，以確認交易狀態並取得對應的 token。
 
 ### Webhook structure
 
