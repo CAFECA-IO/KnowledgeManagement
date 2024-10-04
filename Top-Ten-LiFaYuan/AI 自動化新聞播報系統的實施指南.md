@@ -184,10 +184,10 @@ vocal_file = comfyui_client.get_vocal(text, speed=1.5, inference_mode="預訓練
 - **FFmpeg 合成視頻與配音**：
 
 ```bash
-ffmpeg -i generated_video.mp4 -i generated_vocal.wav -c:v copy -c:a aac final_news_video.mp4
+ffmpeg -i generated_video.mp4 -i generated_vocal.wav -c:v copy -c:a aac final_news_vid ceo.mp4
 ```
 
 ---
 
 ## 總結
-這篇KM紀錄了我如何通過 4 個核心模塊構建自動化新聞播報系統，並展示我具體使用的技術細節與實施步驟，同時解釋了為何 ComfyUI 是一個更靈活和高效的選擇。完整的code可以到 [Top-Ten]()
+這篇KM紀錄了我如何通過 4 個核心模塊構建自動化新聞播報系統，並展示我具體使用的技術細節與實施步驟，同時解釋了為何 ComfyUI 是一個更靈活和高效的選擇。完整的code可以到 [Top-Ten-LiFaYuan](https://github.com/CAFECA-IO/Top-Ten-LiFaYuan/tree/develop)查看。
