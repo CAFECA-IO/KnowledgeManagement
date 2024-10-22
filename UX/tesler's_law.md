@@ -31,6 +31,15 @@ Larry Tesler 是一位計算機科學家，他在 Xerox PARC 和 Apple 工作時
 
 在自動駕駛系統中，設計師和工程師必須解決非常複雜的感應、數據處理和決策問題，而駕駛者只需簡單地選擇目的地即可，複雜的駕駛決策完全交給車輛。
 
+## 不是越簡單越好
+
+然而，簡單的設計不總是最好。有時候，過度簡化反而會讓使用者感到困惑或失去控制感。
+例如，某些應用程式為了讓介面看起來更簡單，過度隱藏了高級選項，導致有經驗的使用者無法快速找到需要的功能。
+
+因此，設計師的任務不只是讓產品看起來簡單，還要確保功能齊全且易於使用。
+真正的挑戰是找到功能與簡單之間的平衡，讓使用者能夠根據自己的需求找到所需的功能，而不會感到困擾。
+
+![1*1J9md3_G3xci5TRoEX33xg](https://github.com/user-attachments/assets/05bce830-c7e2-4d1f-b0c8-6a06bd2e3739)
 
 ## 設計技術解決方案
 
@@ -167,4 +176,10 @@ Apple 的產品經常被視為複雜性守恆定律的成功範例，特別是�
 
 在日常生活中，我們經常使用看似簡單的工具，其實背後的設計師已經花費大量心血，將複雜性承擔了下來。這就是偉大設計的力量。
 
+## Reference
 
+[Tesler’s law, 複雜性守恆定律](https://www.handyui.com/2024/09/10/teslers-law/?fbclid=IwY2xjawGCys5leHRuA2FlbQIxMAABHX4js9RT5ruoe4gCARg9dkyAFBPdTupOzc62HbNBppZB-nKaEGgdMWACTA_aem_pTxpG_c-qWUfU7RaSs4zKA)
+
+[Tesler’s Law: The Beauty of Simplicity and Humanity in UX](https://blog.yarsalabs.com/teslers-law-the-user-experience-mandate-for-simplicity-and-humanity/)
+
+[Simplicity is overrated](https://blog.prototypr.io/simplicity-is-overrated-80fe987bbc59)
