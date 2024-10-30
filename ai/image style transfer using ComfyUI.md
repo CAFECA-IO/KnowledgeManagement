@@ -16,12 +16,22 @@
 
 
 ## 使用 ComfyUI 進行圖片風格置換的步驟
+### 步驟一：準備素材與相關Modle資源
+首先，在本次實作所使用的Workflow是將指定圖片轉換成宮崎駿動畫風格的工作流(可參考下圖)，所使用的工作流可以從下方的相關資源中獲取。並且整理出需要下載的相關Modle，在運行工作流時需要準備一張圖片進行風格置換，因為工作流會從LoRA模型中選擇宮崎駿風格的模型，所以不需要第二張圖片。有些風格置換的工作流是需要兩張圖片，一張為風格類型的圖片、另一張則為你想轉化的圖片。
+
+<div align=center>
+
+![image](https://github.com/user-attachments/assets/7bc0b704-e541-479b-a296-a8e326ac6ffa)
+
+</div>
+
+
 
 ## 風格置換後的圖片產出
 
 ## 總結
 
-## 相關資源 與 Reference
+## 相關資源
 ### Workflow
 - [animal workflow](https://openart.ai/workflows/willling/animal-2-anime/NoE7zH8tJ4KlrXbFr6AG)
 
@@ -29,3 +39,6 @@
 - [stabilityai/control-lora](https://huggingface.co/stabilityai/control-lora/blob/main/control-LoRAs-rank256/control-lora-sketch-rank256.safetensors)
 - [dreamshaperXL_v21TurboDPMSDE.safetensors](https://huggingface.co/gingerlollipopdx/ModelsXL/blob/main/dreamshaperXL_v21TurboDPMSDE.safetensors)
 - [StudioGhibli.Redmond-StdGBRRedmAF-StudioGhibli.safetensors](https://huggingface.co/artificialguybr/StudioGhibli.Redmond-V2/blob/main/StudioGhibli.Redmond-StdGBRRedmAF-StudioGhibli.safetensors)
+
+## Reference
+- [ComfyUI中階①Lora、Embeddings](https://vocus.cc/article/658f05b1fd89780001a0c674)
