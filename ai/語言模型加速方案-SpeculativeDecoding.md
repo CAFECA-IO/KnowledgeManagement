@@ -78,4 +78,4 @@ A Comprehensive Survey of Speculative Decoding](https://arxiv.org/html/2401.0785
 - [facebook - 加速 LLM 推理 2 - 3 倍的技巧：Speculative Decoding](https://www.facebook.com/permalink.php?story_fbid=pfbid0JedAZ8EuMCnmBNKqetrcX7xrxRXxmp6a6nYr2Xi8qKwbS6UnHZns6cPeHH9EAqsJl&id=100094251365406)
 - [CH.Tseng - 知識蒸餾 KnowledgeDistillation](https://chtseng.wordpress.com/2020/05/12/%E7%9F%A5%E8%AD%98%E8%92%B8%E9%A4%BE-knowledgedistillation/)
 - [FIND - 知識蒸餾: 壓縮模型以達泛用化](https://www.find.org.tw/index/knowledge/browse/7353378d7b72bcf0722141f77c121cd4/)
-- [[iT 邦幫忙 - Day 21 : 模型優化 - 剪枝 Pruning](https://ithelp.ithome.com.tw/articles/10268124)
+- [iT 邦幫忙 - Day 21 : 模型優化 - 剪枝 Pruning](https://ithelp.ithome.com.tw/articles/10268124)
