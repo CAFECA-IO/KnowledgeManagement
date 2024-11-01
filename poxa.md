@@ -157,6 +157,15 @@ mix run --no-halt
 - 客戶端可以使用WebSocket連接到Poxa服務器，發送和接收消息。
 - 可以使用HTTP API向特定的頻道推送消息。
 
+
+## 壓力測試
+Number of Threads (Users)：設置為 100（模擬 100 個連接），Ramp-Up Period：設置為 10 秒，讓 100 個用戶在 10 秒內逐步連接。Loop Count：設置為 Forever 在10分鐘的時候停止。
+<img width="939" alt="Screenshot 2024-11-01 at 5 36 22 PM" src="https://github.com/user-attachments/assets/6dd635ac-4233-4698-ac1b-14d953527d83">
+<img width="1042" alt="Screenshot 2024-11-01 at 5 36 43 PM" src="https://github.com/user-attachments/assets/948a9b85-e775-4c55-bd9e-0747a361b62e">
+<img width="1563" alt="Response Time Graph" src="https://github.com/user-attachments/assets/7d3cbef5-54b1-4bd7-b11b-24bf78eeed1d">
+<img width="1563" alt="Graph Results" src="https://github.com/user-attachments/assets/f5b4af0c-2895-4212-8063-d0498ab68f2b">
+
+
 ## 結語
 
 了解Poxa的基本概念和使用方法，可以幫助我們更好地在實時互動應用中作出適合的技術選擇和應用。
