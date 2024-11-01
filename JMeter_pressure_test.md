@@ -275,12 +275,17 @@ wget -P /usr/local/Cellar/jmeter/5.6.3/libexec/lib/ext/ https://jmeter-plugins.o
 2. 對比各指標（如延遲、TPS、錯誤率）數值，評估伺服器在不同負載下的反應。
 
 #### 結果紀錄
-Number of Threads (Users)：設置為 100（模擬 100 個連接），Ramp-Up Period：設置為 10 秒，讓 100 個用戶在 10 秒內逐步連接。Loop Count：設置為 Forever 在10分鐘的時候停止。
+- Number of Threads (Users)：設置為 100（模擬 100 個連接），Ramp-Up Period：設置為 10 秒，讓 100 個用戶在 10 秒內逐步連接。Loop Count：設置為 Forever 運行10分鐘。
 <img width="939" alt="Screenshot 2024-11-01 at 5 36 22 PM" src="https://github.com/user-attachments/assets/6dd635ac-4233-4698-ac1b-14d953527d83">
 <img width="1042" alt="Screenshot 2024-11-01 at 5 36 43 PM" src="https://github.com/user-attachments/assets/948a9b85-e775-4c55-bd9e-0747a361b62e">
 <img width="1563" alt="Response Time Graph" src="https://github.com/user-attachments/assets/7d3cbef5-54b1-4bd7-b11b-24bf78eeed1d">
 <img width="1563" alt="Graph Results" src="https://github.com/user-attachments/assets/f5b4af0c-2895-4212-8063-d0498ab68f2b">
 
+- Number of Threads (Users)：設置為 500（模擬 500 個連接），Ramp-Up Period：設置為 10 秒，讓 500 個用戶在 10 秒內逐步連接。Loop Count：設置為 Forever 運行10分鐘。
+
+<img width="1062" alt="Screenshot 2024-11-01 at 5 48 10 PM" src="https://github.com/user-attachments/assets/0e40827b-e09f-4a1e-948a-7efb05ab8635">
+<img width="942" alt="Screenshot 2024-11-01 at 5 48 45 PM" src="https://github.com/user-attachments/assets/06c07f2c-36a2-4f9b-a54b-72f541227fde">
+<img width="1522" alt="Screenshot 2024-11-01 at 5 49 22 PM" src="https://github.com/user-attachments/assets/65865ace-2e76-48d1-9d9a-dcc370c63220">
 
 ### 瓶頸排查
 1. 若發現延遲高或錯誤率增高，檢查伺服器資源（如 CPU、記憶體）的使用情況。
