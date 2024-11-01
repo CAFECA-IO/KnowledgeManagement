@@ -85,7 +85,13 @@ ConcatText_Zho節點則是用來將這些提示詞組合成一個完整的描述
 ![ComfyUI_temp_pvkvm_00020_](https://github.com/user-attachments/assets/58457554-e95a-442a-8a00-c13c1b97f58f)
 
 </div>
+
 ## 總結
+透過ComfyUI我們能夠將一張普通的照片轉換成特定的藝術風格，整個流程包含了模型選擇、提示詞設置、ControlNet 輪廓生成和細緻的參數調整。ComfyUI不僅有開源的資料分享空間，在工作流中提供了靈活的自定義選項，讓使用者能夠生成符合個人需求的圖像效果。
+
+ComfyUI 的多階段流程設計，尤其是 Checkpoint、LoRA 模型的運用，加上 ControlNet 的細節控制，能讓風格置換的結果在保留原始圖片結構，並且精確呈現了特定風格的特徵。無論是生成動畫風格的動物肖像，還是高度寫實的照片風格轉換，ComfyUI 都提供了充分的控制選項，適合不同需求的創作者。
+
+雖然在初期設定參數可能需要嘗試與調整，但一旦熟悉該工作流的整體流程，ComfyUI 能為創作者帶來高效且直觀的風格置換體驗。在後期未來，我們可以預見更多AI工具在個人創作、商業設計等領域中的應用潛力，特別是在快速生成高品質圖片的需求下，不只ComfyUI，還有更多AI能夠協助設計，AI將成為輔助使用者的創意工具。
 
 ## 相關資源
 ### Workflow
@@ -95,6 +101,3 @@ ConcatText_Zho節點則是用來將這些提示詞組合成一個完整的描述
 - [stabilityai/control-lora](https://huggingface.co/stabilityai/control-lora/blob/main/control-LoRAs-rank256/control-lora-sketch-rank256.safetensors)
 - [dreamshaperXL_v21TurboDPMSDE.safetensors](https://huggingface.co/gingerlollipopdx/ModelsXL/blob/main/dreamshaperXL_v21TurboDPMSDE.safetensors)
 - [StudioGhibli.Redmond-StdGBRRedmAF-StudioGhibli.safetensors](https://huggingface.co/artificialguybr/StudioGhibli.Redmond-V2/blob/main/StudioGhibli.Redmond-StdGBRRedmAF-StudioGhibli.safetensors)
-
-## Reference
-- [ComfyUI中階①Lora、Embeddings](https://vocus.cc/article/658f05b1fd89780001a0c674)
