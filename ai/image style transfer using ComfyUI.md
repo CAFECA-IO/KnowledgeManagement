@@ -30,9 +30,9 @@
 ---
 
 ### Checkpoint 和 LoRA 加載
-> **CheckpointLoaderSimple 節點**：此節點加載的是 dreamshaperXL_v21TurboDPMSDE.safetensors 模型。這個模型是主要的生成模型，負責提供風格置換的基礎架構。
+**CheckpointLoaderSimple 節點**：此節點加載的是 dreamshaperXL_v21TurboDPMSDE.safetensors 模型。這個模型是主要的生成模型，負責提供風格置換的基礎架構。
 
-> **LoraLoader 節點**：此節點加載 StudioGhibli.Redmond-StdGBRRedmAF-StudioGhibli.safetensors，應用了特定的"吉卜力"動畫風格。LoraLoader 調整了模型的風格權重，讓後續生成的圖片更接近動畫化效果，例如色彩柔和、線條簡單等。
+**LoraLoader 節點**：此節點加載 StudioGhibli.Redmond-StdGBRRedmAF-StudioGhibli.safetensors，應用了特定的"吉卜力"動畫風格。LoraLoader 調整了模型的風格權重，讓後續生成的圖片更接近動畫化效果，例如色彩柔和、線條簡單等。
 
 以實作案例做說明：當放入一張普通的貓的照片時，這些加載的模型會將貓的圖片數據傳遞給生成模型，並在內部進行圖像風格轉換。並且透過 LoRA 權重的調整，這些模型會將貓的照片改造成 吉卜力動畫風格，讓貓的毛髮變得更平滑、色彩變得更柔和，使得整體效果更加動畫化。
 
