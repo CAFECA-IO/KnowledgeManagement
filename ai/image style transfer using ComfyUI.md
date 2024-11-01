@@ -81,8 +81,9 @@ ConcatText_Zho節點則是用來將這些提示詞組合成一個完整的描述
 </div>
 
 <div align=center>
-
 ![ComfyUI_temp_pvkvm_00020_](https://github.com/user-attachments/assets/58457554-e95a-442a-8a00-c13c1b97f58f)
+
+![ComfyUI_temp_pvkvm_00053_](https://github.com/user-attachments/assets/4554c524-1fce-43d9-bc1c-dde131ec1ef8)
 
 </div>
 
