@@ -74,7 +74,17 @@ ConcatText_Zho節點則是用來將這些提示詞組合成一個完整的描述
 - **KSampler** 主要控制生成的品質，**VAE** 則進行圖片編碼解碼，使得最終結果具有更高的精細度和統一風格。
 
 ## 風格置換後的圖片產出
+<div align=center>
 
+![螢幕擷取畫面 2024-11-01 112702](https://github.com/user-attachments/assets/daaeb4e6-1b9c-4c38-b3f0-c5cc7e399ffb)
+
+</div>
+
+<div align=center>
+
+![ComfyUI_temp_pvkvm_00020_](https://github.com/user-attachments/assets/58457554-e95a-442a-8a00-c13c1b97f58f)
+
+</div>
 ## 總結
 
 ## 相關資源
