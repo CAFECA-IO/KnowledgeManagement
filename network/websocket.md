@@ -34,9 +34,10 @@ WebSocket 協議的運行方式與傳統的 HTTP 請求-回應模式有明顯不
 
 在這個雙向連接中，客戶端和伺服器都可以主動發送訊息，而不需要等待對方請求。這種特性使得 WebSocket 成為即時應用（例如多人遊戲、即時聊天）不可或缺的技術之一。
 
-![image](https://github.com/user-attachments/assets/9c86dcab-84dc-4e50-9946-71efb1c78674)
+![image](https://github.com/user-attachments/assets/27761e77-20fb-42cf-8d8c-0ce23f04da6c)
 
-credit: [Day18 | WebSocket - 神奇的雙向溝通協定](https://ithelp.ithome.com.tw/articles/10239474)
+
+credit: [WebSockets vs WebRTC - Which one to use | Pankaj Baagwan Engineering Blog](https://blog.bagwanpankaj.com/public/assets/websockets-diagram.webp)
 
 
 WebSocket 的基本架構包括以下幾個主要步驟：
