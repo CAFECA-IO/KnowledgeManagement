@@ -179,8 +179,8 @@
 
 在將服務從雲端遷移到本地機器時，容器化是一項關鍵技術，能夠確保應用程式及其依賴環境在不同平台上的一致性與可移植性。本節將探討容器化的實作重點，並提供通用的操作步驟。以資料庫為 Postgres 舉例實作。實作方法是大爆炸式遷移加上漸進式遷移，一口氣備份舊環境的資料，在另一台機器上驗證每一步的遷移，最後透過 DNS 切換，將流量導向新環境。
 
-![1](https://github.com/user-attachments/assets/d72187dd-ec8b-4a7f-8e03-87021caa3865)
-![2](https://github.com/user-attachments/assets/f17e6830-7d24-4b99-b6fb-e9afd966fa8c)
+<img src="https://github.com/user-attachments/assets/d72187dd-ec8b-4a7f-8e03-87021caa3865" width="480">
+<img src="https://github.com/user-attachments/assets/f17e6830-7d24-4b99-b6fb-e9afd966fa8c" width="480">
 
 ### **遷移流程總覽**
 
