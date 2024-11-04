@@ -18,6 +18,7 @@
     - [**各策略的優缺點比較**](#各策略的優缺點比較)
   - [**4. 技術實作重點**](#4-技術實作重點)
     - [**遷移流程總覽**](#遷移流程總覽)
+    - [**回滾流程概覽**](#回滾流程概覽)
     - [**從雲端遷移到本地機器並容器化相關服務**](#從雲端遷移到本地機器並容器化相關服務)
     - [**4.1 環境配置管理**](#41-環境配置管理)
     - [**使用 Docker/容器化**](#使用-docker容器化)
@@ -229,6 +230,59 @@ graph TB
     Monitor --> Performance[效能監控]
     Monitor --> ErrorTracking[錯誤追蹤]
     Monitor --> Maintenance[維護管理]
+```
+
+### **回滾流程概覽**
+
+```mermaid
+graph TB
+    Start[開始回滾] --> DetectIssue[問題偵測]
+
+    %% 問題偵測
+    DetectIssue --> Auto[自動偵測]
+    DetectIssue --> Manual[人工回報]
+    Auto --> Alert[告警觸發]
+    Manual --> Report[問題回報]
+
+    %% 評估階段
+    Alert --> Evaluate[問題評估]
+    Report --> Evaluate
+    Evaluate --> Decision{需要回滾?}
+
+    %% 回滾執行
+    Decision -->|是| StopService[停止服務]
+    Decision -->|否| Monitor[持續監控]
+
+    StopService --> Backup[執行備份]
+    Backup --> RollbackType{回滾類型}
+
+    %% 不同類型的回滾
+    RollbackType -->|資料庫| DBRollback[資料庫回滾]
+    RollbackType -->|檔案系統| FSRollback[檔案系統回滾]
+    RollbackType -->|容器服務| ContainerRollback[容器回滾]
+    RollbackType -->|程式碼| CodeRollback[程式碼回滾]
+
+    %% 程式碼回滾細節
+    CodeRollback --> GitRollback[Git 版本回退]
+    GitRollback --> UpdateDeps[更新相依套件]
+    UpdateDeps --> RebuildImage[重新建立映像檔]
+
+    %% 回滾後處理
+    DBRollback --> Verify[驗證回滾結果]
+    FSRollback --> Verify
+    ContainerRollback --> Verify
+    RebuildImage --> Verify
+
+    %% 結果確認
+    Verify --> Success{回滾成功?}
+    Success -->|是| Restart[重啟服務]
+    Success -->|否| StopService
+
+    %% 完成流程
+    Restart --> Test[功能測試]
+    Test --> Done[完成回滾]
+    Done --> PostMortem[事後檢討]
+    PostMortem --> Update[更新文件與回滾腳本]
 ```
 
 ### **從雲端遷移到本地機器並容器化相關服務**
@@ -696,57 +750,6 @@ rsync -avz /local/path/to/media user@local_server:/path/to/media
      - 執行關鍵功能的測試案例
      - 驗證 API 端點的可用性
      - 確認資料的一致性
-
-```mermaid
-graph TB
-    Start[開始回滾] --> DetectIssue[問題偵測]
-
-    %% 問題偵測
-    DetectIssue --> Auto[自動偵測]
-    DetectIssue --> Manual[人工回報]
-    Auto --> Alert[告警觸發]
-    Manual --> Report[問題回報]
-
-    %% 評估階段
-    Alert --> Evaluate[問題評估]
-    Report --> Evaluate
-    Evaluate --> Decision{需要回滾?}
-
-    %% 回滾執行
-    Decision -->|是| StopService[停止服務]
-    Decision -->|否| Monitor[持續監控]
-
-    StopService --> Backup[執行備份]
-    Backup --> RollbackType{回滾類型}
-
-    %% 不同類型的回滾
-    RollbackType -->|資料庫| DBRollback[資料庫回滾]
-    RollbackType -->|檔案系統| FSRollback[檔案系統回滾]
-    RollbackType -->|容器服務| ContainerRollback[容器回滾]
-    RollbackType -->|程式碼| CodeRollback[程式碼回滾]
-
-    %% 程式碼回滾細節
-    CodeRollback --> GitRollback[Git 版本回退]
-    GitRollback --> UpdateDeps[更新相依套件]
-    UpdateDeps --> RebuildImage[重新建立映像檔]
-
-    %% 回滾後處理
-    DBRollback --> Verify[驗證回滾結果]
-    FSRollback --> Verify
-    ContainerRollback --> Verify
-    RebuildImage --> Verify
-
-    %% 結果確認
-    Verify --> Success{回滾成功?}
-    Success -->|是| Restart[重啟服務]
-    Success -->|否| StopService
-
-    %% 完成流程
-    Restart --> Test[功能測試]
-    Test --> Done[完成回滾]
-    Done --> PostMortem[事後檢討]
-    PostMortem --> Update[更新文件與回滾腳本]
-```
 
 ## **5. 測試與驗證**
 
