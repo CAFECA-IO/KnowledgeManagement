@@ -17,6 +17,7 @@
     - [**平行運行策略 (Parallel Running)**](#平行運行策略-parallel-running)
     - [**各策略的優缺點比較**](#各策略的優缺點比較)
   - [**4. 技術實作重點**](#4-技術實作重點)
+    - [**遷移流程總覽**](#遷移流程總覽)
     - [**從雲端遷移到本地機器並容器化相關服務**](#從雲端遷移到本地機器並容器化相關服務)
     - [**4.1 環境配置管理**](#41-環境配置管理)
     - [**使用 Docker/容器化**](#使用-docker容器化)
@@ -129,6 +130,8 @@
 - 風險較高，若遷移過程中出現問題，將影響整個系統。
 - 難以逐步驗證每個部分的正常運行。
 
+![1](https://github.com/user-attachments/assets/abffb9bd-ca9b-4e07-aa98-0e687c55eb46)
+
 ### **漸進式遷移 (Phased Migration) / 增量遷移 (Incremental Migration)**
 
 **定義**：分階段逐步將服務與數據遷移到新環境，每次遷移部分功能。
@@ -142,6 +145,8 @@
 
 - 遷移時間較長，需要更細緻的計劃與管理。
 - 需要在舊環境與新環境間保持同步。
+
+![2](https://github.com/user-attachments/assets/636a96d0-05aa-46fa-ad0d-88586594532d)
 
 ### **平行運行策略 (Parallel Running)**
 
@@ -157,6 +162,8 @@
 - 增加資源成本，需同時維護兩套環境。
 - 複雜的流量管理與同步機制。
 
+![3](https://github.com/user-attachments/assets/be85ec66-465f-4104-a1b2-6b65d4a22ff7)
+
 ### **各策略的優缺點比較**
 
 | 策略         | 優點                   | 缺點                     |
@@ -167,9 +174,69 @@
 
 ## **4. 技術實作重點**
 
+### **遷移流程總覽**
+
+```mermaid
+graph TB
+    Start[開始遷移] --> Prep[準備階段]
+
+    %% 準備階段
+    Prep --> EnvConfig[環境配置管理]
+    Prep --> DBPrep[資料庫準備]
+    Prep --> MediaPrep[媒體文件準備]
+
+    %% 環境配置管理
+    EnvConfig --> Docker[容器化服務]
+    EnvConfig --> Config[配置文件管理]
+    Docker --> DockerCompose[編寫 Docker Compose]
+    Docker --> BuildImage[建立映像檔]
+    Config --> EnvFile[環境變數設定]
+    Config --> Secrets[機密資訊管理]
+
+    %% 資料庫遷移
+    DBPrep --> Backup[資料庫備份]
+    DBPrep --> Schema[Schema 遷移]
+    DBPrep --> DataMigrate[資料遷移]
+    Backup --> BackupVerify[備份驗證]
+    Schema --> SchemaDiff[Schema 差異比對]
+    DataMigrate --> DataVerify[資料驗證]
+
+    %% 媒體文件遷移
+    MediaPrep --> MediaBackup[媒體檔案備份]
+    MediaPrep --> MediaTransfer[媒體檔案傳輸]
+    MediaBackup --> MediaVerify[備份驗證]
+
+    %% 部署階段
+    DockerCompose --> Deploy[部署服務]
+    EnvFile --> Deploy
+    BackupVerify --> Deploy
+    MediaVerify --> Deploy
+
+    %% 驗證階段
+    Deploy --> Testing[測試與驗證]
+    Testing --> UnitTest[單元測試]
+    Testing --> IntegTest[整合測試]
+    Testing --> UAT[使用者驗收測試]
+
+    %% 結果判斷
+    Testing --> Success{測試通過?}
+    Success -->|是| Done[完成遷移]
+    Success -->|否| Rollback[執行回滾]
+    Rollback --> Prep
+
+    %% 完成後監控
+    Done --> Monitor[持續監控]
+    Monitor --> Performance[效能監控]
+    Monitor --> ErrorTracking[錯誤追蹤]
+    Monitor --> Maintenance[維護管理]
+```
+
 ### **從雲端遷移到本地機器並容器化相關服務**
 
-在將服務從雲端遷移到本地機器時，容器化是一項關鍵技術，能夠確保應用程式及其依賴環境在不同平台上的一致性與可移植性。本節將探討容器化的實作重點，並提供通用的操作步驟。以資料庫為 Postgres 舉例實作。
+在將服務從雲端遷移到本地機器時，容器化是一項關鍵技術，能夠確保應用程式及其依賴環境在不同平台上的一致性與可移植性。本節將探討容器化的實作重點，並提供通用的操作步驟。以資料庫為 Postgres 舉例實作。實作方法是大爆炸式遷移跟漸進式遷移的混合。
+
+![1](https://github.com/user-attachments/assets/d72187dd-ec8b-4a7f-8e03-87021caa3865)
+![2](https://github.com/user-attachments/assets/f17e6830-7d24-4b99-b6fb-e9afd966fa8c)
 
 ### **4.1 環境配置管理**
 
@@ -629,6 +696,57 @@ rsync -avz /local/path/to/media user@local_server:/path/to/media
      - 執行關鍵功能的測試案例
      - 驗證 API 端點的可用性
      - 確認資料的一致性
+
+```mermaid
+graph TB
+    Start[開始回滾] --> DetectIssue[問題偵測]
+
+    %% 問題偵測
+    DetectIssue --> Auto[自動偵測]
+    DetectIssue --> Manual[人工回報]
+    Auto --> Alert[告警觸發]
+    Manual --> Report[問題回報]
+
+    %% 評估階段
+    Alert --> Evaluate[問題評估]
+    Report --> Evaluate
+    Evaluate --> Decision{需要回滾?}
+
+    %% 回滾執行
+    Decision -->|是| StopService[停止服務]
+    Decision -->|否| Monitor[持續監控]
+
+    StopService --> Backup[執行備份]
+    Backup --> RollbackType{回滾類型}
+
+    %% 不同類型的回滾
+    RollbackType -->|資料庫| DBRollback[資料庫回滾]
+    RollbackType -->|檔案系統| FSRollback[檔案系統回滾]
+    RollbackType -->|容器服務| ContainerRollback[容器回滾]
+    RollbackType -->|程式碼| CodeRollback[程式碼回滾]
+
+    %% 程式碼回滾細節
+    CodeRollback --> GitRollback[Git 版本回退]
+    GitRollback --> UpdateDeps[更新相依套件]
+    UpdateDeps --> RebuildImage[重新建立映像檔]
+
+    %% 回滾後處理
+    DBRollback --> Verify[驗證回滾結果]
+    FSRollback --> Verify
+    ContainerRollback --> Verify
+    RebuildImage --> Verify
+
+    %% 結果確認
+    Verify --> Success{回滾成功?}
+    Success -->|是| Restart[重啟服務]
+    Success -->|否| StopService
+
+    %% 完成流程
+    Restart --> Test[功能測試]
+    Test --> Done[完成回滾]
+    Done --> PostMortem[事後檢討]
+    PostMortem --> Update[更新文件與回滾腳本]
+```
 
 ## **5. 測試與驗證**
 
