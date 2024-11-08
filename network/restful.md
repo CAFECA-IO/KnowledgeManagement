@@ -5,7 +5,7 @@
 ## 基本原則
 
 1. **資源命名**：路徑應該反映資源，而非動作。使用名詞表示資源，並保持路徑單數。
-   - 例如：`/user/{userId}/company`，而非 `/users/{userId}/companies` 或 `/users/{userId}/create-company`。
+   - 例如：`/user/{userId}/company`，而非 `/users/{userId}/companies` 或 `/users/{userId}/create_company`。
 
 2. **HTTP 方法**：
    - `GET`：獲取資源或集合。
@@ -202,12 +202,12 @@ DELETE /report/98765
 ### 4. 用戶選擇當前公司
 
 #### 4.1 設置當前選擇的公司
-- 路徑：`PUT /user/{userId}/selected-company`
+- 路徑：`PUT /user/{userId}/selected_company`
 - 用途：設置用戶的當前選擇公司，該公司將成為用戶後續操作的預設公司。
 
 範例：
 ```http
-PUT /user/12345/selected-company
+PUT /user/12345/selected_company
 Content-Type: application/json
 
 {
