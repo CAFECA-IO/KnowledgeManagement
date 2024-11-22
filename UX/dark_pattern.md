@@ -64,7 +64,9 @@ Jared Spool受雇的電商BestBuy試圖改善付款過程中的流失率，而Ja
 這很明顯的強制使用者進行某項行為以達成任務，由於在這個情況下，顧客的帳號密碼並非完成購買的必要條件，只是一向獲取使用者個資，以及讓使用者日後付款更為順暢的服務，因此屬於暗黑模式的一種。
 因此Jared Spool 進行了以下的改善:
 
-![IMG_3201](https://github.com/user-attachments/assets/51d4a369-294b-4665-b6a3-76b3c06dab29)
+
+![IMG_3201](https://github.com/user-attachments/assets/3f6019aa-27ee-40f7-9a04-4a6f9bd29a10)
+
 
 新增了無須建立帳號的「繼續」按鈕，讓BestBuy購買商品的使用者增加了45%，也為BestBuy在第一年帶來了3億美元的額外銷售額。
 
@@ -151,8 +153,49 @@ Duolingo是一個語言學習網站，利用自家的吉祥物貓頭鷹，向使
 
 <img width="536" alt="Screen Shot 2021-06-22 at 12 05 28 PM" src="https://github.com/user-attachments/assets/f0d735c1-8586-4d77-b0d2-3553b3b07cdb">
 
+## Roach motel 蟑螂屋
+
+### 解釋
+
+該名詞由 Dr. Harry Brignull 提出，又稱蟑螂旅社，是指一但加入就難以退出或取消的服務。通常這種暗黑模式的特點是，在加入方案或入會時的操作非常簡單，但退會卻非常困難。
+日本於2021年，修改了「特定商業交易法」，將「禁止妨礙網購契約解除的行為」納入了法案中。
+
+### 真實案例
+
+#### Adobe
+
+Adobe 被指控使用了蟑螂屋暗黑模式，由於在訂閱期Adobe Creative Cloud的服務時非常容易，介面也很直觀，反觀如果你想取消訂閱，必須經過好幾道的步驟，甚至還有取消費用，常常導致使用者放棄取消，繼續付款。
+
+![a8c02ddc609954f766bc3712f618a749cbec97c6_fl9-720p_25](https://github.com/user-attachments/assets/11f15c46-9338-4891-be3a-f3614fb2eac0)
+
+## Privacy zuckering 隱私祖克化
+
+### 解釋
+
+是以Facebook創辦人馬克祖克柏而命名的暗黑模式，意指服務經營者擅自公開（分享）使用者意圖之外的隱私。
+早期的Facebook對於隱私的設定非常複雜，導致使用者在預設的情況下往往會過度公開隱私資訊，因此收到許多團體的抱怨，Facebook也被迫更改網站設計。
+
+然而現在企業執行隱私祖克化的方法越來越巧妙，在服務規範中，企業加入對自己極其有利的措辭，或在本人不知情的情況下提供給第三方。
+
+### 真實案例
+
+#### Google
+
+Google曾被指控隱私祖克化，誤導用戶，使其認為已經關閉了位置歷史紀錄，位置數據就不會被搜集。
+然而2018年的報告揭露，即使用戶在隱私設置中停用了位置歷史，Google仍然通過其他方式（如「網絡與應用活動」）繼續追蹤用戶的行蹤。
+Google 因此判賠了6000萬美元的罰金。
+
+這一做法受到了嚴格審查，因為用戶往往未能意識到，即使他們已經試圖選擇停用，他們的數據仍在被記錄中。
+這些涉及到複雜的設置，選擇退出某一類型的數據收集並不意味著停止收集其他相關數據，從而使得用戶在不知情的情況下分享了更多信息。
+這些做法引發了各國隱私監管機構的調查，包括美國聯邦貿易委員會和歐洲數據保護機構。
+
+![5000](https://github.com/user-attachments/assets/1640eb0b-eed9-439b-81eb-1f9ed8963c0b)
+
+
 
 
 [Federal Trade Commission](https://www.ftc.gov/business-guidance/blog/2022/12/245-million-ftc-settlement-alleges-fortnite-owner-epic-games-used-digital-dark-patterns-charge)
 
 [What Are Dark Patterns?](https://gironajs.com/en/blog/what-are-dark-patterns)
+
+[U.S. sues Adobe over hard-to-cancel subscriptions]([https://shahmm.medium.com/adobes-subscription-scandal-how-the-creative-giant-betrayed-customer-trust-31ff8b0adaf4](https://www.abccolumbia.com/2024/06/19/u-s-sues-adobe-over-hard-to-cancel-subscriptions/))
