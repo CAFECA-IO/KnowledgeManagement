@@ -90,7 +90,7 @@ cb0c1c77f97c   node:20                   "docker-entrypoint.s…"   3 weeks ago 
 2. Enter docker
 ```shell
 # Container NAME = postgres for example
-docker exec -it isunfa-postgres-1 bash
+docker exec -it postgres bash
 ```
 
 3. Enter postgresql
