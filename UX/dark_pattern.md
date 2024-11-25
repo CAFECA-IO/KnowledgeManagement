@@ -64,8 +64,7 @@ Jared Spool受雇的電商BestBuy試圖改善付款過程中的流失率，而Ja
 這很明顯的強制使用者進行某項行為以達成任務，由於在這個情況下，顧客的帳號密碼並非完成購買的必要條件，只是一向獲取使用者個資，以及讓使用者日後付款更為順暢的服務，因此屬於暗黑模式的一種。
 因此Jared Spool 進行了以下的改善:
 
-
-![IMG_3201](https://github.com/user-attachments/assets/3f6019aa-27ee-40f7-9a04-4a6f9bd29a10)
+<img width="1161" alt="截圖 2024-11-25 下午2 55 41" src="https://github.com/user-attachments/assets/8a8ea9b6-9afd-449d-98d7-38a6677b966c">
 
 
 新增了無須建立帳號的「繼續」按鈕，讓BestBuy購買商品的使用者增加了45%，也為BestBuy在第一年帶來了3億美元的額外銷售額。
