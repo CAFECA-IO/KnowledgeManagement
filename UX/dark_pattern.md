@@ -13,10 +13,6 @@
 歐盟的 UCPD, GDPR, DSA 和 DMA 協助使用者創造公平的網路生態。
 美國則有聯邦貿易委員會法案, ROSCA, 和 CAN-SPAM 為主要相關連的聯邦法。
 
-真實案例有：著名的Epic Games 曾經被罰緩2.45億美元，因為其底下的遊戲“Fortnite”使用了暗黑模式，造成使用者在不知情的情況下於遊戲中消費。
-
-![230919134547-fortnite-on-smartphone-2020](https://github.com/user-attachments/assets/c63e27fc-cfa9-4d73-99fc-4b29ed0399ed)
-
 
 # 暗黑模式的種類
 
