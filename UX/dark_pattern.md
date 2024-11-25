@@ -282,14 +282,37 @@ Amazon 曾被 FTC 及歐盟警告，其 Prime 會員的取消流程存在許多�
 
 ![ryanair-png](https://github.com/user-attachments/assets/b7212ff2-7ef8-4900-af26-023059abed72)
 
+# 總結
+
+黑暗模式提醒我們，設計師在塑造數位世界時肩負著巨大的責任。每一次看似無害的點擊或「隨意」的決策背後，都可能隱藏著操控、誤導與剝削用戶的意圖。
+那些短期看似巧妙、有利可圖的手段，最終可能會侵蝕用戶的信任，讓他們感到被欺騙、無助，甚至被忽視，以長期來說都是對於品牌的傷害。
+
+在商業行為中，我們往往過度重視「數據」，銷售量、觸及率、A/B測試的結果等。
+卻忽略了許多數字背後無法衡量的價值，導致我們迷失在短期的利益中。
+
+每一個設計選擇，不僅僅影響著螢幕上的互動，更深遠地影響著人與品牌或企業之間的關係。
+我們應該反思：如果站在用戶的角度，我們自己會對這款產品感到滿意嗎？
+如果答案是否定的，那麼我們就該重新考慮設計。
+在商業利益與使用者友善之間，應該要更為公平、誠信並創造用戶的福祉。
+
+真正的設計成功，應該體現在讓用戶感到被尊重與珍視，而非利用小手段達到商業利益。
+通過避免使用黑暗模式，專注於透明和友善的設計，我們有能力幫助建立一個以信任為基礎的數位世界，創造一個更有價值的產品。
 
 
+# Reference
 
 ![currys-dark-pattern](https://github.com/user-attachments/assets/af101e46-eb96-4dfb-9a1e-42e64257ac27)
-
 
 [Federal Trade Commission](https://www.ftc.gov/business-guidance/blog/2022/12/245-million-ftc-settlement-alleges-fortnite-owner-epic-games-used-digital-dark-patterns-charge)
 
 [What Are Dark Patterns?](https://gironajs.com/en/blog/what-are-dark-patterns)
 
 [U.S. sues Adobe over hard-to-cancel subscriptions]([https://shahmm.medium.com/adobes-subscription-scandal-how-the-creative-giant-betrayed-customer-trust-31ff8b0adaf4](https://www.abccolumbia.com/2024/06/19/u-s-sues-adobe-over-hard-to-cancel-subscriptions/))
+
+[The Dark Pattern暗黑模式: 欺騙使用者心理與行為的設計](https://www.eslite.com/product/10012011762682651519001)
+
+[Dark Patterns: How design seeks to control us | Sally Woellner | TEDxSydney](https://www.youtube.com/watch?v=lJUW0iZzAaQ&t=45s)
+
+[What Are Dark Patterns in UX Design?](https://careerfoundry.com/en/blog/ux-design/dark-patterns-ux/)
+
+[Dark patterns versus behavioural nudges in UX](https://uxplanet.org/dark-patterns-versus-behavioural-nudges-in-ux-e79633970b3f)
