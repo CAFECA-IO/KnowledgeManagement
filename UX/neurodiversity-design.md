@@ -86,15 +86,24 @@ Addressing these issues benefits everyone, improving usability for users in high
 
 #### 1. **Adaptive Interfaces**  
 - **What It Is**: Interfaces that dynamically adjust based on user behavior or preferences.  
-- **Implementation**: Offer "focus mode," toggle sensory settings, or use AI to detect patterns and simplify navigation.  
+- **Implementation**: Offer "focus mode," toggle sensory settings, or use AI to detect patterns and simplify navigation.
+- **Example**: Binance offers "Lite mode" to simplify the function and intereface
+
+<img width="774" alt="截圖 2024-12-10 下午5 11 55" src="https://github.com/user-attachments/assets/3020e4d6-4f35-4568-a131-3539a3d13285">
 
 #### 2. **Cognitive Load Indicators**  
 - **What It Is**: Tools like progress bars or breadcrumbs that break tasks into manageable steps.  
 - **Implementation**: Tax filing software with clear sections and visual grouping reduces mental strain.  
+- **Example**:TurboTax employs a step-by-step progress bar that shows users how far along they are in the tax filing process, breaking a complex task into smaller, manageable steps.
+
+![turbotax-interface](https://github.com/user-attachments/assets/4f3f5a6d-4a7c-4877-b3cf-6f26bb7f3813)
+
 
 #### 3. **Multi-Sensory Feedback**  
 - **What It Is**: Reinforcing actions with visual, auditory, and tactile cues.  
 - **Implementation**: Use vibrations for button presses, subtle sounds for confirmations, and text with color-coded notifications.  
+
+
 
 #### 4. **Predictive Assistance**  
 - **What It Is**: AI-powered tools that anticipate user needs, like suggesting frequently used actions.  
