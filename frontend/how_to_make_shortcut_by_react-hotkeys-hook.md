@@ -1,4 +1,10 @@
 # 用 react-hotkeys-hook 製作快捷鍵
+## [Notion 好讀版](https://www.notion.so/react-hotkeys-hook-14d7ebc118668075a0bbfd0234aacad2?pvs=4)
+
+- [安裝與基本用法](#安裝與基本用法)
+- [詳細功能說明](#詳細功能說明)
+- [應用場景](#應用場景)
+- [踩雷與排錯](#踩雷與排錯)
 
 本文將說明用 `react-hotkeys-hook` 套件實作功能快捷鍵（熱鍵）的具體步驟，以及本人在開發途中遇到的踩雷紀錄。
 
