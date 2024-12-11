@@ -1,9 +1,9 @@
 # Create sudoer user in Ubuntu
 ```shell
-useradd -m -s /usr/bin/bash ${username}
+sudo useradd -m -s /usr/bin/bash ${username}
 ```
 ```shell
-passwd ${username}
+sudo passwd ${username}
 New password:
 ```
 ```shell
