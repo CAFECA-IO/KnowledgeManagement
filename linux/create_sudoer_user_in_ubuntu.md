@@ -61,5 +61,6 @@ UsePAM yes
 ```
 - restart ssh
 ```shell
-sudo systemctl restart sshd
+sudo systemctl restart ssh
 ```
+** not work ! **
