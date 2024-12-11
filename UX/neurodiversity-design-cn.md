@@ -170,3 +170,22 @@
 像是專注模式、易讀字體和自適應介面這些原本為支持 ADHD 或閱讀障礙所設計的功能，也能提升所有使用者的效率和可用性。  
 
 透過投資於神經多樣性友好的設計，我們可以創造更友善的產品
+
+
+### Reference:
+
+[Embracing Neurodiversity in UX Design: Crafting Inclusive Digital Environments](https://www.uxmatters.com/mt/archives/2024/04/embracing-neurodiversity-in-ux-design-crafting-inclusive-digital-environments.php)
+
+[Neuro-Inclusive Design: Developing UX principles and best practices to cater to diverse neurological profiles](https://medium.com/@faria.faria9/neuro-inclusive-design-developing-ux-principles-and-best-practices-to-cater-to-diverse-20ab7f66cee4)
+
+[Designing for Everyone: The Magic of Neurodiversity in UX](https://medium.com/design-bootcamp/designing-for-everyone-the-magic-of-neurodiversity-in-ux-34b24f97c398)
+
+[Designing Inclusive and Sensory-Friendly UX for Neurodiverse Audiences](https://uxmag.com/articles/designing-inclusive-and-sensory-friendly-ux-for-neurodiverse-audiences)
+
+[How to Design for Neurodiversity: Inclusive Content and UX](https://www.interaction-design.org/master-classes/how-to-design-for-neurodiversity-inclusive-content-and-ux?srsltid=AfmBOorFvRAw3AEED_xUCjnucNHP7MCWuBz8eHRtb3ExQ4XKyeBeFC1G)
+
+[5 Ways to Design for Neurodiversity with SLDS](https://www.salesforce.com/blog/design-for-neurodiversity-slds/)
+
+[Neurodiversity Design System](https://neurodiversity.design)
+
+[ADHD Test Online](https://www.clinical-partners.co.uk/for-adults/adult-adhd-add/test-for-adhd)
