@@ -94,7 +94,7 @@ useHotkeys(keys: string | string[], callback: (event: KeyboardEvent, handler: Ho
 | 選項 | 型別 | 預設值 | 說明 |
 | --- | --- | --- | --- |
 | enabled | boolean \| (keyboardEvent: KeyboardEvent, hotkeysEvent: HotkeysEvent) => boolean | true | 這個選項用來決定快捷鍵是否有效（active），可傳入 boolean 或函數。 |
-| enableOnFormTags | boolean \| FormTags[] | false | 預設情況下，當焦點位於表單元素（如 `<input>`、`<textarea>`、`<select>` 等）時會停用快捷鍵**，**此選項是為了避免用戶在輸入內容時觸發。開發者可以根據需求決定是否打開。 |
+| enableOnFormTags | boolean \| FormTags[] | false | 預設情況下，當焦點位於表單元素（如 `<input>`、`<textarea>`、`<select>` 等）時會停用快捷鍵，此選項是為了避免用戶在輸入內容時觸發。開發者可以根據需求決定是否打開。 |
 | enableOnContentEditable | boolean | false | 預設情況下，`react-hotkeys-hook` 會在 `contentEditable` （可編輯）元素內停用快捷鍵，以免誤觸。開發者可以根據需求決定是否打開。 |
 | combinationKey | string | + | 表示組合鍵的字符。 |
 | splitKey | string | , | 表示分隔不同按鍵的字符。 |
