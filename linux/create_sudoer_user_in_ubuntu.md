@@ -45,3 +45,21 @@ sudo apt-get install openssh-server <<!
 Y
 !
 ```
+
+## Allow SSH login using a username and password (for AWS)
+- update ssh config
+```shell
+sudo vi /etc/ssh/sshd_config
+```
+```shell
+# allow password authentication
+PasswordAuthentication yes
+
+# close challenge response authentication
+ChallengeResponseAuthentication no
+UsePAM yes
+```
+- restart ssh
+```shell
+sudo systemctl restart sshd
+```
