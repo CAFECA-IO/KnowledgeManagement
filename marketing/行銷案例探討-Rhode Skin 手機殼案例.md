@@ -1,4 +1,5 @@
 # 行銷案例探討：Rhode Skin 手機殼事件
+![截圖-2024-10-09-03 26 19-1300x1099](https://github.com/user-attachments/assets/6d5696a3-d6fd-4495-8c13-d0b9e6b6341e)
 
 ## 背景介紹  
 Rhode Skin 是由國際超模 Hailey Bieber 創立的高端護膚品牌，以「簡約、科學、高效」為核心理念，主攻年輕女性市場。在 2024 年，品牌推出了一款創新產品——結合唇膏收納功能的手機殼。這一產品迅速成為市場焦點，不僅解決了消費者的實際需求，還得益於品牌對產品功能與行銷策略的緊密結合，創造出現象級的市場效應。
@@ -19,6 +20,7 @@ Rhode Skin 是由國際超模 Hailey Bieber 創立的高端護膚品牌，以「
 ---
 
 ## 行銷策略解析  
+![0hzSUqxp-UJXxoCDbGzpZaK1FeKQ1bbDB6BnA_GEpbfxxGan4uU21vBkgNfk5ZaGd9UHJrT08Lf0lEPmt5VG4](https://github.com/user-attachments/assets/590f648e-b86d-4549-9322-baf3732e74cc)
 
 ### 1. 產品即行銷的策略模型  
 
