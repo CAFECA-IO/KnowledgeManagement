@@ -1,4 +1,4 @@
-# 行銷案例探討：Rhode Skin 手機殼事件
+# 行銷案例探討：Rhode Skin 手機殼如何塑造新消費潮流？
 ![截圖-2024-10-09-03 26 19-1300x1099](https://github.com/user-attachments/assets/6d5696a3-d6fd-4495-8c13-d0b9e6b6341e)
 
 ## 背景介紹  
