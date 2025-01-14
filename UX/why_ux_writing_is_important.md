@@ -107,3 +107,21 @@ UX writing 一詞在過去五年內被全球搜尋的次數也大幅增加，201
 UX writing 不僅僅只是「文案」，它是一個非常強大的工具，經過實驗測試，UX Writing 可以決定使用者的體驗及甚至決定產品是否成功。
 從清晰度、同理心、可用性等多種角度來設計好的UX Writing，可以增加使用者對產品的滿意度，並達到業務目標。
 
+
+### Reference
+
+[What Is Microcopy? 5 Essential Tips to Write Like a Pro](https://careerfoundry.com/en/blog/ux-design/what-is-microcopy-ux/)
+
+[A Beginner's Guide To UX Writing (Full Guide)](https://www.youtube.com/watch?v=hsMLqUFtPbU)
+
+[Microcopy in a nutshell: Past, present and future](https://uxwritinghub.com/what-is-microcopy/)
+
+[Best 10 Examples And Guidelines For Error Messages](https://uxwritinghub.com/error-message-examples/)
+
+[UX WRITING HUB](https://course.uxwritinghub.com/products/a-taste-of-ux-writing-free-course/categories/2148242723/posts/2150193312)
+
+[Microcopy: Tiny Words With A Huge UX Impact](https://uxplanet.org/microcopy-tiny-words-with-a-huge-ux-impact-90140acc6e42)
+
+[15 marvellous microcopy examples (and how they improve UX)](https://econsultancy.com/15-marvellous-microcopy-examples-and-how-they-improve-ux/)
+
+
