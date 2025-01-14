@@ -20,9 +20,9 @@ UX writing 一詞在過去五年內被全球搜尋的次數也大幅增加，201
 
 1. **增加易用性**: 清楚明瞭並且以使用者為中心的 UX Writing 可以確保使用者在操作過程中能更容易地了解該如何與產品互動，好的 UX Writing 可以大幅降低使用者在使用產品時產生的困惑，並且解決使用者問題，讓使用者能更快速的達到想要的目的。
 
-例如：比起在關鍵字搜尋欄位放上「Search」，更精準的告知使用者可以查詢什麼樣的內容，可以降低使用者產生問題的可能。
+例如：Spotify，比起在關鍵字搜尋欄位放上「Search」，更精準的告知使用者可以查詢什麼樣的內容，可以降低使用者產生問題的可能。
 
-![dXvIZ](https://github.com/user-attachments/assets/0ca6c270-9643-415e-823c-02d0244e9674)
+<img width="417" alt="ux-writing-skills-example-spotify" src="https://github.com/user-attachments/assets/b552ec17-ffed-470c-a593-781ebf40b735" />
 
 
 2. **加強 Brand Voice**: UX writing 是可以直接展現出品牌的個性. 體貼又具一致性的口吻，可以創造與使用者之間的信任，加強品牌忠實度。根據品牌個性的不同，也可以加入幽默、輕鬆、年輕的語氣。
@@ -69,7 +69,9 @@ UX writing 一詞在過去五年內被全球搜尋的次數也大幅增加，201
 
 4. **創造正面的情緒影響**: 友善且具有同情心的文字，可以讓使用者感到被關懷、被重視，以此來增加使用者對產品正面積極的情緒體驗。
 
-例如： Slack 在空的訊息夾中加入「Isn't that nice？」
+例如： Slack 在空的訊息夾中加入「Isn't that nice？」，與使用者共情，產生正面情緒體驗。
+
+![notification-wont-go-away-v0-04zu7blr7sub1](https://github.com/user-attachments/assets/32213560-afa9-4956-bb86-582c003090eb)
 
 
 ---
@@ -90,17 +92,18 @@ UX writing 一詞在過去五年內被全球搜尋的次數也大幅增加，201
 
 ---
 
-### Key Principles of Effective UX Writing
+### 5 tips 如何寫出好的 UX Writing
 
-1. **Be Clear**: Avoid jargon and use simple language that anyone can understand.
-2. **Be Concise**: Communicate the message in as few words as possible.
-3. **Be Consistent**: Ensure all copy aligns with the product’s tone and style guidelines.
-4. **Be Empathetic**: Anticipate user needs and address their pain points thoughtfully.
-5. **Test and Iterate**: Regularly test your copy with real users to identify areas for improvement.
+1. **清楚**: 避免使用專有名詞，以所有人都可以懂的簡單語言及表達方式。
+2. **簡潔**: 根據統計顯示，當一個句子少於14個字時（英文），使用者可以理解 90% 的訊息。當一個句子少於8個字時（英文），則使用者可以理解100%。確保可以用最簡短的文字來清楚表達想傳達的意思。
+3. **一致性**: 確保所有的UX Writing在口吻及用詞上在產品中保持一致。
+4. **具有同情心**: 站在使用者的角度，預設他們的需求，並想辦法解決痛點。
+5. **測試**: 定期量化測試你的UX Writing，從中尋找可以優化的部分。
 
 ---
 
-### Conclusion
+### 結論
 
-UX writing is more than just words—it’s a powerful tool that shapes user experiences and drives product success. By focusing on clarity, empathy, and usability, UX writers can create digital products that delight users and achieve business goals.
+UX writing 不僅僅只是「文案」，它是一個非常強大的工具，經過實驗測試，UX Writing 可以決定使用者的體驗及甚至決定產品是否成功。
+從清晰度、同理心、可用性等多種角度來設計好的UX Writing，可以增加使用者對產品的滿意度，並達到業務目標。
 
