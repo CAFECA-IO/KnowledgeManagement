@@ -1,5 +1,5 @@
 # **前端功能備忘錄**
-目標是整理一些好用但不熟悉的前端功能，主要是table、flexbox 以及 grid相關的內容，作為備忘錄，方便工作時查閱。
+目標是整理一些好用但不熟悉的前端功能，主要是flexbox 以及 grid相關的內容，作為備忘錄，方便工作時查閱。
 
 
 ## **HTML 常見功能**
@@ -264,40 +264,105 @@ CSS Grid 是一種**雙維度佈局系統**，可以同時管理行與列的佈�
 
 ---
 
-### **3. 元素對齊**
+### **CSS Grid 元素對齊**
 
-#### **單元格內對齊**
-1. **`justify-items`**：
-   - 控制單元格內的水平對齊方式。
-   - **值**：
-     - `start`：靠左對齊。
-     - `end`：靠右對齊。
-     - `center`：居中對齊。
-     - `stretch`（預設）：撐滿單元格寬度。
-
-2. **`align-items`**：
-   - 控制單元格內的垂直對齊方式。
-   - **值**：
-     - `start`：靠上對齊。
-     - `end`：靠下對齊。
-     - `center`：垂直居中。
-     - `stretch`（預設）：撐滿單元格高度。
-
-#### **整體網格對齊**
-1. **`justify-content`**：
-   - 控制整個網格在容器內的水平對齊方式。
-   - **值**：
-     - `start`、`end`、`center`、`space-around`、`space-between`、`space-evenly`。
-
-2. **`align-content`**：
-   - 控制整個網格在容器內的垂直對齊方式。
-   - **值**：
-     與 `justify-content` 相同。
-
-3. **`place-items`** 和 **`place-content`**：
-   - 簡寫形式，用於同時設置 `justify-items` 和 `align-items` 或 `justify-content` 和 `align-content`。
+#### **對齊屬性的三種層級**
+1. **網格整體對齊（`justify-content` 和 `align-content`）**：
+   - 控制整個網格在容器內的排列方式。
+   - 屬性必須寫在 **grid container** 上。
+2. **單元格內對齊（`justify-items` 和 `align-items`）**：
+   - 控制所有 **grid items** 在單元格內的對齊方式。
+   - 屬性必須寫在 **grid container** 上。
+3. **單個項目對齊（`justify-self` 和 `align-self`）**：
+   - 控制單個 **grid item** 在單元格內的對齊方式。
+   - 屬性必須寫在 **grid item** 上，並會覆蓋容器的全局設置。
 
 ---
+
+#### **單元格內對齊**
+
+##### **全局對齊**
+- **`justify-items`**：
+  - 控制所有項目在**行軸（row axis）**上的對齊。
+- **`align-items`**：
+  - 控制所有項目在**列軸（column axis）**上的對齊。
+
+##### **單項目對齊**
+- **`justify-self`**：
+  - 控制單個項目在**行軸（row axis）**上的對齊，覆蓋 `justify-items`。
+- **`align-self`**：
+  - 控制單個項目在**列軸（column axis）**上的對齊，覆蓋 `align-items`。
+
+##### **屬性值**
+- **`start`**：靠左/靠上對齊。
+- **`end`**：靠右/靠下對齊。
+- **`center`**：居中對齊。
+- **`stretch`**（預設）：撐滿單元格。
+
+---
+
+#### **整體網格對齊**
+
+##### **`justify-content`**
+- 控制整個網格在容器內的水平對齊方式。
+- **值**：
+  - `start`：靠左對齊。
+  - `end`：靠右對齊。
+  - `center`：水平居中。
+  - `space-around`：項目周圍空間相等，首尾間距為中間間距的一半。
+  - `space-between`：項目之間間距相等，首尾無空白。
+  - `space-evenly`：項目之間和首尾空間完全均等。
+
+##### **`align-content`**
+- 控制整個網格在容器內的垂直對齊方式。
+- **值**：
+  與 `justify-content` 相同（針對垂直方向）。
+
+##### **簡寫形式**
+- **`place-items`**：
+  - 簡寫 `justify-items` 和 `align-items`。
+- **`place-content`**：
+  - 簡寫 `justify-content` 和 `align-content`。
+
+---
+
+#### **範例**
+```html
+<div class="container">
+  <div class="item">Item 1</div>
+  <div class="item">Item 2</div>
+</div>
+```
+
+```css
+.container {
+  display: grid;
+  justify-items: center; /* 所有項目水平居中 */
+  align-items: start;    /* 所有項目垂直靠上 */
+  justify-content: space-between; /* 網格水平間距相等 */
+  align-content: center;          /* 網格垂直居中 */
+}
+
+.item:nth-child(2) {
+  justify-self: end;     /* 單個項目水平靠右 */
+  align-self: stretch;   /* 單個項目垂直撐滿 */
+}
+```
+
+---
+
+#### **對齊屬性比較**
+| **值**              | **首尾間距**  | **元素間距**         | **特徵**                               |
+|---------------------|---------------|----------------------|---------------------------------------|
+| `start`             | 無            | 無                   | 所有元素靠容器起始位置。               |
+| `end`               | 無            | 無                   | 所有元素靠容器結束位置。               |
+| `center`            | 等距          | 等距                 | 所有元素集中在容器中間。               |
+| `space-around`      | 1/2 間距      | 間距相等             | 首尾間距為中間間距的一半。             |
+| `space-between`     | 無            | 間距相等             | 首尾無空白，僅元素之間有間距。         |
+| `space-evenly`      | 等距          | 間距相等             | 每個間距均勻分佈，包括首尾間距。       |
+
+---
+
 
 ### **4. 元素範圍與重疊**
 
@@ -432,4 +497,6 @@ CSS Grid 是一種**雙維度佈局系統**，可以同時管理行與列的佈�
 2. **適用 CSS 排版**：
    - 更靈活的佈局設計，例如儀表板、卡片式版面。
    - **Flexbox** 或 **Grid** 可模擬表格效果。
+
+---
 
