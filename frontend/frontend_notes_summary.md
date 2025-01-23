@@ -462,9 +462,12 @@ CSS Grid 是一種**雙維度佈局系統**，可以同時管理行與列的佈�
 ```
 
 ### **7. 自動化與彈性布局**
+
 #### **自動填充與適配**
+
 1. **`repeat()`**：
-   - 用於簡化重複模式：
+   - 用於簡化重複模式，定義多列或多行的佈局。
+   - **範例**：
      ```css
      .container {
        grid-template-columns: repeat(3, 1fr);
@@ -473,21 +476,115 @@ CSS Grid 是一種**雙維度佈局系統**，可以同時管理行與列的佈�
      ```
 
 2. **`auto-fit` 與 `auto-fill`**：
-   - **`auto-fit`**：自動調整列數，填充可用空間。
-   - **`auto-fill`**：保持網格模板，未使用的空間也保留列。
+   - **`auto-fit`**：
+     - 自動調整列數，僅根據內容生成所需的列，無多餘空白。
+     - **適用場景**：動態內容排列，不需要保留空白區域。
+   - **`auto-fill`**：
+     - 保留未使用的空列，完整展示模板結構，適合需要預留空間的佈局。
+     - **適用場景**：固定模板結構，預留未來新增內容的位置。
+   - **範例**：
+     ```css
+     .container {
+       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+       /* 使用 auto-fit，列寬最小 100px，最大填滿空間，僅生成所需列 */
+     }
 
-   **範例**：
-   ```css
-   .container {
-     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-     /* 列寬最小 100px，最大填滿空間 */
-   }
-   ```
+     .container-auto-fill {
+       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+       /* 使用 auto-fill，列寬最小 100px，最大填滿空間，保留空列 */
+     }
+     ```
 
 ---
 
+#### **隱式網格尺寸**
 
-此筆記結合了 **Grid** 和 **Flexbox** 的佈局功能及應用場景，適合開發過程中查閱與實踐。
+1. **`grid-auto-rows`** 和 **`grid-auto-columns`**：
+   - 用於設置隱式添加的行或列的尺寸（即未顯式定義但自動生成的網格）。
+   - **屬性功能**：
+     - **`grid-auto-rows`**：設定隱式生成行的高度。
+     - **`grid-auto-columns`**：設定隱式生成列的寬度。
+   - **支持值**：
+     - 固定單位（`px`）。
+     - 百分比（`%`）。
+     - 彈性比例（`fr`）。
+     - 重複函數（`repeat()`）。
+   - **範例**：
+     ```css
+     .container {
+       grid-auto-rows: 100px;
+       grid-auto-columns: 1fr;
+       /* 隱式行高固定為 100px，隱式列寬為 1fr */
+     }
+     ```
+
+---
+
+#### **隱式網格排列順序**
+
+1. **`grid-auto-flow`**：
+   - 定義隱式添加的項目應按行或列的順序排列。
+   - **屬性值**：
+     - **`row`**（預設）：新項目按行排列，從左到右，超出後生成新行。
+     - **`column`**：新項目按列排列，從上到下，超出後生成新列。
+     - **`dense`**：優化佈局，嘗試填補空隙（適用於較小的項目）。
+     - 可以組合使用，例如 `grid-auto-flow: row dense;`。
+   - **範例**：
+     ```css
+     .container {
+       grid-auto-flow: row dense;
+       /* 新項目優先按行排列，並填補空隙 */
+     }
+     ```
+
+---
+
+### **範例比較**
+
+#### **`auto-fit` 範例**
+```html
+<div class="container-auto-fit">
+  <div class="item">Item 1</div>
+  <div class="item">Item 2</div>
+</div>
+```
+
+```css
+.container-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  width: 500px; /* 容器固定寬度 */
+}
+```
+- **效果**：只有內容的列顯示，未使用的空列會被移除。
+
+#### **`auto-fill` 範例**
+```html
+<div class="container-auto-fill">
+  <div class="item">Item 1</div>
+  <div class="item">Item 2</div>
+</div>
+```
+
+```css
+.container-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  width: 500px; /* 容器固定寬度 */
+}
+```
+- **效果**：保留未使用的空列，完整展示網格模板，並預留未來新增項目的位置。
+
+---
+
+### **關鍵點總結**
+1. **`repeat()`**：用於簡化重複模式，特別是列或行的數量和大小。
+2. **`auto-fit`**：僅生成所需的列數，無多餘空白。
+3. **`auto-fill`**：保留未使用的空列，完整展示網格模板。
+4. **`grid-auto-rows` 和 `grid-auto-columns`**：設置隱式行或列的大小。
+5. **`grid-auto-flow`**：控制隱式項目按行或列排列，並支持優化佈局的 `dense` 模式。
 
 ## **補充：表格與 CSS 的選擇**
 1. **適用表格**：
@@ -499,4 +596,6 @@ CSS Grid 是一種**雙維度佈局系統**，可以同時管理行與列的佈�
    - **Flexbox** 或 **Grid** 可模擬表格效果。
 
 ---
+
+此筆記結合了 **Grid** 和 **Flexbox** 的佈局功能及應用場景，適合開發過程中查閱與實踐。
 
