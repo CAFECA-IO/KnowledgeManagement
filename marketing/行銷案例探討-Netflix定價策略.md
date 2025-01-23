@@ -1,6 +1,6 @@
 # Netflix定價策略的深入探討
 
-![netflix-logo](https://github.com/user-attachments/assets/4c9d028b-59d7-44ea-b649-584ac5e6db25)
+![netflix-logo](https://github.com/user-attachments/assets/2f7b687b-e7dc-4887-a6ab-c65ce95f191a)
 
 隨著數位時代的到來，Netflix從一個線上DVD租賃服務轉型為全球領先的串流媒體平台。
 在這一過程中，其定價模式、對消費者心理的理解、價格彈性分析、用戶行為研究以及數據與技術的應用，都扮演了關鍵角色。
