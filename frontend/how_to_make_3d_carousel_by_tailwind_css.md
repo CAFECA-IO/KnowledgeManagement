@@ -274,7 +274,7 @@ const CarouselPage: React.FC = () => {
   // 當前幻燈片索引
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  // Info: (20250205 - Julian) 幻燈片內容
+  // 幻燈片內容
   const displayedCarousel = slideData.map((slide) => (
     <div
       key={slide.id} 
