@@ -193,7 +193,7 @@ const Slide: React.FC<{ slideData: ISlideData; order: number }> = ({
 
 請參考以下展示影片，以觀察 Order 的變化。
 
-https://github.com/user-attachments/assets/f34393f4-29ab-416b-970a-259d9c786470
+https://github.com/user-attachments/assets/28cbd9ea-9e76-4188-9a94-d0657351e338
 
 完整程式碼如下：
 
