@@ -114,4 +114,24 @@ CREATE DATABASE new_database;
 ALTER DATABASE new_database OWNER TO new_user;
 ```
 
-7. Try with [TablePlus](https://tableplus.com/)
+7. Or assign PRIVILEGES to new_user
+```
+GRANT CONNECT ON DATABASE new_database TO new_user;
+```
+
+7.1 Switch to new_database
+```
+\c new_database
+```
+
+7.2 Allow new_user connect to new_database
+```
+GRANT CONNECT ON DATABASE new_database TO new_user;
+```
+
+7.3 Assign all PRIVILEGES to new_user
+```
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO mermer;
+```
+
+8. Try with [TablePlus](https://tableplus.com/)
