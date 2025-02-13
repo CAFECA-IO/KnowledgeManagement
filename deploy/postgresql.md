@@ -131,7 +131,7 @@ GRANT CONNECT ON DATABASE new_database TO new_user;
 
 7.3 Assign all PRIVILEGES to new_user
 ```
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO mermer;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO new_user;
 ```
 
 8. Try with [TablePlus](https://tableplus.com/)
