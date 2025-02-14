@@ -10,6 +10,18 @@ New password:
 sudo usermod -g sudo ${username}
 ```
 
+# Assign user to developer group
+```shell
+sudo usermod -a -G developer ${username}
+```
+```shell
+getent group developer
+```
+```shell
+# output
+developer:x:1004:${username}
+```
+
 ## Install OpenSSH
 ```shell
 sudo apt-get install openssh-server
