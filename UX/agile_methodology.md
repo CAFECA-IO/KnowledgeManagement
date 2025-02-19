@@ -1,6 +1,6 @@
 # 什麼是敏捷開發？
 
-## 概覽？
+## 概覽
 
 想像你要裝潢房間，與其一次訂好所有家具、顏色、擺設，然後等到一切完成才發現有些地方不合適，不如分階段進行，邊裝潢邊調整，確保每一步都符合你的需求。這就是敏捷開發（Agile）的概念！
 
@@ -74,6 +74,8 @@ Scrum 是一種敏捷開發框架，幫助團隊以迭代（Sprint）方式開�
 Scrum 團隊包含 **產品負責人（Product Owner）、Scrum Master 和開發團隊**，
 並透過 **每日站立會議（Daily Stand-up）、Sprint 規劃、Sprint 回顧 和 Sprint 檢視** 等活動來持續改進和交付價值。
 Scrum 強調團隊協作、快速適應變化，以及持續交付可用產品。
+
+<img width="821" alt="截圖 2025-02-19 下午12 01 41" src="https://github.com/user-attachments/assets/e846510a-b26c-4494-942b-9ecb22d93eb0" />
 
 ### Scrum 的週期
 
@@ -169,9 +171,23 @@ Scrum Master 是 **Scrum 團隊的引導者**，確保團隊正確遵循 **Scrum
    - 持續提升開發技能與團隊協作能力，採用**最佳開發實踐（Best Practices）**，例如測試驅動開發（TDD）、持續整合（CI/CD）等。
    - 在**Sprint 回顧會**中，總結 Sprint 期間的問題，並提出改進方案，讓下一次 Sprint 更高效。
 
+### Scrum 文件
 
-<img width="821" alt="截圖 2025-02-19 下午12 01 41" src="https://github.com/user-attachments/assets/9379ff7b-31c3-4c5b-99e6-756e1d5d0e74" />
+1. **產品待辦清單（Product Backlog）：** 是一份由各種User story所組成，代表產品需涵蓋的功能的清單，會由 **產品負責人(Product Owner)** 管理並決定優先順序。
 
+2. **Sprint待辦清單（Sprint Backlog）：** 是經過討論後從**產品待辦清單**中選出這次**Sprint**要處理的任務以及各任務的優先順序清單。
+
+3. **燃盡圖（Burn Down Chart）：** 是用於表示**剩餘工作量**的工作圖表，由橫軸（X）和縱軸（Y）組成，橫軸表示時間，縱軸表示工作量。
+
+<img width="832" alt="截圖 2025-02-19 下午1 07 13" src="https://github.com/user-attachments/assets/5d7d0ad0-0a08-4cdf-83cc-191be23db04d" />
+
+
+### Scrum 會議
+
+1. **Sprint 計畫（Sprint Planning）：** 用來規劃下一次的Sprint，決定 **Sprint 待辦清單（Sprint List）** 等工作。
+2. **每日站會（Daily Scrum）：** 通常在每日開始工作前，團隊成員會討論前一日完成了什麼工作、是否有遇到問題、今日該處理什麼工作等，會議時間不超過**15分鐘**
+3. **Sprint 檢閱（Sprint Review）：** 像利害關係人及主管交付Sprint完成的成品
+4. **Sprint 回顧（Sprint Retrospective）：** 由小組成員參與，不建議主管參加，目的是讓小組成員討論此次Sprint有哪裡需要改進及優化。
 
 ## 結語
 
