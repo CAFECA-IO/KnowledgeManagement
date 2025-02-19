@@ -194,3 +194,22 @@ Scrum Master 是 **Scrum 團隊的引導者**，確保團隊正確遵循 **Scrum
 敏捷開發不只是一種方法，而是一種 **心態（Mindset）**，重點在於靈活應對變化、持續學習與優化。透過清晰的待辦事項、持續整合、自動化部署，以及控制技術債，你的團隊就能更高效地交付優質軟體。
 
 
+## Reference
+
+[Scrum in 20 mins... (with examples)](https://www.youtube.com/watch?v=SWDhGSZNF9M)
+
+[ChatGPT](https://chatgpt.com/canvas/shared/67b2d92a093881919f2e9e5d83715aec)
+
+[Microsoft](https://learn.microsoft.com/en-us/devops/plan/what-is-agile)
+
+[Scrum vs Kanban | Differences & Similarities Between Scrum & Kanban | Invensis Learning](https://www.youtube.com/watch?v=pxxmSLJj8FQ)
+
+[What is Agile UX? The Complete 2025 Guide](https://careerfoundry.com/blog/ux-design/what-is-agile-ux/)
+
+[Where Does a UI/UX Designer Fit in Agile Methodology?](https://medium.com/@harinderuiuxsingh/where-does-a-ui-ux-designer-fit-in-agile-methodology-283a297a9d2c)
+
+[Attributes of Effective Agile UX](https://www.youtube.com/watch?v=XLvx-hCmKPk)
+
+[UX in Scrum](https://www.youtube.com/watch?v=BjIewxNTCMU&t=1s)
+
+[Transforming the Way we Work- Scrum, Waterfall or just Go “Agile” – Part I](https://www.craftsilicon.com/transforming-the-way-we-work-scrum-waterfall-or-just-go-agile-part1/)
