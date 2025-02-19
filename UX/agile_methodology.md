@@ -83,9 +83,9 @@ Scrum 強調團隊協作、快速適應變化，以及持續交付可用產品�
 
 2. **Sprint 規劃（Sprint Planning）** —— 在此階段，團隊會根據前一步驟列出的待辦清單，來決定此次的 Sprint 該完成哪些任務
 
-3. **Sprint 待辦清單（Sprint Backlog）** —— 這裡會將前一步驟決定要執行的任務，進行優先順序的排列
+3. **Sprint 待辦清單（Sprint Backlog）** —— 這裡會將前一步驟決定要執行的任務，進行優先順序的排列。
 
-4. **Sprint** —— 此階段就會開始進行開發，在這裡不會管小組應該如何執行任務，小組決定如何管理自己的工作，只需要遵循盡可能在 Sprint 的的週期內完成任務。
+4. **Sprint** —— 此階段會開始進行開發，在這裡不會管團隊成員應該如何執行任務，團隊成員決定如何管理自己的工作，只需遵循盡可能在 Sprint 的週期內完成任務。
 
 5. **Potential Product** —— 上架在Sprint當中完成的產品，在敏捷式開發中通常會希望在第一個Sprint就可以產出一個已經可以供使用者運行的軟體，後續再持續優化。
 
@@ -173,7 +173,7 @@ Scrum Master 是 **Scrum 團隊的引導者**，確保團隊正確遵循 **Scrum
 
 ### Scrum 文件
 
-1. **產品待辦清單（Product Backlog）：** 是一份由各種User story所組成，代表產品需涵蓋的功能的清單，會由 **產品負責人(Product Owner)** 管理並決定優先順序。
+1. **產品待辦清單（Product Backlog）：** 是一份由各種User story所組成，代表產品需涵蓋的功能清單，會由 **產品負責人(Product Owner)** 管理並決定優先順序。
 
 2. **Sprint待辦清單（Sprint Backlog）：** 是經過討論後從**產品待辦清單**中選出這次**Sprint**要處理的任務以及各任務的優先順序清單。
 
@@ -185,8 +185,8 @@ Scrum Master 是 **Scrum 團隊的引導者**，確保團隊正確遵循 **Scrum
 ### Scrum 會議
 
 1. **Sprint 計畫（Sprint Planning）：** 用來規劃下一次的Sprint，決定 **Sprint 待辦清單（Sprint List）** 等工作。
-2. **每日站會（Daily Scrum）：** 通常在每日開始工作前，團隊成員會討論前一日完成了什麼工作、是否有遇到問題、今日該處理什麼工作等，會議時間不超過**15分鐘**
-3. **Sprint 檢閱（Sprint Review）：** 像利害關係人及主管交付Sprint完成的成品
+2. **每日站會（Daily Scrum）：** 通常在每日開始工作前，團隊成員會討論前一日完成了什麼工作、是否有遇到問題、今日該處理什麼工作等，會議時間不超過**15分鐘**。
+3. **Sprint 檢閱（Sprint Review）：** 向利害關係人及主管交付Sprint完成的成品。
 4. **Sprint 回顧（Sprint Retrospective）：** 由小組成員參與，不建議主管參加，目的是讓小組成員討論此次Sprint有哪裡需要改進及優化。
 
 ## 結語
