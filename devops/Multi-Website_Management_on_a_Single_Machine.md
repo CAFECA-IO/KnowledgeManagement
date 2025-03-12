@@ -159,7 +159,6 @@ restart: always
 📌 **讓網站流量經過 Cloudflare，減少 DDoS 攻擊影響**
 
 ---
----
 
 ## **6️⃣ 最小學習範圍：如果要 Debug 需要了解哪些 Docker 與 Nginx 技術？**
 **最少需要了解的內容**
