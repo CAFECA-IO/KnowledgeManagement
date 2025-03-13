@@ -77,3 +77,20 @@ While ARIA’s `role=feed` helps screen reader users access infinite scroll, oth
 ### **Conclusion**
 Web design innovations like infinite scroll can enhance user experience, but they should not come at the cost of usability or accessibility. A hybrid model or alternative navigation options can ensure a seamless, inclusive experience for all users. Carefully evaluating user needs and platform goals will help determine the best approach. Just like a well-organized library benefits readers, the right navigation structure ensures a better digital experience for everyone.
 
+### **Reference**
+
+[Infinite Scrolling, Pagination Or “Load More” Buttons? Usability Findings In eCommerce](https://www.smashingmagazine.com/2016/03/pagination-infinite-scrolling-load-more-buttons/?source=post_page-----e1c3a3d682d9---------------------------------------)
+
+[UX: Infinite Scrolling vs. Pagination](https://uxplanet.org/ux-infinite-scrolling-vs-pagination-1030d29376f1)
+
+[Pagination vs Infinite Scroll: Which is Best for Your Website?](https://www.tekrevol.com/blogs/pagination-vs-infinite-scroll-website/)
+
+[Pagination vs. Infinite Scroll : Which is Better?](https://www.onething.design/post/pagination-vs-infinite-scroll-which-is-better)
+
+[Infinite Scrolling & Role=Feed Accessibility Issues](https://www.deque.com/blog/infinite-scrolling-rolefeed-accessibility-issues/)
+
+[YouTube Is Testing Infinite Scroll](https://passionfru.it/youtube-infinite-scroll-105257/)
+
+[Effective pagination for your website: design tips and examples](https://www.halo-lab.com/blog/pagination-design-tips-and-examples)
+
+[Infinite Scroll Design Guide: What Should You Know](https://www.mockplus.com/blog/post/infinite-scroll-design-guide)
