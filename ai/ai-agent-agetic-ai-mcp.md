@@ -221,6 +221,8 @@ AI Agent 是指能在一定規範及環境中，依據所接收資訊做出決�
 
 ## MCP（Model Context Protocol）的緣起與核心精神
 
+- MCP 規格可參考[ Model Context Protocol spec](https://spec.modelcontextprotocol.io/specification/2024-11-05/)
+
 當 AI 的行為開始涉及外部世界——例如讀取網路資料、對接各種信息服務、透過 API 進行跨平台操作——就需要更加明確且標準化的介面，才能使這些 Autonomous Agent 順暢呼叫並整合外界資源。MCP（Model Context Protocol）正是為此而提出。
 
 MCP 的目標在於定義一套通用協定，確保「任何模型都能夠透過通用接頭去呼叫外部工具或資源」。從角度上看，MCP 與傳統的函式呼叫（function calling）模式有類似之處：都需要事先定義一個標準的函式介面、參數與回傳訊息格式。但 MCP 希望能更進一步統一定義與涵蓋範圍，使模型開發者不必在不同應用之間重複撰寫各式 API 對接程式，同時也讓 AI Agent 或 Agentic AI 能夠更迅速地引用各廠商或開發者提供的多樣功能，像是呼叫雲端計算服務、讀取特定資料庫或發送 GitHub Pull Request 等等。
