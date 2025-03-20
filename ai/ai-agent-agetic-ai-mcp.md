@@ -19,6 +19,7 @@
   - [未來發展方向與研究挑戰](#未來發展方向與研究挑戰)
   - [面向工程師的未來啟示](#面向工程師的未來啟示)
   - [Key Takeaways](#key-takeaways)
+  - [Ref](#ref)
 
 # 探討 AI Agent、Agentic AI 與 MCP
 
@@ -37,6 +38,7 @@ AI Agent 是指能在一定規範及環境中，依據所接收資訊做出決�
 - 下圖為透過 AI 分析 GitHub PR 是否有安全性漏洞的自動化流程(ref: [n8n](https://n8n.io/))
 
 ![image](https://github.com/user-attachments/assets/24cc3895-efbb-49fa-9ad8-c6cf75cce2d4)
+(圖片來源: [Anthropic](https://www.anthropic.com/engineering/building-effective-agents) )
 
 ## Agentic AI 的進階意涵
 
@@ -45,6 +47,7 @@ AI Agent 是指能在一定規範及環境中，依據所接收資訊做出決�
 在實踐層面，Agentic AI 也往往結合了多次迭代、平行工作與工具呼叫機制：例如當執行一個程式碼生成任務或文檔翻譯工作時，Agentic AI 可能根據不同片段的內容，同時分配多個子代理平行處理，最後再將各子結果整合成最終版本。或是在面對複雜問題時，它能擬定出一套可調整的計劃策略，並透過多輪嘗試優化結果。這種流程在有限度的情境中可與人類的解題思維頗為相似，也成為目前各種更「自律」的 AI 系統的基礎。
 
 ![image](https://github.com/user-attachments/assets/8d5118d7-4df0-4e57-8ff0-e25a8912f475)
+(圖片來源: [Anthropic](https://www.anthropic.com/engineering/building-effective-agents) )
 
 ## AI Agent vs Agentic AI 比較
 
@@ -70,6 +73,7 @@ AI Agent 是指能在一定規範及環境中，依據所接收資訊做出決�
 - 用途是降低 LLM 產生 Hallucinations 的機會，提升 LLM 的可靠性
 
 ![image 2](https://github.com/user-attachments/assets/9e4f26cb-721e-4303-b7f5-271f3a1fe549)
+(圖片來源: [Anthropic](https://www.anthropic.com/engineering/building-effective-agents) )
 
 ### **工作流程：提示鏈 (Prompt Chaining)**
 
@@ -82,6 +86,7 @@ AI Agent 是指能在一定規範及環境中，依據所接收資訊做出決�
 - **範例：** 生成行銷文案，然後將其翻譯成不同的語言；撰寫文件大綱，檢查大綱是否符合特定標準，然後根據大綱撰寫文件.
 
 ![image 3](https://github.com/user-attachments/assets/137edeb2-40ee-4dcd-b9c0-8e328867c873)
+(圖片來源: [Anthropic](https://www.anthropic.com/engineering/building-effective-agents) )
 
 ### **工作流程：路由 (Routing)**
 
@@ -94,6 +99,7 @@ AI Agent 是指能在一定規範及環境中，依據所接收資訊做出決�
 - **範例：** 將不同類型的客戶服務查詢（一般問題、退款請求、技術支援）導向不同的下游流程、提示和工具；將簡單/常見的問題導向較小的模型，將困難/不常見的問題導向更強大的模型，以優化成本和速度.
 
 ![image 4](https://github.com/user-attachments/assets/be88a099-1976-4be0-8e92-a363ceac67aa)
+(圖片來源: [Anthropic](https://www.anthropic.com/engineering/building-effective-agents) )
 
 ### **工作流程：並行化 (Parallelization)**
 
@@ -132,6 +138,7 @@ AI Agent 是指能在一定規範及環境中，依據所接收資訊做出決�
     - 作用類似多個人從不同角度檢查同一份文件。
 
 ![image 5](https://github.com/user-attachments/assets/0b95e868-6446-422b-8f42-f0b6fbd2581b)
+(圖片來源: [Anthropic](https://www.anthropic.com/engineering/building-effective-agents) )
 
 ### **工作流程：協調者-工作者 (Orchestrator-Workers)**
 
@@ -160,6 +167,7 @@ AI Agent 是指能在一定規範及環境中，依據所接收資訊做出決�
 - **適用情境：** 適用於無法預測所需子任務的複雜任務.
 
 ![image 6](https://github.com/user-attachments/assets/13d66b71-c91d-4ae1-ab03-1af9c9fd2c20)
+(圖片來源: [Anthropic](https://www.anthropic.com/engineering/building-effective-agents) )
 
 ### **工作流程：評估者-優化器 (Evaluator-Optimizer)**
 
@@ -196,6 +204,7 @@ AI Agent 是指能在一定規範及環境中，依據所接收資訊做出決�
   - **Optimizer LLM** 接收到這些回饋後，會**根據 Evaluator 的建議進行進一步的搜尋和分析**，以完善其回應。這個迭代過程會持續進行，直到 Evaluator 認為已經收集到足夠的資訊，問題得到了充分的回答。
 
 ![image 7](https://github.com/user-attachments/assets/3c381ed3-2e21-43b9-b256-fab3dfae645c)
+(圖片來源: [Anthropic](https://www.anthropic.com/engineering/building-effective-agents) )
 
 ### 對於複雜的搜尋任務比較表格
 
@@ -316,7 +325,18 @@ AI Agent、Agentic AI 與 MCP 三者的結合關鍵在於「可擴充」與「�
 
 - **何時不應該使用 Agentic AI：** 對於定義明確、重複性高的簡單任務；當需要高度可預測和一致性的行為時；當對延遲和成本敏感；當任務不需要複雜的決策或自主性；在對透明度和可解釋性要求極高的場景；在沒有完善的基礎設施和持續監控能力；在沒有充分考慮倫理和安全問題；以及當可以透過更簡單的 LLM 增強技術解決問題時
 
-
 ## Ref
 
-- 待補充
+- [Antropic - agentic ai](https://www.anthropic.com/engineering/building-effective-agents)
+
+- [Model Context Protocol doc](https://modelcontextprotocol.io/introduction)
+
+- [fastmcp - Pythonic way to build Model Context Protocol servers ](https://github.com/jlowin/fastmcp)
+
+- <https://medium.com/@elisowski/ai-agents-vs-agentic-ai-whats-the-difference-and-why-does-it-matter-03159ee8c2b4>
+
+- <https://www.anthropic.com/news/model-context-protocol>
+
+- [ai agent vs agentic ai](https://www.linkedin.com/pulse/understanding-agentic-ai-vs-agents-anshuman-jha-zpsgc/)
+
+- [OpenTools | The API for LLM tool use](https://opentools.com)
