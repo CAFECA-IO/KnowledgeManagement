@@ -13,7 +13,7 @@
   - [MCP（Model Context Protocol）的緣起與核心精神](#mcpmodel-context-protocol的緣起與核心精神)
     - [典型應用範例](#典型應用範例)
   - [三者的互動與技術結合](#三者的互動與技術結合)
-  - [建立 Agentic 可用的框架](#建立-agentic-可用的框架)
+  - [建立 Agentic 系統可用的框架](#建立-agentic-系統可用的框架)
   - [何時以及何時不使用 Agentic AI](#何時以及何時不使用-agentic-ai)
   - [未來發展方向與研究挑戰](#未來發展方向與研究挑戰)
   - [面向工程師的未來啟示](#面向工程師的未來啟示)
@@ -233,7 +233,9 @@ AI Agent、Agentic AI 與 MCP 三者的結合關鍵在於「可擴充」與「�
 
 第二，若想打造更具有自主決策能力與迭代能力的 Agentic AI，則 MCP 能大幅減少與外部 API 溝通的複雜度，使得 Agentic AI 能夠便利地擴張可支援的功能範圍。
 
-## 建立 Agentic 可用的框架
+## 建立 Agentic 系統可用的框架
+
+- [OpenAI Agents SDK](https://github.com/openai/openai-agents-python)
 
 - [LangGraph](https://langchain-ai.github.io/langgraph/) from LangChain;
 
