@@ -54,3 +54,6 @@
 - 不得扣抵稅額需於年底調整期申報。
 - 檔案內容須與財政部電子檢核規格一致。
 
+## Reference
+- [營業稅媒體檔規格](https://github.com/CAFECA-IO/Documents/blob/main/ISF/documents/tax_detail.pdf)
+
