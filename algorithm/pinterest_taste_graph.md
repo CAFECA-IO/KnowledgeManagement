@@ -2,6 +2,9 @@
 作為一個視覺搜尋引擎，透過個人化來促進更深層次的用戶參與、留存和忠誠度，讓Pinterest 擁有巨大潛力。
 根據統計，有48％美國社交媒體用戶使用Pinterest來查找和購物，而Facebook、Instagram 僅佔10％，Snapchat則佔4%。
 
+<img width="413" alt="Screen-Shot-2025-03-17-at-3 30 10-PM" src="https://github.com/user-attachments/assets/435ddbcb-0783-437e-83a1-0499c7082cb7" />
+
+
 讓我們來看看是什麼，讓 Pinterest 能從主流的社交媒體中脫穎而出。
 
 ### 品味圖譜（Taste Graph）：Pinterest 打造個人化體驗的秘密武器
