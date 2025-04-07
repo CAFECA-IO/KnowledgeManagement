@@ -46,10 +46,14 @@ Pinterest 是以圖片為主的搜尋與推薦平台，用戶透過滑動與點�
 
 舉例來說：你儲存了一張波希米亞風格的居家設計圖，Pinterest 不只會推薦類似風格的照片，也會引導你探索相關但不同主題的內容，例如「戶外露營靈感」或「綠植佈置」，讓推薦跳脫同溫層。
 
+
 #### 二、非社交導向的內容推薦
 與 Instagram、Facebook 不同，Pinterest 並不依賴你的朋友或關注對象來決定你看到什麼內容。推薦來源主要來自演算法分析你的品味與行為，而不是社交圈動態，這樣能降低社交迴音室的效應（Echo ChamberEffect）。
 
 你可能只儲存了幾張食譜，但平台會主動根據這些行為發展出更多潛在喜好：素食、野餐點心、異國料理等等，而不是單純重複你點過的東西。
+
+![photo_13383_wide_large](https://github.com/user-attachments/assets/085b1362-d1fc-4fd6-8b64-f58c61f7f9f6)
+
 
 ### 多階段推薦系統：Pinterest 如何規模化個人化
 
@@ -64,6 +68,10 @@ Pinterest 是以圖片為主的搜尋與推薦平台，用戶透過滑動與點�
 這種方法取代了傳統的時間排序動態，Pinterest 稱其為「基於個人化相關性的自適應動態消息」，顯著提高了用戶參與度。
 
 這樣的兩階段架構（Retrieval + Ranking）不只提升推薦品質，也能讓系統更有效率地運作，是其他大型平台，如 YouTube、TikTok等，常見的設計方式。
+
+![0*Xe5F68GBjV6KWLST](https://github.com/user-attachments/assets/796357c2-2edf-4241-95b0-e0394bcc99c7)
+
+![0*TwUVnOTgQiOf58oZ](https://github.com/user-attachments/assets/cd949fb0-0272-4ff0-956b-340e4bc668c0)
 
 
 ### 持續學習：Pinterest 如何讓推薦越來越懂你
@@ -82,6 +90,9 @@ Pinterest 並不只是一個找靈感的地方，還逐步將探索轉化為實�
 
 Pinterest 的廣告推薦系統與購物推薦也使用這套推薦基礎，並使用類似的排序模型，所以就算是商業內容，也能保持高度相關性與個人化。
 
+![home decor style guides](https://github.com/user-attachments/assets/cc7b496e-e692-414c-9b01-137159137a1b)
+
+
 ### 讓推薦更貼心，而不是更侵入
 
 Pinterest 在推薦上的設計理念，並不是要強行塞滿你的動態牆，而是像一位溫柔的顧問，根據你的品味不斷提供你新的點子。
@@ -99,4 +110,21 @@ Pinterest 打造一個讓人靜靜探索、也能自我表達的空間。也許�
 最後，你不僅打造出夢想中的廚房，還順便成為下個用戶的靈感來源，你的 Pin 也可能被收藏、被轉發，成為別人清單上的第一張。
 
 這就是 Pinterest 演算法：它不只是「給你想看的」，更是「幫你找到你沒想到但會愛上的」。
+
+
+### Reference
+
+[Pinterest’s Personalization Playbook](https://uxplanet.org/pinterests-personalization-playbook-e677dfd1a155)
+
+[Pinterest – Scaling Taste using AI](https://abhitsian.blog/2025/02/08/how-pinterest-is-using-ai-to-perfect-the-art-of-digital-discovery/)
+
+[25 must-know Pinterest stats for marketers in 2025](https://sproutsocial.com/insights/pinterest-statistics/)
+
+[Pinterest opens up more than 5,000 interests for advertiser targeting through its Taste Graph](https://techcrunch.com/2017/09/21/pinterest-opens-up-more-than-5000-interests-for-advertiser-targeting-through-its-taste-graph/)
+
+[Pinnability: Machine learning in the home feed](https://medium.com/pinterest-engineering/pinnability-machine-learning-in-the-home-feed-64be2074bf60)
+
+[Living in a filter bubble](https://www.technollama.co.uk/living-in-a-filter-bubble)
+
+[New ways to shop on Pinterest and discover retailers of all sizes](https://newsroom-archive.pinterest.com/en-gb/new-ways-to-shop-on-pinterest-and-discover-retailers-of-all-sizes)
 
