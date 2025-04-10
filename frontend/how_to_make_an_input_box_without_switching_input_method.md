@@ -24,7 +24,7 @@
 1. 即使輸入法為中文，仍可順利輸入數字。
 2. 保留刪除鍵(`Backspace`)、方向鍵 (`Arrow Left` & `Arrow Right`)、Tab 鍵等功能的預設行為。
 
-簡單來說，實作的方法就是透過 `input` 的 `*onKeyDown`* 自訂輸入邏輯：
+簡單來說，實作的方法就是透過 `input` 的 `onKeyDown` 自訂輸入邏輯：
 
 ### 實作方法
 
