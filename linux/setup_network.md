@@ -24,7 +24,6 @@ cali645ca3069fd  no wireless extensions.
 calib5363765ba5  no wireless extensions.
 
 vxlan.calico  no wireless extensions.
-
 ```
 2. The wired network interface is `enp12s0`
 3. The wireless network interface is `wlp13s0`
