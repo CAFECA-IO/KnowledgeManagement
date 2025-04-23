@@ -1,5 +1,5 @@
 # Setup Network
-1. 檢查網路卡狀態是否可用
+1. Check the status of network interfaces to ensure they are available
 ```shell
 iwconfig
 ```
@@ -26,11 +26,11 @@ calib5363765ba5  no wireless extensions.
 vxlan.calico  no wireless extensions.
 
 ```
-2. 有線網路介面為 `enp12s0`
-3. 無線網路介面 `wlp13s0`
+2. The wired network interface is `enp12s0`
+3. The wireless network interface is `wlp13s0`
 
 ## Setup Netplan
-編輯 Netplan 設定檔，以 ubuntu server 22.04 預設路徑為例
+Edit the Netplan configuration file, using the default path for Ubuntu Server 22.04 as an example.
 ```shell
 sudo vi /etc/netplan/00-installer-config.yaml
 ```
@@ -58,8 +58,22 @@ network:
 ```
 
 ## Apply Config
-```
+```shell
 sudo netplan apply
 ```
 
 ## Final Check
+```shell
+ping -c 4 8.8.8.8
+```
+```
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=58 time=4.61 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=58 time=2.82 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=58 time=3.05 ms
+64 bytes from 8.8.8.8: icmp_seq=4 ttl=58 time=3.83 ms
+
+--- 8.8.8.8 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 2.820/3.575/4.605/0.701 ms
+```
