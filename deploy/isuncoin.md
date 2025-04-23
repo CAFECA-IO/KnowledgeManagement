@@ -25,7 +25,7 @@ last updated on 2023-12-13
 cd /workspace
 git clone https://github.com/CAFECA-IO/isuncoin
 cd isuncoin
-make geth
+make isuncoin
 ```
 
 ### Setup Environment
