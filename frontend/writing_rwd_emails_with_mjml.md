@@ -1,4 +1,4 @@
-# 如何製作不需要切換輸入法的輸入框
+# 使用 MJML 撰寫響應式電子郵件
 
 ### [Notion 好讀版](https://www.notion.so/MJML-1d77ebc118668030b99eefd1cfd75424?pvs=4)
 - [為什麼使用 MJML？](#為什麼使用-mjml)
