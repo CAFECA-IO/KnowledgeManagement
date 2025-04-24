@@ -140,6 +140,12 @@ Apple 在 iOS、macOS、watchOS 裡都有非常完整的無障礙功能系統，
 1. 語音導覽（VoiceOver）
 VoiceOver 是 Apple 的畫面閱讀器，讓視障者能透過觸控手勢和語音說明了解螢幕上的內容。它並非外加模組，而是與作業系統整合的核心功能，能夠支援所有原生與第三方 App。這強調了無障礙設計不應是「加上去的東西」，而是開發初期就要納入的考量。
 
+<div align=center>
+
+![image](https://github.com/user-attachments/assets/8d7c7c12-d881-4a02-8dbb-66e35cdc291c)
+
+</div>
+
 2. 動態控制（Reduce Motion）
 為了避免某些動態效果導致癲癇或暈眩等不適，Apple 提供「減少動態效果」選項。這讓設計師明白，動態體驗雖然迷人，但也可能是某些用戶的障礙。
 
@@ -152,6 +158,12 @@ VoiceOver 是 Apple 的畫面閱讀器，讓視障者能透過觸控手勢和語
 ### Google Maps 導入輪椅友善路線
 Google Maps 是日常生活中不可或缺的地圖導航工具，在無障礙設計上也展現出實用與細緻的考量。特別是在許多城市中推出的「輪椅無障礙路線」，解決了行動不便者在城市中移動的痛點。
 這種設計不只是為了解決「障礙者」的問題，而是實現真正的「普惠設計（inclusive design）」。
+
+<div align=center>
+
+![image](https://github.com/user-attachments/assets/60b32370-e30a-486b-8c0e-75b18a1e1101)
+
+</div>
 
 #### 無障礙設計巧思與學習重點：
 
