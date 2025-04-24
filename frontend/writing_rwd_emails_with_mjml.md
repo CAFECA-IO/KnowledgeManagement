@@ -1,26 +1,41 @@
-# 為什麼使用 MJML ？
+# 如何製作不需要切換輸入法的輸入框
+
+### [Notion 好讀版](https://www.notion.so/MJML-1d77ebc118668030b99eefd1cfd75424?pvs=4)
+- [為什麼使用 MJML？](#為什麼使用-mjml)
+- [撰寫 MJML](#撰寫-mjml)
+  - [MJML 核心架構](#mjml-核心架構)
+  - [常用標籤分類與說明](#常用標籤分類與說明)
+  - [範本參考](#範本參考)
+- [寄送郵件](#寄送郵件)
+  - [建立範本](#建立範本)
+  - [轉換 HTML](#轉換-html)
+  - [發送郵件](#發送郵件)
+  - [測試範例：POST Body]()
+- [注意事項](#注意事項)
+  - [安裝套件](#安裝套件)
+  - [添加註解](#添加註解)
+  - [插入圖片](#插入圖片)
+  - [垃圾郵件](#垃圾郵件)
+- [參考資料](#參考資料)
+
+## 為什麼使用 MJML？
 
 電子報是企業與使用者之間最直接、也是最穩定的聯繫方式。然而透過 HTML 手刻 Email 絕非易事，原因是各個 Email Client 對常用 CSS 屬性的普遍支援度不高。尤其是排版常用到的 `flex` 和 `grid` ，在 Gmail 和 Outlook 都無法使用。
 
 而 MJML 這個工具，能處理 Email 在不同客戶端和設備上的相容性問題，降低開發難度。
 
-<aside>
-💡
-
-想了解各家 Email Client 的支援程度，可以到 [Can I email](https://www.caniemail.com/) 查詢。
-
-</aside>
+> [!TIP]
+> 想了解各家 Email Client 的支援程度，可以到 [Can I email](https://www.caniemail.com/) 查詢。
 
 MJML（Mailjet Markup Language）是一個專為簡化電子郵件開發而設計的標記語言框架。它能將內容轉譯成支援 Gmail、Outlook、Apple Mail 等大多數 Email Client 的 HTML 結構，讓開發者專注於郵件內容的設計與排版。
 
 主要優點：
-
 - 簡化的語法結構，降低開發難度。
 - 自動處理 `跨平台` 和 `跨設備` 的相容性。
 - 支援響應式設計。
 - 開源專案，社群活躍，有官方網站和 `VS Code` 插件。
 
-# 撰寫 MJML
+## 撰寫 MJML
 
 安裝 MJML CLI 工具：
 
@@ -28,15 +43,14 @@ MJML（Mailjet Markup Language）是一個專為簡化電子郵件開發而設�
 npm install mjml
 ```
 
-如果在 VS Code 上開發，可以安裝 [`MJML Official`](https://marketplace.visualstudio.com/items?itemName=mjmlio.vscode-mjml)  套件，它提供以下功能：
-
+如果在 VS Code 上開發，可以安裝 [MJML Official](https://marketplace.visualstudio.com/items?itemName=mjmlio.vscode-mjml)  套件，它提供以下功能：
 - 美化 MJML 排版
 - 轉譯後 HTML 的即時預覽（與實際輸出略有出入）
 - 自動格式化 MJML 原始碼
 
-![截圖 2025-04-16 上午11.48.53.png](attachment:c8fecb56-5430-4133-aa90-f31f3215e272:截圖_2025-04-16_上午11.48.53.png)
+![mjml-official](https://github.com/user-attachments/assets/fa563e61-b41c-4950-92ae-99700392ff11)
 
-## MJML 核心架構
+### MJML 核心架構
 
 MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
 
@@ -52,9 +66,9 @@ MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
 </mjml>
 ```
 
-## 常用標籤分類與說明
+### 常用標籤分類與說明
 
-### Meta / 設定用標籤
+#### Meta / 設定用標籤
 
 | 標籤 | 說明 |
 | --- | --- |
@@ -65,7 +79,7 @@ MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
 | `<mj-class>` | 宣告樣式群組，可重複套用。 |
 | `<mj-all>` | 套用所有元件的全域樣式設定。 |
 
-### 功能元件
+#### 功能元件
 
 | 標籤 | 說明 |
 | --- | --- |
@@ -73,7 +87,7 @@ MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
 | `<mj-raw>` | 插入原生 HTML（如 `<table>`）。 |
 | `<mj-include>` | 導入外部 MJML 檔案，常用於模組化。 |
 
-### Layout 元件
+#### Layout 元件
 
 排版階層：**mj-section > mj-group > mj-column**
 
@@ -83,7 +97,7 @@ MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
 | `<mj-column>` | 縱向排列的容器。 |
 | `<mj-group>` | 包住多個 `<mj-column>` ，使其在桌機版橫排，並在手機版不自動堆疊。 |
 
-### Content 元件
+#### Content 元件
 
 | 標籤 | 說明 |
 | --- | --- |
@@ -94,7 +108,7 @@ MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
 | `<mj-divider>` | 水平分隔線。 |
 | `<mj-spacer>` | 插入空白空間，可自訂高度。 |
 
-## 範本參考
+### 範本參考
 
 ```xml
 <mjml>
@@ -200,16 +214,12 @@ MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
 </mjml>
 ```
 
-![截圖 2025-04-24 上午9.50.30.png](attachment:0060dbf1-ac05-4453-8777-3d9872e508db:截圖_2025-04-24_上午9.50.30.png)
+![mjml-preview](https://github.com/user-attachments/assets/e0a274c3-be7e-4b6f-80df-6dc49ddf0214)
 
-<aside>
-💡
+> [!TIP]
+> 每個 MJML 標籤皆有對應的屬性（如 padding、align、color 等），可用來細部調整樣式與排版。詳細可參考 [MJML 官方文件](https://documentation.mjml.io/#supported-components) 中各元件的說明頁面。
 
-每個 MJML 標籤皆有對應的屬性（如 padding、align、color 等），可用來細部調整樣式與排版。詳細可參考 [MJML 官方文件](https://documentation.mjml.io/#supported-components) 中各元件的說明頁面。
-
-</aside>
-
-# 寄送郵件
+## 寄送郵件
 
 排版完成後就可以準備寄出郵件了，這個步驟會用到以下兩個套件：
 
@@ -225,15 +235,10 @@ MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
     
     Nodemailer 是一個 Node.js 的套件，支持 SMTP、OAuth2 等協議。可以用它製作簡易的寄信 API。
     
+> [!TIP]
+> 如果想更多 nodemailer 的資訊，請參考我過去寫的[這篇文章](https://mermer.com.tw/en/knowledge-management/20240910001)。本文不會深入說明其設定細節。
 
-<aside>
-💡
-
-如果想更多 nodemailer 的資訊，請參考我過去寫的[這篇文章](https://mermer.com.tw/en/knowledge-management/20240910001)。本文不會深入說明其設定細節。
-
-</aside>
-
-## 建立範本
+### 建立範本
 
 將要插入資料的地方以 `{{變數名稱}}`  標記。以下為範例（為了輕便這裡只截取部分）：
 
@@ -262,7 +267,7 @@ MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
 </mj-section>
 ```
 
-## 轉換 HTML
+### 轉換 HTML
 
 ```tsx
 // src/pages/api/v1/send_email.ts
@@ -280,7 +285,7 @@ if (errors.length) {
 }
 ```
 
-## 發送郵件
+### 發送郵件
 
 ```tsx
 // 設置郵件選項
@@ -303,7 +308,7 @@ if (success) {
 }
 ```
 
-## 測試範例：POST Body
+### 測試範例：POST Body
 
 ```json
 // POST API body example
@@ -324,13 +329,12 @@ if (success) {
 
 你可以透過 Postman 呼叫 API，測試郵件是否能成功渲染與寄出。
 
-![email_example.png](attachment:a56be222-021a-44b2-8f9c-0367c60554d2:email_example.png)
+![email_example](https://github.com/user-attachments/assets/6da5abb5-9f14-4e14-8a28-86d4c4a42006)
 
-# 注意事項
+## 注意事項
 
 ### 安裝套件
-
-請確認你安裝的是官方維護的 VS Code 套件 [MJML Official](https://marketplace.visualstudio.com/items?itemName=mjmlio.vscode-mjml) 。
+請確認你安裝的是官方維護的 VS Code 套件 [MJML Official](https://marketplace.visualstudio.com/items?itemName=mjmlio.vscode-mjml)。
 
 此套件具備以下特性：
 
@@ -338,13 +342,14 @@ if (success) {
 - 自動輸出 HTML。
 - 支援即時預覽。
 
-⚠️ 不建議使用另一款 [MJML 套件](https://marketplace.visualstudio.com/items?itemName=attilabuti.vscode-mjml)，該套件已停止更新，功能也較不完整。
+> [!WARNING]
+> 不建議使用另一款 [MJML 套件](https://marketplace.visualstudio.com/items?itemName=attilabuti.vscode-mjml)，該套件已停止更新，功能也較不完整。
 
 ### 添加註解
 
 MJML 的註解和標準 HTML 一樣是使用 `<!-- ... -->` ，且可以放在任何層級中。
 
-🚨請特別注意：
+🚨 請特別注意：
 
 - **MJML 在轉換 HTML 時會保留註解。**
 - 雖然不會顯示在畫面上，但收件者仍可從 Email 原始碼中看到。
@@ -375,7 +380,7 @@ MJML 的註解和標準 HTML 一樣是使用 `<!-- ... -->` ，且可以放在�
     - 信件中只有圖片、沒有任何文字內容
 - 主旨與郵件內容不符。
 
-# 參考資料
+## 參考資料
 
 - [讓 Email 切版不再可怕－MJML 初次使用心得](https://uu9924079.medium.com/%E8%AE%93-email-%E5%88%87%E7%89%88%E4%B8%8D%E5%86%8D%E5%8F%AF%E6%80%95-mjml-%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97-2b9748a47f87)
 - [製作 RWD email 工具：MJML，如何使用及注意事項](https://www.letswrite.tw/mjml-rwd-email/)
