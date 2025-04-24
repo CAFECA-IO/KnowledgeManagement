@@ -1,5 +1,6 @@
 # 如何製作不需要切換輸入法的輸入框
 
+### [Notion 好讀版](https://www.notion.so/1b57ebc118668037bc1cf7e76b87c8bd?pvs=4)
 - [需求背景](#需求背景)
 - [自訂輸入邏輯](#自訂輸入邏輯)
   - [實作方法](#實作方法)
@@ -39,18 +40,18 @@
 以下是核心邏輯，當使用者按下數字鍵時，攔截事件並手動更新 `input` 的值：
 
 ```jsx
-let temp = value; // Info: (20250306 - Julian) 取得目前顯示值
-let code = ''; // Info: (20250306 - Julian) 存放按鍵對應的數字
+let temp = value; 取得目前顯示值
+let code = ''; 存放按鍵對應的數字
 
-const input = event.currentTarget; // Info: (20250306 - Julian) 取得 input 元件
-const cursorPos = input.selectionStart ?? value.length; // Info: (20250306 - Julian) 取得當前游標位置
+const input = event.currentTarget; 取得 input 元件
+const cursorPos = input.selectionStart ?? value.length; 取得當前游標位置
 
-// Info: (20250306 - Julian) 如果按下的是數字鍵
+如果按下的是數字鍵
 if (pressKeyCode.indexOf('Digit') > -1) {
-  code = pressKeyCode.slice(-1); // Info: (20250306 - Julian) 取得數字鍵的值
-  temp = temp.slice(0, cursorPos) + code + temp.slice(cursorPos); // Info: (20250306 - Julian) 插入數字
+  code = pressKeyCode.slice(-1); 取得數字鍵的值
+  temp = temp.slice(0, cursorPos) + code + temp.slice(cursorPos); 插入數字
 
-  // Info: (20250306 - Julian) 更新輸入框的值
+  更新輸入框的值
   handleChange({ target: { value: temp } } as React.ChangeEvent<HTMLInputElement>);
 }
 ```
@@ -58,7 +59,7 @@ if (pressKeyCode.indexOf('Digit') > -1) {
 我們需要讓 `Tab`、`Backspace`、`Delete`、方向鍵等維持原本功能，因此當偵測到這些按鍵時，不執行自訂邏輯：
 
 ```jsx
-// Info: (20250313 - Julian) 允許特定按鍵執行預設行為
+// 允許特定按鍵執行預設行為
 if (
   pressKeyCode === 'Tab' ||
   pressKeyCode === 'Backspace' ||
@@ -73,12 +74,12 @@ if (
 完整的 `onKeyDown` 事件如下：
 
 ```jsx
-// Info: (20250306 - Julian) 處理在中文輸入法下，填入數字的情況
+處理在中文輸入法下，填入數字的情況
 function convertInput(event: React.KeyboardEvent<HTMLInputElement>) {
-  // Info: (20250306 - Julian) 取得按下的鍵盤 code
+  取得按下的鍵盤 code
   const pressKeyCode = event.code; 
   
-  // Info: (20250313 - Julian) 允許特定按鍵執行預設行為
+  // 允許特定按鍵執行預設行為
   if (
     pressKeyCode === 'Tab' ||
     pressKeyCode === 'Backspace' ||
@@ -89,21 +90,21 @@ function convertInput(event: React.KeyboardEvent<HTMLInputElement>) {
     return;
   }
 
-	// Info: (20250306 - Julian) 阻止預設事件
+	阻止預設事件
   event.preventDefault(); 
 
-  let temp = value; // Info: (20250306 - Julian) 取得目前顯示值
-  let code = ''; // Info: (20250306 - Julian) 存放按鍵對應的數字
+  let temp = value; 取得目前顯示值
+  let code = ''; 存放按鍵對應的數字
 
-  const input = event.currentTarget; // Info: (20250306 - Julian) 取得 input 元件
-  const cursorPos = input.selectionStart ?? value.length; // Info: (20250306 - Julian) 取得當前游標位置
+  const input = event.currentTarget; 取得 input 元件
+  const cursorPos = input.selectionStart ?? value.length; 取得當前游標位置
 
-  // Info: (20250306 - Julian) 如果按下的是數字鍵
+  如果按下的是數字鍵
   if (pressKeyCode.indexOf('Digit') > -1) {
-    code = pressKeyCode.slice(-1); // Info: (20250306 - Julian) 取得數字鍵的值
-    temp = temp.slice(0, cursorPos) + code + temp.slice(cursorPos); // Info: (20250306 - Julian) 插入數字
+    code = pressKeyCode.slice(-1); 取得數字鍵的值
+    temp = temp.slice(0, cursorPos) + code + temp.slice(cursorPos); 插入數字
 
-    // Info: (20250306 - Julian) 更新輸入框的值
+    更新輸入框的值
     handleChange({ target: { value: temp } } as React.ChangeEvent<HTMLInputElement>);
   }
 }
@@ -112,12 +113,12 @@ function convertInput(event: React.KeyboardEvent<HTMLInputElement>) {
 不過以上只處理「轉換數字」的情境，需要轉換英文的話可以試試這個：
 
 ```jsx
-// Info: (20250306 - Julian) 如果按下的是字母鍵
+如果按下的是字母鍵
 if (pressKeyCode.indexOf("Key") > -1) {
-  code = event.key; // Info: (20250306 - Julian) 取得字母鍵的值
-  temp = temp.slice(0, cursorPos) + code + temp.slice(cursorPos); // Info: (20250306 - Julian) 插入字母
+  code = event.key; 取得字母鍵的值
+  temp = temp.slice(0, cursorPos) + code + temp.slice(cursorPos); 插入字母
 
-  // Info: (20250306 - Julian) 變更顯示值
+  變更顯示值
   handleChange({
     target: { value: temp },
   } as React.ChangeEvent<HTMLInputElement>);
@@ -149,13 +150,13 @@ if (pressKeyCode.indexOf("Key") > -1) {
 #### 範例：
 
 ```jsx
-{/* Info: (20250313 - Julian) 輸入電子郵件(自動驗證) */}
+{/* 輸入電子郵件(自動驗證) */}
 <input type="email" />
 
-{/* Info: (20250313 - Julian) 輸入電話(09開頭，共10碼) */}
+{/* 輸入電話(09開頭，共10碼) */}
 <input type="tel" pattern="09[0-9]{8}" />
 
-{/* Info: (20250313 - Julian) 輸入密碼(至少6碼，包含大小寫字母和數字) */}
+{/* 輸入密碼(至少6碼，包含大小寫字母和數字) */}
 <input
 	type="password"
 	pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{6,}"
