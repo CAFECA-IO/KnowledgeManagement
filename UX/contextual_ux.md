@@ -45,14 +45,6 @@
 <img width="802" alt="截圖 2025-05-13 下午1 59 31" src="https://github.com/user-attachments/assets/9417b0d7-c0d8-4a99-8e10-50dc06d53ace" />
 
 
-#### 🧩 Inline Instructions（欄內即時提示）  
-欄位內提示是最直接有效的即時反饋設計，尤其在表單中至關重要。這種做法興起於 Web 2.0 時期，當 AJAX 技術讓頁面可以即時互動，不再需要重新整理頁面才能驗證輸入內容。如今它已經成為所有現代系統的標配功能之一。  
-📍**範例：Google Ads 註冊表單**  
-當使用者輸入錯誤網址格式時，欄位下即時出現紅字：「請輸入有效網址（例：https://example.com）」。
-
-<img width="652" alt="截圖 2025-05-13 下午2 02 49" src="https://github.com/user-attachments/assets/f49d77db-469e-4522-9727-6eab849f4581" />
-
-
 👉 **說明：** Contextual Help 的每種型態都各有所長，這就是情境提示，不打擾、不中斷，卻能在需要的當下提供幫助。
 
 ---
@@ -62,7 +54,9 @@
 Progressive Disclosure 是 HCI（人機互動）領域中的經典設計原則，早期由 Apple 在 Mac OS 介面中使用：只顯示使用者需要的資訊，其餘隱藏起來，直到他們主動要求更多。這個設計技巧讓產品同時滿足新手與進階使用者，是資訊層級規劃的核心方法。
 
 📍**範例：Figma**
-剛開啟文件時只看到基本工具列，要使用進階 prototyping 或 developer mode，要點開特定功能區才會顯示。
+剛開啟新文件時只看到基本工具列，要使用進階 prototyping 或 developer mode 等其餘進階功能，要點開特定功能區才會顯示。
+
+<img width="1439" alt="截圖 2025-05-13 下午2 05 38" src="https://github.com/user-attachments/assets/313bba93-bc65-4ca8-b9c4-9bbf0b15556a" />
 
 👉 **說明：** 漸進式揭露能幫助使用者先專注於基本操作，降低學習曲線。
 
@@ -72,8 +66,10 @@ Progressive Disclosure 是 HCI（人機互動）領域中的經典設計原則�
 
 欄位內提示是最直接有效的即時反饋設計，尤其在表單中至關重要。這種做法興起於 Web 2.0 時期，當 AJAX 技術讓頁面可以即時互動，不再需要重新整理頁面才能驗證輸入內容。如今它已經成為所有現代系統的標配功能之一。
 
-📍**範例：Stripe 註冊表單**
-當使用者輸入錯誤網址格式時，欄位下即時出現紅字：「請輸入有效網址（例：[https://example.com）」。](https://example.com）」。)
+📍**範例：Google Ads 註冊表單**  
+當使用者輸入錯誤網址格式時，欄位下即時出現紅字：「請輸入有效網址（例：https://example.com）」。
+
+<img width="652" alt="截圖 2025-05-13 下午2 02 49" src="https://github.com/user-attachments/assets/f49d77db-469e-4522-9727-6eab849f4581" />
 
 👉 **說明：** 用最即時的方式協助使用者完成任務，比事後報錯更有效也更友善。
 
@@ -83,8 +79,12 @@ Progressive Disclosure 是 HCI（人機互動）領域中的經典設計原則�
 
 微文案這個詞最早由 UX Writer Erin Kissane 提出，用來描述介面中那些看似不起眼的小文字：按鈕、提示、錯誤訊息… 但它們其實是 UX 中極具力量的元素。好的微文案不只說明操作，更能傳達品牌語氣、建立信任感。
 
+關於微文案詳細介紹可參考：[為什麼UX Writing 很重要](https://mermer.com.tw/knowledge-management/20250114001)
+
 📍**範例：Dropbox 刪除提示**
-在你刪除檔案時，系統會提醒：「此動作無法復原，請確認是否繼續」。
+在你刪除檔案分享連結時，系統會提醒：「此動作會造成他人無法造訪該連結，請確認是否繼續」。
+
+![remove-links](https://github.com/user-attachments/assets/1a710049-2c21-46ec-95ea-dab9890185f2)
 
 👉 **說明：** 精準的文案能在關鍵時刻給予心理安全感，也能明確傳達行為後果。
 
