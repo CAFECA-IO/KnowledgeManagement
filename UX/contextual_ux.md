@@ -59,7 +59,7 @@ Progressive Disclosure 是 HCI（人機互動）領域中的經典設計原則�
 欄位內提示是最直接有效的即時反饋設計，尤其在表單中至關重要。這種做法興起於 Web 2.0 時期，當 AJAX 技術讓頁面可以即時互動，不再需要重新整理頁面才能驗證輸入內容。如今它已經成為所有現代系統的標配功能之一。
 
 📍**範例：Google Ads 註冊表單**  
-當使用者輸入錯誤網址格式時，欄位下即時出現紅字：「請輸入有效網址（例：https://example.com）」。
+當使用者輸入錯誤網址格式時，欄位下即時出現紅字：「請輸入有效網址（例：'https://example.com'）」。
 
 <img width="652" alt="截圖 2025-05-13 下午2 02 49" src="https://github.com/user-attachments/assets/f49d77db-469e-4522-9727-6eab849f4581" />
 
