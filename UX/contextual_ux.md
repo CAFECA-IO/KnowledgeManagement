@@ -18,6 +18,9 @@
 📍**範例：Figma 工具列提示**  
 當滑鼠移到 Icon 上時，會顯示「Move Tool (V)」、「Scale Tool (K)」等簡短說明。
 
+<img width="551" alt="截圖 2025-05-13 下午1 40 48" src="https://github.com/user-attachments/assets/d27f9463-2516-45ef-a7a9-b2bc05472303" />
+
+---
 
 #### 🧩 Overlays（浮層提示）  
 遮罩背景、強調局部功能區塊，常用於新功能導覽或強調變更內容。  
