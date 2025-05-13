@@ -132,3 +132,15 @@ Progressive Disclosure 是 HCI（人機互動）領域中的經典設計原則�
 ## ✨ 結語：資訊剛剛好，體驗才會好
 
 設計不是把資訊塞得越多越好，而是要拿捏得剛剛好。透過這些 UX 方法，產品能變得更容易上手、學習，也能讓使用者在關鍵時刻不再迷路，順利完成任務。
+
+
+---
+
+## Reference
+
+[Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+[Just-in-Time Help: Look Right!](https://www.youtube.com/watch?v=6tVMuWObaqU)
+
+[What is Progressive Disclosure? Show & Hide the Right Information](https://www.uxpin.com/studio/blog/what-is-progressive-disclosure/)
+
