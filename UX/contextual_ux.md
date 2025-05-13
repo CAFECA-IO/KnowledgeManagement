@@ -20,27 +20,38 @@
 
 <img width="551" alt="截圖 2025-05-13 下午1 40 48" src="https://github.com/user-attachments/assets/d27f9463-2516-45ef-a7a9-b2bc05472303" />
 
----
 
 #### 🧩 Overlays（浮層提示）  
 遮罩背景、強調局部功能區塊，常用於新功能導覽或強調變更內容。  
 📍**範例：Notion 新功能公告**  
-釋出新功能時，進入頁面會出現半透明浮層，說明更新內容並提示「Got it」按鈕。
+釋出新功能時，進入頁面會出現浮層，說明更新內容並提示「Got it」或「Try it out」按鈕。
+
+<img width="1473" alt="Notion_modal_feature_announce_571bde574f" src="https://github.com/user-attachments/assets/09e3d7ad-9b26-4022-b7e4-bec66b968c32" />
+
 
 #### 🧩 Walkthroughs（操作導覽）  
 以互動步驟引導使用者完成一段流程，常用於初次使用導覽。  
 📍**範例：Canva 初次登入教學**  
 使用者第一次進入編輯器，系統會引導一步步新增圖片、加入文字，教你如何使用平台。
 
+![image-9-1](https://github.com/user-attachments/assets/5ef5b02a-b3d3-404a-aedf-60abe5947206)
+
+
 #### 🧩 Embedded Help（內嵌說明）  
 將說明內容內嵌在界面中，使用者不需跳出畫面即可查看。  
 📍**範例：Slack 設定頁面說明文字**  
-每個選項下方都有簡短說明文字，例如「控制誰可以邀請新成員」直接寫在設定區塊內。
+每個選項下方都有簡短說明文字，直接寫在設定區塊內。
+
+<img width="802" alt="截圖 2025-05-13 下午1 59 31" src="https://github.com/user-attachments/assets/9417b0d7-c0d8-4a99-8e10-50dc06d53ace" />
+
 
 #### 🧩 Inline Instructions（欄內即時提示）  
 欄位內提示是最直接有效的即時反饋設計，尤其在表單中至關重要。這種做法興起於 Web 2.0 時期，當 AJAX 技術讓頁面可以即時互動，不再需要重新整理頁面才能驗證輸入內容。如今它已經成為所有現代系統的標配功能之一。  
-📍**範例：Stripe 註冊表單**  
+📍**範例：Google Ads 註冊表單**  
 當使用者輸入錯誤網址格式時，欄位下即時出現紅字：「請輸入有效網址（例：https://example.com）」。
+
+<img width="652" alt="截圖 2025-05-13 下午2 02 49" src="https://github.com/user-attachments/assets/f49d77db-469e-4522-9727-6eab849f4581" />
+
 
 👉 **說明：** Contextual Help 的每種型態都各有所長，這就是情境提示，不打擾、不中斷，卻能在需要的當下提供幫助。
 
