@@ -29,14 +29,6 @@
 <img width="1473" alt="Notion_modal_feature_announce_571bde574f" src="https://github.com/user-attachments/assets/09e3d7ad-9b26-4022-b7e4-bec66b968c32" />
 
 
-#### 🧩 Walkthroughs（操作導覽）  
-以互動步驟引導使用者完成一段流程，常用於初次使用導覽。  
-📍**範例：Canva 初次登入教學**  
-使用者第一次進入編輯器，系統會引導一步步新增圖片、加入文字，教你如何使用平台。
-
-![image-9-1](https://github.com/user-attachments/assets/5ef5b02a-b3d3-404a-aedf-60abe5947206)
-
-
 #### 🧩 Embedded Help（內嵌說明）  
 將說明內容內嵌在界面中，使用者不需跳出畫面即可查看。  
 📍**範例：Slack 設定頁面說明文字**  
@@ -96,6 +88,8 @@ Progressive Disclosure 是 HCI（人機互動）領域中的經典設計原則�
 
 📍**範例：Canva 初次登入教學**
 使用者第一次進入編輯器，系統會引導你一步步新增圖片、加入文字，教你如何使用平台。
+
+![image-9-1](https://github.com/user-attachments/assets/5ef5b02a-b3d3-404a-aedf-60abe5947206)
 
 👉 **說明：** 循序漸進的互動教學，能降低第一次使用的挫折，提升導入成功率。
 
