@@ -13,13 +13,14 @@ Database Migration 指當應用程式的 DB Schema 有變動時，將這些結�
 3. 追蹤誰在什麼時候對資料庫做了什麼變動
 
 ### 以 iSunFA 資料庫為例
-截至 2025-05-14 iSunFA 資料庫承襲自 [Beta](https://github.com/CAFECA-IO/iSunFA/releases/tag/v0.9.0) 版本的資料庫結構，初始版本共有 39 張資料表，在更新至 [RC1](https://github.com/CAFECA-IO/iSunFA/releases/tag/v0.10.0) 版本的歷程中，共經歷了 77 次以上的資料表變更，包含：
+截至 2025-05-14 iSunFA 資料庫承襲自 [Beta](https://github.com/CAFECA-IO/iSunFA/releases/tag/v0.9.0) 版本的資料庫結構，初始版本共有 39 張資料表，在更新至 [RC1](https://github.com/CAFECA-IO/iSunFA/releases/tag/v0.10.0) 版本的歷程中，共經歷了 146 次以上的資料表變更，包含：
 1. 新增資料表數：34 張
 2. 刪除資料表數：3 張
 3. 新增欄位操作次數：33 次
 4. 刪除欄位操作次數：19 次
 5. 欄位型別調整次數：5 次
 6. 索引新增或刪除操作次數：52 次
+
 這表示當你完成 iSunFA v0.9.0 部署並成功啟動後，將程式碼更新至 v0.10.0 再次啟動時，系統將因為資料庫版本差異而無法正常運作。
 
 ### 快速建立自己的資料庫環境來實驗吧
