@@ -5,6 +5,7 @@
 - [撰寫 MJML](#撰寫-mjml)
   - [MJML 核心架構](#mjml-核心架構)
   - [常用標籤分類與說明](#常用標籤分類與說明)
+  - [Media Query 響應式樣式](#media-query-響應式樣式)
   - [範本參考](#範本參考)
 - [寄送郵件](#寄送郵件)
   - [建立範本](#建立範本)
@@ -107,6 +108,41 @@ MJML 是一種 XML 語法的語意化標記語言，其結構包含三層：
 | `<mj-button>` | 可自訂的 CTA 按鈕，支援樣式與連結。 |
 | `<mj-divider>` | 水平分隔線。 |
 | `<mj-spacer>` | 插入空白空間，可自訂高度。 |
+
+### Media Query 響應式樣式
+
+MJML 支援使用原生 CSS 的 `@media` 語法來設定響應式樣式，這讓你可以依據不同螢幕寬度，動態調整顏色、字體大小、邊距等。
+
+這些樣式必須透過 `<mj-style>` 宣告，並且放置在 `<mj-head>` 區塊內（類似 `<mj-attributes>` 的用法）。
+
+以下範例展示如何根據螢幕寬度切換背景顏色樣式：
+
+```xml
+<mj-head>
+  <mj-style>
+    .primary-color { background-color: #6464c8; }
+    .secondary-color { background-color: #c8c8ff; }
+  </mj-style>
+
+  <mj-style>
+    @media (max-width: 480px) {
+      .primary-color { background-color: #64c8c8; }
+      .secondary-color { background-color: #c8ffff; }
+    }
+  </mj-style>
+</mj-head>
+
+<mj-body>
+  <mj-section css-class="primary-color">
+    <mj-column css-class="secondary-color">
+      ...
+    </mj-column>
+  </mj-section>
+</mj-body>
+```
+
+> [!WARNING]
+> Outlook 桌機版通常不支援 media query，有相關的 RWD 需求可能要另尋解方。
 
 ### 範本參考
 
