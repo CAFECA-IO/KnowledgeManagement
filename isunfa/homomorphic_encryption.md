@@ -1,4 +1,4 @@
-# 從下午茶開始的同態加密 Homomorphic Encryption
+# 從綠逗薏人開始的同態加密 Homomorphic Encryption
 ![homomorphic_encryption](https://github.com/user-attachments/assets/7703bd4d-3600-4079-83f2-6bdccd777ab9)
 
 # 從下午茶聊起
