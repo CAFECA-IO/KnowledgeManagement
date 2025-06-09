@@ -1,7 +1,7 @@
 # Working with GitHub Copilot: 提升軟體工程實踐的 AI 協作指南
 ![working_with_github_copilot](https://github.com/user-attachments/assets/44893715-51e9-4905-a259-08316782706a)
 
-GitHub Copilot 正在改變軟體開發的格局，它不僅僅是一個自動完成工具，更是一個能夠深度參與開發流程的 AI 協作夥伴。本報告將深入探討如何有效地與 GitHub Copilot 協作，從提升開發效率到強化程式碼品質，同時也將審視其帶來的挑戰與限制。所有程式碼範例均採用 Next.js 與 TypeScript，並遵循特定的註解格式。
+GitHub Copilot 正在改變軟體開發的格局，它不僅僅是一個自動完成工具，更是一個能夠深度參與開發流程的 AI 協作夥伴。本報告將深入探討如何有效地與 GitHub Copilot 協作，從提升開發效率到強化程式碼品質，同時也將審視其帶來的挑戰與限制。
 
 ## 讓 AI 提供你軟體工程知識的輔助
 
