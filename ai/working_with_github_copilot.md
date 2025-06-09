@@ -104,70 +104,23 @@ GitHub Copilot 的強大之處部分源於其並非依賴單一 AI 模型，而�
 
 ```typescript
 /** Info: (20250609 - Gemini)
- * @file modelCollaborationConcept.ts
- * @description 概念性展示不同 AI 模型可能如何處理同一任務。
- * GitHub Copilot 使用多個模型；這是一個思想實驗。
+ * 目前 Github Copilot 並不支援替換模型
+ * 截至 2025-06-09 為止，Copilot Autocomplete 使用 OpenAI Codex (from GPT‑3) 與 GPT‑3.5 Turbo
+ * 截至 2025-06-09 為止，Copilot Chat 使用 GPT‑4.1
+ * 待未來提供替換方案後更新此段落
  */
-
-/** Info: (20250609 - Gemini)
- * 一個用於生成 Next.js API 路由的提示。
- */
-const apiRoutePrompt = `
-/** Info: (20250609 - Gemini)
- * 使用 TypeScript 生成一個 Next.js API 路由 (app router)。
- * 它應該處理對 /api/items 的 GET 請求。
- * 它應該返回一個項目列表：。
- * 請包含 JSDoc 註解。
- */
-`;
-
-/** Info: (20250609 - Gemini)
- * 模擬「模型 A」（例如，針對簡潔性進行優化）可能如何回應。
- * @param _prompt - 輸入提示（在此簡單模擬中未使用）。
- * @returns 代表模型 A 程式碼生成的字串。
- */
-function getSuggestionFromModelA(_prompt: string): string {
-  return `
-// /app/api/items/route.ts (模型 A - 簡潔)
-import { NextResponse } from 'next/server';
-export async function GET() {
-  return NextResponse.json();
-}`;
-}
-
-/** Info: (20250609 - Gemini)
- * 模擬「模型 B」（例如，針對詳細性和錯誤處理進行優化）可能如何回應。
- * @param _prompt - 輸入提示（在此簡單模擬中未使用）。
- * @returns 代表模型 B 程式碼生成的字串。
- */
-function getSuggestionFromModelB(_prompt: string): string {
-  return `
-// /app/api/items/route.ts (模型 B - 詳細且穩健)
-import { NextRequest, NextResponse } from 'next/server';
-
-interface Item { id: number; name: string; }
-const items: Item =;
-
-/** Info: (20250609 - Gemini) @description 處理 GET 請求以獲取所有項目。 */
-export async function GET(request: NextRequest) {
-  try {
-    // 在實際情境中，可能會從資料庫獲取
-    return NextResponse.json(items, { status: 200 });
-  } catch (error) {
-    console.error("獲取項目失敗：", error);
-    return NextResponse.json({ message: "獲取項目錯誤" }, { status: 500 });
-  }
-}`;
-}
-
-// console.log("提示：", apiRoutePrompt);
-// console.log("模型 A 建議：", getSuggestionFromModelA(apiRoutePrompt));
-// console.log("模型 B 建議：", getSuggestionFromModelB(apiRoutePrompt));
-// Info: (20250609 - Gemini) 這說明了底層模型會影響 Copilot 建議的風格和完整性。
 ```
 
+**表 1：GitHub Copilot 模型**
 
-**表 1：GitHub Copilot 提示工程最佳實踐**
+| 功能                 | 使用模型                                                     | 是否可切換         |
+| ------------------ | -------------------------------------------------------- | ------------- |
+| autocomplete       | OpenAI Codex（GPT‑3.5 Turbo）                              | ❌ 無法切換        |
+| Chat（預設）           | GPT‑4.1                                                  | ✅ 可切換         |
+| Chat（immersive 模式） | GPT‑4.1, GPT‑4o, GPT‑4.5 (preview), Claude, Gemini, o系列等 | ✅ 可切換（需訂閱/授權） |
+
+
+**表 2：GitHub Copilot 提示工程最佳實踐**
 
 | 最佳實踐    | 說明                                                                 | 目的                                          |
 | ---------- | ------------------------------------------------------------------- | -------------------------------------------- |
