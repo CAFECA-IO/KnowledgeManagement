@@ -31,7 +31,7 @@ make isuncoin
 ### Setup Environment
 ```shell
 sudo mv isuncoin/ /usr/local
-sudo ln -s /usr/local/isuncoin/build/bin/geth /usr/local/bin
+sudo ln -s /usr/local/isuncoin/build/bin/isuncoin /usr/local/bin
 ```
 
 ### Creating Genesis
