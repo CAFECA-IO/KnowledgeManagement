@@ -195,3 +195,18 @@
 ## 總結
 
 設計師可以把這十條原則當作設計過程中的思考工具，在原型階段或甚至構思初期對照，幫助發現盲點並做出更貼近用戶需求的調整，在完成設計後更是一個檢查指標，確保最終成果不只是美觀，而是真正讓用戶感到直觀、流暢且值得信任的體驗。
+
+
+## Reference
+
+https://www.interaction-design.org/literature/topics/heuristic-evaluation?srsltid=AfmBOorXd6YzXH7uJhMEs-Ktpe8V-IKE84-8GP8u_wx6FCyfnLEmqU9R
+
+https://janicejllin.medium.com/快速優化介面的經驗法則評估-heuristic-evaluation-14be8a790635
+
+https://maze.co/guides/usability-testing/heuristic-evaluation/
+
+https://www.nngroup.com/videos/heuristic-evaluation/
+
+https://www.nngroup.com/videos/conduct-heuristic-evaluation/?lm=heuristic-evaluation&pt=youtubevideo
+
+https://www.nngroup.com/videos/error-message-visibility/?lm=conduct-heuristic-evaluation&pt=youtubevideo 
