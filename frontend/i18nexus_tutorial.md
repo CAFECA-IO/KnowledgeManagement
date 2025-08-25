@@ -110,7 +110,7 @@ npx create-next-app@latest
 I18NEXUS_API_KEY="your_api_key"
 ```
 
-> ⚠️**注意：**請勿將 API Key 提交到 Git 中，以免造成安全風險。
+> ⚠️ **注意**：請勿將 API Key 提交到 Git 中，以免造成安全風險。
 
 # 實作步驟
 
@@ -124,12 +124,12 @@ I18NEXUS_API_KEY="your_api_key"
 npm install i18next react-i18next i18next-resources-to-backend next-i18n-router
 ```
 
-> ⚠️ **注意：這裡**安裝的是 **react-i18next** 而非 next-i18next，因為後者不支援 App Router。
+> ⚠️ **注意**：這裡安裝的是 **react-i18next** 而非 next-i18next，因為後者不支援 App Router。
 
 另外，我們還需要安裝兩個工具：
 
-- **i18nexus-cli：**用來同步雲端翻譯檔。
-- **concurrently：**方便在開發環境中同時執行多個指令。
+- **i18nexus-cli**：用來同步雲端翻譯檔。
+- **concurrently**：方便在開發環境中同時執行多個指令。
 
 ```bash
 npm install i18nexus-cli concurrently --save-dev
@@ -395,7 +395,7 @@ npm run i18n:pull
         
     - 這樣即使翻譯檔不在 Git 裡，部署時也能自動拉取最新翻譯。
 
-> **⚠️ 例外情況：**如果專案需要離線模式，才會考慮把翻譯檔 commit 進 Git。
+> ⚠️ **例外情況**：如果專案需要離線模式，才會考慮把翻譯檔 commit 進 Git。
 
 ## 如何讓設計與 PM 參與翻譯管理
 
