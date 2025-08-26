@@ -1,5 +1,7 @@
 # 如何建立使用者對 AI 的信任
 
+![67c1954831fdaebbd4d02c5f_Building_Trust_AI_through_design](https://github.com/user-attachments/assets/c14ff251-3f47-407c-a6c0-e0ad3841676b)
+
 AI 已經慢慢融入我們的生活，演算法幫我們挑電影、AI 助理幫我們寫郵件、銀行用 AI 評估貸款風險等。可是，你有沒有想過：我們為什麼會「相信」或「不相信」一個 AI？
 
 就像我們交朋友一樣，如果一個人常常說話前後不一、答非所問，或者讓你覺得在隱瞞什麼，你大概會覺得他很不可靠。AI 也是如此，「信任」是使用者願不願意採用（adoption）的關鍵。
