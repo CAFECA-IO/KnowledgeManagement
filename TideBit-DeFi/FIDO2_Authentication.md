@@ -75,15 +75,17 @@ TideBit‑DeFi v2 在多應用（Web、行動、後台）提供一致的無密�
 
 ```mermaid
 flowchart TB
-  u[User + Authenticator (Passkey)] -->|WebAuthn get()/PRF| auth[TideBit-Auth]
-  subgraph TideBit-Auth
+  u["User + Authenticator (Passkey)"] -->|WebAuthn get and PRF| auth["TideBit-Auth"]
+
+  subgraph sg_auth["TideBit-Auth"]
     auth -->|verify assertion| v[Verifier]
-    v -->|issue short-lived DeWT| jwt[DeWT Token]
+    v -->|issue short-lived DeWT| jwt["DeWT Token"]
   end
-  jwt --> apps[Apps (Trade/Save/Console)]
-  apps -->|low-risk API with DeWT| api[Backend APIs]
-  apps -->|high-risk action| spc[SPC Confirmation]
-  spc -->|bind summary (asset/amount/feeCap/nonce)| consent[Verifiable Consent]
+
+  jwt --> apps["Apps (Trade/Save/Console)"]
+  apps -->|low-risk API with DeWT| api["Backend APIs"]
+  apps -->|high-risk action| spc["SPC Confirmation"]
+  spc -->|bind summary with asset, amount, feeCap, nonce| consent["Verifiable Consent"]
   consent --> api
 ```
 
