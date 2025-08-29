@@ -45,6 +45,6 @@ L：流動性大小
 
 # Reference
 
-- [++智能合約實現的交易所++](https://github.com/XPAEXCHANGE/smart-contracts/blob/master/Solidity/Baliv.sol)
+- [智能合約實現的交易所](https://github.com/XPAEXCHANGE/smart-contracts/blob/master/Solidity/Baliv.sol)
 
 - [Uniswap v3 liquidity math](https://atiselsts.github.io/pdfs/uniswap-v3-liquidity-math.pdf)
