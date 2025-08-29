@@ -1,4 +1,4 @@
-# Cross‑Application FIDO2 Enhanced Cryptographic Authentication — Whitepaper v2.3（整合 DeWT）
+# Cross‑Application FIDO2 Enhanced Cryptographic Authentication — Whitepaper
 
 > **一句話**：
 > 以 **FIDO2 + 短時效 DeWT‑Session** 完成跨應用 SSO（低風險），
