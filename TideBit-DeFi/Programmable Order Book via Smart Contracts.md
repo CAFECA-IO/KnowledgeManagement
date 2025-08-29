@@ -6,6 +6,19 @@
 
 在流動性管理方面，本交易所借鑒了 Uniswap V3 的**集中流動性 (Concentrated Liquidity)** 創新機制。此機制允許流動性提供者將其資產集中於特定的價格區間內，顯著提升了**資本效率**。流動性 (L)、資產數量 (x, y) 與價格區間 (pa, pb, P) 之間的關係透過嚴謹的數學公式定義，例如當前價格 P 介於 pa 和 pb 之間時，資產 X 和 Y 的數量可分別透過 Eq. 11 (`x = L (√pb - √P) / (√P · √pb)`) 和 Eq. 12 (`y = L(√P - √pa)`) 計算。這些數學模型是實現精確資產分配和流動性供給的核心。
 
+<img width="547" height="108" alt="CleanShot 2025-08-29 at 16 47 15" src="https://github.com/user-attachments/assets/7419f26d-ed80-4920-b8f0-84a0a453691f" />
+
+x：需要存入的 token X 數量
+
+y：需要存入的 token Y 數量
+
+pa,pb​：LP 選定的價格區間
+
+P：當前價格
+
+L：流動性大小
+
+
 為了在 EVM 環境中精確執行這些複雜的交易與流動性計算，智能合約的開發必須嚴謹考量多項**實作細節**：
 
 1. **價格刻度 (Ticks)**：將連續的價格空間映射到離散的刻度點，以 `p(i) = 1.0001i` 定義價格與刻度的關係。
@@ -17,3 +30,12 @@
 4. **ERC20 代幣的小數位 (Decimals)**：在進行跨代幣價格計算時，必須將不同 ERC20 代幣的 `decimals` 參數納入考量，進行適當的單位轉換，以確保價格計算的正確性。
 
 透過上述智能合約驅動的訂單簿、高效撮合引擎以及借鑒 Uniswap AMM 的流動性管理機制，本交易所成功構建了一個既安全透明、又高效資本運用的去中心化交易平台。
+
+
+
+
+# Reference
+
+- [++智能合約實現的交易所++](https://github.com/XPAEXCHANGE/smart-contracts/blob/master/Solidity/Baliv.sol)
+
+- [Uniswap v3 liquidity math](https://atiselsts.github.io/pdfs/uniswap-v3-liquidity-math.pdf)
