@@ -53,7 +53,7 @@ TideBit‑DeFi 在多應用（Web、行動、後台）提供一致的免密碼�
 * **B（Chain Key）**：由 PRF(A) 與 S 經 HKDF 衍生之鏈上簽名金鑰，只公開 B\_pub。
 * **NCFCID**：身分證合約，維護允許的 B 集合、角色與撤銷。
 * **DeWT‑Session**：短時效 JWT，用於內部微服務低風險 API。
-* **DeWT（鏈背書）**：由 B 簽出之自含式憑證，驗證端回鏈確認授權狀態。
+* **DeWT**：由 B 簽出之自含式憑證，驗證端回鏈確認授權狀態。
 
 **使用者旅程**：
 
@@ -195,7 +195,7 @@ TideBit‑DeFi 在多應用（Web、行動、後台）提供一致的免密碼�
 
 ## 15. 名詞備註（Glossary）
 
-FIDO2／Passkey、RP ID、PRF（hmac‑secret）、devicePublicKey、largeBlob、SPC、DeWT‑Session、DeWT（鏈背書）、A/S/B、NCFCID、EIP‑1271。
+FIDO2／Passkey、RP ID、PRF（hmac‑secret）、devicePublicKey、largeBlob、SPC、DeWT‑Session、DeWT、A/S/B、NCFCID、EIP‑1271。
 
 ---
 
@@ -216,7 +216,7 @@ FIDO2／Passkey、RP ID、PRF（hmac‑secret）、devicePublicKey、largeBlob�
 }
 ```
 
-## 附錄 B — DeWT（鏈背書）最小格式
+## 附錄 B — DeWT 最小格式
 
 **Header**
 
