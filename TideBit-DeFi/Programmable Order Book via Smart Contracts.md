@@ -18,6 +18,9 @@ P：當前價格
 
 L：流動性大小
 
+<img width="396" height="529" alt="CleanShot 2025-08-29 at 16 43 28" src="https://github.com/user-attachments/assets/cc8ef657-9bb9-45d8-b984-7e554ad6e678" />
+
+
 
 為了在 EVM 環境中精確執行這些複雜的交易與流動性計算，智能合約的開發必須嚴謹考量多項**實作細節**：
 
