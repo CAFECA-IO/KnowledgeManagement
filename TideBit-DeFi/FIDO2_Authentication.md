@@ -9,7 +9,10 @@
 
 ## 摘要（Abstract）
 
-TideBit‑DeFi v2 在多應用（Web、行動、後台）提供一致的免密碼登入與高風險操作的再次確認。登入面以 FIDO2/Passkeys 完成人機綁定與抗釣魚，並簽發短時效權杖 **DeWT‑Session** 於內部傳遞最小權限；高風險操作採 **Secure Payment Confirmation（SPC）** 顯示可驗證交易摘要，並將摘要綁入授權證據。進一步整合 **DeWT v2**：使用者裝置的 **平台金鑰 A** 與裝置祕密 **S** 加上 WebAuthn **PRF** 衍生鏈上金鑰 **B**，以 **NCFCID**（身分證合約）管理 B 的授權與撤銷，確保「登入 → 授權 → 一次性鏈上簽名 / 去中心化憑證（DeWT）」完整且可稽核。
+TideBit‑DeFi 在多應用（Web、行動、後台）提供一致的免密碼登入與高風險操作的再次確認。
+登入面以 FIDO2/Passkeys 完成人機綁定與抗釣魚，並簽發短時效權杖 **DeWT‑Session** 於內部傳遞最小權限；高風險操作採 **Secure Payment Confirmation（SPC）** 顯示可驗證交易摘要，並將摘要綁入授權證據。
+進一步整合 **DeWT**：
+  - 使用者裝置的 **平台金鑰 A** 與裝置祕密 **S** 加上 WebAuthn **PRF** 衍生鏈上金鑰 **B**，以 **NCFCID**（身分證合約）管理 B 的授權與撤銷，確保「登入 → 授權 → 一次性鏈上簽名 / 去中心化憑證（DeWT）」完整且可稽核。
 
 ---
 
