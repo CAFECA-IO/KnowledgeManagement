@@ -1,337 +1,246 @@
-# CAFECA DeWT v2 — 設計總覽與規格（更新版）
+# Partial Private‑Key Protection for FIDO2 — Whitepaper v1.1（Readable × Technical）
+
+> **一句話**：把「能動資產的私鑰」拆成多份，日常簽名需 **本人裝置（k\_u）+ 平台 HSM（k\_p）** 共同參與；任一方單獨無法代簽。遺失或風險時，啟用 **備援分片（k\_r）** 在鏈上 **即時撤銷與重建**。全程以 **SPC 所見即所簽**與 **NCFCID 合約**確保可稽核、可治理。
 
 ---
 
-## 0. 核心理念
+## 摘要（Abstract）
 
-* 用 **FIDO2 平台金鑰 `A*`** 綁定裝置唯一性（每台裝置只保留一把 `A`，可記錄 `credIdHash`）。
-* 由 **`A` 與私密值 `S`** 推導可對鏈簽名的 **區塊鏈金鑰 `B*`**（不把 `A` 暴露在鏈上；`A` 僅用於派生與驗證）。
-* 以智能合約維護 **NCFCID（身分證）** 與 **允許的 `B` 公鑰集合** 的對應；任何 DeWT 驗簽都**以鏈上現況為準**（即時撤銷）。
-* 以 **零知識證明（ZK）** 或 **承諾‑揭露（commit–reveal）** 替代「把密碼雜湊上鏈」的流程，避免長期暴露。
-* **DeWT** 是類 JWT 的**自含式憑證**，但驗證時會**回鏈查** NCFCID 的有效金鑰與撤銷狀態。
-
-> 設計哲學：**中心化使用感受 × 去中心化信任**。伺服器或單一裝置都無法單獨濫用。
+本白皮書提出一套與 **FIDO2/WebAuthn** 完整整合的「部分私鑰保護」方法：登入用 FIDO2 綁定本人（抗釣魚），高風險操作以 **Secure Payment Confirmation（SPC）** 呈現「所見即所簽」摘要；真正能動資產的鏈上私鑰 **K** 不以整把存在任何單點，而是以 **2 方閾值簽名**（使用者裝置分片 \`k\_u\` ＋ 平台 HSM 分片 \`k\_p\`）完成簽名，並以 **備援分片 \`k\_r\`** 處理恢復與輪替。授權狀態由 **NCFCID（身分證合約）** 維護，任何驗證都以鏈上現況為準，可即時撤銷。方案與前篇 **Cross‑Application FIDO2**、**DeWT v2** 無縫銜接。
 
 ---
 
-## 1. 流程（0～11）— 強化版
+## 讀者地圖（讀者怎麼讀）
 
-### 0) 產生一次性密碼與雜湊（建立承諾）
-
-客戶端產生一次性密碼 `PW1` 與隨機鹽 `salt1`，計算：
-
-* `PWH1 = Argon2id(PW1, salt1, params)`（或 `scrypt`），防彩虹表。
-* 上鏈只存承諾：`C1 = keccak256(PWH1 || nonce_c1)`，其中 `nonce_c1` 僅客戶端保存。
-
-### 1) 以承諾註冊取得 `NID1`
-
-`registerUser(C1)` → 合約發出事件回傳 `NID1`。此時**不暴露** `PW1` 或 `PWH1`。
-
-### 2) 在裝置建立 FIDO2 平台金鑰 `A1`
-
-使用 **platform authenticator** 建立 `A1=(A1_pub, A1_credId)`，可（選擇性）保存 attestation。系統策略確保「**每裝置僅一把 `A`**」。
-
-### 3) 推導鏈上金鑰 `B1`（**修正版：PRF 派生**）
-
-> 原提案以 `sigA = Sign_A1(challengeX)` 作為 HKDF 輸入，但 ECDSA 簽章**非決定性**（未保證 RFC6979），會導致 seed 不可重現。改為使用 **WebAuthn PRF／hmac‑secret**，其輸出對同一 `A` 與同一 salt 是**決定性**且不可逆。
-
-* 選定 `context` 與 `challengeX`（例如由伺服器／合約事件給定）。
-* 要求 WebAuthn `get()` **PRF 擴充**：`F = PRF(A1, salt = H(challengeX || context))`。
-* 準備裝置祕密 `S1`（256‑bit 隨機，**永不上鏈**，存於 TEE/SE）。
-* **派生 seed**：`seed1 = HKDF(sha256, IKM = (F || H(S1)), salt = H("CAFECA/B-derivation/v1" || challengeX), info = A1_pub)`。
-* 以 `seed1` 產生鏈金鑰 `B1=(B1_priv, B1_pub)`（EVM 鏈建議 `secp256k1`；其他鏈可用 `ed25519`）。
-* 性質：同裝置＋同 `S1`＋同 `challengeX` 可重現；若要一次性，讓 `challengeX` 每次不同或把時間窗納入 HKDF 參數。
-
-> **回退**（若環境不支援 PRF）：
->
-> * 在憑證的 `largeBlob` 存放一次性裝置祕密 `T`（隨機 256‑bit），以 `seed = HKDF(H(S1||T||challengeX))` 派生；或
-> * 直接走「部分私鑰保護」3 分片路徑（F/D/S），不做 `B` 派生（參考白皮書第 2 篇）。
-
-### 4) 鏈上登記 FIDO2（以 ZK 或揭露驗證承諾）
-
-* **方案 A（建議）— ZK 證明**：
-
-  * 電路證明者知 `PW1, salt1, nonce_c1`，使 `Argon2id(PW1,salt1)=PWH1` 且 `keccak256(PWH1||nonce_c1)=C1`。
-  * 送交易：`enrollFIDO_ZK(NID1, A1_pub, credIdHash, B1_pub, proofZK)`。
-  * 合約 `verify(proofZK)` 成功 → 綁定 `NID1 → (A1_pub, B1_pub)`。
-* **方案 B — commit–reveal（PoC）**：
-
-  * `revealFIDO(NID1, A1_pub, credIdHash, B1_pub, PWH1, nonce_c1)`；合約驗 `keccak256(PWH1||nonce_c1)==C1`。
-  * **缺點**：`PWH1` 被公開（雖為 KDF 後值，仍不理想），僅作過渡。
-
-### 5) 以 `B1` 建立 `NCFCID1`（身分證）
-
-`createIdentity(B1_pub)` → 產出 `NCFCID1`，並把 `B1_pub` 設為管理者。
-資料關聯：
-
-* `A1_pub → NCFCID1` 可查
-* `NCFCID1 → {A_pub_set, B_pub_set, roles, revocations}` 可查
-
-### 6～10) 第二裝置重複（`A2/B2/登記`）
-
-與 0～4 同理得到 `NID2, A2, B2`，以 `enrollFIDO_ZK(...)` 完成登記。
-
-### 11) 申請加入與審批
-
-`requestJoin(NCFCID1, B2_pub)`；由 `B1_priv`（管理者）呼叫 `approveJoin(NCFCID1, B2_pub)`。
-完成後：
-
-* `A2_pub → NCFCID1` 可查
-* `NCFCID1 → A1_pub, A2_pub, B1_pub, B2_pub` 可查
-
-> **關鍵修正回顧**：用 ZK/承諾取代明文／KDF 值上鏈；用 PRF 派生 `B` 取代簽章導 seed；一切驗證以鏈上名簿為準。
+* **決策者**：看 §1–§4、§8、§11（10 分鐘掌握價值與風險）。
+* **工程師**：關鍵看 §5（協定）、§6（恢復/輪替）、§10（落地指南）、附錄。
 
 ---
 
-## 2. 智能合約介面（Solidity 片段）
+## 1. 問題與目標（Motivation & Goals）
 
-```solidity
-interface ICAFECARegistry {
-    // 事件
-    event UserRegistered(uint256 indexed nid, bytes32 commitment);
-    event FIDOEnrolled(uint256 indexed nid, bytes32 aPubHash, bytes bPub, bytes32 credIdHash);
-    event IdentityCreated(bytes32 indexed ncfcid, bytes bPub);
-    event JoinRequested(bytes32 indexed ncfcid, bytes bPub);
-    event JoinApproved(bytes32 indexed ncfcid, bytes bPub, bytes approverB);
-    event Revoked(bytes32 indexed ncfcid, bytes bPub);
+**痛點**：單把私鑰即單點風險；裝置/伺服器任何一端被攻破都可能代簽；同時不能犧牲使用者體驗與合規稽核。
 
-    // 1) 註冊承諾
-    function registerUser(bytes32 commitmentC1) external returns (uint256 nid);
+**目標**：
 
-    // 4A) 以 ZK 完成 FIDO 登記
-    function enrollFIDO_ZK(
-        uint256 nid,
-        bytes calldata aPub,        // A 公鑰或其壓縮形式
-        bytes32 credIdHash,         // keccak(credentialId)
-        bytes calldata bPub,        // 鏈上金鑰 B 公鑰（secp256k1: 33/65 字節）
-        bytes calldata proofZK
-    ) external;
+* 任何單一實體（裝置或伺服器）**都無法單獨簽名**。
+* **日常 2 方**即可簽名（快速），**第 3 方備援**僅於恢復/輪替動用。
+* 與 **FIDO2、SPC、NCFCID、DeWT** 深度整合，維持「中心化體驗 × 去中心化信任」。
 
-    // 5) 建立身分證
-    function createIdentity(bytes calldata bPub) external returns (bytes32 ncfcid);
+---
 
-    // 11) 加入／審批
-    function requestJoin(bytes32 ncfcid, bytes calldata bPub) external;
-    function approveJoin(bytes32 ncfcid, bytes calldata bPub) external;
+## 2. 威脅模型（Threat Model）
 
-    // 撤銷與輪替
-    function revokeB(bytes32 ncfcid, bytes calldata bPub) external;
-    function rotateB(bytes32 ncfcid, bytes calldata oldB, bytes calldata newB) external;
+* **釣魚/偽站**：誘導在假網域登入/確認。
+* **UI 調包/中間人**：所見非所簽。
+* **伺服器入侵**：平台憑證/金鑰被濫用。
+* **裝置惡意程式**：攔截或注入。
+* **遺失/毀損**：需要安全恢復/撤銷。
 
-    // 查詢
-    function resolveByAPubHash(bytes32 aPubHash) external view returns (bytes32 ncfcid);
-    function resolveByNCFCID(bytes32 ncfcid) external view returns (bytes[] memory aPubs, bytes[] memory bPubs);
-    function isAuthorized(bytes32 ncfcid, bytes calldata bPub) external view returns (bool);
-}
+> **假設**：使用者通過 FIDO2 UV（指紋/臉）；平台有 HSM 與審計；鏈上可部署 NCFCID 合約。
+
+---
+
+## 3. 設計總覽（System Overview）
+
+**名詞**：
+
+* **A（Passkey）**：FIDO2 平台鑰，用於人機在場與 PRF，**不直接簽鏈上交易**。
+* **S（Device Secret）**：裝置祕密，存於 TEE/SE，永不外流。
+* **k\_u（User Share）**：由 **PRF(A)** 與 **S** 經 **HKDF** 決定性導出；只存在裝置記憶體。
+* **k\_p（Platform Share）**：HSM 內的伺服器分片，具速率/審批限制。
+* **k\_r（Recovery Share）**：離線備援，只用於恢復/輪替。
+* **NCFCID**：鏈上身分證合約，維護授權的公鑰/角色與撤銷。
+
+**直覺**：登入像 Apple Pay；動資產要「本人在場 + 平台共簽」；任何一方被攻破都無法單獨挪用資產；撤銷在鏈上即時生效。
+
+---
+
+## 4. 流程圖（GitHub 安全版 Mermaid）
+
+**4.1 日常簽名路徑**
+
+```mermaid
+flowchart TB
+  U["User Device with Passkey A"] -->|SPC confirm| SUM["Build summary digest"]
+  SUM --> PRF["WebAuthn PRF (A)"]
+  PRF --> KU["HKDF with device secret S -> k_u"]
+  KU --> PROTO["2‑party Schnorr signing"]
+  HSM["Platform HSM holds k_p"] --> PROTO
+  PROTO --> SIG["Signature (R,s)"]
+  SIG --> ONC["On‑chain tx or DeWT issue"]
+  ONC --> REG["NCFCID checks authorization"]
 ```
 
-> 建議：狀態「精簡」、事件「完整」。`aPubHash = keccak256(A_pub)`；attestation blob 放 IPFS 只上 CID。
+**4.2 恢復與輪替路徑**
+
+```mermaid
+flowchart TB
+  LOST["Device lost"] --> REQ["Recovery request (cooldown + approval)"]
+  REQ --> KR["Use offline k_r"]
+  KR --> REBIND["Bind new device -> new k_u"]
+  HSM2["Platform HSM k_p"] --> REBIND
+  REBIND --> ROT["Rotate or re‑authorize on NCFCID"]
+```
+
+> 圖中省略了雜湊/序列化細節；規格見 §5.3 與附錄 A。
 
 ---
 
-## 3. DeWT（鏈背書的自含式憑證）
+## 5. 協定與規格（Protocols）
 
-### 3.1 Header（`json`）
+### 5.1 SPC 所見即所簽（摘要綁定）
+
+**摘要欄位**（固定序列化順序）：`asset, amount, feeCap, purpose, nonce, exp`。將 JSON 去空白序列化後 **SHA‑256**，作為訊息的一部分（§附錄 A）。
+
+### 5.2 WebAuthn 認證與 PRF
+
+* 以 `navigator.credentials.get()` 要求 **UV** 與 **PRF**；
+* 伺服器下發 `challengeX = H(tag || digest(summary) || H(ciphertext) || rpId || origin)`，其中 `ciphertext` 為你要綁定的「密文」（例如已加密的同意單），**只取雜湊用於綁定**；
+* 認證器返回 **PRF 輸出 F（32 bytes）** 與 WebAuthn 簽章（供登入驗證）。
+
+### 5.3 裝置分片導出 k\_u（決定性）
+
+* `seed = HKDF(sha256, IKM = F || H(S), salt = H("PPK/v1" || challengeX), info = A_pub, len = 32)`；
+* `k_u = int(seed) mod n`（曲線群階）；
+* **性質**：相同 A、S、challengeX 導出相同 `k_u`；變更摘要/密文/nonce/到期 → `k_u` 改變，達成上下文綁定。
+
+### 5.4 2 方 Schnorr 簽名（secp256k1）
+
+* 私鑰視為加法分享：`K = k_u + k_p (mod n)`；
+* 互換臨時點：裝置產 `r_u`，HSM 產 `r_p`，合成 `R = R_u + R_p`；
+* 計算 `e = H(R || P || m)`（`P` 為公鑰，`m` 包含 SPC 摘要雜湊與交易資料）；
+* 分別出 `s_u = r_u + e·k_u`、`s_p = r_p + e·k_p`，合成 `s = s_u + s_p (mod n)`；
+* 輸出 `(R,s)`；鏈上/鏈下照標準 Schnorr 驗章。
+
+> **為何不用 ECDSA 2PC？** 可行但時序與邏輯複雜；Schnorr 在 2PC 更簡潔且易審計。
+
+### 5.5 恢復與輪替
+
+* **恢復**：啟動冷卻＋審批流程，以 `k_r` 與 `k_p` 綁定新裝置導出 `k_u'`，並在 NCFCID 重新授權；
+* **輪替**：選擇隨機 Δ，裝置/平台各自本地更新：`k_u' = k_u + Δ`、`k_p' = k_p − Δ`；或直接導出新公鑰並呼叫 `rotateB`。
+
+---
+
+## 6. 與 NCFCID / DeWT 的關係
+
+* **NCFCID**：`isAuthorized(ncfcid, pub)` 為最終真相；`revokeB/rotateB` 即時生效；事件可稽核。
+* **DeWT（鏈背書憑證）**：由合成公鑰 `P` 對 payload 簽名；驗證端先依 `kid` 回鏈定位公鑰並檢撤銷，再驗章。可搭配前篇 **DeWT‑Session（短時效 JWT）** 做內部 SSO。
+
+---
+
+## 7. 安全分析（Threats ↔ Controls）
+
+| 威脅     | 控制                 | 解釋                     |
+| ------ | ------------------ | ---------------------- |
+| 釣魚/偽站  | FIDO2 RP/Origin 綁定 | 假站叫不動 Passkey。         |
+| UI 調包  | SPC + 摘要雜湊入訊息      | 後端/合約可重演核對，所見即所簽。      |
+| 伺服器入侵  | 只持有 k\_p；鏈上撤銷      | 單方無法簽；撤銷即時生效。          |
+| 裝置惡意程式 | UV + TEE/SE        | 本人在場；分片不可導出。           |
+| 憑證重放   | 唯一 nonce/exp/aud   | 重放無效；DeWT‑Session 短時效。 |
+| 恢復濫用   | 冷卻期 + 多簽審批 + 審計    | k\_r 使用受控、全程留痕。        |
+
+---
+
+## 8. 相容性與降級（Compatibility & Fallback）
+
+* **無 PRF 的瀏覽器**：
+
+  1. 要求硬體金鑰路徑（platform/hybrid）；
+  2. largeBlob 存一次性祕密 T，`HKDF(H(S||T||challenge))`；
+  3. 保留 SPC 強綁定，必要時提高風險等級或人工覆核。
+
+---
+
+## 9. 風險矩陣（Risk Matrix）
+
+| 事件      | 機率 | 影響 | 緩解                       | 殘餘 |
+| ------- | -: | -: | ------------------------ | -- |
+| 裝置惡意程式  |  中 |  高 | FIDO2 UV、TEE/SE、SPC、速率限制 | 低  |
+| 平台被入侵   |  中 |  高 | 只持 `k_p`、HSM 守護、回鏈撤銷     | 低  |
+| 備援分片被盜  |  低 |  中 | 離線保管、多簽+冷卻、全程審計          | 低  |
+| 中間人調包摘要 |  低 |  高 | 摘要雜湊入訊息、nonce/exp 綁定     | 低  |
+| 分片不同步   |  低 |  中 | 健檢與對賬、支援輪替               | 低  |
+
+---
+
+## 10. 工程落地指南（Next.js × Node × Solidity）
+
+**前端（Next.js/TS/Tailwind）**
+
+* WebAuthn `get()`：要求 UV、PRF；把 `challengeX` 放入 `publicKey.challenge`。
+* SPC：統一摘要格式與固定序列化；UI 顯示資產/金額/feeCap/nonce/到期。
+* 2PC：與後端開 WebSocket/gRPC 流程，錯誤需可重試且防重放。
+
+**後端（Node/Edge）**
+
+* Gate：高風險 API 必帶 SPC 證據；
+* 2PC：HSM 計算 `s_p`，有速率與配額；
+* JWT：DeWT‑Session 走 RS/ES + JWKS，`exp` 5–15 分、`jti` 可撤銷；
+* 稽核：重大事件簽名雜湊與時間戳寫入不可竄改倉。
+
+**鏈上（Solidity）**
+
+* NCFCID：`isAuthorized/revokeB/rotateB`；狀態精簡、事件完整；
+* 可選 EIP‑1271：支援合約錢包策略核驗。
+
+---
+
+## 11. 限制與未來工作（Limitations & Future Work）
+
+* PRF 覆蓋率仍不一致；
+* 2PC 需完善的中止/重試協定（避免 nonce 重用）；
+* 將恢復流程（KYC/審批）形式化為 **ZK 憑證**，降低對平台信任面。
+
+---
+
+## 附錄 A — SPC 摘要規格（固定序列化）
 
 ```json
-{
-  "typ": "DeWT",
-  "alg": "ES256K",
-  "kid": "NCFCID1#bKey-0",
-  "chain": { "chainId": 8453, "registry": "0xRegistryAddr" }
-}
+{"a":"USDT","x":"100.00","f":"0.5","p":"withdraw","n":"<nonce>","e":1710000000}
 ```
 
-### 3.2 Payload（`json`）
+* 以 UTF‑8、無多餘空白序列化，再做 SHA‑256；
+* 此雜湊納入 `challengeX` 與訊息 `m` 用於簽名。
 
-```json
-{
-  "iss": "0xRegistryAddr",   
-  "sub": "NCFCID1",
-  "aud": "cafeca.app",
-  "iat": 1724630400,
-  "nbf": 1724630400,
-  "exp": 1724634000,
-  "nonce": "random-128bit",
-  "scope": ["read:profile", "tx:submit"],
-  "device": { "aPubHash": "0x...", "credIdHash": "0x..." },
-  "proofType": "fido-assert",
-  "proofRef": "event:0x<txhash>#<logIndex>"
-}
-```
+## 附錄 B — 2 方 Schnorr 訊息順序（簡化）
 
-### 3.3 簽名
+1. 裝置送 `R_u`，HSM 回 `R_p`；
+2. 合成 `R`，計 `e = H(R || P || m)`；
+3. 裝置回 `s_u`，HSM 回 `s_p`；
+4. 驗 `(R, s_u + s_p)`。
 
-* `signatureB = Sign_B_priv( base64url(header) || "." || base64url(payload) )`。
-* 演算法對應 `alg=ES256K`（secp256k1 ECDSA）。
-
-### 3.4 驗證流程
-
-1. 解析 header → 取得 `chainId/registry` 與 `kid`（定位 `NCFCID` 與 key index）。
-2. **回鏈查** `isAuthorized(NCFCID, B_pub_from_kid)` 與撤銷狀態。
-3. 用 `B_pub` 驗章；檢 `exp/nbf/aud/nonce`。
-4. （可選）對 `device.aPubHash/credIdHash` 做策略檢查（如要求 platform authenticator）。
-
-> 即便 DeWT 未到期，只要合約撤銷了 `B`，憑證立即失效。
-
----
-
-### 3.5 ShardEnvelope（分片綁定證明 — 用「密文 + credId + 簽名」做綁定）
-
-**目的**：證明此導出/分片操作確實由特定 FIDO2 憑證 **A** 在特定上下文下完成，且使用者已於 **SPC** 視窗確認（所見即所簽）。此證明**不包含 `k_u`/私鑰值**，僅作**綁定與稽核**。
-
-**Schema（jsonc）**
-
-```jsonc
-{
-  "ver": "PPK-1",
-  "ncfcid": "0x...",                // 可選：對應身分證
-  "credIdHash": "0x...",            // keccak(credentialId)
-  "aPubHash": "0x...",              // keccak(A_pub)
-  "cipherDigest": "0x...",          // H(ciphertext) —— 你的「密文」雜湊
-  "ctx": "0x...",                   // H(ciphertext || rpId || origin)
-  "nonce": "uuid-...", "exp": 1710,
-  "challengeX": "0x...",            // H("CAFECA/chal/v1" || ctx || credIdHash || nonce || exp)
-  "proof": {
-    "id": "<credentialId base64url>",
-    "authenticatorData": "<base64url>",
-    "clientDataJSON":    "<base64url>", // 內含 challengeX/type/origin
-    "signature":         "<base64url>"  // A 私鑰簽 (authData || SHA256(clientDataJSON))
-  },
-  "extensions": { "prf": true, "devicePubKey": true } // 記錄當時擴充
-}
-```
-
-**驗證要點**
-
-1. 檢 `clientDataJSON.type`、`origin` 與 `challenge` 是否等於 `challengeX`；檢 `rpIdHash`。
-2. 以 A 公鑰驗 `signature`；比對 `credIdHash`。
-3. 依 `challengeX` 重新跑 **PRF(A)** → **HKDF**（裝置端本地）應能重現相同 `k_u`；伺服器**不接觸**分片值。
-4. 策略檢查：`aPubHash/credIdHash` 類型、platform authenticator 要求等。
-
-> 你的「密文 + key id + 簽名」即體現在 `cipherDigest`、`credIdHash`、`proof.signature` 三處，形成可驗可稽核的綁定證據。
-
----
-
-## 4. 客戶端派生與驗證（Next.js / TypeScript）
-
-### 4.0 挑戰與摘要建構（TypeScript 範例）
+## 附錄 C — TypeScript 型別（不使用 any）
 
 ```ts
-export type ConsentSummary = { asset:string; amount:string; feeCap:string; purpose:string; nonce:string; exp:number };
-
-export function digestSummary(s: ConsentSummary): string {
-  const canonical = JSON.stringify({a:s.asset,x:s.amount,f:s.feeCap,p:s.purpose,n:s.nonce,e:s.exp});
-  return sha256hex(canonical); // 固定序列化 → SHA-256 → 0x... 字串
-}
-
-export function buildChallengeX(cipherHex: string, rpId: string, origin: string, nonce: string, exp: number) {
-  const ctx = sha256hex(hexToBytes(cipherHex), utf8(rpId), utf8(origin));
-  const tag = utf8("CAFECA/chal/v1");
-  return sha256hex(tag, hexToBytes(ctx), utf8(nonce), u64be(exp));
-}
-```
-
-> 建議：`challengeX` 同時餵給 **WebAuthn PRF 的 salt** 與 **HKDF 的 salt/info**，達成上下文綁定與不可重放。
-
-### 4.1 以 PRF 派生 `B`（瀏覽器）
-
-```ts
-// src/lib/dewt/derive.ts
-import { hkdf } from '@noble/hashes/hkdf';
-import { sha256 } from '@noble/hashes/sha256';
-import { secp256k1 } from '@noble/curves/secp256k1';
-
-export type DeriveInput = {
-  challengeXHex: string;  // 交易/情境挑戰（hex）
-  aPubCompressed: Uint8Array; // A 的壓縮公鑰（可作 info）
-  prfOutput: Uint8Array;  // 透過 WebAuthn PRF 取得的 32 bytes
-  S1: Uint8Array;         // 256-bit，存於裝置 TEE/SE
+export type ConsentSummary = {
+  asset: string;
+  amount: string; // decimal string
+  feeCap: string; // decimal string
+  purpose: "withdraw" | "liquidate" | "raiseLimit";
+  nonce: string; // hex or uuid
+  exp: number;   // unix seconds
 };
 
-export function deriveB(input: DeriveInput) {
-  const ctx = new TextEncoder().encode('CAFECA/B-derivation/v1');
-  const salt = sha256(new Uint8Array([
-    ...ctx,
-    ...Uint8Array.from(Buffer.from(input.challengeXHex.replace(/^0x/, ''), 'hex')),
-  ]));
-  const ikm = new Uint8Array([...input.prfOutput, ...sha256(input.S1)]);
-  const seed = hkdf(sha256, ikm, salt, input.aPubCompressed, 32);
-  const sk = secp256k1.utils.hashToPrivateKey(seed);
-  const pk = secp256k1.getPublicKey(sk, true);
-  return { sk, pk };
-}
+export type TwoPCMsg = {
+  Ru: string; // hex
+  Rp: string; // hex
+  R: string;  // hex
+  e: string;  // hex
+  su?: string; // hex
+  sp?: string; // hex
+};
 ```
 
-> `prfOutput` 由 `navigator.credentials.get()` 的 PRF 擴充取得；`S1` 存於 Secure Enclave/StrongBox/TPM，不落地。
+## 附錄 D — Recovery Checklist（作業指引）
 
-### 4.2 驗證 DeWT（伺服器）
-
-```ts
-// src/server/dewt/verify.ts
-import { secp256k1 } from '@noble/curves/secp256k1';
-import { sha256 } from '@noble/hashes/sha256';
-
-export type DeWT = { headerB64: string; payloadB64: string; signature: Uint8Array };
-
-export async function verifyDeWT(tok: DeWT, bPub: Uint8Array) {
-  const msg = new TextEncoder().encode(`${tok.headerB64}.${tok.payloadB64}`);
-  const digest = sha256(msg);
-  return secp256k1.verify(tok.signature, digest, bPub);
-}
-```
-
-> 實務中需先依 `kid` 回鏈抓對應 `B_pub`，並檢查撤銷、到期、`aud/nonce` 等。
+* 驗身：KYC + 多因素；
+* 時間鎖：冷卻期 ≥ 24h；
+* 審批：至少 2 人/多簽；
+* 稽核：全程事件上鏈或寫入不可竄改倉；
+* 完成後：舊公鑰撤銷、新公鑰廣播、用戶確認。
 
 ---
 
-## 5. 安全考量與策略
-
-* **避免前置／重放**：ZK 驗證 `C1`；或 commit–reveal 搭配 deadline 與 front‑run guard；所有挑戰／nonce 皆帶時效與 `aud` 綁定。
-* **裝置唯一性**：要求 platform authenticator＋`credProtect`；記錄 `credIdHash` 於鏈上避免重複。
-* **`B` 暴露風險**：`B` 用於鏈上／網路簽章，若洩漏可即時合約撤銷；`A` 與 `S` 永不外流，可重新派生新 `B`。
-* **密碼政策**：一次性 `PW*` 僅用於首次引導或裝置加入；之後以 FIDO2/`B` 無密碼驗證。
-* **隱私**：鏈上存 `aPubHash/credIdHash` 而非原值； attestation CID 放 IPFS/私有倉。
-* **ZK 電路**：Argon2 上鏈驗證成本高，可改 Poseidon‑friendly 流程：本地 `Argon2→Poseidon`，合約只驗 Poseidon 值。
-* **金鑰輪替與撤銷**：`rotateB(ncfcid, oldB, newB)`；`revokeB(ncfcid, bPub)`（事件廣播，驗證端必查撤銷）。
-* **權限分層**：每把 `B` 具 role：`admin` / `member` / `tx-only`；DeWT `scope` 對齊角色。
-
----
-
-## 6. 簡化資料結構
-
-| 實體    | 鏈上欄位                                                                                  | 說明           |
-| ----- | ------------------------------------------------------------------------------------- | ------------ |
-| 使用者註冊 | `nid => commitmentC`                                                                  | 只存承諾值        |
-| 裝置/憑證 | `aPubHash => ncfcid`                                                                  | 由 FIDO2 登記建立 |
-| 身分證   | `ncfcid => {bPubs, roles, revocations}`                                               | 名簿核心         |
-| 事件    | `UserRegistered, FIDOEnrolled, IdentityCreated, JoinRequested, JoinApproved, Revoked` | 索引/稽核        |
-| 外部存儲  | `attestationCID`                                                                      | IPFS / 私有倉   |
-
----
-
-## 7. 端到端範例（濃縮）
-
-1. 裝置 D1：產生 `PW1, salt1, nonce_c1` → `C1` → `registerUser(C1)` ⇒ `NID1`。
-2. D1 建立 `A1`，以 PRF 得 `F`，結合 `S1`→ `B1`。
-3. D1 產出 `proofZK`，呼叫 `enrollFIDO_ZK(NID1, A1_pub, credIdHash, B1_pub, proofZK)`。
-4. D1 用 `B1_priv` 呼叫 `createIdentity(B1_pub)` ⇒ `NCFCID1`。
-5. 裝置 D2：同流程得到 `B2`，`requestJoin(NCFCID1, B2_pub)`；D1（`B1` 管理者）`approveJoin(...)`。
-6. 任一裝置簽發 DeWT：用自己的 `B*` 簽 payload；伺服端收到後**回鏈核驗** `NCFCID1` 是否授權該 `B`。
-
----
-
-## 8. 你可以立刻做的落地任務
-
-* **合約 PoC**：先做無 ZK 版（commit–reveal），介面依上文；事件齊全。
-* **派生程式庫**：在 App 端完成 `deriveB`（PRF→HKDF→keypair），封裝 `S` 於 TEE/SE。
-* **DeWT 驗證器**：實作 `verifyDeWT(token, chainRpc, registryAddr)`，自動回鏈核驗授權與撤銷。
-* **ZK 版本**：下一版替換為 `enrollFIDO_ZK`，讓 reveal 退場。
-
----
-
-## 9. 與現行白皮書的對位
-
-* **Cross‑App FIDO2**：提供 `PRF`／`devicePublicKey` 與 SPC 的同意證據。
-* **Partial Private‑Key**：若走三分片（F/D/S）路徑，可與本方案併存（高風險操作用分片，一般操作用 `B`）。
-* **DeWT‑Session**（伺服器 JWT）可與 `DeWT`（鏈背書憑證）**並行**：前者用於 Web2 SSO；後者用於跨域、跨系統的**去中心化驗證**。
+**版本**：v1.1‑WP‑FIDO2‑PPK（2025‑09）
+**作者**：Tzuhan (Emily)
