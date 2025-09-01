@@ -1,7 +1,5 @@
 # CAFECA DeWT v2 — 設計總覽與規格（更新版）
 
-> 本版整合你提供的新版設計，修正第 3 步「以簽章導出 seed」在 ECDSA 非決定性上的隱患，改以 **WebAuthn PRF／hmac‑secret** 作為可重現且不洩漏 A 的派生來源；同時保留 **commit–reveal** 作為早期 PoC 的替代路徑，最終建議走 **ZK**。
-
 ---
 
 ## 0. 核心理念
