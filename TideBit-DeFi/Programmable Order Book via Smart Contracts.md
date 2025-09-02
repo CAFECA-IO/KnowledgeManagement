@@ -43,7 +43,8 @@ x \cdot y = k
 ```
 
 <img width="1080" height="533" alt="Image" src="https://github.com/user-attachments/assets/8c9172cf-69b9-4a89-8195-ebf3c79a690c" />
-(ref: [AMM 進化史](https://news.cnyes.com/news/id/4943990))
+
+ref: [AMM 進化史](https://news.cnyes.com/news/id/4943990)
 
 
 ## **結論與展望**
