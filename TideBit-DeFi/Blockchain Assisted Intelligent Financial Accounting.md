@@ -193,7 +193,7 @@ emit VoucherEntry(0xExpenseSalaryAccountAddress, 30000, 0xCashAccountAddress, 30
 
 ---
 
-### 結論
+### 結論與展望
 
 透過上述技術，我們建立了一個高度透明、防篡改、自動化且可高效審計的區塊鏈會計系統，為未來的金融審計帶來變革。
 
