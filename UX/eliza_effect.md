@@ -55,3 +55,13 @@ ELIZA 效應提醒我們，最好的科技體驗不是完美模仿人類，而�
 在這個人類與機器日益交融的時代，ELIZA 效應不再只是一個心理學現象，它成為一面鏡子，映照出我們對連結、理解與陪伴的根本渴望。而優秀的設計，正是懂得在適當的時候，以適當的方式，回應這種渴望——不製造錯覺，只搭建橋樑。
 
 畢竟，真正打動人心的，從來不是科技假裝的理解，而是設計真誠的關注。作為設計師，我們的任務不是創造完美的擬人幻象，而是設計出能尊重人性、輔助人類，同時保持技術誠實的產品——在這條路上，ELIZA 六十年前點亮的那盞燈，至今仍在指引方向。
+
+## Reference
+[ELIZA Effect: Why We Fall in Love with AI](https://www.youtube.com/watch?v=b_m5vPwfPdI)
+[The ELIZA Effect-NN Group](https://www.nngroup.com/articles/eliza-effect-ai/)
+[ELIZA效應](https://zh.wikipedia.org/zh-tw/ELIZA效應)
+[The Story Of ELIZA: The AI That Fooled The World](https://liacademy.co.uk/the-story-of-eliza-the-ai-that-fooled-the-world/)
+[Nervous System: The ELIZA Effect](https://www.thinkbrg.com/insights/publications/nervous-system-eliza-effect/)
+[The Eliza Effect: How ChatGPT Creates the Illusion of Understanding](https://www.youtube.com/watch?v=rJDrnFVh1KA)
+[The ELIZA Effect](https://www.youtube.com/watch?v=mJrZe80G6G4)
+[Humanizing AI Does Not Help Your Users](https://www.youtube.com/watch?v=SgYj7gxhmtE)
