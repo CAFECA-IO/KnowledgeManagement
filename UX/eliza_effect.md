@@ -1,5 +1,6 @@
 
-![Uploading robotic-ai-therapist-engaging-with-human-patient-calm-serene-therapy-room-reflecting.jpg…]()
+![robotic-ai-therapist-engaging-with-human-patient-calm-serene-therapy-room-reflecting](https://github.com/user-attachments/assets/71749fb6-8c11-44ba-9ba3-867aa0f1e8ca)
+
 
 # 當程式碼化身傾聽者：從 ELIZA 到現代 AI，我們為何總在機器中尋找理解？
 
