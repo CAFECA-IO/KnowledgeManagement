@@ -1,3 +1,6 @@
+
+![Uploading robotic-ai-therapist-engaging-with-human-patient-calm-serene-therapy-room-reflecting.jpg…]()
+
 # 當程式碼化身傾聽者：從 ELIZA 到現代 AI，我們為何總在機器中尋找理解？
 
 在深夜的電腦螢幕前，你向 AI 傾訴工作帶來的焦慮。它回應：「工作為何讓你感到焦慮呢？」那一瞬間，你彷彿感受到被理解的溫暖——即使理性告訴你，這可能只是一串精心設計的程式碼。
