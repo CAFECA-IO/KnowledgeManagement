@@ -36,7 +36,6 @@
 > 平台的角色僅限於作為 Bundler 接收並轉發 `UserOperation`。這在我們的 API 路由中得到了體現，後端僅作為通道 (Passthrough)，無法修改簽名內容。
 >
 > ```typescript
-> //
 > // 平台後端僅接收 userOp 並呼叫 bundlerService 轉發，無法偽造簽名
 > const userOp = await request.json();
 > const txHash = await bundlerService.sendUserOp(userOp);
