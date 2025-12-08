@@ -36,25 +36,6 @@
 > }
 > ```
 
-### 2.2.1 獨立合約實體 (Independent Contract Entity)
-
-在本架構中，每位用戶的數位身分都對應一個獨立部署在以太坊區塊鏈上的 **智能合約錢包 (SCW)**。
-
-  * **主權自主 (Self-Sovereign)**：合約設有嚴格的 `onlySelf` 權限控制，這意味著**即便是平台的營運方或合約的部署者 (Factory)，也無權更改合約狀態或移動資金**。合約僅服從於用戶持有私鑰所簽署的指令。
-
-> **代碼證據 2.2.1 (增強)：**
-> 參見 `contracts/scw.sol`。管理功能如 `addSigner` 受到 `onlySelf` 保護，確保了權限的絕對隔離。
->
-> ```solidity
-> //
-> modifier onlySelf() {
->     require(msg.sender == address(this), "SCW: must call via UserOp");
->     _;
-> }
-> ```
-
-
-
 
 ### 2.2.2 確定性地址生成 (Deterministic Address Generation)
 
