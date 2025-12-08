@@ -24,7 +24,6 @@
 > 參見 `contracts/scw.sol`，合約繼承自 IAccount，明確定義了這是一個獨立的帳戶實體，而非單純的記帳代幣。
 >
 > ```solidity
-> //
 > contract SCW is IAccount {
 >     EntryPoint public immutable entryPoint;
 >     // ...
@@ -41,7 +40,6 @@
 > 參見 `contracts/scw_factory.sol` 的 `getAddress` 函式。地址計算公式為 `keccak256(0xff + sender + salt + bytecodeHash)`，保證了地址生成的數學確定性與不可篡改性。
 >
 > ```solidity
-> //
 > function getAddress(uint256 pubKeyX, uint256 pubKeyY, uint256 salt) public view returns (address) {
 >     // ...
 >     bytes32 hash = keccak256(
@@ -75,7 +73,6 @@
 > 參見 `src/lib/fido2-parse.ts`。我們的解析邏輯明確顯示，系統僅從 `authData` 中提取公開的座標點，完全沒有涉及私鑰的傳輸路徑。
 >
 > ```typescript
-> //
 > export function parsePublicKeyCoordinates(attestationObjectBase64: string): ICoordinates | null {
 >     // ...
 >     // 僅提取 x, y 公鑰座標
@@ -93,10 +90,8 @@
 > 參見 `contracts/scw.sol`。我們使用 `mapping` 儲存授權公鑰的雜湊值，這構成了鏈上的存取控制列表 (ACL)。
 >
 > ```solidity
-> //
 > mapping(bytes32 => bool) public signers;
-> ```
-
+>
 > function \_addSigner(uint256 x, uint256 y) internal {
 > bytes32 hash = keccak256(abi.encode(x, y));
 > if (\!signers[hash]) {
@@ -104,9 +99,8 @@
 > // ...
 > }
 > }
->
 > ```
-> ```
+
 
 -----
 
