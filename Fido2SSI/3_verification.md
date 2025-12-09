@@ -81,6 +81,7 @@
 > bytes memory challengeBytes = bytes(challengeBase64);
 > ```
 
+> ```
 > // 逐字元檢查，確保簽名是針對「這筆」特定交易生成的
 > for (uint i = 0; i \< challengeBytes.length; i++) {
 > if (sig.clientDataJSON[sig.challengeLocation + i] \!= challengeBytes[i]) {
@@ -88,7 +89,6 @@
 > }
 > }
 >
-> ```
 > ```
 
 ### 階段三：資料完整性驗證 (Data Integrity)
