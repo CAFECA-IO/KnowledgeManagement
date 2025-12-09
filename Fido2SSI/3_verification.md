@@ -24,14 +24,14 @@
 > ```solidity
 > //
 > library FCL_ecdsa {
->     // ...
->     function ecdsa_verify(bytes32 message, uint256 r, uint256 s, uint256 Qx, uint256 Qy) internal view returns (bool) {
->         if (r == 0 || r >= n || s == 0 || s >= n) {
->             return false;
->         }
->         // 執行 P-256 橢圓曲線點乘運算與驗證
->         // ...
->     }
+>      // ...
+>      function ecdsa_verify(bytes32 message, uint256 r, uint256 s, uint256 Qx, uint256 Qy) internal view returns (bool) {
+>          if (r == 0 || r >= n || s == 0 || s >= n) {
+>              return false;
+>          }
+>          // 執行 P-256 橢圓曲線點乘運算與驗證
+>          // ...
+>      }
 > }
 > ```
 
@@ -51,17 +51,18 @@
 合約首先從簽名資料中提取公鑰 (`pubKeyX`, `pubKeyY`)，並檢查該公鑰是否已在鏈上的白名單 (`signers` mapping) 中註冊。這確保了只有用戶綁定過的設備才能發起指令。
 
 > **代碼證據 3.3.1：**
+> 參見 `contracts/scw.sol`。
 >
 > ```solidity
 > //
 > function _verifyWebAuthnSignature(...) internal view returns (bool) {
->     WebAuthnSignature memory sig = abi.decode(signature, (WebAuthnSignature));
->     bytes32 pubKeyHash = keccak256(abi.encode(sig.pubKeyX, sig.pubKeyY));
->     // 檢查公鑰是否在白名單內
->     if (!signers[pubKeyHash]) {
->         return false; // 拒絕未授權的裝置
->     }
->     // ...
+>      WebAuthnSignature memory sig = abi.decode(signature, (WebAuthnSignature));
+>      bytes32 pubKeyHash = keccak256(abi.encode(sig.pubKeyX, sig.pubKeyY));
+>      // 檢查公鑰是否在白名單內
+>      if (!signers[pubKeyHash]) {
+>          return false; // 拒絕未授權的裝置
+>      }
+>      // ...
 > }
 > ```
 
@@ -71,6 +72,7 @@
 在我們的實作中，`clientDataJSON` 必須包含當次交易的唯一雜湊 (`UserOpHash`)。這意味著即使簽名被洩露，也無法用於任何其他交易或重複執行同一筆交易。
 
 > **代碼證據 3.3.2：**
+> 參見 `contracts/scw.sol`。
 >
 > ```solidity
 > //
@@ -79,13 +81,14 @@
 > bytes memory challengeBytes = bytes(challengeBase64);
 > ```
 
-> ```
 > // 逐字元檢查，確保簽名是針對「這筆」特定交易生成的
 > for (uint i = 0; i \< challengeBytes.length; i++) {
 > if (sig.clientDataJSON[sig.challengeLocation + i] \!= challengeBytes[i]) {
 > return false;
 > }
 > }
+>
+> ```
 > ```
 
 ### 階段三：資料完整性驗證 (Data Integrity)
@@ -95,6 +98,7 @@
 這確保了簽名範圍涵蓋了瀏覽器環境參數 (`authenticatorData`) 與交易內容 (`clientDataJSON`)，任何對內容的微小篡改都會導致雜湊值劇烈變化。
 
 > **代碼證據 3.3.3：**
+> 參見 `contracts/scw.sol`。
 >
 > ```solidity
 > //
@@ -107,6 +111,7 @@
 最後，合約調用 `FCL_ecdsa.ecdsa_verify`，傳入上述計算出的 `messageHash` 以及簽名中的 `r, s` 值。如果數學驗證通過，則證明該交易確實由持有私鑰的用戶裝置所簽署。
 
 > **代碼證據 3.3.4：**
+> 參見 `contracts/scw.sol`。
 >
 > ```solidity
 > //
@@ -114,7 +119,6 @@
 > ```
 
 -----
-
 
 ## 3.4 執行層隔離與 Relayer 的角色 (Relayer Isolation & Censorship Resistance)
 
@@ -138,7 +142,7 @@
 > ```solidity
 > //
 > if (!_verifyWebAuthnSignature(userOp.signature, userOpHash)) {
->     return 1; // 返回 1 代表驗證失敗，Bundler 將損失 Gas
+>      return 1; // 返回 1 代表驗證失敗，Bundler 將損失 Gas
 > }
 > return 0; // 返回 0 代表成功
 > ```
