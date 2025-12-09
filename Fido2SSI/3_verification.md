@@ -37,13 +37,18 @@
 
 -----
 
+### 3.2.3 技術優勢：Gas 成本優化 (Gas Efficiency)
+
+在傳統觀念中，於 EVM 執行非原生曲線 (Non-native Curve) 運算的成本極高。然而，本協議採用的 `FCL_ecdsa` 函式庫經過了極致的組合語言級優化（Assembly-level Optimization）。
+這使得一筆包含 P-256 簽名驗證的交易成本，能夠控制在商業可行的範圍內。這不僅突破了以太坊的技術限制，更為大規模採用 (Mass Adoption) 掃除了成本障礙。
+
 ## 3.3 交易驗證流程詳解 (Anatomy of Verification)
 
 當用戶發起一筆交易（例如：轉帳）時，SCW 合約的 `validateUserOp` 函式是唯一的守門員。以下是該函式內部的四階段安全檢查：
 
 ### 階段一：簽名者授權檢查 (Signer Authorization)
 
-合約首先從簽名資料中提取公鑰 (`pubKeyX`, `pubKeyY`)，並檢查該公鑰是否已在鏈上的白名單 (`signers` mapping) 中註冊。
+合約首先從簽名資料中提取公鑰 (`pubKeyX`, `pubKeyY`)，並檢查該公鑰是否已在鏈上的白名單 (`signers` mapping) 中註冊。這確保了只有用戶綁定過的設備才能發起指令。
 
 > **代碼證據 3.3.1：**
 >
@@ -52,6 +57,7 @@
 > function _verifyWebAuthnSignature(...) internal view returns (bool) {
 >     WebAuthnSignature memory sig = abi.decode(signature, (WebAuthnSignature));
 >     bytes32 pubKeyHash = keccak256(abi.encode(sig.pubKeyX, sig.pubKeyY));
+>     // 檢查公鑰是否在白名單內
 >     if (!signers[pubKeyHash]) {
 >         return false; // 拒絕未授權的裝置
 >     }
@@ -61,8 +67,8 @@
 
 ### 階段二：抗重放攻擊驗證 (Anti-Replay Protection)
 
-為了防止惡意攻擊者擷取舊的簽名重複發送，WebAuthn 協議要求簽名必須包含一個隨機挑戰值 (Challenge)。在我們的架構中，這個 Challenge 就是當次交易的唯一雜湊值 (`UserOpHash`)。
-合約會解碼簽名中的 `clientDataJSON`，比對其中包含的 Challenge 是否與當前的交易內容一致。
+為了防止惡意攻擊者攔截舊的交易封包並重複發送，合約強制檢查簽名中的 Challenge 值。
+在我們的實作中，`clientDataJSON` 必須包含當次交易的唯一雜湊 (`UserOpHash`)。這意味著即使簽名被洩露，也無法用於任何其他交易或重複執行同一筆交易。
 
 > **代碼證據 3.3.2：**
 >
@@ -73,19 +79,20 @@
 > bytes memory challengeBytes = bytes(challengeBase64);
 > ```
 
+> ```
 > // 逐字元檢查，確保簽名是針對「這筆」特定交易生成的
 > for (uint i = 0; i \< challengeBytes.length; i++) {
 > if (sig.clientDataJSON[sig.challengeLocation + i] \!= challengeBytes[i]) {
 > return false;
 > }
 > }
->
-> ```
 > ```
 
 ### 階段三：資料完整性驗證 (Data Integrity)
 
-合約計算 `clientDataHash` 與 `authenticatorData` 的組合雜湊值，這是 FIDO2 標準定義的簽名原文 (Signed Message)。這確保了簽名不僅涵蓋了交易內容，還涵蓋了瀏覽器環境的安全參數。
+合約依循 W3C WebAuthn 標準，重建簽名原文 (Signed Message)。
+`messageHash = sha256(authenticatorData || sha256(clientDataJSON))`
+這確保了簽名範圍涵蓋了瀏覽器環境參數 (`authenticatorData`) 與交易內容 (`clientDataJSON`)，任何對內容的微小篡改都會導致雜湊值劇烈變化。
 
 > **代碼證據 3.3.3：**
 >
@@ -107,6 +114,7 @@
 > ```
 
 -----
+
 
 ## 3.4 執行層隔離與 Relayer 的角色 (Relayer Isolation & Censorship Resistance)
 
