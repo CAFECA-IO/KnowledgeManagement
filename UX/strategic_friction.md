@@ -172,3 +172,22 @@ behavioral biometrics(行為生物辨識)代表著摩擦設計的未來，系統
 優秀的體驗設計師不再僅僅是「流暢流程」的提供者，更是用戶利益的守門人和認知過程的引導者。我們的工作是在「無阻礙的效率」與「有深度的反思」之間尋找最佳平衡點。
 
 真正的使用者中心設計，不僅是讓事情變得更容易，有時更是讓事情變得更正確、更安全、更值得信賴。在適當的地方聰明地減速，最終將引領用戶，和我們的產品——走向更可持續、更令人滿意的長期關係。
+
+
+## References
+
+[Embracing Beneficial Friction for Human-Centered AI](https://blog.irvingwb.com/blog/2024/07/the-importance-of-good-friction-in-human-first-ai.html)
+
+[To help improve the accuracy of generative AI, add speed bumps](https://mitsloan.mit.edu/ideas-made-to-matter/to-help-improve-accuracy-generative-ai-add-speed-bumps)
+
+[The Impact of Friction on UX: How Slowing Down Can Boost User Experience](https://medium.com/@dianappstechnology/the-impact-of-friction-on-ux-how-slowing-down-can-boost-user-experience-d037fd776b97)
+
+[How strategic friction lets brands balance security and convenience](https://b2b.mastercard.com/news-and-insights/blog/how-strategic-friction-lets-brands-balance-security-and-convenience/)
+
+[Mehmet Doğan - The Art of Adding Friction into UX](https://www.youtube.com/watch?v=UMaEfTgD39o)
+
+[Why Design Friction Can Be Good for Your Product](https://www.youtube.com/watch?v=tlA6SPVMhpg)
+
+[Digital Week | Friction is the future for brand, marketing and memorability](https://www.youtube.com/watch?v=SwYnla7UGHc)
+
+[推力理論](https://zh.wikipedia.org/wiki/助推理论)
