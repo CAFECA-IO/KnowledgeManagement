@@ -118,6 +118,61 @@
 > return FCL_ecdsa.ecdsa_verify(messageHash, sig.r, sig.s, sig.pubKeyX, sig.pubKeyY);
 > ```
 
+### 3.3 節的資料流向圖 (Mermaid Source Code)
+
+這張圖精確對應了白皮書第三章描述的四個驗證階段。
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as 👤 User (Device/TEE)
+    participant Relayer as 📨 Relayer (Bundler)
+    participant SCW as ⛓️ SCW (Smart Contract)
+    participant Lib as 📚 FCL_ecdsa (Lib)
+
+    Note over User, SCW: 🟢 Off-Chain World (Trust Boundary)
+
+    User->>User: 1. Biometric Auth (FaceID)
+    User->>User: 2. Sign UserOpHash (P-256)
+    Note right of User: Output: <br/>- authenticatorData<br/>- clientDataJSON (w/ Challenge)<br/>- Signature (r, s)
+
+    User->>Relayer: 3. Send Signed UserOp
+    
+    Note over Relayer, SCW: 🔴 On-Chain Boundary (Gas Paid by Relayer)
+
+    Relayer->>SCW: 4. Call validateUserOp(UserOp)
+    
+    rect rgb(240, 248, 255)
+        Note over SCW, Lib: 🛡️ On-Chain Verification Logic
+        
+        SCW->>SCW: Phase 1: Signer Auth Check
+        Note right of SCW: Verify: signers[keccak(PubKey)] == true
+
+        SCW->>SCW: Phase 2: Anti-Replay Check
+        Note right of SCW: Verify: clientDataJSON contains UserOpHash
+
+        SCW->>SCW: Phase 3: Data Integrity
+        Note right of SCW: Calc: msgHash = sha256(authData + clientDataHash)
+
+        SCW->>Lib: Phase 4: Crypto Verification
+        Lib-->>SCW: Return true/false (P-256 Math)
+    end
+
+    alt Verification Passed
+        SCW-->>Relayer: Return 0 (Success)
+        Relayer->>SCW: Execute Transaction
+    else Verification Failed
+        SCW-->>Relayer: Return 1 (Fail)
+        Note left of Relayer: 💸 Relayer loses Gas,<br/>Transaction Reverted
+    end
+```
+
+### 圖表解讀
+
+1.  **Trust Boundary (信任邊界)**：圖中清楚標示了紅線。私鑰運算完全發生在 `User (Device/TEE)` 內部。
+2.  **Relayer 的角色**：可以看到 Relayer 只是傳遞者 (Step 3 -\> Step 4)，並在驗證失敗時承擔後果 (Step 4 的 `else` 分支)。
+3.  **四階段驗證**：在 `SCW` 的淺藍色區塊中，對應了白皮書 3.3 節詳述的 Phase 1 到 Phase 4 邏輯。
+
 -----
 
 ## 3.4 執行層隔離與 Relayer 的角色 (Relayer Isolation & Censorship Resistance)
