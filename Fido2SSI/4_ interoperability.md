@@ -31,6 +31,7 @@
 >   });
 > ```
 
+> ```typescript
 > // 2. 將憑證負載傳送至後端，啟動 SCW 部署程序
 > const response = await fetch('/api/v1/secure/webauthn', {
 > method: 'POST',
@@ -38,8 +39,6 @@
 > // ...
 > });
 > };
->
-> ```
 > ```
 
 -----
