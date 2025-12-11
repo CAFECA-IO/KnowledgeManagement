@@ -137,7 +137,62 @@
       * **操作**：驗證簽名 (Verification)、執行交易 (Execution)。
       * **安全性**：由以太坊共識機制與數學演算法保障 (Code is Law)。
 
------
+```mermaid
+graph TD
+    %% 定義樣式
+    classDef trusted fill:#e6fffa,stroke:#00b894,stroke-width:2px,color:#2d3436;
+    classDef untrusted fill:#ffeaa7,stroke:#fdcb6e,stroke-width:2px,stroke-dasharray: 5 5,color:#2d3436;
+    classDef blockchain fill:#e8f0fe,stroke:#2980b9,stroke-width:2px,color:#2d3436;
+    
+    %% 用戶端信任區域 (User Trusted Zone)
+    subgraph UserDevice [📱 User Device - Trusted Zone]
+        direction TB
+        Bio[👤 Biometrics<br/>FaceID / TouchID]
+        TEE[🔒 Secure Enclave / TEE]
+        
+        subgraph KeyStorage [Key Storage]
+            PrivKey(🔑 Private Key<br/>Cannot be exported)
+        end
+        
+        ClientApp[Client App / SDK]
+    end
+
+    %% 平台端非信任區域 (Untrusted Zone)
+    subgraph Platform [☁️ Platform / Relayer - Untrusted Zone]
+        direction TB
+        Bundler[📦 Bundler Service]
+        Paymaster[💰 Paymaster<br/>Gas Sponsor]
+    end
+
+    %% 區塊鏈驗證區域 (Verifiable Zone)
+    subgraph Blockchain [⛓️ Ethereum / EVM - Verifiable Zone]
+        direction TB
+        EntryPoint[EntryPoint Contract]
+        
+        subgraph SCW [Your Identity]
+            SCW_Logic[📄 SCW Contract]
+            PubKey(📝 Public Key<br/>x, y coordinates)
+        end
+    end
+
+    %% 關係連接
+    Bio ==>|1. Unlock| TEE
+    TEE ==>|2. Sign Hash| ClientApp
+    PrivKey -.->|Stored Inside| TEE
+    
+    ClientApp -->|3. Send Signed UserOp| Bundler
+    
+    Bundler -->|4. Submit Transaction| EntryPoint
+    Paymaster -.->|Pay Gas| EntryPoint
+    
+    EntryPoint -->|5. Validate & Execute| SCW_Logic
+    SCW_Logic -.->|Verify Signature| PubKey
+
+    %% 紅色邊界線說明：標記跨越信任邊界的連線 (ClientApp -> Bundler)
+    linkStyle 3 stroke:#ff7675,stroke-width:3px,color:red;
+```
+架構與信任邊界圖 (Architecture & Trust Boundary Diagram)
+
 
 ## 2.5 小結 (Summary)
 
