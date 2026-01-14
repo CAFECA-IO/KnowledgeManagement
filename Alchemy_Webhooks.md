@@ -34,9 +34,16 @@ Alchemy Webhook 主要用於即時推播鏈上資料通知，可追蹤多個區�
 
 <img width="1474" height="819" alt="截圖 2026-01-14 晚上7 52 46" src="https://github.com/user-attachments/assets/ecd85ee0-d842-441f-b6a1-ce44ba11ee66" />
 
+建立完成就會進到 Webhook dashboard，這裡可以看到所有 Webhooks 服務的動態。
+
+<img width="1488" height="810" alt="截圖 2026-01-14 晚上7 57 39" src="https://github.com/user-attachments/assets/9e631a6d-95a7-4062-a1c3-0b6a759f8b71" />
 
 ## 結果測試
+現在試試發送交易到收款地址，可以在 Webhook URL 看到 Alchemy Webhooks  回報的收款資訊。
+<img width="942" height="720" alt="截圖 2026-01-14 晚上8 00 46" src="https://github.com/user-attachments/assets/15fd0884-f5c3-4c43-ba9f-3db8e9485ac6" />
 
+Webhook dashboard 也會有活動紀錄，這樣就設定完成了。
+<img width="1252" height="252" alt="截圖 2026-01-14 晚上8 02 41" src="https://github.com/user-attachments/assets/32e39d58-d64b-4af9-b34e-b7cdf2b8ba66" />
 
 ### 參考資料
 - [Alchemy](https://www.alchemy.com/)
