@@ -7,6 +7,7 @@ Alchemy Webhooks 主要用於即時推播鏈上資料通知，可追蹤多個區
     - [建立 Webhooks](#建立-webhooks)
     - [取得所有 Webhooks](#取得所有-webhooks)
     - [更新 Webhooks](#更新-webhooks)
+    - [取得 Address Activity Ｗebhooks 所有地址](#取得-address-activity-ｗebhooks-所有地址)
     - [新增和刪除 Webhooks 位址](#新增和刪除-webhooks-位址)
     - [替換 Webhooks 地址](#替換-webhooks-地址)
     - [刪除 Webhooks](#刪除-webhooks)
@@ -174,6 +175,27 @@ curl -X PUT https://dashboard.alchemy.com/api/update-webhook \
     "version": "version",
     "deactivation_reason": "reason"
   }
+}
+```
+
+### [取得 Address Activity Ｗebhooks 所有地址](https://www.alchemy.com/docs/data/webhooks/webhooks-api-endpoints/notify-api-endpoints/webhook-addresses)
+這個端點只在 Address Activity Ｗebhooks 適用，提供取得 Webhooks 中所有訂閱地址的功能。
+
+```bash
+curl -G https://dashboard.alchemy.com/api/webhook-addresses \
+     -H "X-Alchemy-Token: your-X-Alchemy-Token" \
+     -d webhook_id=webhook_id
+```
+
+- **your-X-Alchemy-Token**：Auth token。
+- **webhook_id**：要查詢的 Ｗebhooks id，可先使用[取得所有 Webhooks](https://www.alchemy.com/docs/data/webhooks/webhooks-api-endpoints/notify-api-endpoints/team-webhooks) 這支 API 查詢。
+
+成功後應該會得到以下格式的回應：
+
+```json
+{
+  "data": ["your-address"],
+  "pagination": { "cursors": {}, "total_count": 1 }
 }
 ```
 
