@@ -1,5 +1,16 @@
 # 搭建 Alchemy Webhooks 
-Alchemy Webhook 主要用於即時推播鏈上資料通知，可追蹤多個區塊鏈上的地址活動、交易手續費等資訊。開發者亦可根據自己的需求進行自訂。
+Alchemy Webhooks 主要用於即時推播鏈上資料通知，可追蹤多個區塊鏈上的地址活動、交易手續費等資訊。除了 GUI，Alchemy 也提供許多 Notify API 節點，讓開發者能更自由地整合其他專案，亦可根據自己的需求進行自訂。
+
+- 申請 Alchemy 帳號
+- 取得 Alchemy Auth Token
+- 互動 API
+    - 建立 Webhooks
+    - 取得所有 Webhooks
+    - 更新 Webhooks
+    - 新增和刪除 Webhooks 位址
+    - 更改 Webhooks 地址
+    - 刪除 Webhooks
+- 參考來源
 
 ## Alchemy 帳號申請
 至 [Alchemy](https://auth.alchemy.com/?redirectUrl=https%3A%2F%2Fdashboard.alchemy.com%2Fwebhooks%3FappRedir%3D1) 註冊帳號，須通過 Captcha 、手機和電子郵件驗證。也支援 Google 登入。
