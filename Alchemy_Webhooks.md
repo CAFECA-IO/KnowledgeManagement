@@ -1,18 +1,18 @@
 # 搭建 Alchemy Webhooks 
 Alchemy Webhooks 主要用於即時推播鏈上資料通知，可追蹤多個區塊鏈上的地址活動、交易手續費等資訊。除了 GUI，Alchemy 也提供許多 Notify API 節點，讓開發者能更自由地整合其他專案，亦可根據自己的需求進行自訂。
 
-- 申請 Alchemy 帳號
-- 取得 Alchemy Auth Token
-- 互動 API
-    - 建立 Webhooks
-    - 取得所有 Webhooks
-    - 更新 Webhooks
-    - 新增和刪除 Webhooks 位址
-    - 更改 Webhooks 地址
-    - 刪除 Webhooks
-- 參考來源
+- [申請 Alchemy 帳號](#申請-alchemy-帳號)
+- [取得 Alchemy Auth Token](#取得-alchemy-auth-token)
+- [Webhooks API](#webhooks-api)
+    - [建立 Webhooks](#建立-webhooks)
+    - [取得所有 Webhooks](#取得所有-webhooks)
+    - [更新 Webhooks](#更新-webhooks)
+    - [新增和刪除 Webhooks 位址](#新增和刪除-webhooks-位址)
+    - [替換 Webhooks 地址](#替換-webhooks-地址)
+    - [刪除 Webhooks](#刪除-webhooks)
+- [參考來源](#參考來源)
 
-## Alchemy 帳號申請
+## 申請 Alchemy 帳號
 至 [Alchemy](https://auth.alchemy.com/?redirectUrl=https%3A%2F%2Fdashboard.alchemy.com%2Fwebhooks%3FappRedir%3D1) 註冊帳號，須通過 Captcha 、手機和電子郵件驗證。也支援 Google 登入。
 <img width="634" height="853" alt="截圖 2026-01-14 下午6 44 28" src="https://github.com/user-attachments/assets/50f06cd3-06ab-434b-a7f8-e3d1513c3200" />
 
@@ -26,7 +26,7 @@ Alchemy Webhooks 主要用於即時推播鏈上資料通知，可追蹤多個區
 
 <img width="1484" height="765" alt="截圖 2026-01-14 晚上7 11 27" src="https://github.com/user-attachments/assets/b256e809-958f-495c-882c-8554e5d6e481" />
 
-## Webhooks 設定
+## 取得 Alchemy Auth Token
 [官方文檔](https://www.alchemy.com/docs/reference/webhooks-overview)有非常清楚的步驟，也有根據不同用例詳細說明。以下範例選用的是追蹤收款地址的 [Address Activity Webhook](https://www.alchemy.com/docs/reference/address-activity-webhook)。
 
 在側欄點擊 **Data > Webhooks** 即可找到 Webhooks 服務，本例需要即時回報收款情形，所以選擇 **Real-time notifications**。
@@ -49,14 +49,22 @@ Alchemy Webhooks 主要用於即時推播鏈上資料通知，可追蹤多個區
 
 <img width="1488" height="810" alt="截圖 2026-01-14 晚上7 57 39" src="https://github.com/user-attachments/assets/9e631a6d-95a7-4062-a1c3-0b6a759f8b71" />
 
-## 結果測試
+## Webhooks API
+
+### 建立 Webhooks
+### 取得所有 Webhooks
+### 更新 Webhooks
+### 新增和刪除 Webhooks 位址
+### 替換 Webhooks 地址
+### 刪除 Webhooks
+
 現在試試發送交易到收款地址，可以在 Webhook URL 看到 Alchemy Webhooks  回報的收款資訊。
 <img width="942" height="720" alt="截圖 2026-01-14 晚上8 00 46" src="https://github.com/user-attachments/assets/15fd0884-f5c3-4c43-ba9f-3db8e9485ac6" />
 
 Webhook dashboard 也會有活動紀錄，這樣就設定完成了。
 <img width="1252" height="252" alt="截圖 2026-01-14 晚上8 02 41" src="https://github.com/user-attachments/assets/32e39d58-d64b-4af9-b34e-b7cdf2b8ba66" />
 
-### 參考資料
+### 參考來源
 - [Alchemy](https://www.alchemy.com/)
 - [Alchemy Get Started](https://www.alchemy.com/docs/get-started)
 - [Offcial Tutorial Playlist](https://www.youtube.com/playlist?list=PLMj8NvODurfEDTZiorkULaW-303EC97tG)
