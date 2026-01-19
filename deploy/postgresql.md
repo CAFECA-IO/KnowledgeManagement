@@ -33,9 +33,9 @@ sudo -u postgres psql
 > ALTER USER aha WITH PASSWORD 'sayaha';
 ```
 
-### Generate Database
+### Generate Database to User
 ```shell
-sudo su - postgres -c "createdb ahadb"
+sudo su - postgres -c "createdb ahadb OWNER aha"
 ```
 
 ### Grant Privileges to User
