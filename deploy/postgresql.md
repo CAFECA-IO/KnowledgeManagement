@@ -35,7 +35,8 @@ sudo -u postgres psql
 
 ### Generate Database to User
 ```shell
-sudo su - postgres -c "createdb ahadb OWNER aha"
+sudo -u postgres psql
+> CREATE DATABASE ahadb OWNER aha;
 ```
 
 ### Grant Privileges to User
