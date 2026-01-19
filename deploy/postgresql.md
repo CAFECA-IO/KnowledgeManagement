@@ -42,7 +42,8 @@ sudo -u postgres psql
 ### Grant Privileges to User
 ```shell
 sudo -u postgres psql
-> grant all privileges on database ahadb to aha;
+> \c ahadb
+> GRANT ALL PRIVILEGES on DATABASE ahadb to aha;
 ```
 
 ### Allow Remote Connection
