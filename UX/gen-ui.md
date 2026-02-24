@@ -1,3 +1,6 @@
+
+<img width="1478" height="730" alt="blog-4-3" src="https://github.com/user-attachments/assets/1eecb583-5ce6-4017-89e4-1aaf2e3c30f9" />
+
 ## 什麼是 GenUI？（你以為的生成式介面，可能只是場誤會）
 
 在介紹 Gen UI 前，我們必須先釐清兩個截然不同的概念：
@@ -62,6 +65,8 @@
 千萬別誤會，如果真的讓 AI 憑空捏造，畫面不僅容易跑版，甚至可能會出現不符合品牌形象的奇怪配色或樣式。
 
 實際上，Generative UI 是結合了「智能數據感知」、「可重複使用的元件庫」與「AI 判斷決策」的三方完美協作。我們可以把它拆解成三個關鍵步驟：
+
+<img width="1478" height="730" alt="blog-3-2" src="https://github.com/user-attachments/assets/2af2c830-c534-46b9-a7a4-cd25d794a381" />
 
 ### 首先，系統需要先理解使用者情境
 
@@ -184,4 +189,10 @@ Generative UI 就像是一片還沒有被完全探索的深海。它充滿了技
 
 ---
 
-
+## Ref
+[GenUI: AI-Generated Interfaces](https://www.youtube.com/watch?v=4pbYHXAe7Tg)
+[Generative UI 時代的設計反思](https://www.handyui.com/generative-ui-a-new-design-paradigm/)
+[Generative UI: What It Is and Why It Matters](https://www.thesys.dev/blogs/generative-ui)
+[Generative UI: A rich, custom, visual interactive user experience for any prompt](https://research.google/blog/generative-ui-a-rich-custom-visual-interactive-user-experience-for-any-prompt/)
+[Generative UI](https://www.copilotkit.ai/generative-ui)
+[What is Generative UI?](https://tambo.co/blog/posts/what-is-generative-ui)
