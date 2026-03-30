@@ -128,6 +128,25 @@ const tokenImplSlot = await client.getStorageAt({
 ```
 如果讀出來的值不是 `0x00000...`，就代表代理合約成功指向了實體邏輯。
 
+### 💡EIP-1967 架構圖
+
+```mermaid
+sequenceDiagram
+    participant User as 用戶錢包
+    participant Proxy as Proxy 合約<br/>(固定地址, 儲存資料)
+    participant Storage as EIP-1967 Slot<br/>(0x360894...)
+    participant Logic as 邏輯合約<br/>(可替換, 含演算法)
+
+    User->>Proxy: 1. 呼叫 mint()
+    Proxy->>Storage: 2. 去 Slot 拿邏輯合約地址
+    Storage-->>Proxy: 回傳 Logic Contract 地址
+    Proxy->>Logic: 3. delegatecall(mint)
+    Note over Proxy,Logic: 邏輯合約執行運算，<br/>但狀態變更會寫在 Proxy 身上
+    Logic-->>Proxy: 4. 執行完畢
+    Proxy-->>User: 5. 回傳成功
+```
+
+
 ---
 
 ## 🛡️ 高階工程師的企業級考量 (Best Practices)
